@@ -50,6 +50,10 @@
       font-size: 1.2rem;
       margin-bottom: 20px;
     }
+	.hero img {
+	  max-width: 100%;
+	  height: auto;
+	}
     .class-buttons button {
       background-color: #1e88e5;
       color: white;
@@ -80,48 +84,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-	.cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 40px 20px;
-    }
-	.card-link {
-	  text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
-	  display: block; /* Biến liên kết thành khối để nó chiếm toàn bộ không gian của card */
-	}
-
-    .card {
-      background-color: #bbdefb;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 250px;
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-	  background-color: #42a5f5;
-    }
-    .card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-    }
-    .card-body {
-      padding: 10px;
-	  text-align: center;
-    }
-    .card-body h3 {
-      margin-top: 0;
-      color: #d84315;
-    }
-    .card-body p {
-      margin: 10px 0 0;
-	  font-weight: 800;
-      font-size: 0.95rem;
-    }
+	
     @media (max-width: 768px) {
       .hero {
         flex-direction: column;
@@ -142,7 +105,27 @@
       text-decoration: none;
       border-radius: 4px;
     }
-	
+	#danhsach {
+	  padding: 20px 40px;
+	  text-align: left;
+	}
+
+	.baihoc {
+	  margin-bottom: 16px;
+	  display: flex;
+	  align-items: center;
+	  gap: 20px;
+	}
+
+	.baihoc strong {
+	  flex: 1;
+	  font-size: 1.1rem;
+	}
+
+	.baihoc a.button {
+	  white-space: nowrap;
+	}
+
   </style>
 </head>
 <body>
@@ -155,9 +138,9 @@
     </div>
     <nav>
       <a href="../index.html">Trang chủ</a>
-      <a href="#">Thời Khóa Biểu</a>
-      <a href="#">Góc Giải Trí</a>
-      <a href="#">Góc Phụ Huynh</a>
+      <a href="../thoikhoabieu.html">Thời Khóa Biểu</a>
+      <a href="../gocgiaitri.html">Góc Giải Trí</a>
+      <a href="../gocphuhuynh.html">Góc Phụ Huynh</a
     </nav>
   </header>
 
@@ -166,11 +149,11 @@
       <h1>Chào mừng các em lớp 3 đến với lớp học</h1>
       <p>Hãy chọn bài học của ngày hôm nay.</p>
     </div>
-    <img src="HomeBanner.png" alt="Tin học" width="500" style="border-radius: 20px; margin-top: 0px" />
+    <img src="Banner.png" alt="Tin học" width="500" style="border-radius: 20px; margin-top: 0px" />
   </section>
 
    <h1>📚 Danh sách bài học</h1>
-  <div id="danhsach"></div>
+<div id="danhsach">Đang tải danh sách bài học...</div>
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbwXo0aQrVtsnpwqbp1rCQ9LkEnII4yIxfw18XunGb933Jl42OXa0UBBNN4OQdP7DfO6/exec"; // <-- thay link tại đây
@@ -179,15 +162,17 @@
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("danhsach");
-        data.forEach(bai => {
-          const div = document.createElement("div");
-          div.className = "baihoc";
-          div.innerHTML = `
-            <strong>${bai.ten}</strong><br>
-            <a class="button" href="xembaigiang.html?link=${encodeURIComponent(bai.link)}" target="_blank">Xem bài giảng</a>
-          `;
-          container.appendChild(div);
-        });
+		container.innerHTML = ""; // Xoá nội dung "Đang tải..."
+
+		data.forEach(bai => {
+		  const div = document.createElement("div");
+		  div.className = "baihoc";
+		  div.innerHTML = `
+			<strong>${bai.ten}</strong>
+			<a class="button" href="../xembaigiang.html?link=${encodeURIComponent(bai.link)}" target="_blank">Xem bài giảng</a>
+		  `;
+		  container.appendChild(div);
+		});
       })
       .catch(err => {
         document.getElementById("danhsach").innerText = "Không thể tải danh sách bài học.";
