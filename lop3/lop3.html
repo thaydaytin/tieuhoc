@@ -125,6 +125,11 @@
 	.baihoc a.button {
 	  white-space: nowrap;
 	}
+	hr.divider {
+	  border: none;
+	  border-top: 1px dashed #aaa;
+	  margin: 12px 0;
+	}
 
   </style>
 </head>
@@ -146,7 +151,7 @@
 
   <section class="hero">
     <div class="hero-text">
-      <h1>Chào mừng các em lớp 3 đến với lớp học</h1>
+      <h1>Chào mừng các em lớp Tin học 3</h1>
       <p>Hãy chọn bài học của ngày hôm nay.</p>
     </div>
     <img src="Banner.png" alt="Tin học" width="500" style="border-radius: 20px; margin-top: 0px" />
@@ -164,7 +169,7 @@
         const container = document.getElementById("danhsach");
 		container.innerHTML = ""; // Xoá nội dung "Đang tải..."
 
-		data.forEach(bai => {
+		data.forEach((bai, index) => {
 		  const div = document.createElement("div");
 		  div.className = "baihoc";
 		  div.innerHTML = `
@@ -172,6 +177,13 @@
 			<a class="button" href="../xembaigiang.html?link=${encodeURIComponent(bai.link)}" target="_blank">Xem bài giảng</a>
 		  `;
 		  container.appendChild(div);
+
+		  // Thêm đường kẻ nếu không phải bài cuối
+		  if (index < data.length - 1) {
+			const hr = document.createElement("hr");
+			hr.className = "divider";
+			container.appendChild(hr);
+		  }
 		});
       })
       .catch(err => {
