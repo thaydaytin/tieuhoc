@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thầy Dạy Tin - Trắc nghiệm kiến thức bài học</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 40px;
+      background-color: #42a5f5;
+      border-bottom: 4px solid #1e88e5;
+    }
+    .logo img {
+      height: 100px;
+    }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 900;
+	  font-size: 1.2rem;
+      color: white;
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: url("tracnghiembg.jpg") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      background-color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .choice-btn {
+      width: 80%;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .choice-btn:hover {
+      background-color: #388E3C;
+    }
+    #result, #timer {
+      font-size: 18px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+	@media (max-width: 768px) { 
+	footer a:hover {
+		color: #ffeb3b;
+	}
+      .class-buttons button {
+        width: 80%;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+	<header>
+    <div class="logo">
+       <a href="index.html"> 
+			<img src="logo.png" alt="Logo Thầy Dạy Tin">
+		</a>
+    </div>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="thoikhoabieu.html">Thời Khóa Biểu</a>
+      <a href="gocgiaitri.html">Góc Giải Trí</a>
+      <a href="gocphuhuynh.html">Góc Phụ Huynh</a>
+    </nav>
+  </header>
+
+  <div class="container" id="startScreen">
+    <h2>🎮 Bắt đầu trò chơi</h2>
+    <input type="text" id="studentName" placeholder="Nhập tên của bạn" style="padding:10px;width:80%">
+    <br><br>
+    <button onclick="startGame()">Bắt đầu</button>
+    <p id="loading" style="color: red; font-weight: bold;">⏳ Đang tải câu hỏi...</p>
+  </div>
+
+  <div class="container" id="gameScreen" style="display:none;">
+    <div id="questionBox">
+      <h3 id="question"></h3>
+      <div id="choices"></div>
+      <div id="timer">⏱️ 10</div>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <div class="container" id="endScreen" style="display:none;">
+    <h2>🎉 Hoàn thành!</h2>
+    <p id="finalScore"></p>
+  </div>
+
+  <script>
+    let questions = [];
+    let current = 0;
+    let totalScore = 0;
+    let timer;
+    let timeLeft = 10;
+    let startTime;
+    let student = '';
+
+    // 🔍 Hàm đọc URL query string
+    function getParam(key) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(key);
+    }
+
+    // 🟡 Tải dữ liệu JSON từ Google Drive (hoặc URL bất kỳ)
+    const jsonURL = getParam('json');
+    if (!jsonURL) {
+      document.getElementById("loading").innerText = "❌ Không có đường dẫn dữ liệu!";
+    } else {
+      fetch(jsonURL)
+        .then(res => res.json())
+        .then(data => {
+          questions = data;
+          document.getElementById("loading").innerText = "✅ Câu hỏi đã sẵn sàng!";
+        })
+        .catch(err => {
+          document.getElementById("loading").innerText = "❌ Không thể tải dữ liệu câu hỏi.";
+          console.error(err);
+        });
+    }
+
+    function startGame() {
+      student = document.getElementById("studentName").value.trim();
+      if (student === "") {
+        alert("Vui lòng nhập tên!");
+        return;
+      }
+      if (questions.length === 0) {
+        alert("Dữ liệu chưa sẵn sàng hoặc bị lỗi.");
+        return;
+      }
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("gameScreen").style.display = "block";
+      showQuestion();
+    }
+
+    function showQuestion() {
+      if (current >= questions.length) {
+        finishGame();
+        return;
+      }
+
+      let q = questions[current];
+      document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
+      let choiceDiv = document.getElementById("choices");
+      choiceDiv.innerHTML = '';
+      q.choices.forEach((choice, idx) => {
+        let btn = document.createElement("button");
+        btn.className = "choice-btn";
+        btn.innerText = `${String.fromCharCode(65 + idx)}. ${choice}`;
+        btn.onclick = () => checkAnswer(idx);
+        choiceDiv.appendChild(btn);
+      });
+
+      document.getElementById("result").innerText = '';
+      timeLeft = 10;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      startTime = new Date();
+      timer = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+      timeLeft--;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById("result").innerText = "⏳ Hết giờ!";
+        setTimeout(() => {
+          current++;
+          showQuestion();
+        }, 1000);
+      }
+    }
+
+    function checkAnswer(selected) {
+      clearInterval(timer);
+      let q = questions[current];
+      let isCorrect = selected === q.answer;
+      let now = new Date();
+      let secondsUsed = Math.round((now - startTime) / 1000);
+      let score = isCorrect ? Math.max(0, 10 - secondsUsed) : 0;
+      totalScore += score;
+
+      document.getElementById("result").innerText = isCorrect ? `✅ Đúng! +${score} điểm` : "❌ Sai!";
+      setTimeout(() => {
+        current++;
+        showQuestion();
+      }, 1000);
+    }
+
+    function finishGame() {
+      document.getElementById("gameScreen").style.display = "none";
+      document.getElementById("endScreen").style.display = "block";
+      document.getElementById("finalScore").innerText = `Tên: ${student} | Tổng điểm: ${totalScore}`;
+      sendToGoogleSheet(student, totalScore);
+    }
+
+    function sendToGoogleSheet(name, score) {
+      fetch('https://script.google.com/macros/s/AKfycbw9-0JR-MN11X4bcxt4m2Rt0WizZNsMlJh3a-foc6e2loq5p8v5sy8o_DsfTtCwmNLcZQ/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({name: name, score: score, timestamp: new Date().toISOString()})
+      });
+    }
+  </script>
+  
+  <footer style="background-color: #64b5f6; color: white; text-align: center; padding: 20px 10px; font-size: 1rem; border-top: 4px solid #1e88e5;">
+    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
+    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
+  </footer>
+</body>
+</html>
