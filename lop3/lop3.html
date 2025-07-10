@@ -130,36 +130,46 @@
 	  border-top: 1px dashed #aaa;
 	  margin: 12px 0;
 	}
+	html, body {
+	  height: 100%;
+	  margin: 0;
+	  display: flex;
+	  flex-direction: column;
+	}
 
+	.wrapper {
+	  flex: 1;
+	}
+	
   </style>
 </head>
 <body>
+	<div class="wrapper">
+	  <header>
+		<div class="logo">
+		   <a href="../index.html"> 
+				<img src="../logo.png" alt="Logo Thầy Dạy Tin">
+			</a>
+		</div>
+		<nav>
+		  <a href="../index.html">Trang chủ</a>
+		  <a href="../thoikhoabieu.html">Thời Khóa Biểu</a>
+		  <a href="../gocgiaitri.html">Góc Giải Trí</a>
+		  <a href="../gocthongtin.html">Góc Thông Tin</a>
+		</nav>
+	  </header>
 
-  <header>
-    <div class="logo">
-       <a href="../index.html"> 
-			<img src="../logo.png" alt="Logo Thầy Dạy Tin">
-		</a>
-    </div>
-    <nav>
-      <a href="../index.html">Trang chủ</a>
-      <a href="../thoikhoabieu.html">Thời Khóa Biểu</a>
-      <a href="../gocgiaitri.html">Góc Giải Trí</a>
-      <a href="../gocphuhuynh.html">Góc Phụ Huynh</a
-    </nav>
-  </header>
+	  <section class="hero">
+		<div class="hero-text">
+		  <h1>Chào mừng các em lớp Tin học 3</h1>
+		  <p>Hãy chọn bài học của ngày hôm nay.</p>
+		</div>
+		<img src="Banner.png" alt="Tin học" width="500" style="border-radius: 20px; margin-top: 0px" />
+	  </section>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Chào mừng các em lớp Tin học 3</h1>
-      <p>Hãy chọn bài học của ngày hôm nay.</p>
-    </div>
-    <img src="Banner.png" alt="Tin học" width="500" style="border-radius: 20px; margin-top: 0px" />
-  </section>
-
-   <h1>📚 Danh sách bài học</h1>
-<div id="danhsach">Đang tải danh sách bài học...</div>
-
+	   <h1>📚 Danh sách bài học</h1>
+		<div id="danhsach">Đang tải danh sách bài học...</div>
+	</div>
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbwXo0aQrVtsnpwqbp1rCQ9LkEnII4yIxfw18XunGb933Jl42OXa0UBBNN4OQdP7DfO6/exec"; // <-- thay link tại đây
 
@@ -175,6 +185,7 @@
 		  div.innerHTML = `
 			<strong>${bai.ten}</strong>
 			<a class="button" href="../xembaigiang.html?link=${encodeURIComponent(bai.link)}" target="_blank">Xem bài giảng</a>
+			<a class="button" href="tracnghiem/selectGame.html?json=${encodeURIComponent(bai.json)}&tuan=${encodeURIComponent(bai.tuan)}&ten=${encodeURIComponent(bai.ten)}">Làm Bài Tập</a>
 		  `;
 		  container.appendChild(div);
 
