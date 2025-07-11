@@ -59,7 +59,7 @@
       margin-top: 15px;
       font-weight: bold;
     }
-    @media (max-width: 768px) { 
+    @media (max-width: 768px) {
       footer a:hover {
         color: #ffeb3b;
       }
@@ -74,32 +74,30 @@
       display: flex;
       flex-direction: column;
     }
-
     .wrapper {
       flex: 1;
     }
-
-    /* ✅ Nút quay lại */
     #backBtn {
-	  background-color: #ffffffcc;
-	  color: #333;
-	  border: 2px solid #64b5f6;
-	  border-radius: 8px;
-	  padding: 6px 14px;
-	  font-size: 16px;
-	  cursor: pointer;
-	  transition: background-color 0.3s;
-	}
-	#backBtn:hover {
-	  background-color: #bbdefb;
-	}
+      margin: 10px 40px;
+      background-color: #ffffffcc;
+      color: #333;
+      border: 2px solid #64b5f6;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #backBtn:hover {
+      background-color: #bbdefb;
+    }
   </style>
 </head>
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
     <header>
       <div class="logo">
-        <a href="../../index.html"> 
+        <a href="../../index.html">
           <img src="../../logo.png" alt="Logo Thầy Dạy Tin">
         </a>
       </div>
@@ -110,9 +108,11 @@
         <a href="../../gocthongtin.html">Góc Thông Tin</a>
       </nav>
     </header>
-	<div style="padding: 10px 40px;">
-	  <button id="backBtn" onclick="history.back()" title="Quay lại">⬅ Quay lại</button>
-	</div>
+
+    <div style="text-align: left;">
+      <button id="backBtn" onclick="history.back()" title="Quay lại">⬅ Quay lại</button>
+    </div>
+
     <div class="container" id="startScreen">
       <h2>🎮 Bắt đầu chơi trắc nghiệm nhanh</h2>
       <input type="text" id="studentName" placeholder="Nhập tên - lớp của bạn ví dụ Nguyễn Văn A - Lớp 3a" style="padding:10px;width:80%">
@@ -136,6 +136,11 @@
     </div>
   </div>
 
+  <footer style="background-color: #64b5f6; color: white; text-align: center; padding: 20px 10px; font-size: 1rem; border-top: 4px solid #1e88e5;">
+    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
+    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
+  </footer>
+
   <script>
     let questions = [];
     let current = 0;
@@ -154,10 +159,9 @@
     if (!jsonURL) {
       document.getElementById("loading").innerText = "❌ Không có đường dẫn dữ liệu!";
     } else {
-	
-		const proxyURL = "https://script.google.com/macros/s/AKfycby7NLepZRxH62tW_dI5evNQb_k7YJuYvV8e_ifE9xlMafO-KK2LO4Qjj3GNkXLFsYeyrg/exec"; // link Apps Script get link json
-		const finalURL = `${proxyURL}?url=${encodeURIComponent(jsonURL)}`;
-	
+      const baseURL = "https://thaydaytin.github.io/tieuhoc/lop3/tracnghiem/";
+      const finalURL = baseURL + jsonURL;
+
       fetch(finalURL)
         .then(res => res.json())
         .then(data => {
@@ -255,10 +259,5 @@
       });
     }
   </script>
-
-  <footer style="background-color: #64b5f6; color: white; text-align: center; padding: 20px 10px; font-size: 1rem; border-top: 4px solid #1e88e5;">
-    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
-    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
-  </footer>
 </body>
 </html>
