@@ -154,7 +154,11 @@
     if (!jsonURL) {
       document.getElementById("loading").innerText = "❌ Không có đường dẫn dữ liệu!";
     } else {
-      fetch(jsonURL)
+	
+		const proxyURL = "https://script.google.com/macros/s/AKfycby7NLepZRxH62tW_dI5evNQb_k7YJuYvV8e_ifE9xlMafO-KK2LO4Qjj3GNkXLFsYeyrg/exec"; // link Apps Script get link json
+		const finalURL = `${proxyURL}?url=${encodeURIComponent(jsonURL)}`;
+	
+      fetch(finalURL)
         .then(res => res.json())
         .then(data => {
           questions = data;
