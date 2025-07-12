@@ -6,100 +6,67 @@
   <title>Thầy Dạy Tin - Trắc nghiệm kiến thức bài học</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    /* ... giữ nguyên phần style gốc ... */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2px 40px;
-      background-color: #42a5f5;
-      border-bottom: 4px solid #1e88e5;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 2px 40px; background-color: #42a5f5; border-bottom: 4px solid #1e88e5;
     }
-    .logo img {
-      height: 100px;
-    }
-    nav a {
-      margin-left: 25px;
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 1.2rem;
-      color: white;
-    }
+    .logo img { height: 100px; }
+    nav a { margin-left: 25px; text-decoration: none; font-weight: 900; font-size: 1.2rem; color: white; }
     body {
       font-family: 'Quicksand', sans-serif;
       background: url("tracnghiembg.jpg") no-repeat center center fixed;
       background-size: cover;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
     }
     .container {
       background-color: rgba(255,255,255,0.9);
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
+      max-width: 600px; margin: 50px auto; padding: 20px;
+      border-radius: 15px; text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
     .choice-btn {
-      width: 80%;
-      margin: 10px auto;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
+      width: 80%; margin: 10px auto; padding: 12px;
+      font-size: 16px; border-radius: 8px;
+      background-color: #4CAF50; color: white;
+      border: none; cursor: pointer;
     }
-    .choice-btn:hover {
-      background-color: #388E3C;
-    }
+    .choice-btn:hover { background-color: #388E3C; }
     #result, #timer {
-      font-size: 18px;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-    @media (max-width: 768px) {
-      footer a:hover {
-        color: #ffeb3b;
-      }
-      .class-buttons button {
-        width: 80%;
-        margin-top: 10px;
-      }
-    }
-    html, body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    .wrapper {
-      flex: 1;
+      font-size: 18px; margin-top: 15px; font-weight: bold;
     }
     #backBtn {
       margin: 10px 40px;
-      background-color: #ffffffcc;
-      color: #333;
-      border: 2px solid #64b5f6;
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+      background-color: #ffffffcc; color: #333;
+      border: 2px solid #64b5f6; border-radius: 8px;
+      padding: 6px 14px; font-size: 16px;
+      cursor: pointer; transition: background-color 0.3s;
     }
-    #backBtn:hover {
-      background-color: #bbdefb;
-    }
+    #backBtn:hover { background-color: #bbdefb; }
+    html, body { height: 100%; margin: 0; display: flex; flex-direction: column; }
+    .wrapper { flex: 1; }
+	button {
+	  font-size: 17px;
+	  padding: 12px 22px;
+	  border-radius: 10px;
+	  background-color: #2196f3;
+	  color: white;
+	  border: none;
+	  cursor: pointer;
+	  margin: 6px;
+	  transition: all 0.2s ease-in-out;
+	}
+	button:hover {
+	  background-color: #1976d2;
+	  transform: scale(1.05);
+	}
   </style>
 </head>
 <body>
   <div class="wrapper">
     <header>
       <div class="logo">
-        <a href="../../index.html">
-          <img src="../../logo.png" alt="Logo Thầy Dạy Tin">
-        </a>
+        <a href="../../index.html"><img src="../../logo.png" alt="Logo Thầy Dạy Tin"></a>
       </div>
       <nav>
         <a href="../../index.html">Trang chủ</a>
@@ -115,7 +82,7 @@
 
     <div class="container" id="startScreen">
       <h2>🎮 Bắt đầu chơi trắc nghiệm nhanh</h2>
-      <input type="text" id="studentName" placeholder="Nhập tên - lớp của bạn ví dụ Nguyễn Văn A - Lớp 3a" style="padding:10px;width:80%">
+      <input type="text" id="studentName" placeholder="Nhập tên của bạn" style="padding:10px;width:80%">
       <br><br>
       <button onclick="startGame()">Bắt đầu</button>
       <p id="loading" style="color: red; font-weight: bold;">⏳ Đang tải câu hỏi...</p>
@@ -133,6 +100,8 @@
     <div class="container" id="endScreen" style="display:none;">
       <h2>🎉 Hoàn thành!</h2>
       <p id="finalScore"></p>
+      <button onclick="restartGame()">🔁 Làm lại</button>
+      <button onclick="finishAndBack()">✅ Hoàn thành</button>
     </div>
   </div>
 
@@ -155,6 +124,14 @@
       return url.searchParams.get(key);
     }
 
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
     const jsonURL = getParam('json');
     if (!jsonURL) {
       document.getElementById("loading").innerText = "❌ Không có đường dẫn dữ liệu!";
@@ -165,7 +142,7 @@
       fetch(finalURL)
         .then(res => res.json())
         .then(data => {
-          questions = data;
+          questions = shuffleArray(data); // Trộn câu hỏi
           document.getElementById("loading").innerText = "✅ Câu hỏi đã sẵn sàng!";
         })
         .catch(err => {
@@ -184,6 +161,8 @@
         alert("Dữ liệu chưa sẵn sàng hoặc bị lỗi.");
         return;
       }
+      current = 0;
+      totalScore = 0;
       document.getElementById("startScreen").style.display = "none";
       document.getElementById("gameScreen").style.display = "block";
       showQuestion();
@@ -199,10 +178,17 @@
       document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
       let choiceDiv = document.getElementById("choices");
       choiceDiv.innerHTML = '';
-      q.choices.forEach((choice, idx) => {
+
+      let choicesWithIndex = q.choices.map((choice, idx) => ({
+        text: choice, originalIndex: idx
+      }));
+      choicesWithIndex = shuffleArray(choicesWithIndex);
+      q.shuffledAnswer = choicesWithIndex.findIndex(c => c.originalIndex === q.answer);
+
+      choicesWithIndex.forEach((choiceObj, idx) => {
         let btn = document.createElement("button");
         btn.className = "choice-btn";
-        btn.innerText = `${String.fromCharCode(65 + idx)}. ${choice}`;
+        btn.innerText = `${String.fromCharCode(65 + idx)}. ${choiceObj.text}`;
         btn.onclick = () => checkAnswer(idx);
         choiceDiv.appendChild(btn);
       });
@@ -230,7 +216,7 @@
     function checkAnswer(selected) {
       clearInterval(timer);
       let q = questions[current];
-      let isCorrect = selected === q.answer;
+      let isCorrect = selected === q.shuffledAnswer;
       let now = new Date();
       let secondsUsed = Math.round((now - startTime) / 1000);
       let score = isCorrect ? Math.max(0, 10 - secondsUsed) : 0;
@@ -247,7 +233,20 @@
       document.getElementById("gameScreen").style.display = "none";
       document.getElementById("endScreen").style.display = "block";
       document.getElementById("finalScore").innerText = `Tên: ${student} | Tổng điểm: ${totalScore}`;
+    }
+
+    function restartGame() {
+      questions = shuffleArray(questions);
+      current = 0;
+      totalScore = 0;
+      document.getElementById("endScreen").style.display = "none";
+      document.getElementById("gameScreen").style.display = "block";
+      showQuestion();
+    }
+
+    function finishAndBack() {
       sendToGoogleSheet(student, totalScore);
+      history.back();
     }
 
     function sendToGoogleSheet(name, score) {
@@ -255,7 +254,7 @@
         method: 'POST',
         mode: 'no-cors',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({name: name, score: score, timestamp: new Date().toISOString()})
+        body: JSON.stringify({ name: name, score: score, timestamp: new Date().toISOString() })
       });
     }
   </script>
