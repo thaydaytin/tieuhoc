@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <div class="card" onclick="startGame('gameB.html')" style="cursor:pointer;">
+      <div class="card" onclick="startGame('gameTNDS.html')" style="cursor:pointer;">
         <img src="icon/3.png" alt="GAME 2">
         <div class="card-body">
           <h3>Trắc nghiệm đúng sai</h3>
@@ -156,11 +156,13 @@
     function startGame(gameFile) {
       const jsonLink = getParam("json");
       const tuan = getParam("tuan");
+	  const ngaybd = getParam("ngaybd");
+	  const ngaykt = getParam("ngaykt");
       if (!jsonLink || !tuan) {
         alert("Thiếu dữ liệu json hoặc tuần!");
         return;
       }
-      const finalURL = `${gameFile}?json=${encodeURIComponent(jsonLink)}&tuan=${encodeURIComponent(tuan)}`;
+      const finalURL = `${gameFile}?json=${encodeURIComponent(jsonLink)}&tuan=${encodeURIComponent(tuan)}&ngaybd=${encodeURIComponent(ngaybd)}&ngaykt=${encodeURIComponent(ngaykt)}`;
       window.location.href = finalURL;
     }
 

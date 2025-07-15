@@ -81,7 +81,7 @@
     </div>
 
     <div class="container" id="startScreen">
-      <h2>🎮 Bắt đầu chơi trắc nghiệm nhanh</h2>
+      <h2>🎮 Bắt đầu chơi trắc nghiệm Đúng - Sai</h2>
       <input type="text" id="studentName" placeholder="Nhập tên của bạn" style="padding:10px;width:80%">
       <br><br>
       <button onclick="startGame()">Bắt đầu</button>
@@ -115,7 +115,7 @@
     let current = 0;
     let totalScore = 0;
     let timer;
-    let timeLeft = 10;
+    let timeLeft = 5;
     let startTime;
     let student = '';
 
@@ -137,8 +137,8 @@
       document.getElementById("loading").innerText = "❌ Không có đường dẫn dữ liệu!";
     } else {
       
-		const finalURL = decodeURIComponent(jsonURL);
-		console.log("📁 finalURL:", finalURL);
+      const finalURL = decodeURIComponent(jsonURL);
+
       fetch(finalURL)
         .then(res => res.json())
         .then(data => {
@@ -168,11 +168,36 @@
       showQuestion();
     }
 
-    function showQuestion() {
-      if (current >= questions.length) {
-        finishGame();
-        return;
-      }
+    
+function showQuestion() {
+  if (current >= questions.length) {
+    finishGame();
+    return;
+  }
+
+  let q = questions[current];
+  document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
+  let choiceDiv = document.getElementById("choices");
+  choiceDiv.innerHTML = '';
+
+  let btnTrue = document.createElement("button");
+  btnTrue.className = "choice-btn";
+  btnTrue.innerText = "✅ Đúng";
+  btnTrue.onclick = () => checkAnswer(true);
+  choiceDiv.appendChild(btnTrue);
+
+  let btnFalse = document.createElement("button");
+  btnFalse.className = "choice-btn";
+  btnFalse.innerText = "❌ Sai";
+  btnFalse.onclick = () => checkAnswer(false);
+  choiceDiv.appendChild(btnFalse);
+
+  document.getElementById("result").innerText = '';
+  timeLeft = 5;
+  document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
+  startTime = new Date();
+  timer = setInterval(updateTimer, 1000);
+}
 
       let q = questions[current];
       document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
@@ -194,15 +219,15 @@
       });
 
       document.getElementById("result").innerText = '';
-      timeLeft = 10;
-      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      timeLeft = 5;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
       startTime = new Date();
       timer = setInterval(updateTimer, 1000);
     }
 
     function updateTimer() {
       timeLeft--;
-      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
       if (timeLeft <= 0) {
         clearInterval(timer);
         document.getElementById("result").innerText = "⏳ Hết giờ!";
@@ -213,21 +238,22 @@
       }
     }
 
-    function checkAnswer(selected) {
-      clearInterval(timer);
-      let q = questions[current];
-      let isCorrect = selected === q.shuffledAnswer;
-      let now = new Date();
-      let secondsUsed = Math.round((now - startTime) / 1000);
-      let score = isCorrect ? Math.max(0, 10 - secondsUsed) : 0;
-      totalScore += score;
+    
+function checkAnswer(selected) {
+  clearInterval(timer);
+  let q = questions[current];
+  let isCorrect = (selected === Boolean(q.answer));
+  let now = new Date();
+  let secondsUsed = Math.round((now - startTime) / 1000);
+  let score = isCorrect ? Math.max(0, 5 - secondsUsed) : 0;
+  totalScore += score;
 
-      document.getElementById("result").innerText = isCorrect ? `✅ Đúng! +${score} điểm` : "❌ Sai!";
-      setTimeout(() => {
-        current++;
-        showQuestion();
-      }, 1000);
-    }
+  document.getElementById("result").innerText = isCorrect ? `✅ Đúng! +${score} điểm` : "❌ Sai!";
+  setTimeout(() => {
+    current++;
+    showQuestion();
+  }, 1000);
+}
 
     function finishGame() {
       document.getElementById("gameScreen").style.display = "none";
