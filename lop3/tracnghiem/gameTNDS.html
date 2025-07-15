@@ -175,55 +175,9 @@ function showQuestion() {
     return;
   }
 
-  let q = questions[current];
-  document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
-  let choiceDiv = document.getElementById("choices");
-  choiceDiv.innerHTML = '';
+  }
 
-  let btnTrue = document.createElement("button");
-  btnTrue.className = "choice-btn";
-  btnTrue.innerText = "✅ Đúng";
-  btnTrue.onclick = () => checkAnswer(true);
-  choiceDiv.appendChild(btnTrue);
-
-  let btnFalse = document.createElement("button");
-  btnFalse.className = "choice-btn";
-  btnFalse.innerText = "❌ Sai";
-  btnFalse.onclick = () => checkAnswer(false);
-  choiceDiv.appendChild(btnFalse);
-
-  document.getElementById("result").innerText = '';
-  timeLeft = 5;
-  document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
-  startTime = new Date();
-  timer = setInterval(updateTimer, 1000);
-}
-
-      let q = questions[current];
-      document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
-      let choiceDiv = document.getElementById("choices");
-      choiceDiv.innerHTML = '';
-
-      let choicesWithIndex = q.choices.map((choice, idx) => ({
-        text: choice, originalIndex: idx
-      }));
-      choicesWithIndex = shuffleArray(choicesWithIndex);
-      q.shuffledAnswer = choicesWithIndex.findIndex(c => c.originalIndex === q.answer);
-
-      choicesWithIndex.forEach((choiceObj, idx) => {
-        let btn = document.createElement("button");
-        btn.className = "choice-btn";
-        btn.innerText = `${String.fromCharCode(65 + idx)}. ${choiceObj.text}`;
-        btn.onclick = () => checkAnswer(idx);
-        choiceDiv.appendChild(btn);
-      });
-
-      document.getElementById("result").innerText = '';
-      timeLeft = 5;
-      document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
-      startTime = new Date();
-      timer = setInterval(updateTimer, 1000);
-    }
+      }
 
     function updateTimer() {
       timeLeft--;
