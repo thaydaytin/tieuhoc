@@ -171,16 +171,43 @@
 
     
 
+
 function showQuestion() {
   if (current >= questions.length) {
     finishGame();
     return;
   }
 
-  }
+  let q = questions[current];
+  let randomIndex = Math.floor(Math.random() * q.choices.length);
+  let choiceText = q.choices[randomIndex];
+  let isCorrectAnswer = (randomIndex === q.answer);
+  let sentence = `${choiceText} là ${q.question}`;
 
+  document.getElementById("question").innerText = `Câu ${current + 1}: ${sentence}`;
 
-          
+  let choiceDiv = document.getElementById("choices");
+  choiceDiv.innerHTML = '';
+
+  let btnTrue = document.createElement("button");
+  btnTrue.className = "choice-btn";
+  btnTrue.innerText = "✅ Đúng";
+  btnTrue.onclick = () => checkAnswer(true, isCorrectAnswer);
+  choiceDiv.appendChild(btnTrue);
+
+  let btnFalse = document.createElement("button");
+  btnFalse.className = "choice-btn";
+  btnFalse.innerText = "❌ Sai";
+  btnFalse.onclick = () => checkAnswer(false, isCorrectAnswer);
+  choiceDiv.appendChild(btnFalse);
+
+  document.getElementById("result").innerText = '';
+  timeLeft = 5;
+  document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
+  startTime = new Date();
+  timer = setInterval(updateTimer, 1000);
+}
+         
 
     function updateTimer() {
       timeLeft--;
