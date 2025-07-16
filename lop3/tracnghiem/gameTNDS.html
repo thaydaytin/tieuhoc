@@ -115,7 +115,7 @@
     let current = 0;
     let totalScore = 0;
     let timer;
-    let timeLeft = 5;
+    let timeLeft = 20;
     let startTime;
     let student = '';
 
@@ -202,7 +202,7 @@ function showQuestion() {
   choiceDiv.appendChild(btnFalse);
 
   document.getElementById("result").innerText = '';
-  timeLeft = 10;
+  timeLeft = 20;
   document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
   startTime = new Date();
   timer = setInterval(updateTimer, 1000);
@@ -228,7 +228,7 @@ function checkAnswer(selected, isCorrect) {
   clearInterval(timer);
   let now = new Date();
   let secondsUsed = Math.round((now - startTime) / 1000);
-  let score = selected === isCorrect ? Math.max(0, 10 - secondsUsed) : 0;
+  let score = selected === isCorrect ? Math.max(0, 10 - secondsUsed/2) : 0;
   totalScore += score;
 
   document.getElementById("result").innerText = (selected === isCorrect) ? `✅ Đúng! +${score} điểm` : "❌ Sai!";
