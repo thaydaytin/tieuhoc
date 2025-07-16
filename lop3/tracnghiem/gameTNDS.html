@@ -182,7 +182,7 @@ function showQuestion() {
   let randomIndex = Math.floor(Math.random() * q.choices.length);
   let choiceText = q.choices[randomIndex];
   let isCorrectAnswer = (randomIndex === q.answer);
-  let sentence = `${choiceText} là ${q.question}`;
+  let sentence = `${q.question} - Đáp án là ${choiceText} đúng hay sai?`;
 
   document.getElementById("question").innerText = `Câu ${current + 1}: ${sentence}`;
 
