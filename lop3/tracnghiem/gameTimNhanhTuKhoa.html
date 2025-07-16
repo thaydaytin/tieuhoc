@@ -61,23 +61,64 @@
 	  background-color: #1976d2;
 	  transform: scale(1.05);
 	}
-	#matrix {
+	.grid {
       display: grid;
-      grid-template-columns: repeat(10, 30px);
+      grid-template-columns: repeat(10, 35px);
       grid-gap: 3px;
       justify-content: center;
-      margin: 20px 0;
+      margin-top: 15px;
     }
     .cell {
-      width: 30px; height: 30px;
-      border: 1px solid #ccc;
-      display: flex; align-items: center; justify-content: center;
+      width: 35px;
+      height: 35px;
       background: white;
+      border: 1px solid #bbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: bold;
-      cursor: default;
+      user-select: none;
+    }
+    .cell.selected {
+      background-color: #81c784;
+      color: white;
     }
     .cell.correct {
-      background-color: lightgreen !important;
+      background-color: #4caf50;
+      color: white;
+    }
+    #question {
+      font-size: 18px;
+      margin: 15px;
+    }
+    #timer {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    #wordList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px;
+    }
+    .word {
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #90caf9;
+    }
+    .word.found {
+      background: #81c784;
+      color: white;
+    }
+    #result {
+      margin-top: 10px;
+    }
+    input {
+      padding: 8px;
+      width: 80%;
+      margin: 10px auto;
     }
   </style>
 </head>
@@ -98,27 +139,16 @@
       <button id="backBtn" onclick="history.back()" title="Quay lại">⬅ Quay lại</button>
     </div>
 	
-     <div class="container" id="startScreen">
-      <h2>🎯 Tìm đáp án đúng trong ma trận</h2>
-      <input type="text" id="studentName" placeholder="Nhập tên của bạn" style="padding:10px;width:80%">
-      <br><br>
-      <button onclick="startGame()">Bắt đầu</button>
-      <p id="loading">⏳ Đang tải câu hỏi...</p>
-    </div>
-
-    <div class="container" id="gameScreen" style="display:none;">
-      <h3 id="question"></h3>
-      <div id="matrix"></div>
-      <div id="timer">⏱️ 30</div>
-      <div id="result"></div>
-    </div>
-
-    <div class="container" id="endScreen" style="display:none;">
-      <h2>🎉 Hoàn thành!</h2>
-      <p id="finalScore"></p>
-      <button onclick="restartGame()">🔁 Làm lại</button>
-      <button onclick="finishAndBack()">✅ Hoàn thành</button>
-    </div>
+     <div>
+    <input type="text" id="studentName" placeholder="Nhập tên của bạn" />
+    <div id="question">Đang tải...</div>
+    <div id="timer">⏱️ 30s</div>
+    <div id="wordList"></div>
+    <div class="grid" id="matrix"></div>
+    <div id="result"></div>
+    <br>
+    <button onclick="startGame()">🎮 Bắt đầu</button>
+  </div>
 	
   </div>
 
@@ -128,145 +158,120 @@
   </footer>
 
   <script>
+    const matrixSize = 10;
     const getParam = key => new URLSearchParams(location.search).get(key);
     const jsonURL = decodeURIComponent(getParam('json') || '');
-    const tuan = getParam("tuan");
-    const ngaybd = new Date(getParam("ngaybd"));
-    const ngaykt = new Date(getParam("ngaykt"));
+    const tuan = getParam('tuan');
+    const ngaybd = new Date(getParam('ngaybd'));
+    const ngaykt = new Date(getParam('ngaykt'));
 
-    let questions = [], current = 0, matrix = [], matrixSize = 10;
-    let timeLeft = 30, timer, totalScore = 0, student = "";
+    let questions = [], words = [], current = 0, matrix = [], timeLeft = 30, timer, score = 0;
 
-    fetch(jsonURL).then(res => res.json()).then(data => {
-      questions = data;
-      document.getElementById("loading").innerText = "✅ Câu hỏi đã sẵn sàng!";
-    }).catch(() => {
-      document.getElementById("loading").innerText = "❌ Không thể tải dữ liệu.";
-    });
-
-    function startGame() {
-      student = document.getElementById("studentName").value.trim();
-      if (!student) return alert("Vui lòng nhập tên!");
-      const now = new Date();
-      if (now < ngaybd || now > ngaykt) return alert("⛔ Ngoài thời gian làm bài!");
-
-      totalScore = 0;
-      document.getElementById("startScreen").style.display = "none";
-      document.getElementById("gameScreen").style.display = "block";
-      setupMatrix();
-      showNextQuestion();
+    function randomChar() {
+      return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[Math.floor(Math.random() * 26)];
     }
 
-    function setupMatrix() {
-      matrix = Array.from({ length: matrixSize }, () => Array(matrixSize).fill(randomChar()));
-      let placed = [];
-      for (let q of questions) {
-        let word = q.choices[q.answer].toUpperCase();
-        let success = placeWord(word);
-        if (!success) console.log("Không thể đặt từ:", word);
+    function createEmptyMatrix() {
+      return Array.from({length: matrixSize}, () => Array(matrixSize).fill(''));
+    }
+
+    function fillMatrixRandom() {
+      for (let r = 0; r < matrixSize; r++) {
+        for (let c = 0; c < matrixSize; c++) {
+          if (!matrix[r][c]) matrix[r][c] = randomChar();
+        }
       }
-      renderMatrix();
     }
 
     function placeWord(word) {
-      const directions = [ [1,0], [0,1], [1,1] ];
-      for (let tries = 0; tries < 100; tries++) {
-        let dir = directions[Math.floor(Math.random() * directions.length)];
-        let r = Math.floor(Math.random() * (matrixSize - dir[0] * word.length));
-        let c = Math.floor(Math.random() * (matrixSize - dir[1] * word.length));
-        let canPlace = true;
+      word = word.toUpperCase();
+      const dirs = [[1,0],[0,1],[1,1]];
+      for (let attempt = 0; attempt < 100; attempt++) {
+        const [dr, dc] = dirs[Math.floor(Math.random()*dirs.length)];
+        let row = Math.floor(Math.random() * matrixSize);
+        let col = Math.floor(Math.random() * matrixSize);
+        if (row + dr * word.length > matrixSize || col + dc * word.length > matrixSize) continue;
+
+        let fits = true;
         for (let i = 0; i < word.length; i++) {
-          if (matrix[r + dir[0]*i][c + dir[1]*i] !== word[i] && matrix[r + dir[0]*i][c + dir[1]*i] !== randomChar()) {
-            canPlace = false; break;
+          const ch = matrix[row + dr*i][col + dc*i];
+          if (ch && ch !== word[i]) {
+            fits = false;
+            break;
           }
         }
-        if (canPlace) {
-          for (let i = 0; i < word.length; i++) {
-            matrix[r + dir[0]*i][c + dir[1]*i] = word[i];
-          }
-          return true;
+        if (!fits) continue;
+
+        for (let i = 0; i < word.length; i++) {
+          matrix[row + dr*i][col + dc*i] = word[i];
         }
+        return true;
       }
       return false;
     }
 
-    function renderMatrix() {
-      const box = document.getElementById("matrix");
-      box.innerHTML = '';
+    function drawMatrix() {
+      const board = document.getElementById("matrix");
+      board.innerHTML = '';
       for (let r = 0; r < matrixSize; r++) {
         for (let c = 0; c < matrixSize; c++) {
-          const d = document.createElement("div");
-          d.className = "cell";
-          d.innerText = matrix[r][c];
-          box.appendChild(d);
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          cell.innerText = matrix[r][c];
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          board.appendChild(cell);
         }
       }
     }
 
-    function showNextQuestion() {
-      if (current >= questions.length) return finishGame();
-      const q = questions[current];
-      document.getElementById("question").innerText = `🔍 ${q.question}`;
+    function updateTimer() {
+      timeLeft--;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
+      if (timeLeft % 3 === 0) score = Math.max(0, score - 1);
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById("result").innerText = "⏰ Hết giờ!";
+      }
+    }
+
+    function startGame() {
+      const name = document.getElementById("studentName").value.trim();
+      if (!name) return alert("Vui lòng nhập tên!");
+      const now = new Date();
+      if (now < ngaybd || now > ngaykt) return alert("⛔ Ngoài thời gian cho phép!");
+
+      matrix = createEmptyMatrix();
+      score = 10;
+      current = 0;
+      document.getElementById("result").innerText = "";
+      words = [];
+      questions.forEach(q => {
+        const word = q.choices[q.answer].toUpperCase();
+        words.push(word);
+        placeWord(word);
+      });
+      fillMatrixRandom();
+      drawMatrix();
+      showWords();
+      document.getElementById("question").innerText = "🔍 Hãy tìm các từ khóa trong lưới!";
       timeLeft = 30;
-      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}s`;
+      clearInterval(timer);
       timer = setInterval(updateTimer, 1000);
     }
 
-    function updateTimer() {
-      timeLeft--;
-      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
-      if (timeLeft % 3 === 0) totalScore = Math.max(0, totalScore - 1);
-      if (timeLeft <= 0) {
-        clearInterval(timer);
-        current++;
-        showNextQuestion();
-      }
-    }
-
-    function finishGame() {
-      document.getElementById("gameScreen").style.display = "none";
-      document.getElementById("endScreen").style.display = "block";
-      document.getElementById("finalScore").innerText = `Tên: ${student} | Tổng điểm: ${totalScore}`;
-    }
-
-    function restartGame() {
-      current = 0;
-      totalScore = 0;
-      setupMatrix();
-      document.getElementById("endScreen").style.display = "none";
-      document.getElementById("gameScreen").style.display = "block";
-      showNextQuestion();
-    }
-
-    function finishAndBack() {
-      sendToGoogleSheet(student, totalScore);
-      history.back();
-    }
-
-    function sendToGoogleSheet(name, score) {
-      const ngaybdStr = getParam("ngaybd");
-      const ngayktStr = getParam("ngaykt");
-      const now = new Date();
-      if (now < new Date(ngaybdStr) || now > new Date(ngayktStr)) {
-        console.log("Không gửi: ngoài thời gian hợp lệ.");
-        return;
-      }
-      fetch('https://script.google.com/macros/s/AKfycbzgUqhbFgVKUv5COoC-JIb3tvfjCYvvdKqBiZ47VzgdZXt-oQrxFWGGK-XZfF8y9duZ/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name,
-          score: score,
-          tuan: tuan,
-          timestamp: now.toISOString()
-        })
+    function showWords() {
+      const list = document.getElementById("wordList");
+      list.innerHTML = '';
+      words.forEach(w => {
+        const span = document.createElement("span");
+        span.className = "word";
+        span.innerText = w;
+        list.appendChild(span);
       });
     }
 
-    function randomChar() {
-      return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
-    }
   </script>
 </body>
 </html>
