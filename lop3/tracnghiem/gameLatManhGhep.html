@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thầy Dạy Tin - Trò Chơi Lật Mảnh Ghép</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0; padding: 0;
+      background: #e3f2fd;
+      display: flex; flex-direction: column; min-height: 100vh;
+    }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 40px; background-color: #42a5f5; border-bottom: 4px solid #1e88e5;
+    }
+    .logo img { height: 80px; }
+    nav a {
+      margin-left: 25px; text-decoration: none;
+      font-weight: 900; font-size: 1.2rem; color: white;
+    }
+    footer {
+      background-color: #64b5f6; color: white; text-align: center;
+      padding: 20px 10px; font-size: 1rem;
+      border-top: 4px solid #1e88e5;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #gameBoard {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      background-image: url("hidden-image.jpg");
+      background-size: cover;
+      margin-bottom: 30px;
+    }
+    .tile {
+      position: absolute;
+      background-color: #2196f3;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: opacity 0.5s;
+    }
+    .tile.hide { opacity: 0; pointer-events: none; }
+    .questionBox {
+      max-width: 500px;
+      text-align: center;
+    }
+    button {
+      font-size: 16px;
+      padding: 10px 18px;
+      margin: 5px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background-color: #388e3c; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="../../index.html"><img src="../../logo.png" alt="Logo Thầy Dạy Tin"></a>
+    </div>
+    <nav>
+      <a href="../../index.html">Trang chủ</a>
+      <a href="../../thoikhoabieu.html">Thời Khóa Biểu</a>
+      <a href="../../gocgiaitri.html">Góc Giải Trí</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <input type="text" id="studentName" placeholder="Nhập tên của bạn" style="padding:10px; width:80%; max-width:400px">
+    <br><br>
+    <div id="gameBoard"></div>
+    <div class="questionBox">
+      <h3 id="question"></h3>
+      <div id="choices"></div>
+    </div>
+    <div id="score"></div>
+  </div>
+
+  <footer>
+    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
+    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
+  </footer>
+
+  <audio id="correctSound" src="audio/correct.mp3"></audio>
+  <audio id="wrongSound" src="audio/wrong.mp3"></audio>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const jsonPath = decodeURIComponent(params.get('json'));
+    const tuan = params.get('tuan');
+    const ngaybd = new Date(params.get('ngaybd'));
+    const ngaykt = new Date(params.get('ngaykt'));
+
+    let questions = [], current = 0, score = 0, tiles = [];
+
+    fetch(jsonPath)
+      .then(res => res.json())
+      .then(data => {
+        questions = data;
+        createTiles(questions.length);
+        showQuestion();
+      });
+
+    function createTiles(n) {
+      const board = document.getElementById("gameBoard");
+      const rows = Math.ceil(Math.sqrt(n));
+      const cols = rows;
+      const w = board.clientWidth / cols;
+      const h = board.clientHeight / rows;
+      for (let i = 0; i < n; i++) {
+        const div = document.createElement("div");
+        div.className = "tile";
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+        div.style.width = `${w}px`;
+        div.style.height = `${h}px`;
+        div.style.top = `${row * h}px`;
+        div.style.left = `${col * w}px`;
+        board.appendChild(div);
+        tiles.push(div);
+      }
+    }
+
+    function showQuestion() {
+      if (current >= questions.length) {
+        document.getElementById("question").innerText = "\ud83c\udf89 Hoàn thành!\nTên: " + document.getElementById("studentName").value + " | \u0110iểm: " + score;
+        sendToGoogleSheet(document.getElementById("studentName").value, score);
+        return;
+      }
+      const q = questions[current];
+      document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
+      const choiceBox = document.getElementById("choices");
+      choiceBox.innerHTML = "";
+      q.choices.forEach((c, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = c;
+        btn.onclick = () => checkAnswer(i);
+        choiceBox.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(i) {
+      const correct = questions[current].answer;
+      const sound = i === correct ? "correctSound" : "wrongSound";
+      document.getElementById(sound).play();
+      if (i === correct) {
+        tiles[current].classList.add("hide");
+        score++;
+      }
+      current++;
+      setTimeout(showQuestion, 800);
+    }
+
+    function sendToGoogleSheet(name, score) {
+      const now = new Date();
+      if (!name || now < ngaybd || now > ngaykt) return;
+      fetch('https://script.google.com/macros/s/AKfycbzgUqhbFgVKUv5COoC-JIb3tvfjCYvvdKqBiZ47VzgdZXt-oQrxFWGGK-XZfF8y9duZ/exec', {
+        method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, score, tuan, timestamp: now.toISOString() })
+      });
+    }
+  </script>
+</body>
+</html>
