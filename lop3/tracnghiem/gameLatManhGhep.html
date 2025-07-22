@@ -384,15 +384,28 @@
       #finalScore {
         font-size: 1.5rem;
       }
-      #blindBagScreen {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 2 columns on small screens */
+      #bagsContainer { /* Adjusted for smaller screens */
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+        gap: 15px;
       }
       .blind-bag {
-        min-width: 120px;
-        min-height: 120px;
-        font-size: 1.2rem;
+        width: 120px; /* Smaller fixed width */
+        height: 120px; /* Smaller fixed height */
+        font-size: 1rem; /* Smaller font size */
       }
     }
+
+    @media (max-width: 480px) { /* For very small screens */
+      #bagsContainer {
+        grid-template-columns: repeat(1, 1fr); /* 1 column on very small screens */
+        gap: 10px;
+      }
+      .blind-bag {
+        width: 100%; /* Full width for single column */
+        height: 100px; /* Smaller height for single column */
+      }
+    }
+
     /* Keyframes for messageBox */
     @keyframes fadeInOut {
         0% { opacity: 0; top: 0px; }
@@ -402,13 +415,15 @@
     }
 
     /* Styles for Blind Bags */
-    #blindBagScreen {
+    #bagsContainer { /* This is the grid container */
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* 3 columns */
       gap: 25px; /* Increased gap */
       padding: 20px;
       max-width: 900px; /* Adjust as needed for 3 columns */
       width: 100%;
+      justify-items: center; /* Center items horizontally within their grid cells */
+      align-items: center; /* Center items vertically within their grid cells */
     }
 
     .blind-bag {
@@ -434,7 +449,7 @@
       width: 150px; /* Fixed width for consistency */
       height: 150px; /* Fixed height for consistency */
       aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
-      margin: auto; /* Center bags within grid cells */
+      /* margin: auto; Removed as justify-items and align-items on grid container handle centering */
     }
 
     .blind-bag::before { /* Remove the gift emoji */
