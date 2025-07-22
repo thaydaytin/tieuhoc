@@ -413,7 +413,8 @@
 
     .blind-bag {
       background: url('icon/tuimu.png') no-repeat center center; /* New image for bags */
-      background-size: cover; /* Ensure image covers the bag */
+      background-size: contain; /* Changed to contain to fit the image better */
+      background-color: #FFD700; /* Gold color for bags */
       border: 5px solid #FFA500; /* Orange border */
       border-radius: 20px;
       padding: 20px;
@@ -424,15 +425,16 @@
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      font-size: 1.5rem;
+      font-size: 1.2rem; /* Reduced font size for smaller bags */
       font-weight: bold;
       color: white; /* White text for better contrast */
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Stronger text shadow */
       position: relative;
       overflow: hidden;
-      min-width: 180px; /* Balanced size */
-      min-height: 180px; /* Balanced size */
+      width: 150px; /* Fixed width for consistency */
+      height: 150px; /* Fixed height for consistency */
       aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
+      margin: auto; /* Center bags within grid cells */
     }
 
     .blind-bag::before { /* Remove the gift emoji */
