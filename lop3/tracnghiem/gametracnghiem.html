@@ -387,6 +387,13 @@
         font-size: 1.5rem;
       }
     }
+    /* Keyframes for messageBox */
+    @keyframes fadeInOut {
+        0% { opacity: 0; top: 0px; }
+        10% { opacity: 1; top: 20px; }
+        90% { opacity: 1; top: 20px; }
+        100% { opacity: 0; top: 0px; }
+    }
   </style>
 </head>
 <body>
@@ -694,25 +701,19 @@
         messageBox.addEventListener('animationend', () => {
             messageBox.remove();
         });
-
-        const styleSheet = document.createElement('style');
-        styleSheet.type = 'text/css';
-        styleSheet.innerText = `
-            @keyframes fadeInOut {
-                0% { opacity: 0; top: 0px; }
-                10% { opacity: 1; top: 20px; }
-                90% { opacity: 1; top: 20px; }
-                100% { opacity: 0; top: 0px; }
-            }
-        `;
-        document.head.appendChild(styleSheet);
     }
 
     // Tự động focus vào input sau khi trang tải xong
     document.addEventListener('DOMContentLoaded', () => {
+        const studentNameInput = document.getElementById('studentName');
         setTimeout(() => {
-            document.getElementById('studentName').focus();
+            studentNameInput.focus();
         }, 100); // Một độ trễ nhỏ để đảm bảo mọi thứ đã sẵn sàng
+
+        // Thêm sự kiện click cho startScreen để đảm bảo focus
+        document.getElementById('startScreen').addEventListener('click', () => {
+            studentNameInput.focus();
+        });
     });
   </script>
 </body>
