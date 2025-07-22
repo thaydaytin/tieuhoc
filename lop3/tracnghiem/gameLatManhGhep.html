@@ -384,6 +384,14 @@
       #finalScore {
         font-size: 1.5rem;
       }
+      #blindBagScreen {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 2 columns on small screens */
+      }
+      .blind-bag {
+        min-width: 120px;
+        min-height: 120px;
+        font-size: 1.2rem;
+      }
     }
     /* Keyframes for messageBox */
     @keyframes fadeInOut {
@@ -396,15 +404,16 @@
     /* Styles for Blind Bags */
     #blindBagScreen {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 25px; /* Increased gap */
       padding: 20px;
-      max-width: 900px; /* Adjust as needed */
+      max-width: 900px; /* Adjust as needed for 3 columns */
       width: 100%;
     }
 
     .blind-bag {
-      background-color: #FFD700; /* Gold color for bags */
+      background: url('icon/tuimu.png') no-repeat center center; /* New image for bags */
+      background-size: cover; /* Ensure image covers the bag */
       border: 5px solid #FFA500; /* Orange border */
       border-radius: 20px;
       padding: 20px;
@@ -417,25 +426,22 @@
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
       font-size: 1.5rem;
       font-weight: bold;
-      color: #8B4513; /* Brown text */
+      color: white; /* White text for better contrast */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Stronger text shadow */
       position: relative;
       overflow: hidden;
-      min-height: 150px; /* Ensure bags have a minimum height */
+      min-width: 180px; /* Balanced size */
+      min-height: 180px; /* Balanced size */
+      aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
     }
 
-    .blind-bag::before { /* Decorative element */
-      content: '🎁'; /* Gift emoji */
-      font-size: 3em;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.3;
-      z-index: 1;
+    .blind-bag::before { /* Remove the gift emoji */
+      content: none;
     }
 
     .blind-bag.opened {
       background-color: #f0f0f0; /* Lighter background when opened */
+      background-image: none; /* Remove image when opened */
       border-color: #ccc;
       cursor: default;
       box-shadow: none;
@@ -446,7 +452,7 @@
     .blind-bag:not(.opened):hover {
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-      background-color: #FFC107; /* Lighter gold on hover */
+      border-color: #FFD700; /* Change border color on hover */
     }
 
     .blind-bag-content {
@@ -562,6 +568,7 @@
     let timeLeft = 20;
     let startTime;
     let student = '';
+    let currentQuestionIndex; // Khai báo biến này ở phạm vi toàn cục
 
     // Power-up states
     let scoreMultiplier = 1;
