@@ -22,7 +22,7 @@
     body {
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
-      background-size: cover;
+      background-attachment: fixed; /* Đã thêm thuộc tính này để cố định nền */
       display: flex;
       flex-direction: column;
       min-height: 100vh; /* Đảm bảo footer luôn ở cuối trang */
@@ -409,7 +409,7 @@
 
     <div class="container" id="startScreen">
       <h2>🎮 Bắt đầu chơi trắc nghiệm nhanh</h2>
-      <input type="text" id="studentName" placeholder="Nhập tên của bạn" style="padding:10px;width:80%" autofocus>
+      <input type="text" id="studentName" placeholder="Nhập tên của bạn">
       <br><br>
       <button onclick="startGame()">Bắt đầu</button>
       <p id="loading" style="color: red; font-weight: bold;">⏳ Đang tải câu hỏi...</p>
@@ -708,6 +708,12 @@
         document.head.appendChild(styleSheet);
     }
 
+    // Tự động focus vào input sau khi trang tải xong
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            document.getElementById('studentName').focus();
+        }, 100); // Một độ trễ nhỏ để đảm bảo mọi thứ đã sẵn sàng
+    });
   </script>
 </body>
 </html>
