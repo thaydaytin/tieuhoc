@@ -395,14 +395,12 @@
           const item = document.createElement('div');
           item.className = 'game-item';
           item.innerHTML = `
-            <img src="${game.icon}" alt="${game.ten}">
-            <p>${game.ten}</p>
+            <a href="GamePlay.html?url=${encodeURIComponent(game.duongdan)}&ten=${encodeURIComponent(game.ten)}"
+               style="text-decoration: none; color: inherit; display: block;">
+              <img src="${game.icon}" alt="${game.ten}">
+              <p>${game.ten}</p>
+            </a>
           `;
-          item.onclick = () => {
-            const url = encodeURIComponent(game.duongdan);
-            const ten = encodeURIComponent(game.ten);
-            window.location.href = `GamePlay.html?url=${url}&ten=${ten}`;
-          };
           gameList.appendChild(item);
         });
       })
