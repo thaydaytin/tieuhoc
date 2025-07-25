@@ -420,10 +420,9 @@
         });
     }
 
-    fetch('./Game/dsGame.json') // Đã sửa đường dẫn tại đây
+    fetch('./Game/dsGame.json')
       .then(res => {
           if (!res.ok) {
-              // Thêm thông báo lỗi chi tiết hơn nếu fetch không thành công
               throw new Error(`HTTP error! status: ${res.status} - Could not load Game/dsGame.json`);
           }
           return res.json();
@@ -440,7 +439,10 @@
           item.onclick = () => {
             const url = encodeURIComponent(game.duongdan);
             const ten = encodeURIComponent(game.ten);
-            window.location.href = `GamePlay.html?url=${url}&ten=${ten}`;
+            const finalGameUrl = `GamePlay.html?url=${url}&ten=${ten}`; // Biến để dễ gỡ lỗi
+            console.log("Attempting to navigate to:", finalGameUrl); // Ghi log ra console
+            showMessage(`Đang tải game: ${game.ten}`, "info"); // Hiển thị thông báo trên màn hình
+            window.location.href = finalGameUrl;
           };
           gameList.appendChild(item);
         });
