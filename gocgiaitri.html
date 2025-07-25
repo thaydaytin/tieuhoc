@@ -6,30 +6,19 @@
   <title>Thầy Dạy Tin - Góc Giải Trí</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset và thiết lập cơ bản */
     html, body {
       box-sizing: border-box;
-      height: 100%;
       margin: 0;
       padding: 0;
-      width: 100%;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #87CEEB, #FFFACD);
+      background-attachment: fixed;
     }
 
     *, *::before, *::after {
       box-sizing: inherit;
     }
 
-    body {
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
-      background-attachment: fixed; /* Cố định nền */
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #333;
-    }
-
-    /* Header - Giữ nguyên phong cách đã thống nhất */
     header {
       display: flex;
       justify-content: space-between;
@@ -38,7 +27,6 @@
       background-color: #42a5f5;
       border-bottom: 4px solid #1e88e5;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 100%;
     }
     .logo img {
       height: 100px;
@@ -58,177 +46,98 @@
     }
 
     .wrapper {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
-      width: 100%;
     }
 
-    /* Hero Section (Banner) */
     .hero {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: space-around;
-      padding: 0px 20px; /* Đã điều chỉnh padding để khớp với các trang khác */
-      background-color: #bbdefb; /* Màu xanh nhạt */
-      border-radius: 25px; /* Bo tròn */
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Bóng đổ */
-      margin-bottom: 30px; /* Khoảng cách dưới */
-      width: 100%; /* Đã thay đổi để banner rộng toàn bộ chiều ngang */
-      max-width: none; /* Đã loại bỏ giới hạn chiều rộng tối đa */
-      border: 5px solid #90EE90; /* Viền xanh lá cây nhạt */
-      margin-top: 0; /* Đã loại bỏ margin-top */
+      align-items: center;
+      background-color: #bbdefb;
+      border-radius: 25px;
+      padding: 20px;
+      width: 100%;
+      border: 5px solid #90EE90;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     .hero-text {
       max-width: 500px;
-      text-align: left;
-      padding: 0; /* Đã điều chỉnh padding cho text để khớp với các trang khác */
     }
     .hero-text h1 {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 3.2rem; /* Lớn hơn */
-      margin-bottom: 20px;
-      color: #FF6347; /* Màu đỏ cà chua */
-      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+      font-size: 3.2rem;
+      color: #FF6347;
     }
     .hero-text p {
-      font-size: 1.5rem; /* Lớn hơn */
-      margin-bottom: 20px;
-      color: #4682B4; /* Xanh thép */
+      font-size: 1.5rem;
+      color: #4682B4;
     }
     .hero img {
-      max-width: 500px; /* Giới hạn kích thước ảnh */
-      width: 100%; /* Đảm bảo ảnh co giãn */
+      max-width: 500px;
+      width: 100%;
       height: auto;
-      border-radius: 0; /* Đã loại bỏ bo tròn */
-      margin-top: 0px;
-      box-shadow: none; /* Đã loại bỏ đổ bóng */
     }
 
-    /* Nút trong hero section */
-    .class-buttons button {
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
-      background: linear-gradient(to right, #4CAF50, #8BC34A); /* Gradient xanh lá cây */
-      color: white;
-      padding: 15px 30px; /* Lớn hơn */
-      margin: 8px;
-      border: none;
-      border-radius: 30px; /* Bo tròn nhiều hơn */
-      font-size: 1.2rem; /* Lớn hơn */
-      cursor: pointer;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-    .class-buttons button::before { /* Hiệu ứng lấp lánh */
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.4s ease, height 0.4s ease;
-      z-index: 1;
-    }
-    .class-buttons button:hover::before {
-      width: 200%;
-      height: 200%;
-    }
-    .class-buttons button:hover {
-      background: linear-gradient(to right, #388E3C, #689F38); /* Gradient xanh đậm hơn */
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    }
-    .class-buttons button:active {
-      transform: translateY(0);
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Container chung cho danh sách game */
     .container {
       background-color: rgba(255, 255, 255, 0.95);
-      max-width: 1200px; /* Tăng kích thước tối đa cho 5 cột */
+      max-width: 1200px;
       margin: 20px auto;
       padding: 30px;
       border-radius: 25px;
       text-align: center;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       border: 5px solid #90EE90;
-      position: relative;
-      overflow: hidden;
-    }
-    .container::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      right: -20px;
-      bottom: -20px;
-      background: url('https://placehold.co/100x100/FFD700/FFFFFF?text=%E2%98%85') repeat;
-      opacity: 0.05;
-      z-index: 0;
     }
 
-    /* Game Grid (Danh sách game) */
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr); /* 5 cột trên màn hình lớn */
-      gap: 25px; /* Khoảng cách giữa các item */
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
       margin-top: 20px;
-      width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng container */
-      max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-      margin-left: auto; /* Căn giữa grid */
-      margin-right: auto; /* Căn giữa grid */
     }
 
-    /* Game Item (Mỗi ô game) */
     .game-item {
-      background-color: rgba(255, 255, 255, 0.95); /* Nền trắng trong suốt */
-      border: 5px solid #FFD700; /* Viền vàng */
-      border-radius: 25px; /* Bo tròn */
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 5px solid #FFD700;
+      border-radius: 25px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       text-align: center;
       padding: 15px;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       cursor: pointer;
-      display: flex; /* Dùng flexbox để căn giữa nội dung */
+      display: flex;
       flex-direction: column;
-      justify-content: center; /* Căn giữa theo chiều dọc */
-      align-items: center; /* Căn giữa theo chiều ngang */
-      min-height: 180px; /* Chiều cao tối thiểu cho item */
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
     }
 
     .game-item:hover {
       transform: translateY(-8px) scale(1.03);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-      border-color: #FFA500; /* Đổi màu viền khi hover */
+      border-color: #FFA500;
     }
 
     .game-item img {
-      width: 100px; /* Kích thước icon lớn hơn */
-      height: 100px; /* Kích thước icon lớn hơn */
-      object-fit: contain; /* Đảm bảo icon vừa vặn */
-      margin-bottom: 10px; /* Khoảng cách giữa icon và chữ */
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      pointer-events: none;
     }
 
     .game-item p {
-      margin-top: 0; /* Loại bỏ margin-top mặc định của p */
-      font-size: 1.1rem; /* Font chữ lớn hơn một chút */
-      color: #333;
+      margin: 0;
+      font-size: 1.1rem;
       font-weight: 600;
-      line-height: 1.3; /* Cải thiện khả năng đọc */
+      color: #333;
+      pointer-events: none;
     }
 
-    /* Footer - Giữ nguyên phong cách đã thống nhất */
     footer {
       background-color: #64b5f6;
       color: white;
@@ -237,171 +146,64 @@
       font-size: 1rem;
       border-top: 4px solid #1e88e5;
       box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-      width: 100%;
     }
     footer p {
       margin: 5px 0;
       font-weight: 600;
     }
-
-    /* Keyframes for messageBox */
-    @keyframes fadeInOut {
-        0% { opacity: 0; top: 0px; }
-        10% { opacity: 1; top: 20px; }
-        90% { opacity: 1; top: 20px; }
-        100% { opacity: 0; top: 0px; }
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) { /* 4 cột cho màn hình lớn hơn */
-      .game-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 992px) { /* 3 cột cho máy tính bảng */
-      .game-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-      }
-      .game-item {
-        min-height: 160px;
-      }
-      .game-item img {
-        width: 90px;
-        height: 90px;
-      }
-      .game-item p {
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 768px) { /* 2 cột cho điện thoại lớn */
-      header {
-        flex-direction: column;
-        padding: 10px 20px;
-      }
-      nav a {
-        margin: 0 10px;
-        font-size: 1rem;
-      }
-      .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-      }
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-      .hero-text p {
-        font-size: 1.2rem;
-      }
-      .hero img {
-        max-width: 80%;
-        margin-top: 20px;
-      }
-      .class-buttons button {
-        width: 80%;
-        margin-top: 10px;
-        font-size: 1rem;
-        padding: 10px 20px;
-      }
-      .container {
-        margin: 20px 10px;
-        padding: 20px;
-        border-radius: 15px;
-      }
-      .game-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-      .game-item {
-        min-height: 140px;
-        padding: 10px;
-      }
-      .game-item img {
-        width: 70px;
-        height: 70px;
-      }
-      .game-item p {
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) { /* 1 cột cho điện thoại nhỏ */
-      .game-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-      }
-      .game-item {
-        width: 100%; /* Chiếm toàn bộ chiều rộng */
-        min-height: 120px;
-      }
-      .game-item img {
-        width: 60px;
-        height: 60px;
-      }
-      .game-item p {
-        font-size: 0.85rem;
-      }
-    }
   </style>
 </head>
 <body>
-	<header>
-		<div class="logo">
-		   <a href="index.html"> 
-				<img src="logo.png" alt="Logo Thầy Dạy Tin">
-			</a>
-		</div>
-		<nav>
-		  <a href="index.html">Trang chủ</a>
-		  <a href="thoikhoabieu.html">Thời Khóa Biểu</a>
-		  <a href="gocgiaitri.html">Góc Giải Trí</a>
-		  <a href="gocthongtin.html">Góc Thông Tin</a>
-		</nav>
-	</header>
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="logo.png" alt="Logo Thầy Dạy Tin">
+      </a>
+    </div>
+    <nav>
+      <a href="index.html">Trang chủ</a>
+      <a href="thoikhoabieu.html">Thời Khóa Biểu</a>
+      <a href="gocgiaitri.html">Góc Giải Trí</a>
+      <a href="gocthongtin.html">Góc Thông Tin</a>
+    </nav>
+  </header>
 
-	<div class="wrapper">
-	  <section class="hero">
-		<div class="hero-text">
-		  <h1>Góc Giải Trí</h1>
-		  <p>Giải trí bằng các trò chơi phù hợp với lứa tuổi, tăng cường cho môn học.</p>
-		  <div class="class-buttons">
-			<button onclick="window.location.href='#'" hidden>Xem ngay</button>
-		  </div>
-		</div>
-		<img src="GiaiTriBanner.png" alt="Tin học" />
-	  </section>
-		<div class="container"> <!-- Áp dụng style container ở đây -->
-		<div class="game-grid" id="gameList">
-		  <!-- Danh sách game sẽ được thêm ở đây -->
-		</div>
-	  </div>
-  
-	</div>
-  
+  <div class="wrapper">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Góc Giải Trí</h1>
+        <p>Giải trí bằng các trò chơi phù hợp với lứa tuổi, tăng cường cho môn học.</p>
+      </div>
+      <img src="GiaiTriBanner.png" alt="Banner Giải Trí">
+    </section>
+
+    <div class="container">
+      <div class="game-grid" id="gameList">
+        <!-- Danh sách game sẽ được thêm ở đây -->
+      </div>
+    </div>
+  </div>
+
   <footer>
     <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
+
+  <!-- ✅ Đoạn JS tạo danh sách game và click hoạt động -->
   <script>
     fetch('Game/dsGame.json')
       .then(res => res.json())
       .then(data => {
         const gameList = document.getElementById('gameList');
         data.forEach(game => {
-          const item = document.createElement('div');
-          item.className = 'game-item';
-          item.innerHTML = `
-            <a href="GamePlay.html?url=${encodeURIComponent(game.duongdan)}&ten=${encodeURIComponent(game.ten)}"
-               style="text-decoration: none; color: inherit; display: block;">
-              <img src="${game.icon}" alt="${game.ten}">
-              <p>${game.ten}</p>
-            </a>
+          const link = document.createElement('a');
+          link.href = `GamePlay.html?url=${encodeURIComponent(game.duongdan)}&ten=${encodeURIComponent(game.ten)}`;
+          link.className = 'game-item';
+          link.innerHTML = `
+            <img src="${game.icon}" alt="${game.ten}">
+            <p>${game.ten}</p>
           `;
-          gameList.appendChild(item);
+          gameList.appendChild(link);
         });
       })
       .catch(error => {
