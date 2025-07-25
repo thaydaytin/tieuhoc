@@ -201,6 +201,43 @@
         padding: 10px 20px;
       }
     }
+	.container {
+      padding: 20px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .game-item {
+      background: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .game-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .game-item img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .game-item p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #333;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -229,12 +266,42 @@
 		</div>
 		<img src="GiaiTriBanner.png" alt="Tin học" />
 	  </section>
-
+		<div class="container">
+		<div class="game-grid" id="gameList">
+		  <!-- Danh sách game sẽ được thêm ở đây -->
+		</div>
+	  </div>
+  
 	</div>
   
   <footer>
     <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
+  <script>
+    fetch('Game/dsGame.json')
+      .then(res => res.json())
+      .then(data => {
+        const gameList = document.getElementById('gameList');
+        data.forEach(game => {
+          const item = document.createElement('div');
+          item.className = 'game-item';
+          item.innerHTML = `
+            <img src="${game.icon}" alt="${game.ten}">
+            <p>${game.ten}</p>
+          `;
+          item.onclick = () => {
+            const url = encodeURIComponent(game.duongdan);
+            const ten = encodeURIComponent(game.ten);
+            window.location.href = `GamePlay.html?url=${url}&ten=${ten}`;
+          };
+          gameList.appendChild(item);
+        });
+      })
+      .catch(error => {
+        document.getElementById('gameList').innerHTML = "<p>Không thể tải danh sách game.</p>";
+        console.error(error);
+      });
+  </script>
 </body>
 </html>
