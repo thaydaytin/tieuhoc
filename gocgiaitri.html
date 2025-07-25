@@ -14,7 +14,6 @@
       background: linear-gradient(to bottom right, #87CEEB, #FFFACD);
       background-attachment: fixed;
     }
-
     *, *::before, *::after {
       box-sizing: inherit;
     }
@@ -93,11 +92,24 @@
       border: 5px solid #90EE90;
     }
 
+    /* ✅ Giao diện lưới 5 cột + responsive */
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
       gap: 25px;
       margin-top: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .game-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .game-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .game-item {
@@ -189,7 +201,7 @@
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
 
-  <!-- ✅ Đoạn JS tạo danh sách game và click hoạt động -->
+  <!-- ✅ JS hiển thị danh sách game -->
   <script>
     fetch('Game/dsGame.json')
       .then(res => res.json())
