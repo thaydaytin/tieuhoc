@@ -387,46 +387,8 @@
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
   <script>
-    // Hàm hiển thị thông báo thay cho alert()
-    function showMessage(message, type = "info") {
-        const messageBox = document.createElement('div');
-        messageBox.style.position = 'fixed';
-        messageBox.style.top = '20px';
-        messageBox.style.left = '50%';
-        messageBox.style.transform = 'translateX(-50%)';
-        messageBox.style.padding = '15px 30px';
-        messageBox.style.borderRadius = '10px';
-        messageBox.style.zIndex = '1000';
-        messageBox.style.color = 'white';
-        messageBox.style.fontWeight = 'bold';
-        messageBox.style.fontSize = '1.2rem';
-        messageBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        messageBox.style.animation = 'fadeInOut 4s forwards';
-        messageBox.innerText = message;
-
-        if (type === "warning") {
-            messageBox.style.backgroundColor = '#FFC107'; // Yellow
-        } else if (type === "error") {
-            messageBox.style.backgroundColor = '#F44336'; // Red
-        } else {
-            messageBox.style.backgroundColor = '#2196F3'; // Blue
-        }
-
-        document.body.appendChild(messageBox);
-
-        // Remove message box after animation
-        messageBox.addEventListener('animationend', () => {
-            messageBox.remove();
-        });
-    }
-
-    fetch('./Game/dsGame.json')
-      .then(res => {
-          if (!res.ok) {
-              throw new Error(`HTTP error! status: ${res.status} - Could not load Game/dsGame.json`);
-          }
-          return res.json();
-      })
+    fetch('Game/dsGame.json')
+      .then(res => res.json())
       .then(data => {
         const gameList = document.getElementById('gameList');
         data.forEach(game => {
@@ -439,18 +401,14 @@
           item.onclick = () => {
             const url = encodeURIComponent(game.duongdan);
             const ten = encodeURIComponent(game.ten);
-            const finalGameUrl = `GamePlay.html?url=${url}&ten=${ten}`; // Biến để dễ gỡ lỗi
-            console.log("Attempting to navigate to:", finalGameUrl); // Ghi log ra console
-            showMessage(`Đang tải game: ${game.ten}`, "info"); // Hiển thị thông báo trên màn hình
-            window.location.href = finalGameUrl;
+            window.location.href = `GamePlay.html?url=${url}&ten=${ten}`;
           };
           gameList.appendChild(item);
         });
       })
       .catch(error => {
-        document.getElementById('gameList').innerHTML = "<p style='color: red; font-weight: bold;'>Không thể tải danh sách game. Vui lòng kiểm tra đường dẫn file 'Game/dsGame.json' và đảm bảo file tồn tại.</p>";
-        console.error("Lỗi tải dữ liệu game:", error);
-        showMessage("Lỗi: Không thể tải danh sách game. Vui lòng kiểm tra console để biết chi tiết.", "error");
+        document.getElementById('gameList').innerHTML = "<p>Không thể tải danh sách game.</p>";
+        console.error(error);
       });
   </script>
 </body>
