@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mây Từ - Luyện Gõ Phím</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel CDN (để biên dịch JSX trong trình duyệt) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        /* CSS animations for the game elements */
+        @keyframes floatLeft {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-120vw); opacity: 0.5; } /* Trôi ra ngoài màn hình */
+        }
+
+        @keyframes plusOneAnimation {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+        }
+
+        .word-cloud-container {
+            position: absolute;
+            right: -20vw; /* Bắt đầu từ ngoài màn hình bên phải */
+            white-space: nowrap;
+            animation-name: floatLeft;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards; /* Giữ trạng thái cuối cùng của animation */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Hiệu ứng mờ dần khi biến mất */
+            z-index: 10; /* Đảm bảo từ nằm trên các yếu tố nền */
+        }
+
+        .word-cloud-container.typed {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        .cloud-svg {
+            width: 150px; /* Kích thước đám mây */
+            height: 80px; /* Tăng chiều cao để chữ vừa hơn */
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); /* Đổ bóng cho đám mây */
+        }
+
+        .cloud-text {
+            position: absolute;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.25rem; /* Giữ kích thước chữ */
+            z-index: 1; /* Đảm bảo chữ nằm trên đám mây */
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Tạo hiệu ứng chữ nổi */
+            /* Căn giữa chữ trong đám mây */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .plus-one {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FFD700; /* Màu vàng kim */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            animation: plusOneAnimation 1s ease-out forwards;
+            z-index: 15; /* Đảm bảo +1 nằm trên đám mây */
+            /* Vị trí ban đầu của +1 sẽ là trung tâm của đám mây */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Căn giữa +1 */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .cloud-text {
+            font-size: 1rem;
+          }
+          .cloud-svg {
+            width: 120px; /* Kích thước đám mây nhỏ hơn trên mobile */
+            height: 60px;
+          }
+          .plus-one {
+            font-size: 1.2rem;
+          }
+        }
+
+        /* Animation cho chim bay */
+        @keyframes fly {
+          0% { transform: translateX(0) translateY(0); }
+          25% { transform: translateX(50px) translateY(-20px); }
+          50% { transform: translateX(100px) translateY(0); }
+          75% { transform: translateX(50px) translateY(20px); }
+          100% { transform: translateX(0) translateY(0); }
+        }
+        .bird-animation {
+          animation: fly 4s infinite ease-in-out;
+        }
+
+        /* Animation cho ong bay */
+        @keyframes buzz {
+          0% { transform: translateX(0) translateY(0); }
+          25% { transform: translateX(10px) translateY(-5px); }
+          50% { transform: translateX(0) translateY(0); }
+          75% { transform: translateX(-10px) translateY(5px); }
+          100% { transform: translateX(0) translateY(0); }
+        }
+        .bee-animation {
+          animation: buzz 1s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+        const ReactDOM = window.ReactDOM;
+
+        // Danh sách các từ tiếng Việt ngắn, không dấu
+        const WORD_LIST = [
+          'toi', 'ban', 'hoc', 'tap', 'viet', 'nam', 'game', 'phim', 'go', 'nhanh',
+          'may', 'tinh', 'chuot', 'sach', 'but', 'qua', 'tao', 'cam', 'xanh', 'do',
+          'vang', 'den', 'trang', 'mua', 'he', 'dong', 'xuan', 'thu', 'gio', 'nuoc',
+          'lua', 'dat', 'troi', 'song', 'bien', 'nui', 'rung', 'cay', 'hoa', 'la',
+          'trai', 'ngot', 'chua', 'dang', 'cay', 'man', 'ngon', 'dep', 'xau', 'lon',
+          'be', 'cao', 'thap', 'dai', 'ngan', 'rong', 'hep', 'am', 'lanh', 'nong',
+          'mat', 'sang', 'toi', 'nhieu', 'it', 'mot', 'hai', 'ba', 'bon', 'sau',
+          'bay', 'tam', 'chin', 'muoi', 'con', 'cho', 'meo', 'chim', 'ca', 'lon',
+          'nho', 'nhay', 'chay', 'di', 'den', 'ngu', 'day', 'an', 'uong', 'noi',
+          'cuoi', 'khoc', 'hat', 'doc', 'viet', 'nghe', 'nhin', 'lam', 'choi', 'hoc',
+          'tap', 'ngay', 'dem', 'sang', 'chieu', 'toi', 'trua', 'som', 'muon', 'tuan',
+          'thang', 'nam', 'tet', 'le', 'vui', 'buon', 'gian', 'hon', 'yeu', 'ghet'
+        ];
+
+        // Hàm tạo ID duy nhất
+        const generateId = () => Math.random().toString(36).substr(2, 9);
+
+        // Số lượng từ tối đa hiển thị cùng lúc trên màn hình
+        const MAX_WORDS_ON_SCREEN = 7; // Giới hạn số lượng mây từ
+
+        const App = () => {
+          const [score, setScore] = useState(0); // Điểm của người chơi
+          const [timeLeft, setTimeLeft] = useState(30); // Thời gian còn lại, điều chỉnh thành 30 giây
+          const [gameStarted, setGameStarted] = useState(false); // Trạng thái game đã bắt đầu
+          const [gameOver, setGameOver] = useState(false); // Trạng thái game kết thúc
+          const [words, setWords] = useState([]); // Danh sách các từ đang hiển thị trên màn hình
+          const [inputValue, setInputValue] = useState(''); // Giá trị ô nhập liệu
+          const inputRef = useRef(null); // Tham chiếu đến ô nhập liệu để focus
+          const gameAreaRef = useRef(null); // Tham chiếu đến khu vực hiển thị game
+          const gameIntervalRef = useRef(null); // Tham chiếu cho interval game timer
+          const wordGenerationIntervalRef = useRef(null); // Tham chiếu cho interval tạo từ
+
+          // Hàm bắt đầu trò chơi
+          const startGame = useCallback(() => {
+            setScore(0);
+            setTimeLeft(30); // Đặt lại thời gian về 30 giây khi bắt đầu game mới
+            setWords([]);
+            setInputValue('');
+            setGameOver(false);
+            setGameStarted(true);
+            // Tự động focus vào ô nhập liệu khi bắt đầu game
+            if (inputRef.current) {
+              inputRef.current.focus();
+            }
+          }, []);
+
+          // Hàm tạo từ mới
+          const generateWord = useCallback(() => {
+            // Chỉ tạo từ mới nếu số lượng từ trên màn hình chưa đạt giới hạn
+            if (words.length >= MAX_WORDS_ON_SCREEN) {
+              return;
+            }
+
+            const randomWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+            const id = generateId();
+            
+            // Lấy chiều cao khu vực game từ gameAreaRef, nếu chưa có thì dùng ước tính
+            // Đảm bảo gameAreaRef.current tồn tại trước khi truy cập clientHeight
+            const gameAreaHeight = gameAreaRef.current ? gameAreaRef.current.clientHeight : window.innerHeight * 0.5;
+            const top = Math.random() * (gameAreaHeight - 100) + 50; // Đảm bảo từ không quá sát mép
+            
+            // Tốc độ trôi tăng dần: càng nhiều điểm, từ trôi càng nhanh (thời gian duration càng giảm)
+            // Giới hạn tốc độ tối đa để không quá khó
+            const baseDuration = 20; // Thời gian trôi ban đầu (giây)
+            const speedIncreaseFactor = 0.2; // Giảm 0.2 giây cho mỗi điểm
+            const minDuration = 5; // Thời gian trôi tối thiểu (giây)
+
+            const duration = Math.max(minDuration, baseDuration - (score * speedIncreaseFactor));
+
+            setWords(prevWords => [
+              ...prevWords,
+              { id, text: randomWord, top, duration, typed: false, originalTop: top } // Lưu vị trí ban đầu cho hiệu ứng +1
+            ]);
+          }, [score, words.length]); // score và words.length là dependency để tính toán tốc độ và giới hạn từ
+
+          // Hàm xử lý khi nhập liệu
+          const handleInputChange = useCallback((e) => {
+            const value = e.target.value;
+            setInputValue(value);
+
+            // Tìm từ khớp với giá trị nhập liệu
+            const matchedWordIndex = words.findIndex(word =>
+              !word.typed && word.text === value.trim()
+            );
+
+            if (matchedWordIndex !== -1) {
+              // Nếu tìm thấy từ khớp
+              setScore(prevScore => prevScore + 1); // Tăng điểm
+              setWords(prevWords => {
+                const newWords = [...prevWords];
+                newWords[matchedWordIndex].typed = true; // Đánh dấu từ đã được gõ
+                return newWords;
+              });
+              setInputValue(''); // Xóa ô nhập liệu
+            }
+          }, [words]);
+
+          // Xử lý sự kiện nhấn phím
+          const handleKeyDown = useCallback((e) => {
+            if (e.key === 'Enter') {
+              setInputValue(''); // Xóa ô nhập liệu khi nhấn Enter
+            }
+          }, []);
+
+          // Hàm để lấy danh hiệu dựa trên điểm số
+          const getRankTitle = useCallback((currentScore) => {
+            if (currentScore === 0) {
+              return "Cố gắng lần sau nhé!";
+            } else if (currentScore >= 1 && currentScore <= 5) {
+              return "Ngón Tay Tập Sự";
+            } else if (currentScore >= 6 && currentScore <= 10) {
+              return "Phím Thủ Khởi Đầu";
+            } else if (currentScore >= 11 && currentScore <= 15) {
+              return "Bàn Phím Nhanh Nhẹn";
+            } else if (currentScore >= 16 && currentScore <= 20) {
+              return "Chuyên Gia Tốc Độ";
+            } else if (currentScore >= 21 && currentScore <= 25) {
+              return "Bậc Thầy Gõ Phím";
+            } else if (currentScore >= 26 && currentScore <= 30) {
+              return "Vua Tốc Độ Bàn Phím";
+            } else if (currentScore > 30) {
+              return "Huyền Thoại Gõ Phím";
+            }
+            return ""; // Trường hợp mặc định
+          }, []);
+
+          // useEffect để quản lý timer và tạo từ
+          useEffect(() => {
+            // Chỉ khởi tạo interval khi gameStarted là true, game chưa kết thúc VÀ gameAreaRef.current đã có giá trị
+            if (gameStarted && !gameOver && gameAreaRef.current) {
+              // Xóa bất kỳ interval hiện có nào trước khi thiết lập cái mới
+              clearInterval(gameIntervalRef.current);
+              clearInterval(wordGenerationIntervalRef.current);
+
+              // Bắt đầu đếm ngược thời gian
+              gameIntervalRef.current = setInterval(() => {
+                setTimeLeft(prevTime => {
+                  if (prevTime <= 1) {
+                    clearInterval(gameIntervalRef.current);
+                    clearInterval(wordGenerationIntervalRef.current);
+                    setGameOver(true);
+                    setGameStarted(false); // Dừng game
+                    return 0;
+                  }
+                  return prevTime - 1;
+                });
+              }, 1000);
+
+              // Bắt đầu tạo từ mới sau mỗi khoảng thời gian ngẫu nhiên (nhanh hơn)
+              wordGenerationIntervalRef.current = setInterval(() => {
+                generateWord();
+              }, Math.random() * (1000 - 500) + 500); // Tạo từ mới mỗi 0.5-1 giây
+
+              // Cleanup function khi component unmount hoặc game kết thúc
+              return () => {
+                clearInterval(gameIntervalRef.current);
+                clearInterval(wordGenerationIntervalRef.current);
+              };
+            } else {
+              // Nếu trạng thái game thay đổi sang chưa bắt đầu hoặc kết thúc, hãy xóa các interval
+              clearInterval(gameIntervalRef.current);
+              clearInterval(wordGenerationIntervalRef.current);
+            }
+          }, [gameStarted, gameOver, generateWord, gameAreaRef.current]); // Thêm gameAreaRef.current vào dependencies
+
+          // Hàm xử lý khi animation của từ kết thúc (tức là từ đã trôi qua màn hình hoặc đã gõ)
+          const handleAnimationEnd = useCallback((id) => {
+            setWords(prevWords =>
+              prevWords.filter(word => word.id !== id) // Loại bỏ từ khỏi state
+            );
+          }, []);
+
+          // useEffect để xử lý việc xóa nhanh từ đã gõ
+          useEffect(() => {
+            const typedWords = words.filter(word => word.typed);
+            typedWords.forEach(word => {
+              // Đặt timeout để loại bỏ từ sau khi hiệu ứng biến mất hoàn tất (0.3s)
+              setTimeout(() => {
+                setWords(prevWords => prevWords.filter(w => w.id !== word.id));
+              }, 300); // Thời gian này khớp với transition duration của .word-cloud-container.typed
+            });
+          }, [words]); // Chạy khi danh sách words thay đổi
+
+          // useEffect để đảm bảo input luôn focus khi game đang chạy
+          useEffect(() => {
+            if (gameStarted && !gameOver && inputRef.current) {
+              inputRef.current.focus();
+            }
+          }, [gameStarted, gameOver]);
+
+
+          // Component đơn giản cho cây
+          const Tree = ({ style }) => (
+            <div className="absolute" style={style}>
+              {/* Thân cây */}
+              <div className="w-4 h-12 bg-amber-800 mx-auto rounded-b-lg"></div>
+              {/* Tán lá */}
+              <div className="w-16 h-16 bg-green-600 rounded-full absolute -top-8 left-1/2 transform -translate-x-1/2"></div>
+              <div className="w-12 h-12 bg-green-700 rounded-full absolute -top-10 left-1/2 transform -translate-x-1/2 -ml-4"></div>
+              <div className="w-10 h-10 bg-green-500 rounded-full absolute -top-6 left-1/2 transform -translate-x-1/2 ml-4"></div>
+            </div>
+          );
+
+          // Component đơn giản cho bụi cỏ
+          const Bush = ({ style }) => (
+            <div className="absolute" style={style}>
+              <div className="w-20 h-10 bg-green-500 rounded-full"></div>
+              <div className="w-16 h-8 bg-green-600 rounded-full absolute -top-2 left-8"></div>
+            </div>
+          );
+
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-400 flex flex-col items-center justify-center p-4 font-inter relative overflow-hidden">
+              <div className="flex flex-col items-center justify-center h-screen w-screen p-4"> {/* Full màn hình */}
+                <div className="bg-white p-8 rounded-xl shadow-2xl w-full h-full text-center relative overflow-hidden flex flex-col"> {/* Kích thước lớn hơn */}
+                  <h1 className="text-4xl font-extrabold text-blue-700 mb-6">
+                    Mây Từ - Luyện Gõ Phím
+                  </h1>
+
+                  <div className="flex justify-between items-center mb-6 text-xl font-semibold text-gray-700">
+                    <span>Điểm: <span className="text-green-600">{score}</span></span>
+                    <span>Thời gian: <span className="text-red-500">{timeLeft}s</span></span>
+                  </div>
+
+                  {/* Khu vực hiển thị từ và cảnh quan */}
+                  <div ref={gameAreaRef} className="relative w-full flex-grow bg-blue-100 border-2 border-blue-300 rounded-lg mb-6 overflow-hidden">
+                    {/* Mặt trời */}
+                    <svg className="absolute top-4 right-4 w-20 h-20 z-10" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" fill="#FFD700" /> {/* Vòng tròn mặt trời */}
+                        {/* Tia nắng */}
+                        {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(angle => (
+                            <line
+                                key={angle}
+                                x1="50" y1="50" x2="50" y2="10"
+                                stroke="#FFD700" strokeWidth="5"
+                                transform={`rotate(${angle} 50 50)`}
+                            />
+                        ))}
+                    </svg>
+
+                    {/* Cây lớn phía sau */}
+                    <svg className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 h-auto z-0" viewBox="0 0 200 300">
+                        {/* Thân cây */}
+                        <rect x="90" y="150" width="20" height="150" fill="#8B4513" rx="5" ry="5" />
+                        {/* Tán lá */}
+                        <circle cx="100" cy="100" r="80" fill="#228B22" />
+                        <circle cx="70" cy="150" r="60" fill="#2E8B57" />
+                        <circle cx="130" cy="150" r="70" fill="#3CB371" />
+                        <circle cx="150" cy="100" r="50" fill="#20B2AA" />
+                    </svg>
+
+                    {/* Các yếu tố nền động vật và cây cỏ nằm TRONG khu vực game */}
+                    <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-green-500 to-green-300 rounded-t-full z-0">
+                      {/* Cây */}
+                      <Tree style={{ bottom: '20%', left: '10%' }} />
+                      <Tree style={{ bottom: '30%', left: '80%', transform: 'scale(0.8)' }} />
+                      {/* Bụi cỏ */}
+                      <Bush style={{ bottom: '10%', left: '30%' }} />
+                      <Bush style={{ bottom: '5%', left: '60%', transform: 'scale(0.7)' }} />
+                      {/* Thỏ */}
+                      <span className="absolute bottom-5 left-20 text-4xl">🐰</span>
+                      {/* Chim */}
+                      <span className="absolute top-1/4 left-1/4 text-3xl bird-animation">🐦</span>
+                      <span className="absolute top-1/3 right-1/4 text-2xl bird-animation" style={{ animationDuration: '3s', animationDelay: '1s' }}>🐦</span>
+                      {/* Ong */}
+                      <span className="absolute top-1/2 left-1/2 text-xl bee-animation">🐝</span>
+                    </div>
+
+                    {!gameStarted && !gameOver && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-2xl font-bold z-20">
+                        Nhấn "Bắt đầu chơi" để bắt đầu!
+                      </div>
+                    )}
+                    {words.map(word => (
+                      <div
+                        key={word.id}
+                        className={`word-cloud-container ${word.typed ? 'typed' : ''}`}
+                        style={{
+                          top: `${word.top}px`,
+                          animationDuration: `${word.duration}s`,
+                          animationPlayState: gameStarted && !gameOver ? 'running' : 'paused', // Dừng animation khi game chưa bắt đầu hoặc kết thúc
+                        }}
+                        onAnimationEnd={(e) => {
+                            // Chỉ xử lý animationEnd nếu đó là animation floatLeft
+                            if (e.animationName === 'floatLeft') {
+                                handleAnimationEnd(word.id);
+                            }
+                        }}
+                      >
+                        {/* SVG cho hình đám mây giống thật hơn */}
+                        <svg className="cloud-svg" viewBox="0 0 100 50">
+                          <path fill="#ffffff" d="M 10 30 Q 0 30, 0 20 Q 0 10, 10 10 Q 20 0, 30 0 Q 40 0, 50 10 Q 60 0, 70 0 Q 80 0, 90 10 Q 100 10, 100 20 Q 100 30, 90 30 Q 80 40, 70 40 Q 60 40, 50 30 Q 40 40, 30 40 Q 20 40, 10 30 Z" />
+                        </svg>
+                        {/* Chữ của từ */}
+                        <span className="cloud-text">{word.text}</span>
+                        {/* Hiệu ứng +1 khi gõ đúng */}
+                        {word.typed && <span className="plus-one">+1</span>}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Ô nhập liệu */}
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    className="w-full p-3 border-2 border-blue-400 rounded-lg text-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6"
+                    placeholder={gameStarted ? "Gõ từ ở đây..." : "Nhấn Bắt đầu chơi"}
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown} // Thêm sự kiện onKeyDown
+                    disabled={!gameStarted || gameOver} // Vô hiệu hóa khi game chưa bắt đầu hoặc đã kết thúc
+                  />
+
+                  {/* Nút Bắt đầu/Chơi lại */}
+                  {!gameStarted && !gameOver && (
+                    <button
+                      onClick={startGame}
+                      className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75"
+                    >
+                      Bắt đầu chơi
+                    </button>
+                  )}
+
+                  {gameOver && (
+                    <div className="absolute inset-0 bg-black bg-opacity-75 flex flex-col items-center justify-center rounded-xl z-20">
+                      <h2 className="text-white text-5xl font-extrabold mb-4 animate-bounce">
+                        Hết Giờ!
+                      </h2>
+                      <p className="text-white text-3xl mb-2">
+                        Bạn đạt được <span className="text-yellow-400">{score}</span> điểm!
+                      </p>
+                      {score === 0 ? (
+                        <p className="text-white text-2xl mb-6">Cố gắng lần sau nhé!</p>
+                      ) : (
+                        <p className="text-white text-2xl mb-6">
+                          Danh hiệu: <span className="text-yellow-300">{getRankTitle(score)}</span>
+                        </p>
+                      )}
+                      <button
+                        onClick={startGame}
+                        className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition-all duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75"
+                      >
+                        Chơi Lại
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                <p className="mt-8 text-gray-600 text-sm">
+                  Mẹo: Gõ chính xác từ để hoàn thành. Nhấn Enter để xóa nhanh ô gõ.
+                </p>
+              </div>
+            </div>
+          );
+        };
+
+        // Render the React App component into the 'root' div
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

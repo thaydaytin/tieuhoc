@@ -1,0 +1,17 @@
+[
+  {
+    "ten": "Chơi cờ ca rô",
+    "icon": "Game/GameCaRo.png",
+    "duongdan": "Game/GameCaRo.html"
+  },
+  {
+    "ten": "Luyện gõ bàn phím",
+    "icon": "Game/GameMayTu.png",
+    "duongdan": "Game/GameMayTu.html"
+  },
+  {
+    "ten": "Trở Thành Pháo Thủ",
+    "icon": "Game/GamePhaoThu.png",
+    "duongdan": "Game/GamePhaoThu.html"
+  }
+]
