@@ -72,15 +72,15 @@
 
   <script>
     let board, game;
-    const $status = $('#status');
     const pieceValues = { p: 10, n: 30, b: 30, r: 50, q: 90, k: 900 };
 
     function updateStatus() {
+      const $status = document.getElementById("status");
       let status = game.turn() === 'w' ? 'Trắng di chuyển' : 'Đen di chuyển';
       if (game.in_checkmate()) status = 'Chiếu hết!';
       else if (game.in_draw()) status = 'Hòa!';
       else if (game.in_check()) status += ' - Chiếu!';
-      $status.text(status);
+      $status.textContent = status;
     }
 
     function evaluate(game) {
@@ -133,12 +133,12 @@
       }
     }
 
-    $(function () {
+    window.onload = function () {
       game = new Chess();
       board = Chessboard('board', {
         draggable: true,
         position: 'start',
-        onDrop: (src, tgt) => {
+        onDrop: function (src, tgt) {
           const move = game.move({ from: src, to: tgt, promotion: 'q' });
           if (move === null) return 'snapback';
           updateStatus();
@@ -146,14 +146,14 @@
         }
       });
 
-      $('#resetBtn').click(() => {
+      document.getElementById('resetBtn').onclick = function () {
         game.reset();
         board.start();
         updateStatus();
-      });
+      };
 
       updateStatus();
-    });
+    };
   </script>
 </body>
 </html>
