@@ -45,40 +45,53 @@
     }
 
     .wrapper {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      width: 100%;
     }
 
     .hero {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
       align-items: center;
-      background-color: #bbdefb;
-      border-radius: 25px;
-      padding: 20px;
-      width: 100%;
-      border: 5px solid #90EE90;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      justify-content: space-around;
+      padding: 0px 20px; /* Đã điều chỉnh padding để khớp với lop3.html */
+      background-color: #bbdefb; /* Màu xanh nhạt */
+      border-radius: 25px; /* Bo tròn */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+      margin-bottom: 30px; /* Khoảng cách dưới */
+      width: 100%; /* Đã thay đổi để banner rộng toàn bộ chiều ngang */
+      max-width: none; /* Đã loại bỏ giới hạn max-width */
+      border: 5px solid #90EE90; /* Viền xanh lá cây nhạt */
+      margin-top: 0; /* Đã loại bỏ margin-top */
     }
     .hero-text {
       max-width: 500px;
+      text-align: left;
+      padding: 0; /* Đã điều chỉnh padding cho text để khớp với lop3.html */
     }
     .hero-text h1 {
-      font-size: 3.2rem;
-      color: #FF6347;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 3.2rem; /* Lớn hơn */
+      margin-bottom: 20px;
+      color: #FF6347; /* Màu đỏ cà chua */
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
     }
     .hero-text p {
-      font-size: 1.5rem;
-      color: #4682B4;
+      font-size: 1.5rem; /* Lớn hơn */
+      margin-bottom: 20px;
+      color: #4682B4; /* Xanh thép */
     }
     .hero img {
-      max-width: 500px;
-      width: 100%;
+      max-width: 500px; /* Giới hạn kích thước ảnh */
+      width: 100%; /* Đảm bảo ảnh co giãn */
       height: auto;
+      border-radius: 0; /* Đã loại bỏ bo tròn */
+      margin-top: 0px;
+      box-shadow: none; /* Đã loại bỏ đổ bóng */
     }
 
     .container {
