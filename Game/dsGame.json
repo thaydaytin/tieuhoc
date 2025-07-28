@@ -23,5 +23,10 @@
     "ten": "Cờ Vua",
     "icon": "Game/1covua.png",
     "duongdan": "https://toytheater.com/chess.php"
+  },
+  {
+    "ten": "Phóng phi tiêu",
+    "icon": "Game/1phongphitieu.jpg",
+    "duongdan": "https://toytheater.com/darts.php"
   }
 ]

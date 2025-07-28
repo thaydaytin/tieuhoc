@@ -6,7 +6,7 @@
     <title>Pháo Thủ Lực Học</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons (optional, but good for some UI elements) -->
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Custom styles for the game to ensure good aesthetics */
@@ -28,7 +28,7 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            max-width: 90%;
+            max-width: 95%; /* Increased max-width for better mobile fit */
             width: 1200px; /* Max width for larger screens */
         }
         canvas {
@@ -102,32 +102,32 @@
             background-color: #2563eb;
         }
 
-        /* Graph specific styles */
-        .graph-container {
-            background-color: #f0f9ff; /* Lighter blue for graph background */
-            border-radius: 1rem;
-            padding: 1rem;
-            border: 1px solid #bfdbfe;
-        }
-        .graph-canvas {
-            background-color: #ffffff;
-            border-radius: 0.75rem;
-            border: 1px solid #d1d5db;
-            width: 100%;
-            height: 200px; /* Fixed height for graph */
-        }
-
         /* Responsive adjustments */
-        @media (min-width: 768px) {
+        /* For screens larger than small (sm) breakpoint */
+        @media (min-width: 640px) {
             .game-grid {
                 display: grid;
-                grid-template-columns: 2fr 1fr; /* Game on left, controls/graph on right */
+                grid-template-columns: 2fr 1fr; /* Game on left, controls on right */
                 gap: 1.5rem;
             }
-            .controls-and-graph {
+            .controls-area {
                 display: flex;
                 flex-direction: column;
                 gap: 1.5rem;
+            }
+        }
+
+        /* For very small screens, stack controls vertically */
+        @media (max-width: 639px) {
+            .game-container {
+                padding: 1rem; /* Reduce padding on small screens */
+            }
+            .control-buttons {
+                flex-direction: column; /* Stack buttons vertically */
+                gap: 1rem; /* Space between stacked buttons */
+            }
+            .control-buttons button {
+                width: 100%; /* Full width buttons */
             }
         }
     </style>
@@ -145,8 +145,8 @@
                 </div>
             </div>
 
-            <!-- Controls and Graph -->
-            <div class="controls-and-graph">
+            <!-- Controls Area -->
+            <div class="controls-area">
                 <!-- Control Sliders -->
                 <div class="flex flex-col gap-4 p-4 bg-blue-50 rounded-xl shadow-md">
                     <h2 class="text-xl font-semibold text-gray-700">Điều khiển</h2>
@@ -169,22 +169,11 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Force-Acceleration Graph -->
-                <div class="graph-container">
-                    <h2 class="text-xl font-semibold text-gray-700 mb-2">Biểu đồ Lực – Gia tốc (F = ma)</h2>
-                    <canvas id="graphCanvas" class="graph-canvas"></canvas>
-                    <p class="text-sm text-gray-500 mt-2 text-center">
-                        <span class="font-bold">Khối lượng (m):</span> <span id="massDisplay">1 kg</span>
-                        <br>
-                        <span class="font-bold">Gia tốc trọng trường (g):</span> <span id="gravityDisplay">9.81 m/s²</span>
-                    </p>
-                </div>
             </div>
         </div>
     </div>
 
-    <script>
+    <script type="module">
         // Global variables for Firebase (will be provided by the Canvas environment)
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
@@ -198,8 +187,6 @@
         // Canvas elements
         const gameCanvas = document.getElementById('gameCanvas');
         const gameCtx = gameCanvas.getContext('2d');
-        const graphCanvas = document.getElementById('graphCanvas');
-        const graphCtx = graphCanvas.getContext('2d');
 
         // UI elements
         const forceSlider = document.getElementById('forceSlider');
@@ -208,8 +195,6 @@
         const angleValueSpan = document.getElementById('angleValue');
         const fireButton = document.getElementById('fireButton');
         const resetButton = document.getElementById('resetButton');
-        const massDisplay = document.getElementById('massDisplay');
-        const gravityDisplay = document.getElementById('gravityDisplay');
         const scoreDisplay = document.getElementById('scoreDisplay'); // New score display element
 
         // Game state variables
@@ -245,20 +230,16 @@
         // --- Initialization and Event Listeners ---
 
         window.onload = function() {
-            // Set initial display values for mass and gravity
-            massDisplay.textContent = `${CANNONBALL_MASS} kg`;
-            gravityDisplay.textContent = `${GRAVITY} m/s²`;
             scoreDisplay.textContent = score; // Initialize score display
 
             // Resize canvases to fit their containers and set initial positions
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
-            // Update slider values and redraw graph on input
+            // Update slider values and redraw game on input
             forceSlider.addEventListener('input', () => {
                 force = parseInt(forceSlider.value);
                 forceValueSpan.textContent = `${force} N`;
-                drawGraph();
                 drawGame(); // Redraw game to show cannon angle
             });
 
@@ -274,9 +255,8 @@
             // Initialize clouds
             initClouds();
 
-            // Initial drawing of game and graph
+            // Initial drawing of game
             drawGame();
-            drawGraph();
             moveTarget(); // Place target initially
             
             // Start cloud animation loop
@@ -300,16 +280,12 @@
         }
 
         /**
-         * Resizes the game and graph canvases to fit their parent containers and updates element positions.
+         * Resizes the game canvas to fit its parent container and updates element positions.
          */
         function resizeCanvas() {
             // Game Canvas
             gameCanvas.width = gameCanvas.offsetWidth;
             gameCanvas.height = gameCanvas.offsetHeight;
-
-            // Graph Canvas
-            graphCanvas.width = graphCanvas.offsetWidth;
-            graphCanvas.height = graphCanvas.offsetHeight;
 
             // Update game element positions based on new canvas size
             cannonBaseX = gameCanvas.width * CANNON_BASE_X_RATIO;
@@ -318,7 +294,6 @@
             
             // Redraw everything after resize
             drawGame();
-            drawGraph();
         }
 
         /**
@@ -338,7 +313,6 @@
             angle = 45;
             forceValueSpan.textContent = `${force} N`;
             angleValueSpan.textContent = `${angle}°`;
-            drawGraph();
             moveTarget(); // Move target to a new random position on reset
         }
 
@@ -491,72 +465,6 @@
             });
         }
 
-        /**
-         * Draws the Force-Acceleration graph.
-         */
-        function drawGraph() {
-            graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height); // Clear graph canvas
-
-            // Graph properties
-            const padding = 30;
-            const originX = padding;
-            const originY = graphCanvas.height - padding;
-            const graphWidth = graphCanvas.width - 2 * padding;
-            const graphHeight = graphCanvas.height - 2 * padding;
-
-            // Draw axes
-            graphCtx.strokeStyle = '#616161'; // Dark gray
-            graphCtx.lineWidth = 2;
-
-            // X-axis (Acceleration)
-            graphCtx.beginPath();
-            graphCtx.moveTo(originX, originY);
-            graphCtx.lineTo(originX + graphWidth, originY);
-            graphCtx.stroke();
-            graphCtx.fillText('Gia tốc (a)', originX + graphWidth / 2, originY + 20);
-
-            // Y-axis (Force)
-            graphCtx.beginPath();
-            graphCtx.moveTo(originX, originY);
-            graphCtx.lineTo(originX, originY - graphHeight);
-            graphCtx.stroke();
-            graphCtx.fillText('Lực (F)', originX - 25, originY - graphHeight / 2);
-
-            // Draw F = ma line
-            // F = m * a => a = F / m
-            // Max Force on slider is 500N. Max Acceleration = 500N / 1kg = 500 m/s^2
-            const maxForce = 500;
-            const maxAcceleration = maxForce / CANNONBALL_MASS;
-
-            // Scale factors for graph
-            const xScale = graphWidth / maxAcceleration;
-            const yScale = graphHeight / maxForce;
-
-            graphCtx.beginPath();
-            graphCtx.moveTo(originX, originY);
-            // Draw line up to max acceleration
-            graphCtx.lineTo(originX + maxAcceleration * xScale, originY - maxForce * yScale);
-            graphCtx.strokeStyle = '#2563eb'; // Blue line
-            graphCtx.lineWidth = 3;
-            graphCtx.stroke();
-
-            // Draw current point (F, a)
-            const currentAcceleration = force / CANNONBALL_MASS;
-            const pointX = originX + currentAcceleration * xScale;
-            const pointY = originY - force * yScale;
-
-            graphCtx.beginPath();
-            graphCtx.arc(pointX, pointY, 5, 0, Math.PI * 2);
-            graphCtx.fillStyle = '#ef4444'; // Red dot
-            graphCtx.fill();
-
-            // Display current F and a near the dot
-            graphCtx.fillStyle = '#333';
-            graphCtx.font = '12px Arial';
-            graphCtx.fillText(`F: ${force} N`, pointX + 10, pointY - 10);
-            graphCtx.fillText(`a: ${currentAcceleration.toFixed(2)} m/s²`, pointX + 10, pointY + 15);
-        }
-
         // --- Game Logic ---
 
         /**
@@ -706,7 +614,6 @@
                 gameCtx.fill();
             }
         }
-
     </script>
 </body>
 </html>
