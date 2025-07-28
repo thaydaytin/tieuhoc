@@ -18,5 +18,10 @@
     "ten": "Sắp xếp đỗ Xe",
     "icon": "Game/1GameDoXe.JPG",
     "duongdan": "https://toytheater.com/parking.php"
+  },
+  {
+    "ten": "Cờ Vua",
+    "icon": "Game/1covua.png",
+    "duongdan": "https://toytheater.com/chess.php"
   }
 ]
