@@ -28,5 +28,10 @@
     "ten": "Phóng phi tiêu",
     "icon": "Game/1phongphitieu.jpg",
     "duongdan": "https://toytheater.com/darts.php"
+  },
+  {
+    "ten": "Đua Xe",
+    "icon": "Game/DuaXe.png",
+    "duongdan": "Game/DuaXe.html"
   }
 ]

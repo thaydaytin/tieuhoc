@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò Chơi Đua Xe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for the game to ensure good aesthetics */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            color: #e2e8f0; /* Light text color */
+        }
+        .game-container {
+            background-color: #2d3748; /* Darker background for container */
+            border-radius: 1.5rem; /* Rounded corners */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 95%; /* Increased max-width for better mobile fit */
+            width: 600px; /* Max width for larger screens */
+            position: relative;
+        }
+        canvas {
+            background-color: #4a5568; /* Dark gray for road background */
+            border-radius: 1rem;
+            border: 2px solid #a0aec0; /* Lighter border */
+            display: block;
+            width: 100%; /* Make canvas responsive */
+            height: 500px; /* Fixed height for game area */
+        }
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1.5rem;
+            text-align: center;
+            z-index: 10;
+        }
+        .game-overlay h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fbd38d; /* Yellowish color */
+            margin-bottom: 1rem;
+        }
+        .game-overlay p {
+            font-size: 1.25rem;
+            color: #cbd5e0; /* Light gray */
+            margin-bottom: 1.5rem;
+        }
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .control-buttons button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #4299e1; /* Blue */
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        .control-buttons button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            background-color: #3182ce;
+        }
+
+        /* Mobile specific controls */
+        .mobile-controls {
+            display: none; /* Hidden by default */
+            justify-content: space-around;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        .mobile-controls button {
+            padding: 1.5rem 2rem; /* Larger touch targets */
+            font-size: 1.5rem;
+            border-radius: 50%; /* Circular buttons */
+            background-color: #63b3ed;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s;
+            border: none;
+        }
+        .mobile-controls button:active {
+            background-color: #4299e1;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 1rem;
+                max-width: 100%; /* Full width on smaller screens */
+                border-radius: 0; /* No rounded corners on full width */
+                box-shadow: none; /* No shadow on full width */
+            }
+            canvas {
+                height: 450px; /* Adjust height for mobile */
+            }
+            .mobile-controls {
+                display: flex; /* Show mobile controls on small screens */
+            }
+            .control-buttons {
+                display: none; /* Hide desktop controls on small screens */
+            }
+            body {
+                padding: 0; /* Remove body padding on mobile */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="game-container">
+        <h1 class="text-3xl font-extrabold text-center text-yellow-300 mb-4">Đua Xe Tốc Độ</h1>
+
+        <div class="game-area relative">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- Score Display -->
+            <div class="absolute top-4 left-4 p-2 bg-gray-800 rounded-lg shadow-md">
+                <span class="text-lg font-bold text-white">Điểm: <span id="scoreDisplay" class="text-green-400">0</span></span>
+            </div>
+
+            <!-- Game Overlay (Start/Game Over) -->
+            <div id="gameOverlay" class="game-overlay">
+                <h2 id="overlayTitle">Đua Xe Tốc Độ</h2>
+                <p id="overlayMessage">Nhấn Bắt Đầu để chơi!</p>
+                <div class="flex gap-4">
+                    <button id="startButton" class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-xl text-xl">
+                        <i class="fas fa-play mr-2"></i>Bắt Đầu
+                    </button>
+                    <button id="resetButton" class="bg-blue-500 hover:bg-blue-600 text-white py-3 px-6 rounded-xl text-xl hidden">
+                        <i class="fas fa-redo mr-2"></i>Chơi Lại
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Controls (hidden on desktop) -->
+        <div class="mobile-controls">
+            <button id="leftButton" class="bg-blue-600 hover:bg-blue-700 text-white">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button id="rightButton" class="bg-blue-600 hover:bg-blue-700 text-white">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        // Global variables for Firebase (will be provided by the Canvas environment)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; 
+
+        // Canvas elements
+        const gameCanvas = document.getElementById('gameCanvas');
+        const gameCtx = gameCanvas.getContext('2d');
+
+        // UI elements
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const gameOverlay = document.getElementById('gameOverlay');
+        const overlayTitle = document.getElementById('overlayTitle');
+        const overlayMessage = document.getElementById('overlayMessage');
+        const startButton = document.getElementById('startButton');
+        const resetButton = document.getElementById('resetButton');
+        const leftButton = document.getElementById('leftButton');
+        const rightButton = document.getElementById('rightButton');
+
+        // Game Constants
+        const CAR_WIDTH_RATIO = 0.1; // Car width relative to canvas width
+        const CAR_HEIGHT_RATIO = 0.15; // Car height relative to canvas height
+        const ROAD_LINE_WIDTH_RATIO = 0.01; // Road line width relative to canvas width
+        const ROAD_LINE_HEIGHT_RATIO = 0.1; // Road line height relative to canvas height
+        const ROAD_LINE_SPACING_RATIO = 0.15; // Spacing between road lines
+        const OBSTACLE_MIN_WIDTH_RATIO = 0.08;
+        const OBSTACLE_MAX_WIDTH_RATIO = 0.12;
+        const OBSTACLE_MIN_HEIGHT_RATIO = 0.1;
+        const OBSTACLE_MAX_HEIGHT_RATIO = 0.15;
+        const COLLECTIBLE_SIZE_RATIO = 0.05;
+
+        // Game State Variables
+        let car = {};
+        let roadLines = [];
+        let obstacles = [];
+        let collectibles = [];
+        let score = 0;
+        let roadSpeed = 5; // Initial road speed
+        let gameRunning = false;
+        let animationFrameId = null;
+        let lastObstacleTime = 0;
+        let lastCollectibleTime = 0;
+        const OBSTACLE_INTERVAL_MIN = 800; // ms
+        const OBSTACLE_INTERVAL_MAX = 1500; // ms
+        const COLLECTIBLE_INTERVAL_MIN = 1000; // ms
+        const COLLECTIBLE_INTERVAL_MAX = 2500; // ms
+
+        // --- Initialization and Event Listeners ---
+
+        window.onload = function() {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            startButton.addEventListener('click', startGame);
+            resetButton.addEventListener('click', resetGame);
+
+            // Keyboard controls for desktop
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
+
+            // Touch controls for mobile
+            leftButton.addEventListener('touchstart', () => moveCar(-1));
+            leftButton.addEventListener('touchend', () => moveCar(0));
+            rightButton.addEventListener('touchstart', () => moveCar(1));
+            rightButton.addEventListener('touchend', () => moveCar(0));
+
+            drawGame(); // Initial draw
+            showOverlay('start');
+        };
+
+        /**
+         * Resizes the game canvas to fit its parent container and initializes game elements.
+         */
+        function resizeCanvas() {
+            gameCanvas.width = gameCanvas.offsetWidth;
+            gameCanvas.height = gameCanvas.offsetHeight;
+
+            // Initialize car properties based on canvas size
+            car = {
+                width: gameCanvas.width * CAR_WIDTH_RATIO,
+                height: gameCanvas.height * CAR_HEIGHT_RATIO,
+                x: (gameCanvas.width / 2) - (gameCanvas.width * CAR_WIDTH_RATIO / 2),
+                y: gameCanvas.height * 0.8, // Position car near bottom
+                speed: gameCanvas.width * 0.008 // Car horizontal movement speed
+            };
+
+            // Initialize road lines
+            roadLines = [];
+            const numLines = Math.ceil(gameCanvas.height / (gameCanvas.height * ROAD_LINE_SPACING_RATIO));
+            for (let i = 0; i < numLines; i++) {
+                roadLines.push({
+                    y: i * (gameCanvas.height * ROAD_LINE_SPACING_RATIO) - gameCanvas.height * ROAD_LINE_HEIGHT_RATIO
+                });
+            }
+
+            // Redraw everything after resize
+            drawGame();
+        }
+
+        /**
+         * Handles keyboard key down events for car movement.
+         * @param {KeyboardEvent} event - The keyboard event.
+         */
+        function handleKeyDown(event) {
+            if (!gameRunning) return;
+            if (event.key === 'ArrowLeft') {
+                car.vx = -car.speed;
+            } else if (event.key === 'ArrowRight') {
+                car.vx = car.speed;
+            }
+        }
+
+        /**
+         * Handles keyboard key up events to stop car movement.
+         * @param {KeyboardEvent} event - The keyboard event.
+         */
+        function handleKeyUp(event) {
+            if (!gameRunning) return;
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                car.vx = 0;
+            }
+        }
+
+        /**
+         * Moves the car based on touch input.
+         * @param {number} direction - -1 for left, 1 for right, 0 to stop.
+         */
+        function moveCar(direction) {
+            if (!gameRunning) return;
+            car.vx = direction * car.speed;
+        }
+
+        /**
+         * Starts the game.
+         */
+        function startGame() {
+            gameRunning = true;
+            score = 0;
+            scoreDisplay.textContent = score;
+            obstacles = [];
+            collectibles = [];
+            roadSpeed = 5; // Reset speed
+            car.x = (gameCanvas.width / 2) - (car.width / 2); // Reset car position
+            car.vx = 0; // Reset car velocity
+            hideOverlay();
+            gameLoop();
+        }
+
+        /**
+         * Resets the game to its initial state.
+         */
+        function resetGame() {
+            cancelAnimationFrame(animationFrameId);
+            gameRunning = false;
+            showOverlay('start');
+            drawGame(); // Redraw initial state
+        }
+
+        /**
+         * Shows the game overlay with a specific message.
+         * @param {string} type - 'start' or 'gameOver'.
+         */
+        function showOverlay(type) {
+            gameOverlay.classList.remove('hidden');
+            if (type === 'start') {
+                overlayTitle.textContent = 'Đua Xe Tốc Độ';
+                overlayMessage.textContent = 'Nhấn Bắt Đầu để chơi!';
+                startButton.classList.remove('hidden');
+                resetButton.classList.add('hidden');
+            } else if (type === 'gameOver') {
+                overlayTitle.textContent = 'Hết Game!';
+                overlayMessage.textContent = `Điểm của bạn: ${score}. Nhấn Chơi Lại.`;
+                startButton.classList.add('hidden');
+                resetButton.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Hides the game overlay.
+         */
+        function hideOverlay() {
+            gameOverlay.classList.add('hidden');
+        }
+
+        // --- Drawing Functions ---
+
+        /**
+         * Draws all game elements on the canvas.
+         */
+        function drawGame() {
+            gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height); // Clear canvas
+
+            // Draw road
+            drawRoad();
+
+            // Draw obstacles
+            drawObstacles();
+
+            // Draw collectibles
+            drawCollectibles();
+
+            // Draw car
+            drawCar();
+
+            // Update score display in HTML
+            scoreDisplay.textContent = score;
+        }
+
+        /**
+         * Draws the scrolling road lines.
+         */
+        function drawRoad() {
+            gameCtx.fillStyle = '#a0aec0'; // White for road lines
+            const lineWidth = gameCanvas.width * ROAD_LINE_WIDTH_RATIO;
+            const lineHeight = gameCanvas.height * ROAD_LINE_HEIGHT_RATIO;
+            const lineSpacing = gameCanvas.height * ROAD_LINE_SPACING_RATIO;
+
+            roadLines.forEach(line => {
+                // Left dashed line
+                gameCtx.fillRect(gameCanvas.width * 0.25 - lineWidth / 2, line.y, lineWidth, lineHeight);
+                // Right dashed line
+                gameCtx.fillRect(gameCanvas.width * 0.75 - lineWidth / 2, line.y, lineWidth, lineHeight);
+            });
+        }
+
+        /**
+         * Draws the player's car with a more realistic design.
+         */
+        function drawCar() {
+            const carX = car.x;
+            const carY = car.y;
+            const carWidth = car.width;
+            const carHeight = car.height;
+
+            // Main body color (e.g., Red)
+            const bodyColor = '#e53e3e'; 
+            // Window color
+            const windowColor = '#cbd5e0';
+            // Wheel color
+            const wheelColor = '#333333';
+            // Headlight/Taillight color
+            const lightColor = '#fbd38d';
+
+            // Draw main body (bottom part)
+            gameCtx.fillStyle = bodyColor;
+            gameCtx.beginPath();
+            gameCtx.moveTo(carX + carWidth * 0.1, carY + carHeight * 0.9); // Bottom-left
+            gameCtx.lineTo(carX + carWidth * 0.9, carY + carHeight * 0.9); // Bottom-right
+            gameCtx.lineTo(carX + carWidth * 0.95, carY + carHeight * 0.5); // Top-right (slight slope)
+            gameCtx.lineTo(carX + carWidth * 0.05, carY + carHeight * 0.5); // Top-left (slight slope)
+            gameCtx.closePath();
+            gameCtx.fill();
+
+            // Draw cabin/roof
+            gameCtx.fillStyle = bodyColor;
+            gameCtx.beginPath();
+            gameCtx.moveTo(carX + carWidth * 0.2, carY + carHeight * 0.5); // Front-bottom-left of cabin
+            gameCtx.lineTo(carX + carWidth * 0.8, carY + carHeight * 0.5); // Front-bottom-right of cabin
+            gameCtx.lineTo(carX + carWidth * 0.75, carY + carHeight * 0.1); // Top-right of cabin
+            gameCtx.lineTo(carX + carWidth * 0.25, carY + carHeight * 0.1); // Top-left of cabin
+            gameCtx.closePath();
+            gameCtx.fill();
+
+            // Draw windows (windshield, side windows)
+            gameCtx.fillStyle = windowColor;
+            // Windshield
+            gameCtx.beginPath();
+            gameCtx.moveTo(carX + carWidth * 0.25, carY + carHeight * 0.15);
+            gameCtx.lineTo(carX + carWidth * 0.75, carY + carHeight * 0.15);
+            gameCtx.lineTo(carX + carWidth * 0.72, carY + carHeight * 0.45);
+            gameCtx.lineTo(carX + carWidth * 0.28, carY + carHeight * 0.45);
+            gameCtx.closePath();
+            gameCtx.fill();
+
+            // Left side window
+            gameCtx.fillRect(carX + carWidth * 0.1, carY + carHeight * 0.25, carWidth * 0.1, carHeight * 0.2);
+            // Right side window
+            gameCtx.fillRect(carX + carWidth * 0.8, carY + carHeight * 0.25, carWidth * 0.1, carHeight * 0.2);
+
+
+            // Draw wheels (circles for simplicity and realism)
+            const wheelRadius = carWidth * 0.08;
+            gameCtx.fillStyle = wheelColor;
+            // Front-left wheel
+            gameCtx.beginPath();
+            gameCtx.arc(carX + carWidth * 0.2, carY + carHeight * 0.9, wheelRadius, 0, Math.PI * 2);
+            gameCtx.fill();
+            // Front-right wheel
+            gameCtx.beginPath();
+            gameCtx.arc(carX + carWidth * 0.8, carY + carHeight * 0.9, wheelRadius, 0, Math.PI * 2);
+            gameCtx.fill();
+
+            // Draw headlights
+            gameCtx.fillStyle = lightColor;
+            gameCtx.fillRect(carX + carWidth * 0.08, carY + carHeight * 0.55, carWidth * 0.07, carHeight * 0.05);
+            gameCtx.fillRect(carX + carWidth * 0.85, carY + carHeight * 0.55, carWidth * 0.07, carHeight * 0.05);
+
+            // Draw taillights
+            gameCtx.fillStyle = '#cc0000'; // Red for taillights
+            gameCtx.fillRect(carX + carWidth * 0.08, carY + carHeight * 0.8, carWidth * 0.07, carHeight * 0.05);
+            gameCtx.fillRect(carX + carWidth * 0.85, carY + carHeight * 0.8, carWidth * 0.07, carHeight * 0.05);
+        }
+
+        /**
+         * Draws all active obstacles (now cars).
+         */
+        function drawObstacles() {
+            obstacles.forEach(obstacle => {
+                const obsX = obstacle.x;
+                const obsY = obstacle.y;
+                const obsWidth = obstacle.width;
+                const obsHeight = obstacle.height;
+                const obsColor = obstacle.color;
+
+                // Draw main body (bottom part)
+                gameCtx.fillStyle = obsColor;
+                gameCtx.beginPath();
+                gameCtx.moveTo(obsX + obsWidth * 0.1, obsY + obsHeight * 0.9); // Bottom-left
+                gameCtx.lineTo(obsX + obsWidth * 0.9, obsY + obsHeight * 0.9); // Bottom-right
+                gameCtx.lineTo(obsX + obsWidth * 0.95, obsY + obsHeight * 0.5); // Top-right (slight slope)
+                gameCtx.lineTo(obsX + obsWidth * 0.05, obsY + obsHeight * 0.5); // Top-left (slight slope)
+                gameCtx.closePath();
+                gameCtx.fill();
+
+                // Draw cabin/roof
+                gameCtx.fillStyle = obsColor;
+                gameCtx.beginPath();
+                gameCtx.moveTo(obsX + obsWidth * 0.2, obsY + obsHeight * 0.5); // Front-bottom-left of cabin
+                gameCtx.lineTo(obsX + obsWidth * 0.8, obsY + obsHeight * 0.5); // Front-bottom-right of cabin
+                gameCtx.lineTo(obsX + obsWidth * 0.75, obsY + obsHeight * 0.1); // Top-right of cabin
+                gameCtx.lineTo(obsX + obsWidth * 0.25, obsY + obsHeight * 0.1); // Top-left of cabin
+                gameCtx.closePath();
+                gameCtx.fill();
+
+                // Draw windows (windshield, side windows)
+                gameCtx.fillStyle = '#2d3748'; // Darker window color
+                // Windshield
+                gameCtx.beginPath();
+                gameCtx.moveTo(obsX + obsWidth * 0.25, obsY + obsHeight * 0.15);
+                gameCtx.lineTo(obsX + obsWidth * 0.75, obsY + obsHeight * 0.15);
+                gameCtx.lineTo(obsX + obsWidth * 0.72, obsY + obsHeight * 0.45);
+                gameCtx.lineTo(obsX + obsWidth * 0.28, obsY + obsHeight * 0.45);
+                gameCtx.closePath();
+                gameCtx.fill();
+
+                // Left side window
+                gameCtx.fillRect(obsX + obsWidth * 0.1, obsY + obsHeight * 0.25, obsWidth * 0.1, obsHeight * 0.2);
+                // Right side window
+                gameCtx.fillRect(obsX + obsWidth * 0.8, obsY + obsHeight * 0.25, obsWidth * 0.1, obsHeight * 0.2);
+
+                // Draw wheels (circles)
+                const wheelRadius = obsWidth * 0.08;
+                gameCtx.fillStyle = '#333333'; // Dark wheel color
+                // Front-left wheel
+                gameCtx.beginPath();
+                gameCtx.arc(obsX + obsWidth * 0.2, obsY + obsHeight * 0.9, wheelRadius, 0, Math.PI * 2);
+                gameCtx.fill();
+                // Front-right wheel
+                gameCtx.beginPath();
+                gameCtx.arc(obsX + obsWidth * 0.8, obsY + obsHeight * 0.9, wheelRadius, 0, Math.PI * 2);
+                gameCtx.fill();
+            });
+        }
+
+        /**
+         * Draws all active collectibles.
+         */
+        function drawCollectibles() {
+            collectibles.forEach(collectible => {
+                gameCtx.fillStyle = collectible.color;
+                gameCtx.beginPath();
+                gameCtx.arc(collectible.x + collectible.size / 2, collectible.y + collectible.size / 2, collectible.size / 2, 0, Math.PI * 2);
+                gameCtx.fill();
+            });
+        }
+
+        // --- Game Logic ---
+
+        /**
+         * Main game loop, updates positions and checks for collisions.
+         */
+        function gameLoop(timestamp) {
+            if (!gameRunning) return;
+
+            // Update car position
+            car.x += car.vx;
+            // Keep car within canvas bounds
+            if (car.x < 0) car.x = 0;
+            if (car.x + car.width > gameCanvas.width) car.x = gameCanvas.width - car.width;
+
+            // Update road lines
+            roadLines.forEach(line => {
+                line.y += roadSpeed;
+                if (line.y > gameCanvas.height) {
+                    line.y = -gameCanvas.height * ROAD_LINE_SPACING_RATIO + (line.y - gameCanvas.height); // Wrap around
+                }
+            });
+
+            // Generate new obstacles
+            if (timestamp - lastObstacleTime > Math.random() * (OBSTACLE_INTERVAL_MAX - OBSTACLE_INTERVAL_MIN) + OBSTACLE_INTERVAL_MIN) {
+                generateObstacle();
+                lastObstacleTime = timestamp;
+            }
+
+            // Update obstacles and check collisions
+            obstacles.forEach((obstacle, index) => {
+                obstacle.y += roadSpeed;
+                // Remove if off-screen
+                if (obstacle.y > gameCanvas.height) {
+                    obstacles.splice(index, 1);
+                }
+
+                // Check collision with car
+                if (checkCollision(car, obstacle)) {
+                    endGame();
+                }
+            });
+
+            // Generate new collectibles
+            if (timestamp - lastCollectibleTime > Math.random() * (COLLECTIBLE_INTERVAL_MAX - COLLECTIBLE_INTERVAL_MIN) + COLLECTIBLE_INTERVAL_MIN) {
+                generateCollectible();
+                lastCollectibleTime = timestamp;
+            }
+
+            // Update collectibles and check collection
+            collectibles.forEach((collectible, index) => {
+                collectible.y += roadSpeed;
+                // Remove if off-screen
+                if (collectible.y > gameCanvas.height) {
+                    collectibles.splice(index, 1);
+                }
+
+                // Check collection with car
+                if (checkCollision(car, collectible)) {
+                    score += 10; // Increase score
+                    roadSpeed += 0.2; // Increase speed slightly
+                    collectibles.splice(index, 1); // Remove collected item
+                }
+            });
+
+            drawGame();
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        /**
+         * Generates a new obstacle at a random position.
+         */
+        function generateObstacle() {
+            const laneWidth = gameCanvas.width * 0.25; // Width of each driving lane
+            const lane1Center = gameCanvas.width * 0.25;
+            const lane2Center = gameCanvas.width * 0.75;
+
+            const obstacleWidth = Math.random() * (OBSTACLE_MAX_WIDTH_RATIO - OBSTACLE_MIN_WIDTH_RATIO) * gameCanvas.width + OBSTACLE_MIN_WIDTH_RATIO * gameCanvas.width;
+            const obstacleHeight = Math.random() * (OBSTACLE_MAX_HEIGHT_RATIO - OBSTACLE_MIN_HEIGHT_RATIO) * gameCanvas.height + OBSTACLE_MIN_HEIGHT_RATIO * gameCanvas.height;
+
+            // Randomly choose a lane (left or right)
+            const lane = Math.random() < 0.5 ? lane1Center : lane2Center;
+            const x = lane - obstacleWidth / 2; // Center obstacle in the lane
+
+            const colors = ['#3182ce', '#805ad5', '#dd6b20', '#d53f8c']; // Blue, Purple, Orange, Pink
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+            obstacles.push({
+                x: x,
+                y: -obstacleHeight, // Start above canvas
+                width: obstacleWidth,
+                height: obstacleHeight,
+                color: randomColor
+            });
+        }
+
+        /**
+         * Generates a new collectible at a random position.
+         */
+        function generateCollectible() {
+            const laneWidth = gameCanvas.width * 0.25; // Width of each driving lane
+            const lane1Center = gameCanvas.width * 0.25;
+            const lane2Center = gameCanvas.width * 0.75;
+
+            const collectibleSize = gameCanvas.width * COLLECTIBLE_SIZE_RATIO;
+
+            // Randomly choose a lane (left or right)
+            const lane = Math.random() < 0.5 ? lane1Center : lane2Center;
+            const x = lane - collectibleSize / 2; // Center collectible in the lane
+
+            collectibles.push({
+                x: x,
+                y: -collectibleSize, // Start above canvas
+                size: collectibleSize,
+                color: '#f6e05e' // Gold color for collectibles
+            });
+        }
+
+        /**
+         * Checks for collision between two rectangular objects.
+         * @param {object} rect1 - First rectangle {x, y, width, height}.
+         * @param {object} rect2 - Second rectangle {x, y, width, height}.
+         * @returns {boolean} - True if collision, false otherwise.
+         */
+        function checkCollision(rect1, rect2) {
+            // Adjust rect2 for circular collectible if applicable
+            let r2x = rect2.x;
+            let r2y = rect2.y;
+            let r2w = rect2.width || rect2.size;
+            let r2h = rect2.height || rect2.size;
+
+            return rect1.x < r2x + r2w &&
+                   rect1.x + rect1.width > r2x &&
+                   rect1.y < r2y + r2h &&
+                   rect1.y + rect1.height > r2y;
+        }
+
+        /**
+         * Ends the game and displays the game over overlay.
+         */
+        function endGame() {
+            gameRunning = false;
+            cancelAnimationFrame(animationFrameId);
+            showOverlay('gameOver');
+        }
+    </script>
+</body>
+</html>
