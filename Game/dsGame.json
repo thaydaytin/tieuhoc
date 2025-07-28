@@ -33,5 +33,35 @@
     "ten": "Đua Xe",
     "icon": "Game/DuaXe.png",
     "duongdan": "Game/DuaXe.html"
+  },
+  {
+    "ten": "Hiệp sĩ Hercules",
+    "icon": "Game/1hercules.jpg",
+    "duongdan": "https://toytheater.com/hercules.php"
+  },
+  {
+    "ten": "Cờ Uno",
+    "icon": "Game/1uno.jpg",
+    "duongdan": "https://toytheater.com/four-colors.php"
+  },
+  {
+    "ten": "Cờ Domino",
+    "icon": "Game/1domino.gif",
+    "duongdan": "https://toytheater.com/dominoes.php"
+  },
+  {
+    "ten": "Tách màu ống nghiệm",
+    "icon": "Game/1liquid.gif",
+    "duongdan": "https://toytheater.com/liquid-sort.php"
+  },
+  {
+    "ten": "Ghép các ô màu",
+    "icon": "Game/1ghepomau.jpg",
+    "duongdan": "https://toytheater.com/sliding-squares.php"
+  },
+  {
+    "ten": "So tài trí nhớ",
+    "icon": "Game/1memory_chess.gif",
+    "duongdan": "https://toytheater.com/memory-chess.php"
   }
 ]
