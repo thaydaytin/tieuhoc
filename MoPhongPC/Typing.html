@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Gõ Phím - Typing Practice</title>
+    <!-- Tải Tailwind CSS CDN để tạo kiểu nhanh chóng và đẹp mắt -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải font Inter từ Google Fonts để có giao diện hiện đại -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Đặt font chữ mặc định và căn giữa nội dung trang */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e0f7fa; /* Màu nền xanh da trời nhạt, tươi sáng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Chiều cao tối thiểu của trang là toàn bộ khung nhìn */
+            margin: 0;
+            padding: 20px;
+        }
+        /* Container chính của ứng dụng */
+        .container {
+            background-color: #ffffff; /* Nền trắng sạch sẽ */
+            border-radius: 25px; /* Bo tròn góc nhiều hơn */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Đổ bóng rõ hơn */
+            padding: 35px;
+            max-width: 950px; /* Chiều rộng tối đa lớn hơn một chút */
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* Khoảng cách giữa các phần tử */
+            position: relative; /* Để chứa thông báo nổi */
+        }
+        /* Tiêu đề chính */
+        h1 {
+            color: #2196f3; /* Màu xanh dương nổi bật */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Thêm đổ bóng chữ */
+        }
+        /* Đoạn mô tả */
+        p {
+            color: #424242; /* Màu xám đậm hơn */
+        }
+
+        /* Khu vực hiển thị văn bản cần gõ */
+        .lesson-text-display {
+            font-size: 2rem; /* Cỡ chữ lớn hơn */
+            line-height: 1.7;
+            min-height: 160px; /* Chiều cao tối thiểu */
+            background-color: #e8f5e9; /* Màu nền xanh lá cây nhạt, dịu mắt */
+            padding: 25px;
+            border-radius: 20px;
+            text-align: left;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            color: #334155;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Đổ bóng trong nhẹ */
+        }
+        /* Kiểu cho ký tự gõ đúng */
+        .lesson-text-display .correct {
+            color: #28a745; /* Xanh lá cây tươi sáng */
+            font-weight: 600; /* Đậm hơn một chút */
+        }
+        /* Kiểu cho ký tự gõ sai */
+        .lesson-text-display .incorrect {
+            color: #dc3545; /* Đỏ tươi */
+            background-color: #ffcdd2; /* Nền đỏ nhạt hơn */
+            border-bottom: 3px solid #dc3545; /* Đường viền dưới dày hơn */
+            animation: shake 0.2s ease-in-out 2; /* Hiệu ứng rung nhẹ */
+        }
+        /* Hiệu ứng rung cho ký tự sai */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+            100% { transform: translateX(0); }
+        }
+        /* Kiểu cho ký tự hiện tại đang được gõ */
+        .lesson-text-display .current {
+            background-color: #ffeb3b; /* Vàng tươi, như một ngôi sao */
+            border-radius: 6px;
+            padding: 0 4px;
+            box-shadow: 0 0 8px rgba(255, 235, 59, 0.6); /* Đổ bóng vàng rực rỡ */
+            animation: pulse 1.5s infinite alternate; /* Hiệu ứng nhấp nháy */
+        }
+        /* Hiệu ứng nhấp nháy cho ký tự hiện tại */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        /* Ô nhập liệu của người dùng */
+        .typing-input {
+            font-size: 1.6rem;
+            padding: 18px 25px;
+            border: 3px solid #a7d9f7; /* Viền xanh nhạt */
+            border-radius: 20px;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        /* Hiệu ứng khi ô nhập liệu được focus */
+        .typing-input:focus {
+            border-color: #007bff; /* Xanh dương đậm */
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Đổ bóng xanh mạnh hơn */
+        }
+        /* Khu vực hiển thị thống kê */
+        .stats-display {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        /* Mỗi mục thống kê */
+        .stat-item {
+            background-color: #fff3e0; /* Nền màu cam nhạt, ấm áp */
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ nhàng */
+            min-width: 180px;
+            flex: 1; /* Cho phép các mục co giãn */
+            max-width: 220px; /* Giới hạn chiều rộng tối đa */
+        }
+        /* Nhãn của mục thống kê */
+        .stat-label {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        /* Giá trị của mục thống kê */
+        .stat-value {
+            font-size: 2.2rem; /* Cỡ chữ lớn hơn */
+            font-weight: 800; /* Đậm hơn */
+            color: #2196f3; /* Màu xanh dương nổi bật */
+        }
+        /* Nhóm các nút điều khiển */
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        /* Kiểu cho nút điều khiển */
+        .control-button {
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            color: white;
+            background-image: linear-gradient(to right, #81c784, #4caf50); /* Gradient xanh lá cây tươi mới */
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4); /* Đổ bóng xanh lá */
+        }
+        /* Hiệu ứng khi di chuột qua nút */
+        .control-button:hover {
+            background-image: linear-gradient(to right, #4caf50, #388e3c); /* Gradient xanh lá cây đậm hơn */
+            transform: translateY(-3px); /* Nâng nút lên nhiều hơn */
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
+        }
+        /* Hiệu ứng khi nhấn nút */
+        .control-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Bộ chọn ngôn ngữ */
+        .language-selector {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        /* Kiểu cho nút chọn ngôn ngữ */
+        .language-button {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid #b3e5fc; /* Viền xanh dương nhạt */
+            background-color: #e1f5fe; /* Nền xanh dương rất nhạt */
+            color: #039be5; /* Màu xanh dương */
+            transition: all 0.2s ease;
+        }
+        /* Kiểu cho nút ngôn ngữ đang hoạt động hoặc khi di chuột qua */
+        .language-button.active, .language-button:hover {
+            border-color: #2196f3; /* Xanh dương đậm hơn */
+            background-color: #90caf9; /* Xanh dương nhạt */
+            color: #1976d2; /* Xanh dương đậm */
+            box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Kiểu cho bàn phím ảo */
+        .virtual-keyboard {
+            display: grid;
+            grid-template-columns: repeat(14, 1fr); /* 14 cột cho các phím */
+            gap: 8px;
+            padding: 25px;
+            background-color: #f0f4f8; /* Nền xám xanh nhạt */
+            border-radius: 20px;
+            margin-top: 25px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        /* Kiểu cho từng phím trên bàn phím ảo */
+        .key {
+            background-color: #e3f2fd; /* Màu nền xanh rất nhạt */
+            padding: 12px 6px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #475569;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+            min-width: 35px;
+            height: 55px;
+        }
+        /* Kiểu khi phím được nhấn (active) */
+        .key.active {
+            background-color: #42a5f5; /* Xanh dương trung bình */
+            color: white;
+            transform: translateY(2px);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+        /* Kiểu riêng cho phím cách (Space) */
+        .key.space {
+            grid-column: span 6; /* Chiếm 6 cột */
+        }
+        /* Kiểu cho các phím đặc biệt (Tab, CapsLock, Enter, Shift, Backspace) */
+        .key.tab, .key.caps, .key.enter, .key.shift, .key.backspace {
+            font-size: 0.9rem; /* Font nhỏ hơn */
+        }
+        /* Kích thước cột cho các phím đặc biệt */
+        .key.tab { grid-column: span 1; }
+        .key.caps { grid-column: span 1; }
+        .key.enter { grid-column: span 2; }
+        .key.shift { grid-column: span 2; }
+        .key.backspace { grid-column: span 2; }
+
+        /* Thông báo hoàn thành bài học */
+        #completion-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #4CAF50; /* Xanh lá cây */
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0; /* Mặc định ẩn */
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none; /* Không chặn sự kiện chuột */
+        }
+        #completion-message.show {
+            opacity: 1;
+        }
+
+        /* Điều chỉnh responsive cho màn hình vừa (tablet) */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                gap: 20px;
+            }
+            .lesson-text-display {
+                font-size: 1.6rem;
+                min-height: 140px;
+                padding: 20px;
+            }
+            .typing-input {
+                font-size: 1.4rem;
+                padding: 15px 20px;
+            }
+            .stat-value {
+                font-size: 1.8rem;
+            }
+            .stat-item {
+                padding: 15px 20px;
+                min-width: 140px;
+            }
+            .control-button {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+            .virtual-keyboard {
+                grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+                gap: 6px;
+                padding: 20px;
+            }
+            .key {
+                font-size: 1rem;
+                height: 45px;
+                min-width: unset;
+            }
+            .key.space {
+                grid-column: span 4;
+            }
+            .key.tab, .key.caps, .key.enter, .key.shift, .key.backspace {
+                font-size: 0.8rem;
+            }
+            #completion-message {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+        }
+
+        /* Điều chỉnh responsive cho màn hình nhỏ (điện thoại) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                gap: 15px;
+            }
+            .lesson-text-display {
+                font-size: 1.3rem;
+                min-height: 100px;
+                padding: 15px;
+            }
+            .typing-input {
+                font-size: 1.1rem;
+                padding: 12px 15px;
+            }
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            .stat-item {
+                padding: 10px 15px;
+                min-width: 100px;
+            }
+            .control-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            .language-button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            .virtual-keyboard {
+                padding: 10px;
+                gap: 4px;
+            }
+            .key {
+                font-size: 0.8rem;
+                height: 38px;
+            }
+            .key.space {
+                grid-column: span 3;
+            }
+            #completion-message {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-4xl font-bold mb-4">Luyện Gõ Phím</h1>
+        <p class="text-lg mb-6">Hãy gõ đoạn văn bản dưới đây để luyện tập!</p>
+
+        <div id="lesson-text" class="lesson-text-display">
+            <!-- Văn bản bài học sẽ được tải ở đây -->
+        </div>
+
+        <input type="text" id="typing-input" class="typing-input" placeholder="Bắt đầu gõ ở đây...">
+
+        <div id="stats" class="stats-display">
+            <div class="stat-item">
+                <div class="stat-label">Tốc độ (WPM)</div>
+                <div id="wpm" class="stat-value">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Độ chính xác</div>
+                <div id="accuracy" class="stat-value">0%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Lỗi</div>
+                <div id="errors" class="stat-value">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Thời gian</div>
+                <div id="timer" class="stat-value">0s</div>
+            </div>
+        </div>
+
+        <div class="control-buttons">
+            <button id="start-button" class="control-button">Bắt đầu bài mới</button>
+            <!-- Nút "Làm lại" đã được loại bỏ -->
+        </div>
+
+        <div class="language-selector">
+            <button id="lang-en" class="language-button active">Tiếng Anh</button>
+            <button id="lang-vi" class="language-button">Tiếng Việt (Không dấu)</button>
+        </div>
+
+        <div id="virtual-keyboard" class="virtual-keyboard">
+            <!-- Bàn phím ảo sẽ được tạo ra bằng JavaScript -->
+        </div>
+
+        <!-- Thông báo hoàn thành câu -->
+        <div id="completion-message" class="hidden">Hoàn thành câu!</div>
+    </div>
+
+    <script>
+        // Các đoạn văn bản để luyện tập
+        const lessonTexts = {
+            en: [
+                "The quick brown fox jumps over the lazy dog.",
+                "Practice makes perfect. Keep typing every day.",
+                "Hello world, this is a simple typing test.",
+                "Never give up on your dreams.",
+                "Learning to type faster is a valuable skill.",
+                "The sun always shines brightest after rain.",
+                "Books are a uniquely portable magic.",
+                "Technology has revolutionized the way we live.",
+                "Creativity is intelligence having fun.",
+                "The early bird catches the worm."
+            ],
+            vi: [
+                "Chao mung cac em den voi bai hoc go phim.",
+                "Hay cung luyen tap de go nhanh hon.",
+                "Viet Nam que huong toi. Dat nuoc men yeu.",
+                "Hoc tap la su nghiep cua ca doi nguoi.",
+                "Cham chi ren luyen se dat duoc thanh cong.",
+                "Moi ngay mot chut, kien tri se thanh cong.",
+                "An toan giao thong la hanh phuc cua moi nha.",
+                "Bao ve moi truong la trach nhiem cua chung ta.",
+                "Sach la nguon tri thuc vo tan cua nhan loai.",
+                "Cong nghe giup chung ta ket noi the gioi."
+            ]
+        };
+
+        // Bố cục bàn phím ảo
+        const keyboardLayout = [
+            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+            ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+            ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
+            ['ShiftLeft', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'ShiftRight'],
+            ['ControlLeft', 'AltLeft', 'Space', 'AltRight', 'ControlRight']
+        ];
+
+        // Khởi tạo các biến trạng thái
+        let currentLanguage = 'en'; // Ngôn ngữ mặc định là tiếng Anh
+        let currentLessonText = ''; // Đoạn văn bản hiện tại
+        let typedCharacters = ''; // Các ký tự đã gõ (lấy từ input.value)
+        let totalErrors = 0; // Tổng số lỗi trong toàn bộ phiên
+        let totalTypedChars = 0; // Tổng số ký tự đã gõ trong toàn bộ phiên
+        let startTime = null; // Thời gian bắt đầu bài học (chỉ reset khi bắt đầu bài mới)
+        let timerInterval = null; // ID của bộ đếm thời gian
+        let isLessonActive = false; // Trạng thái bài học đang hoạt động
+
+        // Lấy các phần tử DOM
+        const lessonTextDisplay = document.getElementById('lesson-text');
+        const typingInput = document.getElementById('typing-input');
+        const wpmDisplay = document.getElementById('wpm');
+        const accuracyDisplay = document.getElementById('accuracy');
+        const errorsDisplay = document.getElementById('errors');
+        const timerDisplay = document.getElementById('timer');
+        const startButton = document.getElementById('start-button');
+        const langEnButton = document.getElementById('lang-en');
+        const langViButton = document.getElementById('lang-vi');
+        const virtualKeyboard = document.getElementById('virtual-keyboard');
+        const completionMessage = document.getElementById('completion-message'); // Thêm phần tử thông báo
+
+        // --- Các hàm cốt lõi ---
+
+        /**
+         * Khởi tạo một bài học mới (reset tất cả các chỉ số).
+         */
+        function startNewLesson() {
+            // Reset tất cả các trạng thái cho một bài học hoàn toàn mới
+            typedCharacters = '';
+            totalErrors = 0;
+            totalTypedChars = 0;
+            startTime = null;
+            isLessonActive = false;
+            typingInput.value = '';
+            typingInput.disabled = false;
+            typingInput.focus();
+            clearInterval(timerInterval);
+            timerDisplay.textContent = '0s';
+
+            // Chọn câu đầu tiên
+            loadNextSentence();
+            updateStats();
+            resetVirtualKeyboardHighlight();
+        }
+
+        /**
+         * Tải một câu mới để luyện tập.
+         * Hàm này được gọi khi bắt đầu bài mới hoặc khi hoàn thành một câu.
+         */
+        function loadNextSentence() {
+            // Chọn một đoạn văn bản ngẫu nhiên dựa trên ngôn ngữ hiện tại
+            const texts = lessonTexts[currentLanguage];
+            currentLessonText = texts[Math.floor(Math.random() * texts.length)];
+            
+            // Đặt lại các biến liên quan đến câu hiện tại
+            typedCharacters = ''; // Xóa ô nhập liệu
+            typingInput.value = ''; // Xóa giá trị trong ô input
+            
+            renderLessonText(); // Hiển thị văn bản bài học mới
+            typingInput.focus(); // Tự động focus vào ô nhập liệu
+        }
+
+        /**
+         * Hiển thị văn bản bài học lên màn hình, thêm các span để tạo hiệu ứng.
+         * Đồng thời cập nhật trạng thái đúng/sai/hiện tại của từng ký tự.
+         */
+        function renderLessonText() {
+            lessonTextDisplay.innerHTML = ''; // Xóa nội dung cũ
+            let currentSentenceErrors = 0; // Lỗi trong câu hiện tại
+
+            for (let i = 0; i < currentLessonText.length; i++) {
+                const char = currentLessonText[i];
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.id = `char-${i}`; // Gán ID cho từng ký tự
+
+                if (i < typedCharacters.length) {
+                    // Nếu ký tự này đã được gõ
+                    if (typedCharacters[i] === char) {
+                        span.classList.add('correct');
+                    } else {
+                        span.classList.add('incorrect');
+                        currentSentenceErrors++; // Tăng lỗi cho câu hiện tại
+                    }
+                }
+
+                if (i === typedCharacters.length) {
+                    // Đây là ký tự tiếp theo mà người dùng cần gõ
+                    span.classList.add('current');
+                }
+                lessonTextDisplay.appendChild(span);
+            }
+
+            // Cập nhật charIndex dựa trên độ dài của văn bản đã gõ trong câu hiện tại
+            charIndex = typedCharacters.length;
+
+            // Cuộn đến ký tự hiện tại nếu cần (đối với văn bản dài)
+            const currentCharSpan = document.getElementById(`char-${charIndex}`);
+            if (currentCharSpan) {
+                currentCharSpan.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        /**
+         * Xử lý sự kiện khi người dùng nhập liệu vào ô input.
+         * Hàm này sẽ được gọi mỗi khi nội dung ô input thay đổi.
+         * Đây là nơi chính để kiểm tra và cập nhật trạng thái bài học.
+         */
+        function handleInput() {
+            // Bắt đầu bài học và hẹn giờ nếu đây là ký tự đầu tiên của toàn bộ phiên
+            if (!isLessonActive) {
+                startTime = new Date().getTime();
+                startTimer();
+                isLessonActive = true;
+            }
+
+            const oldTypedCharactersLength = typedCharacters.length;
+            typedCharacters = typingInput.value; // Lấy toàn bộ nội dung hiện tại của ô input
+            
+            // Tính toán lỗi và ký tự gõ được trong lần nhập này
+            let newErrors = 0;
+            for (let i = oldTypedCharactersLength; i < typedCharacters.length; i++) {
+                if (typedCharacters[i] !== currentLessonText[i]) {
+                    newErrors++;
+                }
+            }
+            totalErrors += newErrors;
+            totalTypedChars = typedCharacters.length; // Cập nhật tổng số ký tự đã gõ
+
+            renderLessonText(); // Render lại văn bản bài học để cập nhật trạng thái đúng/sai/hiện tại
+            updateStats(); // Cập nhật thống kê
+
+            // Kiểm tra nếu đã gõ hết văn bản của câu hiện tại
+            if (charIndex >= currentLessonText.length) {
+                endCurrentSentence();
+            }
+        }
+
+        /**
+         * Xử lý sự kiện khi người dùng nhấn phím (keydown).
+         * Chỉ dùng để highlight phím trên bàn phím ảo.
+         */
+        function handleKeydown(event) {
+            highlightVirtualKey(event.code, event.key, true);
+        }
+
+        /**
+         * Xử lý sự kiện khi người dùng nhả phím (keyup).
+         * Chỉ dùng để xóa highlight khỏi phím trên bàn phím ảo.
+         */
+        function handleKeyup(event) {
+            highlightVirtualKey(event.code, event.key, false);
+        }
+
+        /**
+         * Cập nhật các chỉ số thống kê (WPM, độ chính xác, lỗi).
+         */
+        function updateStats() {
+            const currentTime = new Date().getTime();
+            const timeElapsedSeconds = startTime ? (currentTime - startTime) / 1000 : 0;
+
+            let wordsPerMinute = 0;
+            if (timeElapsedSeconds > 0 && totalTypedChars > 0) {
+                // Tính WPM: (số ký tự đúng / 5) / thời gian (phút)
+                const correctTypedChars = totalTypedChars - totalErrors;
+                wordsPerMinute = Math.round((correctTypedChars / 5) / (timeElapsedSeconds / 60));
+            }
+
+            let accuracy = 0;
+            if (totalTypedChars > 0) {
+                // Tính độ chính xác: (số ký tự đúng / tổng số ký tự đã gõ) * 100
+                accuracy = Math.round(((totalTypedChars - totalErrors) / totalTypedChars) * 100);
+            }
+
+            wpmDisplay.textContent = wordsPerMinute;
+            accuracyDisplay.textContent = `${accuracy}%`;
+            errorsDisplay.textContent = totalErrors;
+        }
+
+        /**
+         * Bắt đầu bộ đếm thời gian.
+         */
+        function startTimer() {
+            clearInterval(timerInterval); // Đảm bảo không có bộ đếm nào đang chạy
+            timerInterval = setInterval(() => {
+                const currentTime = new Date().getTime();
+                const timeElapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+                timerDisplay.textContent = `${timeElapsedSeconds}s`;
+                updateStats(); // Cập nhật thống kê liên tục
+            }, 1000); // Cập nhật mỗi giây
+        }
+
+        /**
+         * Kết thúc câu hiện tại.
+         * Hiển thị thông báo và tự động chuyển sang câu mới.
+         */
+        function endCurrentSentence() {
+            // Hiển thị thông báo hoàn thành câu
+            completionMessage.textContent = 'Hoàn thành câu! Tuyệt vời!';
+            completionMessage.classList.add('show');
+            
+            // Dừng input tạm thời để tránh gõ vào câu mới trước khi nó tải
+            typingInput.disabled = true;
+
+            setTimeout(() => {
+                completionMessage.classList.remove('show');
+                loadNextSentence(); // Tải câu mới
+                typingInput.disabled = false; // Cho phép nhập liệu lại
+                typingInput.focus(); // Focus vào ô nhập liệu
+            }, 1500); // Hiển thị 1.5 giây
+        }
+
+        // --- Các hàm bàn phím ảo ---
+
+        /**
+         * Tạo bàn phím ảo dựa trên bố cục đã định nghĩa.
+         */
+        function createVirtualKeyboard() {
+            virtualKeyboard.innerHTML = ''; // Xóa nội dung cũ
+            keyboardLayout.forEach(row => {
+                row.forEach(keyText => {
+                    const keyDiv = document.createElement('div');
+                    keyDiv.classList.add('key');
+                    keyDiv.textContent = keyText === 'Space' ? '' : keyText; // Không hiển thị chữ "Space"
+                    if (keyText === 'Space') {
+                        keyDiv.setAttribute('aria-label', 'Spacebar'); // Thêm aria-label cho khả năng tiếp cận
+                    }
+
+                    // Thêm các lớp CSS cụ thể cho các phím đặc biệt để tạo kiểu
+                    if (keyText === 'Space') keyDiv.classList.add('space');
+                    else if (keyText === 'Tab') keyDiv.classList.add('tab');
+                    else if (keyText === 'CapsLock') keyDiv.classList.add('caps');
+                    else if (keyText === 'Enter') keyDiv.classList.add('enter');
+                    else if (keyText.includes('Shift')) keyDiv.classList.add('shift');
+                    else if (keyText === 'Backspace') keyDiv.classList.add('backspace');
+
+                    // Gán thuộc tính data-key để dễ dàng tìm kiếm phím
+                    keyDiv.dataset.key = keyText;
+
+                    virtualKeyboard.appendChild(keyDiv);
+                });
+            });
+        }
+
+        /**
+         * Highlight hoặc bỏ highlight một phím trên bàn phím ảo.
+         * @param {string} keyCode - Mã phím (ví dụ: 'KeyA', 'Space').
+         * @param {string} keyChar - Ký tự của phím (ví dụ: 'a', ' ').
+         * @param {boolean} addHighlight - True để thêm highlight, False để bỏ.
+         */
+        function highlightVirtualKey(keyCode, keyChar, addHighlight) {
+            let keyElement = null;
+            // Tìm kiếm phím dựa trên keyCode hoặc keyChar
+            if (keyCode.startsWith('Key') || keyCode.startsWith('Digit')) {
+                keyElement = document.querySelector(`.key[data-key="${keyChar.toLowerCase()}"]`);
+            } else {
+                // Xử lý các phím đặc biệt
+                switch (keyCode) {
+                    case 'Space': keyElement = document.querySelector('.key.space'); break;
+                    case 'Tab': keyElement = document.querySelector('.key[data-key="Tab"]'); break;
+                    case 'CapsLock': keyElement = document.querySelector('.key[data-key="CapsLock"]'); break;
+                    case 'Enter': keyElement = document.querySelector('.key[data-key="Enter"]'); break;
+                    case 'ShiftLeft': keyElement = document.querySelector('.key[data-key="ShiftLeft"]'); break;
+                    case 'ShiftRight': keyElement = document.querySelector('.key[data-key="ShiftRight"]'); break;
+                    case 'Backspace': keyElement = document.querySelector('.key[data-key="Backspace"]'); break;
+                    case 'Minus': keyElement = document.querySelector('.key[data-key="-"]'); break;
+                    case 'Equal': keyElement = document.querySelector('.key[data-key="="]'); break;
+                    case 'BracketLeft': keyElement = document.querySelector('.key[data-key="["]'); break;
+                    case 'BracketRight': keyElement = document.querySelector('.key[data-key="]"]'); break;
+                    case 'Backslash': keyElement = document.querySelector('.key[data-key="\\"]'); break;
+                    case 'Semicolon': keyElement = document.querySelector('.key[data-key=";"]'); break;
+                    case 'Quote': keyElement = document.querySelector('.key[data-key="\'"]'); break;
+                    case 'Comma': keyElement = document.querySelector('.key[data-key=","]'); break;
+                    case 'Period': keyElement = document.querySelector('.key[data-key="."]'); break;
+                    case 'Slash': keyElement = document.querySelector('.key[data-key="/"]'); break;
+                    case 'Backquote': keyElement = document.querySelector('.key[data-key="`"]'); break;
+                    case 'ControlLeft': keyElement = document.querySelector('.key[data-key="ControlLeft"]'); break;
+                    case 'ControlRight': keyElement = document.querySelector('.key[data-key="ControlRight"]'); break;
+                    case 'AltLeft': keyElement = document.querySelector('.key[data-key="AltLeft"]'); break;
+                    case 'AltRight': keyElement = document.querySelector('.key[data-key="AltRight"]'); break;
+                    // Thêm các trường hợp khác nếu cần
+                }
+            }
+
+            if (keyElement) {
+                if (addHighlight) {
+                    keyElement.classList.add('active');
+                } else {
+                    keyElement.classList.remove('active');
+                }
+            }
+        }
+
+        /**
+         * Xóa tất cả các highlight trên bàn phím ảo.
+         */
+        function resetVirtualKeyboardHighlight() {
+            document.querySelectorAll('.key.active').forEach(key => {
+                key.classList.remove('active');
+            });
+        }
+
+        // --- Lắng nghe sự kiện ---
+
+        startButton.addEventListener('click', startNewLesson); // Nút này giờ là để bắt đầu bài mới hoàn toàn
+
+        typingInput.addEventListener('input', handleInput);
+        typingInput.addEventListener('keydown', handleKeydown);
+        typingInput.addEventListener('keyup', handleKeyup);
+
+        // Lắng nghe sự kiện click cho các nút chọn ngôn ngữ
+        langEnButton.addEventListener('click', () => {
+            currentLanguage = 'en';
+            langEnButton.classList.add('active');
+            langViButton.classList.remove('active');
+            startNewLesson(); // Bắt đầu bài mới khi đổi ngôn ngữ
+        });
+
+        langViButton.addEventListener('click', () => {
+            currentLanguage = 'vi';
+            langViButton.classList.add('active');
+            langEnButton.classList.remove('active');
+            startNewLesson(); // Bắt đầu bài mới khi đổi ngôn ngữ
+        });
+
+        // --- Khởi tạo khi trang tải xong ---
+        window.onload = () => {
+            createVirtualKeyboard(); // Tạo bàn phím ảo
+            startNewLesson(); // Khởi tạo bài học đầu tiên khi tải trang
+        };
+
+    </script>
+</body>
+</html>

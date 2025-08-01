@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch UI Demo</title>
+    <style>
+        /* CSS tuỳ chỉnh để tạo giao diện giống Scratch */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: stretch;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            background-color: #fff;
+            box-shadow: none;
+            border-radius: 0;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3a7bd5;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .project-controls button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.2s ease;
+        }
+
+        .project-controls button:hover {
+            background-color: #218838;
+        }
+
+        #stopButton {
+            background-color: #dc3545;
+        }
+
+        #stopButton:hover {
+            background-color: #c82333;
+        }
+
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            min-height: 0;
+        }
+
+        .left-panel {
+            flex: 0 0 250px;
+            background-color: #f8f8f8;
+            border-right: 1px solid #eee;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .left-panel.drag-over-delete {
+            background-color: #ffcccc;
+        }
+
+        .left-panel h2 {
+            font-size: 1.3em;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .blocks-palette {
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+
+        .block {
+            background-color: #008CBA;
+            color: white;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: grab;
+            transition: transform 0.1s ease;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            user-select: none; /* Ngăn chặn việc chọn văn bản khi kéo */
+            position: relative;
+        }
+        
+        .block:hover {
+            transform: scale(1.05);
+        }
+
+        .block:active {
+            cursor: grabbing;
+        }
+        
+        .motion-block { background-color: #4a90e2; }
+        .looks-block { background-color: #8c88ff; }
+        .events-block { background-color: #ffd800; }
+        .control-block { background-color: #ffab19; }
+
+        .sprites-area {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .sprite-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .sprite-item:hover, .sprite-item.active {
+            background-color: #e6f3ff;
+            border-color: #4a90e2;
+        }
+
+        .sprite-item img {
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #ddd;
+            width: 50px;
+            height: 50px;
+        }
+
+        .sprite-item.active img {
+            border-color: #4a90e2;
+        }
+
+        .center-panel {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stage {
+            flex-basis: 400px;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            cursor: default; /* Đặt lại con trỏ chuột cho sân khấu */
+        }
+
+        .stage h2 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #666;
+            font-size: 1.2em;
+            margin: 0;
+            z-index: 10;
+        }
+
+        .scratch-sprite {
+            width: 80px;
+            height: 80px;
+            object-fit: contain; /* Đảm bảo hình ảnh không bị méo */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: filter 0.5s ease, transform 0.5s ease; /* Cập nhật transition */
+            cursor: grab; /* Con trỏ chuột khi di chuyển trên nhân vật */
+        }
+
+        .speech-bubble {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 10px;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            z-index: 20;
+            white-space: nowrap;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .script-area {
+            flex-grow: 1;
+            background-color: #f5f5f5;
+            padding: 25px 15px 15px;
+            position: relative;
+            min-height: 0;
+            overflow-y: auto;
+            border: 2px dashed #ccc;
+            border-radius: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .script-area.drag-over {
+            border-color: #4a90e2;
+            background-color: #e6f3ff;
+        }
+        
+        .script-area h2 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #666;
+            font-size: 1.2em;
+            margin: 0;
+            z-index: 10;
+        }
+
+        .script-area .placeholder {
+            color: #aaa;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Scratch UI Demo</h1>
+            <div class="project-controls">
+                <button id="runButton">▶️ Chạy</button>
+                <button id="stopButton">🛑 Dừng</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <aside class="left-panel" id="deletionZone">
+                <div class="blocks-palette">
+                    <h2>Khối lệnh</h2>
+                    <!-- Khối lệnh Sự kiện -->
+                    <div class="block events-block" draggable="true" data-type="when-flag">Khi bấm lá cờ xanh</div>
+                    <!-- Khối lệnh Chuyển động -->
+                    <div class="block motion-block" draggable="true" data-type="move" data-value="50">Di chuyển 50 bước</div>
+                    <div class="block motion-block" draggable="true" data-type="turn" data-value="15">Xoay 15 độ</div>
+                    <div class="block motion-block" draggable="true" data-type="goToRandom">Đi tới vị trí ngẫu nhiên</div>
+                    <!-- Khối lệnh Hiển thị -->
+                    <div class="block looks-block" draggable="true" data-type="say" data-value="Xin chào!">Nói "Xin chào!"</div>
+                    <div class="block looks-block" draggable="true" data-type="show">Hiện</div>
+                    <div class="block looks-block" draggable="true" data-type="hide">Ẩn</div>
+                    <div class="block looks-block" draggable="true" data-type="changeColor" data-value="25">Thay đổi hiệu ứng màu một lượng 25</div>
+                    <div class="block looks-block" draggable="true" data-type="setSize" data-value="100">Đặt kích thước thành 100%</div>
+                    <!-- Khối lệnh Điều khiển -->
+                    <div class="block control-block" draggable="true" data-type="wait" data-value="1000">Chờ 1 giây</div>
+                    <div class="block control-block" draggable="true" data-type="repeat" data-value="4">Lặp lại 4 lần</div>
+                </div>
+                <div class="sprites-area">
+                    <h2>Nhân vật</h2>
+                    <div class="sprite-item active" id="sprite1">
+                        <img src="images/meo.png" alt="Nhân vật 1">
+                        <p>Sprite1</p>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="center-panel">
+                <div class="stage" id="stage">
+                    <h2>Sân khấu</h2>
+                    <!-- Sử dụng thẻ <img> để hiển thị nhân vật -->
+                    <img id="scratch-cat" class="scratch-sprite" src="images/meo.png" alt="Mèo Scratch">
+                    <!-- Bong bóng lời nói sẽ hiển thị ở đây -->
+                </div>
+                <div class="script-area" id="scriptArea">
+                    <h2>Kịch bản</h2>
+                    <!-- Khối lệnh sẽ được kéo thả vào đây -->
+                    <p class="placeholder">Kéo khối lệnh vào đây để tạo kịch bản</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // JavaScript để xử lý tương tác cơ bản
+        document.addEventListener('DOMContentLoaded', () => {
+            const blocksPalette = document.querySelector('.blocks-palette');
+            const scriptArea = document.getElementById('scriptArea');
+            const placeholder = scriptArea.querySelector('.placeholder');
+            const runButton = document.getElementById('runButton');
+            const stopButton = document.getElementById('stopButton');
+            const scratchCat = document.getElementById('scratch-cat');
+            const leftPanel = document.querySelector('.left-panel');
+            const stage = document.getElementById('stage');
+
+            let draggedBlock = null;
+            let isRunning = false;
+            let currentTimeout = null;
+            let currentHue = 0;
+            let currentRotation = 0;
+            let defaultSpriteSize = 80; // Kích thước mặc định của nhân vật
+            
+            // Biến để xử lý kéo thả nhân vật
+            let isDraggingCat = false;
+            let offsetX = 0;
+            let offsetY = 0;
+
+            // Hàm cập nhật transform của nhân vật
+            const updateCatTransform = () => {
+                scratchCat.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+            };
+
+            // --- Xử lý Kéo và Thả Khối lệnh ---
+            blocksPalette.addEventListener('dragstart', (e) => {
+                if (e.target.classList.contains('block')) {
+                    draggedBlock = e.target;
+                    e.dataTransfer.setData('text/plain', 'palette');
+                    e.dataTransfer.effectAllowed = 'copy';
+                }
+            });
+
+            scriptArea.addEventListener('dragstart', (e) => {
+                if (e.target.classList.contains('block')) {
+                    draggedBlock = e.target;
+                    e.dataTransfer.setData('text/plain', 'script');
+                    e.dataTransfer.effectAllowed = 'move';
+                }
+            });
+
+            scriptArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                scriptArea.classList.add('drag-over');
+                e.dataTransfer.dropEffect = 'copy';
+            });
+            scriptArea.addEventListener('dragleave', () => {
+                scriptArea.classList.remove('drag-over');
+            });
+            
+            scriptArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                scriptArea.classList.remove('drag-over');
+                
+                if (draggedBlock && e.dataTransfer.getData('text/plain') === 'palette') {
+                    const newBlock = draggedBlock.cloneNode(true);
+                    newBlock.setAttribute('draggable', 'true');
+                    scriptArea.appendChild(newBlock);
+                    placeholder.style.display = 'none';
+                }
+                draggedBlock = null;
+            });
+
+            leftPanel.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                if (e.dataTransfer.getData('text/plain') === 'script') {
+                    leftPanel.classList.add('drag-over-delete');
+                }
+            });
+            leftPanel.addEventListener('dragleave', () => {
+                leftPanel.classList.remove('drag-over-delete');
+            });
+            leftPanel.addEventListener('drop', (e) => {
+                e.preventDefault();
+                leftPanel.classList.remove('drag-over-delete');
+                
+                if (draggedBlock && e.dataTransfer.getData('text/plain') === 'script') {
+                    draggedBlock.remove();
+                    if (scriptArea.querySelectorAll('.block').length === 0) {
+                        placeholder.style.display = 'block';
+                    }
+                }
+                draggedBlock = null;
+            });
+
+            // --- Xử lý Kéo và Thả Nhân vật ---
+            scratchCat.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                isDraggingCat = true;
+
+                const stageRect = stage.getBoundingClientRect();
+                const catRect = scratchCat.getBoundingClientRect();
+
+                offsetX = e.clientX - catRect.left;
+                offsetY = e.clientY - catRect.top;
+
+                scratchCat.style.cursor = 'grabbing';
+                scratchCat.style.transform = 'none'; // tạm thời bỏ transform để tránh làm lệch vị trí
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDraggingCat) {
+                    const stageRect = stage.getBoundingClientRect();
+
+                    let newX = e.clientX - stageRect.left - offsetX;
+                    let newY = e.clientY - stageRect.top - offsetY;
+
+                    // Giới hạn trong vùng sân khấu
+                    newX = Math.max(0, Math.min(newX, stage.offsetWidth - scratchCat.offsetWidth));
+                    newY = Math.max(0, Math.min(newY, stage.offsetHeight - scratchCat.offsetHeight));
+
+                    scratchCat.style.left = `${newX}px`;
+                    scratchCat.style.top = `${newY}px`;
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDraggingCat) {
+                    isDraggingCat = false;
+                    scratchCat.style.cursor = 'grab';
+                    updateCatTransform(); // giữ nguyên chức năng xoay
+                }
+            });
+// --- Xử lý Chức năng Cơ bản ---
+            const runScript = async (blocks) => {
+                for (const block of blocks) {
+                    if (!isRunning) break;
+                    
+                    const type = block.dataset.type;
+                    const value = block.dataset.value;
+
+                    switch (type) {
+                        case 'when-flag':
+                            console.log('Bắt đầu kịch bản khi bấm lá cờ xanh!');
+                            break;
+                        case 'move':
+                            const moveValue = parseInt(value, 10);
+                            // Lấy vị trí từ style.left
+                            const currentLeft = parseFloat(scratchCat.style.left) || 0; 
+                            scratchCat.style.left = `${currentLeft + moveValue}px`;
+                            await new Promise(resolve => currentTimeout = setTimeout(resolve, 500));
+                            break;
+                        case 'turn':
+                            currentRotation = (currentRotation + parseInt(value, 10)) % 360;
+                            // Cập nhật transform mà không ảnh hưởng đến vị trí
+                            scratchCat.style.transform = `rotate(${currentRotation}deg)`;
+                            await new Promise(resolve => currentTimeout = setTimeout(resolve, 500));
+                            break;
+                        case 'goToRandom':
+                            const stageWidth = stage.offsetWidth;
+                            const stageHeight = stage.offsetHeight;
+                            const newX = Math.random() * (stageWidth - scratchCat.offsetWidth);
+                            const newY = Math.random() * (stageHeight - scratchCat.offsetHeight);
+                            // Cập nhật vị trí bằng style.left và style.top
+                            scratchCat.style.left = `${newX}px`;
+                            scratchCat.style.top = `${newY}px`;
+                            await new Promise(resolve => currentTimeout = setTimeout(resolve, 500));
+                            break;
+                        case 'say':
+                            const speechBubble = document.createElement('div');
+                            speechBubble.classList.add('speech-bubble');
+                            speechBubble.textContent = value;
+                            stage.appendChild(speechBubble);
+                            await new Promise(resolve => currentTimeout = setTimeout(resolve, 2000));
+                            if (speechBubble) speechBubble.remove();
+                            break;
+                        case 'show':
+                            scratchCat.style.visibility = 'visible';
+                            break;
+                        case 'hide':
+                            scratchCat.style.visibility = 'hidden';
+                            break;
+                        case 'changeColor':
+                            currentHue = (currentHue + parseInt(value, 10)) % 360;
+                            scratchCat.style.filter = `hue-rotate(${currentHue}deg)`;
+                            break;
+                        case 'setSize':
+                            const newSize = parseInt(value, 10);
+                            scratchCat.style.width = `${defaultSpriteSize * (newSize / 100)}px`;
+                            scratchCat.style.height = `${defaultSpriteSize * (newSize / 100)}px`;
+                            break;
+                        case 'wait':
+                            const waitTime = parseInt(value, 10);
+                            await new Promise(resolve => currentTimeout = setTimeout(resolve, waitTime));
+                            break;
+                        case 'repeat':
+                            const repeatCount = parseInt(value, 10);
+                            console.log(`Lặp lại ${repeatCount} lần`);
+                            // Để đơn giản, chỉ in ra console. Một ứng dụng Scratch thực tế sẽ lặp lại các khối lệnh bên trong nó.
+                            for (let i = 0; i < repeatCount; i++) {
+                                console.log(`Lần lặp thứ ${i + 1}`);
+                                // Đây là nơi để thực thi các khối lệnh con nếu có.
+                                // Tuy nhiên, với cấu trúc phẳng hiện tại, chúng ta chỉ mô phỏng.
+                            }
+                            break;
+                    }
+                }
+                isRunning = false;
+            };
+
+            runButton.addEventListener('click', () => {
+                if (isRunning) return;
+                isRunning = true;
+                
+                const blocks = scriptArea.querySelectorAll('.block');
+                if (blocks.length === 0) {
+                    isRunning = false;
+                    return;
+                }
+                
+                // Loại bỏ dòng này để không đặt lại vị trí nhân vật khi chạy
+                // resetSpriteState(); 
+
+                runScript(blocks);
+            });
+
+            stopButton.addEventListener('click', () => {
+                console.log('Dừng kịch bản.');
+                isRunning = false;
+                if (currentTimeout) clearTimeout(currentTimeout);
+                
+                resetSpriteState();
+            });
+            
+            const resetSpriteState = () => {
+                // Đặt lại các thuộc tính khác, giữ nguyên vị trí.
+                currentRotation = 0;
+                scratchCat.style.transform = `rotate(${currentRotation}deg)`;
+                scratchCat.style.visibility = 'visible';
+                scratchCat.style.filter = 'none';
+                currentHue = 0;
+                scratchCat.style.width = `${defaultSpriteSize}px`;
+                scratchCat.style.height = `${defaultSpriteSize}px`;
+                
+                // Xóa bong bóng lời nói nếu có
+                const speechBubble = document.querySelector('.speech-bubble');
+                if (speechBubble) {
+                    speechBubble.remove();
+                }
+            };
+        });
+    </script>
+</body>
+</html>

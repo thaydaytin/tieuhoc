@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Kỹ Năng Chuột Cho Bé</title>
+    <!-- Google Fonts - Inter with Vietnamese subset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the game */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f8ff; /* AliceBlue */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .game-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            max-width: 800px;
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 600px; /* Ensure enough height for game area */
+        }
+
+        .game-area {
+            position: relative;
+            width: 100%;
+            flex-grow: 1; /* Allow game area to expand */
+            border: 4px solid #42a5f5; /* Thicker, more prominent blue border */
+            border-radius: 15px;
+            background-color: #e6f7ff; /* Lighter blue */
+            overflow: hidden; /* Hide overflowing targets */
+            min-height: 350px; /* Minimum height for game area */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #666;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(66, 165, 245, 0.5); /* Matching shadow for vivid look */
+        }
+
+        .target {
+            position: absolute;
+            background-color: #ff6347; /* Tomato */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            user-select: none; /* Prevent text selection */
+        }
+
+        .target.clicked {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        .drag-item {
+            position: absolute;
+            background-color: #8a2be2; /* BlueViolet */
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            cursor: grab;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        .drop-zone {
+            position: absolute;
+            background-color: #3cb371; /* MediumSeaGreen */
+            border: 3px dashed #2e8b57; /* SeaGreen */
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            user-select: none;
+        }
+
+        /* Enhanced button styles */
+        .button-primary {
+            /* Base styles */
+            @apply bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out;
+            /* Custom gradient and shadow */
+            background-image: linear-gradient(to right, #4CAF50, #2196F3); /* Green to Blue gradient */
+            box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4); /* Stronger blue shadow */
+            border: 2px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+            /* Hover effects */
+            &:hover {
+                background-image: linear-gradient(to right, #2196F3, #4CAF50); /* Reverse gradient on hover */
+                box-shadow: 0 8px 20px rgba(33, 150, 243, 0.6); /* Even stronger shadow on hover */
+                transform: scale(1.08); /* Slightly larger scale on hover */
+            }
+            /* Active state */
+            &:active {
+                transform: scale(0.95); /* Shrink slightly on click */
+                box-shadow: 0 3px 10px rgba(33, 150, 243, 0.3); /* Smaller shadow on click */
+            }
+        }
+
+        .button-secondary {
+            /* Base styles */
+            @apply bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out;
+            /* Custom shadow */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Stronger grey shadow */
+            border: 2px solid rgba(0, 0, 0, 0.1); /* Subtle grey border */
+            /* Hover effects */
+            &:hover {
+                background-color: #cbd5e1; /* Lighter grey on hover */
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+                transform: scale(1.08); /* Slightly larger scale on hover */
+            }
+            /* Active state */
+            &:active {
+                transform: scale(0.95); /* Shrink slightly on click */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Smaller shadow on click */
+            }
+        }
+
+        .level-indicator {
+            background-color: #ffe0b2; /* Light Orange */
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #e65100; /* Darker Orange */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-display {
+            background-color: #c8e6c9; /* Light Green */
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #2e7d32; /* Dark Green */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            z-index: 1000;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        .message-box button {
+            /* Apply primary button style to the OK button in message box */
+            /* Removed @apply here as it's now directly on the HTML element */
+            @apply mt-4; /* Keep margin top */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 1rem;
+                gap: 1rem;
+                min-height: 500px;
+            }
+            .game-area {
+                min-height: 300px;
+                font-size: 1.2rem;
+            }
+            .button-primary, .button-secondary {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .level-indicator, .score-display {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="text-4xl font-extrabold text-blue-700 mb-4">Luyện Kỹ Năng Chuột 🐭</h1>
+        <div class="flex justify-between items-center mb-4">
+            <div id="level-display" class="level-indicator">Cấp độ: 0</div>
+            <div id="score-display" class="score-display">Điểm: 0</div>
+            <div id="timer-display" class="level-indicator hidden">Thời gian: 10</div> <!-- Timer display -->
+        </div>
+
+        <div id="game-area" class="game-area">
+            <p id="instruction-text" class="text-gray-600">Chào mừng bạn đến với trò chơi luyện chuột! Nhấn "Bắt đầu" để bắt đầu.</p>
+        </div>
+
+        <div class="flex justify-center gap-4 mt-4">
+            <button id="start-button" class="button-primary">Bắt đầu</button>
+        </div>
+    </div>
+
+    <!-- Message Box for Alerts -->
+    <div id="custom-alert" class="message-box hidden">
+        <p id="alert-message" class="text-lg font-semibold text-gray-800"></p>
+        <button id="alert-ok-button" class="button-primary mt-4">OK</button>
+    </div>
+
+    <script>
+        // Global game variables
+        let currentLevel = 0;
+        let score = 0;
+        let targetsToHit = 10; // Number of successful targets per level
+        let targetsHit = 0; // Number of successful hits
+        let gameActive = false;
+        let dragItem = null;
+        let dropZone = null;
+
+        // Timer variables
+        let timerIntervalId;
+        let timerTimeoutId;
+        let currentCountdown = 10; // Initial countdown time
+        const maxTime = 10; // Maximum time allowed for a hit to get full points
+
+        // DOM elements
+        const gameArea = document.getElementById('game-area');
+        const instructionText = document.getElementById('instruction-text');
+        const levelDisplay = document.getElementById('level-display');
+        const scoreDisplay = document.getElementById('score-display');
+        const startButton = document.getElementById('start-button');
+        const customAlert = document.getElementById('custom-alert');
+        const alertMessage = document.getElementById('alert-message');
+        const alertOkButton = document.getElementById('alert-ok-button');
+        const timerDisplay = document.getElementById('timer-display'); // New timer display element
+
+        // Game levels configuration
+        const levels = [
+            {
+                name: "Di chuyển chuột",
+                instruction: "Di chuyển chuột vào các ngôi sao ⭐ để ghi điểm!",
+                type: "mousemove",
+                initialTargetSize: 80,
+                targetSize: 80,
+                minTargetSize: 30,
+                targetContent: "⭐"
+            },
+            {
+                name: "Nháy chuột trái",
+                instruction: "Nháy chuột trái vào các quả táo 🍎 để thu hoạch!",
+                type: "click",
+                initialTargetSize: 70,
+                targetSize: 70,
+                minTargetSize: 30,
+                targetContent: "🍎"
+            },
+            {
+                name: "Nháy đúp chuột",
+                instruction: "Nháy đúp chuột vào các bong bóng 🎈 để làm vỡ chúng!",
+                type: "dblclick",
+                initialTargetSize: 60,
+                targetSize: 60,
+                minTargetSize: 20,
+                targetContent: "🎈"
+            },
+            {
+                name: "Nháy chuột phải",
+                instruction: "Nháy chuột phải vào các hộp quà 🎁 để mở!",
+                type: "contextmenu",
+                initialTargetSize: 70,
+                targetSize: 70,
+                minTargetSize: 30,
+                targetContent: "🎁"
+            },
+            {
+                name: "Kéo thả",
+                instruction: "Kéo chú ếch 🐸 vào chiếc lá 🍃!",
+                type: "dragdrop",
+                dragItemSize: 80,
+                dropZoneSize: 100,
+                dragContent: "🐸",
+                dropContent: "🍃"
+            }
+        ];
+
+        // --- Utility Functions ---
+
+        /**
+         * Displays a custom alert message.
+         * @param {string} message - The message to display.
+         * @param {string} buttonText - Text for the OK button.
+         */
+        function showAlert(message, buttonText = "OK") {
+            alertMessage.textContent = message;
+            alertOkButton.textContent = buttonText;
+            customAlert.classList.remove('hidden');
+        }
+
+        /**
+         * Hides the custom alert message.
+         */
+        function hideAlert() {
+            customAlert.classList.add('hidden');
+        }
+
+        /**
+         * Generates a random position within the game area.
+         * @param {number} elementWidth - The width of the element to position.
+         * @param {number} elementHeight - The height of the element to position.
+         * @returns {{x: number, y: number}} - Random x and y coordinates.
+         */
+        function getRandomPosition(elementWidth, elementHeight) {
+            const gameAreaRect = gameArea.getBoundingClientRect();
+            const maxX = gameAreaRect.width - elementWidth;
+            const maxY = gameAreaRect.height - elementHeight;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            return { x, y };
+        }
+
+        /**
+         * Updates the score display.
+         */
+        function updateScoreDisplay() {
+            scoreDisplay.textContent = `Điểm: ${score}`;
+        }
+
+        /**
+         * Updates the level display.
+         */
+        function updateLevelDisplay() {
+            levelDisplay.textContent = `Cấp độ: ${currentLevel + 1} / ${levels.length}`;
+        }
+
+        /**
+         * Clears all targets and elements from the game area.
+         */
+        function clearGameArea() {
+            gameArea.innerHTML = '';
+            // Clear any active timers
+            clearInterval(timerIntervalId);
+            clearTimeout(timerTimeoutId);
+            timerDisplay.classList.add('hidden'); // Hide timer when game area is cleared
+
+            // Remove drag/drop listeners if they exist
+            if (dragItem) {
+                dragItem.removeEventListener('mousedown', startDrag);
+            }
+            document.removeEventListener('mousemove', doDrag);
+            document.removeEventListener('mouseup', endDrag);
+            dragItem = null;
+            dropZone = null;
+        }
+
+        /**
+         * Handles a successful target interaction.
+         * @param {HTMLElement | null} targetElement - The target element that was interacted with (null for drag/drop).
+         */
+        function handleSuccess(targetElement) {
+            // Calculate points based on time remaining
+            let pointsAwarded = Math.max(0, maxTime + currentCountdown); // maxTime is 10, currentCountdown can be negative
+            score += pointsAwarded;
+            targetsHit++;
+            updateScoreDisplay();
+
+            const levelConfig = levels[currentLevel];
+
+            // Clear timers on successful hit
+            clearInterval(timerIntervalId);
+            clearTimeout(timerTimeoutId);
+            timerDisplay.classList.add('hidden'); // Hide timer immediately
+
+            if (levelConfig.type === "dragdrop") {
+                // For drag/drop, elements are removed in endDrag, just check for next target/level
+                if (targetsHit < targetsToHit) {
+                    generateTarget();
+                } else {
+                    endLevel();
+                }
+            } else {
+                // For other types, remove targetElement visually after a short delay
+                if (targetElement) {
+                    targetElement.classList.add('clicked');
+                    setTimeout(() => {
+                        if (targetElement.parentNode === gameArea) {
+                            gameArea.removeChild(targetElement);
+                        }
+                        if (targetsHit < targetsToHit) {
+                            // Calculate new size for the next target
+                            const initialSize = levelConfig.initialTargetSize;
+                            const minSize = levelConfig.minTargetSize;
+                            // Ensure targetsToHit is not zero to prevent division by zero
+                            const sizeReductionPerHit = targetsToHit > 0 ? (initialSize - minSize) / targetsToHit : 0;
+                            const newSize = initialSize - (targetsHit * sizeReductionPerHit);
+                            levelConfig.targetSize = Math.max(minSize, newSize); // Update targetSize for the next generation
+                            generateTarget();
+                        } else {
+                            endLevel();
+                        }
+                    }, 150);
+                }
+            }
+        }
+
+        /**
+         * Handles when the timer for a target runs out.
+         */
+        function handleTimeOut() {
+            clearInterval(timerIntervalId);
+            clearTimeout(timerTimeoutId);
+            timerDisplay.classList.add('hidden'); // Hide timer
+
+            // Remove current target without scoring
+            const currentTarget = gameArea.querySelector('.target');
+            if (currentTarget && currentTarget.parentNode === gameArea) {
+                gameArea.removeChild(currentTarget);
+            }
+            // For drag/drop, remove items if they still exist
+            if (dragItem && gameArea.contains(dragItem)) {
+                gameArea.removeChild(dragItem);
+                dragItem = null;
+            }
+            if (dropZone && gameArea.contains(dropZone)) {
+                gameArea.removeChild(dropZone);
+                dropZone = null;
+            }
+
+            // Generate a new target for the same level, no score increment
+            if (targetsHit < targetsToHit) { // Only generate new if level not yet completed
+                generateTarget();
+            } else {
+                endLevel(); // If somehow targetsHit already reached targetsToHit, end level
+            }
+        }
+
+        /**
+         * Starts the countdown timer for the current target.
+         */
+        function startTargetTimer() {
+            clearInterval(timerIntervalId);
+            clearTimeout(timerTimeoutId);
+            currentCountdown = maxTime; // Reset timer for each new target to initial maxTime
+            timerDisplay.textContent = `Thời gian: ${currentCountdown}`;
+            timerDisplay.classList.remove('hidden'); // Show timer
+
+            timerIntervalId = setInterval(() => {
+                currentCountdown--;
+                // Display only non-negative time to the user
+                timerDisplay.textContent = `Thời gian: ${Math.max(0, currentCountdown)}`;
+                // The actual currentCountdown can go negative for scoring logic
+            }, 1000);
+
+            // Set a timeout for when the "grace period" for full points ends (after 10 seconds)
+            // And another timeout for when the target should disappear (after 20 seconds, maxTime + 10 seconds penalty window)
+            timerTimeoutId = setTimeout(handleTimeOut, maxTime * 1000 + 10 * 1000); // 20 seconds total until target disappears
+        }
+
+        /**
+         * Generates a new target for click/double-click/right-click/mousemove levels, or sets up drag/drop.
+         */
+        function generateTarget() {
+            clearGameArea(); // Clear previous target before generating a new one
+            const levelConfig = levels[currentLevel];
+
+            if (levelConfig.type === "dragdrop") {
+                setupDragDrop();
+            } else {
+                // Use the potentially updated targetSize
+                const size = levelConfig.targetSize;
+                const target = document.createElement('div');
+                target.classList.add('target');
+                target.style.width = `${size}px`;
+                target.style.height = `${size}px`;
+                target.style.fontSize = `${size * 0.6}px`; // Adjust font size based on target size
+                target.textContent = levelConfig.targetContent;
+
+                const { x, y } = getRandomPosition(size, size);
+                target.style.left = `${x}px`;
+                target.style.top = `${y}px`;
+
+                gameArea.appendChild(target);
+                startTargetTimer(); // Start timer for this new target
+
+                // Add event listener based on level type
+                if (levelConfig.type === "click") {
+                    target.addEventListener('click', () => handleSuccess(target));
+                } else if (levelConfig.type === "dblclick") {
+                    target.addEventListener('dblclick', () => handleSuccess(target));
+                } else if (levelConfig.type === "contextmenu") {
+                    target.addEventListener('contextmenu', (e) => {
+                        e.preventDefault(); // Prevent default context menu
+                        handleSuccess(target);
+                    });
+                } else if (levelConfig.type === "mousemove") {
+                    target.addEventListener('mouseenter', () => handleSuccess(target));
+                }
+            }
+        }
+
+        /**
+         * Initializes the drag and drop level.
+         */
+        function setupDragDrop() {
+            // clearGameArea() is called before this, so no need to clear again
+            const levelConfig = levels[currentLevel];
+
+            // Create drop zone first and position it randomly
+            dropZone = document.createElement('div');
+            dropZone.classList.add('drop-zone');
+            dropZone.style.width = `${levelConfig.dropZoneSize}px`;
+            dropZone.style.height = `${levelConfig.dropZoneSize}px`;
+            dropZone.style.fontSize = `${levelConfig.dropZoneSize * 0.6}px`;
+            dropZone.textContent = levelConfig.dropContent;
+            const { x: dropX, y: dropY } = getRandomPosition(levelConfig.dropZoneSize, levelConfig.dropZoneSize);
+            dropZone.style.left = `${dropX}px`;
+            dropZone.style.top = `${dropY}px`;
+            gameArea.appendChild(dropZone);
+
+            // Create drag item and position it randomly
+            dragItem = document.createElement('div');
+            dragItem.classList.add('drag-item');
+            dragItem.style.width = `${levelConfig.dragItemSize}px`;
+            dragItem.style.height = `${levelConfig.dragItemSize}px`;
+            dragItem.style.fontSize = `${levelConfig.dragItemSize * 0.6}px`;
+            dragItem.textContent = levelConfig.dragContent;
+
+            const { x: dragX, y: dragY } = getRandomPosition(levelConfig.dragItemSize, levelConfig.dragItemSize);
+            dragItem.style.left = `${dragX}px`;
+            dragItem.style.top = `${dragY}px`;
+            gameArea.appendChild(dragItem);
+
+            // Add drag listeners
+            dragItem.addEventListener('mousedown', startDrag);
+            startTargetTimer(); // Start timer for drag/drop as well
+        }
+
+        // Drag and Drop variables
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        /**
+         * Starts the dragging process.
+         * @param {MouseEvent} e - The mouse event.
+         */
+        function startDrag(e) {
+            isDragging = true;
+            dragItem.style.cursor = 'grabbing';
+            offsetX = e.clientX - dragItem.getBoundingClientRect().left;
+            offsetY = e.clientY - dragItem.getBoundingClientRect().top;
+            document.addEventListener('mousemove', doDrag);
+            document.addEventListener('mouseup', endDrag);
+        }
+
+        /**
+         * Handles the dragging movement.
+         * @param {MouseEvent} e - The mouse event.
+         */
+        function doDrag(e) {
+            if (!isDragging) return;
+
+            const gameAreaRect = gameArea.getBoundingClientRect();
+            let newX = e.clientX - offsetX - gameAreaRect.left;
+            let newY = e.clientY - offsetY - gameAreaRect.top;
+
+            // Constrain drag item within game area boundaries
+            newX = Math.max(0, Math.min(newX, gameAreaRect.width - dragItem.offsetWidth));
+            newY = Math.max(0, Math.min(newY, gameAreaRect.height - dragItem.offsetHeight));
+
+            dragItem.style.left = `${newX}px`;
+            dragItem.style.top = `${newY}px`;
+        }
+
+        /**
+         * Ends the dragging process and checks for drop.
+         */
+        function endDrag() {
+            isDragging = false;
+            // Ensure dragItem is not null before trying to access its style
+            if (dragItem) {
+                dragItem.style.cursor = 'grab';
+            }
+            document.removeEventListener('mousemove', doDrag);
+            document.removeEventListener('mouseup', endDrag);
+
+            // Check if dropped inside drop zone
+            if (dragItem && dropZone) { // Ensure both elements exist before checking collision
+                const dragRect = dragItem.getBoundingClientRect();
+                const dropRect = dropZone.getBoundingClientRect();
+
+                if (
+                    dragRect.left < dropRect.right &&
+                    dragRect.right > dropRect.left &&
+                    dragRect.top < dropRect.bottom &&
+                    dragRect.bottom > dropRect.top
+                ) {
+                    // Dropped successfully
+                    // Remove elements from DOM first
+                    if (gameArea.contains(dragItem)) {
+                        gameArea.removeChild(dragItem);
+                    }
+                    if (gameArea.contains(dropZone)) {
+                        gameArea.removeChild(dropZone);
+                    }
+                    // Nullify references after successful removal
+                    dragItem = null;
+                    dropZone = null;
+
+                    // Then update game state
+                    handleSuccess(null); // Pass null as targetElement, as they are already removed
+                } else {
+                    // If dropped outside, don't count as success, but timer still runs.
+                    // If you want to penalize or reset on bad drop, add logic here.
+                }
+            }
+        }
+
+        // --- Game Flow Functions ---
+
+        /**
+         * Starts the current level.
+         */
+        function startLevel() {
+            gameActive = true;
+            targetsHit = 0;
+            instructionText.classList.add('hidden');
+            startButton.classList.add('hidden');
+
+            updateLevelDisplay();
+            clearGameArea(); // Clear any previous elements and timers
+
+            // Reset targetSize for the current level to its initial value
+            if (levels[currentLevel].initialTargetSize) {
+                levels[currentLevel].targetSize = levels[currentLevel].initialTargetSize;
+            }
+
+            const levelConfig = levels[currentLevel];
+            gameArea.innerHTML = `<p class="text-2xl text-blue-600 mb-4">${levelConfig.name}</p><p class="text-xl text-gray-700">${levelConfig.instruction}</p>`;
+
+            // Delay showing targets to allow instructions to be read
+            setTimeout(() => {
+                gameArea.innerHTML = ''; // Clear instructions
+                generateTarget(); // This will call setupDragDrop if it's a dragdrop level
+            }, 3000); // Show instructions for 3 seconds
+        }
+
+        /**
+         * Ends the current level.
+         */
+        function endLevel() {
+            gameActive = false;
+            clearGameArea(); // Clear any remaining targets and timers
+
+            if (currentLevel < levels.length - 1) {
+                instructionText.textContent = `Hoàn thành Cấp độ ${currentLevel + 1}! Bạn đã ghi được ${score} điểm. Chuẩn bị cho cấp độ tiếp theo...`;
+                instructionText.classList.remove('hidden');
+                setTimeout(goToNextLevel, 3000); // Automatically go to next level after 3 seconds
+            } else {
+                // Game finished, determine encouragement message
+                let encouragementMessage = "";
+                if (score < 600) {
+                    encouragementMessage = "Bạn còn non và xanh lắm.";
+                } else if (score < 700) {
+                    encouragementMessage = "Bạn cũng tạm được thôi, cố gắng lên nhé!";
+                } else if (score <= 800) { // Changed from < 800 to <= 800 to include 800
+                    encouragementMessage = "Bạn cũng khá đấy, hãy thử lại và làm tốt hơn!";
+                } else if (score < 950) {
+                    encouragementMessage = "Bạn làm tốt lắm, hãy giữ vững phong độ nhé!";
+                } else { // 950 and above
+                    encouragementMessage = "Bạn thật Xuất sắc!";
+                }
+
+                // Show final score in a popup with encouragement
+                showAlert(`Chúc mừng! Bạn đã hoàn thành tất cả các cấp độ! Tổng điểm của bạn là: ${score} điểm. ${encouragementMessage}`, "Chơi lại");
+                // The alertOkButton will now handle resetGame
+            }
+        }
+
+        /**
+         * Moves to the next level.
+         */
+        function goToNextLevel() {
+            currentLevel++;
+            if (currentLevel < levels.length) {
+                startLevel();
+            } else {
+                // Game finished, show final score and option to restart
+                endLevel();
+            }
+        }
+
+        /**
+         * Resets the game to the beginning.
+         */
+        function resetGame() {
+            currentLevel = 0;
+            score = 0;
+            targetsHit = 0;
+            gameActive = false;
+            updateScoreDisplay();
+            updateLevelDisplay();
+            clearGameArea(); // Clear game area and timers
+            hideAlert(); // Hide the alert popup
+
+            instructionText.textContent = "Chào mừng bạn đến với trò chơi luyện chuột! Nhấn 'Bắt đầu' để bắt đầu.";
+            instructionText.classList.remove('hidden');
+            startButton.classList.remove('hidden');
+            // Reset all target sizes to their initial values for next game
+            levels.forEach(level => {
+                if (level.initialTargetSize) {
+                    level.targetSize = level.initialTargetSize;
+                }
+            });
+        }
+
+        // --- Event Listeners for Buttons ---
+        startButton.addEventListener('click', startLevel);
+        alertOkButton.addEventListener('click', () => {
+            // If the alert is showing the final score, clicking OK should reset the game
+            if (currentLevel === levels.length - 1 && !gameActive) {
+                resetGame();
+            } else {
+                hideAlert();
+            }
+        });
+
+
+        // Initialize game on load
+        window.onload = () => {
+            updateScoreDisplay();
+            updateLevelDisplay();
+            // Optional: Preload any assets if needed
+        };
+
+        // Ensure game area resizes dynamically
+        window.addEventListener('resize', () => {
+            // If a target exists, reposition it to stay within bounds
+            const existingTarget = gameArea.querySelector('.target');
+            if (existingTarget) {
+                const size = levels[currentLevel].targetSize;
+                const { x, y } = getRandomPosition(size, size); // Re-calculate random position
+                existingTarget.style.left = `${x}px`;
+                existingTarget.style.top = `${y}px`;
+            }
+            // For drag/drop, if items exist, you might need to re-center or reposition them
+            if (dragItem && dropZone) {
+                const levelConfig = levels[currentLevel];
+                // Recalculate dropZone position first
+                const { x: dropX, y: dropY } = getRandomPosition(levelConfig.dropZoneSize, levelConfig.dropZoneSize);
+                dropZone.style.left = `${dropX}px`;
+                dropZone.style.top = `${dropY}px`;
+
+                // Then position dragItem relative to the new drag position
+                const { x: dragX, y: dragY } = getRandomPosition(levelConfig.dragItemSize, levelConfig.dragItemSize);
+                dragItem.style.left = `${dragX}px`;
+                dragItem.style.top = `${dragY}px`;
+            }
+        });
+
+        // Prevent context menu from appearing on right-click for the whole game area
+        gameArea.addEventListener('contextmenu', (e) => {
+            if (levels[currentLevel] && levels[currentLevel].type !== "contextmenu") {
+                e.preventDefault();
+            }
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Windows 10 - Thực hành máy tính</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to override Tailwind or add specific effects */
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Prevent scrolling on the desktop */
+            margin: 0;
+            padding: 0;
+        }
+        .desktop-background {
+            background: linear-gradient(to bottom right, #0078D4, #005A9E); /* Windows 10 blue gradient */
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 1rem;
+            transition: opacity 2s ease-in-out; /* For shutdown effect */
+        }
+        .taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 48px; /* Standard taskbar height */
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .start-button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .start-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .start-button.active {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .start-button-image {
+            width: 28px; /* Adjust size as needed */
+            height: 28px; /* Adjust size as needed */
+            object-fit: contain;
+        }
+        .icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px; /* Icon width */
+            height: 80px; /* Icon height */
+            margin: 0.5rem;
+            cursor: pointer;
+            user-select: none; /* Prevent text selection on double click */
+            transition: background-color 0.1s ease-in-out;
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+        }
+        .icon:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+        }
+        .icon-image {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            margin-bottom: 0.25rem;
+        }
+        .icon-text {
+            color: white;
+            font-size: 0.75rem; /* Smaller text for icons */
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+        }
+
+        /* Start Menu */
+        .start-menu {
+            position: fixed;
+            bottom: 48px; /* Above the taskbar */
+            left: 0;
+            width: 280px; /* Width of the start menu */
+            height: calc(100% - 48px); /* Full height minus taskbar */
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            z-index: 999;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+            transform: translateY(100%); /* Start off-screen */
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push power options to bottom */
+            padding-bottom: 1rem; /* Padding for power section */
+        }
+        .start-menu.show {
+            transform: translateY(0); /* Slide in */
+            opacity: 1;
+            visibility: visible;
+        }
+        .start-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .start-menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .start-menu-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+            object-fit: contain;
+        }
+		.logo-thaydaytin {
+			width: 60px;
+			height: 60px;
+		}
+        .start-menu-text {
+            font-size: 0.95rem;
+        }
+
+        /* Power Menu */
+        .power-menu {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Slightly darker for power menu */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            transform: translateY(100%); /* Start hidden */
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out, visibility 0.3s ease-out;
+        }
+        .power-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Shutdown Overlay */
+        .shutdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Black screen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            z-index: 3000; /* Above everything */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out; /* Fade in */
+        }
+        .shutdown-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .shutdown-message {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            animation: pulse 1.5s infinite alternate; /* Simple pulsing effect */
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+
+        /* Generic App Window Modal (repurposed from This PC modal) */
+        .app-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+            display: flex; /* Keep flex for centering when not maximized */
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .app-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .app-modal-window {
+            background-color: #f0f0f0; /* Light gray background for window */
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            /* Updated: Make the window open nearly full screen */
+            width: calc(100% - 4rem); /* 90% width, adjusted for padding/margin */
+            height: calc(100% - 48px - 4rem); /* 90% height minus taskbar, adjusted for padding/margin */
+            top: 2rem; /* Position from top */
+            left: 2rem; /* Position from left */
+            position: absolute; /* Use absolute positioning for precise placement */
+            transform: translate3d(0px, 0px, 0); /* Reset transform for initial positioning */
+            transition: all 0.3s ease-in-out; /* Smooth transition for maximize/restore */
+        }
+        .app-modal-window.maximized {
+            width: calc(100% - 2rem); /* Full width minus padding */
+            height: calc(100% - 48px - 2rem); /* Full height minus taskbar and padding */
+            top: 1rem; /* Padding from top */
+            left: 1rem; /* Padding from left */
+            transform: translate3d(0, 0, 0) !important; /* Override dragging transform */
+            border-radius: 0; /* No rounded corners when maximized */
+            box-shadow: none; /* No shadow when maximized */
+        }
+        .window-header {
+            background-color: #e0e0e0; /* Slightly darker header */
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            cursor: grab; /* Indicate draggable */
+        }
+        .app-modal-window.maximized .window-header {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            cursor: default; /* No dragging when maximized */
+        }
+        .window-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .window-controls button {
+            background-color: transparent;
+            border: none;
+            font-size: 1.25rem;
+            color: #555;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .window-controls button:hover {
+            background-color: #d0d0d0;
+        }
+        .window-controls button.close-btn:hover {
+            background-color: #e81123; /* Red for close button */
+            color: white;
+        }
+        .window-content {
+            flex-grow: 1;
+            padding: 1rem;
+            background-color: white;
+            overflow-y: auto; /* Scroll if content overflows */
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            display: flex; /* Use flex for content layout */
+            flex-direction: column;
+        }
+        .app-modal-window.maximized .window-content {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        /* Specific content for generic app modal */
+        .app-message-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        /* File Explorer specific styles */
+        .file-explorer-ribbon {
+            display: flex;
+            flex-direction: column; /* Changed to column to stack groups and new actions row */
+            align-items: flex-start; /* Align items to the start of the cross axis */
+            gap: 0.5rem; /* Space between rows/groups */
+            padding: 0.5rem 1rem;
+            background-color: #f0f0f0; /* Light gray for ribbon background */
+            border-bottom: 1px solid #ccc;
+            position: relative; /* For Home menu positioning */
+        }
+        .ribbon-group {
+            display: flex;
+            align-items: center; /* Align items in a row */
+            gap: 1rem; /* Space between buttons in a group */
+        }
+        .ribbon-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            min-width: 60px; /* Ensure buttons have some width */
+            text-align: center;
+            color: #333;
+            border: 1px solid transparent; /* For disabled state */
+        }
+        .ribbon-button:hover:not(:disabled) {
+            background-color: #e0e0e0;
+        }
+        .ribbon-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f0f0f0;
+            color: #666;
+        }
+        .ribbon-button-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 0.25rem;
+            object-fit: contain;
+        }
+
+        /* Home Actions Row Styles (new) */
+        .home-actions-row {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap if window is too small */
+            gap: 0.5rem; /* Gap between buttons */
+            padding: 0.25rem 0; /* Small vertical padding */
+            border-radius: 0.5rem;
+            background-color: #e0e0e0; /* Slightly different background for the row */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+            transition: all 0.3s ease-in-out;
+            max-height: 0; /* Start hidden */
+            overflow: hidden; /* Hide overflow content */
+            opacity: 0; /* Start invisible */
+            visibility: hidden; /* Start not visible */
+        }
+        .home-actions-row.show {
+            max-height: 100px; /* Adjust based on content height */
+            opacity: 1;
+            visibility: visible;
+            padding: 0.5rem 0; /* Restore padding when shown */
+        }
+
+        .home-action-button { /* Renamed from home-menu-item for clarity */
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #333;
+            transition: background-color 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-radius: 0.25rem;
+            white-space: nowrap;
+        }
+        .home-action-button:hover:not(:disabled) {
+            background-color: #d0d0d0; /* Lighter hover for actions row */
+        }
+        .home-action-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            color: #666;
+        }
+        .home-action-icon { /* Renamed from home-menu-icon */
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-bottom: 0.15rem;
+        }
+        /* No separators needed in this horizontal row */
+
+
+        .file-explorer-breadcrumbs {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: white; /* Match content background */
+        }
+        .breadcrumb-item {
+            color: #0078D4;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 0.25rem;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+        .breadcrumb-item:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb-separator {
+            color: #666;
+            margin-right: 0.25rem;
+        }
+        .file-list {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Responsive grid */
+            gap: 1rem;
+            overflow-y: auto; /* Allow scrolling for files */
+            padding-right: 0.5rem; /* Space for scrollbar */
+            padding-left: 1rem; /* Match breadcrumb padding */
+        }
+        .file-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.1s ease-in-out, border 0.1s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            position: relative; /* For context menu */
+            border: 1px solid transparent; /* Default border */
+        }
+        .file-item:hover {
+            background-color: rgba(0, 120, 212, 0.1); /* Light blue hover */
+        }
+        .file-item.selected {
+            background-color: rgba(0, 120, 212, 0.2); /* Selected background */
+            border: 1px solid #0078D4; /* Blue border when selected */
+        }
+        .file-item.cut-effect {
+            opacity: 0.6;
+            border: 1px dashed #0078D4;
+        }
+        .file-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            margin-bottom: 0.25rem;
+        }
+        .file-name {
+            font-size: 0.8rem;
+            text-align: center;
+            word-break: break-all; /* Break long words */
+            white-space: normal; /* Allow wrapping */
+            color: #333;
+        }
+
+        /* Context Menu */
+        .context-menu {
+            position: fixed;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 2500;
+            display: none; /* Hidden by default */
+            min-width: 150px;
+            overflow: hidden; /* For rounded corners */
+        }
+        .context-menu-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #333;
+            transition: background-color 0.1s;
+        }
+        .context-menu-item:hover:not(:disabled) {
+            background-color: #e0e0e0;
+        }
+        .context-menu-item:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            color: #666;
+        }
+        .context-menu-separator {
+            height: 1px;
+            background-color: #eee;
+            margin: 0.25rem 0;
+        }
+
+        /* Input/Confirmation Modals */
+        .action-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .action-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .action-modal-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .action-modal-content input {
+            width: calc(100% - 1.5rem); /* Adjust for padding */
+            padding: 0.75rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+        .action-modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .action-modal-buttons button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+        .action-modal-buttons button.confirm-btn {
+            background-color: #0078D4;
+            color: white;
+        }
+        .action-modal-buttons button.confirm-btn:hover {
+            background-color: #005A9E;
+        }
+        .action-modal-buttons button.cancel-btn {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        .action-modal-buttons button.cancel-btn:hover {
+            background-color: #d0d0d0;
+        }
+
+        /* Fullscreen Prompt Modal */
+        .fullscreen-prompt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000; /* Above all other modals */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .fullscreen-prompt-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .fullscreen-prompt-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 500px;
+            color: #333;
+            position: relative; /* For close button positioning */
+        }
+        .fullscreen-prompt-content button {
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .fullscreen-prompt-content button:hover {
+            background-color: #005A9E;
+        }
+        .fullscreen-close-button { /* New style for close button */
+            position: absolute;
+            top: 0.25rem; /* Adjusted for closer top positioning */
+            right: 0.25rem; /* Adjusted for closer right positioning */
+            background: transparent; /* No background */
+            border: none;
+            font-size: 1.2rem; /* Smaller font size for 'X' */
+            color: #666;
+            cursor: pointer;
+            width: 28px; /* Small square size for the button area */
+            height: 28px;
+            border-radius: 50%; /* Make it round */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .fullscreen-close-button:hover {
+            background-color: rgba(0, 0, 0, 0.05); /* Very subtle transparent black */
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Desktop Background -->
+    <div class="desktop-background" id="desktop-background">
+        <!-- Desktop Icons -->
+        <div id="this-pc-icon" class="icon" data-app-name="This PC">
+            <img src="images/thispc.png" alt="This PC Icon" class="icon-image">
+            <span class="icon-text">This PC</span>
+        </div>
+        <div id="word-icon" class="icon" data-app-name="Word">
+            <img src="images/word.png" alt="Word Icon" class="icon-image">
+            <span class="icon-text">Word</span>
+        </div>
+        <div id="powerpoint-icon" class="icon" data-app-name="PowerPoint">
+            <img src="images/powerpoint.png" alt="PowerPoint Icon" class="icon-image">
+            <span class="icon-text">PowerPoint</span>
+        </div>
+        <div id="scratch-icon" class="icon" data-app-name="Scratch">
+            <img src="images/scratch.png" alt="Scratch Icon" class="icon-image">
+            <span class="icon-text">Scratch</span>
+        </div>
+        <!-- New Icons Added Here -->
+        <div id="mouse-skills-icon" class="icon" data-app-name="Mouse Skills">
+            <img src="images/mouseskills.png" alt="Mouse Skills Icon" class="icon-image">
+            <span class="icon-text">Mouse Skills</span>
+        </div>
+        <div id="rapid-typing-icon" class="icon" data-app-name="Rapid Typing">
+            <img src="images/typing.png" alt="Rapid Typing Icon" class="icon-image">
+            <span class="icon-text">Rapid Typing</span>
+        </div>
+		<div id="paint-icon" class="icon" data-app-name="Paint">
+            <img src="images/paint.png" alt="Rapid Typing Icon" class="icon-image">
+            <span class="icon-text">Paint</span>
+        </div>
+		<div id="paint-icon" class="icon" data-app-name="Trình Duyệt Web">
+            <img src="images/chrome.png" alt="Rapid Typing Icon" class="icon-image">
+            <span class="icon-text">Trình Duyệt Web</span>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <button id="start-button" class="start-button">
+            <!-- Windows Start Icon (Image) -->
+            <img src="images/start.png" alt="Windows Start Icon" class="start-button-image">
+        </button>
+        <!-- More taskbar items can be added -->
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="start-menu">
+        <!-- Main menu content can go here -->
+        <div class="flex-grow">
+            <!-- Example menu items -->
+            <div class="start-menu-item">
+                <img src="images/logo.png" alt="Documents Icon" class="start-menu-icon logo-thaydaytin">
+                <span class="start-menu-text">Thầy Dạy Tin</span>
+            </div>
+            <div class="start-menu-item">
+                <img src="images/school.png" alt="Pictures Icon" class="start-menu-icon">
+                <span class="start-menu-text">Mô phỏng PC thực hành</span>
+            </div>
+            <div class="start-menu-item">
+                <img src="images/diachi.png" alt="Settings Icon" class="start-menu-icon">
+                <span class="start-menu-text">Dành cho học sinh tiểu học</span>
+            </div>
+        </div>
+
+        <!-- Power Options -->
+        <div class="relative w-full">
+            <div id="power-button" class="start-menu-item">
+                <!-- Power Icon (Image) -->
+                <img src="images/power.png" alt="Power Icon" class="start-menu-icon">
+                <span class="start-menu-text">Power</span>
+            </div>
+            <div id="power-menu-options" class="power-menu">
+                <div id="shutdown-button" class="start-menu-item">
+                    <!-- Shutdown Icon (Image) -->
+                    <img src="images/power.png" alt="Shutdown Icon" class="start-menu-icon">
+                    <span class="start-menu-text">Shutdown</span>
+                </div>
+                <!-- You can add Restart, Sleep here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic App Window Modal (repurposed from This PC modal) -->
+    <div id="app-modal-overlay" class="app-modal-overlay">
+        <div id="app-modal-window" class="app-modal-window">
+            <div class="window-header">
+                <span id="app-window-title" class="window-title"></span>
+                <div class="window-controls">
+                    <button class="minimize-btn" title="Minimize">—</button>
+                    <button id="maximize-restore-button" class="maximize-btn" title="Maximize">□</button>
+                    <button id="app-close-button" class="close-btn" title="Close">X</button>
+                </div>
+            </div>
+            <div id="app-window-content" class="window-content">
+                <!-- File Explorer specific content -->
+                <div id="file-explorer-ribbon" class="file-explorer-ribbon hidden">
+                    <div class="ribbon-group">
+                        <button id="back-button" class="ribbon-button">
+                            <img src="https://placehold.co/24x24/CCCCCC/000000?text=Back" alt="Back Icon" class="ribbon-button-icon">
+                            Back
+                        </button>
+                        <button id="home-button" class="ribbon-button">
+                            <img src="https://placehold.co/24x24/0078D4/FFFFFF?text=Home" alt="Home Icon" class="ribbon-button-icon">
+                            Home
+                        </button>
+                    </div>
+                    <!-- New Home Actions Row -->
+                    <div id="home-actions-row" class="home-actions-row">
+                        <button class="home-action-button" id="home-new-folder">
+                            <img src="images/newfolder.png" alt="New Folder Icon" class="home-action-icon">
+                            New Folder
+                        </button>
+                        <button class="home-action-button" id="home-new-item">
+                            <img src="images/newitem.png" alt="New Item Icon" class="home-action-icon">
+                            New Item
+                        </button>
+                        <button class="home-action-button" id="home-cut">
+                            <img src="images/cut.png" alt="Cut Icon" class="home-action-icon">
+                            Cut
+                        </button>
+                        <button class="home-action-button" id="home-copy">
+                            <img src="images/copy.png" alt="Copy Icon" class="home-action-icon">
+                            Copy
+                        </button>
+                        <button class="home-action-button" id="home-paste" disabled>
+                            <img src="images/paste.png" alt="Paste Icon" class="home-action-icon">
+                            Paste
+                        </button>
+                        <button class="home-action-button" id="home-rename">
+                            <img src="images/rename.png" alt="Rename Icon" class="home-action-icon">
+                            Rename
+                        </button>
+                        <button class="home-action-button" id="home-delete">
+                            <img src="images/delete.png" alt="Delete Icon" class="home-action-icon">
+                            Delete
+                        </button>
+                        <button class="home-action-button" id="home-copy-to">
+                            <img src="images/copyto.png" alt="Copy To Icon" class="home-action-icon">
+                            Copy to
+                        </button>
+                        <button class="home-action-button" id="home-move-to">
+                            <img src="images/moveto.png" alt="Move To Icon" class="home-action-icon">
+                            Move to
+                        </button>
+                    </div>
+                </div>
+                <div id="file-explorer-breadcrumbs" class="file-explorer-breadcrumbs hidden"></div>
+                <div id="file-list" class="file-list hidden"></div>
+                <!-- App message content -->
+                <div id="app-message-content" class="app-message-content hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Context Menu -->
+    <div id="context-menu" class="context-menu">
+        <div class="context-menu-item" id="context-open">Open</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" id="context-new-folder">New Folder</div>
+        <div class="context-menu-item" id="context-new-item">New Item</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" id="context-cut">Cut</div>
+        <div class="context-menu-item" id="context-copy">Copy</div>
+        <div class="context-menu-item" id="context-paste" disabled>Paste</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" id="context-rename">Rename</div>
+        <div class="context-menu-item" id="context-delete">Delete</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" id="context-copy-to">Copy to</div>
+        <div class="context-menu-item" id="context-move-to">Move to</div>
+    </div>
+
+    <!-- Action Modals (for New/Rename/Delete/CopyTo/MoveTo confirmation/input) -->
+    <div id="action-modal-overlay" class="action-modal-overlay">
+        <div class="action-modal-content">
+            <p id="action-modal-message" class="text-lg font-semibold text-gray-800"></p>
+            <input type="text" id="action-modal-input" placeholder="Enter new name" class="hidden">
+            <div class="action-modal-buttons">
+                <button id="action-modal-confirm" class="confirm-btn">OK</button>
+                <button id="action-modal-cancel" class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shutdown Overlay -->
+    <div id="shutdown-overlay" class="shutdown-overlay">
+        <p>Shutting down...</p>
+        <p class="shutdown-message">Please wait</p>
+    </div>
+
+    <!-- Fullscreen Prompt Modal (New) -->
+    <div id="fullscreen-prompt-overlay" class="fullscreen-prompt-overlay">
+        <div class="fullscreen-prompt-content">
+            <button id="fullscreen-close-button" class="fullscreen-close-button" title="Đóng">X</button>
+            <p class="text-xl font-bold mb-4">Chào mừng bạn đến với Desktop Windows!</p>
+            <p class="mb-4">Để có trải nghiệm tốt nhất, vui lòng bật chế độ toàn màn hình.</p>
+            <button id="enter-fullscreen-button">Bật toàn màn hình</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const desktopBackground = document.getElementById('desktop-background');
+            const icons = document.querySelectorAll('.icon');
+            
+            const appModalOverlay = document.getElementById('app-modal-overlay');
+            const appModalWindow = document.getElementById('app-modal-window');
+            const appWindowTitle = document.getElementById('app-window-title');
+            const appWindowContent = document.getElementById('app-window-content');
+            const appCloseButton = document.getElementById('app-close-button');
+            const maximizeRestoreButton = document.getElementById('maximize-restore-button');
+
+            const startButton = document.getElementById('start-button');
+            const startMenu = document.getElementById('start-menu');
+            const powerButton = document.getElementById('power-button');
+            const powerMenuOptions = document.getElementById('power-menu-options');
+            const shutdownButton = document.getElementById('shutdown-button');
+            const shutdownOverlay = document.getElementById('shutdown-overlay');
+
+            const fileExplorerRibbon = document.getElementById('file-explorer-ribbon');
+            const fileExplorerBreadcrumbs = document.getElementById('file-explorer-breadcrumbs');
+            const fileListContainer = document.getElementById('file-list');
+            const appMessageContent = document.getElementById('app-message-content');
+
+            // Ribbon buttons
+            const backButton = document.getElementById('back-button');
+            const homeButton = document.getElementById('home-button'); 
+            const homeActionsRow = document.getElementById('home-actions-row'); // New reference for the horizontal row
+
+            // Home Actions Row buttons (renamed from home-menu-item for clarity)
+            const homeNewFolder = document.getElementById('home-new-folder');
+            const homeNewItem = document.getElementById('home-new-item'); 
+            const homeCut = document.getElementById('home-cut');
+            const homeCopy = document.getElementById('home-copy');
+            const homePaste = document.getElementById('home-paste');
+            const homeRename = document.getElementById('home-rename');
+            const homeDelete = document.getElementById('home-delete');
+            const homeCopyTo = document.getElementById('home-copy-to');
+            const homeMoveTo = document.getElementById('home-move-to');
+
+            const contextMenu = document.getElementById('context-menu');
+            const contextOpen = document.getElementById('context-open');
+            const contextNewFolder = document.getElementById('context-new-folder');
+            const contextNewItem = document.getElementById('context-new-item'); 
+            const contextCut = document.getElementById('context-cut');
+            const contextCopy = document.getElementById('context-copy');
+            const contextPaste = document.getElementById('context-paste');
+            const contextRename = document.getElementById('context-rename');
+            const contextDelete = document.getElementById('context-delete');
+            const contextCopyTo = document.getElementById('context-copy-to');
+            const contextMoveTo = document.getElementById('context-move-to');
+
+            const actionModalOverlay = document.getElementById('action-modal-overlay');
+            const actionModalMessage = document.getElementById('action-modal-message');
+            const actionModalInput = document.getElementById('action-modal-input');
+            const actionModalConfirm = document.getElementById('action-modal-confirm');
+            const actionModalCancel = document.getElementById('action-modal-cancel');
+
+            // New Fullscreen Prompt Elements
+            const fullscreenPromptOverlay = document.getElementById('fullscreen-prompt-overlay');
+            const enterFullscreenButton = document.getElementById('enter-fullscreen-button');
+            const fullscreenCloseButton = document.getElementById('fullscreen-close-button'); // New close button reference
+
+            let clickTimers = {}; // Use an object to store timers for each icon
+            const DBL_CLICK_THRESHOLD = 300; // milliseconds
+
+            // --- File System Data Structure (in-memory) ---
+            // This represents our virtual file system. Changes here are not persistent.
+            const fileSystem = {
+                'This PC': {
+                    type: 'root',
+                    children: {
+                        'Local Disk (C:)': {
+                            type: 'drive',
+                            icon: 'images/disk.png',
+                            isSystemDrive: true, // Mark as system drive
+                            children: {
+                                'Users': { type: 'folder', icon: 'images/folder.png', children: {
+                                    'Student': { type: 'folder', icon: 'images/folder.png', children: {
+                                        'Documents': { type: 'folder', icon: 'images/folder.png', children: {} },
+                                        'Pictures': { type: 'folder', icon: 'images/folder.png', children: {} },
+                                        'MyFirstFile.txt': { type: 'file', icon: 'https://placehold.co/48x48/FFFFFF/000000?text=TXT' }
+                                    }}
+                                } },
+                                'Program Files': { type: 'folder', icon: 'images/folder.png', children: {} },
+                                'Windows': { type: 'folder', icon: 'images/folder.png', children: {} },
+                                'System32': { type: 'folder', icon: 'images/folder.png', children: {} },
+                                'ReadMe.txt': { type: 'file', icon: 'https://placehold.co/48x48/FFFFFF/000000?text=TXT' }
+                            }
+                        },
+                        'Data (D:)': {
+                            type: 'drive',
+                            icon: 'images/disk.png',
+                            children: {
+                                'Photos': { type: 'folder', icon: 'images/folder.png', children: {
+                                    'Vacation': { type: 'folder', icon: 'images/folder.png', children: {} }
+                                } },
+                                'Videos': { type: 'folder', icon: 'images/folder.png', children: {} },
+                                'MyVideo.mp4': { type: 'file', icon: 'https://placehold.co/48x48/FFFFFF/000000?text=MP4' }
+                            }
+                        },
+                        'USB Drive (E:)': {
+                            type: 'drive',
+                            icon: 'images/disk.png',
+                            children: {}
+                        }
+                    }
+                }
+            };
+            let currentPath = ['This PC']; // Current path in the file system
+            let selectedFileItemElement = null; // Stores the HTML element of the currently selected file/folder
+            let selectedFileItemData = null; // Stores the data object of the currently selected file/folder
+            
+            // Clipboard for Cut/Copy/Paste
+            let clipboard = {
+                mode: null, // 'copy' or 'cut'
+                item: null, // { name: string, path: string[] }
+                data: null // The actual data object to copy/move
+            };
+
+            // Maximize/Restore state
+            let isMaximized = false;
+            let originalWindowRect = { x: 0, y: 0, width: 0, height: 0 }; // To store original position and size
+
+            // --- Helper to get a directory object by path ---
+            function getDirectoryByPath(pathArray) {
+                let currentDir = fileSystem;
+                for (let i = 0; i < pathArray.length; i++) {
+                    if (!currentDir[pathArray[i]]) {
+                        return null; // Path segment not found
+                    }
+                    if (currentDir[pathArray[i]].children === undefined) {
+                        return null; // Not a directory/drive
+                    }
+                    currentDir = currentDir[pathArray[i]].children;
+                }
+                return currentDir;
+            }
+
+            // --- Helper to get current directory object ---
+            function getCurrentDirectory() {
+                return getDirectoryByPath(currentPath);
+            }
+
+            // --- Update UI for button states (for Home menu and Context menu) ---
+            function updateButtonStates() {
+                const isItemSelected = selectedFileItemElement !== null;
+                const isClipboardNotEmpty = clipboard.item !== null;
+                const isCurrentPathRoot = currentPath.length === 1; // 'This PC' is root
+                const isCurrentPathSystemDrive = currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)';
+                const isSelectedItemSystemDrive = isItemSelected && selectedFileItemData.isSystemDrive === true; // Check data, not element dataset
+
+                // Home Actions Row buttons
+                homeCut.disabled = !isItemSelected || isCurrentPathSystemDrive || isSelectedItemSystemDrive;
+                homeCopy.disabled = !isItemSelected;
+                homePaste.disabled = !isClipboardNotEmpty || isCurrentPathSystemDrive;
+                homeRename.disabled = !isItemSelected || isCurrentPathSystemDrive || isSelectedItemSystemDrive;
+                homeDelete.disabled = !isItemSelected || isCurrentPathSystemDrive || isSelectedItemSystemDrive;
+                homeCopyTo.disabled = !isItemSelected;
+                homeMoveTo.disabled = !isItemSelected || isCurrentPathSystemDrive || isSelectedItemSystemDrive;
+                homeNewFolder.disabled = isCurrentPathSystemDrive;
+                homeNewItem.disabled = isCurrentPathSystemDrive;
+
+                // Back button (separate from Home menu logic)
+                backButton.disabled = currentPath.length <= 1;
+            }
+
+            // --- Render File System Content ---
+            function renderFileSystemContent() {
+                fileListContainer.innerHTML = ''; // Clear previous content
+                const currentDir = getCurrentDirectory();
+
+                if (!currentDir) {
+                    console.error("Current directory not found:", currentPath);
+                    fileListContainer.innerHTML = '<p class="text-gray-600 text-center">Error: Directory not found.</p>';
+                    return;
+                }
+
+                for (const name in currentDir) {
+                    const item = currentDir[name];
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('file-item');
+                    itemElement.dataset.name = name; // Store name for easy access
+                    itemElement.dataset.type = item.type; // Store type for easy access
+                    if (item.isSystemDrive) {
+                        itemElement.dataset.isSystemDrive = 'true'; // Mark system drive
+                    }
+
+                    let iconSrc;
+                    if (item.icon) {
+                        iconSrc = item.icon;
+                    } else if (item.type === 'folder') {
+                        iconSrc = 'images/folder.png'; // Default folder icon
+                    } else if (item.type === 'file') {
+                        const extension = name.split('.').pop().toUpperCase();
+                        iconSrc = `https://placehold.co/48x48/FFFFFF/000000?text=${extension}`; // Default file icon based on extension
+                    } else {
+                        iconSrc = 'https://placehold.co/48x48/CCCCCC/000000?text=?'; // Unknown type
+                    }
+
+                    itemElement.innerHTML = `
+                        <img src="${iconSrc}" alt="${item.type} icon" class="file-icon">
+                        <span class="file-name">${name}</span>
+                    `;
+
+                    // Apply cut effect if this item is in clipboard and mode is 'cut'
+                    if (clipboard.mode === 'cut' && clipboard.item && clipboard.item.name === name && 
+                        JSON.stringify(clipboard.item.path) === JSON.stringify(currentPath)) {
+                        itemElement.classList.add('cut-effect');
+                    }
+
+                    // Double-click to open
+                    itemElement.addEventListener('click', (event) => {
+                        event.stopPropagation(); // Prevent click from propagating to container
+                        const clickedAppName = itemElement.dataset.name;
+                        
+                        // Handle single click selection
+                        if (selectedFileItemElement) {
+                            selectedFileItemElement.classList.remove('selected');
+                        }
+                        selectedFileItemElement = itemElement;
+                        selectedFileItemData = item;
+                        selectedFileItemElement.classList.add('selected'); // Add 'selected' class here
+                        updateButtonStates(); // Update button states on selection
+
+                        if (!clickTimers[clickedAppName]) {
+                            clickTimers[clickedAppName] = setTimeout(() => {
+                                clickTimers[clickedAppName] = null; // Reset timer after single click
+                            }, DBL_CLICK_THRESHOLD);
+                        } else {
+                            clearTimeout(clickTimers[clickedAppName]);
+                            clickTimers[clickedAppName] = null;
+                            
+                            // *** Special handling for Local Disk (C:) ***
+                            if (item.isSystemDrive) {
+                                showActionModal(
+                                    "Các thao tác không đúng trên ổ đĩa C có thể dẫn đến việc lỗi phần mềm và máy tính có thể sẽ không hoạt động được!",
+                                    false,
+                                    null,
+                                    'Đã hiểu', // Confirm button text
+                                    'Đóng' // Cancel button text
+                                );
+                            } else if (item.type === 'folder' || item.type === 'drive' || item.type === 'root') {
+                                navigateTo(clickedAppName);
+                            } else {
+                                // For files, just show a message
+                                showActionModal(`Bạn đã mở tập tin "${clickedAppName}"`, false, null, 'OK');
+                            }
+                        }
+                    });
+
+                    // Right-click for context menu
+                    itemElement.addEventListener('contextmenu', (event) => {
+                        event.preventDefault(); // Prevent default browser context menu
+                        event.stopPropagation(); // Prevent propagating to document
+                        // Select the item on right-click
+                        if (selectedFileItemElement) {
+                            selectedFileItemElement.classList.remove('selected');
+                        }
+                        selectedFileItemElement = itemElement;
+                        selectedFileItemData = item;
+                        selectedFileItemElement.classList.add('selected'); // Add 'selected' class here
+                        showContextMenu(event.clientX, event.clientY, itemElement);
+                    });
+
+                    fileListContainer.appendChild(itemElement);
+                }
+                updateBreadcrumbs();
+                updateButtonStates(); // Update button states after rendering
+            }
+
+            // --- Navigation Functions ---
+            function navigateTo(itemName) {
+                const currentDir = getCurrentDirectory();
+                const targetItem = currentDir[itemName];
+
+                // Prevent navigation into system drive (C:)
+                if (targetItem && targetItem.isSystemDrive) {
+                    showActionModal(
+                        "Các thao tác không đúng trên ổ đĩa C có thể dẫn đến việc lỗi phần mềm và máy tính có thể sẽ không hoạt động được!",
+                        false,
+                        null,
+                        'Đã hiểu',
+                        'Đóng'
+                    );
+                    return; // Do not navigate
+                }
+
+                if (targetItem && (targetItem.type === 'folder' || targetItem.type === 'drive' || targetItem.type === 'root')) {
+                    currentPath.push(itemName);
+                    renderFileSystemContent();
+                    selectedFileItemElement = null; // Clear selection on navigation
+                    selectedFileItemData = null;
+                }
+            }
+
+            function goBack() {
+                if (currentPath.length > 1) {
+                    currentPath.pop();
+                    renderFileSystemContent();
+                    selectedFileItemElement = null; // Clear selection on navigation
+                    selectedFileItemData = null;
+                }
+            }
+
+            function updateBreadcrumbs() {
+                fileExplorerBreadcrumbs.innerHTML = '';
+                currentPath.forEach((segment, index) => {
+                    const breadcrumbSpan = document.createElement('span');
+                    breadcrumbSpan.classList.add('breadcrumb-item');
+                    breadcrumbSpan.textContent = segment;
+                    breadcrumbSpan.dataset.index = index;
+                    breadcrumbSpan.addEventListener('click', () => {
+                        // Prevent navigating directly into C: from breadcrumbs
+                        if (segment === 'Local Disk (C:)' && index === 1) { // Check if it's C: and its position in path
+                             showActionModal(
+                                "Các thao tác không đúng trên ổ đĩa C có thể dẫn đến việc lỗi phần mềm và máy tính có thể sẽ không hoạt động được!",
+                                false,
+                                null,
+                                'Đã hiểu',
+                                'Đóng'
+                            );
+                            return;
+                        }
+                        currentPath = currentPath.slice(0, parseInt(breadcrumbSpan.dataset.index) + 1);
+                        renderFileSystemContent();
+                        selectedFileItemElement = null; // Clear selection on navigation
+                        selectedFileItemData = null;
+                    });
+                    fileExplorerBreadcrumbs.appendChild(breadcrumbSpan);
+                    if (index < currentPath.length - 1) {
+                        const separator = document.createElement('span');
+                        separator.classList.add('breadcrumb-separator');
+                        separator.textContent = ' > ';
+                        fileExplorerBreadcrumbs.appendChild(separator);
+                    }
+                });
+                backButton.disabled = currentPath.length <= 1; // Disable back button at root
+            }
+
+            // --- Context Menu Functions ---
+            function showContextMenu(x, y, targetElement = null) {
+                contextMenu.style.left = `${x}px`;
+                contextMenu.style.top = `${y}px`;
+                contextMenu.style.display = 'block';
+
+                // Enable/disable context menu items based on selection/target/clipboard
+                const isItemSelected = targetElement !== null;
+                const isFolderOrDrive = isItemSelected && (targetElement.dataset.type === 'folder' || targetElement.dataset.type === 'drive' || targetElement.dataset.type === 'root');
+                const isClipboardEmpty = clipboard.item === null;
+                const isCurrentPathSystemDrive = currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)';
+                const isSelectedItemSystemDrive = isItemSelected && targetElement.dataset.isSystemDrive === 'true';
+
+                contextOpen.style.display = isFolderOrDrive ? 'block' : 'none';
+                contextOpen.disabled = isSelectedItemSystemDrive; // Disable open for C: drive
+
+                contextRename.style.display = isItemSelected ? 'block' : 'none';
+                contextRename.disabled = isSelectedItemSystemDrive || isCurrentPathSystemDrive; // Disable rename for C: drive or items within
+
+                contextDelete.style.display = isItemSelected ? 'block' : 'none';
+                contextDelete.disabled = isSelectedItemSystemDrive || isCurrentPathSystemDrive; // Disable delete for C: drive or items within
+
+                contextCut.style.display = isItemSelected ? 'block' : 'none';
+                contextCut.disabled = isSelectedItemSystemDrive || isCurrentPathSystemDrive; // Disable cut for C: drive or items within
+
+                contextCopy.style.display = isItemSelected ? 'block' : 'none';
+                contextCopy.disabled = false; // Always allow copy
+
+                contextPaste.style.display = isClipboardEmpty ? 'none' : 'block'; // Only show if clipboard has item
+                contextPaste.disabled = isClipboardEmpty || isCurrentPathSystemDrive; // Disable paste if clipboard is empty or in C: drive
+
+                contextCopyTo.style.display = isItemSelected ? 'block' : 'none';
+                contextCopyTo.disabled = false; // Always allow copy to
+
+                contextMoveTo.style.display = isItemSelected ? 'block' : 'none';
+                contextMoveTo.disabled = isSelectedItemSystemDrive || isCurrentPathSystemDrive; // Disable move from C: drive or items within
+                
+                // New Folder/Item are always available unless in C drive
+                contextNewFolder.style.display = 'block';
+                contextNewFolder.disabled = isCurrentPathSystemDrive;
+                contextNewItem.style.display = 'block';
+                contextNewItem.disabled = isCurrentPathSystemDrive;
+
+                // Hide context menu when clicking anywhere else
+                document.addEventListener('click', hideContextMenu, { once: true });
+                document.addEventListener('contextmenu', hideContextMenu, { once: true }); // Hide if another right-click
+            }
+
+            function hideContextMenu() {
+                contextMenu.style.display = 'none';
+            }
+
+            // --- Action Modals ---
+            let currentActionCallback = null;
+            function showActionModal(message, showInput, callback, confirmText = 'OK', cancelText = 'Cancel') { 
+                actionModalMessage.textContent = message;
+                actionModalInput.value = ''; // Clear input
+                if (showInput) {
+                    actionModalInput.classList.remove('hidden');
+                    actionModalInput.focus();
+                } else {
+                    actionModalInput.classList.add('hidden');
+                }
+                actionModalConfirm.textContent = confirmText;
+                actionModalCancel.textContent = cancelText;
+
+                actionModalOverlay.classList.add('show');
+                currentActionCallback = callback;
+            }
+
+            function hideActionModal() {
+                actionModalOverlay.classList.remove('show');
+                currentActionCallback = null;
+            }
+
+            actionModalConfirm.addEventListener('click', () => {
+                if (currentActionCallback) {
+                    // If input is hidden, it's a confirmation, so pass true.
+                    // Otherwise, pass the input value.
+                    currentActionCallback(actionModalInput.classList.contains('hidden') ? true : actionModalInput.value);
+                }
+                hideActionModal();
+            });
+
+            actionModalCancel.addEventListener('click', () => {
+                hideActionModal(); // No callback for cancel, just close
+            });
+
+            // --- File System Operations ---
+            function addNewItem(type) {
+                const currentDir = getCurrentDirectory();
+                if (currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)') { // Check if in C: drive
+                    showActionModal('Cannot add new items to drive C:.', false, null, 'OK'); 
+                    return;
+                }
+                showActionModal(`Enter new ${type === 'folder' ? 'folder' : 'file'} name:`, true, (newName) => { 
+                    if (newName) {
+                        if (currentDir[newName]) {
+                            showActionModal(`Name "${newName}" already exists. Please choose another name.`, false, null, 'OK'); 
+                            return;
+                        }
+                        currentDir[newName] = { type: type, children: type === 'folder' ? {} : undefined };
+                        renderFileSystemContent();
+                    }
+                }, 'Create', 'Cancel'); 
+            }
+
+            function renameSelectedItem() {
+                if (!selectedFileItemElement || !selectedFileItemData) {
+                    showActionModal('Please select an item to rename.', false, null, 'OK'); 
+                    return;
+                }
+                if (selectedFileItemData.isSystemDrive || (currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)')) { // Prevent renaming C: drive or items within
+                    showActionModal('Cannot rename items related to drive C:.', false, null, 'OK'); 
+                    return;
+                }
+                const oldName = selectedFileItemElement.dataset.name;
+                
+                showActionModal(`Rename "${oldName}" to:`, true, (newName) => { 
+                    if (newName && newName !== oldName) {
+                        const currentDir = getCurrentDirectory();
+                        if (currentDir[newName]) {
+                            showActionModal(`Name "${newName}" already exists. Please choose another name.`, false, null, 'OK'); 
+                            return;
+                        }
+                        // Create new entry, copy data, then delete old
+                        currentDir[newName] = { ...currentDir[oldName] };
+                        delete currentDir[oldName];
+                        renderFileSystemContent();
+                        selectedFileItemElement = null; // Clear selection after rename
+                        selectedFileItemData = null;
+                    }
+                }, 'Rename', 'Cancel'); 
+            }
+
+            function deleteSelectedItem() {
+                if (!selectedFileItemElement || !selectedFileItemData) {
+                    showActionModal('Please select an item to delete.', false, null, 'OK'); 
+                    return;
+                }
+                if (selectedFileItemData.isSystemDrive || (currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)')) { // Prevent deleting C: drive or items within
+                    showActionModal('Cannot delete items related to drive C:.', false, null, 'OK'); 
+                    return;
+                }
+                const itemName = selectedFileItemElement.dataset.name;
+                
+                showActionModal(`Are you sure you want to delete "${itemName}"?`, false, (confirmed) => { 
+                    if (confirmed) { // Confirm button was clicked
+                        const currentDir = getCurrentDirectory();
+                        delete currentDir[itemName];
+                        renderFileSystemContent();
+                        selectedFileItemElement = null; // Clear selection after delete
+                        selectedFileItemData = null;
+                    }
+                }, 'Delete', 'Cancel'); 
+            }
+
+            function cutSelectedItem() {
+                if (!selectedFileItemElement || !selectedFileItemData) {
+                    showActionModal('Please select an item to Cut.', false, null, 'OK'); 
+                    return;
+                }
+                 if (selectedFileItemData.isSystemDrive || (currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)')) {
+                    showActionModal('Cannot Cut items related to drive C:.', false, null, 'OK'); 
+                    return;
+                }
+                // Clear any existing cut effect
+                if (clipboard.item && clipboard.mode === 'cut') {
+                    const prevCutElement = document.querySelector(`.file-item[data-name="${clipboard.item.name}"]`);
+                    if (prevCutElement) {
+                        prevCutElement.classList.remove('cut-effect');
+                    }
+                }
+
+                clipboard.mode = 'cut';
+                clipboard.item = { name: selectedFileItemElement.dataset.name, path: [...currentPath] };
+                clipboard.data = selectedFileItemData; // Store the actual data object
+                
+                selectedFileItemElement.classList.add('cut-effect'); // Apply cut effect
+                updateButtonStates();
+            }
+
+            function copySelectedItem() {
+                if (!selectedFileItemElement || !selectedFileItemData) {
+                    showActionModal('Please select an item to Copy.', false, null, 'OK'); 
+                    return;
+                }
+                // Clear any existing cut effect
+                if (clipboard.item && clipboard.mode === 'cut') {
+                    const prevCutElement = document.querySelector(`.file-item[data-name="${clipboard.item.name}"]`);
+                    if (prevCutElement) {
+                        prevCutElement.classList.remove('cut-effect');
+                    }
+                }
+
+                clipboard.mode = 'copy';
+                clipboard.item = { name: selectedFileItemElement.dataset.name, path: [...currentPath] };
+                // Deep copy the data to ensure independent copy
+                clipboard.data = JSON.parse(JSON.stringify(selectedFileItemData));
+                updateButtonStates();
+            }
+
+            function pasteItem() {
+                if (clipboard.item === null) {
+                    showActionModal('No item in Clipboard to Paste.', false, null, 'OK'); 
+                    return;
+                }
+                if (currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)') {
+                    showActionModal('Cannot Paste into drive C:.', false, null, 'OK'); 
+                    return;
+                }
+                
+                const sourceName = clipboard.item.name;
+                const sourcePath = clipboard.item.path;
+                const sourceData = clipboard.data;
+                const currentDir = getCurrentDirectory();
+
+                let newName = sourceName;
+                let counter = 1;
+                while (currentDir[newName]) {
+                    const nameParts = sourceName.split('.');
+                    if (nameParts.length > 1 && nameParts[0] !== '') { // Has extension
+                        newName = `${nameParts.slice(0, -1).join('.')}(${counter}).${nameParts[nameParts.length - 1]}`;
+                    } else { // No extension or empty name
+                        newName = `${sourceName}(${counter})`;
+                    }
+                    counter++;
+                }
+
+                if (clipboard.mode === 'copy') {
+                    currentDir[newName] = JSON.parse(JSON.stringify(sourceData)); // Deep copy
+                    showActionModal(`Copied "${sourceName}" to "${newName}".`, false, null, 'OK'); 
+                } else if (clipboard.mode === 'cut') {
+                    // Remove from source
+                    const sourceParentDir = getDirectoryByPath(sourcePath);
+                    if (sourceParentDir && sourceParentDir[sourceName]) {
+                        delete sourceParentDir[sourceName];
+                        currentDir[newName] = sourceData; // Move the original data
+                        showActionModal(`Moved "${sourceName}" to "${newName}".`, false, null, 'OK'); 
+                    } else {
+                        showActionModal('Original item not found to move.', false, null, 'OK'); 
+                    }
+                    // Clear cut effect from original element if still exists
+                    const prevCutElement = document.querySelector(`.file-item[data-name="${sourceName}"]`);
+                    if (prevCutElement) {
+                        prevCutElement.classList.remove('cut-effect');
+                    }
+                    clipboard.mode = null;
+                    clipboard.item = null;
+                    clipboard.data = null;
+                }
+                renderFileSystemContent();
+                updateButtonStates();
+            }
+
+            function copyMoveTo(mode) {
+                if (!selectedFileItemElement || !selectedFileItemData) {
+                    showActionModal(`Please select an item to ${mode === 'copy' ? 'Copy to' : 'Move to'}.`, false, null, 'OK'); 
+                    return;
+                }
+                if (mode === 'move' && (selectedFileItemData.isSystemDrive || (currentPath.length === 2 && currentPath[1] === 'Local Disk (C:)'))) {
+                    showActionModal('Cannot move items related to drive C:.', false, null, 'OK'); 
+                    return;
+                }
+
+                const itemName = selectedFileItemElement.dataset.name;
+                const itemData = selectedFileItemData;
+                const sourcePath = [...currentPath]; // Path of the item being moved/copied
+
+                showActionModal(`Enter destination path (e.g., C:\\Users\\Student or D:\\Photos) for "${itemName}":`, true, (destinationPathStr) => { 
+                    if (!destinationPathStr) {
+                        return; // User cancelled or entered empty
+                    }
+
+                    // Simple path parsing: "C:\Users\Student" -> ["This PC", "Local Disk (C:)", "Users", "Student"]
+                    // Assumes paths always start with a drive letter
+                    let destPathSegments = ['This PC'];
+                    const parts = destinationPathStr.split(/\\|\//).filter(p => p); // Split by \ or / and remove empty
+                    
+                    if (parts.length === 0) {
+                        showActionModal('Invalid destination path.', false, null, 'OK'); 
+                        return;
+                    }
+
+                    // Handle drive letter (e.g., C: -> Local Disk (C:))
+                    const driveMap = {
+                        'C:': 'Local Disk (C:)',
+                        'D:': 'Data (D:)',
+                        'E:': 'USB Drive (E:)'
+                    };
+                    const firstPart = parts[0].toUpperCase();
+                    if (driveMap[firstPart]) {
+                        destPathSegments.push(driveMap[firstPart]);
+                        destPathSegments = destPathSegments.concat(parts.slice(1));
+                    } else {
+                        showActionModal('Destination path must start with a drive (C:, D:, E:).', false, null, 'OK'); 
+                        return;
+                    }
+
+                    // Prevent copying/moving into C: drive
+                    if (destPathSegments[1] === 'Local Disk (C:)') {
+                        showActionModal('Cannot copy/move into drive C:.', false, null, 'OK'); 
+                        return;
+                    }
+
+                    const destinationDir = getDirectoryByPath(destPathSegments);
+
+                    if (!destinationDir) {
+                        showActionModal('Destination path does not exist or is not a folder.', false, null, 'OK'); 
+                        return;
+                    }
+
+                    if (destinationDir[itemName]) {
+                        showActionModal(`Item "${itemName}" already exists at the destination path.`, false, null, 'OK'); 
+                        return;
+                    }
+
+                    // Prevent copying/moving to self or child of self
+                    const fullSourcePath = [...sourcePath, itemName];
+                    if (JSON.stringify(fullSourcePath) === JSON.stringify(destPathSegments) || 
+                        JSON.stringify(destPathSegments).startsWith(JSON.stringify(fullSourcePath))) {
+                        showActionModal('Cannot copy/move an item to itself or its child folder.', false, null, 'OK'); 
+                        return;
+                    }
+
+                    if (mode === 'copy') {
+                        destinationDir[itemName] = JSON.parse(JSON.stringify(itemData)); // Deep copy
+                        showActionModal(`Copied "${itemName}" to "${destinationPathStr}".`, false, null, 'OK'); 
+                    } else { // mode === 'move'
+                        const sourceParentDir = getDirectoryByPath(sourcePath);
+                        if (sourceParentDir && sourceParentDir[itemName]) {
+                            delete sourceParentDir[itemName];
+                            destinationDir[itemName] = itemData; // Move the original data
+                            showActionModal(`Moved "${itemName}" to "${destinationPathStr}".`, false, null, 'OK'); 
+                        } else {
+                            showActionModal('Original item not found to move.', false, null, 'OK'); 
+                        }
+                    }
+                    renderFileSystemContent(); // Re-render current view
+                    selectedFileItemElement = null; // Clear selection
+                    selectedFileItemData = null;
+                    updateButtonStates();
+                }, 'Execute', 'Cancel'); 
+            }
+
+
+            // --- Event Listeners for Home Actions Row & Context Menu ---
+            homeNewFolder.addEventListener('click', () => { hideHomeActionsRow(); addNewItem('folder'); });
+            homeNewItem.addEventListener('click', () => { hideHomeActionsRow(); addNewItem('file'); }); 
+            homeCut.addEventListener('click', () => { hideHomeActionsRow(); cutSelectedItem(); });
+            homeCopy.addEventListener('click', () => { hideHomeActionsRow(); copySelectedItem(); });
+            homePaste.addEventListener('click', () => { hideHomeActionsRow(); pasteItem(); });
+            homeRename.addEventListener('click', () => { hideHomeActionsRow(); renameSelectedItem(); });
+            homeDelete.addEventListener('click', () => { hideHomeActionsRow(); deleteSelectedItem(); });
+            homeCopyTo.addEventListener('click', () => { hideHomeActionsRow(); copyMoveTo('copy'); });
+            homeMoveTo.addEventListener('click', () => { hideHomeActionsRow(); copyMoveTo('move'); });
+
+            // Context menu listeners (already existing, just ensure they call hideContextMenu)
+            contextOpen.addEventListener('click', () => {
+                hideContextMenu();
+                if (selectedFileItemElement && selectedFileItemData.isSystemDrive) {
+                    showActionModal(
+                        "Các thao tác không đúng trên ổ đĩa C có thể dẫn đến việc lỗi phần mềm và máy tính có thể sẽ không hoạt động được!",
+                        false,
+                        null,
+                        'Đã hiểu',
+                        'Đóng'
+                    );
+                    return;
+                }
+                if (selectedFileItemElement && (selectedFileItemData.type === 'folder' || selectedFileItemData.type === 'drive' || selectedFileItemData.type === 'root')) {
+                    navigateTo(selectedFileItemElement.dataset.name);
+                } else if (selectedFileItemElement && selectedFileItemData.type === 'file') {
+                    showActionModal(`Bạn đã mở tập tin "${selectedFileItemElement.dataset.name}"`, false, null, 'OK');
+                }
+            });
+            contextNewFolder.addEventListener('click', () => { hideContextMenu(); addNewItem('folder'); });
+            contextNewItem.addEventListener('click', () => { hideContextMenu(); addNewItem('file'); }); 
+            contextCut.addEventListener('click', () => { hideContextMenu(); cutSelectedItem(); });
+            contextCopy.addEventListener('click', () => { hideContextMenu(); copySelectedItem(); });
+            contextPaste.addEventListener('click', () => { hideContextMenu(); pasteItem(); });
+            contextRename.addEventListener('click', () => { hideContextMenu(); renameSelectedItem(); });
+            contextDelete.addEventListener('click', () => { hideContextMenu(); deleteSelectedItem(); });
+            contextCopyTo.addEventListener('click', () => { hideContextMenu(); copyMoveTo('copy'); });
+            contextMoveTo.addEventListener('click', () => { hideContextMenu(); copyMoveTo('move'); });
+
+
+            // --- Home Button Logic ---
+            homeButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent click from propagating to document
+                homeActionsRow.classList.toggle('show');
+                if (homeActionsRow.classList.contains('show')) {
+                    updateButtonStates(); // Update states when row opens
+                }
+            });
+
+            // Hide Home Actions Row when clicking anywhere else on the app modal content
+            appWindowContent.addEventListener('click', (event) => {
+                hideContextMenu(); // Always hide context menu
+                // Hide Home actions row if click is outside of it and not on the home button itself
+                if (homeActionsRow.classList.contains('show') && !homeActionsRow.contains(event.target) && event.target !== homeButton) {
+                    homeActionsRow.classList.remove('show');
+                }
+
+                // If clicking on empty space, deselect any item
+                if (event.target === fileListContainer || event.target === appWindowContent) {
+                    if (selectedFileItemElement) {
+                        selectedFileItemElement.classList.remove('selected');
+                        selectedFileItemElement = null;
+                        selectedFileItemData = null;
+                        updateButtonStates();
+                    }
+                }
+            });
+
+            // Hide Home Actions Row on right-click as well
+            appWindowContent.addEventListener('contextmenu', (event) => {
+                event.preventDefault(); // Prevent default browser context menu
+                event.stopPropagation(); // Prevent propagating to document
+                hideHomeActionsRow(); // Hide Home actions row on right-click
+                // If right-clicking on empty space, deselect any item
+                if (event.target === fileListContainer || event.target === appWindowContent) {
+                    if (selectedFileItemElement) {
+                        selectedFileItemElement.classList.remove('selected');
+                        selectedFileItemElement = null;
+                        selectedFileItemData = null;
+                        updateButtonStates();
+                    }
+                    showContextMenu(event.clientX, event.clientY, null); // Pass null for no selected item
+                } else { // Right-clicking on an item
+                    // Selection is already handled by item's contextmenu listener
+                }
+            });
+
+            function hideHomeActionsRow() {
+                homeActionsRow.classList.remove('show');
+            }
+
+            // --- Back Button Listener (remains separate) ---
+            backButton.addEventListener('click', goBack);
+
+            // --- Generic App Window Functionality ---
+            function openAppWindow(appName) {
+                appWindowTitle.textContent = appName;
+                
+                // Reset content visibility for all app types
+                fileExplorerRibbon.classList.add('hidden');
+                fileExplorerBreadcrumbs.classList.add('hidden');
+                fileListContainer.classList.add('hidden');
+                appMessageContent.classList.add('hidden');
+
+                // Reset maximize state when opening a new app window
+                if (isMaximized) {
+                    restoreWindow();
+                }
+                
+                // Reset dragging offsets for new window open
+                xOffset = 0;
+                yOffset = 0;
+                // Set initial position to be slightly offset from top-left to appear centered
+                appModalWindow.style.left = '2rem';
+                appModalWindow.style.top = '2rem';
+                setTranslate(0, 0, appModalWindow);
+
+
+                if (appName === "This PC") {
+                    // Show file explorer elements
+                    fileExplorerRibbon.classList.remove('hidden');
+                    fileExplorerBreadcrumbs.classList.remove('hidden');
+                    fileListContainer.classList.remove('hidden');
+                    currentPath = ['This PC']; // Reset path to root of file system
+                    renderFileSystemContent();
+                } 
+				else if (appName === "Word") {
+					appMessageContent.classList.remove('hidden');
+					appMessageContent.innerHTML = `
+						<iframe src="Word.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					`;}
+				else if (appName === "PowerPoint") {
+					appMessageContent.classList.remove('hidden');
+					appMessageContent.innerHTML = `
+						<iframe src="PowerPoint.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					`;}
+				else if (appName === "Scratch") {
+				appMessageContent.classList.remove('hidden');
+				appMessageContent.innerHTML = `
+					<iframe src="tdtScratch.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+				`;}
+				else if (appName === "Mouse Skills") {
+				appMessageContent.classList.remove('hidden');
+				appMessageContent.innerHTML = `
+					<iframe src="MouseSkills.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+				`;}
+				else if (appName === "Rapid Typing") {
+				appMessageContent.classList.remove('hidden');
+				appMessageContent.innerHTML = `
+					<iframe src="Typing.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+				`;}
+				else if (appName === "Paint") {
+				appMessageContent.classList.remove('hidden');
+				appMessageContent.innerHTML = `
+					<iframe src="paint.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+				`;}
+				else if (appName === "Trình Duyệt Web") {
+				appMessageContent.classList.remove('hidden');
+				appMessageContent.innerHTML = `
+					<iframe src="corom.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+				`;}
+				else {
+                    // Show generic app message for Word, PowerPoint, Scratch, and any other app
+                    appMessageContent.classList.remove('hidden');
+                    appMessageContent.innerHTML = `
+                        <p>Bạn đã mở phần mềm "${appName}"</p>
+                    `;
+                }
+                
+                appModalOverlay.classList.add('show');
+                // Close Start Menu if open
+                startMenu.classList.remove('show');
+                startButton.classList.remove('active');
+                powerMenuOptions.classList.remove('show'); // Hide power options
+            }
+
+            // Close button functionality for app window
+            appCloseButton.addEventListener('click', () => {
+                appModalOverlay.classList.remove('show');
+                hideContextMenu(); // Ensure context menu is hidden when closing app window
+                hideHomeActionsRow(); // Ensure Home actions row is hidden
+                selectedFileItemElement = null; // Clear selection
+                selectedFileItemData = null;
+                updateButtonStates();
+                // Reset maximize state when closing
+                if (isMaximized) {
+                    restoreWindow();
+                }
+            });
+
+            // Removed: Close modal when clicking outside the window
+            // appModalOverlay.addEventListener('click', (event) => {
+            //     if (event.target === appModalOverlay) {
+            //         appModalOverlay.classList.remove('show');
+            //         hideContextMenu(); // Ensure context menu is hidden when clicking outside
+            //         hideHomeActionsRow(); // Ensure Home actions row is hidden
+            //         selectedFileItemElement = null; // Clear selection
+            //         selectedFileItemData = null;
+            //         updateButtonStates();
+            //         // Reset maximize state when clicking outside
+            //         if (isMaximized) {
+            //             restoreWindow();
+            //         }
+            //     }
+            // });
+
+            // Basic window dragging functionality for generic app modal
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            const windowHeader = appModalWindow.querySelector('.window-header');
+
+            windowHeader.addEventListener('mousedown', dragStart);
+            appModalWindow.addEventListener('mouseup', dragEnd);
+            appModalWindow.addEventListener('mousemove', drag);
+
+            function dragStart(e) {
+                if (isMaximized) return; // Disable dragging when maximized
+
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+
+                if (e.target === windowHeader || e.target.closest('.window-header') === windowHeader) {
+                    isDragging = true;
+                    windowHeader.style.cursor = 'grabbing';
+                }
+            }
+
+            function dragEnd(e) {
+                isDragging = false;
+                if (!isMaximized) { // Only restore cursor if not maximized
+                    windowHeader.style.cursor = 'grab';
+                }
+            }
+
+            function drag(e) {
+                if (isDragging && !isMaximized) { // Only drag if not maximized
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+
+                    xOffset = currentX;
+                    yOffset = currentY;
+
+                    setTranslate(currentX, currentY, appModalWindow);
+                }
+            }
+
+            function setTranslate(xPos, yPos, el) {
+                el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+            }
+
+            // --- Maximize/Restore Functionality ---
+            maximizeRestoreButton.addEventListener('click', () => {
+                if (isMaximized) {
+                    restoreWindow();
+                } else {
+                    maximizeWindow();
+                }
+            });
+
+            function maximizeWindow() {
+                // Save current position and size before maximizing
+                originalWindowRect.x = xOffset;
+                originalWindowRect.y = yOffset;
+                originalWindowRect.width = appModalWindow.offsetWidth;
+                originalWindowRect.height = appModalWindow.offsetHeight;
+
+                appModalWindow.classList.add('maximized');
+                maximizeRestoreButton.textContent = '❐'; // Restore icon
+                maximizeRestoreButton.title = 'Restore Down';
+                isMaximized = true;
+                windowHeader.style.cursor = 'default'; // No dragging when maximized
+            }
+
+            function restoreWindow() {
+                appModalWindow.classList.remove('maximized');
+                // Restore original position and size
+                xOffset = originalWindowRect.x;
+                yOffset = originalWindowRect.y;
+                setTranslate(xOffset, yOffset, appModalWindow); // Apply saved transform
+
+                // Note: width/height are handled by CSS default values.
+                // If you had dynamic width/height, you'd set them here.
+                
+                maximizeRestoreButton.textContent = '□'; // Maximize icon
+                maximizeRestoreButton.title = 'Maximize';
+                isMaximized = false;
+                windowHeader.style.cursor = 'grab'; // Re-enable dragging
+            }
+
+
+            // --- Desktop Icons Double-Click Functionality ---
+            icons.forEach(icon => {
+                icon.addEventListener('click', () => {
+                    const appName = icon.dataset.appName; // Get app name from data attribute
+                    if (!clickTimers[appName]) {
+                        clickTimers[appName] = setTimeout(() => {
+                            clickTimers[appName] = null; // Reset timer after single click
+                        }, DBL_CLICK_THRESHOLD);
+                    } else {
+                        clearTimeout(clickTimers[appName]);
+                        clickTimers[appName] = null;
+                        openAppWindow(appName); // Double click detected
+                    }
+                });
+            });
+
+            // --- Start Menu Functionality ---
+            startButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent click from propagating to document
+                startMenu.classList.toggle('show');
+                startButton.classList.toggle('active');
+                // Hide power options if start menu is closed
+                if (!startMenu.classList.contains('show')) {
+                    powerMenuOptions.classList.remove('show');
+                }
+                // Close any open app window
+                appModalOverlay.classList.remove('show');
+                if (isMaximized) { // Ensure window restores if Start Menu is opened while an app is maximized
+                    restoreWindow();
+                }
+            });
+
+            // Hide Start Menu when clicking anywhere else on the desktop
+            document.addEventListener('click', (event) => {
+                if (startMenu.classList.contains('show') && !startMenu.contains(event.target) && event.target !== startButton) {
+                    startMenu.classList.remove('show');
+                    startButton.classList.remove('active');
+                    powerMenuOptions.classList.remove('show'); // Hide power options
+                }
+            });
+
+            // --- Power Options Functionality ---
+            powerButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent click from propagating to document/start menu
+                powerMenuOptions.classList.toggle('show');
+            });
+
+            // --- Shutdown Functionality ---
+            shutdownButton.addEventListener('click', () => {
+                startMenu.classList.remove('show'); // Hide start menu
+                startButton.classList.remove('active');
+                powerMenuOptions.classList.remove('show'); // Hide power options
+                appModalOverlay.classList.remove('show'); // Hide any open windows
+                if (isMaximized) { // Ensure window restores if it was maximized before shutdown
+                    restoreWindow();
+                }
+
+                // Start shutdown effect
+                shutdownOverlay.classList.add('active');
+                desktopBackground.style.opacity = '0'; // Fade out desktop background
+
+                setTimeout(() => {
+                    // After a delay, attempt to close the window
+                    window.close();
+                    // Fallback message if window.close() fails (e.g., due to browser security)
+                    setTimeout(() => {
+                        shutdownOverlay.innerHTML = '<p>Không thể đóng tab tự động. Vui lòng đóng thủ công.</p>';
+                    }, 1000); // Show message after 1 second if not closed
+                }, 5000); // 5 seconds for the shutdown process
+            });
+
+            // --- Fullscreen functions ---
+            function enterFullscreen() {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+                    document.documentElement.msRequestFullscreen();
+                }
+            }
+
+            function exitFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { /* Firefox */
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE/Edge */
+                    document.documentElement.msExitFullscreen();
+                }
+            }
+
+            // Event listener for the new fullscreen button
+            enterFullscreenButton.addEventListener('click', () => {
+                enterFullscreen();
+            });
+
+            // Event listener for the new fullscreen close button
+            fullscreenCloseButton.addEventListener('click', () => {
+                fullscreenPromptOverlay.classList.remove('show'); // Hide the prompt
+            });
+
+            // Hide the fullscreen prompt once fullscreen is entered or exited
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    // Fullscreen entered, hide the prompt
+                    fullscreenPromptOverlay.classList.remove('show');
+                } else {
+                    // Fullscreen exited, ensure it's hidden
+                    fullscreenPromptOverlay.classList.remove('show');
+                }
+            });
+
+            // Show fullscreen prompt on page load
+            fullscreenPromptOverlay.classList.add('show');
+        });
+    </script>
+</body>
+</html>

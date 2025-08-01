@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerPoint Lite cho Học Sinh Tiểu Học</title>
+    <!-- Tailwind CSS CDN để tạo kiểu nhanh chóng và đẹp mắt -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-width: 100vw;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .menu-bar {
+            background-color: #e0e0e0;
+            border-bottom: 1px solid #d0d0d0;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .tab-header {
+            display: flex;
+            padding: 0 20px;
+            border-bottom: 1px solid #d0d0d0;
+        }
+        .tab-button {
+            padding: 10px 15px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: #555;
+            transition: all 0.2s ease-in-out;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button:hover {
+            color: #333;
+            background-color: #f0f0f0;
+        }
+        .tab-button.active {
+            color: #4a90e2;
+            border-bottom-color: #4a90e2;
+            background-color: #f9f9f9;
+        }
+        .tab-content-container {
+            padding: 12px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .menu-bar button,
+        .menu-bar select,
+        .menu-bar input[type="color"] {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-size: 0.9rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 38px;
+        }
+        .menu-bar button:hover,
+        .menu-bar select:hover {
+            background-color: #e9e9e9;
+            border-color: #bbb;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .menu-bar button:active {
+            background-color: #dcdcdc;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .menu-bar button.active {
+            background-color: #c0c0c0;
+            border-color: #a0a0a0;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .slide-area-wrapper {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+            flex-grow: 1;
+            height: calc(100vh - 120px);
+        }
+        .slide-preview-container {
+            width: 180px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+            overflow-y: auto;
+            max-height: calc(100vh - 120px);
+        }
+        .slide-preview {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #888;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+        .slide-preview:hover {
+            border-color: #a0a0a0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .slide-preview.active {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+        }
+        .slide-preview-content {
+            transform: scale(0.2);
+            transform-origin: top left;
+            width: 500%;
+            height: 500%;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .slide-preview-content .slide-title-area,
+        .slide-preview-content .slide-content-area {
+            border: 1px dashed #eee;
+            margin-bottom: 5px;
+            padding: 5px;
+            min-height: 30px;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+        .slide-preview-content .slide-title-area {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .slide-preview-content .slide-content-area {
+            flex-grow: 1;
+            font-size: 1.2rem;
+        }
+
+        /* --- Cải tiến bố cục --- */
+        .slide-content {
+            flex-grow: 1;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-size: 1.2rem;
+            line-height: 1.6;
+            overflow: hidden;
+            position: relative;
+
+            /* Các thuộc tính Flexbox mới */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .slide-content:focus-within {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        .slide-title-area {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #333;
+            min-height: 80px;
+            padding: 10px 15px;
+            border: 1px dashed #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+        }
+        .slide-content-area {
+            /* Cập nhật để nó chiếm hết phần còn lại của không gian */
+            flex-grow: 1;
+            font-size: 1.2rem;
+            color: #555;
+            padding: 15px;
+            border: 1px dashed #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            position: relative;
+            overflow-y: auto;
+        }
+        
+        .slide-content-area img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling cho khung ảnh có thể kéo thả */
+        .image-container {
+            position: absolute;
+            cursor: grab;
+            border: 2px dashed transparent;
+            box-sizing: content-box;
+            transition: border-color 0.2s ease-in-out;
+            touch-action: none;
+        }
+
+        .image-container:hover,
+        .image-container.active {
+            border-color: #4a90e2;
+            z-index: 10;
+        }
+        
+        .image-container img {
+            pointer-events: none;
+        }
+        
+        /* Styling cho tay cầm thay đổi kích thước */
+        .resizer {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            right: -6px;
+            bottom: -6px;
+            background: #4a90e2;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            cursor: se-resize;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .image-container:hover .resizer,
+        .image-container.active .resizer {
+            display: block;
+        }
+
+        /* Placeholder styling */
+        [contenteditable][data-placeholder]:empty:before {
+            content: attr(data-placeholder);
+            color: #aaa;
+            pointer-events: none;
+            display: block;
+        }
+        [contenteditable][data-placeholder]:focus:empty:before {
+            content: '';
+        }
+
+        .slide-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding-bottom: 10px;
+        }
+        .slide-navigation button {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .slide-navigation button:hover {
+            background-color: #e0e0e0;
+        }
+        .slide-navigation button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        input[type="color"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 38px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        input[type="color"]::-moz-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type="color"]::-moz-color-swatch {
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        /* Icon styling */
+        .icon {
+            font-size: 1.2rem;
+        }
+        /* Hide file input visually */
+        .hidden-file-input {
+            display: none;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .slide-area-wrapper {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .slide-preview-container {
+                width: 100%;
+                max-height: 150px;
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 10px 0;
+            }
+            .slide-preview {
+                min-width: 120px;
+                margin-right: 10px;
+            }
+            .menu-bar .tab-header {
+                padding: 0 10px;
+            }
+            .menu-bar .tab-button {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+            .tab-content-container {
+                padding: 10px;
+                gap: 8px;
+            }
+            .menu-bar button,
+            .menu-bar select,
+            .menu-bar input[type="color"] {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+                min-width: 35px;
+                min-height: 35px;
+            }
+            .slide-content {
+                padding: 20px;
+                font-size: 1rem;
+                gap: 15px;
+            }
+            .slide-title-area {
+                font-size: 1.8rem;
+                min-height: 60px;
+            }
+            .slide-content-area {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-bar">
+            <div class="tab-header" id="tabHeader">
+                <button class="tab-button" data-tab="file">File</button>
+                <button class="tab-button active" data-tab="home">Home</button>
+                <button class="tab-button" data-tab="insert">Insert</button>
+            </div>
+            <div class="tab-content-container">
+                <!-- File Tab Content -->
+                <div id="fileTabContent" class="tab-content">
+                    <button id="saveBtn" class="rounded-lg shadow-sm bg-blue-500 text-white hover:bg-blue-600" title="Lưu">
+                        <svg class="icon w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 2a1 1 0 00-1 1v3a1 1 0 002 0V3a1 1 0 00-1-1zM5 5a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-3V3a3 3 0 00-3-3H9a3 3 0 00-3 3v2H5zm5 5a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        Save
+                    </button>
+                    <input type="file" id="openFile" accept=".json" class="hidden-file-input">
+                    <button id="openBtn" class="rounded-lg shadow-sm bg-purple-500 text-white hover:bg-purple-600" title="Mở file đã lưu">
+                        <svg class="icon w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                        Open
+                    </button>
+                </div>
+
+                <!-- Home Tab Content -->
+                <div id="homeTabContent" class="tab-content active">
+                    <!-- Chọn Font chữ -->
+                    <select id="fontFamily" class="rounded-lg shadow-sm">
+                        <option value="Arial">Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Inter">Inter (Mặc định)</option>
+                    </select>
+
+                    <!-- Chọn Cỡ chữ -->
+                    <select id="fontSize" class="rounded-lg shadow-sm">
+                        <option value="1">8px</option>
+                        <option value="2">10px</option>
+                        <option value="3">12px</option>
+                        <option value="4" selected>14px</option>
+                        <option value="5">18px</option>
+                        <option value="6">24px</option>
+                        <option value="7">36px</option>
+                    </select>
+
+                    <!-- Chọn Màu chữ -->
+                    <input type="color" id="fontColor" value="#000000" class="rounded-lg shadow-sm">
+
+                    <!-- In đậm -->
+                    <button id="boldBtn" class="font-bold rounded-lg shadow-sm" title="In đậm">B</button>
+                    <!-- In nghiêng -->
+                    <button id="italicBtn" class="italic rounded-lg shadow-sm" title="In nghiêng">I</button>
+                    <!-- Gạch chân -->
+                    <button id="underlineBtn" class="underline rounded-lg shadow-sm" title="Gạch chân">U</button>
+
+                    <!-- Cắt -->
+                    <button id="cutBtn" class="rounded-lg shadow-sm" title="Cắt">
+                        <svg class="icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zM6 3a2 2 0 012-2h2a2 2 0 012 2v2h4.586A1 1 0 0119 6.414V17a2 2 0 01-2 2H7a2 2 0 01-2-2V6.414A1 1 0 016.414 5H11V3zm-1 9a1 1 0 100 2h10a1 1 0 100-2H5z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <!-- Sao chép -->
+                    <button id="copyBtn" class="rounded-lg shadow-sm" title="Sao chép">
+                        <svg class="icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
+                    </button>
+                    <!-- Dán -->
+                    <button id="pasteBtn" class="rounded-lg shadow-sm" title="Dán">
+                        <svg class="icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1zM6 3a2 2 0 012-2h2a2 2 0 012 2v2h4.586A1 1 0 0119 6.414V17a2 2 0 01-2 2H7a2 2 0 01-2-2V6.414A1 1 0 016.414 5H11V3zm-1 9a1 1 0 100 2h10a1 1 0 100-2H5z" clip-rule="evenodd"></path></path></svg>
+                    </button>
+
+                    <!-- Thêm Slide mới -->
+                    <button id="newSlideBtn" class="rounded-lg shadow-sm bg-blue-500 text-white hover:bg-blue-600" title="Thêm Slide mới">
+                        <svg class="icon w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        New Slide
+                    </button>
+                </div>
+
+                <!-- Insert Tab Content -->
+                <div id="insertTabContent" class="tab-content">
+                    <!-- Thêm ảnh từ File -->
+                    <button id="insertImageFileBtn" class="rounded-lg shadow-sm bg-green-500 text-white hover:bg-green-600" title="Thêm ảnh từ máy tính">
+                        <svg class="icon w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-4 3 3 5-5V15z"></path></svg>
+                        Pictures
+                    </button>
+                    <!-- Thêm ảnh từ URL -->
+                    <button id="insertImageUrlBtn" class="rounded-lg shadow-sm bg-green-500 text-white hover:bg-green-600" title="Thêm ảnh từ URL">
+                        <svg class="icon w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3.25 3.25a2 2 0 01-2.828 0L9 9.043l-1.793 1.793a1 1 0 01-1.414-1.414l2.5-2.5a2 2 0 012.828 0l.964.964a2 2 0 010 2.828l-3.25 3.25a2 2 0 01-2.828 0L3 12.043a1 1 0 011.414-1.414l2.5 2.5a2 2 0 002.828 0l.964-.964a2 2 0 000-2.828l3.25-3.25z" clip-rule="evenodd"></path></svg>
+                        Online Pictures
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-area-wrapper">
+            <!-- Khu vực xem trước slide -->
+            <div class="slide-preview-container" id="slidePreviewContainer">
+                <!-- Các bản xem trước slide sẽ được thêm vào đây bằng JS -->
+            </div>
+
+            <!-- Khu vực nội dung slide chính -->
+            <div id="slideContent" class="slide-content">
+                <!-- Nội dung slide sẽ được hiển thị ở đây -->
+            </div>
+        </div>
+
+        <!-- Điều hướng slide -->
+        <div class="slide-navigation">
+            <button id="prevSlideBtn" class="rounded-lg shadow-sm" disabled>Trước</button>
+            <span id="slideCounter" class="text-lg font-medium text-gray-700">1 / 1</span>
+            <button id="nextSlideBtn" class="rounded-lg shadow-sm" disabled>Sau</button>
+        </div>
+    </div>
+
+    <script>
+        // Lấy các phần tử DOM
+        const slideContent = document.getElementById('slideContent');
+        const slidePreviewContainer = document.getElementById('slidePreviewContainer');
+        const fontFamilySelect = document.getElementById('fontFamily');
+        const fontSizeSelect = document.getElementById('fontSize');
+        const fontColorInput = document.getElementById('fontColor');
+        const boldBtn = document.getElementById('boldBtn');
+        const italicBtn = document.getElementById('italicBtn');
+        const underlineBtn = document.getElementById('underlineBtn');
+        const cutBtn = document.getElementById('cutBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const pasteBtn = document.getElementById('pasteBtn');
+        const newSlideBtn = document.getElementById('newSlideBtn');
+        const insertImageFileBtn = document.getElementById('insertImageFileBtn');
+        const insertImageUrlBtn = document.getElementById('insertImageUrlBtn');
+        const prevSlideBtn = document.getElementById('prevSlideBtn');
+        const nextSlideBtn = document.getElementById('nextSlideBtn');
+        const slideCounter = document.getElementById('slideCounter');
+        const tabHeader = document.getElementById('tabHeader');
+        const saveBtn = document.getElementById('saveBtn');
+        const openBtn = document.getElementById('openBtn');
+        const openFile = document.getElementById('openFile');
+
+        // Mảng để lưu trữ nội dung của các slide
+        let slides = [];
+        // Chỉ mục của slide hiện tại đang được hiển thị
+        let currentSlideIndex = 0;
+
+        /**
+         * Hàm tạo một slide trống với cấu trúc dữ liệu mới.
+         * @returns {object} Một đối tượng slide trống.
+         */
+        function createEmptySlide() {
+            return {
+                title: '',
+                text: '',
+                images: []
+            };
+        }
+
+        /**
+         * Hàm khởi tạo ứng dụng.
+         * Thêm slide đầu tiên và cập nhật giao diện.
+         */
+        function initializeApp() {
+            slides.push(createEmptySlide());
+            updateUI();
+            updateSlidePreviews();
+            showTab('home');
+        }
+
+        /**
+         * Cập nhật giao diện người dùng:
+         * - Hiển thị nội dung slide hiện tại.
+         * - Cập nhật bộ đếm slide.
+         * - Bật/tắt các nút điều hướng slide.
+         */
+        function updateUI() {
+            // Xóa nội dung cũ
+            slideContent.innerHTML = '';
+
+            const currentSlideData = slides[currentSlideIndex];
+
+            // Tạo và hiển thị khu vực tiêu đề
+            const titleArea = document.createElement('div');
+            titleArea.classList.add('slide-title-area');
+            titleArea.setAttribute('contenteditable', 'true');
+            titleArea.setAttribute('data-placeholder', 'Nhập tiêu đề slide...');
+            titleArea.innerHTML = currentSlideData.title;
+            slideContent.appendChild(titleArea);
+
+            // Tạo và hiển thị khu vực nội dung
+            const contentArea = document.createElement('div');
+            contentArea.id = 'slideContentArea';
+            contentArea.classList.add('slide-content-area');
+            contentArea.setAttribute('contenteditable', 'true');
+            contentArea.setAttribute('data-placeholder', 'Nhập nội dung slide...');
+            contentArea.innerHTML = currentSlideData.text;
+            slideContent.appendChild(contentArea);
+
+            // Thêm các ảnh từ dữ liệu đã lưu
+            currentSlideData.images.forEach(imageData => {
+                const container = createImageContainer(imageData);
+                contentArea.appendChild(container);
+            });
+
+            slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+            prevSlideBtn.disabled = currentSlideIndex === 0;
+            nextSlideBtn.disabled = currentSlideIndex === slides.length - 1;
+            updateFormattingButtons();
+            
+            // Gắn lại các event listener cho các ảnh mới
+            setupImageInteraction();
+        }
+
+        /**
+         * Cập nhật trạng thái "active" của các nút định dạng (Bold, Italic, Underline)
+         * dựa trên định dạng của văn bản được chọn.
+         */
+        function updateFormattingButtons() {
+            boldBtn.classList.toggle('active', document.queryCommandState('bold'));
+            italicBtn.classList.toggle('active', document.queryCommandState('italic'));
+            underlineBtn.classList.toggle('active', document.queryCommandState('underline'));
+        }
+
+        /**
+         * Lưu nội dung của slide hiện tại vào mảng `slides`.
+         */
+        function saveCurrentSlide() {
+            const currentTitleArea = slideContent.querySelector('.slide-title-area');
+            const currentContentArea = slideContent.querySelector('#slideContentArea');
+
+            if (currentTitleArea && currentContentArea) {
+                // Lưu văn bản
+                slides[currentSlideIndex].title = currentTitleArea.innerHTML;
+                slides[currentSlideIndex].text = currentContentArea.innerHTML.replace(/<div class="image-container".*?<\/div>/g, '');
+
+                // Lấy thông tin các ảnh đang có và lưu vào mảng
+                slides[currentSlideIndex].images = [];
+                const imageContainers = currentContentArea.querySelectorAll('.image-container');
+                imageContainers.forEach(container => {
+                    slides[currentSlideIndex].images.push({
+                        src: container.querySelector('img').src,
+                        left: container.style.left,
+                        top: container.style.top,
+                        width: container.style.width,
+                        height: container.style.height
+                    });
+                });
+            }
+        }
+
+        /**
+         * Chuyển đến slide tiếp theo.
+         */
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                saveCurrentSlide();
+                currentSlideIndex++;
+                updateUI();
+                updateSlidePreviews();
+            }
+        }
+
+        /**
+         * Chuyển đến slide trước đó.
+         */
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                saveCurrentSlide();
+                currentSlideIndex--;
+                updateUI();
+                updateSlidePreviews();
+            }
+        }
+
+        /**
+         * Thêm một slide mới.
+         */
+        function newSlide() {
+            saveCurrentSlide();
+            slides.push(createEmptySlide());
+            currentSlideIndex = slides.length - 1;
+            updateUI();
+            updateSlidePreviews();
+        }
+
+        /**
+         * Tạo một khung ảnh với các thuộc tính đã lưu.
+         * @param {object} imageData - Dữ liệu của ảnh.
+         * @returns {HTMLElement} Khung ảnh.
+         */
+        function createImageContainer(imageData) {
+            const container = document.createElement('div');
+            container.classList.add('image-container');
+            container.style.position = 'absolute';
+            container.style.left = imageData.left;
+            container.style.top = imageData.top;
+            container.style.width = imageData.width;
+            container.style.height = imageData.height;
+
+            const img = document.createElement('img');
+            img.src = imageData.src;
+            img.classList.add('w-full', 'h-auto', 'object-contain');
+
+            const resizer = document.createElement('div');
+            resizer.classList.add('resizer');
+
+            container.appendChild(img);
+            container.appendChild(resizer);
+            return container;
+        }
+
+        /**
+         * Chèn một hình ảnh vào slide hiện tại.
+         * @param {string} src - URL hoặc Data URL của ảnh.
+         */
+        function insertImage(src) {
+            const imageData = {
+                src: src,
+                left: '50px',
+                top: '50px',
+                width: '200px',
+                height: 'auto'
+            };
+            const container = createImageContainer(imageData);
+            const contentArea = document.getElementById('slideContentArea');
+            if (contentArea) {
+                contentArea.appendChild(container);
+                saveCurrentSlide();
+                updateSlidePreviews();
+                setupImageInteraction();
+            }
+        }
+
+        /**
+         * Chèn một hình ảnh từ URL vào slide hiện tại.
+         */
+        function insertImageFromUrl() {
+            const imageUrl = prompt("Vui lòng nhập URL của ảnh:");
+            if (imageUrl) {
+                insertImage(imageUrl);
+            }
+        }
+
+        /**
+         * Chèn một hình ảnh từ file đã chọn vào slide hiện tại.
+         */
+        function insertImageFromFile(file) {
+            if (!file) {
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                insertImage(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        /**
+         * Thiết lập chức năng kéo thả và thay đổi kích thước cho tất cả các ảnh trên slide.
+         */
+        function setupImageInteraction() {
+            const imageContainers = slideContent.querySelectorAll('.image-container');
+            imageContainers.forEach(container => {
+                let isDragging = false;
+                let isResizing = false;
+                let startX, startY, startWidth, startHeight;
+
+                // Xử lý kéo thả
+                container.addEventListener('mousedown', (e) => {
+                    if (e.target.classList.contains('resizer')) {
+                        return;
+                    }
+                    e.preventDefault();
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    container.classList.add('active');
+                });
+                
+                // Xử lý thay đổi kích thước
+                const resizer = container.querySelector('.resizer');
+                resizer.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    isResizing = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    startWidth = parseInt(document.defaultView.getComputedStyle(container).width, 10);
+                    startHeight = parseInt(document.defaultView.getComputedStyle(container).height, 10);
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        e.preventDefault();
+                        const dx = e.clientX - startX;
+                        const dy = e.clientY - startY;
+                        const newLeft = container.offsetLeft + dx;
+                        const newTop = container.offsetTop + dy;
+                        container.style.left = `${newLeft}px`;
+                        container.style.top = `${newTop}px`;
+                        startX = e.clientX;
+                        startY = e.clientY;
+                    } else if (isResizing) {
+                        e.preventDefault();
+                        const dx = e.clientX - startX;
+                        
+                        const aspectRatio = startWidth / startHeight;
+                        let newWidth = startWidth + dx;
+                        let newHeight = newWidth / aspectRatio;
+                        
+                        if (newWidth > 50) {
+                            container.style.width = `${newWidth}px`;
+                            container.style.height = `${newHeight}px`;
+                        }
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    isResizing = false;
+                    container.classList.remove('active');
+                    saveCurrentSlide();
+                    updateSlidePreviews();
+                });
+            });
+        }
+
+        /**
+         * Cập nhật các bản xem trước slide trong thanh bên.
+         */
+        function updateSlidePreviews() {
+            slidePreviewContainer.innerHTML = '';
+            slides.forEach((slideData, index) => {
+                const previewDiv = document.createElement('div');
+                previewDiv.classList.add('slide-preview', 'relative', 'overflow-hidden');
+                if (index === currentSlideIndex) {
+                    previewDiv.classList.add('active');
+                }
+                
+                const contentWrapper = document.createElement('div');
+                contentWrapper.classList.add('slide-preview-content');
+
+                // Thêm tiêu đề
+                const titlePreview = document.createElement('div');
+                titlePreview.classList.add('slide-title-area');
+                titlePreview.innerHTML = slideData.title || 'Tiêu đề';
+                contentWrapper.appendChild(titlePreview);
+
+                // Thêm nội dung văn bản
+                const textPreview = document.createElement('div');
+                textPreview.classList.add('slide-content-area');
+                textPreview.innerHTML = slideData.text || 'Nội dung';
+                contentWrapper.appendChild(textPreview);
+
+                // Thêm ảnh vào preview
+                slideData.images.forEach(imgData => {
+                    const img = document.createElement('img');
+                    img.src = imgData.src;
+                    img.style.position = 'absolute';
+                    img.style.left = imgData.left;
+                    img.style.top = imgData.top;
+                    img.style.width = imgData.width;
+                    textPreview.appendChild(img);
+                });
+
+                previewDiv.appendChild(contentWrapper);
+
+                const slideNumber = document.createElement('span');
+                slideNumber.classList.add('absolute', 'bottom-1', 'right-2', 'text-xs', 'text-gray-500', 'bg-white', 'px-1', 'rounded');
+                slideNumber.textContent = `${index + 1}`;
+                previewDiv.appendChild(slideNumber);
+
+
+                previewDiv.addEventListener('click', () => {
+                    if (index !== currentSlideIndex) {
+                        saveCurrentSlide();
+                        currentSlideIndex = index;
+                        updateUI();
+                        updateSlidePreviews();
+                    }
+                });
+                slidePreviewContainer.appendChild(previewDiv);
+            });
+        }
+
+        /**
+         * Hiển thị tab được chỉ định và ẩn các tab khác.
+         * @param {string} tabId - ID của tab cần hiển thị (ví dụ: 'file', 'home', 'insert').
+         */
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(`${tabId}TabContent`).classList.add('active');
+            document.querySelector(`.tab-button[data-tab="${tabId}"]`).classList.add('active');
+        }
+
+        /**
+         * Lưu toàn bộ slide hiện tại dưới dạng file JSON.
+         */
+        function savePresentation() {
+            saveCurrentSlide();
+            const dataStr = JSON.stringify(slides, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'powerpoint_lite_presentation.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            displayMessageBox('Bài thuyết trình đã được lưu thành công!');
+        }
+
+        /**
+         * Mở bài thuyết trình từ file JSON đã chọn.
+         */
+        function openPresentation(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const loadedSlides = JSON.parse(e.target.result);
+                    // Đảm bảo định dạng file hợp lệ
+                    if (Array.isArray(loadedSlides) && loadedSlides.every(s => typeof s.title === 'string' && typeof s.text === 'string' && Array.isArray(s.images))) {
+                        slides = loadedSlides;
+                        currentSlideIndex = 0;
+                        updateUI();
+                        updateSlidePreviews();
+                        displayMessageBox('Bài thuyết trình đã được mở thành công!');
+                    } else {
+                        displayMessageBox('Định dạng file không hợp lệ. Vui lòng chọn file JSON của PowerPoint Lite.');
+                    }
+                } catch (error) {
+                    console.error('Lỗi khi đọc file:', error);
+                    displayMessageBox('Không thể đọc file. Vui lòng kiểm tra định dạng.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        /**
+         * Hiển thị hộp thoại thông báo tùy chỉnh.
+         * @param {string} message - Nội dung thông báo.
+         */
+        function displayMessageBox(message) {
+            const messageBox = document.createElement('div');
+            messageBox.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-gray-900', 'bg-opacity-50', 'z-50');
+            messageBox.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center">
+                    <p class="text-gray-800 text-lg mb-4">${message}</p>
+                    <button class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-600 transition-colors">
+                        OK
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(messageBox);
+            messageBox.querySelector('button').addEventListener('click', () => {
+                document.body.removeChild(messageBox);
+            });
+        }
+        
+        // --- Gắn các sự kiện cho các nút và input ---
+
+        // Xử lý chuyển đổi tab
+        tabHeader.addEventListener('click', (event) => {
+            if (event.target.classList.contains('tab-button')) {
+                const tabId = event.target.dataset.tab;
+                showTab(tabId);
+            }
+        });
+
+        // Định dạng văn bản
+        boldBtn.addEventListener('click', () => document.execCommand('bold', false, null));
+        italicBtn.addEventListener('click', () => document.execCommand('italic', false, null));
+        underlineBtn.addEventListener('click', () => document.execCommand('underline', false, null));
+
+        // Cập nhật trạng thái nút khi có sự thay đổi lựa chọn trong contenteditable
+        slideContent.addEventListener('mouseup', updateFormattingButtons);
+        slideContent.addEventListener('keyup', updateFormattingButtons);
+        slideContent.addEventListener('input', () => {
+            saveCurrentSlide();
+            updateSlidePreviews();
+        });
+
+
+        // Chọn Font chữ
+        fontFamilySelect.addEventListener('change', (event) => {
+            document.execCommand('fontName', false, event.target.value);
+        });
+
+        // Chọn Cỡ chữ
+        fontSizeSelect.addEventListener('change', (event) => {
+            document.execCommand('fontSize', false, event.target.value);
+        });
+
+        // Chọn Màu chữ
+        fontColorInput.addEventListener('input', (event) => {
+            document.execCommand('foreColor', false, event.target.value);
+        });
+
+        // Thao tác với Clipboard
+        cutBtn.addEventListener('click', () => document.execCommand('cut'));
+        copyBtn.addEventListener('click', () => document.execCommand('copy'));
+        pasteBtn.addEventListener('click', () => document.execCommand('paste'));
+
+        // Quản lý Slide
+        newSlideBtn.addEventListener('click', newSlide);
+        prevSlideBtn.addEventListener('click', prevSlide);
+        nextSlideBtn.addEventListener('click', nextSlide);
+
+        // Chức năng chèn ảnh mới
+        insertImageFileBtn.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e) => insertImageFromFile(e.target.files[0]);
+            input.click();
+        });
+        insertImageUrlBtn.addEventListener('click', insertImageFromUrl);
+
+        // Lưu và Mở file
+        saveBtn.addEventListener('click', savePresentation);
+        openBtn.addEventListener('click', () => openFile.click());
+        openFile.addEventListener('change', openPresentation);
+
+        // Khởi tạo ứng dụng khi trang tải xong
+        window.onload = initializeApp;
+    </script>
+</body>
+</html>

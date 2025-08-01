@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình duyệt Mini</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f3f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .browser-bar {
+            background-color: #ffffff;
+            padding: 8px 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        .address-bar {
+            flex-grow: 1;
+            padding: 8px 16px;
+            border: 1px solid #dadce0;
+            background-color: #e8eaed; /* Màu nền xám nhạt */
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            margin-right: 12px;
+        }
+        
+        .address-bar:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+            background-color: #ffffff; /* Đổi màu nền khi focus */
+        }
+
+        .iframe-container {
+            flex-grow: 1;
+            border: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh địa chỉ -->
+    <div class="browser-bar">
+        <!-- Ô nhập địa chỉ -->
+        <input type="text" id="address-input" class="address-bar" placeholder="Nhập địa chỉ trang web (ví dụ: google.com)...">
+    </div>
+
+    <!-- Khu vực hiển thị nội dung trang web -->
+    <iframe id="web-content" class="iframe-container" src="about:blank"></iframe>
+
+    <script>
+        // Lắng nghe sự kiện khi toàn bộ trang đã được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lấy tham chiếu đến các phần tử HTML bằng ID
+            const addressInput = document.getElementById('address-input');
+            const webContentIframe = document.getElementById('web-content');
+
+            // Xử lý sự kiện khi người dùng gõ phím trong ô địa chỉ
+            addressInput.addEventListener('keydown', (event) => {
+                // Kiểm tra xem phím được nhấn có phải là 'Enter' không
+                if (event.key === 'Enter') {
+                    // Ngăn chặn hành vi mặc định của phím Enter (ví dụ: gửi form)
+                    event.preventDefault(); 
+                    
+                    let url = addressInput.value.trim();
+
+                    // Thêm tiền tố 'https://' nếu người dùng chưa nhập
+                    if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                        url = 'https://' + url;
+                    }
+
+                    // Tải trang web vào iframe nếu URL hợp lệ
+                    if (url) {
+                        webContentIframe.src = url;
+                    }
+                }
+            });
+            // Các nút điều hướng (Quay lại, Tiến tới, Tải lại) đã bị xóa
+            // vì lý do bảo mật của trình duyệt (Same-Origin Policy).
+            // Chính sách này ngăn không cho trang cha truy cập vào nội dung
+            // của iframe nếu chúng có nguồn gốc khác nhau.
+            // Để tải lại trang, bạn chỉ cần nhập lại địa chỉ và nhấn Enter.
+        });
+    </script>
+
+</body>
+</html>
