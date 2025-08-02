@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học tiếng Anh cùng Duolingo</title>
+    <!-- Tải Tailwind CSS để tạo giao diện nhanh chóng và đẹp mắt -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        
+        /* Đảm bảo ứng dụng hiển thị toàn màn hình */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f8d381, #f9a8d4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 20px;
+            overflow-y: auto; /* Cho phép cuộn khi nội dung dài hơn màn hình */
+            box-sizing: border-box;
+        }
+        .game-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 2rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+        .progress-bar {
+            height: 12px;
+            background-color: #e5e5e5;
+            border-radius: 9999px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background-color: #6ee7b7;
+            transition: width 0.5s ease-in-out;
+        }
+        .check-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            background-color: #60a5fa;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px #3b82f6;
+            transition: all 0.2s;
+        }
+        .check-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px #3b82f6;
+        }
+        .check-button:active:not(:disabled) {
+            transform: translateY(2px);
+            box-shadow: 0 2px #3b82f6;
+        }
+        .check-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: 0 4px #6b7280;
+        }
+        .result-box {
+            background-color: #f0fdf4;
+            color: #166534;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-top: 1.5rem;
+            font-size: 1.125rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        @keyframes bounceIn {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-8px);
+            }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        /* Styling cho phần kéo thả từ */
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            min-height: 80px;
+            padding: 1rem;
+            border: 2px dashed #94a3b8;
+            border-radius: 1rem;
+            background-color: #f8fafc;
+        }
+
+        .drop-zone {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            min-height: 80px;
+            padding: 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 1rem;
+            background-color: #f1f5f9;
+        }
+        .draggable-word {
+            background-color: #a5b4fc;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px #818cf8;
+        }
+        .draggable-word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px #818cf8;
+        }
+        .draggable-word:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #818cf8;
+        }
+        .drop-zone-word {
+            background-color: #c7d2fe;
+            color: #4338ca;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px #a5b4fc;
+        }
+        .drop-zone-word:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px #a5b4fc;
+        }
+        .drop-zone-word:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #a5b4fc;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <!-- Khu vực hiển thị tiến độ, thời gian và số tim -->
+        <div class="w-full flex items-center mb-6">
+            <a href="#" onclick="window.location.reload();" class="text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                </svg>
+            </a>
+            <div class="progress-bar flex-grow mx-4">
+                <div id="progress-bar-fill" class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <span class="text-xl font-bold text-gray-500 mr-4" id="timer-display">⏱️ 0:00</span>
+            <span class="text-xl font-bold text-gray-500" id="hearts-count">❤️ 10</span>
+        </div>
+
+        <!-- Khu vực nội dung chính của bài học -->
+        <div id="game-content" class="w-full flex-grow">
+            <!-- Nội dung bài học sẽ được tạo bằng JavaScript -->
+        </div>
+    </div>
+
+    <!-- Tải thư viện Firebase để sử dụng Firestore sau này nếu cần -->
+    <script type="module">
+        // Biến toàn cục từ môi trường Canvas
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+
+        // Logic của ứng dụng sẽ được đặt ở đây
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Ứng dụng đã sẵn sàng!');
+        });
+    </script>
+    
+    <script>
+        // Mảng chứa kho câu hỏi lớn (khoảng 100 câu)
+        const allQuestions = [
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con mèo đang ngủ trên chiếc ghế.", words: ["The", "cat", "is", "sleeping", "on", "the", "chair"], correctSentence: "The cat is sleeping on the chair" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi thích ăn bánh pizza.", words: ["I", "like", "to", "eat", "pizza"], correctSentence: "I like to eat pizza" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Mặt trời mọc vào buổi sáng.", words: ["The", "sun", "rises", "in", "the", "morning"], correctSentence: "The sun rises in the morning" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một con chó màu nâu.", words: ["I", "have", "a", "brown", "dog"], correctSentence: "I have a brown dog" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn có thể bơi không?", words: ["Can", "you", "swim"], correctSentence: "Can you swim" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đang học tiếng Anh.", words: ["I", "am", "learning", "English"], correctSentence: "I am learning English" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy đang chơi bóng đá.", words: ["He", "is", "playing", "football"], correctSentence: "He is playing football" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi đang đi đến trường.", words: ["We", "are", "going", "to", "school"], correctSentence: "We are going to school" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là một cuốn sách.", words: ["This", "is", "a", "book"], correctSentence: "This is a book" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy là một giáo viên.", words: ["She", "is", "a", "teacher"], correctSentence: "She is a teacher" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn bao nhiêu tuổi?", words: ["How", "old", "are", "you"], correctSentence: "How old are you" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn tên là gì?", words: ["What", "is", "your", "name"], correctSentence: "What is your name" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đi ngủ lúc 9 giờ tối.", words: ["I", "go", "to", "bed", "at", "9", "PM"], correctSentence: "I go to bed at 9 PM" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một cây bút chì màu đỏ.", words: ["I", "have", "a", "red", "pencil"], correctSentence: "I have a red pencil" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi thích ăn kem.", words: ["We", "like", "to", "eat", "ice", "cream"], correctSentence: "We like to eat ice cream" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cái hộp này rất lớn.", words: ["This", "box", "is", "very", "big"], correctSentence: "This box is very big" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bố tôi là một bác sĩ.", words: ["My", "father", "is", "a", "doctor"], correctSentence: "My father is a doctor" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là xe buýt của chúng tôi.", words: ["This", "is", "our", "bus"], correctSentence: "This is our bus" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi yêu gia đình tôi.", words: ["I", "love", "my", "family"], correctSentence: "I love my family" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm nay trời mưa.", words: ["It", "is", "raining", "today"], correctSentence: "It is raining today" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bánh quy rất ngon.", words: ["The", "cookie", "is", "delicious"], correctSentence: "The cookie is delicious" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có hai con cá.", words: ["I", "have", "two", "fish"], correctSentence: "I have two fish" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy đang đọc một quyển truyện.", words: ["She", "is", "reading", "a", "story", "book"], correctSentence: "She is reading a story book" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn có khỏe không?", words: ["How", "are", "you"], correctSentence: "How are you" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chào buổi sáng!", words: ["Good", "morning"], correctSentence: "Good morning" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi thích chơi với bạn của tôi.", words: ["I", "like", "to", "play", "with", "my", "friends"], correctSentence: "I like to play with my friends" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta hãy đi dạo.", words: ["Let's", "go", "for", "a", "walk"], correctSentence: "Let's go for a walk" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bông hoa này đẹp quá.", words: ["This", "flower", "is", "very", "beautiful"], correctSentence: "This flower is very beautiful" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy là một học sinh giỏi.", words: ["He", "is", "a", "good", "student"], correctSentence: "He is a good student" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm qua là chủ nhật.", words: ["Yesterday", "was", "Sunday"], correctSentence: "Yesterday was Sunday" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Thức dậy sớm vào buổi sáng.", words: ["Wake", "up", "early", "in", "the", "morning"], correctSentence: "Wake up early in the morning" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một quả táo.", words: ["I", "have", "an", "apple"], correctSentence: "I have an apple" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Mẹ tôi đang nấu ăn.", words: ["My", "mother", "is", "cooking"], correctSentence: "My mother is cooking" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi sống ở Việt Nam.", words: ["I", "live", "in", "Vietnam"], correctSentence: "I live in Vietnam" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn có anh trai không?", words: ["Do", "you", "have", "a", "brother"], correctSentence: "Do you have a brother" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con chim đang bay.", words: ["The", "bird", "is", "flying"], correctSentence: "The bird is flying" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đi học bằng xe đạp.", words: ["I", "go", "to", "school", "by", "bike"], correctSentence: "I go to school by bike" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Thời tiết hôm nay rất đẹp.", words: ["The", "weather", "is", "nice", "today"], correctSentence: "The weather is nice today" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là phòng của tôi.", words: ["This", "is", "my", "room"], correctSentence: "This is my room" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đang xem TV.", words: ["I", "am", "watching", "TV"], correctSentence: "I am watching TV" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy là bạn của tôi.", words: ["He", "is", "my", "friend"], correctSentence: "He is my friend" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta hãy cùng nhau chơi.", words: ["Let's", "play", "together"], correctSentence: "Let's play together" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Mẹ tôi làm việc ở ngân hàng.", words: ["My", "mother", "works", "at", "a", "bank"], correctSentence: "My mother works at a bank" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cậu bé đang cười.", words: ["The", "boy", "is", "laughing"], correctSentence: "The boy is laughing" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn trở thành một phi công.", words: ["I", "want", "to", "be", "a", "pilot"], correctSentence: "I want to be a pilot" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đồng hồ của tôi màu đen.", words: ["My", "watch", "is", "black"], correctSentence: "My watch is black" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi có một con chó nhỏ.", words: ["We", "have", "a", "small", "dog"], correctSentence: "We have a small dog" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi ăn sáng lúc 7 giờ.", words: ["I", "eat", "breakfast", "at", "7", "o'clock"], correctSentence: "I eat breakfast at 7 o'clock" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bữa trưa có món súp.", words: ["There", "is", "soup", "for", "lunch"], correctSentence: "There is soup for lunch" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cà phê của tôi có đường.", words: ["My", "coffee", "has", "sugar"], correctSentence: "My coffee has sugar" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chào buổi tối!", words: ["Good", "evening"], correctSentence: "Good evening" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn một quả chuối.", words: ["I", "want", "a", "banana"], correctSentence: "I want a banana" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Nước rất lạnh.", words: ["The", "water", "is", "cold"], correctSentence: "The water is cold" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn đang làm gì vậy?", words: ["What", "are", "you", "doing"], correctSentence: "What are you doing" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi không thích sô cô la.", words: ["I", "don't", "like", "chocolate"], correctSentence: "I don't like chocolate" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là ngôi nhà của tôi.", words: ["This", "is", "my", "house"], correctSentence: "This is my house" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy rất vui.", words: ["He", "is", "very", "happy"], correctSentence: "He is very happy" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi có một chiếc xe hơi mới.", words: ["We", "have", "a", "new", "car"], correctSentence: "We have a new car" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn uống nước cam.", words: ["I", "want", "to", "drink", "orange", "juice"], correctSentence: "I want to drink orange juice" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con chó đang chạy rất nhanh.", words: ["The", "dog", "is", "running", "fast"], correctSentence: "The dog is running fast" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm nay là thứ mấy?", words: ["What", "day", "is", "it", "today"], correctSentence: "What day is it today" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi học tiếng Việt.", words: ["I", "learn", "Vietnamese"], correctSentence: "I learn Vietnamese" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy có mái tóc dài.", words: ["She", "has", "long", "hair"], correctSentence: "She has long hair" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta hãy cùng nhau học.", words: ["Let's", "study", "together"], correctSentence: "Let's study together" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Trời tối rồi.", words: ["It", "is", "getting", "dark"], correctSentence: "It is getting dark" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đi đến công viên.", words: ["I", "am", "going", "to", "the", "park"], correctSentence: "I am going to the park" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Quả bóng màu xanh dương.", words: ["The", "ball", "is", "blue"], correctSentence: "The ball is blue" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là một bông hoa.", words: ["This", "is", "a", "flower"], correctSentence: "This is a flower" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Họ là gia đình của tôi.", words: ["They", "are", "my", "family"], correctSentence: "They are my family" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn có biết bơi không?", words: ["Can", "you", "swim"], correctSentence: "Can you swim" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đang nghe nhạc.", words: ["I", "am", "listening", "to", "music"], correctSentence: "I am listening to music" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy thích màu đỏ.", words: ["She", "likes", "red"], correctSentence: "She likes red" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi ăn trưa lúc 12 giờ.", words: ["I", "eat", "lunch", "at", "12", "o'clock"], correctSentence: "I eat lunch at 12 o'clock" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Họ là những người bạn tốt.", words: ["They", "are", "good", "friends"], correctSentence: "They are good friends" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy có một chiếc ô tô màu xanh.", words: ["He", "has", "a", "blue", "car"], correctSentence: "He has a blue car" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm nay là thứ năm.", words: ["Today", "is", "Thursday"], correctSentence: "Today is Thursday" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn đi xem phim.", words: ["I", "want", "to", "go", "to", "the", "movies"], correctSentence: "I want to go to the movies" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Thế giới thật rộng lớn.", words: ["The", "world", "is", "big"], correctSentence: "The world is big" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là một cây kem.", words: ["This", "is", "an", "ice", "cream"], correctSentence: "This is an ice cream" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta có một bữa tiệc.", words: ["We", "are", "having", "a", "party"], correctSentence: "We are having a party" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bàn của tôi ở đây.", words: ["My", "desk", "is", "here"], correctSentence: "My desk is here" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đang viết một bức thư.", words: ["I", "am", "writing", "a", "letter"], correctSentence: "I am writing a letter" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy đang uống nước.", words: ["She", "is", "drinking", "water"], correctSentence: "She is drinking water" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Họ đang đi bộ.", words: ["They", "are", "walking"], correctSentence: "They are walking" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bà tôi rất hiền.", words: ["My", "grandmother", "is", "very", "kind"], correctSentence: "My grandmother is very kind" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một chiếc xe đạp mới.", words: ["I", "have", "a", "new", "bicycle"], correctSentence: "I have a new bicycle" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Trái đất của chúng ta màu xanh.", words: ["Our", "earth", "is", "blue"], correctSentence: "Our earth is blue" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy là một cầu thủ bóng rổ.", words: ["He", "is", "a", "basketball", "player"], correctSentence: "He is a basketball player" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi học toán ở trường.", words: ["I", "study", "math", "at", "school"], correctSentence: "I study math at school" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con chó đang sủa.", words: ["The", "dog", "is", "barking"], correctSentence: "The dog is barking" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Họ đang nói chuyện với nhau.", words: ["They", "are", "talking", "to", "each", "other"], correctSentence: "They are talking to each other" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chào buổi chiều!", words: ["Good", "afternoon"], correctSentence: "Good afternoon" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cà chua có màu đỏ.", words: ["Tomatoes", "are", "red"], correctSentence: "Tomatoes are red" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tối nay tôi đi ngủ sớm.", words: ["I", "am", "going", "to", "bed", "early", "tonight"], correctSentence: "I am going to bed early tonight" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta cần giúp đỡ.", words: ["We", "need", "help"], correctSentence: "We need help" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn một ly nước.", words: ["I", "want", "a", "glass", "of", "water"], correctSentence: "I want a glass of water" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy hát rất hay.", words: ["She", "sings", "very", "well"], correctSentence: "She sings very well" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy thích chơi game.", words: ["He", "likes", "to", "play", "games"], correctSentence: "He likes to play games" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hãy đi ra ngoài chơi.", words: ["Let's", "go", "outside", "to", "play"], correctSentence: "Let's go outside to play" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi đang học bài.", words: ["We", "are", "studying"], correctSentence: "We are studying" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chào buổi tối.", words: ["Good", "night"], correctSentence: "Good night" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bánh sinh nhật rất ngọt.", words: ["The", "birthday", "cake", "is", "sweet"], correctSentence: "The birthday cake is sweet" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy là mẹ của tôi.", words: ["She", "is", "my", "mother"], correctSentence: "She is my mother" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy đang bơi trong hồ bơi.", words: ["He", "is", "swimming", "in", "the", "pool"], correctSentence: "He is swimming in the pool" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn một chiếc bánh mì kẹp.", words: ["I", "want", "a", "sandwich"], correctSentence: "I want a sandwich" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đang nói chuyện với bạn của tôi.", words: ["I", "am", "talking", "with", "my", "friend"], correctSentence: "I am talking with my friend" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi đi đến bãi biển.", words: ["We", "go", "to", "the", "beach"], correctSentence: "We go to the beach" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cái bàn có màu nâu.", words: ["The", "table", "is", "brown"], correctSentence: "The table is brown" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi thích mùa hè.", words: ["I", "like", "summer"], correctSentence: "I like summer" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy rất thông minh.", words: ["He", "is", "very", "smart"], correctSentence: "He is very smart" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm nay tôi rất bận.", words: ["I", "am", "very", "busy", "today"], correctSentence: "I am very busy today" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn ăn kem.", words: ["I", "want", "to", "eat", "ice", "cream"], correctSentence: "I want to eat ice cream" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là một bông hoa màu đỏ.", words: ["This", "is", "a", "red", "flower"], correctSentence: "This is a red flower" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cậu ấy là em trai của tôi.", words: ["He", "is", "my", "little", "brother"], correctSentence: "He is my little brother" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta đi đến nhà sách.", words: ["We", "go", "to", "the", "bookstore"], correctSentence: "We go to the bookstore" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Trời có tuyết rơi.", words: ["It", "is", "snowing"], correctSentence: "It is snowing" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một con thỏ trắng.", words: ["I", "have", "a", "white", "rabbit"], correctSentence: "I have a white rabbit" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy đang lái xe.", words: ["He", "is", "driving", "a", "car"], correctSentence: "He is driving a car" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn có thích đọc sách không?", words: ["Do", "you", "like", "to", "read", "books"], correctSentence: "Do you like to read books" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đi mua sắm với mẹ.", words: ["I", "go", "shopping", "with", "my", "mother"], correctSentence: "I go shopping with my mother" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con gấu đang ngủ.", words: ["The", "bear", "is", "sleeping"], correctSentence: "The bear is sleeping" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta học tiếng Anh hàng ngày.", words: ["We", "learn", "English", "every", "day"], correctSentence: "We learn English every day" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn một cốc sữa.", words: ["I", "want", "a", "cup", "of", "milk"], correctSentence: "I want a cup of milk" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Họ đang ăn tối.", words: ["They", "are", "eating", "dinner"], correctSentence: "They are eating dinner" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cô ấy có một chiếc váy màu hồng.", words: ["She", "has", "a", "pink", "dress"], correctSentence: "She has a pink dress" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy đang nghe điện thoại.", words: ["He", "is", "on", "the", "phone"], correctSentence: "He is on the phone" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Trường học rất lớn.", words: ["The", "school", "is", "very", "big"], correctSentence: "The school is very big" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi đang giúp mẹ làm việc nhà.", words: ["I", "am", "helping", "my", "mom", "with", "housework"], correctSentence: "I am helping my mom with housework" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bạn có thể chơi piano không?", words: ["Can", "you", "play", "the", "piano"], correctSentence: "Can you play the piano" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bánh ngọt này ngon quá.", words: ["This", "cake", "is", "delicious"], correctSentence: "This cake is delicious" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Họ đang đi xem phim.", words: ["They", "are", "going", "to", "the", "movies"], correctSentence: "They are going to the movies" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Sách của tôi ở trên bàn.", words: ["My", "book", "is", "on", "the", "table"], correctSentence: "My book is on the table" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một người chị gái.", words: ["I", "have", "a", "sister"], correctSentence: "I have a sister" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Mèo của tôi rất đáng yêu.", words: ["My", "cat", "is", "very", "cute"], correctSentence: "My cat is very cute" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi đang chơi cờ vua.", words: ["We", "are", "playing", "chess"], correctSentence: "We are playing chess" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm nay trời nắng.", words: ["It", "is", "sunny", "today"], correctSentence: "It is sunny today" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi muốn một quả bóng mới.", words: ["I", "want", "a", "new", "ball"], correctSentence: "I want a new ball" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy có một chiếc ba lô màu vàng.", words: ["He", "has", "a", "yellow", "backpack"], correctSentence: "He has a yellow backpack" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Bà tôi đang ngồi trên ghế sofa.", words: ["My", "grandmother", "is", "sitting", "on", "the", "sofa"], correctSentence: "My grandmother is sitting on the sofa" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta học toán vào thứ hai.", words: ["We", "have", "math", "on", "Monday"], correctSentence: "We have math on Monday" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Cái ly của tôi rỗng.", words: ["My", "cup", "is", "empty"], correctSentence: "My cup is empty" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Em gái tôi rất cao.", words: ["My", "sister", "is", "very", "tall"], correctSentence: "My sister is very tall" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng tôi thích bơi lội.", words: ["We", "like", "swimming"], correctSentence: "We like swimming" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chào buổi sáng, mẹ!", words: ["Good", "morning", "mom"], correctSentence: "Good morning mom" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một người bạn ở Nhật Bản.", words: ["I", "have", "a", "friend", "in", "Japan"], correctSentence: "I have a friend in Japan" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Hôm nay là sinh nhật của tôi.", words: ["Today", "is", "my", "birthday"], correctSentence: "Today is my birthday" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con chó đang gặm xương.", words: ["The", "dog", "is", "chewing", "a", "bone"], correctSentence: "The dog is chewing a bone" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi ăn pizza vào bữa tối.", words: ["I", "eat", "pizza", "for", "dinner"], correctSentence: "I eat pizza for dinner" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta cần giúp đỡ.", words: ["We", "need", "help"], correctSentence: "We need help" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Anh ấy đang làm bài tập về nhà.", words: ["He", "is", "doing", "his", "homework"], correctSentence: "He is doing his homework" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Tôi có một cây bút màu xanh lá.", words: ["I", "have", "a", "green", "pen"], correctSentence: "I have a green pen" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Con khỉ thích ăn chuối.", words: ["Monkeys", "like", "to", "eat", "bananas"], correctSentence: "Monkeys like to eat bananas" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Đây là một bông hoa.", words: ["This", "is", "a", "flower"], correctSentence: "This is a flower" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Mẹ tôi nấu ăn rất ngon.", words: ["My", "mom", "cooks", "very", "well"], correctSentence: "My mom cooks very well" },
+            { questionText: "Hãy sắp xếp các từ để dịch câu sau:", vietnameseSentence: "Chúng ta hãy học các loài động vật.", words: ["Let's", "learn", "about", "animals"], correctSentence: "Let's learn about animals" },
+        ];
+
+        // Biến trạng thái của trò chơi
+        const QUIZ_LENGTH = 10;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswersCount = 0;
+        let hearts = 10; // Đã thay đổi số tim thành 10
+        let questions = []; // Mảng 10 câu hỏi ngẫu nhiên
+
+        let timer;
+        let startTime;
+        let elapsedTime = 0;
+
+        const gameContent = document.getElementById('game-content');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+        const heartsCount = document.getElementById('hearts-count');
+        const timerDisplay = document.getElementById('timer-display');
+
+        // Hàm xáo trộn mảng
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Hàm cập nhật thanh tiến độ
+        function updateProgressBar() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            progressBarFill.style.width = `${progress}%`;
+        }
+        
+        // Hàm cập nhật bộ đếm thời gian
+        function updateTimer() {
+            const now = new Date();
+            elapsedTime = Math.floor((now - startTime) / 1000);
+            const minutes = Math.floor(elapsedTime / 60);
+            const seconds = elapsedTime % 60;
+            timerDisplay.textContent = `⏱️ ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+        
+        // Hàm hiển thị câu hỏi
+        function renderQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                clearInterval(timer);
+                showResult();
+                return;
+            }
+
+            const currentQuestion = questions[currentQuestionIndex];
+            const shuffledWords = [...currentQuestion.words].sort(() => Math.random() - 0.5);
+            
+            let htmlContent = `
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">${currentQuestion.questionText}</h1>
+                <p class="text-2xl font-semibold text-gray-600 mb-6 italic">"${currentQuestion.vietnameseSentence}"</p>
+                <div id="drop-zone" class="drop-zone w-full mb-6"></div>
+                <div id="word-bank" class="word-bank w-full">
+            `;
+
+            shuffledWords.forEach((word) => {
+                htmlContent += `<button class="draggable-word" data-word="${word}">${word}</button>`;
+            });
+
+            htmlContent += `
+                </div>
+                <div id="feedback-box" class="mt-4 w-full"></div>
+                <button id="check-button" class="check-button mt-6" disabled>Kiểm tra</button>
+            `;
+            
+            gameContent.innerHTML = htmlContent;
+            updateProgressBar();
+        }
+
+        // Hàm di chuyển từ và cập nhật trạng thái nút Kiểm tra
+        function moveWord(wordButton, targetContainer, newClass) {
+            const dropZone = document.getElementById('drop-zone');
+            const checkButton = document.getElementById('check-button');
+            
+            targetContainer.appendChild(wordButton);
+            wordButton.className = newClass;
+            
+            // Cập nhật trạng thái nút Kiểm tra một cách chính xác
+            checkButton.disabled = dropZone.childElementCount === 0;
+        }
+
+        // Xử lý khi người dùng nhấn "Kiểm tra"
+        function checkAnswer() {
+            const currentQuestion = questions[currentQuestionIndex];
+            const feedbackBox = document.getElementById('feedback-box');
+            const checkButton = document.getElementById('check-button');
+            const dropZone = document.getElementById('drop-zone');
+            
+            const dropZoneWords = Array.from(dropZone.children).map(child => child.dataset.word);
+            const userAnswer = dropZoneWords.join(' ');
+            const isCorrect = (userAnswer.toLowerCase() === currentQuestion.correctSentence.toLowerCase());
+
+            // Vô hiệu hóa tất cả các nút từ
+            document.querySelectorAll('.draggable-word, .drop-zone-word').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            if (isCorrect) {
+                score += 10;
+                correctAnswersCount++;
+                feedbackBox.innerHTML = `
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md" role="alert">
+                        <p class="font-bold">Chính xác!</p>
+                        <p>Chúc mừng, con đã trả lời đúng rồi! (+10 điểm)</p>
+                    </div>
+                `;
+                checkButton.textContent = "Tiếp tục";
+                checkButton.classList.remove('bg-blue-500', 'shadow-blue-700');
+                checkButton.classList.add('bg-green-500', 'shadow-green-700');
+            } else {
+                hearts--;
+                heartsCount.textContent = `❤️ ${hearts}`;
+                feedbackBox.innerHTML = `
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
+                        <p class="font-bold">Chưa chính xác!</p>
+                        <p>Đáp án đúng là: "${currentQuestion.correctSentence}"</p>
+                    </div>
+                `;
+                checkButton.textContent = "Tiếp tục";
+                checkButton.classList.remove('bg-blue-500', 'shadow-blue-700');
+                checkButton.classList.add('bg-red-500', 'shadow-red-700');
+            }
+            checkButton.disabled = false;
+
+            if (hearts <= 0) {
+                clearInterval(timer);
+                setTimeout(showGameOver, 1000);
+                return;
+            }
+        }
+
+        // Chuyển sang câu hỏi tiếp theo
+        function nextQuestion() {
+            currentQuestionIndex++;
+            renderQuestion();
+
+            const checkButton = document.getElementById('check-button');
+            if (checkButton) {
+                checkButton.textContent = "Kiểm tra";
+                checkButton.classList.remove('bg-green-500', 'shadow-green-700', 'bg-red-500', 'shadow-red-700');
+                checkButton.classList.add('bg-blue-500', 'shadow-blue-700');
+                checkButton.disabled = true; // Vô hiệu hóa nút cho đến khi người dùng ghép từ
+            }
+        }
+        
+        // Hiển thị kết quả cuối cùng
+        function showResult() {
+            let timeBonus = 0;
+            if (elapsedTime < 60) {
+                timeBonus = 20;
+            } else if (elapsedTime >= 60 && elapsedTime <= 70) {
+                timeBonus = 15;
+            } else if (elapsedTime > 70 && elapsedTime <= 80) {
+                timeBonus = 10;
+            } else {
+                timeBonus = 5;
+            }
+            
+            const finalScore = score + timeBonus;
+            const encouragementMessage = `
+                <p class="text-lg text-gray-700 mb-2">Con đã hoàn thành thử thách một cách xuất sắc!</p>
+                <p class="text-xl font-bold text-purple-700 mb-2">Hãy tiếp tục cố gắng để đạt được điểm số cao hơn nữa nhé! 💪</p>
+            `;
+
+            const resultHTML = `
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Hoàn thành bài học!</h1>
+                <p class="text-xl text-gray-600 mb-6">Con đã hoàn thành tất cả các câu hỏi rồi!</p>
+                <div class="result-box w-full">
+                    <p class="text-center text-4xl">🎉</p>
+                    <p class="text-center text-lg">Số câu đúng: <span class="font-extrabold text-green-600">${correctAnswersCount}</span> / ${questions.length}</p>
+                    <p class="text-center text-lg">Thời gian hoàn thành: <span class="font-extrabold text-blue-600">${elapsedTime}</span> giây</p>
+                    <p class="text-center text-lg">Điểm thưởng thời gian: <span class="font-extrabold text-yellow-600">+${timeBonus}</span> điểm</p>
+                    <p class="text-center text-2xl font-extrabold">Tổng điểm: <span class="text-pink-600">${finalScore}</span></p>
+                    <div class="mt-4">${encouragementMessage}</div>
+                </div>
+                <button onclick="window.location.reload()" class="check-button mt-6 bg-blue-500 shadow-blue-700">
+                    Chơi lại
+                </button>
+            `;
+            gameContent.innerHTML = resultHTML;
+            progressBarFill.style.width = "100%";
+        }
+
+        // Hiển thị màn hình game over
+        function showGameOver() {
+            const gameOverHTML = `
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Game Over!</h1>
+                <p class="text-xl text-gray-600 mb-6">Con đã hết lượt chơi rồi. Hãy cố gắng hơn nhé!</p>
+                <div class="result-box bg-red-100 text-red-700 w-full">
+                    <p class="text-center text-4xl">😞</p>
+                    <p class="text-center">Số câu đúng: ${correctAnswersCount}/${currentQuestionIndex}</p>
+                </div>
+                <button onclick="window.location.reload()" class="check-button mt-6 bg-blue-500 shadow-blue-700">
+                    Chơi lại
+                </button>
+            `;
+            gameContent.innerHTML = gameOverHTML;
+        }
+        
+        // Gắn các sự kiện ban đầu khi tải trang
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameContentElement = document.getElementById('game-content');
+            
+            gameContentElement.addEventListener('click', (e) => {
+                const dropZone = document.getElementById('drop-zone');
+                const wordBank = document.getElementById('word-bank');
+                const checkButton = document.getElementById('check-button');
+
+                if (e.target.classList.contains('draggable-word')) {
+                    moveWord(e.target, dropZone, 'drop-zone-word');
+                } else if (e.target.classList.contains('drop-zone-word')) {
+                    moveWord(e.target, wordBank, 'draggable-word');
+                }
+                
+                // Xử lý nút "Kiểm tra" chỉ khi nó được hiển thị
+                if (e.target.id === 'check-button' && !e.target.disabled) {
+                    if (checkButton.textContent === "Kiểm tra") {
+                        checkAnswer();
+                    } else if (checkButton.textContent === "Tiếp tục") {
+                        nextQuestion();
+                    }
+                }
+            });
+        });
+
+        // Khởi động trò chơi
+        window.onload = function() {
+            // Chọn ngẫu nhiên 10 câu hỏi từ kho dữ liệu lớn
+            const shuffledAllQuestions = shuffleArray([...allQuestions]);
+            questions = shuffledAllQuestions.slice(0, QUIZ_LENGTH);
+            
+            // Khởi tạo và bắt đầu bộ đếm thời gian
+            startTime = new Date();
+            timer = setInterval(updateTimer, 1000);
+
+            renderQuestion();
+        };
+    </script>
+</body>
+</html>

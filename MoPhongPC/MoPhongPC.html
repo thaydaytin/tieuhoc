@@ -637,8 +637,9 @@
     </style>
 </head>
 <body>
-    <!-- Desktop Background -->
+    <!-- Desktop Background lg:grid-cols-1-->
     <div class="desktop-background" id="desktop-background">
+	<div class="grid grid-cols-2 gap-1 p-1">
         <!-- Desktop Icons -->
         <div id="this-pc-icon" class="icon" data-app-name="This PC">
             <img src="images/thispc.png" alt="This PC Icon" class="icon-image">
@@ -666,14 +667,19 @@
             <span class="icon-text">Rapid Typing</span>
         </div>
 		<div id="paint-icon" class="icon" data-app-name="Paint">
-            <img src="images/paint.png" alt="Rapid Typing Icon" class="icon-image">
+            <img src="images/paint.png" alt="Paint Icon" class="icon-image">
             <span class="icon-text">Paint</span>
         </div>
-		<div id="paint-icon" class="icon" data-app-name="Trình Duyệt Web">
-            <img src="images/chrome.png" alt="Rapid Typing Icon" class="icon-image">
+		<div id="web-icon" class="icon" data-app-name="Trình Duyệt Web">
+            <img src="images/chrome.png" alt="Web Icon" class="icon-image">
             <span class="icon-text">Trình Duyệt Web</span>
         </div>
+		<div id="duoblingo-icon" class="icon" data-app-name="DuoBlingo">
+            <img src="images/duoblingo.png" alt="Rapid Typing Icon" class="icon-image">
+            <span class="icon-text">DuoBlingo</span>
+        </div>
     </div>
+	</div>
 
     <!-- Taskbar -->
     <div class="taskbar">
@@ -711,10 +717,18 @@
                 <span class="start-menu-text">Power</span>
             </div>
             <div id="power-menu-options" class="power-menu">
+				<div id="sleep-button" class="start-menu-item">
+                    <img src="images/sleep.png" alt="Sleep Icon" class="start-menu-icon">
+                    <span class="start-menu-text">Sleep</span>
+                </div>
                 <div id="shutdown-button" class="start-menu-item">
                     <!-- Shutdown Icon (Image) -->
                     <img src="images/power.png" alt="Shutdown Icon" class="start-menu-icon">
                     <span class="start-menu-text">Shutdown</span>
+                </div>
+				<div id="restart-button" class="start-menu-item">
+                    <img src="images/restart.png" alt="Restart Icon" class="start-menu-icon">
+                    <span class="start-menu-text">Restart</span>
                 </div>
                 <!-- You can add Restart, Sleep here -->
             </div>
@@ -832,7 +846,7 @@
     <!-- Fullscreen Prompt Modal (New) -->
     <div id="fullscreen-prompt-overlay" class="fullscreen-prompt-overlay">
         <div class="fullscreen-prompt-content">
-            <button id="fullscreen-close-button" class="fullscreen-close-button" title="Đóng">X</button>
+            <!--<button id="fullscreen-close-button" class="fullscreen-close-button" title="Đóng">X</button> -->
             <p class="text-xl font-bold mb-4">Chào mừng bạn đến với Desktop Windows!</p>
             <p class="mb-4">Để có trải nghiệm tốt nhất, vui lòng bật chế độ toàn màn hình.</p>
             <button id="enter-fullscreen-button">Bật toàn màn hình</button>
@@ -856,6 +870,8 @@
             const powerButton = document.getElementById('power-button');
             const powerMenuOptions = document.getElementById('power-menu-options');
             const shutdownButton = document.getElementById('shutdown-button');
+			const restartButton = document.getElementById('restart-button');
+			const sleepButton = document.getElementById('sleep-button');
             const shutdownOverlay = document.getElementById('shutdown-overlay');
 
             const fileExplorerRibbon = document.getElementById('file-explorer-ribbon');
@@ -1655,37 +1671,42 @@
 				else if (appName === "Word") {
 					appMessageContent.classList.remove('hidden');
 					appMessageContent.innerHTML = `
-						<iframe src="Word.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+						<iframe src="Word.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 					`;}
 				else if (appName === "PowerPoint") {
 					appMessageContent.classList.remove('hidden');
 					appMessageContent.innerHTML = `
-						<iframe src="PowerPoint.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+						<iframe src="PowerPoint.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 					`;}
 				else if (appName === "Scratch") {
 				appMessageContent.classList.remove('hidden');
 				appMessageContent.innerHTML = `
-					<iframe src="tdtScratch.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					<iframe src="tdtScratch.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 				`;}
 				else if (appName === "Mouse Skills") {
 				appMessageContent.classList.remove('hidden');
 				appMessageContent.innerHTML = `
-					<iframe src="MouseSkills.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					<iframe src="MouseSkills.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 				`;}
 				else if (appName === "Rapid Typing") {
 				appMessageContent.classList.remove('hidden');
 				appMessageContent.innerHTML = `
-					<iframe src="Typing.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					<iframe src="Typing.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 				`;}
 				else if (appName === "Paint") {
 				appMessageContent.classList.remove('hidden');
 				appMessageContent.innerHTML = `
-					<iframe src="paint.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					<iframe src="https://jspaint.app/" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 				`;}
 				else if (appName === "Trình Duyệt Web") {
 				appMessageContent.classList.remove('hidden');
 				appMessageContent.innerHTML = `
-					<iframe src="corom.html" style="width: 100%; height: 100%; border: none; min-height: 780px;"></iframe>
+					<iframe src="corom.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
+				`;}
+				else if (appName === "DuoBlingo") {
+				appMessageContent.classList.remove('hidden');
+				appMessageContent.innerHTML = `
+					<iframe src="DuoBlingo.html" style="width: 100%; height: 100%; border: none; min-height: 80vh;"></iframe>
 				`;}
 				else {
                     // Show generic app message for Word, PowerPoint, Scratch, and any other app
@@ -1893,6 +1914,46 @@
                     }, 1000); // Show message after 1 second if not closed
                 }, 5000); // 5 seconds for the shutdown process
             });
+			
+			// --- Restart Functionality -----------------------------------------------------------------------------------------------------------------------------
+            restartButton.addEventListener('click', () => {
+                startMenu.classList.remove('show'); // Hide start menu
+                startButton.classList.remove('active');
+                powerMenuOptions.classList.remove('show'); // Hide power options
+                appModalOverlay.classList.remove('show'); // Hide any open windows
+                if (isMaximized) { // Ensure window restores if it was maximized before shutdown
+                    restoreWindow();
+                }
+                // Start shutdown effect
+                shutdownOverlay.classList.add('active');
+				shutdownOverlay.innerHTML = '<p>Restarting...</p>';
+                desktopBackground.style.opacity = '0'; // Fade out desktop background
+
+                setTimeout(() => {
+                    // After a delay, attempt to reload the window
+                    window.location.reload();
+                    // Fallback message if window.close() fails (e.g., due to browser security)
+                    
+                }, 5000); // 5 seconds for the shutdown process
+            });
+			// --- sleep Functionality -----------------------------------------------------------------------------------------------------------------------------
+            sleepButton.addEventListener('click', () => {
+                startMenu.classList.remove('show'); // Hide start menu
+                startButton.classList.remove('active');
+                powerMenuOptions.classList.remove('show'); // Hide power options
+                appModalOverlay.classList.remove('show'); // Hide any open windows
+                if (isMaximized) { // Ensure window restores if it was maximized before shutdown
+                    restoreWindow();
+                }
+                // Start shutdown effect
+                shutdownOverlay.classList.add('active');
+				shutdownOverlay.innerHTML = '<p>Máy tính đã vào trạng thái ngủ. Nhấn bất kỳ phím nào để khởi động lại.</p>';
+                desktopBackground.style.opacity = '0'; // Fade out desktop background
+
+                document.addEventListener('keydown', () => {
+					window.location.reload();
+				}, { once: true });
+            });
 
             // --- Fullscreen functions ---
             function enterFullscreen() {
@@ -1925,9 +1986,9 @@
             });
 
             // Event listener for the new fullscreen close button
-            fullscreenCloseButton.addEventListener('click', () => {
-                fullscreenPromptOverlay.classList.remove('show'); // Hide the prompt
-            });
+           // fullscreenCloseButton.addEventListener('click', () => {
+           //     fullscreenPromptOverlay.classList.remove('show'); // Hide the prompt
+           // });
 
             // Hide the fullscreen prompt once fullscreen is entered or exited
             document.addEventListener('fullscreenchange', () => {
