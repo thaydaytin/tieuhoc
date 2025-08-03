@@ -143,6 +143,8 @@
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease-in-out;
             position: relative;
+			cursor: pointer;
+			pointer-events: auto;
         }
         .slide-preview:hover {
             border-color: #a0a0a0;
@@ -869,14 +871,17 @@
                 previewDiv.appendChild(slideNumber);
 
 
-                previewDiv.addEventListener('click', () => {
-                    if (index !== currentSlideIndex) {
-                        saveCurrentSlide();
-                        currentSlideIndex = index;
-                        updateUI();
-                        updateSlidePreviews();
-                    }
-                });
+                previewDiv.style.cursor = 'pointer';
+				previewDiv.dataset.index = index;
+				previewDiv.addEventListener('click', (e) => {
+					const idx = parseInt(e.currentTarget.dataset.index, 10);
+					if (!isNaN(idx) && idx !== currentSlideIndex) {
+						saveCurrentSlide();
+						currentSlideIndex = idx;
+						updateUI();
+						updateSlidePreviews();
+					}
+				});
                 slidePreviewContainer.appendChild(previewDiv);
             });
         }
