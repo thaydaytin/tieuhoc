@@ -702,6 +702,9 @@
 	  const now = new Date();
 
 	  // Chỉ gửi nếu đang trong thời gian hợp lệ
+		now.setHours(0, 0, 0, 0);
+		ngaybd.setHours(0, 0, 0, 0);
+		ngaykt.setHours(0, 0, 0, 0);
 	  if (now >= ngaybd && now <= ngaykt) {
 		fetch("https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec", { // <-- thay bằng URL Web App của Apps Script
 		  method: "POST",
