@@ -724,6 +724,14 @@
 		.catch(e => console.error("Lỗi khi gửi dữ liệu:", e));
 	  } else {
 		console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
+		console.log(now);
+		console.log(ngaybd);
+		console.log(ngaykt);
+
+		// Dừng 5 giây rồi chạy tiếp
+		setTimeout(function() {
+			console.log("Bước 2: log này hiện sau 5 giây");
+		}, 5000);
 	  }
 	}
 
