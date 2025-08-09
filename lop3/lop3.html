@@ -283,7 +283,7 @@
 	</div>
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbz8zZXHA2PgI3U9nTDl4qXYdRm0j58lui-V4pVb3UzwaH2kEeyLqNUpO0ohIbmE0rTx/exec"; // <-- thay link tại đây
-
+	const lop = "3"; //																																						<-- thay lop tại day
     fetch(API_URL, {
       mode: 'cors' // Đã thêm mode: 'cors' để hỗ trợ tải dữ liệu từ các nguồn khác
     })
@@ -303,7 +303,7 @@
 		  div.innerHTML = `
 			<strong>${bai.ten}</strong>
 			<a class="button" href="../xembaigiang.html?link=${encodeURIComponent(bai.link)}" target="_blank">Xem bài giảng</a>
-			<a class="button" href="tracnghiem/selectGame.html?json=${encodeURIComponent(bai.json)}&tuan=${encodeURIComponent(bai.tuan)}&ten=${encodeURIComponent(bai.ten)}&ngaybd=${encodeURIComponent(bai.ngaybd)}&ngaykt=${encodeURIComponent(bai.ngaykt)}">Làm Bài Tập</a>
+			<a class="button" href="../tracnghiem/selectGame.html?lop=${encodeURIComponent(lop)}&json=${encodeURIComponent(bai.json)}&tuan=${encodeURIComponent(bai.tuan)}&ten=${encodeURIComponent(bai.ten)}&ngaybd=${encodeURIComponent(bai.ngaybd)}&ngaykt=${encodeURIComponent(bai.ngaykt)}">Làm Bài Tập</a>
 		  `;
 		  container.appendChild(div);
 
