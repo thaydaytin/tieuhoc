@@ -701,42 +701,33 @@
 	  const ngaykt = new Date(ngayktStr);
 	  const now = new Date();
 
+	  // Đặt giờ về 00:00 để so sánh ngày
+	  now.setHours(0, 0, 0, 0);
+	  ngaybd.setHours(0, 0, 0, 0);
+	  ngaykt.setHours(0, 0, 0, 0);
+
 	  // Chỉ gửi nếu đang trong thời gian hợp lệ
-		now.setHours(0, 0, 0, 0);
-		ngaybd.setHours(0, 0, 0, 0);
-		ngaykt.setHours(0, 0, 0, 0);
 	  if (now >= ngaybd && now <= ngaykt) {
-		fetch("https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec", { // <-- thay bằng URL Web App của Apps Script
+		fetch("https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec", {
 		  method: "POST",
+		  mode: "no-cors", // tránh lỗi CORS
 		  headers: { "Content-Type": "application/json" },
 		  body: JSON.stringify({
 			tenHS: tenHS,
 			diem: diem,
 			tuan: tuan,
-			lop: "3" // "3", "4" hoặc "5"// <-- thay bằng theo lop----------------------------------------------------------------------------------------------------------------------------------
+			lop: "3" // Thay bằng lớp thực tế: "3", "4" hoặc "5"
 		  })
 		})
-		.then(res => res.json())
-		.then(res => {
-		  if (res.status === "success") {
-			console.log("✅ Gửi thành công!");
-		  } else {
-			console.error("❌ Lỗi:", res.message);
-		  }
+		.then(() => {
+		  console.log("✅ Dữ liệu đã được gửi lên Google Sheet!");
 		})
-		.catch(e => console.error("Lỗi khi gửi dữ liệu:", e));
+		.catch(e => console.error("❌ Lỗi khi gửi dữ liệu:", e));
 	  } else {
 		console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
-		console.log(now);
-		console.log(ngaybd);
-		console.log(ngaykt);
-
-		// Dừng 5 giây rồi chạy tiếp
-		setTimeout(function() {
-			console.log("Bước 2: log này hiện sau 5 giây");
-		}, 5000);
 	  }
 	}
+
 
 
     // Hàm hiển thị thông báo thay cho alert()1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
