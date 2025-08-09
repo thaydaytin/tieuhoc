@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thầy Dạy Tin - Chọn trò chơi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset và thiết lập cơ bản */
+    html, body {
+      box-sizing: border-box;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Header - Giữ nguyên phong cách đã thống nhất */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 40px;
+      background-color: #42a5f5;
+      border-bottom: 4px solid #1e88e5;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+    .logo img {
+      height: 100px;
+    }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: white;
+      transition: all 0.3s ease;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    nav a:hover {
+      color: #FFD700;
+      transform: scale(1.1);
+    }
+
+    /* Wrapper cho nội dung chính */
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    h2 {
+      font-family: 'Quicksand', sans-serif;
+      color: #FF6347; /* Màu đỏ cà chua */
+      font-size: 2.8rem; /* Lớn hơn một chút */
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+      font-family: 'Quicksand', sans-serif;
+      color: #4682B4; /* Xanh thép */
+      font-size: 2.2rem; /* Lớn hơn một chút */
+      margin-top: 5px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      font-size: 1.2rem;
+      color: #1565c0;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    /* Thẻ trò chơi */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px; /* Tăng khoảng cách giữa các thẻ */
+      padding: 20px;
+    }
+    .card-link {
+      text-decoration: none;
+      display: block;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.95); /* Nền trắng trong suốt hơn */
+      border-radius: 25px; /* Bo tròn nhiều hơn */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Bóng đổ lớn hơn */
+      overflow: hidden;
+      width: 280px; /* Rộng hơn một chút */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 5px solid #FFD700; /* Viền vàng tươi sáng */
+      position: relative;
+      cursor: pointer; /* Thêm cursor pointer */
+    }
+    .card::before { /* Hiệu ứng trang trí */
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: url('https://placehold.co/50x50/ADD8E6/FFFFFF?text=%E2%9C%A8') repeat; /* Lấp lánh nhỏ */
+      opacity: 0.05;
+      z-index: 0;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.03); /* Hiệu ứng nảy và phóng to */
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      border-color: #FFA500; /* Đổi màu viền khi hover */
+    }
+    .card img {
+      width: 100%;
+      height: 180px; /* Chiều cao ảnh lớn hơn */
+      object-fit: cover;
+      border-bottom: 3px solid #FFC107; /* Viền dưới ảnh */
+    }
+    .card-body {
+      padding: 15px; /* Tăng padding */
+      text-align: center;
+    }
+    .card-body h3 {
+      font-family: 'Quicksand', sans-serif;
+      margin-top: 10px;
+      color: #D84315; /* Màu đỏ cam đậm */
+      font-size: 1.8rem; /* Lớn hơn */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .card-body p {
+      margin: 10px 0 0;
+      font-weight: 600;
+      font-size: 1rem; /* Lớn hơn một chút */
+      color: #555;
+    }
+
+    /* Footer - Giữ nguyên phong cách đã thống nhất */
+    footer {
+      background-color: #64b5f6;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 1rem;
+      border-top: 4px solid #1e88e5;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%;
+    }
+    footer p {
+      margin: 5px 0;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		padding: 10px 30px;
+	  }
+
+	  .logo {
+		flex: 1;
+		display: flex;
+		justify-content: flex-start;
+	  }
+
+	  nav {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding-top: 1px;
+	  }
+
+	  nav a {
+		margin: 3px 10px;
+		font-size: 1.1rem;
+	  }
+      h2 {
+        font-size: 2.2rem;
+      }
+      h3 {
+        font-size: 1.8rem;
+      }
+      .cards {
+        padding: 20px 10px;
+        gap: 20px;
+      }
+      .card {
+        width: 90%; /* Chiếm gần hết chiều rộng trên mobile */
+      }
+      .card img {
+        height: 150px;
+      }
+      .card-body h3 {
+        font-size: 1.5rem;
+      }
+      .card-body p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../logo.png" alt="Logo Thầy Dạy Tin">
+      </a>
+    </div>
+    <nav>
+      <a href="../index.html">Trang chủ</a>
+      <a href="../MoPhongPC/MoPhongPC.html" target="_blank" rel="noopener noreferrer">PC-Mô Phỏng</a>
+      <a href="../gocgiaitri.html">Góc Giải Trí</a>
+      <a href=../gocthongtin.html">Góc Thông Tin</a>
+    </nav>
+  </header>
+	
+  <div class="wrapper">
+    <h2 id="tieude"></h2>
+    <h3>🎮 Chọn trò chơi</h3>
+    
+    <p>📝 Làm bài tập thông qua các trò chơi bên dưới</p>
+
+    <section class="cards">
+      <div class="card" onclick="startGame('gametracnghiem.html')">
+        <img src="icon/1.png" alt="Trắc nghiệm chọn nhanh">
+        <div class="card-body">
+          <h3>Trắc nghiệm chọn nhanh</h3>
+          <p>Chọn đáp án đúng và nhanh nhất</p>
+        </div>
+      </div>
+
+      <div class="card" onclick="startGame('gameTNDS.html')">
+        <img src="icon/3.png" alt="Trắc nghiệm đúng sai">
+        <div class="card-body">
+          <h3>Trắc nghiệm đúng sai</h3>
+          <p>Chọn đáp án đúng và nhanh nhất</p>
+        </div>
+      </div>
+
+      <div class="card" onclick="startGame('gameLatManhGhep.html')">
+        <img src="icon/tuimu.png" alt="Xé túi mù">
+        <div class="card-body">
+          <h3>Xé túi mù</h3>
+          <p>Chọn mở túi mù và trả lời các câu hỏi bên trong</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer style="background-color: #64b5f6; color: white; text-align: center; padding: 20px 10px; font-size: 1rem; border-top: 4px solid #1e88e5;">
+    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
+    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
+  </footer>
+
+  <script>
+    function getParam(key) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(key);
+    }
+
+    function startGame(gameFile) {
+      const lop = getParam("lop");
+	  const jsonLink = getParam("json");
+      const tuan = getParam("tuan");
+	  const ngaybd = getParam("ngaybd");
+	  const ngaykt = getParam("ngaykt");
+      if (!jsonLink || !tuan) {
+        showMessage("Thiếu dữ liệu json hoặc tuần!", "warning");
+        return;
+      }
+      const finalURL = `${gameFile}?lop=${encodeURIComponent(lop)}&json=${encodeURIComponent(jsonLink)}&tuan=${encodeURIComponent(tuan)}&ngaybd=${encodeURIComponent(ngaybd)}&ngaykt=${encodeURIComponent(ngaykt)}`;
+      window.location.href = finalURL;
+    }
+
+    // Hiển thị tên bài + tuần
+    const tenBai = getParam("ten");
+    const soTuan = getParam("tuan");
+    if (tenBai && soTuan) {
+      document.getElementById("tieude").innerText = `📘 ${tenBai} | Tuần ${soTuan}`;
+    }
+
+    // Hàm hiển thị thông báo thay cho alert()
+    function showMessage(message, type = "info") {
+        const messageBox = document.createElement('div');
+        messageBox.style.position = 'fixed';
+        messageBox.style.top = '20px';
+        messageBox.style.left = '50%';
+        messageBox.style.transform = 'translateX(-50%)';
+        messageBox.style.padding = '15px 30px';
+        messageBox.style.borderRadius = '10px';
+        messageBox.style.zIndex = '1000';
+        messageBox.style.color = 'white';
+        messageBox.style.fontWeight = 'bold';
+        messageBox.style.fontSize = '1.2rem';
+        messageBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+        messageBox.style.animation = 'fadeInOut 4s forwards';
+        messageBox.innerText = message;
+
+        if (type === "warning") {
+            messageBox.style.backgroundColor = '#FFC107'; // Yellow
+        } else if (type === "error") {
+            messageBox.style.backgroundColor = '#F44336'; // Red
+        } else {
+            messageBox.style.backgroundColor = '#2196F3'; // Blue
+        }
+
+        document.body.appendChild(messageBox);
+
+        // Remove message box after animation
+        messageBox.addEventListener('animationend', () => {
+            messageBox.remove();
+        });
+
+        const styleSheet = document.createElement('style');
+        styleSheet.type = 'text/css';
+        styleSheet.innerText = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; top: 0px; }
+                10% { opacity: 1; top: 20px; }
+                90% { opacity: 1; top: 20px; }
+                100% { opacity: 0; top: 0px; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    }
+  </script>
+</body>
+</html>

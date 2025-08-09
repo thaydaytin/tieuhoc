@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thầy Dạy Tin - Trắc nghiệm kiến thức bài học</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset và thiết lập cơ bản */
+    html, body {
+      box-sizing: border-box; /* Đảm bảo padding và border được tính vào chiều rộng */
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      width: 100%; /* Đảm bảo body chiếm toàn bộ chiều rộng */
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit; /* Áp dụng box-sizing cho tất cả các phần tử */
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
+      background-attachment: fixed; /* Đã thêm thuộc tính này để cố định nền */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Đảm bảo footer luôn ở cuối trang */
+      color: #333;
+    }
+
+    /* Header - Đã khôi phục về trạng thái ban đầu và đảm bảo full width */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 40px;
+      background-color: #42a5f5; /* Màu xanh dương gốc */
+      border-bottom: 4px solid #1e88e5; /* Viền xanh dương đậm gốc */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Giữ lại bóng đổ */
+      width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng */
+    }
+    .logo img {
+      height: 100px; /* Kích thước gốc */
+      border-radius: 0; /* Bỏ bo tròn */
+      border: none; /* Bỏ viền */
+    }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 900; /* Độ đậm gốc */
+      font-size: 1.2rem;
+      color: white; /* Màu chữ gốc */
+      transition: all 0.3s ease;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Giữ lại bóng chữ */
+    }
+    nav a:hover {
+      color: #FFD700; /* Thay đổi màu hover để nổi bật */
+      transform: scale(1.1);
+    }
+
+    /* Wrapper cho nội dung chính */
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      width: 100%; /* Wrapper cũng chiếm toàn bộ chiều rộng */
+    }
+
+    /* Container chính của game */
+    .container {
+      background-color: rgba(255, 255, 255, 0.95); /* Nền trắng trong suốt hơn */
+      max-width: 650px; /* Rộng hơn một chút */
+      margin: 20px auto;
+      padding: 30px;
+      border-radius: 25px; /* Bo tròn nhiều hơn */
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Bóng đổ lớn hơn */
+      border: 5px solid #90EE90; /* Viền xanh lá cây nhạt */
+      position: relative;
+      overflow: hidden;
+    }
+    .container::before { /* Hiệu ứng trang trí */
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      background: url('https://placehold.co/100x100/FFD700/FFFFFF?text=%E2%98%85') repeat; /* Ngôi sao nhỏ */
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    h2 {
+      font-family: 'Quicksand', sans-serif; /* Đã đổi font */
+      color: #FF6347; /* Màu đỏ cà chua */
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      padding: 15px;
+      width: calc(80% - 30px); /* Đảm bảo padding không làm tràn */
+      border: 3px solid #ADD8E6; /* Viền xanh da trời nhạt */
+      border-radius: 15px;
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input[type="text"]:focus {
+      border-color: #FF6347;
+      box-shadow: 0 0 10px rgba(255, 99, 71, 0.5);
+    }
+
+    /* Nút chung */
+    button {
+      font-family: 'Quicksand', sans-serif; /* Đã đổi font */
+      font-weight: 700; /* Đặt độ đậm cho dễ đọc */
+      font-size: 1.8rem;
+      padding: 15px 30px;
+      border-radius: 30px; /* Bo tròn nút */
+      background: linear-gradient(to right, #4CAF50, #8BC34A); /* Gradient xanh lá cây */
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    button::before { /* Hiệu ứng lấp lánh */
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease;
+      z-index: 1;
+    }
+    button:hover::before {
+      width: 200%;
+      height: 200%;
+    }
+    button:hover {
+      background: linear-gradient(to right, #388E3C, #689F38); /* Gradient xanh đậm hơn */
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Nút Quay lại */
+    #backBtn {
+      margin: 20px 40px;
+      background: linear-gradient(to right, #64b5f6, #90CAF9); /* Gradient xanh da trời */
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      text-shadow: none;
+      align-self: flex-start; /* Đẩy nút về bên trái */
+    }
+    #backBtn:hover {
+      background: linear-gradient(to right, #42a5f5, #64b5f6);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Màn hình loading */
+    #loading {
+      font-size: 1.5rem;
+      color: #FF6347;
+      font-weight: bold;
+      animation: pulse 1.5s infinite alternate;
+    }
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 1; }
+      to { transform: scale(1.05); opacity: 0.8; }
+    }
+
+    /* Hộp câu hỏi */
+    #questionBox {
+      margin-bottom: 20px;
+    }
+    #question {
+      font-family: 'Quicksand', sans-serif; /* Đã đổi font */
+      font-size: 2rem;
+      color: #4682B4; /* Xanh thép */
+      margin-bottom: 25px;
+      min-height: 80px; /* Đảm bảo chiều cao tối thiểu */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #E0FFFF; /* Xanh nhạt */
+      padding: 15px;
+      border-radius: 15px;
+      border: 3px dashed #ADD8E6;
+    }
+
+    /* Nút lựa chọn */
+    .choice-btn {
+      width: calc(90% - 20px); /* Chiều rộng lớn hơn */
+      margin: 10px auto;
+      padding: 15px;
+      font-size: 1.3rem;
+      border-radius: 20px; /* Bo tròn nhiều hơn */
+      background: linear-gradient(to right, #FFD700, #FFEA00); /* Gradient vàng */
+      color: #8B4513; /* Nâu đất */
+      border: 3px solid #FFA500; /* Viền cam */
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+      font-family: 'Quicksand', sans-serif; /* Đã đổi font */
+      font-weight: 600; /* Đặt độ đậm cho dễ đọc */
+    }
+    .choice-btn:hover {
+      background: linear-gradient(to right, #FFA500, #FFD700); /* Đảo gradient khi hover */
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .choice-btn.correct {
+      background: linear-gradient(to right, #7CFC00, #ADFF2F); /* Xanh lá cây sáng */
+      border-color: #32CD32;
+      animation: bounceIn 0.5s forwards;
+    }
+    .choice-btn.wrong {
+      background: linear-gradient(to right, #FF4500, #FF6347); /* Đỏ cam */
+      border-color: #DC143C;
+      animation: shake 0.5s forwards;
+    }
+
+    /* Hiệu ứng rung lắc */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+    /* Hiệu ứng nảy vào */
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    /* Đồng hồ đếm ngược */
+    #timer {
+      font-family: 'Quicksand', sans-serif; /* Đã đổi font */
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #4682B4;
+      margin-top: 20px;
+      background-color: #FFF;
+      border: 4px dashed #FFD700;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+      animation: pulseTimer 1s infinite alternate;
+    }
+    @keyframes pulseTimer {
+      from { transform: scale(1); box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+      to { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+    }
+
+    /* Kết quả */
+    #result {
+      font-size: 1.8rem;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #32CD32; /* Xanh lá cây */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    #result.wrong-text {
+      color: #FF4500; /* Đỏ cam */
+    }
+
+    /* Màn hình kết thúc */
+    #endScreen h2 {
+      color: #32CD32; /* Xanh lá cây */
+      font-size: 3rem;
+    }
+    #finalScore {
+      font-family: 'Quicksand', sans-serif; /* Đã đổi font */
+      font-weight: 700;
+      font-size: 2rem;
+      color: #4682B4;
+      margin-bottom: 30px;
+      background-color: #E0FFFF;
+      padding: 15px;
+      border-radius: 15px;
+      border: 3px dashed #ADD8E6;
+      display: inline-block;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #64b5f6; /* Xanh da trời */
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 1rem;
+      border-top: 5px solid #1e88e5; /* Xanh dương đậm */
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+      width: 100%; /* Đảm bảo footer chiếm toàn bộ chiều rộng */
+    }
+    footer p {
+      margin: 5px 0;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		padding: 10px 30px;
+	  }
+
+	  .logo {
+		flex: 1;
+		display: flex;
+		justify-content: flex-start;
+	  }
+
+	  nav {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding-top: 1px;
+	  }
+
+	  nav a {
+		margin: 3px 10px;
+		font-size: 1.1rem;
+	  }
+      .container {
+        margin: 20px 10px;
+        padding: 20px;
+        border-radius: 15px;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      input[type="text"] {
+        width: calc(90% - 20px);
+        font-size: 1rem;
+      }
+      button {
+        font-size: 1.5rem;
+        padding: 12px 25px;
+      }
+      #backBtn {
+        margin: 10px 20px;
+        font-size: 1rem;
+      }
+      #question {
+        font-size: 1.5rem;
+        min-height: 60px;
+      }
+      .choice-btn {
+        font-size: 1.1rem;
+        padding: 12px;
+        width: calc(95% - 20px);
+      }
+      #timer {
+        font-size: 2rem;
+        width: 80px;
+        height: 80px;
+      }
+      #result {
+        font-size: 1.5rem;
+      }
+      #endScreen h2 {
+        font-size: 2.5rem;
+      }
+      #finalScore {
+        font-size: 1.5rem;
+      }
+    }
+    /* Keyframes for messageBox */
+    @keyframes fadeInOut {
+        0% { opacity: 0; top: 0px; }
+        10% { opacity: 1; top: 20px; }
+        90% { opacity: 1; top: 20px; }
+        100% { opacity: 0; top: 0px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="../index.html"><img src="../logo.png" alt="Logo Thầy Dạy Tin"></a>
+    </div>
+    <nav>
+      <a href="../index.html">Trang chủ</a>
+      <a href="../MoPhongPC/MoPhongPC.html" target="_blank" rel="noopener noreferrer">PC-Mô Phỏng</a>
+      <a href="../gocgiaitri.html">Góc Giải Trí</a>
+      <a href="../gocthongtin.html">Góc Thông Tin</a>
+    </nav>
+  </header>
+
+  <div class="wrapper">
+    <div style="text-align: left; width: 100%; max-width: 650px;">
+      <button id="backBtn" onclick="history.back()" title="Quay lại">⬅ Quay lại</button>
+    </div>
+
+    <div class="container" id="startScreen">
+      <h2>🎮 Bắt đầu chơi trắc nghiệm nhanh</h2>
+      <input type="text" id="studentName" placeholder="Nhập tên của bạn">
+      <br><br>
+      <button onclick="startGame()">Bắt đầu</button>
+      <p id="loading" style="color: red; font-weight: bold;">⏳ Đang tải câu hỏi...</p>
+    </div>
+
+    <div class="container" id="gameScreen" style="display:none;">
+      <div id="questionBox">
+        <h3 id="question"></h3>
+        <div id="choices"></div>
+        <div id="timer">⏱️ 20</div>
+        <div id="result"></div>
+      </div>
+    </div>
+
+    <div class="container" id="endScreen" style="display:none;">
+      <h2>🎉 Hoàn thành!</h2>
+      <p id="finalScore"></p>
+      <button onclick="restartGame()">🔁 Làm lại</button>
+      <button onclick="finishAndBack()">✅ Hoàn thành</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
+    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
+  </footer>
+
+  <script>
+    let questions = [];
+    let current = 0;
+    let totalScore = 0;
+    let timer;
+    let timeLeft = 20; // Tăng thời gian lên 20 giây
+    let startTime;
+    let student = '';
+
+    // Hàm lấy tham số từ URL
+    function getParam(key) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(key);
+    }
+
+    // Hàm xáo trộn mảng (Fisher-Yates shuffle)
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Tải dữ liệu câu hỏi từ JSON
+    const jsonURL = getParam('json');
+    if (!jsonURL) {
+      document.getElementById("loading").innerText = "❌ Không có đường dẫn dữ liệu câu hỏi!";
+    } else {
+      const finalURL = decodeURIComponent(jsonURL);
+      console.log("📁 finalURL:", finalURL);
+      fetch(finalURL)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then(data => {
+          questions = shuffleArray(data); // Trộn câu hỏi
+          document.getElementById("loading").innerText = "✅ Câu hỏi đã sẵn sàng! Nhập tên để bắt đầu.";
+        })
+        .catch(err => {
+          document.getElementById("loading").innerText = "❌ Không thể tải dữ liệu câu hỏi. Vui lòng kiểm tra đường dẫn JSON.";
+          console.error("Lỗi tải dữ liệu JSON:", err);
+        });
+    }
+
+    // Hàm bắt đầu game
+    function startGame() {
+      student = document.getElementById("studentName").value.trim();
+      if (student === "") {
+        showMessage("Vui lòng nhập tên của bạn để bắt đầu trò chơi!", "warning");
+        return;
+      }
+      if (questions.length === 0) {
+        showMessage("Dữ liệu câu hỏi chưa sẵn sàng hoặc bị lỗi. Vui lòng thử lại sau.", "error");
+        return;
+      }
+      current = 0;
+      totalScore = 0;
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("gameScreen").style.display = "block";
+      showQuestion();
+    }
+
+    // Hàm hiển thị câu hỏi
+    function showQuestion() {
+      if (current >= questions.length) {
+        finishGame();
+        return;
+      }
+
+      let q = questions[current];
+      document.getElementById("question").innerText = `Câu ${current + 1}: ${q.question}`;
+      let choiceDiv = document.getElementById("choices");
+      choiceDiv.innerHTML = '';
+
+      // Xáo trộn các lựa chọn
+      let choicesWithIndex = q.choices.map((choice, idx) => ({
+        text: choice, originalIndex: idx
+      }));
+      choicesWithIndex = shuffleArray(choicesWithIndex);
+      q.shuffledAnswer = choicesWithIndex.findIndex(c => c.originalIndex === q.answer);
+
+      // Tạo nút lựa chọn
+      choicesWithIndex.forEach((choiceObj, idx) => {
+        let btn = document.createElement("button");
+        btn.className = "choice-btn";
+        btn.innerText = `${String.fromCharCode(65 + idx)}. ${choiceObj.text}`;
+        btn.onclick = () => checkAnswer(idx, btn);
+        choiceDiv.appendChild(btn);
+      });
+
+      document.getElementById("result").innerText = '';
+      document.getElementById("result").className = ''; // Xóa class cũ
+      timeLeft = 20; // Đặt lại thời gian
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      startTime = new Date();
+      clearInterval(timer); // Xóa timer cũ nếu có
+      timer = setInterval(updateTimer, 1000);
+    }
+
+    // Hàm cập nhật đồng hồ đếm ngược
+    function updateTimer() {
+      timeLeft--;
+      document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+      if (timeLeft <= 5) { // Hiệu ứng đỏ khi còn ít thời gian
+        document.getElementById("timer").style.color = "#FF4500";
+      } else {
+        document.getElementById("timer").style.color = "#4682B4";
+      }
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        document.getElementById("result").innerText = "⏳ Hết giờ!";
+        document.getElementById("result").className = 'wrong-text';
+        disableChoices(); // Vô hiệu hóa các lựa chọn khi hết giờ
+        setTimeout(() => {
+          current++;
+          showQuestion();
+        }, 1500); // Đợi lâu hơn một chút để người chơi kịp đọc thông báo
+      }
+    }
+
+    // Hàm kiểm tra đáp án
+    function checkAnswer(selected, clickedButton) {
+      clearInterval(timer); // Dừng đồng hồ
+      let q = questions[current];
+      let isCorrect = selected === q.shuffledAnswer;
+      let now = new Date();
+      let secondsUsed = Math.round((now - startTime) / 1000);
+      let score = isCorrect ? Math.max(0, 10 - Math.floor(secondsUsed / 2)) : 0; // Tính điểm
+      totalScore += score;
+
+      // Hiển thị kết quả và hiệu ứng
+      if (isCorrect) {
+        document.getElementById("result").innerText = `✅ Đúng rồi! Bạn được +${score} điểm!`;
+        document.getElementById("result").className = ''; // Reset class
+        clickedButton.classList.add('correct');
+      } else {
+        document.getElementById("result").innerText = "❌ Sai rồi! Cố gắng lần sau nhé!";
+        document.getElementById("result").className = 'wrong-text';
+        clickedButton.classList.add('wrong');
+        // Đánh dấu đáp án đúng
+        const allChoiceButtons = document.querySelectorAll('.choice-btn');
+        allChoiceButtons[q.shuffledAnswer].classList.add('correct');
+      }
+
+      disableChoices(); // Vô hiệu hóa các lựa chọn sau khi trả lời
+
+      setTimeout(() => {
+        current++;
+        showQuestion();
+      }, 2000); // Đợi lâu hơn để người chơi xem kết quả
+    }
+
+    // Hàm vô hiệu hóa các nút lựa chọn
+    function disableChoices() {
+      const choiceButtons = document.querySelectorAll('.choice-btn');
+      choiceButtons.forEach(btn => {
+        btn.onclick = null; // Xóa sự kiện click
+        btn.style.pointerEvents = 'none'; // Vô hiệu hóa click
+      });
+    }
+
+    // Hàm kết thúc game
+    function finishGame() {
+      document.getElementById("gameScreen").style.display = "none";
+      document.getElementById("endScreen").style.display = "block";
+      document.getElementById("finalScore").innerText = `Tên: ${student} | Tổng điểm: ${totalScore} điểm`;
+    }
+
+    // Hàm chơi lại game
+    function restartGame() {
+      questions = shuffleArray(questions); // Xáo trộn lại câu hỏi
+      current = 0;
+      totalScore = 0;
+      document.getElementById("endScreen").style.display = "none";
+      document.getElementById("gameScreen").style.display = "block";
+      showQuestion();
+    }
+
+    // Hàm hoàn thành và quay lại trang trước
+    function finishAndBack() {
+      sendToGoogleSheet(student, totalScore);
+      // Sử dụng setTimeout để đảm bảo fetch request có thời gian gửi đi trước khi quay lại
+      setTimeout(() => {
+        history.back();
+      }, 500);
+    }
+
+    // Hàm gửi dữ liệu lên Google Sheet (giữ nguyên logic gốc)1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    /*function sendToGoogleSheet(name, score) {
+      const tuan = getParam("tuan");
+      const ngaybdStr = getParam("ngaybd");
+      const ngayktStr = getParam("ngaykt");
+
+      if (!ngaybdStr || !ngayktStr) {
+        console.log("Thiếu tham số ngày bắt đầu hoặc kết thúc!");
+        return;
+      }
+
+      const ngaybd = new Date(ngaybdStr);
+      const ngaykt = new Date(ngayktStr);
+      const now = new Date();
+
+      if (now >= ngaybd && now <= ngaykt) {
+        fetch('https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec', {
+          method: 'POST',
+          mode: 'no-cors', // Quan trọng để tránh lỗi CORS
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            score: score,
+            tuan: tuan,
+            timestamp: now.toISOString()
+          })
+        })
+        .then(() => console.log("Dữ liệu đã được gửi thành công!"))
+        .catch(e => console.error("Lỗi khi gửi dữ liệu:", e));
+      } else {
+        console.log("Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
+      }
+    }*/
+	function sendToGoogleSheet(tenHS, diem) {
+	  const lop = getParam("lop");  
+	  const tuan = getParam("tuan");       // Lấy tuần từ URL hoặc biến
+	  const ngaybdStr = getParam("ngaybd");// Ngày bắt đầu từ URL
+	  const ngayktStr = getParam("ngaykt");// Ngày kết thúc từ URL
+
+	  // Kiểm tra tham số ngày
+	  if (!ngaybdStr || !ngayktStr) {
+		console.log("Thiếu tham số ngày bắt đầu hoặc kết thúc!");
+		return;
+	  }
+
+	  const ngaybd = new Date(ngaybdStr);
+	  const ngaykt = new Date(ngayktStr);
+	  const now = new Date();
+
+	  // Đặt giờ về 00:00 để so sánh ngày
+	  now.setHours(0, 0, 0, 0);
+	  ngaybd.setHours(0, 0, 0, 0);
+	  ngaykt.setHours(0, 0, 0, 0);
+
+	  // Chỉ gửi nếu đang trong thời gian hợp lệ
+	  if (now >= ngaybd && now <= ngaykt) {
+		fetch("https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec", {
+		  method: "POST",
+		  mode: "no-cors", // tránh lỗi CORS
+		  headers: { "Content-Type": "application/json" },
+		  body: JSON.stringify({
+			tenHS: tenHS,
+			diem: diem,
+			tuan: tuan,
+			lop: lop // Thay bằng lớp thực tế: "3", "4" hoặc "5"
+		  })
+		})
+		.then(() => {
+		  console.log("✅ Dữ liệu đã được gửi lên Google Sheet!");
+		})
+		.catch(e => console.error("❌ Lỗi khi gửi dữ liệu:", e));
+	  } else {
+		console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
+	  }
+	}
+
+
+
+    // Hàm hiển thị thông báo thay cho alert()1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    function showMessage(message, type = "info") {
+        const messageBox = document.createElement('div');
+        messageBox.style.position = 'fixed';
+        messageBox.style.top = '20px';
+        messageBox.style.left = '50%';
+        messageBox.style.transform = 'translateX(-50%)';
+        messageBox.style.padding = '15px 30px';
+        messageBox.style.borderRadius = '10px';
+        messageBox.style.zIndex = '1000';
+        messageBox.style.color = 'white';
+        messageBox.style.fontWeight = 'bold';
+        messageBox.style.fontSize = '1.2rem';
+        messageBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+        messageBox.style.animation = 'fadeInOut 4s forwards';
+        messageBox.innerText = message;
+
+        if (type === "warning") {
+            messageBox.style.backgroundColor = '#FFC107'; // Yellow
+        } else if (type === "error") {
+            messageBox.style.backgroundColor = '#F44336'; // Red
+        } else {
+            messageBox.style.backgroundColor = '#2196F3'; // Blue
+        }
+
+        document.body.appendChild(messageBox);
+
+        // Remove message box after animation
+        messageBox.addEventListener('animationend', () => {
+            messageBox.remove();
+        });
+    }
+
+    // Tự động focus vào input sau khi trang tải xong
+    document.addEventListener('DOMContentLoaded', () => {
+        const studentNameInput = document.getElementById('studentName');
+        setTimeout(() => {
+            studentNameInput.focus();
+        }, 100); // Một độ trễ nhỏ để đảm bảo mọi thứ đã sẵn sàng
+
+        // Thêm sự kiện click cho startScreen để đảm bảo focus
+        document.getElementById('startScreen').addEventListener('click', () => {
+            studentNameInput.focus();
+        });
+    });
+  </script>
+</body>
+</html>
