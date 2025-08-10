@@ -23,6 +23,7 @@
       font-family: 'Quicksand', sans-serif;
       background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
       background-size: cover;
+	  background-attachment: fixed;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -152,7 +153,26 @@
       font-size: 1rem; /* Lớn hơn một chút */
       color: #555;
     }
-
+	/* Honor Board Section */
+    .honor-board {
+      text-align: center;
+      padding: 10px 20px;
+      background-color: rgba(255, 255, 255, 0.95); /* Nền trắng trong suốt */
+      border-radius: 25px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      margin-bottom: 30px;
+      width: 90%;
+      max-width: 900px; /* Giới hạn chiều rộng */
+      border: 5px solid #FFD700; /* Viền vàng tươi sáng */
+    }
+    .honor-board h2 {
+      font-family: 'Quicksand', sans-serif;
+      color: #FF6347; /* Màu đỏ cà chua */
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    
     /* Footer - Giữ nguyên phong cách đã thống nhất */
     footer {
       background-color: #64b5f6;
@@ -207,16 +227,25 @@
         gap: 20px;
       }
       .card {
-        width: 90%; /* Chiếm gần hết chiều rộng trên mobile */
+        width: 75%; /* Chiếm gần hết chiều rộng trên mobile */
       }
       .card img {
         height: 150px;
       }
       .card-body h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
       .card-body p {
         font-size: 0.9rem;
+      }
+	  .honor-board {
+        padding: 30px 10px;
+      }
+      .honor-board h2 {
+        font-size: 2.2rem;
+      }
+      .honor-board iframe {
+        width: 95%;
       }
     }
   </style>
@@ -266,6 +295,11 @@
           <p>Chọn mở túi mù và trả lời các câu hỏi bên trong</p>
         </div>
       </div>
+    </section>
+	
+	<section class="honor-board">
+      <h2>🏆 Bảng Vinh Danh</h2>
+      <div id="top10-container">Đang tải dữ liệu...</div>
     </section>
   </div>
 
@@ -345,6 +379,84 @@
         `;
         document.head.appendChild(styleSheet);
     }
+	
+	// load top 10
+	function loadTop10() {
+	  const lop = getParam("lop");
+	  const tuan = getParam("tuan");
+
+	  if (!lop || !tuan) {
+		document.getElementById("top10-container").innerHTML = "<p style='color:red;'>Thiếu tham số lớp hoặc tuần!</p>";
+		return;
+	  }
+
+	  const url = `https://script.google.com/macros/s/AKfycbxS_C_m_b9tZ9FgP_CLzOXhXZAzr9c9-IBQjxUsE4P06ERkpPyNwIlY-VvUkqzpuGt38Q/exec?lop=${lop}&tuan=${tuan}`; // Thay ID_WEB_APP bằng link web app Apps Script
+
+	  fetch(url)
+		.then(res => res.json())
+		.then(data => {
+		  if (data.status === "success") {
+			renderTable(data.data);
+		  } else {
+			document.getElementById("top10-container").innerHTML = `<p style='color:red;'>${data.message}</p>`;
+		  }
+		})
+		.catch(err => {
+		  document.getElementById("top10-container").innerHTML = `<p style='color:red;'>Lỗi khi tải dữ liệu: ${err}</p>`;
+		});
+	}
+
+	function renderTable(rows) {
+  let html = `
+    <div style="display: flex; justify-content: center; margin-top: 15px;">
+      <table style="border-collapse: collapse; width: 100%; max-width: 500px; font-family: inherit; text-align: center;">
+        <thead>
+          <tr style="background-color: #ffd700; font-weight: bold; font-size: 1.1em;">
+            <th style="padding: 10px; border: 1px solid #ccc;">Hạng</th>
+            <th style="padding: 10px; border: 1px solid #ccc;">Tên học sinh</th>
+            <th style="padding: 10px; border: 1px solid #ccc;">Điểm</th>
+            <th style="padding: 10px; border: 1px solid #ccc;">Tuần</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  const trophyIcons = [
+    "🏆", // Vàng
+    "🥈", // Bạc
+    "🥉"  // Đồng
+  ];
+
+  rows.forEach((row, index) => {
+    const rank = index + 1;
+    let rankDisplay = rank;
+
+    if (rank <= 3) {
+      rankDisplay = `${trophyIcons[rank - 1]} ${rank}`;
+    }
+
+    html += `
+      <tr style="background-color: ${index % 2 === 0 ? '#fff8dc' : '#ffffff'};">
+        <td style="padding: 8px; border: 1px solid #ccc; font-weight: bold;">${rankDisplay}</td>
+        <td style="padding: 8px; border: 1px solid #ccc; font-weight: bold; color: #333;">${row[0]}</td>
+        <td style="padding: 8px; border: 1px solid #ccc; font-weight: bold; color: #d2691e;">${row[1]}</td>
+        <td style="padding: 8px; border: 1px solid #ccc;">${row[2]}</td>
+      </tr>
+    `;
+  });
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  document.getElementById("top10-container").innerHTML = html;
+}
+
+	// Khi trang load thì tự chạy
+	document.addEventListener("DOMContentLoaded", loadTop10);
+	
   </script>
 </body>
 </html>
