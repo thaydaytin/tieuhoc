@@ -248,9 +248,11 @@
         width: 100%;
       }
       .baihoc a.button {
-        width: calc(100% - 40px); /* Nút chiếm gần hết chiều rộng */
-        text-align: center;
-      }
+		  width: calc(100% - 40px); /* Nút chiếm gần hết chiều rộng */
+		  text-align: center;
+		  display: block;           /* Đảm bảo là block để margin auto có tác dụng */
+		  margin: 0 auto;           /* Căn giữa theo chiều ngang */
+		}
     }
   </style>
 </head>
@@ -327,4 +329,3 @@
   </footer>
 </body>
 </html>
-
