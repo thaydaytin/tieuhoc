@@ -3,15 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thầy Dạy Tin</title>
+  <title>Thầy Dạy Tin - Lớp 3</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
+    /* Reset và thiết lập cơ bản */
+    html, body {
+      box-sizing: border-box;
+      height: 100%;
       margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    body {
       font-family: 'Quicksand', sans-serif;
-      background-color: #e3f2fd;
+      background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
+      background-attachment: fixed; /* Đã thêm thuộc tính này để cố định nền */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       color: #333;
     }
+
+    /* Header - Giữ nguyên phong cách đã thống nhất */
     header {
       display: flex;
       justify-content: space-between;
@@ -19,6 +37,7 @@
       padding: 2px 40px;
       background-color: #42a5f5;
       border-bottom: 4px solid #1e88e5;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .logo img {
       height: 100px;
@@ -27,136 +46,282 @@
       margin-left: 25px;
       text-decoration: none;
       font-weight: 900;
-	  font-size: 1.2rem;
+      font-size: 1.2rem;
       color: white;
+      transition: all 0.3s ease;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
+    nav a:hover {
+      color: #FFD700;
+      transform: scale(1.1);
+    }
+
+    /* Wrapper cho nội dung chính */
+    .wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    /* Hero Section - Đã điều chỉnh lại theo yêu cầu */
     .hero {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-around;
-      padding: 0px 20px;
-      background-color: #bbdefb;
+      padding: 0px 20px; /* Đã khôi phục padding gốc */
+      background-color: #bbdefb; /* Đã đổi màu nền thành xanh nhạt */
+      border-radius: 25px; /* Bo tròn */
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Bóng đổ */
+      margin-bottom: 30px; /* Khoảng cách dưới */
+      width: 100%; /* Đảm bảo full chiều rộng */
+      max-width: none; /* Bỏ giới hạn chiều rộng tối đa */
+      border: 5px solid #90EE90; /* Viền xanh lá cây nhạt */
     }
     .hero-text {
       max-width: 500px;
+      text-align: left;
+      padding: 0; /* Đã khôi phục padding gốc */
     }
     .hero-text h1 {
-      font-size: 2.8rem;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 3.2rem; /* Lớn hơn */
       margin-bottom: 20px;
-      color: #1565c0;
+      color: #FF6347; /* Màu đỏ cà chua */
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
     }
     .hero-text p {
-      font-size: 1.2rem;
+      font-size: 1.5rem; /* Lớn hơn */
       margin-bottom: 20px;
+      color: #4682B4; /* Xanh thép */
     }
-    .class-buttons button {
-      background-color: #1e88e5;
-      color: white;
-      padding: 12px 24px;
-      margin: 8px;
-      border: none;
-      border-radius: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s;
+    .hero img {
+      max-width: 500px; /* Đã thêm max-width để giới hạn kích thước ảnh */
+      width: 100%; /* Đảm bảo ảnh co giãn trong giới hạn max-width */
+      height: auto;
+      border-radius: 0; /* Đã loại bỏ bo tròn */
+      margin-top: 0px;
+      box-shadow: none; /* Đã loại bỏ đổ bóng */
     }
-    .class-buttons button:hover {
-      background-color: #1565c0;
-    }
-    .honor-board {
-      text-align: center;
-      padding: 60px 20px;
-      background-color: #e3f2fd;
-    }
-    .honor-board h2 {
-      color: #0d47a1;
-      margin-bottom: 20px;
-    }
-    .honor-board iframe {
-      width: 90%;
-      height: 300px;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-	.cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 40px 20px;
-    }
-	.card-link {
-	  text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
-	  display: block; /* Biến liên kết thành khối để nó chiếm toàn bộ không gian của card */
-	}
 
-    .card {
-      background-color: #bbdefb;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 250px;
-      transition: transform 0.2s;
+    /* Danh sách bài học */
+    h1 { /* Tiêu đề "Danh sách bài học" */
+      font-family: 'Quicksand', sans-serif;
+      color: #FF6347;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
     }
-    .card:hover {
-      transform: translateY(-5px);
-	  background-color: #42a5f5;
+    #danhsach {
+      padding: 20px 40px;
+      text-align: left;
+      background-color: rgba(255, 255, 255, 0.95); /* Nền trắng trong suốt */
+      border-radius: 25px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 800px; /* Giới hạn chiều rộng */
+      margin-bottom: 30px;
+      border: 5px solid #FFD700; /* Viền vàng tươi sáng */
     }
-    .card img {
+
+    .baihoc {
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+      align-items: center;
+      gap: 20px;
+      padding: 15px;
+      background-color: #E0FFFF; /* Nền xanh nhạt cho mỗi bài học */
+      border-radius: 15px;
+      border: 2px dashed #ADD8E6; /* Viền nét đứt */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .baihoc:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .baihoc strong {
+      flex: 1;
+      font-size: 1.5rem; /* Lớn hơn */
+      color: #4682B4; /* Xanh thép */
+    }
+
+    .baihoc a.button {
+      padding: 10px 20px; /* Lớn hơn */
+      background: linear-gradient(to right, #4CAF50, #8BC34A); /* Gradient xanh lá cây */
+      color: white;
+      text-decoration: none;
+      border-radius: 20px; /* Bo tròn nhiều hơn */
+      white-space: nowrap;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+    .baihoc a.button:hover {
+      background: linear-gradient(to right, #388E3C, #689F38); /* Gradient xanh đậm hơn */
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 2px dashed #ADD8E6; /* Viền nét đứt dày hơn */
+      margin: 20px 0; /* Khoảng cách lớn hơn */
+    }
+
+    /* Footer - Giữ nguyên phong cách đã thống nhất */
+    footer {
+      background-color: #64b5f6;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 1rem;
+      border-top: 4px solid #1e88e5;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
       width: 100%;
-      height: 160px;
-      object-fit: cover;
     }
-    .card-body {
-      padding: 10px;
-	  text-align: center;
+    footer p {
+      margin: 5px 0;
+      font-weight: 600;
     }
-    .card-body h3 {
-      margin-top: 0;
-      color: #d84315;
-    }
-    .card-body p {
-      margin: 10px 0 0;
-	  font-weight: 800;
-      font-size: 0.95rem;
-    }
+
+    /* Responsive */
     @media (max-width: 768px) {
+	header {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		padding: 10px 30px;
+	  }
+
+	  .logo {
+		flex: 1;
+		display: flex;
+		justify-content: flex-start;
+	  }
+
+	  nav {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding-top: 1px;
+	  }
+
+	  nav a {
+		margin: 3px 10px;
+		font-size: 1.1rem;
+	  }
       .hero {
         flex-direction: column;
         text-align: center;
+        padding: 20px;
       }
-	footer a:hover {
-		color: #ffeb3b;
-	}
-      .class-buttons button {
-        width: 80%;
-        margin-top: 10px;
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .hero-text p {
+        font-size: 1.2rem;
+      }
+      .hero img {
+        max-width: 80%; /* Ảnh lớn hơn trên mobile */
+        margin-top: 20px;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      #danhsach {
+        padding: 15px 20px;
+      }
+      .baihoc {
+        flex-direction: column; /* Xếp các nút xuống dòng */
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .baihoc strong {
+        font-size: 1.2rem;
+        text-align: center;
+        width: 100%;
+      }
+      .baihoc a.button {
+        width: calc(100% - 40px); /* Nút chiếm gần hết chiều rộng */
+        text-align: center;
       }
     }
-	
   </style>
 </head>
 <body>
+	<header>
+		<div class="logo">
+		   <a href="../index.html"> 
+				<img src="../logo.png" alt="Logo Thầy Dạy Tin">
+			</a>
+		</div>
+		<nav>
+		  <a href="../index.html">Trang chủ</a>
+		  <a href="../MoPhongPC/MoPhongPC.html" target="_blank" rel="noopener noreferrer">PC-Mô Phỏng</a>
+		  <a href="../gocgiaitri.html">Góc Giải Trí</a>
+		  <a href="../gocthongtin.html">Góc Thông Tin</a>
+		</nav>
+	</header>
 
-  <header>
-    <div class="logo">
-       <a href="../index.html"> 
-			<img src="../logo.png" alt="Logo Thầy Dạy Tin">
-		</a>
-    </div>
-    <nav>
-      <a href="../index.html">Trang chủ</a>
-      <a href="#">Thời Khóa Biểu</a>
-      <a href="#">Góc Giải Trí</a>
-      <a href="#">Góc Phụ Huynh</a>
-    </nav>
-  </header>
+	<div class="wrapper">
+	  <section class="hero">
+		<div class="hero-text">
+		  <h1>Chào mừng các em lớp Tin học 3</h1>
+		  <p>Hãy chọn bài học của ngày hôm nay.</p>
+		</div>
+		<img src="Banner.png" alt="Tin học" style="border-radius: 20px; margin-top: 0px" />
+	  </section>
 
+	   <h1>📚 Danh sách bài học</h1>
+		<div id="danhsach">Đang tải danh sách bài học...</div>
+	</div>
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbwx6oIwMBB8ar7uQEbw-8Rw7ayYyLrTTxKg94hTluY8rS1wC6RBD_aUlk1etic9X0Ye/exec"; // <-- thay link tại đây
+	const lop = "4"; //																																						<-- thay lop tại day
+    fetch(API_URL, {
+      mode: 'cors' // Đã thêm mode: 'cors' để hỗ trợ tải dữ liệu từ các nguồn khác
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        const container = document.getElementById("danhsach");
+		container.innerHTML = ""; // Xoá nội dung "Đang tải..."
+
+		data.forEach((bai, index) => {
+		  const div = document.createElement("div");
+		  div.className = "baihoc";
+		  div.innerHTML = `
+			<strong>${bai.ten}</strong>
+			<a class="button" href="../xembaigiang.html?link=${encodeURIComponent(bai.link)}" target="_blank">Xem bài giảng</a>
+			<a class="button" href="../tracnghiem/selectGame.html?lop=${encodeURIComponent(lop)}&json=${encodeURIComponent(bai.json)}&tuan=${encodeURIComponent(bai.tuan)}&ten=${encodeURIComponent(bai.ten)}&ngaybd=${encodeURIComponent(bai.ngaybd)}&ngaykt=${encodeURIComponent(bai.ngaykt)}">Làm Bài Tập</a>
+		  `;
+		  container.appendChild(div);
+
+		  // Thêm đường kẻ nếu không phải bài cuối
+		  if (index < data.length - 1) {
+			const hr = document.createElement("hr");
+			hr.className = "divider";
+			container.appendChild(hr);
+		  }
+		});
+      })
+      .catch(err => {
+        document.getElementById("danhsach").innerText = "Không thể tải danh sách bài học. Vui lòng kiểm tra kết nối hoặc đường dẫn API.";
+        console.error("Lỗi tải dữ liệu:", err);
+      });
+  </script>
   
-
-  <footer style="background-color: #64b5f6; color: white; text-align: center; padding: 20px 10px; font-size: 1rem; border-top: 4px solid #1e88e5;">
+  <footer>
     <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
