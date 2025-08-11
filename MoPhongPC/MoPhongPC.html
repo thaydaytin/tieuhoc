@@ -869,7 +869,7 @@
     <div id="fullscreen-prompt-overlay" class="fullscreen-prompt-overlay">
         <div class="fullscreen-prompt-content">
             <!--<button id="fullscreen-close-button" class="fullscreen-close-button" title="Đóng">X</button> -->
-            <p class="text-xl font-bold mb-4">Chào mừng bạn đến với Desktop Windows!</p>
+            <p class="text-xl font-bold mb-4">Chào mừng bạn đến với bản mô phỏng Windows!</p>
             <p class="mb-4">Để có trải nghiệm tốt nhất, vui lòng bật chế độ toàn màn hình.</p>
             <button id="enter-fullscreen-button">Bật toàn màn hình</button>
         </div>
@@ -2024,7 +2024,7 @@
                     fullscreenPromptOverlay.classList.remove('show');
                 } else {
                     // Fullscreen exited, ensure it's hidden
-                    fullscreenPromptOverlay.classList.remove('show');
+                    fullscreenPromptOverlay.classList.add('show'); /////////////////////////////////////////////////////
                 }
             });
 
