@@ -2017,16 +2017,31 @@
            //     fullscreenPromptOverlay.classList.remove('show'); // Hide the prompt
            // });
 
-            // Hide the fullscreen prompt once fullscreen is entered or exited
-            document.addEventListener('fullscreenchange', () => {
-                if (document.fullscreenElement) {
-                    // Fullscreen entered, hide the prompt
-                    fullscreenPromptOverlay.classList.remove('show');
-                } else {
-                    // Fullscreen exited, ensure it's hidden
-                    fullscreenPromptOverlay.classList.add('show'); /////////////////////////////////////////////////////
-                }
-            });
+            let skipPrompt = false;
+
+			// Bắt tổ hợp phím Alt + Q
+			document.addEventListener('keydown', (e) => {
+				if (e.altKey && e.key.toLowerCase() === 'q') {
+					skipPrompt = true; // Đánh dấu là thoát bằng Alt+Q
+					if (document.fullscreenElement) {
+						document.exitFullscreen();
+					}
+				}
+			});
+
+			// Kiểm tra khi fullscreen thay đổi
+			document.addEventListener('fullscreenchange', () => {
+				if (document.fullscreenElement) {
+					// Vào fullscreen => ẩn prompt
+					fullscreenPromptOverlay.classList.remove('show');
+				} else {
+					if (!skipPrompt) {
+						// Thoát fullscreen mà không phải do Alt+Q => hiện prompt
+						fullscreenPromptOverlay.classList.add('show');
+					}
+					skipPrompt = false; // Reset lại cờ
+				}
+			});
 
             // Show fullscreen prompt on page load
             fullscreenPromptOverlay.classList.add('show');
