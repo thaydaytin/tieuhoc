@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thầy Dạy Tin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
   <style>
     /* Reset và thiết lập cơ bản */
     html, body {
@@ -20,7 +21,7 @@
     }
 
     body {
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Nunito', sans-serif;
       background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
       background-attachment: fixed; /* Cố định nền */
       display: flex;
@@ -28,6 +29,9 @@
       min-height: 100vh;
       color: #333;
     }
+	.font-patrick-hand {
+            font-family: 'Patrick Hand', cursive;
+        }
 
     /* Header - Giữ nguyên phong cách đã thống nhất */
      header {
@@ -87,7 +91,7 @@
       padding: 0; /* Đã điều chỉnh padding cho text để khớp với lop3.html */
     }
     .hero-text h1 {
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Patrick Hand', sans-serif;
       font-size: 3.2rem; /* Lớn hơn */
       margin-bottom: 20px;
       color: #FF6347; /* Màu đỏ cà chua */
@@ -109,7 +113,7 @@
 
     /* Nút trong hero section */
     .class-buttons button {
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Patrick Hand', sans-serif;
       font-weight: 700;
       background: linear-gradient(to right, #4CAF50, #8BC34A); /* Gradient xanh lá cây */
       color: white;
@@ -194,18 +198,30 @@
       background-color: #90CAF9; /* Màu nền hover xanh sáng hơn */
       border-color: #FFA500; /* Đã đổi màu viền hover thành cam */
     }
-    .card img {
-      width: 100%;
-      height: 180px; /* Chiều cao ảnh lớn hơn */
-      object-fit: cover;
-      border-bottom: 3px solid #FFC107; /* Viền dưới ảnh */
-    }
+    .class-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease-in-out;
+        }
+        .class-card:nth-child(1) .class-icon { background-color: #a7f3d0; } /* Xanh mint */
+        .class-card:nth-child(2) .class-icon { background-color: #bfdbfe; } /* Xanh baby */
+        .class-card:nth-child(3) .class-icon { background-color: #fed7aa; } /* Cam đào nhẹ */
+
+        .class-card:nth-child(1):hover .class-icon { background-color: #6ee7b7; }
+        .class-card:nth-child(2):hover .class-icon { background-color: #93c5fd; }
+        .class-card:nth-child(3):hover .class-icon { background-color: #fdba74; }
     .card-body {
       padding: 15px; /* Tăng padding */
       text-align: center;
     }
     .card-body h3 {
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Patrick Hand', sans-serif;
       margin-top: 10px;
       color: #D84315; /* Màu đỏ cam đậm */
       font-size: 1.8rem; /* Lớn hơn */
@@ -221,8 +237,8 @@
     /* Honor Board Section */
     .honor-board {
       text-align: center;
-      padding: 60px 20px;
-      background-color: rgba(255, 255, 255, 0.95); /* Nền trắng trong suốt */
+      padding: 20px 20px;
+      background-color: #bbdefb ; /* Màu xanh */
       border-radius: 25px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       margin-bottom: 30px;
@@ -231,11 +247,27 @@
       border: 5px solid #FFD700; /* Viền vàng tươi sáng */
     }
     .honor-board h2 {
-      font-family: 'Quicksand', sans-serif;
-      color: #FF6347; /* Màu đỏ cà chua */
+      font-family: 'Patrick Hand', sans-serif;
+      color: #4682B4; /* Màu xanh */
       font-size: 2.8rem;
       margin-bottom: 20px;
       text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+    }
+	.honor-board ul {
+        list-style: none; /* Bỏ dấu chấm mặc định của list */
+        padding-left: 10px; /* Xóa padding mặc định của ul */
+        text-align: left; /* Căn lề trái cho toàn bộ danh sách */
+    }
+    .honor-board ul li {
+        font-size: 1.25rem; /* Tăng kích thước chữ, ví dụ 1.25rem (khoảng 20px) */
+        line-height: 1.6; /* Tăng khoảng cách dòng để dễ đọc hơn */
+        margin-bottom: 0.8rem; /* Khoảng cách giữa các mục tin */
+        text-align: left; /* Đảm bảo từng mục căn lề trái */
+    }
+	.honor-board p {
+        font-size: 1.25rem; /* Tăng kích thước chữ, ví dụ 1.25rem (khoảng 20px) */
+        line-height: 1.6; /* Tăng khoảng cách dòng để dễ đọc hơn */
+        margin-bottom: 0.8rem; /* Khoảng cách giữa các mục tin */
     }
     .honor-board iframe {
       width: 90%;
@@ -335,7 +367,20 @@
         width: 95%;
       }
     }
-  </style>
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+</style>
 </head>
 <body>
 
@@ -365,33 +410,50 @@
       <img src="HomeBanner.png" alt="Tin học" />
     </section>
 
-    <section class="cards">
-      <a href="lop3/lop3.html" class="card-link">
-        <div class="card">
-          <div class="card-body">
-            <h3>Lớp 3</h3>
-            <p>Mầm non công nghệ</p>
-          </div>
-        </div>
-      </a>
-      <a href="lop4/lop4.html" class="card-link">
-        <div class="card">
-          <div class="card-body">
-            <h3>Lớp 4</h3>
-            <p>Chồi non lập trình</p>
-          </div>
-        </div>
-      </a>
-      <a href="lop5/lop5.html" class="card-link">
-        <div class="card">
-          <div class="card-body">
-            <h3>Lớp 5</h3>
-            <p>Búp non sáng tạo số</p>
-          </div>
-        </div>
-      </a>    
-    </section>
-    
+	<section class="cards">
+                <div class="card">
+					<div class="card-body">
+                    <div class="class-icon bg-yellow-300 text-yellow-800 text-5xl font-patrick-hand">3</div>
+                    <h3>Lớp 3</h3>
+                    <p>Mầm non công nghệ</p>
+                    <a href="lop3/lop3.html" class="inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">Khám Phá Ngay!</a>
+					</div>
+                </div>
+                <div class="card">
+					<div class="card-body">
+                    <div class="class-icon bg-blue-300 text-blue-800 text-5xl font-patrick-hand">4</div>
+                    <h3>Lớp 4</h3>
+                    <p class="text-gray-600 text-lg mb-4">Chồi non lập trình</p>
+                    <a href="lop4/lop4.html" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">Vào lớp học!</a>
+                   </div>
+                </div>
+                <div class="card">
+				<div class="card-body">
+                    <div class="class-icon bg-pink-300 text-pink-800 text-5xl font-patrick-hand">5</div>
+                    <h3>Lớp 5</h3>
+                    <p class="text-gray-600 text-lg mb-4">Búp non sáng tạo</p>
+                    <a href="lop5/lop5.html" class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">Bắt Đầu Nào!</a>
+					</div>	
+                </div>
+            </section>
+<!-- BẢNG TIN HOẠT ĐỘNG -->
+<section class="honor-board">
+  <h2>📢 Bảng Tin Hoạt Động</h2>
+  <ul>
+    <li>📆 Tuần này: Thi đấu Lập trình Scratch cấp trường!</li>
+    <li>🆕 Đã cập nhật bài giảng mới cho Lớp 4 - Chủ đề "Khám phá phần mềm học tập".</li>
+    <li>🎉 Chào mừng năm học mới 2025 - 2026!</li>
+  </ul>
+</section>
+
+
+<!-- GÓC SÁNG TẠO
+<section class="honor-board">
+  <h2>🎨 Góc sáng tạo học sinh</h2>
+  <p>Cùng xem những sản phẩm tuyệt vời do các bạn học sinh thực hiện!</p>
+  <img src="creative1.jpg" alt="Sản phẩm 1" />
+  <img src="creative2.jpg" alt="Sản phẩm 2" />
+</section>  -->
     
   </div>
 
