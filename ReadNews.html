@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chơi Game - Thầy Dạy Tin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #2196f3;
+      color: white;
+      padding: 5px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+	.logo img {
+      height: 50px;
+    }
+	.wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .home-button {
+      background-color: white;
+      color: #2196f3;
+      padding: 6px 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+    }
+
+    footer {
+      background-color: #2196f3;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+	<div class="logo">
+		<img src="logo.png" alt="Logo Thầy Dạy Tin">
+	</div>
+    <h1 id="gameTitle">▶️ Đang Xem Bảng Tin </h1>
+    <button class="home-button" onclick="window.location.href='gocgiaitri.html'">⬅️ Quay Lại</button>
+  </header>
+	
+  <iframe id="gameFrame" src=""></iframe>
+
+  <footer>
+    © 2025 - Thầy Dạy Tin | Website học Tin học tiểu học
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const newsUrl = params.get('url');
+    const NewsTitle = params.get('ten');
+
+    if (NewsTitle) {
+      document.getElementById('gameTitle').textContent = `▶️ ${decodeURIComponent(NewsTitle)}`;
+    }
+
+    if (newsUrl) {
+      document.getElementById('gameFrame').src = decodeURIComponent(newsUrl);
+    } else {
+      document.getElementById('gameFrame').outerHTML = "<p style='padding:20px'>Không tìm thấy bảng tin nào.</p>";
+    }
+  </script>
+
+</body>
+</html>
