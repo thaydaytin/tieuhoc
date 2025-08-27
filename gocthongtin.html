@@ -119,19 +119,33 @@
 	.news-list {
 	  list-style: none;
 	  padding: 0;
+	  margin: 0;
+	  text-align: left; /* ✅ canh lề trái */
+	  font-family: 'Patrick Hand', cursive; /* ✅ font Patrick Hand */
+	  font-size: 20px;
 	}
+
 	.news-list li {
 	  padding: 8px 0;
 	  border-bottom: 1px solid #ddd;
 	}
+
 	.news-list li a {
 	  text-decoration: none;
 	  color: #333;
 	  display: inline-flex;
 	  align-items: center;
 	}
+
 	.news-list li a:hover {
 	  color: #007BFF;
+	}
+
+	.news-icon {
+	  width: 40px;
+	  height: 40px;
+	  margin-right: 8px;
+	  vertical-align: middle;
 	}
     /* Nút trong hero section */
     .class-buttons button {
@@ -304,14 +318,14 @@
     .then(res => res.json())
     .then(data => {
       const newsList = document.getElementById('newsList');
-      newsList.innerHTML = "<ul class='news-list'></ul>"; // tạo khung danh sách
+      newsList.innerHTML = "<ul class='news-list'></ul>"; 
       const ul = newsList.querySelector('ul');
 
       data.forEach(news => {
         const li = document.createElement('li');
         li.innerHTML = `
           <a href="ReadNews.html?url=${encodeURIComponent(news.duongdan)}&ten=${encodeURIComponent(news.ten)}">
-            <img src="${news.icon}" alt="${news.ten}" style="width:40px; height:40px; vertical-align:middle; margin-right:8px;">
+            <img src="${news.icon}" alt="${news.ten}" class="news-icon">
             ${news.ten}
           </a>
         `;
@@ -323,5 +337,6 @@
       console.error(error);
     });
 </script>
+
 </body>
 </html>
