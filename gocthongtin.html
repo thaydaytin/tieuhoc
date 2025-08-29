@@ -116,13 +116,37 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       border: 5px solid #90EE90;
     }
-	/* ✅ Giao diện lưới 5 cột + responsive */
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 25px;
-      margin-top: 20px;
-    }
+	.news-list {
+	  list-style: none;
+	  padding: 0;
+	  margin: 0;
+	  text-align: left; /* ✅ canh lề trái */
+	  font-family: 'Patrick Hand', cursive; /* ✅ font Patrick Hand */
+	  font-size: 20px;
+	}
+
+	.news-list li {
+	  padding: 8px 0;
+	  border-bottom: 1px solid #ddd;
+	}
+
+	.news-list li a {
+	  text-decoration: none;
+	  color: #333;
+	  display: inline-flex;
+	  align-items: center;
+	}
+
+	.news-list li a:hover {
+	  color: #007BFF;
+	}
+
+	.news-icon {
+	  width: 40px;
+	  height: 40px;
+	  margin-right: 8px;
+	  vertical-align: middle;
+	}
     /* Nút trong hero section */
     .class-buttons button {
       font-family: 'Patrick Hand', sans-serif;
@@ -184,56 +208,7 @@
       font-weight: 600;
     }
 	
-	 @media (max-width: 992px) {
-      .news-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .news-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .news-item {
-      background-color: rgba(255, 255, 255, 0.95);
-      border: 5px solid #FFD700;
-      border-radius: 25px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      padding: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .news-item:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-      border-color: #FFA500;
-    }
-
-    .news-item img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 5px;
-      pointer-events: none;
-    }
-
-    .news-item p {
-      margin: 0;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #333;
-      pointer-events: none;
-    }
-
+	
     footer {
       background-color: #64b5f6;
       color: white;
@@ -327,7 +302,7 @@
 	  </section>
 
 	  <div class="container">
-      <div class="news-grid" id="newsList">
+      <div class="news-list" id="newsList">
         <!-- Danh sách Tin sẽ được thêm ở đây -->
       </div>
     </div>
@@ -338,26 +313,43 @@
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
   
+  
   <script>
-    fetch('News/dsNews.json')
-      .then(res => res.json())
-      .then(data => {
-        const newsList = document.getElementById('newsList');
-        data.forEach(news => {
-          const link = document.createElement('a');
-          link.href = `ReadNews.html?url=${encodeURIComponent(news.duongdan)}&ten=${encodeURIComponent(news.ten)}`;
-          link.className = 'game-item';
-          link.innerHTML = `
-            <img src="${news.icon}" alt="${news.ten}">
-            <p>${news.ten}</p>
+  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStl0p_32Ae_W51amScGfNB6kr1Dqqhbu8KfT_digEangOOTiDXrXHOFMhxSBFfRhniGmCKnm70lt8F/pub?output=csv";
+
+  fetch(sheetUrl)
+    .then(res => res.text())
+    .then(csvText => {
+      const rows = csvText.split("\n").slice(1); // bỏ tiêu đề
+      const newsList = document.getElementById('newsList');
+      newsList.innerHTML = "<ul class='news-list'></ul>";
+      const ul = newsList.querySelector('ul');
+
+      rows.forEach(row => {
+        const cols = row.split(",");
+        const id = cols[0]?.trim();
+        const icon = cols[1]?.trim();
+        const ten = cols[2]?.trim();
+        const noidung = cols[3]?.trim();
+
+        if (id && ten) {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <a href="ReadNews.html?id=${encodeURIComponent(id)}">
+              <img src="${icon}" alt="${ten}" class="news-icon">
+              ${ten}
+            </a>
           `;
-          newsList.appendChild(link);
-        });
-      })
-      .catch(error => {
-        document.getElementById('newsList').innerHTML = "<p>Không thể tải danh sách tin.</p>";
-        console.error(error);
+          ul.appendChild(li);
+        }
       });
+    })
+    .catch(error => {
+      document.getElementById('newsList').innerHTML = "<p>Không thể tải danh sách tin.</p>";
+      console.error(error);
+    });
   </script>
+
+
 </body>
 </html>
