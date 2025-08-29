@@ -325,18 +325,22 @@
       newsList.innerHTML = "<ul class='news-list'></ul>";
       const ul = newsList.querySelector('ul');
 
-      data.forEach(news => {
-        if (news.id && news.ten) {
-          const li = document.createElement('li');
-          li.innerHTML = `
-            <a href="ReadNews.html?id=${encodeURIComponent(news.id)}">
-              <img src="${news.icon}" alt="${news.ten}" class="news-icon">
-              ${news.ten}
-            </a>
-          `;
-          ul.appendChild(li);
-        }
-      });
+      // Sắp xếp theo id giảm dần
+		data.sort((a, b) => Number(b.id) - Number(a.id));
+
+		data.forEach(news => {
+		  if (news.id && news.ten) {
+			const li = document.createElement('li');
+			li.innerHTML = `
+			  <a href="ReadNews.html?id=${encodeURIComponent(news.id)}">
+				<img src="${news.icon}" alt="${news.ten}" class="news-icon">
+				${news.ten}
+			  </a>
+			`;
+			ul.appendChild(li);
+		  }
+		});
+
     })
     .catch(error => {
       document.getElementById('newsList').innerHTML = "<p>Không thể tải danh sách tin.</p>";
