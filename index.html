@@ -269,13 +269,6 @@
         line-height: 1.6; /* Tăng khoảng cách dòng để dễ đọc hơn */
         margin-bottom: 0.8rem; /* Khoảng cách giữa các mục tin */
     }
-    .honor-board iframe {
-      width: 90%;
-      height: 300px;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
 	
     /* Footer - Giữ nguyên phong cách đã thống nhất */
     footer {
@@ -292,6 +285,37 @@
       margin: 5px 0;
       font-weight: 600;
     }
+	.news-list {
+	  list-style: none;
+	  padding: 0;
+	  margin: 0;
+	  text-align: left; /* ✅ canh lề trái */
+	  font-family: 'Patrick Hand', cursive; /* ✅ font Patrick Hand */
+	  font-size: 20px;
+	}
+
+	.news-list li {
+	  padding: 8px 0;
+	  border-bottom: 1px solid #ddd;
+	}
+
+	.news-list li a {
+	  text-decoration: none;
+	  color: #333;
+	  display: inline-flex;
+	  align-items: center;
+	}
+
+	.news-list li a:hover {
+	  color: #007BFF;
+	}
+
+	.news-icon {
+	  width: 40px;
+	  height: 40px;
+	  margin-right: 8px;
+	  vertical-align: middle;
+	}
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -362,9 +386,6 @@
       }
       .honor-board h2 {
         font-size: 2.2rem;
-      }
-      .honor-board iframe {
-        width: 95%;
       }
     }
 
@@ -439,11 +460,9 @@
 <!-- BẢNG TIN HOẠT ĐỘNG -->
 <section class="honor-board">
   <h2>📢 Bảng Tin Hoạt Động</h2>
-  <ul>
-    <li>📆 Tuần này: Thi đấu Lập trình Scratch cấp trường!</li>
-    <li>🆕 Đã cập nhật bài giảng mới cho Lớp 4 - Chủ đề "Khám phá phần mềm học tập".</li>
-    <li>🎉 Chào mừng năm học mới 2025 - 2026!</li>
-  </ul>
+  <div class="news-list" id="newsList">
+        <!-- Danh sách Tin sẽ được thêm ở đây -->
+      </div>
 </section>
 
 
@@ -461,5 +480,41 @@
     <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
     <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
+  
+  <script>
+  // Link JSON từ opensheet.elk.sh
+  const sheetUrl = "https://opensheet.elk.sh/1hNhj8WEQ6EBOqTed1jQratwY-b2GmqrDE8RmI1oZbWw/Sheet1";
+
+  fetch(sheetUrl)
+  .then(res => res.json())
+  .then(data => {
+    const newsList = document.getElementById('newsList');
+    newsList.innerHTML = "<ul class='news-list'></ul>";
+    const ul = newsList.querySelector('ul');
+
+    // Sắp xếp id giảm dần
+    data.sort((a, b) => Number(b.id) - Number(a.id));
+
+    // Lấy tối đa 5 tin đầu tiên
+    const topNews = data.slice(0, 5);
+
+    topNews.forEach(news => {
+      if (news.id && news.ten) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <a href="ReadNews.html?id=${encodeURIComponent(news.id)}">
+            <img src="${news.icon}" alt="${news.ten}" class="news-icon">
+            ${news.ten}
+          </a>
+        `;
+        ul.appendChild(li);
+      }
+    });
+  })
+  .catch(error => {
+    document.getElementById('newsList').innerHTML = "<p>Không thể tải danh sách tin.</p>";
+    console.error(error);
+  });
+</script>
 </body>
 </html>

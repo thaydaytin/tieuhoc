@@ -87,7 +87,7 @@
 		<img src="logo.png" alt="Logo Thầy Dạy Tin">
 	</div>
     <h1 id="gameTitle">▶️ Đang Xem Bảng Tin </h1>
-    <button class="home-button" onclick="window.location.href='gocthongtin.html'">⬅️ Quay Lại</button>
+    <button class="home-button" onclick="history.back()">⬅️ Quay Lại</button>
   </header>
 
 
@@ -110,7 +110,7 @@
         const news = data.find(n => n.id === id);
         if (news) {
           document.getElementById("newsTitle").textContent = news.ten;
-          document.getElementById("newsContent").textContent = news.noidung;
+          document.getElementById("newsContent").innerHTML = news.noidung.replace(/\n/g, "<br>");
         } else {
           document.getElementById("newsTitle").textContent = "Không tìm thấy thông báo";
         }
