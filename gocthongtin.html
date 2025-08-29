@@ -315,29 +315,23 @@
   
   
   <script>
-  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStl0p_32Ae_W51amScGfNB6kr1Dqqhbu8KfT_digEangOOTiDXrXHOFMhxSBFfRhniGmCKnm70lt8F/pub?output=csv";
+  // Link JSON từ opensheet.elk.sh
+  const sheetUrl = "https://opensheet.elk.sh/1hNhj8WEQ6EBOqTed1jQratwY-b2GmqrDE8RmI1oZbWw/Sheet1";
 
   fetch(sheetUrl)
-    .then(res => res.text())
-    .then(csvText => {
-      const rows = csvText.split("\n").slice(1); // bỏ tiêu đề
+    .then(res => res.json())
+    .then(data => {
       const newsList = document.getElementById('newsList');
       newsList.innerHTML = "<ul class='news-list'></ul>";
       const ul = newsList.querySelector('ul');
 
-      rows.forEach(row => {
-        const cols = row.split(",");
-        const id = cols[0]?.trim();
-        const icon = cols[1]?.trim();
-        const ten = cols[2]?.trim();
-        const noidung = cols[3]?.trim();
-
-        if (id && ten) {
+      data.forEach(news => {
+        if (news.id && news.ten) {
           const li = document.createElement('li');
           li.innerHTML = `
-            <a href="ReadNews.html?id=${encodeURIComponent(id)}">
-              <img src="${icon}" alt="${ten}" class="news-icon">
-              ${ten}
+            <a href="ReadNews.html?id=${encodeURIComponent(news.id)}">
+              <img src="${news.icon}" alt="${news.ten}" class="news-icon">
+              ${news.ten}
             </a>
           `;
           ul.appendChild(li);
@@ -348,7 +342,8 @@
       document.getElementById('newsList').innerHTML = "<p>Không thể tải danh sách tin.</p>";
       console.error(error);
     });
-  </script>
+</script>
+
 
 
 </body>

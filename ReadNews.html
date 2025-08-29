@@ -1,72 +1,14 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Chi tiết thông báo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Patrick Hand', cursive;
-      background: linear-gradient(to bottom right, #87CEEB, #FFFACD);
-      padding: 30px;
-      color: #333;
-    }
-    .news-box {
-      background: #fff;
-      border: 3px solid #90EE90;
-      border-radius: 20px;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    h1 {
-      color: #e65100;
-    }
-  </style>
-</head>
-<body>
-  <div class="news-box">
-    <h1 id="newsTitle">Đang tải...</h1>
-    <p id="newsContent"></p>
-  </div>
-
-  <script>
-    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vStl0p_32Ae_W51amScGfNB6kr1Dqqhbu8KfT_digEangOOTiDXrXHOFMhxSBFfRhniGmCKnm70lt8F/pub?output=csv";
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-
-    fetch(sheetUrl)
-      .then(res => res.text())
-      .then(csvText => {
-        const rows = csvText.split("\n").slice(1);
-        rows.forEach(row => {
-          const cols = row.split(",");
-          if (cols[0] === id) {
-            document.getElementById("newsTitle").textContent = cols[2];
-            document.getElementById("newsContent").textContent = cols[3];
-          }
-        });
-      })
-      .catch(err => {
-        document.getElementById("newsTitle").textContent = "Lỗi tải dữ liệu";
-        console.error(err);
-      });
-  </script>
-</body>
-</html>
-=======
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <title>Chơi Game - Thầy Dạy Tin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Patrick Hand', cursive;
       background: #f0f8ff;
       display: flex;
       flex-direction: column;
@@ -112,10 +54,21 @@
       cursor: pointer;
     }
 
-    iframe {
-      flex: 1;
-      width: 100%;
-      border: none;
+	.news-box {
+      background: #fff;
+      border: 3px solid #90EE90;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #e65100;
+    }
+    pre {
+      white-space: pre-wrap;   /* Giữ xuống dòng trong nội dung */
+      font-family: inherit;
     }
 
     footer {
@@ -136,29 +89,37 @@
     <h1 id="gameTitle">▶️ Đang Xem Bảng Tin </h1>
     <button class="home-button" onclick="window.location.href='gocthongtin.html'">⬅️ Quay Lại</button>
   </header>
-	
-  <iframe id="gameFrame" src=""></iframe>
 
+
+  <div class="news-box">
+    <h1 id="newsTitle">Đang tải...</h1>
+    <p id="newsContent"></p>
+  </div>
   <footer>
     © 2025 - Thầy Dạy Tin | Website học Tin học tiểu học
   </footer>
 
   <script>
+    const sheetUrl = "https://opensheet.elk.sh/1AbCdEfGhIjKlMnOpQRsTuVWxyz12345678/Sheet1";
     const params = new URLSearchParams(window.location.search);
-    const newsUrl = params.get('url');
-    const NewsTitle = params.get('ten');
+    const id = params.get("id");
 
-    if (NewsTitle) {
-      document.getElementById('gameTitle').textContent = `▶️ ${decodeURIComponent(NewsTitle)}`;
-    }
-
-    if (newsUrl) {
-      document.getElementById('gameFrame').src = decodeURIComponent(newsUrl);
-    } else {
-      document.getElementById('gameFrame').outerHTML = "<p style='padding:20px'>Không tìm thấy bảng tin nào.</p>";
-    }
+    fetch(sheetUrl)
+      .then(res => res.json())
+      .then(data => {
+        const news = data.find(n => n.id === id);
+        if (news) {
+          document.getElementById("newsTitle").textContent = news.ten;
+          document.getElementById("newsContent").textContent = news.noidung;
+        } else {
+          document.getElementById("newsTitle").textContent = "Không tìm thấy thông báo";
+        }
+      })
+      .catch(err => {
+        document.getElementById("newsTitle").textContent = "Lỗi tải dữ liệu";
+        console.error(err);
+      });
   </script>
 
 </body>
 </html>
->>>>>>> 3157aa826c72024f9fed4f5cc212c34c0051c148
