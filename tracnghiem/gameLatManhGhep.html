@@ -444,29 +444,28 @@
     }
 
     .blind-bag {
-      background: url('icon/tuimu.png') no-repeat center center; /* New image for bags */
-      background-size: contain; /* Changed to contain to fit the image better */
-      background-color: #FFD700; /* Gold color for bags */
-      border: 5px solid #FFA500; /* Orange border */
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 5px solid #FFA500;
       border-radius: 20px;
-      padding: 20px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      font-size: 1.2rem; /* Reduced font size for smaller bags */
+      font-size: 1.2rem;
       font-weight: bold;
-      color: white; /* White text for better contrast */
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Stronger text shadow */
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
       position: relative;
       overflow: hidden;
-      width: 150px; /* Fixed width for consistency */
-      height: 150px; /* Fixed height for consistency */
-      aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
-      /* margin: auto; Removed as justify-items and align-items on grid container handle centering */
+      width: 150px;
+      height: 150px;
+      aspect-ratio: 1 / 1;
+      margin: 10px;
+      display: inline-flex;
     }
 
     .blind-bag::before { /* Remove the gift emoji */
@@ -698,57 +697,59 @@
     }
 
     // Hàm tạo túi mù
-    function generateBags() {
+     function generateBags() {
       bags = [];
       const numQuestions = questions.length;
       const numLuckyBags = 3;
-      const totalBags = numQuestions + numLuckyBags;
 
-      // Add question bags
       for (let i = 0; i < numQuestions; i++) {
         bags.push({ type: 'question', index: i });
       }
 
-      // Add lucky bags
       for (let i = 0; i < numLuckyBags; i++) {
         const randomEffect = LUCKY_BAG_EFFECTS[Math.floor(Math.random() * LUCKY_BAG_EFFECTS.length)];
         bags.push({ type: 'lucky', effect: randomEffect });
       }
 
-      bags = shuffleArray(bags); // Shuffle all bags
+      bags = shuffleArray(bags);
 
       const bagsContainer = document.getElementById("bagsContainer");
-      bagsContainer.innerHTML = ''; // Clear previous bags
+      bagsContainer.innerHTML = '';
 
       bags.forEach((bag, index) => {
         const bagElement = document.createElement("div");
         bagElement.className = "blind-bag";
-        bagElement.dataset.index = index; // Store original index
+        bagElement.dataset.index = index;
+
+        const randImg = Math.floor(Math.random() * 7) + 1;
+        bagElement.dataset.img = randImg;
+        bagElement.style.backgroundImage = `url('icon/tuimu/Picture${randImg}.png')`;
+
         bagElement.innerHTML = `<div class="blind-bag-content">Túi Mù #${index + 1}</div>`;
         bagElement.onclick = () => openBag(index, bagElement);
         bagsContainer.appendChild(bagElement);
       });
     }
 
-    // Hàm mở túi mù
     function openBag(index, bagElement) {
-      if (bagElement.classList.contains('opened')) {
-        return; // Bag already opened
-      }
+      if (bagElement.classList.contains('opened')) return;
 
-      bagElement.classList.add('opened');
-      openedBagsCount++;
+      const imgNum = bagElement.dataset.img;
+      bagElement.style.backgroundImage = `url('icon/tuimu/Picture${imgNum}b.png')`;
 
-      const bag = bags[index];
-      if (bag.type === 'question') {
-        currentQuestionIndex = bag.index; // Store the original question index
-        showQuestion(questions[currentQuestionIndex]);
-      } else if (bag.type === 'lucky') {
-        applyLuckyEffect(bag.effect);
-        setTimeout(() => {
-          checkGameEnd(); // Check if all bags are opened after applying effect
-        }, 1500); // Wait a bit for message to show
-      }
+      setTimeout(() => {
+        bagElement.classList.add('opened');
+        openedBagsCount++;
+
+        const bag = bags[index];
+        if (bag.type === 'question') {
+          currentQuestionIndex = bag.index;
+          showQuestion(questions[currentQuestionIndex]);
+        } else if (bag.type === 'lucky') {
+          applyLuckyEffect(bag.effect);
+          setTimeout(() => checkGameEnd(), 1500);
+        }
+      }, 500);
     }
 
     // Hàm áp dụng hiệu ứng túi may mắn
