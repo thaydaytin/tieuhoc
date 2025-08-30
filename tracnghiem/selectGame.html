@@ -188,6 +188,22 @@
       margin: 5px 0;
       font-weight: 600;
     }
+	#reloadIcon {
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		margin-left: 10px;
+		vertical-align: middle;
+		transition: transform 0.3s ease;
+	  }
+	  /* hiệu ứng xoay */
+	  .rotate {
+		animation: spin 0.5s linear;
+	  }
+	  @keyframes spin {
+		from { transform: rotate(0deg); }
+		to   { transform: rotate(360deg); }
+	  }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -298,9 +314,16 @@
     </section>
 	
 	<section class="honor-board">
-      <h2>🏆 Bảng Vinh Danh</h2>
-      <div id="top10-container">Đang tải dữ liệu...</div>
-    </section>
+	  <h2>
+		🏆 Bảng Vinh Danh
+		<img id="reloadIcon"
+			 src="icon/reload.png" 
+			 alt="Reload" 
+			 title="Tải lại bảng vinh danh" 
+			 onclick="reloadBoard()" >
+	  </h2>
+	  <div id="top10-container">Đang tải dữ liệu...</div>
+	</section>
   </div>
 
   <footer style="background-color: #64b5f6; color: white; text-align: center; padding: 20px 10px; font-size: 1rem; border-top: 4px solid #1e88e5;">
@@ -380,6 +403,16 @@
         document.head.appendChild(styleSheet);
     }
 	
+	function reloadBoard() {
+		const icon = document.getElementById('reloadIcon');
+		icon.classList.add('rotate');
+		// Gọi hàm loadTop10()
+		loadTop10();
+		// Xóa class sau khi xoay xong để có thể xoay lại lần nữa
+		setTimeout(() => {
+		  icon.classList.remove('rotate');
+		}, 500);
+	  }
 	// load top 10
 	function loadTop10() {
 	  const lop = getParam("lop");
