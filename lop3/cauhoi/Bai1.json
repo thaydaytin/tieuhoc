@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Máy tính được sử dụng để làm gì trong gia đình?",
+    "choices": [
+      "Điều khiển máy móc sản xuất",
+      "Soạn thảo văn bản và chơi trò chơi",
+      "Quản lý hồ sơ công việc",
+      "Kiểm soát an ninh nhà máy"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Thành phần nào của máy tính giúp chúng ta nhìn thấy hình ảnh và nội dung?",
+    "choices": [
+      "Bàn phím",
+      "Thân máy",
+      "Màn hình",
+      "Con chuột"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bộ phận nào được ví như “bộ não” của máy tính?",
+    "choices": [
+      "Con chuột",
+      "Màn hình",
+      "Bàn phím",
+      "Thân máy"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Đâu là một trong những lợi ích của máy tính khi sử dụng ở trường học?",
+    "choices": [
+      "Giúp giáo viên soạn bài giảng",
+      "Điều khiển máy móc sản xuất",
+      "Quản lý nhân sự công ty",
+      "Hệ thống tự động hóa"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thiết bị nào giúp chúng ta nhập chữ, số và các kí tự vào máy tính?",
+    "choices": [
+      "Con chuột",
+      "Màn hình",
+      "Loa",
+      "Bàn phím"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để điều khiển con trỏ trên màn hình máy tính, chúng ta sử dụng thiết bị nào?",
+    "choices": [
+      "Bàn phím",
+      "Màn hình",
+      "Con chuột",
+      "Thân máy"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thành phần nào giúp chúng ta nghe được âm thanh từ máy tính, ví dụ như nhạc hoặc tiếng nói?",
+    "choices": [
+      "Màn hình",
+      "Bàn phím",
+      "Loa",
+      "Con chuột"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Đâu là một trong các thành phần cơ bản của máy tính để bàn?",
+    "choices": [
+      "Máy in",
+      "Máy quét",
+      "Con chuột",
+      "Webcam"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ở văn phòng, người ta thường sử dụng máy tính để làm gì?",
+    "choices": [
+      "Lái xe tự động",
+      "Thiết kế thời trang",
+      "Quản lý công việc và hồ sơ",
+      "Sản xuất linh kiện"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong các thành phần sau, thành phần nào có chức năng xử lí và lưu trữ dữ liệu?",
+    "choices": [
+      "Loa",
+      "Bàn phím",
+      "Màn hình",
+      "Thân máy"
+    ],
+    "answer": 3
   }
 ]

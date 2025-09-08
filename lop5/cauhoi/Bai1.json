@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Lợi ích nào của máy tính giúp học sinh làm các bài tập trên lớp?",
+    "choices": [
+      "Giải trí",
+      "Học tập",
+      "Lập trình",
+      "Vui chơi"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Nhờ có máy tính, các em học sinh có thể tạo ra những sản phẩm nào?",
+    "choices": [
+      "Đồ dùng học tập bằng gỗ",
+      "Các sản phẩm số",
+      "Đồ chơi truyền thống",
+      "Các mô hình từ đất sét"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hoạt động nào dưới đây là một ví dụ về giải trí bằng máy tính?",
+    "choices": [
+      "Tìm kiếm thông tin trên mạng",
+      "Soạn thảo văn bản",
+      "Nghe nhạc và xem phim",
+      "Lập trình trò chơi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi sử dụng máy tính, học sinh có thể rèn luyện kĩ năng nào sau đây?",
+    "choices": [
+      "Nấu ăn",
+      "Gõ bàn phím",
+      "Cắt dán thủ công",
+      "Vẽ tranh bằng màu nước"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Máy tính giúp các em học sinh làm việc nhóm và trao đổi thông tin với bạn bè thông qua hoạt động nào?",
+    "choices": [
+      "Chơi thể thao",
+      "Đọc sách giấy",
+      "Hợp tác trực tuyến",
+      "Hát karaoke"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc sử dụng máy tính để tạo ra một bài trình chiếu được xếp vào loại lợi ích nào?",
+    "choices": [
+      "Vui chơi",
+      "Sáng tạo sản phẩm số",
+      "Học tập",
+      "Trao đổi thông tin"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Loại thông tin nào có thể được tìm thấy trên máy tính?",
+    "choices": [
+      "Thông tin không có thật",
+      "Thông tin vô ích",
+      "Những thông tin thú vị và bổ ích",
+      "Thông tin bịa đặt"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lợi ích nào giúp các em học sinh viết những câu chuyện hoặc làm bài văn?",
+    "choices": [
+      "Giải trí",
+      "Soạn thảo văn bản",
+      "Vẽ tranh",
+      "Nghe nhạc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Máy tính giúp các em học sinh tự tìm hiểu bài mới hoặc ôn tập bài cũ, đây là lợi ích về?",
+    "choices": [
+      "Vui chơi",
+      "Hợp tác",
+      "Sáng tạo",
+      "Học tập"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Kĩ năng nào không thể rèn luyện qua việc sử dụng máy tính?",
+    "choices": [
+      "Sử dụng chuột",
+      "Tạo bài trình chiếu",
+      "Thuyết trình trước đám đông",
+      "Gõ bàn phím"
+    ],
+    "answer": 2
   }
 ]

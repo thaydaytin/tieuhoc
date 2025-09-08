@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Loại máy tính nào thường có các bộ phận rời nhau như màn hình, thân máy, bàn phím và chuột?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
+      "Máy tính xách tay",
+      "Điện thoại thông minh",
+      "Máy tính để bàn",
+      "Máy tính bảng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Đặc điểm nào nổi bật của máy tính xách tay so với máy tính để bàn?",
+    "choices": [
+      "Các bộ phận rời nhau",
+      "Không có bàn phím",
+      "Có thể di chuyển dễ dàng",
+      "Không có màn hình"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trên máy tính xách tay, bộ phận nào đảm nhiệm chức năng của chuột?",
+    "choices": [
+      "Màn hình cảm ứng",
+      "Thân máy",
+      "Bàn phím tích hợp",
+      "Vùng chuột cảm ứng"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thành phần nào trên điện thoại thông minh và máy tính bảng đảm nhiệm chức năng của cả màn hình, bàn phím và chuột?",
+    "choices": [
+      "Bộ xử lí trung tâm (CPU)",
+      "Màn hình cảm ứng",
+      "Thân máy",
       "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Tất cả các loại máy tính thông dụng đều có những thành phần cơ bản nào?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Thân máy và màn hình",
+      "Màn hình, bàn phím, và chuột",
+      "Thân máy, màn hình, bàn phím, và chuột",
+      "Loa và máy in"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Máy tính bảng có ưu điểm gì so với máy tính xách tay về kích thước?",
+    "choices": [
+      "Lớn hơn và nặng hơn",
+      "Nhỏ gọn và nhẹ hơn",
+      "Chỉ dùng để làm việc",
+      "Chỉ dùng để chơi trò chơi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đặc điểm của máy tính để bàn “All-in-one” là gì?",
+    "choices": [
+      "Các bộ phận hoàn toàn tách rời",
+      "Chỉ có màn hình và bàn phím",
+      "Thân máy và màn hình gắn liền với nhau",
+      "Không có thân máy"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong các thiết bị sau, thiết bị nào thường sử dụng màn hình cảm ứng để tương tác?",
+    "choices": [
+      "Máy tính để bàn",
+      "Máy tính xách tay",
+      "Điện thoại thông minh",
+      "Máy in"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Loại máy tính nào có bàn phím tích hợp trên thân máy?",
+    "choices": [
+      "Máy tính để bàn",
+      "Máy tính bảng",
+      "Máy tính xách tay",
+      "Máy tính All-in-one"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Mục đích chính của việc tích hợp các thành phần trên máy tính xách tay và máy tính bảng là gì?",
+    "choices": [
+      "Để chúng cồng kềnh hơn",
+      "Để chúng nặng hơn",
+      "Để chúng dễ di chuyển và sử dụng hơn",
+      "Để chúng hoạt động chậm hơn"
+    ],
+    "answer": 2
   }
 ]
