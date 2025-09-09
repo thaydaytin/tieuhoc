@@ -557,7 +557,7 @@
 
       document.getElementById("result").innerText = '';
       document.getElementById("result").className = ''; // Xóa class cũ
-      timeLeft = 20; // Đặt lại thời gian
+      timeLeft = 30; // Đặt lại thời gian
       document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
       startTime = new Date();
       clearInterval(timer); // Xóa timer cũ nếu có
@@ -593,7 +593,7 @@
       let isCorrect = selected === q.shuffledAnswer;
       let now = new Date();
       let secondsUsed = Math.round((now - startTime) / 1000);
-      let score = isCorrect ? Math.max(0, 10 - Math.floor(secondsUsed / 2)) : 0; // Tính điểm
+      let score = isCorrect ? Math.max(0, 10 - Math.floor(secondsUsed / 3)) : 0; // Tính điểm
       totalScore += score;
 
       // Hiển thị kết quả và hiệu ứng
