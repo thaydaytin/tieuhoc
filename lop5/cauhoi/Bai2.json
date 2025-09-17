@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Phần mềm nào dưới đây được sử dụng để tạo bài trình chiếu?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Microsoft Word",
+      "Microsoft PowerPoint",
+      "Scratch",
+      "Google Chrome"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Để thêm một trang trình chiếu mới trong PowerPoint, em cần vào dải lệnh nào?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "File",
+      "Insert",
+      "Home",
+      "View"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Lệnh nào được dùng để thêm trang trình chiếu mới?",
+    "choices": [
+      "Save",
+      "New Slide",
+      "Pictures",
+      "Open"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để lưu bài trình chiếu, em cần vào dải lệnh nào?",
+    "choices": [
+      "Home",
+      "Insert",
+      "File",
+      "Design"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để thêm ảnh vào trang trình chiếu, em sẽ chọn lệnh nào trong dải lệnh Insert?",
+    "choices": [
+      "New Slide",
+      "Save",
+      "Pictures",
+      "Exit"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phần mềm nào giúp các em học sinh luyện gõ bàn phím?",
+    "choices": [
+      "Google Chrome",
+      "Rapid Typing",
+      "Mouse Skills",
+      "Scratch"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "choices": [
+      "PowerPoint",
+      "Word",
+      "Chrome",
+      "Scratch"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'Save' có chức năng gì trong PowerPoint?",
+    "choices": [
+      "Thêm trang trình chiếu mới",
+      "Lưu bài trình chiếu",
+      "Thêm hình ảnh",
+      "Đóng phần mềm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm Scratch được sử dụng cho mục đích gì?",
+    "choices": [
+      "Thực hành sử dụng chuột",
+      "Tạo bài trình chiếu",
+      "Lập trình đơn giản",
+      "Soạn thảo văn bản"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Một sản phẩm số mà học sinh có thể tự tạo ra nhờ máy tính là gì?",
+    "choices": [
+      "Chiếc máy bay giấy",
+      "Một bài trình chiếu",
+      "Một chiếc bánh kem",
+      "Một bức tranh vẽ trên giấy"
+    ],
+    "answer": 1
   }
 ]
