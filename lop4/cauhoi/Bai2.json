@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong các ví dụ sau, đâu là một phần mềm?",
     "choices": [
       "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Bàn phím",
+      "Microsoft Word",
+      "Con chuột"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Phần mềm và phần cứng có mối quan hệ như thế nào với nhau?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Hoàn toàn độc lập",
+      "Phần mềm chỉ hoạt động khi có internet",
+      "Chúng phụ thuộc lẫn nhau",
+      "Phần cứng hoạt động mà không cần phần mềm"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Bộ phận nào của máy tính thực hiện chức năng nhờ vào sự hướng dẫn của phần mềm?",
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Bàn phím",
+      "Màn hình",
+      "Phần cứng",
+      "Chuột"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc tắt máy tính không đúng cách có thể gây ra hậu quả gì?",
+    "choices": [
+      "Tiết kiệm điện hơn",
+      "Làm tăng tốc độ máy tính",
+      "Gây ra lỗi phần mềm và hư hại phần cứng",
+      "Không ảnh hưởng gì"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phần mềm có thể thực hiện được chức năng của mình nhờ có:",
+    "choices": [
+      "Phần cứng",
+      "Màn hình",
+      "Bàn phím",
+      "Chuột"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Việc máy tính bị nhiễm virus sẽ gây ra hậu quả gì cho phần mềm?",
+    "choices": [
+      "Làm phần mềm hoạt động tốt hơn",
+      "Gây hỏng và lỗi phần mềm",
+      "Làm phần mềm tự động cập nhật",
+      "Không ảnh hưởng gì"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Phần cứng hoạt động được là nhờ sự hướng dẫn của:",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Phần mềm",
+      "Bộ nguồn",
+      "Bộ nhớ trong",
+      "Bàn phím"
     ],
     "answer": 0
+  },
+  {
+    "question": "Đâu là một ví dụ về phần mềm học gõ phím?",
+    "choices": [
+      "Rapid Typing",
+      "Máy in",
+      "Loa",
+      "USB"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi sử dụng máy tính, học sinh cần làm gì để tránh gây lỗi phần mềm?",
+    "choices": [
+      "Tải về nhiều chương trình không rõ nguồn gốc",
+      "Sử dụng phần mềm đúng cách",
+      "Ngắt điện đột ngột",
+      "Không bao giờ tắt máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm giúp chúng ta làm gì với máy tính?",
+    "choices": [
+      "Chỉ để lưu trữ dữ liệu",
+      "Hư hại phần cứng",
+      "Hướng dẫn máy tính làm các công việc cụ thể",
+      "Cung cấp nguồn điện"
+    ],
+    "answer": 2
   }
 ]
