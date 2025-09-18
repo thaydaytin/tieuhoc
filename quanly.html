@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý lớp học</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      text-align: center;
+      padding: 50px;
+    }
+    #loginBox, #classManager {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 300px;
+      margin: auto;
+    }
+    input[type=password] {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="loginBox">
+    <h2>🔐 Nhập mật khẩu</h2>
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="checkPassword()">Đăng nhập</button>
+    <div id="error"></div>
+  </div>
+
+  <div id="classManager" style="display:none;">
+    <h2>📚 Trang quản lý lớp học</h2>
+    <p>Chào mừng thầy đã đăng nhập thành công!</p>
+    <!-- Chỗ này sau thầy có thể thêm bảng lớp học, danh sách học sinh -->
+  </div>
+
+  <script>
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function checkPassword() {
+      const password = document.getElementById("password").value;
+      const enteredHash = await sha256(password);
+
+      // lấy hash từ file password.json
+      const response = await fetch("pw.json");
+      const data = await response.json();
+      const correctHash = data.hash;
+
+      if (enteredHash === correctHash) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("classManager").style.display = "block";
+      } else {
+        document.getElementById("error").innerText = "❌ Mật khẩu sai!";
+      }
+    }
+  </script>
+</body>
+</html>
