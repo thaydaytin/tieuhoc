@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thông báo - Thầy Dạy Tin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Patrick Hand', cursive;
+      background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
+      background-attachment: fixed; /* Cố định nền */
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #2196f3;
+      color: white;
+      padding: 5px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+	.logo img {
+      height: 50px;
+    }
+	.wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .home-button {
+      background-color: white;
+      color: #2196f3;
+      padding: 6px 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+	.news-box {
+      background: #fff;
+      border: 5px solid #FFD700;
+      border-radius: 20px;
+      padding: 20px;
+	  width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #e65100;
+    }
+    pre {
+      white-space: pre-wrap;   /* Giữ xuống dòng trong nội dung */
+      font-family: inherit;
+    }
+
+    footer {
+      background-color: #2196f3;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+    }
+	.news-link {
+	  display: inline-block;
+	  padding: 12px 20px;
+	  margin: 10px 0;
+	  background-color: #f0f0f0;
+	  border-radius: 10px;
+	  text-decoration: none;
+	  color: #333;
+	  font-weight: bold;
+	  font-size: 20px;
+	  transition: 0.3s;
+	}
+	.news-link:hover {
+	  background-color: #4CAF50;
+	  color: white;
+	}
+  </style>
+</head>
+<body>
+
+  <header>
+	<div class="logo">
+		<img src="logo.png" alt="Logo Thầy Dạy Tin">
+	</div>
+    <h1 id="gameTitle">▶️ Góc Chia Sẻ </h1>
+    <button class="home-button" onclick="history.back()">⬅️ Quay Lại</button>
+  </header>
+
+
+  <div class="news-box">
+    <a href="https://drive.google.com/drive/folders/17kYPE5FdEaMajBMwiJY1hnOcP9OrewXY?usp=sharing" target="_blank" class="news-link">
+    📖   Tool hỗ trợ nhập liệu Phổ cập giáo dục XMC
+  </a>
+  </div>
+  <footer>
+    © 2025 - Thầy Dạy Tin | Website học Tin học tiểu học
+  </footer>
+
+</body>
+</html>
