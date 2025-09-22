@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Con trỏ chuột trên màn hình thường có hình gì?",
+    "choices": [
+      "Bàn tay",
+      "Mũi tên",
+      "Dấu cộng",
+      "Hình tròn"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Khi cầm chuột đúng cách, ngón tay trỏ của em sẽ đặt ở nút nào?",
+    "choices": [
+      "Nút cuộn",
+      "Nút chuột phải",
+      "Nút chuột trái",
+      "Nút cuộn và nút chuột trái"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác nào là nhấn nút chuột trái rồi thả ngón tay ra ngay lập tức?",
+    "choices": [
+      "Kéo thả chuột",
+      "Nháy đúp chuột",
+      "Nháy chuột",
+      "Nháy chuột phải"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác nào là nhấn nhanh nút chuột trái hai lần rồi thả ngón tay ra ngay?",
+    "choices": [
+      "Nháy chuột",
+      "Kéo thả chuột",
+      "Lăn nút cuộn chuột",
+      "Nháy đúp chuột"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để di chuyển một đối tượng trên màn hình đến vị trí mới, em cần thực hiện thao tác nào?",
+    "choices": [
+      "Nháy chuột",
+      "Nháy đúp chuột",
+      "Lăn nút cuộn chuột",
+      "Kéo thả chuột"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Khi cầm chuột đúng cách, bàn tay và cổ tay của em phải ở vị trí nào?",
+    "choices": [
+      "Vẹo sang một bên",
+      "Cử động linh hoạt",
+      "Nâng lên cao",
+      "Thẳng hàng tự nhiên"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thao tác nào giúp em di chuyển trang web lên hoặc xuống?",
+    "choices": [
+      "Nháy đúp chuột",
+      "Lăn nút cuộn chuột",
+      "Nháy chuột phải",
+      "Kéo thả chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để hiển thị một menu tùy chọn, em cần thực hiện thao tác nào?",
+    "choices": [
+      "Nháy chuột phải",
+      "Nháy chuột",
+      "Nháy đúp chuột",
+      "Kéo thả chuột"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Một con chuột máy tính thông thường có bao nhiêu nút chính?",
+    "choices": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Vì sao chúng ta cần sử dụng chuột đúng cách?",
+    "choices": [
+      "Để máy tính hoạt động chậm hơn",
+      "Để chuột không bị hỏng",
+      "Để điều khiển máy tính linh hoạt và chính xác",
+      "Để làm cho con trỏ chuột biến mất"
+    ],
+    "answer": 2
   }
 ]
