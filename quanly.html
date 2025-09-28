@@ -15,10 +15,11 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      width: 300px;
+      width: 90%;
+      max-width: 600px;
       margin: auto;
     }
-    input[type=password] {
+    input[type=password], select {
       width: 90%;
       padding: 10px;
       margin: 10px 0;
@@ -38,6 +39,9 @@
       color: red;
       margin-top: 10px;
     }
+    .student { display: flex; align-items: center; margin: 8px 0; }
+    .name { flex: 1; text-align: left; }
+    .like, .dislike { margin-left: 10px; cursor: pointer; font-size: 16px; }
   </style>
 </head>
 <body>
@@ -50,11 +54,25 @@
 
   <div id="classManager" style="display:none;">
     <h2>📚 Trang quản lý lớp học</h2>
-    <p>Chào mừng thầy đã đăng nhập thành công!</p>
-    <!-- Chỗ này sau thầy có thể thêm bảng lớp học, danh sách học sinh -->
+    <label for="classSelect">Chọn lớp: </label>
+    <select id="classSelect" onchange="loadStudents()">
+      <option value="">-- Chọn lớp --</option>
+      <option value="3A">3A</option>
+      <option value="3B">3B</option>
+      <option value="3C">3C</option>
+      <option value="4A">4A</option>
+      <option value="4B">4B</option>
+      <option value="4C">4C</option>
+      <option value="5A">5A</option>
+      <option value="5B1">5B1</option>
+      <option value="5B2">5B2</option>
+      <option value="5C">5C</option>
+    </select>
+    <div id="studentList"></div>
   </div>
 
   <script>
+    // ---------------- Mật khẩu đăng nhập ----------------
     async function sha256(message) {
       const msgBuffer = new TextEncoder().encode(message);
       const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
@@ -66,7 +84,6 @@
       const password = document.getElementById("password").value;
       const enteredHash = await sha256(password);
 
-      // lấy hash từ file password.json
       const response = await fetch("pw.json");
       const data = await response.json();
       const correctHash = data.hash;
@@ -77,6 +94,42 @@
       } else {
         document.getElementById("error").innerText = "❌ Mật khẩu sai!";
       }
+    }
+
+    // ---------------- Quản lý lớp học ----------------
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbz-hJBaS4uxYfSW3oEmYnDBlsXl-U0HdPSvgZTNWp-yMwx6nCjR6wyOOPvHyRWKSRhwzw/exec"; // Thay bằng URL Apps Script
+
+    async function loadStudents() {
+      const className = document.getElementById("classSelect").value;
+      if (!className) {
+        document.getElementById("studentList").innerHTML = "";
+        return;
+      }
+
+      let res = await fetch(`${scriptUrl}?class=${className}`);
+      let data = await res.json();
+      let students = data.slice(1); // bỏ dòng tiêu đề
+
+      let html = `<h3>Lớp ${className}</h3>`;
+      students.forEach(s => {
+        html += `
+          <div class="student">
+            <div class="name">${s[1]}</div>
+            <button class="like" onclick="updatePoint('${className}','${s[0]}','like')">👍</button>
+            <button class="dislike" onclick="updatePoint('${className}','${s[0]}','dislike')">👎</button>
+          </div>
+        `;
+      });
+      document.getElementById("studentList").innerHTML = html;
+    }
+
+    async function updatePoint(className, id, action) {
+      await fetch(scriptUrl, {
+        method: "POST",
+        body: JSON.stringify({ id, action, class: className })
+      });
+      // Refresh lại danh sách ngay sau khi cập nhật
+      loadStudents();
     }
   </script>
 </body>
