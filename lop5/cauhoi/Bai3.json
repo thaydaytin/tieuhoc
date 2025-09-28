@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để chèn một hình ảnh vào tài liệu Word hoặc trang trình chiếu, em sử dụng lệnh nào trong dải lệnh Home?",
+    "choices": [
+      "Save",
+      "Pictures",
+      "Font",
+      "Size"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Lệnh 'Save' nằm trong dải lệnh nào và có chức năng gì?",
+    "choices": [
+      "Home, dùng để chèn ảnh",
+      "File, dùng để lưu tệp văn bản",
+      "Insert, dùng để thay đổi kiểu chữ",
+      "View, dùng để in đậm chữ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để làm cho chữ trở nên in đậm, em cần nhấn vào lệnh nào?",
+    "choices": [
+      "I",
+      "U",
+      "B",
+      "A"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Muốn thay đổi kiểu chữ, em sẽ sử dụng lệnh nào?",
+    "choices": [
+      "Size",
+      "Font",
+      "B",
+      "U"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để gõ được tiếng Việt trên máy tính, em cần phải có phần mềm nào?",
+    "choices": [
+      "Paint",
+      "Word",
+      "Unikey hoặc Vietkey",
+      "Chrome"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh nào có chức năng làm cho chữ trở thành in nghiêng?",
+    "choices": [
+      "I",
+      "B",
+      "U",
+      "A"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Đâu là một ví dụ về lợi ích của việc sử dụng máy tính thành thạo?",
+    "choices": [
+      "Chỉ dùng để chơi trò chơi",
+      "Chỉ để lướt web",
+      "Giúp em học tập và tạo ra các sản phẩm số",
+      "Làm hỏng máy tính"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để làm cho chữ được gạch chân, em cần nhấn vào lệnh nào?",
+    "choices": [
+      "U",
+      "B",
+      "I",
+      "A"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi muốn thay đổi kích thước chữ, em sẽ sử dụng lệnh nào?",
+    "choices": [
+      "Font",
+      "Size",
+      "Bold",
+      "Italic"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm nào có thể dùng để tạo video từ ảnh có sẵn?",
+    "choices": [
+      "Microsoft Word",
+      "PowerPoint",
+      "Canva",
+      "Cả hai đáp án B và C"
+    ],
+    "answer": 3
   }
 ]
