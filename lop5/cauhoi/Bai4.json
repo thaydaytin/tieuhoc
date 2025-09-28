@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Thành phần nào KHÔNG phải là thành phần cơ bản thường có trên một website?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Tên website",
+      "Bảng chọn nội dung",
+      "Địa chỉ email của người tạo",
+      "Địa chỉ website"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để truy cập một website, em cần sử dụng thành phần nào sau đây?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Bảng chọn nội dung",
+      "Công cụ tìm kiếm",
+      "Tên website",
+      "Địa chỉ website"
     ],
-    "answer": 2
+    "answer": 3
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Đâu là một trong hai cách chính để tìm thông tin trên website?",
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Chỉ sử dụng công cụ tìm kiếm",
+      "Sử dụng bảng chọn nội dung hoặc công cụ tìm kiếm",
+      "Nhấn phím F12 trên bàn phím",
+      "Thực hiện thao tác nháy đúp chuột"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Bảng chọn nội dung trên website thường chứa các thành phần nào để dẫn đến các phần khác?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Các lệnh tắt máy tính",
+      "Các siêu liên kết",
+      "Các quảng cáo",
+      "Nút nguồn"
     ],
-    "answer": 0
+    "answer": 1
+  },
+  {
+    "question": "Khi tìm thông tin bằng công cụ tìm kiếm, bước đầu tiên em cần làm là gì?",
+    "choices": [
+      "Nhập từ khóa tìm kiếm",
+      "Nháy chuột vào nút 'Tìm kiếm'",
+      "Nháy chuột vào công cụ tìm kiếm",
+      "Tắt cửa sổ trình duyệt"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu muốn tìm thông tin nhanh về một chủ đề cụ thể trên website, cách nào sau đây là hiệu quả nhất?",
+    "choices": [
+      "Nháy chuột vào từng siêu liên kết ngẫu nhiên",
+      "Sử dụng công cụ tìm kiếm với từ khóa chính xác",
+      "Nhập địa chỉ website nhiều lần",
+      "Chỉ xem Trang chủ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Địa chỉ 'vme.org.vn/vi' là ví dụ cho thành phần nào của website?",
+    "choices": [
+      "Tên website",
+      "Địa chỉ website",
+      "Bảng chọn nội dung",
+      "Công cụ tìm kiếm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để đóng một cửa sổ trình duyệt (website), em sẽ làm gì?",
+    "choices": [
+      "Nhấn phím Enter",
+      "Nháy chuột vào nút 'X' ở góc trên bên phải",
+      "Nháy đúp chuột vào địa chỉ website",
+      "Nháy chuột vào nút 'Tìm kiếm'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sau khi nhập từ khóa tìm kiếm, bước tiếp theo để nhận kết quả là gì?",
+    "choices": [
+      "Nháy chuột vào địa chỉ website",
+      "Nháy chuột vào nút 'Tìm kiếm'",
+      "Mở thêm cửa sổ mới",
+      "Thay đổi tên website"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mục 'Giới thiệu', 'Tin tức', 'Hoạt động giáo dục' trên website thuộc thành phần nào?",
+    "choices": [
+      "Công cụ tìm kiếm",
+      "Địa chỉ website",
+      "Bảng chọn nội dung",
+      "Tên website"
+    ],
+    "answer": 2
   }
 ]

@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Sau khi gõ xong một phím ở hàng phím số, em cần làm gì với các ngón tay của mình?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Để nguyên ở hàng phím số",
+      "Nhấc hẳn tay ra khỏi bàn phím",
+      "Đưa các ngón tay về hàng phím cơ sở",
+      "Chỉ đưa ngón trỏ về hàng phím cơ sở"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Ngón tay nào của bàn tay trái được phân công để gõ phím số 4 và 5?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón giữa",
+      "Ngón trỏ"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Ngón tay nào của bàn tay phải được phân công để gõ phím số 6 và 7?",
+    "choices": [
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón giữa",
+      "Ngón trỏ"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để gõ phím số 8, em sẽ sử dụng ngón tay nào của bàn tay phải?",
+    "choices": [
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón giữa",
+      "Ngón trỏ"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Lợi ích quan trọng nhất của việc gõ bàn phím đúng cách là gì?",
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Giúp máy tính khởi động nhanh hơn",
+      "Gõ nhanh và chính xác mà không cần nhìn bàn phím",
+      "Làm cho bàn phím bền hơn",
+      "Chỉ để luyện tập các phím số"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Ngón tay nào của bàn tay trái được phân công để gõ phím số 2?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón giữa",
+      "Ngón trỏ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gõ bàn phím đúng cách, khả năng nào của em được tăng cường?",
+    "choices": [
+      "Khả năng di chuyển chuột",
+      "Khả năng lập trình",
+      "Khả năng tập trung",
+      "Khả năng kết nối Internet"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ngón tay nào của bàn tay phải được phân công để gõ phím số 0?",
+    "choices": [
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón giữa",
+      "Ngón trỏ"
     ],
     "answer": 0
+  },
+  {
+    "question": "Để gõ phím số 3, em sẽ sử dụng ngón tay nào của bàn tay trái?",
+    "choices": [
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón giữa",
+      "Ngón trỏ"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc chăm chỉ luyện tập gõ bàn phím đúng cách giúp em tăng tốc độ gõ và...",
+    "choices": [
+      "Giảm khả năng tập trung",
+      "Tăng độ mỏi tay",
+      "Nâng cao độ chính xác",
+      "Chỉ gõ được các phím số"
+    ],
+    "answer": 2
   }
 ]

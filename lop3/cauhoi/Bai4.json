@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong các bước khởi động máy tính, sau khi kiểm tra bật điện và nhấn nút nguồn trên thân máy, bước tiếp theo (đối với các màn hình cũ) là gì?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Nháy chuột vào Start",
+      "Màn hình tự chuyển sang chế độ chờ",
+      "Bật công tắc điện trên màn hình",
+      "Nháy đúp chuột vào biểu tượng This PC"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Màn hình làm việc đầu tiên xuất hiện sau khi máy tính khởi động xong được gọi là gì?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Màn hình chờ",
+      "Màn hình nền",
+      "Màn hình khóa",
+      "Màn hình chính"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Việc khởi động và tắt máy tính không đúng cách sẽ gây ra hậu quả gì?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Máy tính hoạt động nhanh hơn",
+      "Tiết kiệm điện năng đáng kể",
+      "Gây tổn hại cho thiết bị và thông tin ở trong máy tính",
+      "Không ảnh hưởng gì"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bước đầu tiên để tắt máy tính đúng cách là gì?",
+    "choices": [
+      "Nháy chuột vào Power",
+      "Nháy chuột vào Shut down",
+      "Nháy chuột vào Start",
+      "Rút dây nguồn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong các lựa chọn sau, thao tác nào KHÔNG được phép làm để tắt máy tính?",
+    "choices": [
+      "Nhấn, giữ nút nguồn trên thân máy",
+      "Nháy chuột vào Start -> Power -> Shut down",
+      "Nháy chuột vào Start -> Power -> Restart",
+      "Đóng tất cả các phần mềm đang mở"
     ],
     "answer": 0
+  },
+  {
+    "question": "Biểu tượng 'This PC' trên màn hình nền có chức năng gì?",
+    "choices": [
+      "Là nút tắt máy tính",
+      "Là phần mềm quản lí tệp",
+      "Là phần mềm soạn thảo văn bản",
+      "Là phần mềm trình chiếu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để kích hoạt phần mềm 'This PC', em cần thực hiện thao tác chuột nào lên biểu tượng đó?",
+    "choices": [
+      "Nháy chuột phải",
+      "Kéo thả chuột",
+      "Nháy đúp chuột",
+      "Lăn nút cuộn chuột"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh nào trong cửa sổ Power giúp máy tính tắt đi và tự động bật lại ngay lập tức?",
+    "choices": [
+      "Shut down",
+      "Sleep",
+      "Restart",
+      "Power"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh nào được nháy chuột vào ở cuối cùng trong quy trình tắt máy tính đúng cách?",
+    "choices": [
+      "Sleep",
+      "Shut down",
+      "Restart",
+      "Start"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Với hầu hết các màn hình hiện nay, khi tắt máy tính, màn hình sẽ tự động chuyển sang chế độ nào?",
+    "choices": [
+      "Chế độ nghỉ",
+      "Chế độ chờ",
+      "Chế độ trình chiếu",
+      "Tắt hoàn toàn"
+    ],
+    "answer": 1
   }
 ]
