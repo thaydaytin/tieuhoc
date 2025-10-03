@@ -31,17 +31,40 @@
       color: white;
       border-radius: 6px;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
-    button:hover {
-      background: #2980b9;
+    button:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
     }
     #error {
       color: red;
       margin-top: 10px;
     }
-    .student { display: flex; align-items: center; margin: 8px 0; }
+    .student { 
+      display: flex; 
+      align-items: center; 
+      margin: 8px 0; 
+      padding: 10px 0; 
+      border-bottom: 1px solid #ddd;
+    }
     .name { flex: 1; text-align: left; }
     .like, .dislike { margin-left: 10px; cursor: pointer; font-size: 16px; }
+    .effect {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0;
+      animation: popUp 0.5s forwards;
+    }
+    @keyframes popUp {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    }
   </style>
 </head>
 <body>
@@ -115,20 +138,26 @@
         html += `
           <div class="student">
             <div class="name">${s[1]}</div>
-            <button class="like" onclick="updatePoint('${className}','${s[0]}','like')">👍</button>
-            <button class="dislike" onclick="updatePoint('${className}','${s[0]}','dislike')">👎</button>
+            <button class="like" onclick="updatePoint('${className}','${s[0]}','like', this)">👍</button>
+            <button class="dislike" onclick="updatePoint('${className}','${s[0]}','dislike', this)">👎</button>
           </div>
         `;
       });
       document.getElementById("studentList").innerHTML = html;
     }
 
-    async function updatePoint(className, id, action) {
+    async function updatePoint(className, id, action, el) {
+      // Hiệu ứng +1 hoặc -1
+      const effect = document.createElement("div");
+      effect.className = "effect";
+      effect.textContent = action === "like" ? "+1" : "-1";
+      el.appendChild(effect);
+      setTimeout(() => effect.remove(), 500);
+
       await fetch(scriptUrl, {
         method: "POST",
         body: JSON.stringify({ id, action, class: className })
       });
-      // Refresh lại danh sách ngay sau khi cập nhật
       loadStudents();
     }
   </script>
