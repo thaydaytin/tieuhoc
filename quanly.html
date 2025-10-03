@@ -61,6 +61,8 @@
       opacity: 0;
       animation: popUp 0.5s forwards;
     }
+    .effect.plus { color: green; }
+    .effect.minus { color: red; }
     @keyframes popUp {
       0% { opacity: 1; transform: translateX(-50%) translateY(0); }
       100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
@@ -92,6 +94,7 @@
       <option value="5C">5C</option>
     </select>
     <div id="studentList"></div>
+    <button onclick="copyStudents()">📋 Copy danh sách học sinh</button>
   </div>
 
   <script>
@@ -145,11 +148,34 @@
       });
       document.getElementById("studentList").innerHTML = html;
     }
+   
+    async function copyStudents() {
+    const className = document.getElementById("classSelect").value;
+    if (!className) {
+      alert("Vui lòng chọn lớp trước!");
+      return;
+    }
+  
+    let res = await fetch(`${scriptUrl}?class=${className}`);
+    let data = await res.json();
+    let students = data.slice(1); // bỏ dòng tiêu đề
+  
+    // Lấy cột tên học sinh (cột 2 trong sheet)
+    let listText = students.map(s => s[1]).join("\\n");
+  
+    // Copy vào clipboard
+    try {
+      await navigator.clipboard.writeText(listText);
+      alert("✅ Danh sách học sinh lớp " + className + " đã được copy!");
+    } catch (err) {
+      alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
+    }
+  }
 
     async function updatePoint(className, id, action, el) {
       // Hiệu ứng +1 hoặc -1
       const effect = document.createElement("div");
-      effect.className = "effect";
+      effect.className = action === "like" ? "effect plus" : "effect minus";
       effect.textContent = action === "like" ? "+1" : "-1";
       el.appendChild(effect);
       setTimeout(() => effect.remove(), 500);
