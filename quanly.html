@@ -32,40 +32,35 @@
       border-radius: 6px;
       cursor: pointer;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
     button:active {
       transform: scale(0.9);
       transition: transform 0.1s;
     }
-    #error {
-      color: red;
-      margin-top: 10px;
-    }
-    .student { 
-      display: flex; 
-      align-items: center; 
-      margin: 8px 0; 
-      padding: 10px 0; 
+    #error { color: red; margin-top: 10px; }
+    .student {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #ddd;
+      position: relative;
     }
     .name { flex: 1; text-align: left; }
     .like, .dislike { margin-left: 10px; cursor: pointer; font-size: 16px; }
     .effect {
       position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       opacity: 0;
-      animation: popUp 0.5s forwards;
+      animation: popUp 1s forwards;
     }
     .effect.plus { color: green; }
     .effect.minus { color: red; }
     @keyframes popUp {
-      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-30px); }
     }
   </style>
 </head>
@@ -93,8 +88,9 @@
       <option value="5B2">5B2</option>
       <option value="5C">5C</option>
     </select>
-    <div id="studentList"></div>
+    <br>
     <button onclick="copyStudents()">📋 Copy danh sách học sinh</button>
+    <div id="studentList"></div>
   </div>
 
   <script>
@@ -148,43 +144,48 @@
       });
       document.getElementById("studentList").innerHTML = html;
     }
-   
-    async function copyStudents() {
-    const className = document.getElementById("classSelect").value;
-    if (!className) {
-      alert("Vui lòng chọn lớp trước!");
-      return;
-    }
-  
-    let res = await fetch(`${scriptUrl}?class=${className}`);
-    let data = await res.json();
-    let students = data.slice(1); // bỏ dòng tiêu đề
-  
-    // Lấy cột tên học sinh (cột 2 trong sheet)
-    let listText = students.map(s => s[1]).join("\\n");
-  
-    // Copy vào clipboard
-    try {
-      await navigator.clipboard.writeText(listText);
-      alert("✅ Danh sách học sinh lớp " + className + " đã được copy!");
-    } catch (err) {
-      alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
-    }
-  }
 
+    // Hiệu ứng và cập nhật điểm
     async function updatePoint(className, id, action, el) {
-      // Hiệu ứng +1 hoặc -1
+      const parent = el.parentElement;
       const effect = document.createElement("div");
       effect.className = action === "like" ? "effect plus" : "effect minus";
       effect.textContent = action === "like" ? "+1" : "-1";
-      el.appendChild(effect);
-      setTimeout(() => effect.remove(), 500);
+
+      // Đặt hiệu ứng phía trên nút
+      const rect = el.getBoundingClientRect();
+      effect.style.left = el.offsetLeft + el.offsetWidth / 2 + "px";
+      effect.style.top = "-5px";
+      parent.appendChild(effect);
+      setTimeout(() => effect.remove(), 1000);
 
       await fetch(scriptUrl, {
         method: "POST",
         body: JSON.stringify({ id, action, class: className })
       });
+
       loadStudents();
+    }
+
+    // ---------------- Copy danh sách học sinh ----------------
+    async function copyStudents() {
+      const className = document.getElementById("classSelect").value;
+      if (!className) {
+        alert("Vui lòng chọn lớp trước!");
+        return;
+      }
+
+      let res = await fetch(`${scriptUrl}?class=${className}`);
+      let data = await res.json();
+      let students = data.slice(1);
+      let listText = students.map(s => s[1]).join("\\n");
+
+      try {
+        await navigator.clipboard.writeText(listText);
+        alert("✅ Danh sách học sinh lớp " + className + " đã được copy!");
+      } catch (err) {
+        alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
+      }
     }
   </script>
 </body>
