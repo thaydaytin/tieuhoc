@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Đâu là một trong các loại thông tin chính mà ta dễ nhận biết trên trang web?",
+    "choices": [
+      "Phần cứng",
+      "Lập trình",
+      "Âm thanh",
+      "Tốc độ mạng"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Thành phần nào trên trang web có thể chứa một liên kết?",
+    "choices": [
+      "Bộ nguồn",
+      "Thân máy",
+      "Siêu liên kết",
+      "Bàn phím"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Khi di chuyển chuột vào đối tượng chứa siêu liên kết, con trỏ chuột sẽ biến thành hình gì?",
+    "choices": [
+      "Mũi tên",
+      "Bàn tay",
+      "Hình tròn xoay",
+      "Dấu cộng"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Loại thông tin nào là sự kết hợp của văn bản, hình ảnh, âm thanh?",
+    "choices": [
+      "Văn bản thuần túy",
+      "Video",
+      "Hình ảnh tĩnh",
+      "Âm thanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi nháy chuột vào một siêu liên kết, điều gì sẽ xảy ra?",
+    "choices": [
+      "Máy tính sẽ tự động tắt",
+      "Mở ra một trang web mới",
+      "Chỉ làm chữ in đậm hơn",
+      "Làm con trỏ chuột biến mất"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khẳng định nào sau đây là đúng?",
+    "choices": [
+      "Trang web là siêu liên kết",
+      "Trang web là siêu văn bản",
+      "Trang web chỉ chứa văn bản",
+      "Trang web chỉ chứa hình ảnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Siêu văn bản là loại văn bản có chứa nhiều loại thông tin khác nhau, bao gồm cả:",
+    "choices": [
+      "Phần mềm Word",
+      "Bộ vi xử lí",
+      "Siêu liên kết",
+      "Bộ nhớ ngoài"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Đâu là một trong các loại thông tin chính trên trang web?",
+    "choices": [
+      "Bảng mạch chính",
+      "Ổ đĩa",
+      "Văn bản",
+      "Máy in"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Siêu văn bản luôn chứa các siêu liên kết dẫn đến đâu?",
+    "choices": [
+      "Các ứng dụng trên máy tính",
+      "Các trang web khác",
+      "Hàng phím cơ sở",
+      "Bộ nhớ trong"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi con trỏ chuột biến thành hình bàn tay, điều đó báo hiệu đối tượng đó là gì?",
+    "choices": [
+      "Một hình ảnh tĩnh",
+      "Một đoạn văn bản thường",
+      "Một siêu liên kết",
+      "Một nút nguồn"
+    ],
+    "answer": 2
   }
 ]

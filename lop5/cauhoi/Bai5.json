@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Khi hợp tác với bạn bè trong tìm kiếm thông tin, em sẽ nhận được lợi ích gì?",
+    "choices": [
+      "Chỉ làm chậm quá trình tìm kiếm",
+      "Tìm được nhanh và nhiều thông tin phù hợp hơn",
+      "Chỉ tìm được thông tin không quan trọng",
+      "Làm hỏng máy tính"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Đâu là một phương tiện giúp trao đổi và chia sẻ thông tin?",
+    "choices": [
+      "Màn hình máy tính",
+      "Ổ đĩa ngoài",
+      "Bàn phím",
+      "Bộ nguồn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong quy trình chia sẻ tệp bằng ổ đĩa ngoài (USB), bước nào là bắt buộc để tránh làm hỏng thiết bị?",
+    "choices": [
+      "Sao chép tệp ngẫu nhiên",
+      "Ngắt kết nối ổ đĩa ngoài một cách an toàn",
+      "Chỉ cần rút ổ đĩa ra ngay",
+      "Kết nối ổ đĩa ngoài qua mạng không dây"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'Eject Mass Storage' dùng để làm gì?",
+    "choices": [
+      "Bắt đầu sao chép tệp",
+      "Ngắt kết nối ổ đĩa ngoài một cách an toàn",
+      "Làm hỏng ổ đĩa",
+      "Chỉ hiển thị tệp trên ổ đĩa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc trao đổi, hợp tác tìm kiếm thông tin nên được thực hiện bởi:",
+    "choices": [
+      "Chỉ một bạn giỏi nhất",
+      "Một nhóm bạn hợp tác thực hiện",
+      "Người lớn",
+      "Chỉ trên điện thoại thông minh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phương tiện nào sau đây là ứng dụng giao tiếp trực tuyến dùng để chia sẻ thông tin?",
+    "choices": [
+      "Microsoft Word",
+      "Zalo hoặc Messenger Kids",
+      "Rapid Typing",
+      "This PC"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sao chép tệp từ máy tính A sang máy tính B bằng ổ đĩa ngoài, việc đầu tiên em cần làm là gì?",
+    "choices": [
+      "Rút ổ đĩa ra ngay lập tức",
+      "Kết nối ổ đĩa ngoài vào máy tính A",
+      "Tắt máy tính B",
+      "Nháy chuột vào Start"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu ngắt kết nối ổ đĩa ngoài không đúng cách, hậu quả có thể là gì?",
+    "choices": [
+      "Tìm được nhiều thông tin hơn",
+      "Máy tính khởi động nhanh hơn",
+      "Làm hỏng ổ đĩa ngoài",
+      "Tăng tốc độ mạng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong các phương tiện sau, đâu là phương tiện trao đổi thông tin không cần kết nối vật lí (dây cáp)?",
+    "choices": [
+      "Ổ đĩa ngoài",
+      "Thiết bị nhớ USB",
+      "Thư điện tử",
+      "Thân máy tính"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để hoàn thành việc chia sẻ tệp bằng ổ đĩa ngoài, em cần phải ngắt kết nối ổ đĩa ngoài ở bao nhiêu máy tính?",
+    "choices": [
+      "Chỉ máy tính A",
+      "Chỉ máy tính B",
+      "Cả máy tính A và B",
+      "Không cần ngắt kết nối"
+    ],
+    "answer": 2
   }
 ]

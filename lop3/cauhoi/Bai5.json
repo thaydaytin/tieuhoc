@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Khi làm việc với máy tính, khoảng cách hợp lí từ mắt đến màn hình là bao nhiêu?",
+    "choices": [
+      "Dưới 30 cm",
+      "Từ 50 cm đến 80 cm",
+      "Từ 10 cm đến 20 cm",
+      "Trên 100 cm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tư thế ngồi sai khi làm việc với máy tính có thể gây ra bệnh gì cho cơ thể?",
+    "choices": [
+      "Bệnh về dạ dày và da",
+      "Bệnh về cột sống và mắt",
+      "Bệnh về tim mạch và phổi",
+      "Bệnh về răng miệng và tai"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sau mỗi 30 phút sử dụng máy tính, em cần nghỉ giải lao trong bao lâu?",
+    "choices": [
+      "Không cần nghỉ",
+      "Từ 1 đến 2 phút",
+      "Từ 5 đến 10 phút",
+      "Trên 20 phút"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Quy tắc nào sau đây là đúng về tư thế ngồi khi làm việc với máy tính?",
+    "choices": [
+      "Lưng cong",
+      "Mắt nhìn thấp hơn tầm màn hình",
+      "Lưng thẳng",
+      "Tay đặt chặt lên bàn phím"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Điều nào sau đây là KHÔNG được phép làm để đảm bảo an toàn về điện?",
+    "choices": [
+      "Thực hiện nghiêm túc quy tắc an toàn về điện",
+      "Không chạm tay vào vật có điện",
+      "Dùng kéo hoặc dao kim loại cắm vào ổ điện",
+      "Không để vật chứa nước gần máy tính"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Vị trí của màn hình nên như thế nào so với mắt khi em ngồi thẳng?",
+    "choices": [
+      "Mắt nhìn xuống dưới màn hình",
+      "Mắt nhìn lên trên màn hình",
+      "Mắt ngang tầm màn hình",
+      "Màn hình đặt sát vào mắt"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc để vật chứa nước gần máy tính có thể gây ra hậu quả gì?",
+    "choices": [
+      "Giúp máy tính mát hơn",
+      "Làm tăng tốc độ máy tính",
+      "Gây chập điện và cháy nổ",
+      "Làm tăng tuổi thọ thiết bị"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi làm việc với máy tính, chỗ ngồi cần đảm bảo yếu tố nào về ánh sáng?",
+    "choices": [
+      "Không cần ánh sáng",
+      "Nguồn sáng chiếu thẳng vào màn hình",
+      "Chỗ ngồi đủ ánh sáng, nguồn sáng không chiếu thẳng vào màn hình",
+      "Chỉ cần dùng đèn pin"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu sử dụng máy tính quá lâu (quá 30 phút liên tục), em sẽ bị ảnh hưởng gì về sức khỏe?",
+    "choices": [
+      "Tăng cân",
+      "Tăng thị lực",
+      "Giảm thị lực và mỏi mệt",
+      "Cơ bắp phát triển"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi gõ bàn phím, hai bàn tay của em nên được đặt như thế nào?",
+    "choices": [
+      "Đặt chặt lên bàn phím",
+      "Thả lỏng thoải mái, đặt nhẹ lên bàn phím",
+      "Nâng cao khỏi bàn phím",
+      "Chỉ đặt ngón tay trỏ"
+    ],
     "answer": 1
   }
 ]
