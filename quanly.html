@@ -169,24 +169,27 @@
 
     // ---------------- Copy danh sách học sinh ----------------
     async function copyStudents() {
-      const className = document.getElementById("classSelect").value;
-      if (!className) {
-        alert("Vui lòng chọn lớp trước!");
-        return;
-      }
+  const className = document.getElementById("classSelect").value;
+  if (!className) {
+    alert("Vui lòng chọn lớp trước!");
+    return;
+  }
 
-      let res = await fetch(`${scriptUrl}?class=${className}`);
-      let data = await res.json();
-      let students = data.slice(1);
-      let listText = students.map(s => s[1]).join("\\n");
+  let res = await fetch(`${scriptUrl}?class=${className}`);
+  let data = await res.json();
+  let students = data.slice(1);
 
-      try {
-        await navigator.clipboard.writeText(listText);
-        alert("✅ Danh sách học sinh lớp " + className + " đã được copy!");
-      } catch (err) {
-        alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
-      }
-    }
+  // Tạo danh sách với mỗi học sinh 1 dòng riêng (Excel hiểu được)
+  let listText = students.map(s => s[1]).join("\r\n"); // dùng \r\n để Excel tách hàng
+
+  try {
+    await navigator.clipboard.writeText(listText);
+    alert("✅ Đã copy danh sách lớp " + className + " — dán thẳng vào Excel được!");
+  } catch (err) {
+    alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
+  }
+}
+
   </script>
 </body>
 </html>
