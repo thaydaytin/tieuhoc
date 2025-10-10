@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QR Code Generator</title>
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #1e40af;
+    }
+
+    /* Frame (compact and proportional) */
+    #qrcode-frame {
+      display: none;
+      width: 240px;
+      height: 280px;
+      background: white;
+      border: 5px solid #2563eb;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    #qrcode {
+      margin-bottom: 5px;
+    }
+
+    #qrcode-name {
+      font-weight: bold;
+      font-size: 16px;
+      color: #374151;
+      margin-top: 5px;
+    }
+
+    #download-btn {
+      display: none;
+      margin-top: 15px;
+      background: #16a34a;
+    }
+
+    #download-btn:hover {
+      background: #15803d;
+    }
+  </style>
+</head>
+<body>
+  <h1>Trình Tạo Mã QR</h1>
+
+  <div class="input-box">
+    <input type="text" id="qr-content" placeholder="Nhập vào nội dung cần tạo mã QR" />
+    <input type="text" id="qr-name" placeholder="Đặt tên cho mã (Nếu cần)" />
+    <button onclick="generateQR()">Tạo mã QR</button>
+  </div>
+
+  <div id="qrcode-frame">
+    <div id="qrcode"></div>
+    <div id="qrcode-name"></div>
+  </div>
+
+  <button id="download-btn" onclick="downloadQR()">Tải về</button>
+
+  <script>
+    let qr;
+
+    function generateQR() {
+      const content = document.getElementById("qr-content").value.trim();
+      const name = document.getElementById("qr-name").value.trim();
+
+      if (!content) {
+        alert("Please enter content for the QR code!");
+        return;
+      }
+
+      const frame = document.getElementById("qrcode-frame");
+      const qrContainer = document.getElementById("qrcode");
+      const qrName = document.getElementById("qrcode-name");
+      const downloadBtn = document.getElementById("download-btn");
+
+      qrContainer.innerHTML = "";
+
+      // Larger QR code to fill frame
+      qr = new QRCode(qrContainer, {
+        text: content,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+      });
+
+      qrName.textContent = name || "";
+      frame.style.display = "flex";
+      downloadBtn.style.display = "inline-block";
+    }
+
+    async function downloadQR() {
+      const frame = document.getElementById("qrcode-frame");
+      const name = document.getElementById("qr-name").value.trim() || "qrcode";
+
+      const canvas = await html2canvas(frame, {
+        backgroundColor: "#ffffff",
+        scale: 3,
+      });
+
+      const link = document.createElement("a");
+      link.download = name + ".png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    }
+  </script>
+</body>
+</html>
