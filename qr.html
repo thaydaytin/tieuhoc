@@ -34,7 +34,12 @@
       color: #2563eb;
       margin-bottom: 20px;
     }
-
+	h2 {
+      font-size: 1.2rem;
+      color: #1565c0;
+      font-weight: 600;
+	  margin-bottom: 1px;
+    }
     .input-box {
       display: flex;
       flex-direction: column;
@@ -107,8 +112,10 @@
   <h1>Trình Tạo Mã QR</h1>
 
   <div class="input-box">
-    <input type="text" id="qr-content" placeholder="Nhập vào nội dung cần tạo mã QR" />
-    <input type="text" id="qr-name" placeholder="Đặt tên cho mã (Nếu cần)" />
+	<h2>Nhập nội dung cần tạo mã QR (Đường dẫn google driver, website, văn bản,...):</h2>
+    <input type="text" id="qr-content" placeholder="Nội dung cần tạo mã QR" />
+	<h2>Đặt tên cho mã QR (nếu cần):</h2>
+    <input type="text" id="qr-name" placeholder="Tên mã QR" />
     <button onclick="generateQR()">Tạo mã QR</button>
   </div>
 
@@ -127,7 +134,7 @@
       const name = document.getElementById("qr-name").value.trim();
 
       if (!content) {
-        alert("Please enter content for the QR code!");
+        alert("Hãy nhập vào nội dung cần tạo mã QR!");
         return;
       }
 
@@ -141,8 +148,8 @@
       // Larger QR code to fill frame
       qr = new QRCode(qrContainer, {
         text: content,
-        width: 200,
-        height: 200,
+        width: 220,
+        height: 220,
         colorDark: "#000000",
         colorLight: "#ffffff",
       });
