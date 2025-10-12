@@ -26,7 +26,7 @@
       position: absolute;
       top: 15px;
       left: 15px;
-      height: 50px;
+      height: 75px;
       width: auto;
       border-radius: 8px;
     }
@@ -43,7 +43,8 @@
     .input-box {
       display: flex;
       flex-direction: column;
-      width: 300px;
+      width: 30%;
+	  min-width: 300px;
       gap: 10px;
       margin-bottom: 20px;
     }
@@ -112,10 +113,10 @@
   <h1>Trình Tạo Mã QR</h1>
 
   <div class="input-box">
-	<h2>Nhập nội dung cần tạo mã QR (Đường dẫn google driver, website, văn bản,...):</h2>
-    <input type="text" id="qr-content" placeholder="Nội dung cần tạo mã QR" />
-	<h2>Đặt tên cho mã QR (nếu cần):</h2>
-    <input type="text" id="qr-name" placeholder="Tên mã QR" />
+	<h2>Nhập nội dung cần tạo mã QR:</h2>
+    <input type="text" id="qr-content" placeholder="Nhập link gg drive, website hay văn bản bất kì cần tạo mã QR" />
+	<h2>Đặt tên cho mã QR:</h2>
+    <input type="text" id="qr-name" placeholder="Có thể để trống nếu không cần tên" />
     <button onclick="generateQR()">Tạo mã QR</button>
   </div>
 
