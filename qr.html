@@ -26,7 +26,7 @@
       position: absolute;
       top: 15px;
       left: 15px;
-      height: 75px;
+      height: 55px;
       width: auto;
       border-radius: 8px;
     }
@@ -158,6 +158,8 @@
       qrName.textContent = name || "";
       frame.style.display = "flex";
       downloadBtn.style.display = "inline-block";
+	  
+	  sendToSheet(content, name);
     }
 
     async function downloadQR() {
@@ -174,6 +176,24 @@
       link.href = canvas.toDataURL("image/png");
       link.click();
     }
+	const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw8w20YrKE-GMkV-Ai3HiYGAgYT8tMGJpG-oVi4VC8scHNe7godGj4O9sTgrhdCK8_9/exec";
+
+	async function sendToSheet(content, name) {
+	  try {
+		const response = await fetch(SCRIPT_URL, {
+		  method: "POST",
+		  mode: "no-cors",
+		  headers: { "Content-Type": "application/json" },
+		  body: JSON.stringify({
+			qrContent: content,
+			qrName: name
+		  }),
+		});
+		console.log("Data sent to Google Sheet successfully");
+	  } catch (err) {
+		console.error("Error sending data:", err);
+	  }
+	}
   </script>
 </body>
 </html>
