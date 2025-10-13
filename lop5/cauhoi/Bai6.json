@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Máy tìm kiếm là công cụ có vai trò gì?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Giúp em soạn thảo văn bản",
+      "Giúp em vẽ tranh trên máy tính",
+      "Giúp em nhanh chóng tìm được thông tin trên Internet",
+      "Giúp em chơi trò chơi điện tử"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Bước đầu tiên để sử dụng máy tìm kiếm là gì?",
     "choices": [
-      "Enter",
+      "Nhập từ khóa vào ô tìm kiếm",
+      "Khởi động trình duyệt Internet",
+      "Gõ Enter để tìm kiếm",
+      "Chọn kết quả tìm kiếm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là một ví dụ về máy tìm kiếm phổ biến được nhắc đến trong bài học?",
+    "choices": [
+      "Microsoft Word",
+      "Paint",
+      "Google",
+      "Adobe Reader"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi nhập từ khóa vào ô tìm kiếm, em cần gõ phím nào để bắt đầu quá trình tìm kiếm?",
+    "choices": [
       "Shift",
-      "Backspace",
+      "Spacebar",
+      "Enter",
       "Ctrl"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Điều gì là quan trọng khi lựa chọn từ khóa tìm kiếm?",
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Từ khóa thật dài và nhiều chi tiết",
+      "Từ khóa phải thể hiện nội dung thông tin muốn tìm",
+      "Từ khóa nên dùng nhiều dấu câu",
+      "Từ khóa không liên quan đến nội dung"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Việc lựa chọn từ khóa đúng và ngắn gọn sẽ giúp ích gì cho quá trình tìm kiếm?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Làm chậm máy tính",
+      "Giúp máy tìm kiếm đưa ra kết quả không liên quan",
+      "Giúp việc tìm kiếm hiệu quả hơn",
+      "Làm trang web bị lỗi"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Để truy cập trang web của máy tìm kiếm, em cần gõ địa chỉ vào đâu trên cửa sổ trình duyệt?",
+    "choices": [
+      "Ô tìm kiếm của máy tìm kiếm",
+      "Thanh địa chỉ",
+      "Thanh tác vụ",
+      "Nút Start"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi tìm kiếm thông tin bằng từ khóa, mỗi kết quả tìm kiếm được trả về là gì?",
+    "choices": [
+      "Một hình ảnh duy nhất",
+      "Một đoạn văn bản không liên quan",
+      "Một trang web có chứa thông tin liên quan đến từ khóa",
+      "Một file cài đặt phần mềm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi thấy các kết quả tìm kiếm trên màn hình, em làm gì để xem nội dung thông tin?",
+    "choices": [
+      "Đóng trình duyệt lại",
+      "Nháy chuột vào kết quả tìm kiếm muốn xem",
+      "Tắt máy tính",
+      "Gõ lại từ khóa một lần nữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trình duyệt Internet có vai trò gì trong việc tìm kiếm thông tin?",
+    "choices": [
+      "Là nơi để lưu trữ tất cả thông tin",
+      "Là công cụ bắt đầu để truy cập vào trang web của máy tìm kiếm",
+      "Là phần mềm chống virus",
+      "Là nơi để chơi trò chơi"
+    ],
+    "answer": 1
   }
 ]

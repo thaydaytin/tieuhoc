@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Nguyên tắc cơ bản nhất khi gặp các trang web có nội dung không phù hợp lứa tuổi là gì?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Cố tình truy cập để xem thử",
+      "Ghi lại địa chỉ trang web",
+      "Không nên xem và tránh xa",
+      "Chia sẻ cho bạn bè cùng xem"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Xem các trò chơi, phim, ảnh bạo lực trên mạng có thể gây ra tác hại nào?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Giúp em học giỏi hơn",
+      "Khiến em bị lôi cuốn và làm theo hành vi không đúng mực",
+      "Tăng cường sức khỏe",
+      "Tăng tốc độ máy tính"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Nếu truy cập vào các trang web chứa phần mềm độc hại, máy tính của em có nguy cơ bị gì?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Tự động làm việc nhanh hơn",
+      "Nâng cấp phần mềm",
+      "Nhiễm virus",
+      "Mở thêm cửa sổ quảng cáo"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Việc tiết lộ thông tin cá nhân theo lời dụ dỗ của kẻ mạo danh trên mạng sẽ gây ra hậu quả gì?",
+    "choices": [
+      "Giúp em có thêm bạn bè",
+      "Giúp kẻ xấu lừa đảo, gây hại cho bản thân và gia đình",
+      "Làm tăng khả năng gõ máy",
+      "Không ảnh hưởng gì"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi truy cập vào các trang web có thông tin chỉ dành cho người lớn (ví dụ như mạng xã hội không phù hợp), em có nguy cơ bị gì?",
+    "choices": [
+      "Được khen thưởng",
+      "Bị bắt nạt hoặc bị lừa đảo",
+      "Học được kiến thức mới",
+      "Cải thiện thị lực"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khẳng định nào sau đây là đúng về việc xem trang web không phù hợp lứa tuổi?",
+    "choices": [
+      "Chỉ xem một chút là được",
+      "Không được cố tình xem để tránh tác hại",
+      "Chỉ nên xem vào cuối tuần",
+      "Chỉ cần tắt tiếng là được"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là một hành vi sai trái khi sử dụng máy tính?",
+    "choices": [
+      "Tìm kiếm thông tin phục vụ học tập",
+      "Truy cập các trang web có nội dung xấu (ví dụ như phim, ảnh độc hại)",
+      "Ngồi đúng tư thế khi gõ bàn phím",
+      "Nghỉ giải lao sau 30 phút"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu bị lôi cuốn bởi nội dung bạo lực trên mạng, em có thể vô tình làm theo những hành vi như thế nào?",
+    "choices": [
+      "Hành vi tốt với mọi người",
+      "Hành vi đúng mực",
+      "Hành vi không đúng mực",
+      "Hành vi lịch sự"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Mục đích chính của bài học này là gì?",
+    "choices": [
+      "Dạy em cách tạo trang web",
+      "Giải thích sơ lược tác hại của việc cố tình truy cập trang web không phù hợp lứa tuổi và không nên xem",
+      "Dạy em cách cài đặt phần mềm chống virus",
+      "Dạy em cách gõ bàn phím nhanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hậu quả không tốt nào có thể xảy ra khi em bị kẻ xấu lừa đảo trên mạng?",
+    "choices": [
+      "Nhận được quà tặng",
+      "Gây hại cho bản thân và gia đình",
+      "Được lên lớp",
+      "Tìm thấy thông tin bí mật"
+    ],
+    "answer": 1
   }
 ]

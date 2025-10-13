@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Ba dạng thông tin thường gặp trong cuộc sống hằng ngày là gì?",
+    "choices": [
+      "Dạng chữ, dạng video, dạng cảm xúc",
+      "Dạng chữ, dạng hình ảnh, dạng âm thanh",
+      "Dạng hình vẽ, dạng tốc độ, dạng màu sắc",
+      "Dạng số, dạng công thức, dạng kí hiệu"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Thông tin trong một thời khóa biểu là thông tin dạng gì?",
+    "choices": [
+      "Dạng âm thanh",
+      "Dạng chữ",
+      "Dạng hình ảnh",
+      "Dạng video"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin ở các biển báo giao thông thường là thông tin dạng gì?",
+    "choices": [
+      "Dạng chữ",
+      "Dạng âm thanh",
+      "Dạng hình ảnh",
+      "Dạng kí hiệu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi nghe tiếng còi xe cứu thương hú, ta đang thu nhận thông tin dạng nào?",
+    "choices": [
+      "Dạng chữ",
+      "Dạng hình ảnh",
+      "Dạng âm thanh",
+      "Dạng siêu văn bản"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bức ảnh chụp một sự kiện trong sách báo cung cấp thông tin dạng gì?",
+    "choices": [
+      "Dạng chữ",
+      "Dạng âm thanh",
+      "Dạng hình ảnh",
+      "Dạng bảng biểu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sách và báo thường chứa thông tin chủ yếu ở dạng nào?",
+    "choices": [
+      "Dạng âm thanh",
+      "Dạng chữ",
+      "Dạng hình ảnh",
+      "Dạng video"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi trò chuyện với nhau để trao đổi thông tin, đó là dạng thông tin nào được sử dụng chủ yếu?",
+    "choices": [
+      "Dạng hình ảnh",
+      "Dạng chữ",
+      "Dạng âm thanh",
+      "Dạng số"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Biển hiệu cửa hàng là ví dụ của thông tin dạng nào?",
+    "choices": [
+      "Dạng chữ và hình ảnh",
+      "Dạng âm thanh và chữ",
+      "Dạng âm thanh và hình ảnh",
+      "Chỉ dạng video"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khẳng định nào sau đây là đúng về cách con người thu nhận thông tin?",
+    "choices": [
+      "Chỉ thu nhận thông tin dạng chữ",
+      "Chỉ thu nhận thông tin khi dùng máy tính",
+      "Luôn thu nhận thông tin ở nhiều dạng khác nhau",
+      "Chỉ thu nhận thông tin dạng âm thanh"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thông tin trong một bảng biểu thống kê số liệu thường là thông tin dạng gì?",
+    "choices": [
+      "Dạng âm thanh",
+      "Dạng hình ảnh",
+      "Dạng chữ",
+      "Dạng tốc độ"
+    ],
+    "answer": 2
   }
 ]

@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
+    "question": "Thành phần nào sau đây KHÔNG phải là thành phần thường có trên một website?",
+    "choices": [
+      "Tên website",
+      "Địa chỉ website",
+      "Bảng chọn nội dung (menu)",
+      "Phần mềm soạn thảo văn bản"
+    ],
+    "answer": 3
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để tìm thông tin trên website, em có thể sử dụng cách nào sau đây?",
+    "choices": [
+      "Ngắt kết nối mạng Internet",
+      "Nháy chuột vào các siêu liên kết phù hợp",
+      "Tắt màn hình máy tính",
+      "Khởi động lại máy tính"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Công cụ nào trên website có thể giúp em tìm kiếm thông tin?",
+    "choices": [
+      "Bộ nguồn",
+      "Thanh địa chỉ",
+      "Công cụ tìm kiếm (Search)",
+      "Thẻ nhớ USB"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc nháy chuột vào một mục trong Bảng chọn nội dung để mở ra thông tin liên quan là sử dụng thành phần nào của website?",
+    "choices": [
+      "Công cụ tìm kiếm",
+      "Siêu liên kết",
+      "Địa chỉ website",
+      "Tên website"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sử dụng công cụ tìm kiếm trên website, em cần thực hiện bước nào sau khi nhập từ khóa?",
+    "choices": [
+      "Nháy chuột vào Start",
+      "Nháy chuột vào Tìm kiếm",
+      "Đóng cửa sổ trình duyệt",
+      "Tắt máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là một trong các thành phần thường có trên website?",
+    "choices": [
+      "Địa chỉ email của tất cả người dùng",
+      "Bảng chọn nội dung",
+      "Tên người thiết kế",
+      "Bản đồ chi tiết"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Địa chỉ website (URL) được hiển thị ở đâu trên cửa sổ phần mềm duyệt web?",
+    "choices": [
+      "Thanh tác vụ",
+      "Thanh địa chỉ",
+      "Màn hình nền",
+      "Cửa sổ File Explorer"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Ngoài việc dùng các siêu liên kết, em còn có thể tìm thông tin trên website bằng cách nào?",
+    "choices": [
+      "Dùng bàn phím để gõ tất cả nội dung",
+      "Sử dụng công cụ tìm kiếm",
+      "Sử dụng bộ nhớ RAM",
+      "Chỉ đọc các hình ảnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để mở một trang web mới, em nháy chuột vào đối tượng nào có hình bàn tay khi di chuột vào?",
+    "choices": [
+      "Hình ảnh tĩnh",
+      "Văn bản thường",
+      "Siêu liên kết",
+      "Tên website"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong hai cách tìm kiếm thông tin trên website, cách nào phù hợp khi em đã biết chính xác thông tin cần tìm là gì?",
+    "choices": [
+      "Chỉ dùng siêu liên kết",
+      "Chỉ dùng bảng chọn nội dung",
+      "Sử dụng công cụ tìm kiếm",
+      "Rút dây nguồn máy tính"
+    ],
+    "answer": 2
   }
 ]

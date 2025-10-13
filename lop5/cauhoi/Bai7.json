@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Máy tìm kiếm là công cụ có vai trò gì?",
+    "choices": [
+      "Giúp em soạn thảo văn bản",
+      "Giúp em vẽ tranh trên máy tính",
+      "Giúp em nhanh chóng tìm được thông tin trên Internet",
+      "Giúp em chơi trò chơi điện tử"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Bước đầu tiên để sử dụng máy tìm kiếm là gì?",
+    "choices": [
+      "Nhập từ khóa vào ô tìm kiếm",
+      "Khởi động trình duyệt Internet",
+      "Gõ Enter để tìm kiếm",
+      "Chọn kết quả tìm kiếm"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Khi hợp tác với bạn bè trong tìm kiếm thông tin, em sẽ nhận được lợi ích gì?",
+    "choices": [
+      "Chỉ làm chậm quá trình tìm kiếm",
+      "Tìm được nhanh và nhiều thông tin phù hợp hơn",
+      "Chỉ tìm được thông tin không quan trọng",
+      "Làm hỏng máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là một phương tiện giúp trao đổi và chia sẻ thông tin?",
+    "choices": [
+      "Màn hình máy tính",
+      "Ổ đĩa ngoài",
+      "Bàn phím",
+      "Bộ nguồn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điều gì là quan trọng khi lựa chọn từ khóa tìm kiếm?",
+    "choices": [
+      "Từ khóa thật dài và nhiều chi tiết",
+      "Từ khóa phải thể hiện nội dung thông tin muốn tìm",
+      "Từ khóa nên dùng nhiều dấu câu",
+      "Từ khóa không liên quan đến nội dung"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phương tiện nào sau đây là ứng dụng giao tiếp trực tuyến dùng để chia sẻ thông tin?",
+    "choices": [
+      "Microsoft Word",
+      "Zalo hoặc Messenger Kids",
+      "Rapid Typing",
+      "This PC"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để truy cập trang web của máy tìm kiếm, em cần gõ địa chỉ vào đâu trên cửa sổ trình duyệt?",
+    "choices": [
+      "Ô tìm kiếm của máy tìm kiếm",
+      "Thanh địa chỉ",
+      "Thanh tác vụ",
+      "Nút Start"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi tìm kiếm thông tin bằng từ khóa, mỗi kết quả tìm kiếm được trả về là gì?",
+    "choices": [
+      "Một hình ảnh duy nhất",
+      "Một đoạn văn bản không liên quan",
+      "Một trang web có chứa thông tin liên quan đến từ khóa",
+      "Một file cài đặt phần mềm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi thấy các kết quả tìm kiếm trên màn hình, em làm gì để xem nội dung thông tin?",
+    "choices": [
+      "Đóng trình duyệt lại",
+      "Nháy chuột vào kết quả tìm kiếm muốn xem",
+      "Tắt máy tính",
+      "Gõ lại từ khóa một lần nữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi tìm thông tin bằng công cụ tìm kiếm, bước đầu tiên em cần làm là gì?",
+    "choices": [
+      "Nhập từ khóa tìm kiếm",
+      "Nháy chuột vào nút 'Tìm kiếm'",
+      "Nháy chuột vào công cụ tìm kiếm",
+      "Tắt cửa sổ trình duyệt"
+    ],
+    "answer": 2
   }
 ]

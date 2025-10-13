@@ -102,8 +102,6 @@
         </div>
         <div>
           <div style="display:flex; gap:8px; align-items:center;">
-            <button id="replayBtn" class="btn-secondary">🔁 Làm lại</button>
-            <button id="completeBtn" class="btn-danger">✅ Hoàn thành</button>
           </div>
         </div>
       </div>
@@ -161,7 +159,7 @@
       <p id="quizFeedback" style="font-weight:700; min-height:28px; margin-top:8px;"></p>
       <div style="margin-top:12px; display:flex; gap:8px;">
         <button id="quizNextBtn" style="display:none;">Tiếp tục</button>
-        <button id="quizCloseBtn" class="btn-secondary">Đóng (Bỏ qua)</button>
+      <!--  <button id="quizCloseBtn" class="btn-secondary">Đóng (Bỏ qua)</button> -->
       </div>
     </div>
   </div>
@@ -237,13 +235,13 @@
   const quizOptionsEl = document.getElementById('quizOptions');
   const quizFeedbackEl = document.getElementById('quizFeedback');
   const quizNextBtn = document.getElementById('quizNextBtn');
-  const quizCloseBtn = document.getElementById('quizCloseBtn');
+ // const quizCloseBtn = document.getElementById('quizCloseBtn');
 
   // Buttons
   const startBtn = document.getElementById('startBtn');
   const howBtn = document.getElementById('howBtn');
-  const replayBtn = document.getElementById('replayBtn');
-  const completeBtn = document.getElementById('completeBtn');
+ // const replayBtn = document.getElementById('replayBtn');
+ // const completeBtn = document.getElementById('completeBtn');
   const endReplayBtn = document.getElementById('endReplayBtn');
   const endCompleteBtn = document.getElementById('endCompleteBtn');
 
@@ -509,17 +507,17 @@
     else resetRodAndMessage("Sẵn sàng câu! Lượt còn lại: " + gameState.turnsLeft);
   };
 
-  quizCloseBtn.onclick = () => {
+ // quizCloseBtn.onclick = () => {
     // allow teacher to skip quiz (counts as no points)
-    quizModal.style.display = 'none';
-    gameState.isQuizzing = false;
-    if (gameState.currentCaughtFish) {
-      gameState.currentCaughtFish.reset();
-      gameState.currentCaughtFish = null;
-    }
-    if (gameState.turnsLeft <= 0) showGameOver();
-    else resetRodAndMessage("Bỏ qua câu hỏi. Sẵn sàng câu!");
-  };
+ //   quizModal.style.display = 'none';
+//    gameState.isQuizzing = false;
+ //   if (gameState.currentCaughtFish) {
+ //     gameState.currentCaughtFish.reset();
+  //    gameState.currentCaughtFish = null;
+ //   }
+  //  if (gameState.turnsLeft <= 0) showGameOver();
+  //  else resetRodAndMessage("Bỏ qua câu hỏi. Sẵn sàng câu!");
+  //};
 
   // -------------------- UI helpers --------------------
   function updateUI() {
@@ -539,40 +537,48 @@
   }
 
   // -------------------- Google Sheet submission (same logic / date check) --------------------
-  function sendToGoogleSheet(tenHS, diem, callback) {
-    const lop = getParam('lop') || '';
-    const tuan = getParam('tuan') || '';
-    const ngaybdStr = getParam('ngaybd');
-    const ngayktStr = getParam('ngaykt');
+  function sendToGoogleSheet(tenHS, diem) {
+	  const lop = getParam("lop");  
+	  const tuan = getParam("tuan");       // Lấy tuần từ URL hoặc biến
+	  const ngaybdStr = getParam("ngaybd");// Ngày bắt đầu từ URL
+	  const ngayktStr = getParam("ngaykt");// Ngày kết thúc từ URL
 
-    if (!ngaybdStr || !ngayktStr) {
-      console.log("Thiếu tham số ngày bắt đầu hoặc kết thúc! Không gửi lên Google Sheet.");
-      if (callback) callback(false);
-      return;
-    }
-    const ngaybd = new Date(ngaybdStr);
-    const ngaykt = new Date(ngayktStr);
-    const now = new Date();
-    now.setHours(0,0,0,0); ngaybd.setHours(0,0,0,0); ngaykt.setHours(0,0,0,0);
+	  // Kiểm tra tham số ngày
+	  if (!ngaybdStr || !ngayktStr) {
+		console.log("Thiếu tham số ngày bắt đầu hoặc kết thúc!");
+		return;
+	  }
 
-    if (now >= ngaybd && now <= ngaykt) {
-      fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tenHS: tenHS, diem: diem, tuan: tuan, lop: lop })
-      }).then(()=> {
-        console.log("✅ Dữ liệu đã được gửi lên Google Sheet!");
-        if (callback) callback(true);
-      }).catch(e => {
-        console.error("Lỗi khi gửi dữ liệu:", e);
-        if (callback) callback(false);
-      });
-    } else {
-      console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
-      if (callback) callback(false);
-    }
-  }
+	  const ngaybd = new Date(ngaybdStr);
+	  const ngaykt = new Date(ngayktStr);
+	  const now = new Date();
+
+	  // Đặt giờ về 00:00 để so sánh ngày
+	  now.setHours(0, 0, 0, 0);
+	  ngaybd.setHours(0, 0, 0, 0);
+	  ngaykt.setHours(0, 0, 0, 0);
+
+	  // Chỉ gửi nếu đang trong thời gian hợp lệ
+	  if (now >= ngaybd && now <= ngaykt) {
+		fetch("https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec", {
+		  method: "POST",
+		  mode: "no-cors", // tránh lỗi CORS
+		  headers: { "Content-Type": "application/json" },
+		  body: JSON.stringify({
+			tenHS: tenHS,
+			diem: diem,
+			tuan: tuan,
+			lop: lop // Thay bằng lớp thực tế: "3", "4" hoặc "5"
+		  })
+		})
+		.then(() => {
+		  console.log("✅ Dữ liệu đã được gửi lên Google Sheet!");
+		})
+		.catch(e => console.error("❌ Lỗi khi gửi dữ liệu:", e));
+	  } else {
+		console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
+	  }
+	}
 
   // -------------------- Controls bindings --------------------
   startBtn.addEventListener('click', () => {
@@ -597,15 +603,15 @@
     alert("Hướng dẫn:\n1) Nhập tên → Bắt đầu.\n2) Click vào hồ để thả cần.\n3) Nếu câu được cá, trả lời câu hỏi để ghi điểm.\n4) Game có 10 lượt. Sau khi hết 10 lượt, bấm Hoàn thành để gửi kết quả.");
   });
 
-  replayBtn.addEventListener('click', () => {
+//  replayBtn.addEventListener('click', () => {
     // reload / reset game
-    location.reload();
-  });
+ //   location.reload();
+//  });
 
-  completeBtn.addEventListener('click', () => {
+ // completeBtn.addEventListener('click', () => {
     // show end screen and send
-    showGameOver();
-  });
+ //   showGameOver();
+ // });
 
   endReplayBtn.addEventListener('click', () => {
     location.reload();
