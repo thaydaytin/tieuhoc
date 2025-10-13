@@ -1,1040 +1,646 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thầy Dạy Tin - Game Câu Cá Học Tập</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thầy Dạy Tin - Trò chơi Câu Cá Trắc Nghiệm</title>
+
+  <!-- Fonts giống gametracnghiem.html -->
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    /* Reset và thiết lập cơ bản */
-    html, body {
-      box-sizing: border-box;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
+    /* --- Copy/Adapted styling from gametracnghiem.html, with container for canvas game --- */
+    html, body { height:100%; margin:0; padding:0; box-sizing:border-box; font-family:'Nunito',sans-serif; background: linear-gradient(to bottom right, #87CEEB, #FFFACD); color:#333; display:flex; flex-direction:column; }
+    *, *::before, *::after { box-sizing:inherit; }
 
-    *, *::before, *::after {
-      box-sizing: inherit;
-    }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: linear-gradient(to bottom right, #87CEEB, #FFFACD); /* Nền gradient màu trời và cát */
-      background-attachment: fixed;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      color: #333;
-    }
-
-    /* Header */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 5%;
-      background-color: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:2px 40px; background-color:#42a5f5; border-bottom:4px solid #1e88e5; box-shadow:0 4px 8px rgba(0,0,0,0.2); width:100%;
     }
+    .logo img { height:100px; border-radius:0; border:none; }
+    nav a { margin-left:25px; text-decoration:none; font-weight:900; font-size:1.2rem; color:white; transition:all .3s; text-shadow:1px 1px 2px rgba(0,0,0,.3); }
+    nav a:hover { color:#FFD700; transform:scale(1.1); }
 
-    h1 {
-      font-family: 'Patrick Hand', cursive;
-      font-size: 2rem;
-      color: #2a7f5a; /* Màu xanh lá đậm */
-    }
+    .wrapper { flex:1; display:flex; flex-direction:column; align-items:center; padding:20px; width:100%; }
+    .container { background-color: rgba(255,255,255,0.95); max-width: 900px; width:100%; margin:20px auto; padding:24px; border-radius:20px; text-align:center; box-shadow:0 10px 20px rgba(0,0,0,0.3); border:5px solid #90EE90; position:relative; overflow:hidden; }
 
-    /* Main Container */
-    #main-container {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+    h2 { font-family:'Patrick Hand',sans-serif; color:#FF6347; font-size:2.4rem; margin:0 0 12px 0; }
+    input[type="text"] { padding:12px 16px; width:70%; border:3px solid #ADD8E6; border-radius:12px; font-size:1.1rem; text-align:center; }
 
-    .card {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 900px;
-      text-align: center;
-    }
+    .controls { margin-top:12px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 
-    /* Input Styling */
-    input[type="text"] {
-      padding: 12px 15px;
-      margin: 10px 0;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      width: 100%;
-      max-width: 400px;
-      transition: border-color 0.3s;
-    }
+    button { font-family:'Patrick Hand',sans-serif; font-weight:700; font-size:1.1rem; padding:10px 18px; border-radius:18px; cursor:pointer; border:none; background: linear-gradient(to right,#4CAF50,#8BC34A); color:white; box-shadow:0 5px 10px rgba(0,0,0,0.2); transition:all .2s; }
+    button:hover { transform:translateY(-3px); }
+    .btn-secondary { background: linear-gradient(to right,#64b5f6,#90caf9); color:white; }
+    .btn-danger { background: linear-gradient(to right,#ef4444,#f97316); color:white; }
 
-    input[type="text"]:focus {
-      border-color: #2a7f5a;
-      outline: none;
-    }
+    /* Game layout */
+    .game-area { display:flex; gap:18px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
+    .stats { width: 260px; min-width:220px; text-align:left; }
+    .stat-card { background:#f8fafc; padding:12px; border-radius:10px; margin-bottom:10px; border:1px solid #e6edf3; }
+    .stat-card p { margin:6px 0; font-weight:700; }
+    #messageBox { background:#eef2ff; color:#3730a3; padding:10px; border-radius:8px; margin-top:8px; text-align:center; font-weight:600; }
 
-    /* Button Styling */
-    .button-primary {
-      background-color: #f7a400; /* Màu cam sáng */
-      color: white;
-      padding: 15px 30px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.1s;
-      box-shadow: 0 4px 0 #d48f00; /* Shadow 3D effect */
-    }
+    /* Canvas styling (keep GameCauCa visual) */
+    #lakeCanvas { border:5px solid #0891b2; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); width:100%; max-width:560px; height:340px; background: linear-gradient(to bottom,#7dd3fc 0%,#38bdf8 100%); cursor:crosshair; }
 
-    .button-primary:hover {
-      background-color: #d48f00;
-      transform: translateY(1px);
-      box-shadow: 0 3px 0 #b37700;
-    }
-    
-    .button-primary:disabled {
-        background-color: #ccc;
-        box-shadow: none;
-        cursor: not-allowed;
-    }
+    /* Quiz modal (overlay) */
+    #quizModal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index:9999; padding:20px; }
+    #quizContent { background:white; border-radius:14px; padding:20px; max-width:640px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.25); }
+    .quiz-option { display:block; width:100%; text-align:left; padding:12px 14px; margin:8px 0; border-radius:10px; border:2px solid #e6edf3; background:#fff7ed; font-weight:700; cursor:pointer; }
+    .quiz-option.correct { background:#7CFC00; border-color:#32CD32; color:#073; }
+    .quiz-option.wrong { background:#FF6347; border-color:#DC143C; color:white; }
 
-    /* Scoreboard */
-    .scoreboard {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-    }
+    /* Game Over / End screen modal smaller */
+    #endModal { display:none; position:fixed; inset:0; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:9998; }
+    #endContent { background:white; padding:28px; border-radius:14px; max-width:420px; width:96%; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
 
-    .stat-item {
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      text-align: center;
-      min-width: 120px;
-    }
+    footer { background-color:#64b5f6; color:white; text-align:center; padding:20px 10px; font-size:1rem; border-top:5px solid #1e88e5; box-shadow:0 -4px 8px rgba(0,0,0,0.2); width:100%; }
+    footer p { margin:6px 0; font-weight:600; }
 
-    .stat-label {
-      font-size: 0.9rem;
-      color: #666;
+    /* Responsive */
+    @media (max-width:900px) {
+      .game-area { flex-direction:column; align-items:center; }
+      .stats { width:90%; max-width:420px; order:2; }
+      #lakeCanvas { max-width:90%; height:320px; }
     }
-
-    .stat-value {
-      font-size: 2rem;
-      color: #333;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 10px;
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    /* Keyframe cho Toast */
-    @keyframes fadeInOut {
-        0% { opacity: 0; transform: translate(-50%, 20px); }
-        10% { opacity: 1; transform: translate(-50%, 0); }
-        90% { opacity: 1; transform: translate(-50%, 0); }
-        100% { opacity: 0; transform: translate(-50%, 20px); }
-    }
-
-    /* Canvas Styles */
-    #lakeCanvas {
-        border: 5px solid #0891b2; /* Màu xanh ngọc đậm */
-        border-radius: 20px;
-        cursor: crosshair;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(to bottom, #7dd3fc 0%, #38bdf8 100%); /* Nước xanh gradient */
-        transition: transform 0.3s ease;
-        margin: 20px auto;
-        display: block;
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-    }
-    
-    /* Quiz Modal Styling (adapted from fishing game) */
-    .quiz-option {
-        transition: background-color 0.15s;
-    }
-    .quiz-option:hover:not(.disabled) {
-        background-color: #e0f2fe; /* blue-50 */
-    }
-    .correct-answer { background-color: #10b981 !important; color: white !important; } /* green-500 */
-    .wrong-answer { background-color: #ef4444 !important; color: white !important; } /* red-500 */
-    .disabled { cursor: not-allowed; opacity: 0.8; }
-    
-    #quizModal {
-        z-index: 1000;
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-    
-    /* Responsive Canvas Container */
-    #canvas-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
   </style>
 </head>
 <body>
-
+  <!-- Header (same layout/text as gametracnghiem.html) -->
   <header>
-    <h1>Câu Cá Học Tập</h1>
-    <div id="student-info"></div>
+    <div class="logo">
+      <a href="../index.html"><img src="../logo.png" alt="Logo Thầy Dạy Tin"></a>
+    </div>
+    <nav>
+      <a href="../index.html">Trang chủ</a>
+      <a href="../MoPhongPC/MoPhongPC.html" target="_blank" rel="noopener noreferrer">PC-Mô Phỏng</a>
+      <a href="../gocgiaitri.html">Góc Giải Trí</a>
+      <a href="../gocthongtin.html">Góc Thông Tin</a>
+    </nav>
   </header>
 
-  <div id="main-container">
-
-    <!-- 1. Màn hình Bắt đầu -->
-    <div id="start-screen" class="card">
-      <h2 class="text-3xl font-extrabold text-[#2a7f5a] mb-6">Bắt Đầu Trò Chơi</h2>
-      <p class="text-lg text-gray-700 mb-4">Vui lòng nhập tên của bạn để bắt đầu.</p>
-      <input type="text" id="studentName" placeholder="Tên của bạn" required />
-      
-      <!-- Đã xóa input Lớp học ở đây -->
-
-      <p id="loadingMessage" class="mt-4 text-red-600 font-bold hidden">Đang tải câu hỏi từ Google Sheet...</p>
-      <div id="error-alert" class="text-sm p-3 mt-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 hidden">
-        <p class="font-bold">⚠️ Lỗi tải dữ liệu. Vui lòng kiểm tra:</p>
-        <ul class="list-disc list-inside text-left ml-4">
-            <li>URL trong code có phải là dạng **`/pub?gid=...&output=csv`** không.</li>
-            <li>Sheet đã được **Xuất bản lên web (Publish to the web)** chưa.</li>
-        </ul>
+  <div class="wrapper">
+    <!-- Start Screen: nhập tên + nút Start -->
+    <div class="container" id="startScreen">
+      <h2>🎣 Trò Chơi Câu Cá Học Tập</h2>
+      <p>Nhập tên học sinh và bấm <strong>Bắt đầu</strong> để thả cần. Sau khi câu được cá, hãy trả lời câu hỏi để ghi điểm.</p>
+      <input type="text" id="studentName" placeholder="Nhập tên của bạn" />
+      <div class="controls">
+        <button id="startBtn">Bắt đầu</button>
+        <button id="howBtn" class="btn-secondary">Hướng dẫn</button>
       </div>
-      <button id="start-button" class="button-primary" disabled>Bắt Đầu Câu Cá</button>
+      <p id="loadingText" style="color:red; font-weight:bold; margin-top:10px;">⏳ Đang tải câu hỏi...</p>
     </div>
 
-    <!-- 2. Màn hình Chơi Game -->
-    <div id="game-screen" class="card hidden">
-      
-      <div class="scoreboard">
-        <div class="stat-item bg-blue-100">
-            <div class="stat-label">Tổng điểm</div>
-            <div id="totalScore" class="stat-value text-blue-800">0</div>
+    <!-- Game Screen -->
+    <div class="container" id="gameScreen" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px;">
+        <div>
+          <h2 style="margin:0;">🎣 Hồ Câu</h2>
+          <p style="margin:4px 0 0 0; font-weight:600;">Thả cần để câu. Mỗi lượt thả tương ứng 1 lần câu (tổng 10 lượt).</p>
         </div>
-        <div class="stat-item bg-green-100">
-            <div class="stat-label">Lượt câu còn lại</div>
-            <div id="turnsLeft" class="stat-value text-green-800">0</div>
-        </div>
-        <div class="stat-item bg-yellow-100">
-            <div class="stat-label">Cá đã câu</div>
-            <div id="fishCaught" class="stat-value text-yellow-800">0</div>
+        <div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <button id="replayBtn" class="btn-secondary">🔁 Làm lại</button>
+            <button id="completeBtn" class="btn-danger">✅ Hoàn thành</button>
+          </div>
         </div>
       </div>
-      
-      <!-- Thông báo từ game câu cá -->
-      <div id="messageBox" class="bg-indigo-100 text-indigo-800 p-3 rounded-lg font-medium min-h-[50px] flex items-center justify-center text-center max-w-lg mx-auto mb-4">
-        Sẵn sàng câu!
-      </div>
-      
-      <!-- Khu vực Game Câu Cá -->
-      <div id="canvas-container">
+
+      <div class="game-area">
+        <!-- Canvas -->
+        <div style="flex:1; min-width:320px; max-width:600px;">
           <canvas id="lakeCanvas" width="800" height="400"></canvas>
+          <div id="messageBox">Sẵn sàng câu! Bạn có <span id="turnsLeft">10</span> lượt.</div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+          <div class="stat-card">
+            <p>Tên: <span id="studentDisplay">-</span></p>
+            <p>Tổng điểm: <span id="totalScore">0</span></p>
+            <p>Cá đã câu: <span id="fishCaught">0</span></p>
+            <p>Lượt còn lại: <span id="turnsLeftSmall">10</span></p>
+          </div>
+
+          <div class="stat-card">
+            <p>Loại cá & điểm:</p>
+            <ul style="margin:6px 0 0 18px;">
+              <li>Cá nhỏ — 5 điểm</li>
+              <li>Cá vừa — 10 điểm</li>
+              <li>Cá lớn — 15 điểm</li>
+            </ul>
+          </div>
+
+          <div class="stat-card">
+            <p style="margin-bottom:6px;">Ghi chú:</p>
+            <p style="margin:0; font-size:0.95rem;">Khi câu được cá, cửa sổ hỏi đáp sẽ xuất hiện. Trả lời đúng để cộng điểm. Game kết thúc sau 10 lượt.</p>
+          </div>
+        </div>
       </div>
-      
-      <!-- Nút hành động chính (Dùng để bắt đầu lượt câu) -->
-      <button id="castRodBtn" class="button-primary mt-4">THẢ CẦN CÂU</button>
     </div>
 
-    <!-- 3. Màn hình Kết quả -->
-    <div id="result-screen" class="card hidden">
-      <h2 class="text-4xl font-extrabold text-red-600 mb-6">Hoàn Thành Trò Chơi!</h2>
-      <p class="text-xl text-gray-700 mb-4">Cảm ơn bạn đã tham gia.</p>
-      <p class="text-6xl font-bold text-blue-800 mb-8">Tổng Điểm: <span id="finalScore">0</span></p>
-      <p id="submissionStatus" class="text-lg text-gray-600 mb-4">Đang gửi kết quả...</p>
-      <button onclick="window.location.reload()" class="button-primary bg-blue-600 hover:bg-blue-700">Chơi Lại</button>
+    <!-- End Screen (shown inline when game over) -->
+    <div class="container" id="endScreen" style="display:none;">
+      <h2>🎉 Kết thúc trò chơi!</h2>
+      <p id="finalScoreText" style="font-size:1.2rem; font-weight:800;"></p>
+      <div class="controls">
+        <button id="endReplayBtn">🔁 Chơi lại</button>
+        <button id="endCompleteBtn" class="btn-danger">✅ Hoàn thành & Gửi</button>
+      </div>
     </div>
+  </div>
 
+  <!-- Quiz Modal -->
+  <div id="quizModal">
+    <div id="quizContent">
+      <h3 style="margin-top:0;">❓ Câu hỏi trắc nghiệm</h3>
+      <p id="quizQuestion" style="font-weight:700; font-size:1.1rem;"></p>
+      <div id="quizOptions"></div>
+      <p id="quizFeedback" style="font-weight:700; min-height:28px; margin-top:8px;"></p>
+      <div style="margin-top:12px; display:flex; gap:8px;">
+        <button id="quizNextBtn" style="display:none;">Tiếp tục</button>
+        <button id="quizCloseBtn" class="btn-secondary">Đóng (Bỏ qua)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- End modal (optional small overlay) -->
+  <div id="endModal">
+    <div id="endContent"></div>
   </div>
 
   <footer>
-    <p>© 2024 Thầy Dạy Tin | Game Câu Cá Học Tập</p>
+    <p>🌟 Cùng nhau học tập thật vui và sáng tạo mỗi ngày! 🌟</p>
+    <p>© 2025 - Trang web được xây dựng dành riêng cho học sinh Tiểu học ❤️</p>
   </footer>
 
-  <!-- Modal Quiz (Dùng cho cả 3 màn hình, ẩn/hiện bằng JS) -->
-    <div id="quizModal" class="fixed inset-0 hidden items-center justify-center p-4">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full transform transition-all duration-300 scale-95 opacity-0" id="quizContent">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">❓ Câu Hỏi Trắc Nghiệm</h3>
-            <p id="quizQuestion" class="text-lg mb-6 text-gray-700 font-semibold"></p>
-            <div id="quizOptions" class="space-y-3">
-                <!-- Options will be injected here -->
-            </div>
-            <p id="quizFeedback" class="mt-4 text-center text-lg font-bold min-h-[30px]"></p>
-            <button id="nextActionBtn" class="w-full bg-[#f7a400] text-white p-3 rounded-lg font-bold mt-6 hidden transition duration-150 shadow-md hover:bg-[#d48f00]">Tiếp Tục</button>
-        </div>
-    </div>
+  <script>
+  /*****************************************************************
+   * GameCauCa_v2.html
+   * - Kết hợp giao diện gametracnghiem + cơ chế GameCauCa
+   * - Lấy câu hỏi từ ?json=...
+   * - Gửi kết quả lên Google Script (Apps Script) nếu trong thời gian
+   *
+   * Lưu ý: JSON structure expected:
+   * [{ "question":"...", "choices":["A","B","C","D"], "answer": 0 }, ...]
+   *****************************************************************/
 
+  // -------------------- Config & State --------------------
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec";
 
-  <script type="text/javascript">
-    // ======================================================================
-    // 1. Cấu hình & Dữ liệu Game
-    // ======================================================================
+  // Fish types like original GameCauCa
+  const BASE_FISH_DATA = [
+    { size: 'nhỏ', score: 5, baseRadius: 12, maxRadius: 15, color: '#10b981' },
+    { size: 'vừa', score: 10, baseRadius: 18, maxRadius: 22, color: '#f59e0b' },
+    { size: 'lớn', score: 15, baseRadius: 24, maxRadius: 29, color: '#dc2626' },
+  ];
+  const FISH_COUNT = 10;
+  const LARGE_FISH_ID = 0; // keep like original: fish id 0 is large
 
-    // THAY ĐỔI CÁC URL NÀY ĐỂ KẾT NỐI ĐẾN GOOGLE SHEET CỦA BẠN
-    // URL SHEET để lấy câu hỏi: PHẢI LÀ LINK "Publish to the web" DẠNG /pub?gid=...&output=csv
-    const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTPH-L0W52hB1JgM0qE80G4F1S8fV2D6s5gB-LzFw7ZgH0d4G4E2p2Y/pub?gid=0&single=true&output=csv"; 
-    // URL Google Apps Script để gửi kết quả: Phải là /exec
-    const RESULT_URL = "https://script.google.com/macros/s/AKfycbz_HjYqf9WkE2b4G9z1Xk6X_g3I0O9nBv4J-Z/exec"; 
+  // Game state
+  let questions = []; // loaded from external JSON
+  let studentName = '';
+  let gameState = {
+    score: 0,
+    turnsLeft: 10,
+    fishCaught: 0,
+    currentFishScore: 0,
+    isQuizzing: false,
+    currentCaughtFish: null,
+  };
 
-    const BASE_FISH_DATA = [
-        { size: 'nhỏ', score: 5, baseRadius: 12, maxRadius: 15, color: '#10b981' }, 
-        { size: 'vừa', score: 10, baseRadius: 18, maxRadius: 22, color: '#f59e0b' }, 
-        { size: 'lớn', score: 15, baseRadius: 24, maxRadius: 29, color: '#dc2626' }, 
-    ];
-    const FISH_COUNT = 10;
-    const LARGE_FISH_ID = 0; // Con cá ID=0 luôn là cá lớn (15 điểm)
-    
-    let studentName = '';
-    // Bỏ biến studentClass
-    let QUESTIONS_DATA = []; // Mảng chứa câu hỏi tải từ Sheet
+  // Canvas & fish objects
+  const canvas = document.getElementById('lakeCanvas');
+  const ctx = canvas.getContext('2d');
+  let fishes = [];
+  let rod = { isCast:false, x:0, y:0, lureY:0, animationProgress:0, isPulling:false };
 
-    // Game State (Trạng thái trò chơi)
-    let gameState = {
-        score: 0,
-        turnsLeft: 0, // Sẽ được cập nhật bằng số lượng câu hỏi
-        fishCaught: 0,
-        currentFishScore: 0,
-        currentQuestion: null,
-        isQuizzing: false,
-        currentCaughtFish: null,
-        gameStarted: false,
-    };
-    
-    // Cần câu (Rod)
-    let rod = {
-        isCast: false,
-        x: 0,
-        y: 0,
-        lureY: 0,
-        animationProgress: 0, 
-        isPulling: false,
-    };
+  // DOM refs
+  const loadingText = document.getElementById('loadingText');
+  const startScreen = document.getElementById('startScreen');
+  const gameScreen = document.getElementById('gameScreen');
+  const endScreen = document.getElementById('endScreen');
+  const studentInput = document.getElementById('studentName');
+  const studentDisplay = document.getElementById('studentDisplay');
+  const totalScoreEl = document.getElementById('totalScore');
+  const fishCaughtEl = document.getElementById('fishCaught');
+  const turnsLeftEl = document.getElementById('turnsLeft');
+  const turnsLeftSmallEl = document.getElementById('turnsLeftSmall');
+  const messageBox = document.getElementById('messageBox');
+  const finalScoreText = document.getElementById('finalScoreText');
 
-    // DOM elements
-    const startScreen = document.getElementById('start-screen');
-    const gameScreen = document.getElementById('game-screen');
-    const resultScreen = document.getElementById('result-screen');
-    const startButton = document.getElementById('start-button');
-    const studentNameInput = document.getElementById('studentName');
-    // Bỏ studentClassInput
-    const loadingMessageEl = document.getElementById('loadingMessage');
-    const errorAlertEl = document.getElementById('error-alert'); 
+  // Quiz modal elements
+  const quizModal = document.getElementById('quizModal');
+  const quizQuestionEl = document.getElementById('quizQuestion');
+  const quizOptionsEl = document.getElementById('quizOptions');
+  const quizFeedbackEl = document.getElementById('quizFeedback');
+  const quizNextBtn = document.getElementById('quizNextBtn');
+  const quizCloseBtn = document.getElementById('quizCloseBtn');
 
-    // UI elements
-    const totalScoreEl = document.getElementById('totalScore');
-    const turnsLeftEl = document.getElementById('turnsLeft');
-    const fishCaughtEl = document.getElementById('fishCaught');
-    const messageBox = document.getElementById('messageBox');
-    const finalScoreEl = document.getElementById('finalScore');
-    const submissionStatusEl = document.getElementById('submissionStatus');
-    const castRodBtn = document.getElementById('castRodBtn');
-    
-    // Quiz Modal Elements
-    const quizModal = document.getElementById('quizModal');
-    const quizContent = document.getElementById('quizContent');
-    const quizQuestionEl = document.getElementById('quizQuestion');
-    const quizOptionsEl = document.getElementById('quizOptions');
-    const quizFeedbackEl = document.getElementById('quizFeedback');
-    const nextActionBtn = document.getElementById('nextActionBtn');
-    
-    const canvas = document.getElementById('lakeCanvas');
-    const ctx = canvas.getContext('2d');
-    let fishes = [];
+  // Buttons
+  const startBtn = document.getElementById('startBtn');
+  const howBtn = document.getElementById('howBtn');
+  const replayBtn = document.getElementById('replayBtn');
+  const completeBtn = document.getElementById('completeBtn');
+  const endReplayBtn = document.getElementById('endReplayBtn');
+  const endCompleteBtn = document.getElementById('endCompleteBtn');
 
-    // ======================================================================
-    // 2. Chức năng Chung: Toast, Sheet Data
-    // ======================================================================
+  // -------------------- URL param helpers & load questions --------------------
+  function getParam(key) {
+    const url = new URL(window.location.href);
+    return url.searchParams.get(key);
+  }
 
-    /** Hiển thị thông báo Toast */
-    function showToast(message, type = "info") {
-        let messageBox = document.createElement('div');
-        messageBox.style.position = 'fixed';
-        messageBox.style.bottom = '20px';
-        messageBox.style.left = '50%';
-        messageBox.style.transform = 'translateX(-50%)';
-        messageBox.style.padding = '15px 30px';
-        messageBox.style.borderRadius = '10px';
-        messageBox.style.zIndex = '1000';
-        messageBox.style.color = 'white';
-        messageBox.style.fontWeight = 'bold';
-        messageBox.style.fontSize = '1.2rem';
-        messageBox.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-        messageBox.style.animation = 'fadeInOut 4s forwards';
-        messageBox.innerText = message;
+  function shuffleArray(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
 
-        if (type === "warning") {
-            messageBox.style.backgroundColor = '#FFC107'; 
-        } else if (type === "error") {
-            messageBox.style.backgroundColor = '#F44336'; 
+  // Load questions from JSON passed by ?json=
+  const jsonURLParam = getParam('json');
+  if (!jsonURLParam) {
+    loadingText.innerText = "❌ Không có đường dẫn dữ liệu câu hỏi! Vui lòng truyền ?json=URL";
+  } else {
+    const finalURL = decodeURIComponent(jsonURLParam);
+    fetch(finalURL)
+      .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(data => {
+        // Expecting array of objects {question, choices, answer}
+        questions = shuffleArray(data.slice()); // copy + shuffle
+        loadingText.innerText = "✅ Câu hỏi đã sẵn sàng! Nhập tên để bắt đầu.";
+      })
+      .catch(err => {
+        console.error("Lỗi tải JSON:", err);
+        loadingText.innerText = "❌ Không thể tải dữ liệu câu hỏi. Kiểm tra URL JSON.";
+      });
+  }
+
+  // -------------------- Fish class (adapted from original) --------------------
+  class Fish {
+    constructor(id) { this.id = id; this.reset(); }
+    reset() {
+      let fishType;
+      let validTypes = [...BASE_FISH_DATA];
+      if (this.id === LARGE_FISH_ID) {
+        fishType = validTypes.find(f => f.size === 'lớn');
+      } else {
+        validTypes = validTypes.filter(f => f.size !== 'lớn');
+        fishType = validTypes[Math.floor(Math.random() * validTypes.length)];
+      }
+      this.size = fishType.size;
+      this.score = fishType.score;
+      this.radius = fishType.baseRadius + Math.random() * (fishType.maxRadius - fishType.baseRadius);
+      this.color = fishType.color;
+      this.x = Math.random() * canvas.width;
+      this.y = (Math.random() * (canvas.height - 50)) + 50;
+      this.speed = (this.score / 5) * 0.4 + Math.random() * 0.5;
+      this.directionX = Math.random() > 0.5 ? 1 : -1;
+      this.directionY = Math.random() > 0.5 ? 0.1 : -0.1;
+      this.swimPhase = Math.random() * Math.PI * 2;
+      this.isTargeted = false;
+      this.isCaught = false;
+    }
+    update() {
+      if (this.isCaught) return;
+      if (this.isTargeted) {
+        const dx = rod.x - this.x;
+        const dy = rod.y - this.y;
+        const angle = Math.atan2(dy, dx);
+        const chaseSpeed = 5;
+        this.x += Math.cos(angle) * chaseSpeed;
+        this.y += Math.sin(angle) * chaseSpeed;
+        this.directionX = dx > 0 ? 1 : -1;
+        if (Math.hypot(dx, dy) < this.radius + 5) {
+          this.isCaught = true; this.isTargeted = false; rod.isPulling = true;
+        }
+      } else {
+        this.x += this.speed * this.directionX;
+        this.swimPhase += 0.05;
+        this.y += Math.sin(this.swimPhase) * this.directionY;
+        if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) { this.directionX *= -1; this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x)); }
+        if (this.y - this.radius < 50 || this.y + this.radius > canvas.height) { this.directionY *= -1; this.y = Math.max(50 + this.radius, Math.min(canvas.height - this.radius, this.y)); }
+      }
+    }
+    draw() {
+      ctx.save(); ctx.translate(this.x, this.y);
+      if (this.directionX < 0) ctx.scale(-1,1);
+      if (this.isTargeted && !this.isCaught) { ctx.shadowColor='yellow'; ctx.shadowBlur=15; }
+      ctx.beginPath(); ctx.ellipse(0,0,this.radius*1.5,this.radius,0,0,Math.PI*2); ctx.fillStyle=this.color; ctx.fill(); ctx.strokeStyle='#333'; ctx.lineWidth=1; ctx.stroke();
+      ctx.beginPath(); ctx.arc(this.radius*0.8,0,this.radius*0.15,0,Math.PI*2); ctx.fillStyle='black'; ctx.fill();
+      ctx.beginPath(); ctx.moveTo(-this.radius*1.5,0); ctx.lineTo(-this.radius*1.5-(this.radius*0.8),-this.radius*0.7); ctx.lineTo(-this.radius*1.5-(this.radius*0.8),this.radius*0.7); ctx.closePath(); ctx.fillStyle=this.color; ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  // -------------------- Init & animation --------------------
+  function initGameObjects() {
+    fishes = [];
+    for (let i=0;i<FISH_COUNT;i++) fishes.push(new Fish(i));
+    // size canvas to displayed size
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function drawEnvironment() {
+    // Rocks
+    const rocks = [{ x:100, y:canvas.height-20, radius:30, color:'#78716c' }, { x:canvas.width-150, y:canvas.height-30, radius:45, color:'#57534e' }];
+    rocks.forEach(rock => { ctx.beginPath(); ctx.ellipse(rock.x, rock.y, rock.radius*1.5, rock.radius,0,0,Math.PI*2); ctx.fillStyle=rock.color; ctx.fill(); });
+    const smallRocks = [{x:250,y:canvas.height-10,radius:8,color:'#a8a29e'},{x:400,y:canvas.height-15,radius:12,color:'#78716c'},{x:600,y:canvas.height-5,radius:5,color:'#a8a29e'}];
+    smallRocks.forEach(r=>{ ctx.beginPath(); ctx.arc(r.x,r.y,r.radius,0,Math.PI*2); ctx.fillStyle=r.color; ctx.fill(); });
+    // Moss
+    ctx.strokeStyle='#059669'; ctx.lineWidth=3; ctx.lineCap='round';
+    for (let i=0;i<5;i++){ ctx.beginPath(); ctx.moveTo(0, canvas.height-10 - i*5); ctx.bezierCurveTo(20, canvas.height-30 - i*10, 10, canvas.height-50 - i*15, 10 + Math.random()*10, canvas.height-70 - i*20); ctx.stroke(); }
+    for (let i=0;i<5;i++){ ctx.beginPath(); ctx.moveTo(canvas.width, canvas.height-10 - i*5); ctx.bezierCurveTo(canvas.width-20, canvas.height-30 - i*10, canvas.width-10, canvas.height-50 - i*15, canvas.width - 10 - Math.random()*10, canvas.height-70 - i*20); ctx.stroke(); }
+  }
+
+  function drawWater() {
+    ctx.fillStyle='rgba(255,255,255,0.08)';
+    for (let i=0;i<5;i++) ctx.fillRect(0, i*80 + (Date.now()%5000)/50, canvas.width, 2);
+  }
+
+  function drawFishingRod() {
+    if (!rod.isCast) return;
+    const rodBaseX = canvas.width / 2;
+    const rodBaseY = 0;
+    ctx.beginPath(); ctx.moveTo(rodBaseX, rodBaseY); ctx.lineTo(rod.x, rod.lureY); ctx.strokeStyle='#333'; ctx.lineWidth=2; ctx.stroke();
+    rod.animationProgress = (rod.animationProgress + 0.1) % (Math.PI*2);
+    ctx.beginPath(); ctx.arc(rod.x + Math.sin(rod.animationProgress*5)*2, rod.lureY, 5, 0, Math.PI*2);
+    ctx.fillStyle = rod.isPulling ? '#0d9488' : '#f87171'; ctx.fill();
+
+    if (rod.isPulling) {
+      rod.lureY -= 8;
+      const caughtFish = fishes.find(f => f.isCaught);
+      if (caughtFish) {
+        caughtFish.x = rod.x + Math.sin(rod.animationProgress*5)*2;
+        caughtFish.y = rod.lureY;
+        gameState.currentCaughtFish = caughtFish;
+      }
+      if (rod.lureY <= 0) {
+        rod.isCast = false; rod.isPulling = false;
+        if (gameState.currentCaughtFish) {
+          messageBox.textContent = `✅ Câu được cá ${gameState.currentCaughtFish.size} (${gameState.currentCaughtFish.score} điểm)! Trả lời câu hỏi.` ;
+          gameState.currentFishScore = gameState.currentCaughtFish.score;
+          // show quiz
+          setTimeout(() => showQuizFromQuestions(gameState.currentCaughtFish.score), 300);
         } else {
-            messageBox.style.backgroundColor = '#2196F3'; 
+          resetRodAndMessage("Sẵn sàng câu! Hãy thả cần.");
         }
-
-        document.body.appendChild(messageBox);
-
-        messageBox.addEventListener('animationend', () => {
-            messageBox.remove();
-        });
+      }
+    } else if (rod.lureY < rod.y) {
+      rod.lureY += 5;
+    } else if (rod.lureY >= rod.y && rod.isCast) {
+      rod.lureY = rod.y;
+      checkCatch();
     }
+  }
 
-    /** Tải câu hỏi từ Google Sheet */
-    async function getQuestionsFromSheet() {
-        loadingMessageEl.classList.remove('hidden');
-        errorAlertEl.classList.add('hidden'); 
-        startButton.disabled = true;
+  function animate() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawEnvironment();
+    drawWater();
+    fishes.forEach(f=>{ f.update(); f.draw(); });
+    drawFishingRod();
+    requestAnimationFrame(animate);
+  }
 
-        try {
-            // Thêm cache-control header để tránh lỗi cache trên một số trình duyệt
-            const response = await fetch(SHEET_URL, { cache: 'no-store' }); 
+  // -------------------- Casting & catching logic --------------------
+  function resetRodAndMessage(msg) {
+    rod.isCast = false; rod.isPulling = false;
+    messageBox.textContent = msg;
+    updateUI();
+  }
 
-            // Kiểm tra lỗi HTTP trước
-            if (!response.ok) {
-                 // Throw lỗi nếu response không OK (ví dụ 404, 500)
-                throw new Error(`Lỗi HTTP: ${response.status}`);
-            }
-            
-            const csvText = await response.text();
-            
-            // Xử lý CSV: Tách dòng và cột
-            const rows = csvText.split('\n').slice(1); // Bỏ hàng tiêu đề
-            const questions = rows.map(row => {
-                const columns = row.split(',').map(col => col.trim().replace(/"/g, ''));
-                if (columns.length < 6 || !columns[0]) return null; 
+  function handleCast(e) {
+    if (rod.isCast || gameState.isQuizzing) { messageBox.textContent = "Bạn đang câu hoặc đang trả lời quiz! Hãy đợi."; return; }
+    if (gameState.turnsLeft <= 0) { showGameOver(); return; }
+    gameState.turnsLeft--; updateUI();
+    const rect = canvas.getBoundingClientRect();
+    rod.x = e.clientX - rect.left;
+    rod.y = e.clientY - rect.top;
+    rod.lureY = 0; rod.isCast = true; messageBox.textContent = "Cần câu đang được thả xuống...";
+  }
 
-                const questionText = columns[1];
-                const correctAnswer = columns[2];
-                const option2 = columns[3];
-                const option3 = columns[4];
-                const option4 = columns[5];
-
-                const options = [correctAnswer, option2, option3, option4].filter(o => o);
-                
-                // Định dạng câu hỏi cho game
-                return {
-                    question: questionText,
-                    answer: correctAnswer,
-                    options: options
-                };
-            }).filter(q => q);
-
-            QUESTIONS_DATA = questions;
-            loadingMessageEl.classList.add('hidden');
-
-            if (QUESTIONS_DATA.length > 0) {
-                 startButton.disabled = false;
-                 showToast(`Tải thành công ${QUESTIONS_DATA.length} câu hỏi.`, 'info');
-                 // Cập nhật số lượt chơi
-                 gameState.turnsLeft = QUESTIONS_DATA.length;
-            } else {
-                loadingMessageEl.textContent = "Lỗi: Không tìm thấy câu hỏi trong Sheet.";
-                errorAlertEl.classList.remove('hidden'); 
-                showToast("Lỗi: Sheet không có dữ liệu hoặc định dạng sai.", 'error');
-            }
-            
-        } catch (error) {
-            console.error("[CONSOLE_ERROR] Lỗi tải câu hỏi:", error);
-            loadingMessageEl.textContent = "Lỗi: Lỗi mạng hoặc Sheet chưa được Xuất bản/Truy cập sai.";
-            errorAlertEl.classList.remove('hidden'); 
-            showToast("Lỗi khi tải câu hỏi! Kiểm tra URL và Quyền truy cập Sheet.", 'error');
-        }
+  function checkCatch() {
+    let closestFish = null; let minDistance = Infinity;
+    fishes.forEach(f => {
+      const d = Math.hypot(rod.x - f.x, rod.y - f.y);
+      if (d < minDistance) { minDistance = d; closestFish = f; }
+    });
+    if (closestFish) {
+      closestFish.isTargeted = true;
+      gameState.currentCaughtFish = null;
+      messageBox.textContent = `🐟 Một con cá ${closestFish.size} đã phát hiện mồi! Nó đang bơi lại...`;
+    } else {
+      messageBox.textContent = "🌊 Không có cá ở khu vực này! Thử vị trí khác.";
+      resetRodAndMessage("Không có cá, thử lại!");
     }
+  }
 
-    /** Gửi kết quả lên Google Sheet */
-    async function postToGoogleSheet(data) {
-        submissionStatusEl.textContent = "Đang gửi kết quả lên hệ thống...";
-        
-        // Thêm trường "Class" trống để Apps Script không bị lỗi định dạng
-        data.class = "Không có"; 
-
-        try {
-            const response = await fetch(RESULT_URL, {
-                method: 'POST',
-                mode: 'no-cors', // Cần thiết cho Google Apps Script
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams(data).toString()
-            });
-            // Không thể kiểm tra response.ok vì dùng no-cors, giả định thành công
-            submissionStatusEl.textContent = "✅ Kết quả đã được gửi thành công!";
-            showToast("Kết quả đã được ghi lại!", "info");
-        } catch (error) {
-            console.error("Lỗi gửi kết quả:", error);
-            submissionStatusEl.textContent = "❌ Lỗi khi gửi kết quả. (Vui lòng báo lại giáo viên)";
-            showToast("Lỗi gửi kết quả!", "error");
-        }
+  // -------------------- Quiz integration (use questions loaded earlier) --------------------
+  function showQuizFromQuestions(fishScore) {
+    if (!questions || questions.length === 0) {
+      // fallback built-in questions if external JSON missing
+      const fallback = [{question:"HTML tag tạo liên kết là gì?", choices:["<a>","<link>","<nav>","<href>"], answer:0}];
+      questions = fallback;
     }
+    gameState.isQuizzing = true;
+    // pick a random question from questions array
+    const qi = Math.floor(Math.random() * questions.length);
+    const q = questions[qi];
 
-    // ======================================================================
-    // 3. Logic Chuyển đổi màn hình và Kết thúc Game
-    // ======================================================================
+    gameState.currentQuestion = q;
+    quizQuestionEl.innerText = `[Cá ${gameState.currentCaughtFish?.size || ''}: ${fishScore} điểm] ${q.question}`;
+    quizOptionsEl.innerHTML = ''; quizFeedbackEl.innerText = ''; quizNextBtn.style.display = 'none';
 
-    /** Bắt đầu Quiz sau khi nhập tên */
-    function startQuiz() {
-        if (!QUESTIONS_DATA || QUESTIONS_DATA.length === 0) {
-            showToast("Chưa có câu hỏi được tải. Vui lòng đợi hoặc kiểm tra lại.", 'error');
-            return;
-        }
+    // shuffle choices
+    const choices = q.choices.map((c,i)=>({text:c, originalIndex:i}));
+    shuffleArray(choices);
+    // find new index of correct answer
+    q.shuffledAnswer = choices.findIndex(c => c.originalIndex === q.answer);
 
-        studentName = studentNameInput.value.trim();
-        // Bỏ biến studentClass
-        
-        if (!studentName) {
-            showToast("Vui lòng nhập Tên đầy đủ.", 'warning');
-            return;
-        }
-
-        document.getElementById('student-info').textContent = `${studentName}`;
-        
-        startScreen.classList.add('hidden');
-        gameScreen.classList.remove('hidden');
-        
-        // Khởi tạo Game Câu Cá
-        initGame();
-        
-        showToast("Bắt đầu trò chơi! Hãy câu con cá đầu tiên.", 'info');
-        castRodBtn.disabled = false;
-    }
-
-    /** Kết thúc Game và Gửi điểm */
-    function endGame() {
-        gameScreen.classList.add('hidden');
-        resultScreen.classList.remove('hidden');
-        finalScoreEl.textContent = gameState.score;
-        castRodBtn.disabled = true;
-
-        const dataToSubmit = {
-            name: studentName,
-            score: gameState.score,
-            date: new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
-        };
-        // NOTE: Trường 'class' sẽ được thêm vào trong hàm postToGoogleSheet
-
-        postToGoogleSheet(dataToSubmit);
-    }
-    
-    function updateUI() {
-        totalScoreEl.textContent = gameState.score.toString();
-        turnsLeftEl.textContent = gameState.turnsLeft.toString();
-        fishCaughtEl.textContent = gameState.fishCaught.toString();
-        
-        // Cập nhật trạng thái nút Cast
-        if (gameState.turnsLeft > 0 && !gameState.isQuizzing && !rod.isCast) {
-            castRodBtn.disabled = false;
-            castRodBtn.textContent = "THẢ CẦN CÂU";
-        } else if (gameState.turnsLeft <= 0) {
-            castRodBtn.disabled = true;
-            castRodBtn.textContent = "HẾT LƯỢT";
-        } else {
-            castRodBtn.disabled = true;
-            castRodBtn.textContent = "ĐANG CÂU...";
-        }
-    }
-
-    // ======================================================================
-    // 4. Logic Game Câu Cá (Fish, Environment, Animation)
-    // ======================================================================
-
-    class Fish {
-        constructor(id) {
-            this.id = id;
-            this.reset();
-        }
-
-        reset() {
-            let fishType;
-            let validTypes = [...BASE_FISH_DATA];
-            
-            if (this.id === LARGE_FISH_ID) {
-                fishType = validTypes.find(f => f.size === 'lớn');
-            } else {
-                validTypes = validTypes.filter(f => f.size !== 'lớn');
-                fishType = validTypes[Math.floor(Math.random() * validTypes.length)];
-            }
-
-            this.size = fishType.size; 
-            this.score = fishType.score;
-            this.radius = fishType.baseRadius + Math.random() * (fishType.maxRadius - fishType.baseRadius); 
-            this.color = fishType.color;
-
-            // Vị trí và hướng bơi
-            this.x = Math.random() * canvas.width;
-            this.y = (Math.random() * (canvas.height - 50)) + 50; 
-            this.speed = (this.score / 5) * 0.4 + Math.random() * 0.5; 
-            this.directionX = Math.random() > 0.5 ? 1 : -1;
-            this.directionY = Math.random() > 0.5 ? 0.1 : -0.1;
-            this.swimPhase = Math.random() * Math.PI * 2;
-            
-            this.isTargeted = false; 
-            this.isCaught = false;   
-        }
-
-        update() {
-            if (this.isCaught) return; 
-
-            if (this.isTargeted) {
-                const dx = rod.x - this.x;
-                const dy = rod.y - this.y;
-                const angle = Math.atan2(dy, dx);
-                
-                const chaseSpeed = 5; 
-                
-                this.x += Math.cos(angle) * chaseSpeed;
-                this.y += Math.sin(angle) * chaseSpeed;
-                
-                this.directionX = dx > 0 ? 1 : -1;
-
-                if (Math.hypot(dx, dy) < this.radius + 5) {
-                    this.isCaught = true;
-                    this.isTargeted = false;
-                    rod.isPulling = true;
-                }
-                
-            } else {
-                this.x += this.speed * this.directionX;
-                this.swimPhase += 0.05;
-                this.y += Math.sin(this.swimPhase) * this.directionY;
-
-                if (this.x - this.radius < 0 || this.x + this.radius > canvas.width) {
-                    this.directionX *= -1; 
-                    this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
-                }
-                
-                if (this.y - this.radius < 50 || this.y + this.radius > canvas.height) {
-                    this.directionY *= -1; 
-                    this.y = Math.max(50 + this.radius, Math.min(canvas.height - this.radius, this.y));
-                }
-            }
-        }
-
-        draw() {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            
-            if (this.directionX < 0) {
-                ctx.scale(-1, 1);
-            }
-            
-            if (this.isTargeted && !this.isCaught) {
-                 ctx.shadowColor = 'yellow';
-                 ctx.shadowBlur = 15;
-            }
-
-            // Vẽ thân cá
-            ctx.beginPath();
-            ctx.ellipse(0, 0, this.radius * 1.5, this.radius, 0, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            // Vẽ mắt
-            ctx.beginPath();
-            ctx.arc(this.radius * 0.8, 0, this.radius * 0.15, 0, Math.PI * 2);
-            ctx.fillStyle = 'black';
-            ctx.fill();
-
-            // Vẽ đuôi
-            ctx.beginPath();
-            ctx.moveTo(-this.radius * 1.5, 0);
-            ctx.lineTo(-this.radius * 1.5 - (this.radius * 0.8), -this.radius * 0.7);
-            ctx.lineTo(-this.radius * 1.5 - (this.radius * 0.8), this.radius * 0.7);
-            ctx.closePath();
-            ctx.fillStyle = this.color; 
-            ctx.fill();
-
-            ctx.restore();
-        }
-    }
-    
-    function drawWater() {
-        // Hiệu ứng gợn sóng/ánh sáng trên mặt nước
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-        for (let i = 0; i < 5; i++) {
-            ctx.fillRect(0, i * 80 + (Date.now() % 5000) / 50, canvas.width, 2);
-        }
-    }
-    
-    function drawEnvironment() {
-        // 1. Draw Large Rocks (Đá Lớn)
-        const rocks = [
-            { x: 100, y: canvas.height - 20, radius: 30, color: '#78716c' }, 
-            { x: canvas.width - 150, y: canvas.height - 30, radius: 45, color: '#57534e' }, 
-        ];
-
-        rocks.forEach(rock => {
-            ctx.beginPath();
-            ctx.ellipse(rock.x, rock.y, rock.radius * 1.5, rock.radius, 0, 0, Math.PI * 2);
-            ctx.fillStyle = rock.color;
-            ctx.fill();
-        });
-
-        // 2. Draw Small Rocks (Đá Nhỏ)
-        const smallRocks = [
-            { x: 250, y: canvas.height - 10, radius: 8, color: '#a8a29e' },
-            { x: 400, y: canvas.height - 15, radius: 12, color: '#78716c' },
-            { x: 600, y: canvas.height - 5, radius: 5, color: '#a8a29e' },
-        ];
-        smallRocks.forEach(rock => {
-            ctx.beginPath();
-            ctx.arc(rock.x, rock.y, rock.radius, 0, Math.PI * 2);
-            ctx.fillStyle = rock.color;
-            ctx.fill();
-        });
-
-        // 3. Draw Moss/Algae (Rong Rêu)
-        ctx.strokeStyle = '#059669'; // Green-600
-        ctx.lineWidth = 3;
-        ctx.lineCap = 'round';
-        
-        // Rêu bên trái
-        for (let i = 0; i < 5; i++) {
-            ctx.beginPath();
-            ctx.moveTo(0, canvas.height - 10 - i * 5);
-            ctx.bezierCurveTo(
-                20, canvas.height - 30 - i * 10,
-                10, canvas.height - 50 - i * 15,
-                10 + Math.random() * 10, canvas.height - 70 - i * 20
-            );
-            ctx.stroke();
-        }
-        
-        // Rêu bên phải
-        for (let i = 0; i < 5; i++) {
-            ctx.beginPath();
-            ctx.moveTo(canvas.width, canvas.height - 10 - i * 5);
-            ctx.bezierCurveTo(
-                canvas.width - 20, canvas.height - 30 - i * 10,
-                canvas.width - 10, canvas.height - 50 - i * 15,
-                canvas.width - 10 - Math.random() * 10, canvas.height - 70 - i * 20
-            );
-            ctx.stroke();
-        }
-    }
-    
-    function drawFishingRod() {
-        if (!rod.isCast) return;
-        
-        const rodBaseX = canvas.width / 2;
-        const rodBaseY = 0;
-        
-        // 2. Vẽ dây câu
-        ctx.beginPath();
-        ctx.moveTo(rodBaseX, rodBaseY);
-        ctx.lineTo(rod.x, rod.lureY);
-        ctx.strokeStyle = '#333';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        
-        rod.animationProgress = (rod.animationProgress + 0.1) % (Math.PI * 2);
-
-        // 3. Vẽ mồi câu (lure)
-        ctx.beginPath();
-        ctx.arc(rod.x + Math.sin(rod.animationProgress * 5) * 2, rod.lureY, 5, 0, Math.PI * 2);
-        ctx.fillStyle = rod.isPulling ? '#0d9488' : '#f87171'; // Màu xanh khi kéo, đỏ khi thả
-        ctx.fill();
-
-        if (rod.isPulling) {
-            // Kéo dây câu lên từ từ
-            rod.lureY -= 8; 
-            
-            // Di chuyển con cá đang bị câu theo mồi
-            const caughtFish = fishes.find(f => f.isCaught);
-            if (caughtFish) {
-                caughtFish.x = rod.x + Math.sin(rod.animationProgress * 5) * 2;
-                caughtFish.y = rod.lureY;
-                gameState.currentCaughtFish = caughtFish; 
-            }
-
-            if (rod.lureY <= 0) {
-                // Đã kéo lên khỏi mặt nước
-                rod.isCast = false;
-                rod.isPulling = false;
-                
-                if(gameState.currentCaughtFish) { 
-                    messageBox.textContent = `Câu được cá ${gameState.currentCaughtFish.size} (${gameState.currentCaughtFish.score} điểm)! Trả lời câu hỏi!`;
-                    gameState.currentFishScore = gameState.currentCaughtFish.score;
-                    showQuiz(); 
-                } else {
-                    resetRodAndMessage("Sẵn sàng câu! Hãy thả cần.");
-                }
-            }
-        } else if (rod.lureY < rod.y) {
-             rod.lureY += 5;
-        } else if (rod.lureY >= rod.y && rod.isCast) {
-             rod.lureY = rod.y; 
-             checkCatch();
-        }
-    }
-    
-    function checkCatch() {
-        let closestFish = null;
-        let minDistance = Infinity;
-
-        fishes.forEach(fish => {
-            const distance = Math.sqrt(Math.pow(rod.x - fish.x, 2) + Math.pow(rod.y - fish.y, 2));
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestFish = fish;
-            }
-        });
-
-        if (closestFish) {
-            closestFish.isTargeted = true;
-            gameState.currentCaughtFish = null; 
-            messageBox.textContent = `🐟 Một con cá ${closestFish.size} đã phát hiện mồi! Nó đang bơi nhanh lại...`;
-        } else {
-             messageBox.textContent = "🌊 Không có cá nào ở khu vực này! Thử thả câu chỗ khác.";
-             resetRodAndMessage("Không có cá, thử lại!");
-        }
-    }
-    
-    function handleCast(event) {
-        if (rod.isCast || gameState.isQuizzing || gameState.turnsLeft <= 0) {
-            if (gameState.turnsLeft <= 0) {
-                endGame();
-            }
-            return;
-        }
-        
-        gameState.turnsLeft--;
-        updateUI();
-        
-        // Thiết lập vị trí thả cần (tọa độ trên canvas)
-        const rect = canvas.getBoundingClientRect();
-        const clickX = event.clientX || canvas.width / 2; // Dùng event.clientX hoặc giá trị mặc định nếu gọi từ nút
-        const clickY = event.clientY || canvas.height * 0.8; // Dùng event.clientY hoặc giá trị mặc định
-
-        rod.x = clickX - rect.left;
-        rod.y = clickY - rect.top; // Vị trí mục tiêu của mồi
-        rod.lureY = 0; // Bắt đầu từ đỉnh
-        rod.isCast = true;
-        
-        messageBox.textContent = "Cần câu đang được thả xuống... ";
-        castRodBtn.disabled = true; // Vô hiệu hóa nút khi đang câu
-    }
-
-    function resetRodAndMessage(msg) {
-         rod.isCast = false;
-         rod.isPulling = false;
-         messageBox.textContent = msg;
-         updateUI(); // Cập nhật lại UI để kích hoạt nút Cast
-    }
-
-    function initGame() {
-        fishes = [];
-        for (let i = 0; i < FISH_COUNT; i++) {
-            fishes.push(new Fish(i));
-        }
-
-        // Đảm bảo canvas có kích thước phù hợp với container
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
-        
-        if (!gameState.gameStarted) {
-            // Lắng nghe sự kiện click trên canvas để thả cần
-            canvas.addEventListener('click', (e) => {
-                 // Chỉ cho phép click trên canvas khi nút cast không bị disabled
-                 if (!castRodBtn.disabled) {
-                     handleCast({ 
-                         clientX: e.clientX, 
-                         clientY: e.clientY
-                     });
-                 } else {
-                     showToast("Đang bơi cá hoặc trả lời câu hỏi, không thể câu lúc này.", 'warning');
-                 }
-            });
-            // Lắng nghe sự kiện click trên nút Cast
-            castRodBtn.addEventListener('click', (e) => {
-                // Giả lập tọa độ click ở giữa canvas dưới đáy để kéo cá lên
-                const rect = canvas.getBoundingClientRect();
-                handleCast({ 
-                    clientX: rect.left + canvas.width / 2, 
-                    clientY: rect.top + canvas.height * 0.8
-                });
-            });
-            gameState.gameStarted = true;
-            animate();
-        }
-        
-        updateUI();
-    }
-    
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        drawEnvironment(); 
-        drawWater();
-
-        fishes.forEach(fish => {
-            fish.update();
-            fish.draw();
-        });
-
-        drawFishingRod();
-
-        requestAnimationFrame(animate);
-    }
-
-    // ======================================================================
-    // 5. Logic Quiz
-    // ======================================================================
-    
-    function showQuiz() {
-        if (!gameState.currentCaughtFish) {
-            console.error("Lỗi: Không tìm thấy cá đã câu để hiển thị Quiz.");
-            resetRodAndMessage("Lỗi hệ thống câu cá! Hãy thử câu lại.");
-            return;
-        }
-        
-        if (QUESTIONS_DATA.length === 0) {
-            showToast("Lỗi: Không có câu hỏi nào được tải.", 'error');
-            resetRodAndMessage("Lỗi: Hết câu hỏi.");
-            endGame();
-            return;
-        }
-
-        gameState.isQuizzing = true;
-        
-        // Lấy câu hỏi từ mảng QUESTIONS_DATA
-        const questionIndex = QUESTIONS_DATA.length - gameState.turnsLeft - 1;
-        
-        if (questionIndex < 0 || questionIndex >= QUESTIONS_DATA.length) {
-             console.error("Lỗi Index Câu Hỏi: questionIndex không hợp lệ.", questionIndex);
-             showToast("Lỗi logic câu hỏi, vui lòng thử lại!", 'error');
-             resetRodAndMessage("Lỗi logic. Thử lại lượt câu tiếp theo.");
-             gameState.turnsLeft = Math.max(0, gameState.turnsLeft - 1); // Đảm bảo lượt chơi giảm
-             updateUI();
-             return;
-        }
-
-        const quiz = QUESTIONS_DATA[questionIndex];
-
-        gameState.currentQuestion = quiz;
-        
-        quizQuestionEl.textContent = `[Cá ${gameState.currentCaughtFish.size}: ${gameState.currentCaughtFish.score} điểm] ${quiz.question}`;
-        quizOptionsEl.innerHTML = '';
-        quizFeedbackEl.textContent = '';
-        nextActionBtn.textContent = 'Tiếp Tục Câu';
-        nextActionBtn.onclick = handleQuizContinue;
-        nextActionBtn.classList.add('hidden');
-
-        const shuffledOptions = [...quiz.options].sort(() => Math.random() - 0.5);
-
-        shuffledOptions.forEach(option => {
-            const button = document.createElement('button');
-            button.textContent = option;
-            button.className = 'quiz-option w-full text-left p-3 rounded-lg border border-gray-200 text-gray-700 font-medium transition-colors duration-150 shadow-sm';
-            button.onclick = () => handleAnswer(button, option, quiz.answer);
-            quizOptionsEl.appendChild(button);
-        });
-
-        quizModal.classList.remove('hidden');
-        quizModal.classList.add('flex');
-        setTimeout(() => {
-            quizContent.classList.remove('scale-95', 'opacity-0');
-        }, 10);
-    }
-
-    function handleAnswer(clickedButton, selectedAnswer, correctAnswer) {
-        const options = document.querySelectorAll('.quiz-option');
-        options.forEach(btn => {
-            btn.onclick = null;
-            btn.classList.add('disabled');
-        });
-        
-        if (selectedAnswer === correctAnswer) {
-            clickedButton.classList.add('correct-answer');
-            gameState.score += gameState.currentFishScore;
-            gameState.fishCaught++;
-            quizFeedbackEl.textContent = `✅ Chính xác! Bạn nhận được ${gameState.currentFishScore} điểm.`;
-        } else {
-            clickedButton.classList.add('wrong-answer');
-            quizFeedbackEl.textContent = `❌ Sai rồi. Câu trả lời đúng là: ${correctAnswer}. Bạn không nhận được điểm.`;
-            
-            options.forEach(btn => {
-                if (btn.textContent === correctAnswer) {
-                    btn.classList.add('correct-answer');
-                }
-            });
-        }
-        
-        updateUI();
-        nextActionBtn.classList.remove('hidden');
-    }
-
-    function handleQuizContinue() {
-        // Tắt Modal Quiz
-        quizContent.classList.add('scale-95', 'opacity-0');
-        setTimeout(() => {
-            quizModal.classList.add('hidden');
-            quizModal.classList.remove('flex');
-            gameState.isQuizzing = false;
-            
-            // Reset con cá đã bị câu để nó bơi trở lại
-            if(gameState.currentCaughtFish) {
-                gameState.currentCaughtFish.reset();
-                gameState.currentCaughtFish = null;
-            }
-            
-            // Kiểm tra kết thúc game
-            if (gameState.turnsLeft <= 0) {
-                endGame();
-            } else {
-                resetRodAndMessage("Sẵn sàng câu! Lượt câu còn lại: " + gameState.turnsLeft);
-            }
-        }, 300); 
-    }
-
-    // ======================================================================
-    // 6. Sự kiện Khởi tạo
-    // ======================================================================
-
-    document.addEventListener('DOMContentLoaded', () => {
-        getQuestionsFromSheet(); 
-        
-        // Tự động focus vào input sau khi trang tải xong
-        setTimeout(() => {
-            studentNameInput.focus();
-        }, 100);
-
-        startButton.addEventListener('click', startQuiz);
-        
-        // Thêm lắng nghe sự kiện để kích hoạt nút Start khi có tên
-        studentNameInput.addEventListener('input', () => {
-            const isNameValid = studentNameInput.value.trim().length > 0;
-            const isQuestionsLoaded = QUESTIONS_DATA.length > 0;
-            startButton.disabled = !(isNameValid && isQuestionsLoaded);
-        });
+    choices.forEach((c, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-option';
+      btn.innerText = `${String.fromCharCode(65 + idx)}. ${c.text}`;
+      btn.onclick = () => handleQuizAnswer(btn, idx, q.shuffledAnswer);
+      quizOptionsEl.appendChild(btn);
     });
 
-    // Xử lý resize để canvas luôn vừa với container
-    window.addEventListener('resize', () => {
-        if (gameState.gameStarted) {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
+    quizModal.style.display = 'flex';
+  }
+
+  function handleQuizAnswer(btn, selectedIdx, correctIdx) {
+    // disable all options
+    const opts = document.querySelectorAll('.quiz-option');
+    opts.forEach(o => { o.onclick = null; o.classList.add('disabled'); o.style.pointerEvents = 'none'; });
+
+    if (selectedIdx === correctIdx) {
+      btn.classList.add('correct');
+      gameState.score += gameState.currentFishScore;
+      gameState.fishCaught++;
+      quizFeedbackEl.innerText = `✅ Chính xác! Bạn nhận được ${gameState.currentFishScore} điểm.`;
+    } else {
+      btn.classList.add('wrong');
+      quizFeedbackEl.innerText = `❌ Sai rồi. Đáp án đúng đã được tô.`;
+      // mark correct
+      opts[correctIdx].classList.add('correct');
+    }
+    updateUI();
+    quizNextBtn.style.display = 'inline-block';
+  }
+
+  quizNextBtn.onclick = () => {
+    // hide quiz and reset fish
+    quizModal.style.display = 'none';
+    gameState.isQuizzing = false;
+    if (gameState.currentCaughtFish) {
+      gameState.currentCaughtFish.reset();
+      gameState.currentCaughtFish = null;
+    }
+    if (gameState.turnsLeft <= 0) showGameOver();
+    else resetRodAndMessage("Sẵn sàng câu! Lượt còn lại: " + gameState.turnsLeft);
+  };
+
+  quizCloseBtn.onclick = () => {
+    // allow teacher to skip quiz (counts as no points)
+    quizModal.style.display = 'none';
+    gameState.isQuizzing = false;
+    if (gameState.currentCaughtFish) {
+      gameState.currentCaughtFish.reset();
+      gameState.currentCaughtFish = null;
+    }
+    if (gameState.turnsLeft <= 0) showGameOver();
+    else resetRodAndMessage("Bỏ qua câu hỏi. Sẵn sàng câu!");
+  };
+
+  // -------------------- UI helpers --------------------
+  function updateUI() {
+    totalScoreEl.innerText = gameState.score;
+    fishCaughtEl.innerText = gameState.fishCaught;
+    turnsLeftEl.innerText = gameState.turnsLeft;
+    turnsLeftSmallEl.innerText = gameState.turnsLeft;
+    document.getElementById('studentDisplay').innerText = studentName || '-';
+  }
+
+  function showGameOver() {
+    // display end screen
+    gameScreen.style.display = 'none';
+    endScreen.style.display = 'block';
+    finalScoreText.innerText = `Tên: ${studentName} | Tổng điểm: ${gameState.score} điểm`;
+    // show small modal overlay optionally
+  }
+
+  // -------------------- Google Sheet submission (same logic / date check) --------------------
+  function sendToGoogleSheet(tenHS, diem, callback) {
+    const lop = getParam('lop') || '';
+    const tuan = getParam('tuan') || '';
+    const ngaybdStr = getParam('ngaybd');
+    const ngayktStr = getParam('ngaykt');
+
+    if (!ngaybdStr || !ngayktStr) {
+      console.log("Thiếu tham số ngày bắt đầu hoặc kết thúc! Không gửi lên Google Sheet.");
+      if (callback) callback(false);
+      return;
+    }
+    const ngaybd = new Date(ngaybdStr);
+    const ngaykt = new Date(ngayktStr);
+    const now = new Date();
+    now.setHours(0,0,0,0); ngaybd.setHours(0,0,0,0); ngaykt.setHours(0,0,0,0);
+
+    if (now >= ngaybd && now <= ngaykt) {
+      fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tenHS: tenHS, diem: diem, tuan: tuan, lop: lop })
+      }).then(()=> {
+        console.log("✅ Dữ liệu đã được gửi lên Google Sheet!");
+        if (callback) callback(true);
+      }).catch(e => {
+        console.error("Lỗi khi gửi dữ liệu:", e);
+        if (callback) callback(false);
+      });
+    } else {
+      console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
+      if (callback) callback(false);
+    }
+  }
+
+  // -------------------- Controls bindings --------------------
+  startBtn.addEventListener('click', () => {
+    const name = studentInput.value.trim();
+    if (!name) { showMessage("Vui lòng nhập tên của học sinh để bắt đầu!", "warning"); return; }
+    if (!questions || questions.length === 0) { showMessage("Dữ liệu câu hỏi chưa sẵn sàng. Vui lòng đợi hoặc kiểm tra URL JSON.", "error"); return; }
+    studentName = name;
+    // init game objects & state
+    gameState.score = 0; gameState.turnsLeft = 10; gameState.fishCaught = 0; gameState.currentCaughtFish = null; gameState.isQuizzing = false;
+    initGameObjects();
+    updateUI();
+    startScreen.style.display = 'none'; gameScreen.style.display = 'block';
+    studentDisplay.innerText = studentName;
+    messageBox.textContent = "Sẵn sàng câu! Bạn có 10 lượt.";
+    // attach canvas click
+    canvas.addEventListener('click', handleCast);
+    // start animation loop
+    requestAnimationFrame(animate);
+  });
+
+  howBtn.addEventListener('click', () => {
+    alert("Hướng dẫn:\n1) Nhập tên → Bắt đầu.\n2) Click vào hồ để thả cần.\n3) Nếu câu được cá, trả lời câu hỏi để ghi điểm.\n4) Game có 10 lượt. Sau khi hết 10 lượt, bấm Hoàn thành để gửi kết quả.");
+  });
+
+  replayBtn.addEventListener('click', () => {
+    // reload / reset game
+    location.reload();
+  });
+
+  completeBtn.addEventListener('click', () => {
+    // show end screen and send
+    showGameOver();
+  });
+
+  endReplayBtn.addEventListener('click', () => {
+    location.reload();
+  });
+
+  endCompleteBtn.addEventListener('click', () => {
+    // send to Google Sheet and then go back
+    sendToGoogleSheet(studentName, gameState.score, (ok) => {
+      // small delay then back
+      setTimeout(() => {
+        history.back();
+      }, 500);
     });
+  });
+
+  // small notification helper (styled floating)
+  function showMessage(message, type="info") {
+    const box = document.createElement('div');
+    box.style.position='fixed'; box.style.top='20px'; box.style.left='50%'; box.style.transform='translateX(-50%)';
+    box.style.padding='12px 20px'; box.style.borderRadius='10px'; box.style.zIndex=20000; box.style.color='white'; box.style.fontWeight='700';
+    box.style.boxShadow='0 6px 14px rgba(0,0,0,0.2)'; box.style.fontSize='1rem';
+    if (type === 'warning') box.style.backgroundColor='#FFC107';
+    else if (type === 'error') box.style.backgroundColor='#F44336';
+    else box.style.backgroundColor='#2196F3';
+    box.innerText = message;
+    document.body.appendChild(box);
+    setTimeout(()=> box.remove(), 3500);
+  }
+
+  // auto focus input
+  document.addEventListener('DOMContentLoaded', () => { setTimeout(()=> studentInput.focus(), 150); });
+
+  // resize handling
+  window.addEventListener('resize', () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; });
 
   </script>
-
 </body>
 </html>
