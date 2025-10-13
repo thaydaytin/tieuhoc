@@ -619,12 +619,11 @@
 
   endCompleteBtn.addEventListener('click', () => {
     // send to Google Sheet and then go back
-    sendToGoogleSheet(studentName, gameState.score, (ok) => {
-      // small delay then back
+    sendToGoogleSheet(student, totalScore);
+      // Sử dụng setTimeout để đảm bảo fetch request có thời gian gửi đi trước khi quay lại
       setTimeout(() => {
         history.back();
       }, 500);
-    });
   });
 
   // small notification helper (styled floating)
