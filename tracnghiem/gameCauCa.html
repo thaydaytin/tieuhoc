@@ -42,12 +42,12 @@
     #messageBox { background:#eef2ff; color:#3730a3; padding:10px; border-radius:8px; margin-top:8px; text-align:center; font-weight:600; }
 
     /* Canvas styling (keep GameCauCa visual) */
-    #lakeCanvas { border:5px solid #0891b2; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); width:100%; max-width:560px; height:340px; background: linear-gradient(to bottom,#7dd3fc 0%,#38bdf8 100%); cursor:crosshair; }
+    #lakeCanvas { border:5px solid #0891b2; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); width:100%; max-width:900px; height:450px; display: block; background: linear-gradient(to bottom,#7dd3fc 0%,#38bdf8 100%); cursor:crosshair; }
 
     /* Quiz modal (overlay) */
     #quizModal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index:9999; padding:20px; }
     #quizContent { background:white; border-radius:14px; padding:20px; max-width:640px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.25); }
-    .quiz-option { display:block; width:100%; text-align:left; padding:12px 14px; margin:8px 0; border-radius:10px; border:2px solid #e6edf3; background:#fff7ed; font-weight:700; cursor:pointer; }
+    .quiz-option { display:block; width:100%; text-align:left; padding:12px 14px; color: #000; background: #fff7ed; margin:8px 0; border-radius:10px; border:2px solid #e6edf3; background:#fff7ed; font-weight:700; cursor:pointer; }
     .quiz-option.correct { background:#7CFC00; border-color:#32CD32; color:#073; }
     .quiz-option.wrong { background:#FF6347; border-color:#DC143C; color:white; }
 
@@ -62,7 +62,7 @@
     @media (max-width:900px) {
       .game-area { flex-direction:column; align-items:center; }
       .stats { width:90%; max-width:420px; order:2; }
-      #lakeCanvas { max-width:90%; height:320px; }
+      #lakeCanvas { max-width: 95%; height: 320px; }
     }
   </style>
 </head>
@@ -301,7 +301,7 @@
       this.y = (Math.random() * (canvas.height - 50)) + 50;
       this.speed = (this.score / 5) * 0.4 + Math.random() * 0.5;
       this.directionX = Math.random() > 0.5 ? 1 : -1;
-      this.directionY = Math.random() > 0.5 ? 0.1 : -0.1;
+      this.directionY = (Math.random() - 0.5) * 1.5;
       this.swimPhase = Math.random() * Math.PI * 2;
       this.isTargeted = false;
       this.isCaught = false;
@@ -644,7 +644,12 @@
   document.addEventListener('DOMContentLoaded', () => { setTimeout(()=> studentInput.focus(), 150); });
 
   // resize handling
-  window.addEventListener('resize', () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; });
+	function resizeCanvas() {
+	  canvas.width = canvas.clientWidth;
+	  canvas.height = canvas.clientHeight;
+	}
+	window.addEventListener("load", resizeCanvas);
+	window.addEventListener("resize", resizeCanvas);
 
   </script>
 </body>
