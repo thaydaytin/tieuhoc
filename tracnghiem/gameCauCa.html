@@ -182,11 +182,9 @@
 
   <script>
   /*****************************************************************
-   * GameCauCa_v2.html
-   * - Kết hợp giao diện gametracnghiem + cơ chế GameCauCa
-   * - Lấy câu hỏi từ ?json=...
-   * - Gửi kết quả lên Google Script
-   * - ĐÃ CẬP NHẬT: Khắc phục lỗi biến toàn cục trong hàm gửi Google Sheet
+   * GameCauCa_v2.html - CẬP NHẬT
+   * - ĐÃ KHẮC PHỤC: Lỗi Canvas không hiển thị cá khi mới load (vấn đề offsetWidth=0).
+   * - ĐÃ KHẮC PHỤC: Lỗi sử dụng biến `student` và `totalScore` sai tên khi gửi điểm.
    *****************************************************************/
 
   // -------------------- Config & State --------------------
@@ -344,12 +342,22 @@
   }
 
   // -------------------- Init & animation --------------------
-  function initGameObjects() {
-    fishes = [];
-    for (let i=0;i<FISH_COUNT;i++) fishes.push(new Fish(i));
-    // size canvas to displayed size
+  
+  // Hàm thiết lập lại kích thước Canvas theo kích thước hiển thị
+  function resizeCanvas() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
+    // Cập nhật lại vị trí cá nếu cần thiết (optional, nhưng an toàn hơn)
+    fishes.forEach(f => {
+        f.x = Math.min(f.x, canvas.width - f.radius);
+        f.y = Math.min(f.y, canvas.height - f.radius);
+    });
+  }
+
+  function initGameObjects() {
+    fishes = [];
+    // KHÔNG gọi resizeCanvas ở đây. Gọi sau khi gameScreen đã display: block
+    for (let i=0;i<FISH_COUNT;i++) fishes.push(new Fish(i));
   }
 
   function drawEnvironment() {
@@ -532,7 +540,6 @@
     gameScreen.style.display = 'none';
     endScreen.style.display = 'block';
     finalScoreText.innerText = `Tên: ${studentName} | Tổng điểm: ${gameState.score} điểm | Cá đã câu: ${gameState.fishCaught}`;
-    // show small modal overlay
   }
   
   // Custom message box function (replacing alert())
@@ -600,17 +607,25 @@
     const name = studentInput.value.trim();
     if (!name) { showMessage("Vui lòng nhập tên của học sinh để bắt đầu!", "warning"); return; }
     if (!questions || questions.length === 0) { showMessage("Dữ liệu câu hỏi chưa sẵn sàng. Vui lòng đợi hoặc kiểm tra URL JSON.", "error"); return; }
+    
     studentName = name;
-    // init game objects & state
+    
+    // 1. Setup Game State
     gameState.score = 0; gameState.turnsLeft = 10; gameState.fishCaught = 0; gameState.currentCaughtFish = null; gameState.isQuizzing = false;
-    initGameObjects();
+    
+    // 2. Display Game Screen
+    startScreen.style.display = 'none'; 
+    gameScreen.style.display = 'block';
+    
+    // 3. FIX: Resize Canvas and Init Objects NOW (when gameScreen is visible)
+    resizeCanvas();
+    initGameObjects(); // Cá được tạo với kích thước Canvas đã đúng
+
+    // 4. Update UI & Start Game Loop
     updateUI();
-    startScreen.style.display = 'none'; gameScreen.style.display = 'block';
     studentDisplay.innerText = studentName;
     messageBox.textContent = "Sẵn sàng câu! Bạn có 10 lượt.";
-    // attach canvas click
     canvas.addEventListener('click', handleCast);
-    // start animation loop (đảm bảo loop chỉ chạy 1 lần)
     requestAnimationFrame(animate); 
   });
 
@@ -624,12 +639,12 @@
   });
 
   endCompleteBtn.addEventListener('click', () => {
-    // Cập nhật logic: Truyền studentName và gameState.score
+    // ĐÃ KHẮC PHỤC: Sử dụng studentName và gameState.score
     sendToGoogleSheet(studentName, gameState.score);
-      // Sử dụng setTimeout để đảm bảo fetch request có thời gian gửi đi trước khi quay lại
+      // Giữ nguyên ở màn hình kết thúc sau khi gửi điểm
       setTimeout(() => {
-        // history.back(); // Tùy chọn: nếu muốn quay lại trang trước
-        // Hoặc giữ nguyên màn hình kết thúc, cho phép người chơi xem thông báo.
+		history.back();
+        // Có thể thêm hành động đóng/thông báo chi tiết hơn tại đây
       }, 500);
   });
 
@@ -644,8 +659,8 @@
     setTimeout(()=> studentInput.focus(), 150); 
   });
 
-  // resize handling
-  window.addEventListener('resize', () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; });
+  // resize handling (vẫn giữ nguyên để Canvas tự điều chỉnh kích thước khi cửa sổ thay đổi)
+  window.addEventListener('resize', resizeCanvas);
 
   </script>
 </body>
