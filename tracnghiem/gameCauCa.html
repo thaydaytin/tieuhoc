@@ -42,12 +42,12 @@
     #messageBox { background:#eef2ff; color:#3730a3; padding:10px; border-radius:8px; margin-top:8px; text-align:center; font-weight:600; }
 
     /* Canvas styling (keep GameCauCa visual) */
-    #lakeCanvas { border:5px solid #0891b2; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); width:100%; max-width:900px; height:450px; display: block; background: linear-gradient(to bottom,#7dd3fc 0%,#38bdf8 100%); cursor:crosshair; }
+    #lakeCanvas { border:5px solid #0891b2; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.15); width:100%; max-width:560px; height:340px; background: linear-gradient(to bottom,#7dd3fc 0%,#38bdf8 100%); cursor:crosshair; }
 
     /* Quiz modal (overlay) */
     #quizModal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.6); z-index:9999; padding:20px; }
     #quizContent { background:white; border-radius:14px; padding:20px; max-width:640px; width:100%; box-shadow:0 10px 30px rgba(0,0,0,0.25); }
-    .quiz-option { display:block; width:100%; text-align:left; padding:12px 14px; color: #000; background: #fff7ed; margin:8px 0; border-radius:10px; border:2px solid #e6edf3; background:#fff7ed; font-weight:700; cursor:pointer; }
+    .quiz-option { display:block; width:100%; text-align:left; padding:12px 14px; margin:8px 0; border-radius:10px; border:2px solid #e6edf3;color: #000;  background:#fff7ed; font-weight:700; cursor:pointer; }
     .quiz-option.correct { background:#7CFC00; border-color:#32CD32; color:#073; }
     .quiz-option.wrong { background:#FF6347; border-color:#DC143C; color:white; }
 
@@ -62,15 +62,22 @@
     @media (max-width:900px) {
       .game-area { flex-direction:column; align-items:center; }
       .stats { width:90%; max-width:420px; order:2; }
-      #lakeCanvas { max-width: 95%; height: 320px; }
+      #lakeCanvas { max-width:90%; height:320px; }
     }
+	@media (max-width: 768px) {
+	  #lakeCanvas {
+		max-width: 95%;
+		height: 320px;
+	  }
+	}
   </style>
 </head>
 <body>
   <!-- Header (same layout/text as gametracnghiem.html) -->
   <header>
     <div class="logo">
-      <a href="../index.html"><img src="../logo.png" alt="Logo Thầy Dạy Tin"></a>
+      <!-- Image URL used as placeholder; replace with actual logo path -->
+      <a href="../index.html"><img src="https://placehold.co/100x100/42a5f5/ffffff?text=Logo" alt="Logo Thầy Dạy Tin" style="height: 50px;"></a>
     </div>
     <nav>
       <a href="../index.html">Trang chủ</a>
@@ -159,12 +166,11 @@
       <p id="quizFeedback" style="font-weight:700; min-height:28px; margin-top:8px;"></p>
       <div style="margin-top:12px; display:flex; gap:8px;">
         <button id="quizNextBtn" style="display:none;">Tiếp tục</button>
-      <!--  <button id="quizCloseBtn" class="btn-secondary">Đóng (Bỏ qua)</button> -->
       </div>
     </div>
   </div>
 
-  <!-- End modal (optional small overlay) -->
+  <!-- Small Notification Modal (replaces alert/confirm) -->
   <div id="endModal">
     <div id="endContent"></div>
   </div>
@@ -179,13 +185,12 @@
    * GameCauCa_v2.html
    * - Kết hợp giao diện gametracnghiem + cơ chế GameCauCa
    * - Lấy câu hỏi từ ?json=...
-   * - Gửi kết quả lên Google Script (Apps Script) nếu trong thời gian
-   *
-   * Lưu ý: JSON structure expected:
-   * [{ "question":"...", "choices":["A","B","C","D"], "answer": 0 }, ...]
+   * - Gửi kết quả lên Google Script
+   * - ĐÃ CẬP NHẬT: Khắc phục lỗi biến toàn cục trong hàm gửi Google Sheet
    *****************************************************************/
 
   // -------------------- Config & State --------------------
+  // Sử dụng URL Google Script của bạn.
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec";
 
   // Fish types like original GameCauCa
@@ -228,6 +233,9 @@
   const turnsLeftSmallEl = document.getElementById('turnsLeftSmall');
   const messageBox = document.getElementById('messageBox');
   const finalScoreText = document.getElementById('finalScoreText');
+  const endModal = document.getElementById('endModal');
+  const endContent = document.getElementById('endContent');
+
 
   // Quiz modal elements
   const quizModal = document.getElementById('quizModal');
@@ -235,13 +243,10 @@
   const quizOptionsEl = document.getElementById('quizOptions');
   const quizFeedbackEl = document.getElementById('quizFeedback');
   const quizNextBtn = document.getElementById('quizNextBtn');
- // const quizCloseBtn = document.getElementById('quizCloseBtn');
 
   // Buttons
   const startBtn = document.getElementById('startBtn');
   const howBtn = document.getElementById('howBtn');
- // const replayBtn = document.getElementById('replayBtn');
- // const completeBtn = document.getElementById('completeBtn');
   const endReplayBtn = document.getElementById('endReplayBtn');
   const endCompleteBtn = document.getElementById('endCompleteBtn');
 
@@ -301,7 +306,7 @@
       this.y = (Math.random() * (canvas.height - 50)) + 50;
       this.speed = (this.score / 5) * 0.4 + Math.random() * 0.5;
       this.directionX = Math.random() > 0.5 ? 1 : -1;
-      this.directionY = (Math.random() - 0.5) * 1.5;
+      this.directionY = Math.random() > 0.5 ? 0.1 : -0.1;
       this.swimPhase = Math.random() * Math.PI * 2;
       this.isTargeted = false;
       this.isCaught = false;
@@ -389,7 +394,7 @@
           // show quiz
           setTimeout(() => showQuizFromQuestions(gameState.currentCaughtFish.score), 300);
         } else {
-          resetRodAndMessage("Sẵn sàng câu! Hãy thả cần.");
+          resetRodAndMessage("Sẵn sàng câu! Bạn có " + gameState.turnsLeft + " lượt.");
         }
       }
     } else if (rod.lureY < rod.y) {
@@ -417,9 +422,13 @@
   }
 
   function handleCast(e) {
-    if (rod.isCast || gameState.isQuizzing) { messageBox.textContent = "Bạn đang câu hoặc đang trả lời quiz! Hãy đợi."; return; }
+    if (rod.isCast || gameState.isQuizzing) { showMessage("Bạn đang câu hoặc đang trả lời quiz! Hãy đợi.", "warning"); return; }
     if (gameState.turnsLeft <= 0) { showGameOver(); return; }
-    gameState.turnsLeft--; updateUI();
+    
+    // Giảm lượt và cập nhật UI ngay lập tức
+    gameState.turnsLeft--; 
+    updateUI();
+
     const rect = canvas.getBoundingClientRect();
     rod.x = e.clientX - rect.left;
     rod.y = e.clientY - rect.top;
@@ -438,7 +447,8 @@
       messageBox.textContent = `🐟 Một con cá ${closestFish.size} đã phát hiện mồi! Nó đang bơi lại...`;
     } else {
       messageBox.textContent = "🌊 Không có cá ở khu vực này! Thử vị trí khác.";
-      resetRodAndMessage("Không có cá, thử lại!");
+      // Chỉ reset rod nếu không câu được gì
+      resetRodAndMessage("Không có cá, thử lại! Lượt còn lại: " + gameState.turnsLeft);
     }
   }
 
@@ -507,17 +517,6 @@
     else resetRodAndMessage("Sẵn sàng câu! Lượt còn lại: " + gameState.turnsLeft);
   };
 
- // quizCloseBtn.onclick = () => {
-    // allow teacher to skip quiz (counts as no points)
- //   quizModal.style.display = 'none';
-//    gameState.isQuizzing = false;
- //   if (gameState.currentCaughtFish) {
- //     gameState.currentCaughtFish.reset();
-  //    gameState.currentCaughtFish = null;
- //   }
-  //  if (gameState.turnsLeft <= 0) showGameOver();
-  //  else resetRodAndMessage("Bỏ qua câu hỏi. Sẵn sàng câu!");
-  //};
 
   // -------------------- UI helpers --------------------
   function updateUI() {
@@ -532,8 +531,18 @@
     // display end screen
     gameScreen.style.display = 'none';
     endScreen.style.display = 'block';
-    finalScoreText.innerText = `Tên: ${studentName} | Tổng điểm: ${gameState.score} điểm`;
-    // show small modal overlay optionally
+    finalScoreText.innerText = `Tên: ${studentName} | Tổng điểm: ${gameState.score} điểm | Cá đã câu: ${gameState.fishCaught}`;
+    // show small modal overlay
+  }
+  
+  // Custom message box function (replacing alert())
+  function showMessage(message, type="info") {
+    endModal.style.display = 'flex';
+    endContent.innerHTML = `
+        <h3 style="margin-top:0;">${type === 'error' ? 'Lỗi' : (type === 'warning' ? 'Cảnh báo' : 'Thông báo')}</h3>
+        <p>${message}</p>
+        <button onclick="document.getElementById('endModal').style.display='none';" class="${type === 'warning' ? 'btn-secondary' : 'btn-danger'}" style="margin-top:10px;">Đóng</button>
+    `;
   }
 
   // -------------------- Google Sheet submission (same logic / date check) --------------------
@@ -546,6 +555,7 @@
 	  // Kiểm tra tham số ngày
 	  if (!ngaybdStr || !ngayktStr) {
 		console.log("Thiếu tham số ngày bắt đầu hoặc kết thúc!");
+		showMessage("Gửi điểm thất bại: Thiếu tham số ngày bắt đầu hoặc kết thúc trong URL.", "error");
 		return;
 	  }
 
@@ -553,14 +563,14 @@
 	  const ngaykt = new Date(ngayktStr);
 	  const now = new Date();
 
-	  // Đặt giờ về 00:00 để so sánh ngày
+	  // Đặt giờ về 00:00 để so sánh ngày (Chỉ so sánh ngày, bỏ qua giờ)
 	  now.setHours(0, 0, 0, 0);
 	  ngaybd.setHours(0, 0, 0, 0);
 	  ngaykt.setHours(0, 0, 0, 0);
 
 	  // Chỉ gửi nếu đang trong thời gian hợp lệ
 	  if (now >= ngaybd && now <= ngaykt) {
-		fetch("https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec", {
+		fetch(APPS_SCRIPT_URL, {
 		  method: "POST",
 		  mode: "no-cors", // tránh lỗi CORS
 		  headers: { "Content-Type": "application/json" },
@@ -568,15 +578,20 @@
 			tenHS: tenHS,
 			diem: diem,
 			tuan: tuan,
-			lop: lop // Thay bằng lớp thực tế: "3", "4" hoặc "5"
+			lop: lop 
 		  })
 		})
 		.then(() => {
 		  console.log("✅ Dữ liệu đã được gửi lên Google Sheet!");
+		  showMessage("✅ Hoàn thành! Dữ liệu đã được gửi lên hệ thống.", "info");
 		})
-		.catch(e => console.error("❌ Lỗi khi gửi dữ liệu:", e));
+		.catch(e => {
+            console.error("❌ Lỗi khi gửi dữ liệu:", e);
+            showMessage("❌ Lỗi khi gửi dữ liệu. Vui lòng kiểm tra kết nối hoặc thử lại.", "error");
+        });
 	  } else {
 		console.log("⏳ Không gửi dữ liệu: Ngoài thời gian hợp lệ.");
+        showMessage("⏳ Không gửi điểm: Đã hết thời gian cho phép làm bài. Vui lòng liên hệ giáo viên.", "warning");
 	  }
 	}
 
@@ -595,61 +610,42 @@
     messageBox.textContent = "Sẵn sàng câu! Bạn có 10 lượt.";
     // attach canvas click
     canvas.addEventListener('click', handleCast);
-    // start animation loop
-    requestAnimationFrame(animate);
+    // start animation loop (đảm bảo loop chỉ chạy 1 lần)
+    requestAnimationFrame(animate); 
   });
 
   howBtn.addEventListener('click', () => {
-    alert("Hướng dẫn:\n1) Nhập tên → Bắt đầu.\n2) Click vào hồ để thả cần.\n3) Nếu câu được cá, trả lời câu hỏi để ghi điểm.\n4) Game có 10 lượt. Sau khi hết 10 lượt, bấm Hoàn thành để gửi kết quả.");
+    // Thay thế alert() bằng showMessage()
+    showMessage("Hướng dẫn:\n1) Nhập tên → Bắt đầu.\n2) Click vào hồ (Canvas) để thả cần.\n3) Nếu câu được cá, trả lời câu hỏi để ghi điểm.\n4) Game có 10 lượt. Sau khi hết 10 lượt, bấm Hoàn thành để gửi kết quả.", "info");
   });
-
-//  replayBtn.addEventListener('click', () => {
-    // reload / reset game
- //   location.reload();
-//  });
-
- // completeBtn.addEventListener('click', () => {
-    // show end screen and send
- //   showGameOver();
- // });
 
   endReplayBtn.addEventListener('click', () => {
     location.reload();
   });
 
   endCompleteBtn.addEventListener('click', () => {
-    // send to Google Sheet and then go back
-    sendToGoogleSheet(student, totalScore);
+    // Cập nhật logic: Truyền studentName và gameState.score
+    sendToGoogleSheet(studentName, gameState.score);
       // Sử dụng setTimeout để đảm bảo fetch request có thời gian gửi đi trước khi quay lại
       setTimeout(() => {
-        history.back();
+        // history.back(); // Tùy chọn: nếu muốn quay lại trang trước
+        // Hoặc giữ nguyên màn hình kết thúc, cho phép người chơi xem thông báo.
       }, 500);
   });
 
-  // small notification helper (styled floating)
-  function showMessage(message, type="info") {
-    const box = document.createElement('div');
-    box.style.position='fixed'; box.style.top='20px'; box.style.left='50%'; box.style.transform='translateX(-50%)';
-    box.style.padding='12px 20px'; box.style.borderRadius='10px'; box.style.zIndex=20000; box.style.color='white'; box.style.fontWeight='700';
-    box.style.boxShadow='0 6px 14px rgba(0,0,0,0.2)'; box.style.fontSize='1rem';
-    if (type === 'warning') box.style.backgroundColor='#FFC107';
-    else if (type === 'error') box.style.backgroundColor='#F44336';
-    else box.style.backgroundColor='#2196F3';
-    box.innerText = message;
-    document.body.appendChild(box);
-    setTimeout(()=> box.remove(), 3500);
-  }
-
   // auto focus input
-  document.addEventListener('DOMContentLoaded', () => { setTimeout(()=> studentInput.focus(), 150); });
+  document.addEventListener('DOMContentLoaded', () => { 
+    // Kiểm tra và đặt giá trị cho input nếu có param studentName
+    const urlStudentName = getParam('studentName');
+    if (urlStudentName) {
+        studentInput.value = urlStudentName;
+        studentName = urlStudentName;
+    }
+    setTimeout(()=> studentInput.focus(), 150); 
+  });
 
   // resize handling
-	function resizeCanvas() {
-	  canvas.width = canvas.clientWidth;
-	  canvas.height = canvas.clientHeight;
-	}
-	window.addEventListener("load", resizeCanvas);
-	window.addEventListener("resize", resizeCanvas);
+  window.addEventListener('resize', () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; });
 
   </script>
 </body>
