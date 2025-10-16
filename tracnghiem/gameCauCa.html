@@ -77,7 +77,7 @@
   <header>
     <div class="logo">
       <!-- Image URL used as placeholder; replace with actual logo path -->
-      <a href="../index.html"><img src="https://placehold.co/100x100/42a5f5/ffffff?text=Logo" alt="Logo Thầy Dạy Tin" style="height: 50px;"></a>
+      <a href="../index.html"><img src="../logo.png" alt="Logo Thầy Dạy Tin" style="height: 50px;"></a>
     </div>
     <nav>
       <a href="../index.html">Trang chủ</a>
@@ -202,6 +202,7 @@
 
   // Game state
   let questions = []; // loaded from external JSON
+  let remainingQuestions = []; // MẢNG MỚI: Câu hỏi còn lại chưa được hỏi
   let studentName = '';
   let gameState = {
     score: 0,
@@ -262,6 +263,12 @@
     return arr;
   }
 
+  // Hàm nạp lại remainingQuestions từ questions gốc
+  function reloadRemainingQuestions() {
+      // Sao chép mảng questions gốc (đã xáo trộn) vào mảng còn lại
+      remainingQuestions = shuffleArray(questions.slice()); 
+      console.log(`Đã nạp lại ${remainingQuestions.length} câu hỏi mới vào danh sách còn lại.`);
+  }
   // Load questions from JSON passed by ?json=
   const jsonURLParam = getParam('json');
   if (!jsonURLParam) {
@@ -470,15 +477,27 @@
 
   // -------------------- Quiz integration (use questions loaded earlier) --------------------
   function showQuizFromQuestions(fishScore) {
-    if (!questions || questions.length === 0) {
+   if (!questions || questions.length === 0) {
       // fallback built-in questions if external JSON missing
       const fallback = [{question:"HTML tag tạo liên kết là gì?", choices:["<a>","<link>","<nav>","<href>"], answer:0}];
       questions = fallback;
     }
+    
+    // --- BƯỚC SỬA 1: Kiểm tra nếu hết câu hỏi còn lại, nạp lại ---
+    if (remainingQuestions.length === 0) {
+        if (questions.length === 0) {
+            // Không có câu hỏi nào, không thể quiz.
+            showMessage("Không có câu hỏi để tiếp tục. Trò chơi có thể kết thúc sớm.", "error");
+            quizNextBtn.click(); // Giả lập bấm tiếp tục để game không bị treo
+            return;
+        }
+        reloadRemainingQuestions();
+    }
+
+    // --- BƯỚC SỬA 2: Lấy câu hỏi ĐẦU TIÊN (đã xáo trộn) và XÓA nó khỏi mảng ---
+    const q = remainingQuestions.shift(); // Lấy câu hỏi đầu tiên và xóa khỏi mảng
+
     gameState.isQuizzing = true;
-    // pick a random question from questions array
-    const qi = Math.floor(Math.random() * questions.length);
-    const q = questions[qi];
 
     gameState.currentQuestion = q;
     quizQuestionEl.innerText = `[Cá ${gameState.currentCaughtFish?.size || ''}: ${fishScore} điểm] ${q.question}`;
