@@ -307,9 +307,6 @@
       // Công thức mới: Giá trị càng lớn (15) thì tốc độ càng thấp.
       // Dùng 3.5 làm base speed cao nhất, và trừ đi 3.0 * (score/15)
       const speedBase = 3.5 - (this.score / 12) * 3.0; 
-		if (this.sscore = 12) {
-			speedBase = speedBase + 2.0;
-		}
       this.speed = speedBase + Math.random() * 0.5; // Cộng thêm một chút ngẫu nhiên (0.0 đến 0.5)
       // --- END CẬP NHẬT TỐC ĐỘ ---
       
