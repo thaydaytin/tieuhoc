@@ -63,6 +63,12 @@
       0% { opacity: 1; transform: translateY(0); }
       100% { opacity: 0; transform: translateY(-30px); }
     }
+	#wheelCanvas {
+	  border-radius: 50%;
+	  border: 5px solid #1976d2;
+	  background: #e3f2fd;
+	}
+
   </style>
 </head>
 <body>
@@ -91,7 +97,17 @@
     </select>
     <br>
     <button onclick="copyStudents()">📋 Copy danh sách học sinh</button>
+	<button onclick="openWheel()">🎯 Gọi ngẫu nhiên</button>
     <div id="studentList"></div>
+	<div id="wheelContainer" style="display:none; text-align:center; margin-top:30px;">
+	  <canvas id="wheelCanvas" width="400" height="400"></canvas>
+	  <div style="margin-top:10px;">
+		<button onclick="spinWheel()">🎡 Quay</button>
+		<button onclick="closeWheel()">✖ Đóng</button>
+	  </div>
+	  <div id="winnerName" style="font-size:20px; font-weight:bold; margin-top:10px; color:#2e7d32;"></div>
+	</div>
+
   </div>
 
   <script>
@@ -190,6 +206,103 @@
     alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
   }
 }
+		// ---------------- Vòng quay gọi ngẫu nhiên ----------------
+	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
+	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
+
+	function openWheel() {
+	  const students = document.querySelectorAll(".student .name");
+	  if (students.length === 0) {
+		alert("Vui lòng chọn lớp trước!");
+		return;
+	  }
+
+	  studentsForWheel = Array.from(students).map(s => s.textContent);
+	  arc = Math.PI * 2 / studentsForWheel.length;
+
+	  document.getElementById("wheelContainer").style.display = "block";
+	  document.getElementById("winnerName").textContent = "";
+
+	  wheelCanvas = document.getElementById("wheelCanvas");
+	  ctx = wheelCanvas.getContext("2d");
+	  drawWheel();
+	}
+
+	function closeWheel() {
+	  document.getElementById("wheelContainer").style.display = "none";
+	}
+
+	function drawWheel() {
+	  const outsideRadius = 180;
+	  const textRadius = 140;
+	  const insideRadius = 40;
+	  ctx.clearRect(0, 0, 400, 400);
+
+	  for (let i = 0; i < studentsForWheel.length; i++) {
+		const angle = startAngle + i * arc;
+		ctx.fillStyle = i % 2 === 0 ? "#42a5f5" : "#90caf9";
+
+		ctx.beginPath();
+		ctx.arc(200, 200, outsideRadius, angle, angle + arc, false);
+		ctx.arc(200, 200, insideRadius, angle + arc, angle, true);
+		ctx.fill();
+
+		ctx.save();
+		ctx.fillStyle = "white";
+		ctx.translate(
+		  200 + Math.cos(angle + arc / 2) * textRadius,
+		  200 + Math.sin(angle + arc / 2) * textRadius
+		);
+		ctx.rotate(angle + arc / 2 + Math.PI / 2);
+		ctx.fillText(studentsForWheel[i], -ctx.measureText(studentsForWheel[i]).width / 2, 0);
+		ctx.restore();
+	  }
+
+	  // Mũi tên chỉ định
+	  ctx.fillStyle = "#e53935";
+	  ctx.beginPath();
+	  ctx.moveTo(200 - 10, 20);
+	  ctx.lineTo(200 + 10, 20);
+	  ctx.lineTo(200, 50);
+	  ctx.closePath();
+	  ctx.fill();
+	}
+
+	function rotateWheel() {
+	  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+	  startAngle += (spinAngle * Math.PI / 180);
+	  drawWheel();
+
+	  spinTime += 30;
+	  if (spinTime >= spinTimeTotal) {
+		stopRotateWheel();
+		return;
+	  }
+	  spinTimeout = setTimeout(rotateWheel, 30);
+	}
+
+	function stopRotateWheel() {
+	  clearTimeout(spinTimeout);
+	  const degrees = startAngle * 180 / Math.PI + 90;
+	  const arcd = arc * 180 / Math.PI;
+	  const index = Math.floor((360 - (degrees % 360)) / arcd) % studentsForWheel.length;
+	  const winner = studentsForWheel[index];
+
+	  document.getElementById("winnerName").textContent = "🎉 Học sinh được gọi là: " + winner;
+	}
+
+	function easeOut(t, b, c, d) {
+	  const ts = (t /= d) * t;
+	  const tc = ts * t;
+	  return b + c * (tc + -3 * ts + 3 * t);
+	}
+
+	function spinWheel() {
+	  spinAngleStart = Math.random() * 10 + 10; // tốc độ ban đầu
+	  spinTime = 0;
+	  spinTimeTotal = 5000; // quay 5 giây
+	  rotateWheel();
+	}
 
   </script>
 </body>
