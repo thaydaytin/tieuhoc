@@ -265,7 +265,7 @@
 		alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
 	  }
 	}
-			// ---------------- Vòng quay học sinh có âm thanh ----------------
+			// ---------------- Vòng quay học sinh có âm thanh + tốc độ ngẫu nhiên ----------------
 	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 	let audioSpin = null;
@@ -305,8 +305,6 @@
 
 	  for (let i = 0; i < studentsForWheel.length; i++) {
 		const angle = startAngle + i * arc;
-
-		// Màu sắc tươi sáng xen kẽ
 		const hue = (i * 360 / studentsForWheel.length);
 		ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
 
@@ -328,7 +326,7 @@
 		ctx.restore();
 	  }
 
-	  // Mũi tên trên cùng
+	  // Mũi tên chỉ định
 	  ctx.fillStyle = "#e53935";
 	  ctx.beginPath();
 	  ctx.moveTo(cx - 20, cy - outsideRadius - 20);
@@ -339,14 +337,13 @@
 	}
 
 	function spinWheel() {
-	  // Nếu có âm thanh thì phát
 	  if (!audioSpin) {
-		audioSpin = new Audio("sound/vongquay.mp3"); // <-- đổi tên file âm thanh 
+		audioSpin = new Audio("sound.mp3"); // 🔊 file âm thanh quay 6 giây
 	  }
 	  audioSpin.currentTime = 0;
 	  audioSpin.play();
 
-	  spinAngleStart = Math.random() * 10 + 20;
+	  spinAngleStart = Math.random() * 10 + 20; // tốc độ khởi đầu
 	  spinTime = 0;
 	  spinTimeTotal = 6000; // quay 6 giây
 	  document.getElementById("winnerPopup").style.display = "none";
@@ -354,7 +351,10 @@
 	}
 
 	function rotateWheel() {
-	  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+	  // Tốc độ quay có dao động ngẫu nhiên
+	  let speedRandomizer = (Math.sin(spinTime / 200) + Math.random() * 0.5 + 0.75);
+	  const spinAngle = (spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal)) * speedRandomizer;
+
 	  startAngle += (spinAngle * Math.PI / 180);
 	  drawWheel();
 
@@ -378,7 +378,8 @@
 	  const popup = document.getElementById("winnerPopup");
 	  popup.textContent = "🎉 " + winner + " 🎉";
 	  popup.style.display = "block";
-	  triggerFireworks();
+
+	  triggerFireworks(); // Gọi hiệu ứng pháo hoa
 	}
 
 	function easeOut(t, b, c, d) {
@@ -386,6 +387,7 @@
 	  const tc = ts * t;
 	  return b + c * (tc + -3 * ts + 3 * t);
 	}
+
 	// ---------------- Hiệu ứng pháo hoa khi trúng thưởng ----------------
 	let fireworksCanvas = document.getElementById("fireworksCanvas");
 	let fCtx = fireworksCanvas.getContext("2d");
