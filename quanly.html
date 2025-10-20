@@ -63,16 +63,16 @@
       0% { opacity: 1; transform: translateY(0); }
       100% { opacity: 0; transform: translateY(-30px); }
     }
-	/* Popup vòng quay */
+	/* --- Popup vòng quay --- */
 	.wheel-popup {
 	  position: fixed;
 	  top: 0; left: 0;
-	  width: 100vw;
-	  height: 100vh;
+	  width: 100vw; height: 100vh;
 	  background: rgba(0,0,0,0.7);
 	  display: none;
 	  align-items: center;
 	  justify-content: center;
+	  flex-direction: column;
 	  z-index: 9999;
 	}
 	.wheel-content {
@@ -94,6 +94,35 @@
 	  cursor: pointer;
 	}
 
+	/* --- Popup tên học sinh trúng --- */
+	.winner-popup {
+	  position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  font-size: 48px;
+	  font-weight: bold;
+	  color: #fff;
+	  background: rgba(46, 125, 50, 0.9);
+	  padding: 30px 60px;
+	  border-radius: 20px;
+	  display: none;
+	  z-index: 10000;
+	  animation: blink 1s infinite alternate;
+	}
+	@keyframes blink {
+	  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+	  to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+	}
+	#fireworksCanvas {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  pointer-events: none; /* không ảnh hưởng tới chuột */
+	  z-index: 0;
+	}
   </style>
 </head>
 <body>
@@ -122,18 +151,19 @@
     </select>
     <br>
     <button onclick="copyStudents()">📋 Copy danh sách học sinh</button>
-	<button onclick="openWheel()">🎯 Gọi ngẫu nhiên</button>
+	<button onclick="openWheel()">🎯 Gọi Tên HS ngẫu nhiên</button>
     <div id="studentList"></div>
 	<!-- Popup vòng quay học sinh -->
 	<div id="wheelPopup" class="wheel-popup">
+	  <canvas id="fireworksCanvas"></canvas> <!-- Canvas pháo hoa -->
 	  <div class="wheel-content">
 		<canvas id="wheelCanvas" width="600" height="600"></canvas>
 		<div style="margin-top:20px;">
 		  <button onclick="spinWheel()">🎡 Quay</button>
 		  <button onclick="closeWheel()">✖ Đóng</button>
 		</div>
-		<div id="winnerName" style="font-size:24px; font-weight:bold; margin-top:10px; color:#2e7d32;"></div>
 	  </div>
+	  <div id="winnerPopup" class="winner-popup"></div>
 	</div>
 
 
@@ -235,9 +265,10 @@
 		alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
 	  }
 	}
-			// ---------------- Vòng quay học sinh dạng popup ----------------
+			// ---------------- Vòng quay học sinh có âm thanh ----------------
 	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
+	let audioSpin = null;
 
 	function openWheel() {
 	  const students = document.querySelectorAll(".student .name");
@@ -250,7 +281,7 @@
 	  arc = Math.PI * 2 / studentsForWheel.length;
 
 	  document.getElementById("wheelPopup").style.display = "flex";
-	  document.getElementById("winnerName").textContent = "";
+	  document.getElementById("winnerPopup").style.display = "none";
 
 	  wheelCanvas = document.getElementById("wheelCanvas");
 	  ctx = wheelCanvas.getContext("2d");
@@ -259,20 +290,23 @@
 
 	function closeWheel() {
 	  document.getElementById("wheelPopup").style.display = "none";
+	  document.getElementById("winnerPopup").style.display = "none";
 	  clearTimeout(spinTimeout);
+	  if (audioSpin) audioSpin.pause();
 	}
 
 	function drawWheel() {
-	  const outsideRadius = 280;
-	  const textRadius = 200;
-	  const insideRadius = 50;
 	  const cx = 300, cy = 300;
+	  const outsideRadius = 280;
+	  const insideRadius = 50;
+	  const textRadius = 200;
+
 	  ctx.clearRect(0, 0, 600, 600);
 
 	  for (let i = 0; i < studentsForWheel.length; i++) {
 		const angle = startAngle + i * arc;
 
-		// màu ngẫu nhiên tươi sáng
+		// Màu sắc tươi sáng xen kẽ
 		const hue = (i * 360 / studentsForWheel.length);
 		ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
 
@@ -289,20 +323,34 @@
 		);
 		ctx.rotate(angle + arc / 2);
 		ctx.textAlign = "center";
-		ctx.font = "bold 16px Arial";
-		// viết từ tâm ra ngoài
+		ctx.font = "bold 18px Arial";
 		ctx.fillText(studentsForWheel[i], 0, 0);
 		ctx.restore();
 	  }
 
-	  // Vẽ mũi tên chỉ định
+	  // Mũi tên trên cùng
 	  ctx.fillStyle = "#e53935";
 	  ctx.beginPath();
-	  ctx.moveTo(cx - 15, cy - outsideRadius - 10);
-	  ctx.lineTo(cx + 15, cy - outsideRadius - 10);
-	  ctx.lineTo(cx, cy - outsideRadius + 20);
+	  ctx.moveTo(cx - 20, cy - outsideRadius - 20);
+	  ctx.lineTo(cx + 20, cy - outsideRadius - 20);
+	  ctx.lineTo(cx, cy - outsideRadius + 10);
 	  ctx.closePath();
 	  ctx.fill();
+	}
+
+	function spinWheel() {
+	  // Nếu có âm thanh thì phát
+	  if (!audioSpin) {
+		audioSpin = new Audio("sound/vongquay.mp3"); // <-- đổi tên file âm thanh 
+	  }
+	  audioSpin.currentTime = 0;
+	  audioSpin.play();
+
+	  spinAngleStart = Math.random() * 10 + 20;
+	  spinTime = 0;
+	  spinTimeTotal = 6000; // quay 6 giây
+	  document.getElementById("winnerPopup").style.display = "none";
+	  rotateWheel();
 	}
 
 	function rotateWheel() {
@@ -320,12 +368,17 @@
 
 	function stopRotateWheel() {
 	  clearTimeout(spinTimeout);
+	  if (audioSpin) audioSpin.pause();
+
 	  const degrees = startAngle * 180 / Math.PI + 90;
 	  const arcd = arc * 180 / Math.PI;
 	  const index = Math.floor((360 - (degrees % 360)) / arcd) % studentsForWheel.length;
 	  const winner = studentsForWheel[index];
 
-	  document.getElementById("winnerName").textContent = "🎉 Học sinh được gọi là: " + winner;
+	  const popup = document.getElementById("winnerPopup");
+	  popup.textContent = "🎉 " + winner + " 🎉";
+	  popup.style.display = "block";
+	  triggerFireworks();
 	}
 
 	function easeOut(t, b, c, d) {
@@ -333,14 +386,59 @@
 	  const tc = ts * t;
 	  return b + c * (tc + -3 * ts + 3 * t);
 	}
+	// ---------------- Hiệu ứng pháo hoa khi trúng thưởng ----------------
+	let fireworksCanvas = document.getElementById("fireworksCanvas");
+	let fCtx = fireworksCanvas.getContext("2d");
+	let fireworks = [];
 
-	function spinWheel() {
-	  spinAngleStart = Math.random() * 10 + 20;
-	  spinTime = 0;
-	  spinTimeTotal = 5000; // quay 5 giây
-	  rotateWheel();
+	function resizeFireworks() {
+	  fireworksCanvas.width = window.innerWidth;
+	  fireworksCanvas.height = window.innerHeight;
+	}
+	window.addEventListener("resize", resizeFireworks);
+	resizeFireworks();
+
+	function createFirework(x, y) {
+	  const colors = ["#ff5252", "#ffca28", "#69f0ae", "#40c4ff", "#ea80fc"];
+	  for (let i = 0; i < 30; i++) {
+		fireworks.push({
+		  x: x,
+		  y: y,
+		  radius: Math.random() * 3 + 2,
+		  color: colors[Math.floor(Math.random() * colors.length)],
+		  angle: Math.random() * Math.PI * 2,
+		  speed: Math.random() * 4 + 2,
+		  life: 100
+		});
+	  }
 	}
 
+	function drawFireworks() {
+	  fCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+	  for (let i = fireworks.length - 1; i >= 0; i--) {
+		const f = fireworks[i];
+		f.x += Math.cos(f.angle) * f.speed;
+		f.y += Math.sin(f.angle) * f.speed;
+		f.speed *= 0.98;
+		f.life -= 2;
+		fCtx.beginPath();
+		fCtx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+		fCtx.fillStyle = f.color;
+		fCtx.fill();
+		if (f.life <= 0) fireworks.splice(i, 1);
+	  }
+	  requestAnimationFrame(drawFireworks);
+	}
+	drawFireworks();
+
+	// Gọi khi học sinh trúng
+	function triggerFireworks() {
+	  const cx = window.innerWidth / 2;
+	  const cy = window.innerHeight / 2;
+	  for (let i = 0; i < 5; i++) {
+		setTimeout(() => createFirework(cx, cy), i * 200);
+	  }
+	}
 
   </script>
 </body>
