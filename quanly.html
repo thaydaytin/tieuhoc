@@ -265,7 +265,7 @@
 		alert("❌ Không thể copy tự động, vui lòng copy thủ công.");
 	  }
 	}
-			// ---------------- Vòng quay học sinh có âm thanh + tốc độ ngẫu nhiên ----------------
+			// ---------------- Vòng quay học sinh có âm thanh + lực quay ngẫu nhiên ----------------
 	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 	let audioSpin = null;
@@ -338,12 +338,15 @@
 
 	function spinWheel() {
 	  if (!audioSpin) {
-		audioSpin = new Audio("sound.mp3"); // 🔊 file âm thanh quay 6 giây
+		audioSpin = new Audio("sound/vongquay.mp3"); // 🔊 File âm thanh quay
 	  }
 	  audioSpin.currentTime = 0;
 	  audioSpin.play();
 
-	  spinAngleStart = Math.random() * 10 + 20; // tốc độ khởi đầu
+	  // 🎯 Tốc độ khởi đầu ngẫu nhiên (tăng/giảm nhẹ)
+	  // Ví dụ dao động trong khoảng từ 15 đến 35 độ mỗi frame
+	  spinAngleStart = Math.random() * 20 + 15;
+
 	  spinTime = 0;
 	  spinTimeTotal = 6000; // quay 6 giây
 	  document.getElementById("winnerPopup").style.display = "none";
@@ -351,10 +354,7 @@
 	}
 
 	function rotateWheel() {
-	  // Tốc độ quay có dao động ngẫu nhiên
-	  let speedRandomizer = (Math.sin(spinTime / 200) + Math.random() * 0.5 + 0.75);
-	  const spinAngle = (spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal)) * speedRandomizer;
-
+	  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
 	  startAngle += (spinAngle * Math.PI / 180);
 	  drawWheel();
 
@@ -387,6 +387,7 @@
 	  const tc = ts * t;
 	  return b + c * (tc + -3 * ts + 3 * t);
 	}
+
 
 	// ---------------- Hiệu ứng pháo hoa khi trúng thưởng ----------------
 	let fireworksCanvas = document.getElementById("fireworksCanvas");
