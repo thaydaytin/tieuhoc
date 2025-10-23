@@ -123,6 +123,112 @@
 	  pointer-events: none; /* không ảnh hưởng tới chuột */
 	  z-index: 0;
 	}
+	
+	/* --- Popup đồng hồ --- */
+	.timer-popup {
+	  position: fixed;
+	  top: 0; left: 0;
+	  width: 100vw; height: 100vh;
+	  background: rgba(0,0,0,0.6);
+	  display: none;
+	  align-items: center;
+	  justify-content: center;
+	  flex-direction: column;
+	  z-index: 9999;
+	}
+
+	.timer-content {
+	  background: linear-gradient(135deg, #42a5f5, #7e57c2, #26c6da, #ef5350);
+	  background-size: 400% 400%;
+	  animation: gradientMove 6s ease infinite;
+	  color: white;
+	  border-radius: 20px;
+	  padding: 30px;
+	  text-align: center;
+	  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+	}
+
+	@keyframes gradientMove {
+	  0% { background-position: 0% 50%; }
+	  50% { background-position: 100% 50%; }
+	  100% { background-position: 0% 50%; }
+	}
+
+	.timer-display {
+	  font-size: 80px;
+	  font-weight: bold;
+	  margin: 20px 0;
+	  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+	}
+
+	.timer-buttons button {
+	  margin: 8px;
+	  padding: 10px 20px;
+	  border: none;
+	  background: #fff;
+	  color: #333;
+	  border-radius: 8px;
+	  cursor: pointer;
+	  font-weight: bold;
+	  transition: transform 0.2s;
+	}
+	.timer-buttons button:hover {
+	  transform: scale(1.05);
+	}
+
+	/* --- Popup hết thời gian --- */
+	.timeout-popup {
+	  position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  background: rgba(255, 64, 129, 0.95);
+	  color: white;
+	  font-size: 48px;
+	  font-weight: bold;
+	  padding: 40px 80px;
+	  border-radius: 20px;
+	  display: none;
+	  z-index: 10000;
+	  animation: blinkTimeout 1s infinite alternate;
+	}
+	@keyframes blinkTimeout {
+	  from { opacity: 1; }
+	  to { opacity: 0.5; }
+	}
+	
+	/* --- Vòng tròn tiến trình --- */
+	.timer-ring {
+	  position: relative;
+	  width: 220px;
+	  height: 220px;
+	  margin: auto;
+	}
+	.progress-ring {
+	  transform: rotate(-90deg);
+	}
+	.progress-ring__circle {
+	  stroke-dasharray: 628; /* 2 * PI * 100 (bán kính) */
+	  stroke-dashoffset: 0;
+	  transition: stroke-dashoffset 1s linear, stroke 1s;
+	  stroke-linecap: round;
+	  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8));
+	}
+	.progress-ring__background {
+	  stroke-linecap: round;
+	}
+	.timer-display {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  font-size: 72px;
+	  font-weight: bold;
+	  color: #fff;
+	  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+	}
+
+
   </style>
 </head>
 <body>
@@ -152,6 +258,7 @@
     <br>
     <button onclick="copyStudents()">📋 Copy danh sách học sinh</button>
 	<button onclick="openWheel()">🎯 Gọi Tên HS ngẫu nhiên</button>
+	<button onclick="openTimer()">⏰ Đồng hồ đếm ngược</button>
     <div id="studentList"></div>
 	<!-- Popup vòng quay học sinh -->
 	<div id="wheelPopup" class="wheel-popup">
@@ -164,6 +271,36 @@
 		</div>
 	  </div>
 	  <div id="winnerPopup" class="winner-popup"></div>
+	</div>
+	
+	<!-- Popup đồng hồ đếm ngược -->
+	<div id="timerPopup" class="timer-popup">
+	  <div class="timer-content">
+		<h2>⏳ Đồng hồ đếm ngược</h2>
+		<div class="timer-ring">
+		  <svg class="progress-ring" width="220" height="220">
+			<circle class="progress-ring__background" stroke="#ffffff44" stroke-width="10" fill="transparent" r="100" cx="110" cy="110"/>
+			<circle class="progress-ring__circle" stroke="#fff" stroke-width="10" fill="transparent" r="100" cx="110" cy="110"/>
+		  </svg>
+		  <div class="timer-display" id="timerDisplay">05:00</div>
+		</div>
+
+		<div style="margin-top:15px;">
+		  <label>Phút: <input type="number" id="minutesInput" value="5" min="0" style="width:60px;"></label>
+		  <label>Giây: <input type="number" id="secondsInput" value="0" min="0" max="59" style="width:60px;"></label>
+		</div>
+		<div class="timer-buttons">
+		  <button onclick="startTimer()">▶ Bắt đầu</button>
+		  <button onclick="pauseTimer()">⏸ Tạm dừng</button>
+		  <button onclick="resetTimer()">🔄 Đặt lại</button>
+		  <button onclick="closeTimer()">✖ Đóng</button>
+		</div>
+	  </div>
+
+	  <!-- Popup báo hết giờ -->
+	  <div id="timeoutPopup" class="timeout-popup">
+		⏰ Hết thời gian!
+	  </div>
 	</div>
 
 
@@ -441,6 +578,105 @@
 	  for (let i = 0; i < 5; i++) {
 		setTimeout(() => createFirework(cx, cy), i * 200);
 	  }
+	}
+
+	// ---------------- Đồng hồ đếm ngược ----------------
+	let ringCircle = null;
+	let totalTime = 0;
+
+	let timerInterval = null;
+	let remainingSeconds = 0;
+	let isPaused = false;
+	let audioTimeout = null;
+
+	function openTimer() {
+	  document.getElementById("timerPopup").style.display = "flex";
+	  document.getElementById("timeoutPopup").style.display = "none";
+	  ringCircle = document.querySelector(".progress-ring__circle");
+	  resetTimer();
+	}
+
+	function closeTimer() {
+	  document.getElementById("timerPopup").style.display = "none";
+	  clearInterval(timerInterval);
+	  if (audioTimeout) audioTimeout.pause();
+	}
+
+	function updateDisplay() {
+	  const display = document.getElementById("timerDisplay");
+	  const minutes = Math.floor(remainingSeconds / 60);
+	  const seconds = remainingSeconds % 60;
+	  display.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+	}
+
+	function startTimer() {
+	  const minInput = parseInt(document.getElementById("minutesInput").value) || 0;
+	  const secInput = parseInt(document.getElementById("secondsInput").value) || 0;
+
+	  totalTime = minInput * 60 + secInput;
+	  if (remainingSeconds === 0 || (!isPaused && remainingSeconds !== totalTime)) {
+		remainingSeconds = totalTime;
+	  }
+
+	  if (remainingSeconds <= 0) {
+		alert("Vui lòng nhập thời gian hợp lệ!");
+		return;
+	  }
+
+	  isPaused = false;
+	  clearInterval(timerInterval);
+	  timerInterval = setInterval(() => {
+		if (!isPaused) {
+		  remainingSeconds--;
+		  updateDisplay();
+		  updateRing();
+		  if (remainingSeconds <= 0) {
+			clearInterval(timerInterval);
+			showTimeoutAlert();
+		  }
+		}
+	  }, 1000);
+	}
+
+	function pauseTimer() {
+	  isPaused = !isPaused;
+	}
+
+	function resetTimer() {
+	  clearInterval(timerInterval);
+	  isPaused = false;
+	  const min = parseInt(document.getElementById("minutesInput").value) || 0;
+	  const sec = parseInt(document.getElementById("secondsInput").value) || 0;
+	  totalTime = min * 60 + sec;
+	  remainingSeconds = totalTime;
+	  updateDisplay();
+	  updateRing();
+	}
+
+	function updateRing() {
+	  if (!ringCircle || totalTime === 0) return;
+	  const circumference = 2 * Math.PI * 100;
+	  const offset = circumference - (remainingSeconds / totalTime) * circumference;
+	  ringCircle.style.strokeDashoffset = offset;
+
+	  // đổi màu theo tiến trình
+	  const percent = remainingSeconds / totalTime;
+	  if (percent > 0.5) ringCircle.style.stroke = "#00e676";
+	  else if (percent > 0.2) ringCircle.style.stroke = "#ffeb3b";
+	  else ringCircle.style.stroke = "#ff1744";
+	}
+	
+	function showTimeoutAlert() {
+	  const timeoutPopup = document.getElementById("timeoutPopup");
+	  timeoutPopup.style.display = "block";
+	  
+	  // Phát âm thanh báo hết giờ 
+	  audioTimeout = new Audio("sound/alarm.mp3");
+	  audioTimeout.play();
+
+	  setTimeout(() => {
+		timeoutPopup.style.display = "none";
+	  }, 4000);
 	}
 
   </script>
