@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Bước nào sau đây là bước đầu tiên khi muốn tìm kiếm thông tin trên Internet?",
+    "choices": [
+      "Nhập từ khóa vào ô tìm kiếm",
+      "Khởi động trình duyệt Internet",
+      "Nhấn phím Enter",
+      "Chọn kết quả tìm kiếm"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Em cần nhập địa chỉ trang web của máy tìm kiếm vào đâu trên cửa sổ trình duyệt?",
+    "choices": [
+      "Ô tìm kiếm của máy tính",
+      "Thanh địa chỉ",
+      "Thanh tác vụ",
+      "Ô nhập từ khóa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là một máy tìm kiếm phổ biến?",
+    "choices": [
+      "Microsoft Word",
+      "Google",
+      "Paint",
+      "Calculator"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sau khi nhập từ khóa, em làm gì để máy tìm kiếm bắt đầu công việc?",
+    "choices": [
+      "Nhấn phím Shift",
+      "Nhấn phím Ctrl",
+      "Nhấn phím Enter",
+      "Tắt cửa sổ trình duyệt"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để tìm kiếm hiệu quả, từ khóa cần phải có đặc điểm gì?",
+    "choices": [
+      "Rất dài và chi tiết",
+      "Gồm nhiều câu phức tạp",
+      "Ngắn gọn, không thừa ý và thể hiện đúng nội dung muốn tìm",
+      "Chỉ gồm các con số"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu muốn tìm hình ảnh về 'Hoa đào', em cần chọn mục nào trên trang kết quả tìm kiếm?",
+    "choices": [
+      "Video",
+      "Tất cả",
+      "Hình ảnh (Images)",
+      "Tin tức"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi tìm kiếm, mỗi dòng kết quả hiển thị trên màn hình là gì?",
+    "choices": [
+      "Một chương trình máy tính",
+      "Một trang web có chứa thông tin liên quan đến từ khóa",
+      "Một phần mềm độc hại",
+      "Một quảng cáo"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu từ khóa tìm kiếm quá chung chung (ví dụ: 'Hoa'), kết quả em nhận được có thể như thế nào?",
+    "choices": [
+      "Chỉ có một kết quả duy nhất",
+      "Rất ít kết quả",
+      "Rất nhiều kết quả, khó chọn lọc",
+      "Không có kết quả nào"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi tìm được kết quả phù hợp, em làm gì để xem nội dung của trang web đó?",
+    "choices": [
+      "Nhấn phím Delete",
+      "Nháy chuột vào liên kết (siêu liên kết) của kết quả đó",
+      "Đóng trình duyệt lại",
+      "Nhập từ khóa mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Từ khóa nào sau đây là phù hợp nhất để tìm kiếm về thời khóa biểu tuần này của lớp 4A?",
+    "choices": [
+      "Thời khóa biểu",
+      "Lớp 4A",
+      "Thời khóa biểu lớp 4A tuần này",
+      "Lịch học"
+    ],
+    "answer": 2
   }
 ]

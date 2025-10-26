@@ -1,41 +1,101 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Công cụ nào được sử dụng để tìm kiếm tệp và thư mục trong hệ điều hành Windows?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Microsoft Word",
+      "Hộp tìm kiếm (Search box) trong File Explorer",
+      "Phần mềm Paint",
+      "Trình duyệt Internet"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Em cần nhập từ khóa tìm kiếm vào đâu trong cửa sổ File Explorer?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Thanh địa chỉ",
+      "Vùng hiển thị nội dung",
+      "Hộp tìm kiếm",
+      "Thanh trạng thái"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Kí tự đại diện nào được dùng để đại diện cho MỘT hoặc NHIỀU kí tự bất kì?",
+    "choices": [
+      "Dấu hỏi (?)",
+      "Dấu sao (*)",
+      "Dấu chấm (.)",
+      "Dấu gạch ngang (-)"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh tìm kiếm nào sẽ tìm tất cả các tệp có phần mở rộng là .pptx (tệp trình chiếu PowerPoint)?",
+    "choices": [
+      "*.pptx",
+      "?.pptx",
+      "pptx.*",
+      "Slide.pptx"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Kí tự đại diện nào được dùng để đại diện cho MỘT kí tự bất kì?",
+    "choices": [
+      "Dấu sao (*)",
+      "Dấu hỏi (?)",
+      "Dấu chấm than (!)",
+      "Dấu thăng (#)"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em tìm kiếm với từ khóa 'Bai Hoc?', kết quả có thể là tệp nào?",
+    "choices": [
+      "Bai Hoc 1.docx",
+      "Bai Hoc.docx",
+      "Bai Hoc123.docx",
+      "Bai Hoc A.docx"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu em tìm kiếm với từ khóa '*tin', kết quả có thể là tệp nào?",
+    "choices": [
+      "Tin.txt",
+      "Hoc Tin.docx",
+      "Tin hoc",
+      "Tất cả các tệp trên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc sử dụng công cụ tìm kiếm tệp và thư mục có lợi ích gì?",
+    "choices": [
+      "Tạo ra tệp mới",
+      "Giúp tìm kiếm tệp đã quên vị trí một cách nhanh chóng",
+      "Chỉ xóa các tệp cũ",
+      "Thay đổi màu sắc của thư mục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong cú pháp tìm kiếm, từ khóa phải được nhập vào vùng nào của cửa sổ File Explorer?",
+    "choices": [
+      "Thư mục gốc",
+      "Hộp tìm kiếm",
+      "Tên tệp",
+      "Ổ đĩa D"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi tìm kiếm bằng kí tự đại diện, nếu nhập 'Baitap?.jpg', kết quả có thể là tệp nào?",
+    "choices": [
+      "Baitap1.jpg",
+      "Baitap.jpg",
+      "Baitap12.jpg",
+      "Baitap.txt"
     ],
     "answer": 0
   }

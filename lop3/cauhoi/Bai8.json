@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Xử lí thông tin là gì?",
+    "choices": [
+      "Việc lưu trữ thông tin",
+      "Việc tác động vào thông tin đã thu nhận được để đưa ra thông tin mới hoặc quyết định hành động",
+      "Việc xóa bỏ thông tin không cần thiết",
+      "Việc chỉ truyền thông tin cho người khác"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Quá trình xử lí thông tin gồm mấy bước cơ bản?",
+    "choices": [
+      "Một bước",
+      "Hai bước",
+      "Ba bước",
+      "Bốn bước"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bước đầu tiên trong quá trình xử lí thông tin là gì?",
+    "choices": [
+      "Xử lí thông tin",
+      "Thu nhận thông tin (Đầu vào)",
+      "Đưa ra thông tin (Đầu ra)",
+      "So sánh thông tin"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bước nào trong quá trình xử lí thông tin bao gồm việc phân tích, tính toán, so sánh?",
+    "choices": [
+      "Thu nhận thông tin",
+      "Xử lí thông tin (Thực hiện)",
+      "Đưa ra thông tin",
+      "Lưu trữ thông tin"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em nghe tiếng còi xe cứu thương (thông tin thu nhận), hành động 'dừng lại' để nhường đường thuộc bước nào trong xử lí thông tin?",
+    "choices": [
+      "Thu nhận thông tin",
+      "Xử lí thông tin (Thực hiện)",
+      "Đưa ra thông tin (Đầu ra)",
+      "Ghi nhớ thông tin"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mục đích của việc xử lí thông tin là nhằm tìm ra:",
+    "choices": [
+      "Nội dung không liên quan",
+      "Thông tin có ý nghĩa hoặc đưa ra quyết định hành động",
+      "Tốc độ mạng Internet",
+      "Các phần mềm mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong ví dụ mua hàng, hành động 'Mua sách' là kết quả của bước nào?",
+    "choices": [
+      "Thu nhận thông tin",
+      "Xử lí thông tin",
+      "Đưa ra thông tin (Đầu ra)",
+      "Tất cả các bước trên"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thứ tự đúng của quá trình xử lí thông tin là:",
+    "choices": [
+      "Xử lí $\rightarrow$ Thu nhận $\rightarrow$ Đưa ra",
+      "Thu nhận $\rightarrow$ Đưa ra $\rightarrow$ Xử lí",
+      "Thu nhận $\rightarrow$ Xử lí $\rightarrow$ Đưa ra",
+      "Đưa ra $\rightarrow$ Xử lí $\rightarrow$ Thu nhận"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi giáo viên đọc đề bài toán (Đầu vào), việc em thực hiện các phép tính để ra đáp số thuộc bước nào?",
+    "choices": [
+      "Đầu ra",
+      "Xử lí thông tin (Thực hiện)",
+      "Thu nhận thông tin",
+      "Truyền thông tin"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bước 'Đưa ra thông tin' (Đầu ra) có thể là hành động gì?",
+    "choices": [
+      "Nghe, nhìn, chạm",
+      "Tính toán, so sánh",
+      "Thực hiện hành động hoặc truyền thông tin đã được xử lí",
+      "Ghi chép thông tin"
+    ],
+    "answer": 2
   }
 ]

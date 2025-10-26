@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Thông tin là gì?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Các đồ vật xung quanh em",
+      "Những gì đem lại cho em hiểu biết về thế giới xung quanh",
+      "Các câu lệnh trong máy tính",
+      "Các con số ngẫu nhiên"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Bước nào sau đây KHÔNG thuộc hoạt động thông tin cơ bản của con người?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Thu nhận thông tin",
+      "Xử lí thông tin",
+      "Mua bán hàng hóa",
+      "Lưu trữ thông tin"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Quá trình xử lí thông tin được tóm tắt theo thứ tự nào?",
+    "choices": [
+      "Đầu ra -> Xử lí -> Đầu vào",
+      "Đầu vào -> Đầu ra -> Xử lí",
+      "Xử lí -> Đầu vào -> Đầu ra",
+      "Đầu vào -> Xử lí -> Đầu ra"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thông tin nào sau đây thuộc dạng âm thanh?",
+    "choices": [
+      "Chữ viết trên bảng",
+      "Tiếng chuông báo thức reo",
+      "Bức ảnh gia đình",
+      "Biển báo giao thông"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hành động 'tính toán kết quả một bài toán' thuộc bước nào trong quá trình xử lí thông tin?",
+    "choices": [
+      "Thu nhận thông tin (Đầu vào)",
+      "Xử lí thông tin (Thực hiện)",
+      "Đưa ra thông tin (Đầu ra)",
+      "Lưu trữ thông tin"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lợi ích chính của việc Sắp xếp thông tin là gì?",
+    "choices": [
+      "Giúp thông tin bị mất đi",
+      "Giúp dễ dàng tìm kiếm thông tin nhanh và chính xác hơn",
+      "Làm tăng độ khó của thông tin",
+      "Giúp thông tin chỉ còn dạng chữ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thấy đèn giao thông màu xanh, em quyết định đi tiếp. 'Màu xanh' là gì?",
+    "choices": [
+      "Quyết định hành động",
+      "Thông tin (Đầu vào)",
+      "Xử lí thông tin",
+      "Hậu quả"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc phân loại sách theo các môn học (Toán, Văn, Anh) là sắp xếp thông tin theo quy tắc nào?",
+    "choices": [
+      "Theo thứ tự bảng chữ cái",
+      "Theo kích thước",
+      "Theo nhóm/loại",
+      "Theo thứ tự thời gian"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Đâu là một ví dụ của thông tin dạng hình ảnh?",
+    "choices": [
+      "Lời nói của cô giáo",
+      "Chữ cái A, B, C",
+      "Biểu tượng trên điện thoại di động",
+      "Tiếng chim hót"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu quyết định hành động không đúng đắn sau khi xử lí thông tin, điều gì có thể xảy ra?",
+    "choices": [
+      "Luôn mang lại kết quả tốt",
+      "Không ảnh hưởng gì",
+      "Dẫn đến hậu quả không tốt",
+      "Máy tính sẽ tự sửa lỗi"
+    ],
+    "answer": 2
   }
 ]
