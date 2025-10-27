@@ -162,6 +162,18 @@
     .loader{ width:24px;height:24px;border-radius:50%; border:3px solid #e6f0ff;border-top-color:var(--primary); animation:spin 1s linear infinite }
     @keyframes spin { to { transform:rotate(360deg) } }
 
+    /* login overlay */
+    #loginOverlay {
+      position: fixed; inset:0; background: rgba(2,6,23,0.6); display:flex; align-items:center; justify-content:center; z-index:9999;
+    }
+    #loginBox {
+      background:white; padding:26px; border-radius:12px; width:360px; box-shadow:0 20px 60px rgba(0,0,0,0.2); text-align:center;
+    }
+    #loginBox input {
+      width:100%; padding:10px; margin-top:12px; border-radius:8px; border:1px solid #e6f0ff;
+    }
+    #loginError { color:#c62828; margin-top:8px; }
+
     /* responsive */
     @media (max-width:640px){
       .students{ grid-template-columns: repeat(2, 1fr); }
@@ -171,8 +183,21 @@
 </head>
 <body>
 
+  <!-- LOGIN OVERLAY -->
+  <div id="loginOverlay">
+    <div id="loginBox">
+      <h3>🔐 Đăng nhập quản lý lớp</h3>
+      <input type="password" id="passwordInput" placeholder="Nhập mật khẩu">
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+        <button class="btn-like" onclick="attemptLogin()">Đăng nhập</button>
+      </div>
+      <div id="loginError" class="muted" style="display:none"></div>
+      <div style="margin-top:10px; font-size:12px; color:#666">Mật khẩu được lưu trong <code>pw.json</code> (SHA-256 hash)</div>
+    </div>
+  </div>
+
   <!-- HEADER -->
-  <header class="app-header">
+  <header class="app-header" style="display:none" id="mainHeader">
     <div class="brand">
       <div class="dot">HS</div>
       <div>
@@ -190,7 +215,7 @@
   </header>
 
   <!-- MAIN -->
-  <div class="container">
+  <div class="container" id="mainContent" style="display:none">
     <!-- Controls -->
     <div class="controls">
       <div class="card class-select" style="display:flex;align-items:center;gap:12px;">
@@ -221,7 +246,7 @@
   </div>
 
   <!-- Floating action buttons -->
-  <div class="fab">
+  <div class="fab" style="display:none" id="fabTools">
     <button class="fab-main" title="Công cụ">＋</button>
     <div style="display:flex;flex-direction:column;align-items:center;margin-top:8px;">
       <div class="fab-sub" title="Gọi ngẫu nhiên" onclick="openWheel()">🎯</div>
@@ -231,7 +256,7 @@
     </div>
   </div>
 
-  <!-- Popup: Wheel (reuse earlier code) -->
+  <!-- Popup: Wheel -->
   <div id="wheelPopup" class="overlay" style="display:none; align-items:center; justify-content:center;">
     <div class="ranking-modal" style="max-width:720px;">
       <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -276,7 +301,7 @@
     </div>
   </div>
 
-  <!-- Popup: Timer (reuse earlier) -->
+  <!-- Popup: Timer -->
   <div id="timerPopup" class="overlay" style="display:none;">
     <div class="ranking-modal" style="max-width:420px;">
       <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -329,12 +354,57 @@ let currentWeek = 1;
 let studentsData = []; // array of rows returned from sheet (including id + name + week cols)
 let chartInstance = null;
 
+/* ============================
+  HÀM HASH SHA-256 (dùng cho checkPassword)
+  ============================ */
+async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
+
+/* ============================
+  ĐĂNG NHẬP (pw.json phải nằm cùng thư mục)
+  ============================ */
+async function attemptLogin(){
+  const pass = document.getElementById("passwordInput").value || "";
+  if(!pass){ showLoginError("Vui lòng nhập mật khẩu"); return; }
+  try{
+    const resp = await fetch("pw.json");
+    if(!resp.ok){ showLoginError("Không tìm thấy pw.json"); return; }
+    const j = await resp.json();
+    const correctHash = j.hash;
+    const entered = await sha256(pass);
+    if(entered === correctHash){
+      // success
+      document.getElementById("loginOverlay").style.display = "none";
+      document.getElementById("mainHeader").style.display = "";
+      document.getElementById("mainContent").style.display = "";
+      document.getElementById("fabTools").style.display = "";
+      // render UI
+      renderClassCards();
+      populateWeekSelector();
+      populateRankingWeek();
+      // select first class automatically
+      const first = document.querySelector(".class-item");
+      if(first) first.click();
+    } else {
+      showLoginError("Mật khẩu sai");
+    }
+  }catch(e){
+    console.error("Login error:", e);
+    showLoginError("Lỗi khi kiểm tra mật khẩu");
+  }
+}
+
+function showLoginError(txt){
+  const el = document.getElementById("loginError");
+  el.style.display = "block";
+  el.textContent = txt;
+}
+function logout(){
+  // đơn giản reload trang để hiện lại login
+  window.location.reload();
+}
+
 /* =========== UI INIT =========== */
-document.addEventListener("DOMContentLoaded", () => {
-  renderClassCards();
-  populateWeekSelector();
-  populateRankingWeek();
-});
+// Render class cards etc only after login (renderClassCards called in attemptLogin on success)
 
 /* =========== class cards =========== */
 const classes = ["3A","3B","3C","4A","4B","4C","5A","5B1","5B2","5C"];
@@ -386,13 +456,19 @@ async function loadStudents(){
   document.getElementById("studentList").innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px"><div class="loader"></div></div>';
   try{
     let res = await fetch(`${scriptUrl}?class=${encodeURIComponent(currentClass)}`);
+    if(!res.ok){
+      const text = await res.text();
+      console.error("GET failed:", res.status, res.statusText, text);
+      document.getElementById("studentList").innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#c00">Lỗi khi tải dữ liệu: ${res.status} ${res.statusText}</div>`;
+      return;
+    }
     let data = await res.json();
-    // assume first row is header, rest rows contain [id, name, week1, week2, ... , total?]
+    // expect header + rows
     studentsData = data.slice(1);
     renderStudents();
   }catch(e){
-    console.error(e);
-    document.getElementById("studentList").innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#c00">Không tải được dữ liệu</div>';
+    console.error("Fetch error:", e);
+    document.getElementById("studentList").innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#c00">Không tải được dữ liệu — kiểm tra console (F12).</div>';
   }
 }
 
@@ -406,19 +482,15 @@ function renderStudents(){
   }
 
   studentsData.forEach(row=>{
-    // row: [id, name, week1, week2, ...] index 0=id, 1=name
     const id = row[0];
     const name = row[1];
-    // compute currentWeek score (if col exists)
     const weekIdx = 2 + (currentWeek-1);
     const weekScore = (row[weekIdx] !== undefined && row[weekIdx] !== "") ? Number(row[weekIdx]) : 0;
-    // compute total (last col) if present
-    const total = row[row.length-1] !== undefined ? Number(row[row.length-1]) : null;
+    const total = row[row.length-1] !== undefined && row[row.length-1] !== "" ? Number(row[row.length-1]) : null;
 
     const card = document.createElement("div");
     card.className = "student-card card";
 
-    // avatar with initials & color
     const avatar = document.createElement("div");
     avatar.className = "avatar";
     avatar.style.background = randomColorForName(name);
@@ -461,7 +533,6 @@ function initials(name){
   return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
 }
 function randomColorForName(name){
-  // deterministic color based on name
   let h = 0;
   for(let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) % 360;
   return `hsl(${h}, 75%, 45%)`;
@@ -484,9 +555,7 @@ function refreshStudents(){ if(currentClass) loadStudents(); }
 /* =========== update point (week) =========== */
 async function updatePointWeek(id, delta, btnEl){
   if(!currentClass){ alert("Chọn lớp trước"); return; }
-  // visual feedback
   btnEl.animate([{transform:"scale(1)"},{transform:"scale(0.92)"},{transform:"scale(1)"}], {duration:180});
-  // POST to Apps Script
   try{
     await fetch(scriptUrl, {
       method:"POST",
@@ -506,19 +575,12 @@ function setCurrentWeek(v){
   renderStudents();
 }
 
-/* =========== LOGOUT (local) =========== */
-function logout(){
-  // simple reload to login box (existing login uses pw.json)
-  window.location.reload();
-}
-
 /* ============================
-  RANKING: Top 10 + Chart.js (horizontal bar)
+  RANKING
   ============================ */
 function openRanking(){
   if(!currentClass){ alert("Vui lòng chọn lớp trước"); return; }
   document.getElementById("rankingOverlay").style.display = "flex";
-  // set controls: rankingMode and rankingWeek default
   document.getElementById("rankingMode").value = "week";
   document.getElementById("rankingWeek").value = currentWeek;
   renderRanking();
@@ -527,13 +589,10 @@ function closeRanking(){ document.getElementById("rankingOverlay").style.display
 
 async function renderRanking(){
   if(!currentClass) return;
-  const mode = document.getElementById("rankingMode").value; // 'week' or 'total'
+  const mode = document.getElementById("rankingMode").value;
   const weekSel = parseInt(document.getElementById("rankingWeek").value);
-
-  // ensure studentsData is loaded
   if(!studentsData || studentsData.length===0) await loadStudents();
 
-  // compute scores
   const list = studentsData.map(row=>{
     const name = row[1];
     let score = 0;
@@ -541,18 +600,15 @@ async function renderRanking(){
       const idx = 2 + (weekSel-1);
       score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
     } else {
-      // assume last column is total
       const last = row[row.length-1];
       score = last !== undefined && last !== "" ? Number(last) : 0;
     }
     return { name, score };
   });
 
-  // sort desc & take top10
   list.sort((a,b)=>b.score - a.score);
   const top10 = list.slice(0,10);
 
-  // render top list with medals for top3
   const topListEl = document.getElementById("topList");
   topListEl.innerHTML = "";
   top10.forEach((it, idx)=>{
@@ -567,20 +623,18 @@ async function renderRanking(){
     info.innerHTML = `<div style="font-weight:700">${it.name}</div><div class="muted">Điểm: <strong>${it.score}</strong></div>`;
     div.appendChild(medal); div.appendChild(info);
     topListEl.appendChild(div);
-    // add glow for top3
     if(idx<3){
       div.style.boxShadow = "0 12px 30px rgba(255,215,0,0.12)";
       div.animate([{boxShadow:"0 12px 30px rgba(255,215,0,0.12)"},{boxShadow:"0 12px 60px rgba(255,215,0,0.2)"}], {duration:1000, iterations: Infinity, direction:"alternate"});
     }
   });
 
-  // render chart (horizontal bar)
   const ctx = document.getElementById("rankingChart").getContext("2d");
   if(chartInstance) chartInstance.destroy();
   chartInstance = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: top10.map(t=>t.name).reverse(), // reverse for horizontal orientation
+      labels: top10.map(t=>t.name).reverse(),
       datasets: [{
         label: 'Điểm',
         data: top10.map(t=>t.score).reverse(),
@@ -602,7 +656,7 @@ async function renderRanking(){
 }
 
 /* ============================
-  WHEEL: reuse simplified version + audio + fireworks
+  WHEEL + FIREWORKS + WINNER
   ============================ */
 let wheelCanvas = document.getElementById("wheelCanvas");
 let wheelCtx = wheelCanvas ? wheelCanvas.getContext("2d") : null;
@@ -613,23 +667,35 @@ let audioSpin = null;
 function openWheel(){
   if(!currentClass){ alert("Chọn lớp trước"); return; }
   document.getElementById("wheelPopup").style.display = "flex";
-  // prepare students
-  wheelStudents = studentsData.map(r=>r[1]);
-  if(wheelStudents.length===0) loadStudents().then(()=>{ wheelStudents = studentsData.map(r=>r[1]); setupWheel(); });
-  else setupWheel();
+  wheelStudents = studentsData.map(r=>r[1] || "");
+  if(!wheelStudents || wheelStudents.length === 0){
+    loadStudents().then(()=> {
+      wheelStudents = studentsData.map(r=>r[1] || "");
+      if(wheelStudents.length === 0){
+        alert("Danh sách học sinh trống — kiểm tra dữ liệu lớp trên Google Sheet.");
+        return;
+      }
+      setupWheel();
+    });
+  } else {
+    setupWheel();
+  }
 }
 function closeWheel(){ document.getElementById("wheelPopup").style.display="none"; }
 function setupWheel(){
+  const canvas = document.getElementById("wheelCanvas");
+  wheelCtx = canvas.getContext("2d");
   arc = Math.PI*2 / wheelStudents.length;
   startAngle = 0;
   drawWheel();
 }
 function drawWheel(){
-  const cx = wheelCanvas.width/2, cy = wheelCanvas.height/2;
+  const canvas = document.getElementById("wheelCanvas");
+  const cx = canvas.width/2, cy = canvas.height/2;
   const outsideRadius = Math.min(cx,cy) - 30;
   const insideRadius = 60;
   const textRadius = (outsideRadius + insideRadius)/2;
-  wheelCtx.clearRect(0,0,wheelCanvas.width,wheelCanvas.height);
+  wheelCtx.clearRect(0,0,canvas.width,canvas.height);
   wheelCtx.textAlign="center";
   wheelCtx.textBaseline="middle";
   wheelCtx.font = "bold 16px Poppins";
@@ -643,7 +709,6 @@ function drawWheel(){
     wheelCtx.closePath();
     wheelCtx.fill();
 
-    // text
     wheelCtx.save();
     wheelCtx.translate(cx + Math.cos(angle + arc/2)*textRadius, cy + Math.sin(angle + arc/2)*textRadius);
     wheelCtx.rotate(angle + arc/2 + Math.PI/2);
@@ -653,7 +718,6 @@ function drawWheel(){
     wheelCtx.restore();
   }
 
-  // arrow
   wheelCtx.fillStyle = "#e53935";
   wheelCtx.beginPath();
   wheelCtx.moveTo(cx-18, cy - outsideRadius - 8);
@@ -702,9 +766,7 @@ function showWinner(name){
   setTimeout(()=>{ overlay.style.display = "none"; }, 5000);
 }
 
-/* ============================
-  FIREWORKS (simple) 
-  ============================ */
+/* FIREWORKS */
 const fireworksCanvas = document.getElementById("fireworksCanvas");
 const fctx = fireworksCanvas.getContext("2d");
 let fireworks = [];
@@ -735,7 +797,7 @@ function triggerFireworks(){
 }
 
 /* ============================
-  TIMER: countdown with progress ring & alarm
+  TIMER
   ============================ */
 let ringCircle = document.querySelector(".progress-ring__circle");
 let totalTime = 0, remainingSeconds = 0, timerInterval = null, isPaused=false;
@@ -781,8 +843,6 @@ function pauseTimer(){ isPaused = !isPaused; }
 function resetTimer(){ clearInterval(timerInterval); isPaused=false; const m=document.getElementById("minutesInput").value||0; const s=document.getElementById("secondsInput").value||0; totalTime = Number(m)*60+Number(s); remainingSeconds = totalTime; updateDisplay(); updateRing(); }
 
 function showTimeoutAlert(){
-  const overlay = document.getElementById("timerPopup");
-  // small popup inside
   const div = document.createElement("div"); div.textContent = "⏰ Hết thời gian!"; div.style.cssText="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font-size:36px;background:#ff3d00;color:#fff;padding:24px;border-radius:12px;z-index:99999";
   document.body.appendChild(div);
   audioTimeout = new Audio("sound/alarm.mp3");
@@ -792,29 +852,12 @@ function showTimeoutAlert(){
 }
 
 /* ============================
-  LOGIN (reuse sha256 + pw.json)
-  We assume original pw.json and server behavior remains same.
+  DOM ready: show login overlay first (login overlay already visible by default)
   ============================ */
-async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
-async function checkPassword(){
-  const pass = prompt("Nhập mật khẩu (test)","");
-  if(!pass) return;
-  const entered = await sha256(pass);
-  try{
-    const r = await fetch("pw.json"); const j = await r.json(); const correct = j.hash;
-    if(entered===correct){ document.getElementById("loginBox")?.remove(); /* nothing more since we use class cards */ }
-    else alert("Mật khẩu sai");
-  }catch(e){ alert("Không thể kiểm tra mật khẩu (pw.json)"); }
-}
-
-/* ============================
-  Initialize small: auto-select first class for demo
-  ============================ */
-(function initAuto(){
-  // mark first class active visually
-  const first = document.querySelector(".class-item");
-  if(first){ first.click(); }
-})();
+document.addEventListener("DOMContentLoaded", () => {
+  // login overlay visible; main content hidden until successful login.
+  // If you want to bypass login during testing, call attemptLogin() manually in console.
+});
 
 </script>
 </body>
