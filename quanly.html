@@ -553,21 +553,35 @@ async function copyStudents(){
 function refreshStudents(){ if(currentClass) loadStudents(); }
 
 /* =========== update point (week) =========== */
-async function updatePointWeek(id, delta, btnEl){
-  if(!currentClass){ alert("Chọn lớp trước"); return; }
-  btnEl.animate([{transform:"scale(1)"},{transform:"scale(0.92)"},{transform:"scale(1)"}], {duration:180});
-  try{
+async function updatePointWeek(id, delta, btnEl) {
+  if (!currentClass) {
+    alert("Chọn lớp trước");
+    return;
+  }
+
+  // Hiệu ứng nút
+  btnEl.animate([{ transform: "scale(1)" }, { transform: "scale(0.92)" }, { transform: "scale(1)" }], { duration: 180 });
+
+  try {
+    // Gửi dữ liệu dạng FormData thay vì JSON để tránh lỗi CORS
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("action", delta > 0 ? "like" : "dislike");
+    formData.append("class", currentClass);
+    formData.append("week", currentWeek);
+
     await fetch(scriptUrl, {
-      method:"POST",
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ id: id, action: delta>0 ? "like" : "dislike", class: currentClass, week: currentWeek })
+      method: "POST",
+      body: formData
     });
-    await loadStudents();
-  }catch(e){
+
+    await loadStudents(); // Cập nhật lại danh sách
+  } catch (e) {
     console.error(e);
     alert("Cập nhật thất bại");
   }
 }
+
 
 /* =========== set current week =========== */
 function setCurrentWeek(v){
