@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <title>Quản lý lớp học — Thầy dạy tin</title>
+  <title>Quản lý lớp học — GV. Đồng</title>
 
   <!-- Font & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -179,28 +179,6 @@
       .students{ grid-template-columns: repeat(2, 1fr); }
       .student-card{ padding:10px }
     }
-	/* === Hiệu ứng +1 / -1 bay lên === */
-	.fx-score {
-	  position: absolute;
-	  font-weight: bold;
-	  font-size: 22px;
-	  opacity: 1;
-	  animation: flyUp 0.8s ease-out forwards;
-	  pointer-events: none;
-	  z-index: 1000;
-	}
-
-	@keyframes flyUp {
-	  0% {
-		transform: translateY(0) scale(1);
-		opacity: 1;
-	  }
-	  100% {
-		transform: translateY(-40px) scale(1.5);
-		opacity: 0;
-	  }
-	}
-
   </style>
 </head>
 <body>
@@ -224,7 +202,7 @@
       <div class="dot">HS</div>
       <div>
         <div>Quản lý lớp học</div>
-        <div style="font-size:12px; opacity:0.9">Thầy dạy tin</div>
+        <div style="font-size:12px; opacity:0.9">GV. Đồng — Giao diện hiện đại</div>
       </div>
     </div>
 
@@ -267,7 +245,7 @@
     </div>
   </div>
 
-  <!-- Floating action buttons 
+  <!-- Floating action buttons -->
   <div class="fab" style="display:none" id="fabTools">
     <button class="fab-main" title="Công cụ">＋</button>
     <div style="display:flex;flex-direction:column;align-items:center;margin-top:8px;">
@@ -276,7 +254,7 @@
       <div class="fab-sub" title="Bảng xếp hạng" onclick="openRanking()">📊</div>
       <div class="fab-sub" title="Trò chơi" onclick="alert('Tính năng mini-game sẽ được thêm vào')">🎮</div>
     </div>
-  </div>-->
+  </div>
 
   <!-- Popup: Wheel -->
   <div id="wheelPopup" class="overlay" style="display:none; align-items:center; justify-content:center;">
@@ -521,13 +499,7 @@ function renderStudents(){
     const info = document.createElement("div");
     info.className = "student-info";
     const nm = document.createElement("div"); nm.className="student-name"; nm.textContent = name;
-    cconst meta = document.createElement("div"); 
-	meta.className = "student-meta";
-	meta.innerHTML = `
-	  Tuần ${currentWeek}: <strong class="score-cell">${weekScore}</strong>
-	  ${total!==null ? ` · Tổng: <strong>${total}</strong>` : ""}
-	`;
-
+    const meta = document.createElement("div"); meta.className="student-meta"; meta.innerHTML = `Tuần ${currentWeek}: <strong>${weekScore}</strong>` + (total!==null?` · Tổng: <strong>${total}</strong>` : "");
     info.appendChild(nm); info.appendChild(meta);
 
     const actions = document.createElement("div");
@@ -554,86 +526,61 @@ function renderStudents(){
   });
 }
 
-	/* =========== helper utilities =========== */
-	function initials(name){
-	  const parts = name.trim().split(/\s+/);
-	  if(parts.length===1) return parts[0].slice(0,2).toUpperCase();
-	  return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
-	}
-	function randomColorForName(name){
-	  let h = 0;
-	  for(let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) % 360;
-	  return `hsl(${h}, 75%, 45%)`;
-	}
+/* =========== helper utilities =========== */
+function initials(name){
+  const parts = name.trim().split(/\s+/);
+  if(parts.length===1) return parts[0].slice(0,2).toUpperCase();
+  return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+}
+function randomColorForName(name){
+  let h = 0;
+  for(let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) % 360;
+  return `hsl(${h}, 75%, 45%)`;
+}
 
-	/* =========== copy students =========== */
-	async function copyStudents(){
-	  if(!currentClass){ alert("Vui lòng chọn lớp"); return; }
-	  try{
-		let res = await fetch(`${scriptUrl}?class=${encodeURIComponent(currentClass)}`);
-		let data = await res.json();
-		let rows = data.slice(1);
-		let text = rows.map(r=>r[1]).join("\r\n");
-		await navigator.clipboard.writeText(text);
-		alert("Đã copy danh sách — dán vào Excel được!");
-	  }catch(e){ alert("Không thể copy: "+e.message) }
-	}
-	function refreshStudents(){ if(currentClass) loadStudents(); }
+/* =========== copy students =========== */
+async function copyStudents(){
+  if(!currentClass){ alert("Vui lòng chọn lớp"); return; }
+  try{
+    let res = await fetch(`${scriptUrl}?class=${encodeURIComponent(currentClass)}`);
+    let data = await res.json();
+    let rows = data.slice(1);
+    let text = rows.map(r=>r[1]).join("\r\n");
+    await navigator.clipboard.writeText(text);
+    alert("Đã copy danh sách — dán vào Excel được!");
+  }catch(e){ alert("Không thể copy: "+e.message) }
+}
+function refreshStudents(){ if(currentClass) loadStudents(); }
 
 /* =========== update point (week) =========== */
-	async function updatePointWeek(id, delta, btnEl) {
-	  if (!currentClass) {
-		alert("Chọn lớp trước");
-		return;
-	  }
+async function updatePointWeek(id, delta, btnEl) {
+  if (!currentClass) {
+    alert("Chọn lớp trước");
+    return;
+  }
 
-	  // Hiệu ứng click nút
-	  btnEl.animate(
-		[{ transform: "scale(1)" }, { transform: "scale(0.9)" }, { transform: "scale(1)" }],
-		{ duration: 200 }
-	  );
+  // Hiệu ứng nút
+  btnEl.animate([{ transform: "scale(1)" }, { transform: "scale(0.92)" }, { transform: "scale(1)" }], { duration: 180 });
 
-	  // Tìm dòng học sinh tương ứng
-	  const row = btnEl.closest("tr");
-	  const scoreCell = row.querySelector(".score-cell"); // <td class="score-cell">10</td>
+  try {
+    // Gửi dữ liệu dạng FormData thay vì JSON để tránh lỗi CORS
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("action", delta > 0 ? "like" : "dislike");
+    formData.append("class", currentClass);
+    formData.append("week", currentWeek);
 
-	  // Cập nhật tạm trên giao diện
-	  if (scoreCell) {
-		const oldScore = parseInt(scoreCell.textContent) || 0;
-		const newScore = oldScore + delta;
-		scoreCell.textContent = newScore;
-	  }
+    await fetch(scriptUrl, {
+      method: "POST",
+      body: formData
+    });
 
-	  // Hiệu ứng +1 / -1 bay lên
-	  const fx = document.createElement("div");
-	  fx.textContent = delta > 0 ? "+1" : "-1";
-	  fx.className = "fx-score";
-	  fx.style.color = delta > 0 ? "limegreen" : "red";
-	  fx.style.left = btnEl.offsetLeft + btnEl.offsetWidth / 2 + "px";
-	  fx.style.top = btnEl.offsetTop - 10 + "px";
-
-	  // Thêm hiệu ứng bay
-	  btnEl.parentElement.style.position = "relative";
-	  btnEl.parentElement.appendChild(fx);
-	  setTimeout(() => fx.remove(), 800);
-
-	  // Gửi dữ liệu lên Google Sheet (ngầm, không reload)
-	  try {
-		const formData = new FormData();
-		formData.append("id", id);
-		formData.append("action", delta > 0 ? "like" : "dislike");
-		formData.append("class", currentClass);
-		formData.append("week", currentWeek);
-
-		fetch(scriptUrl, { method: "POST", body: formData })
-		  .then(res => res.text())
-		  .then(txt => console.log("Đã cập nhật Google Sheet:", txt))
-		  .catch(err => console.warn("Không thể gửi dữ liệu:", err));
-	  } catch (e) {
-		console.error("Lỗi khi gửi dữ liệu:", e);
-	  }
-	}
-
+    await loadStudents(); // Cập nhật lại danh sách
+  } catch (e) {
+    console.error(e);
+    alert("Cập nhật thất bại");
+  }
+}
 
 
 /* =========== set current week =========== */
