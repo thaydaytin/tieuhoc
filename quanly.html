@@ -523,8 +523,15 @@ function renderStudents(){
     const info = document.createElement("div");
     info.className = "student-info";
     const nm = document.createElement("div"); nm.className="student-name"; nm.textContent = name;
-    const meta = document.createElement("div"); meta.className="student-meta"; meta.innerHTML = `Tuần ${currentWeek}: <strong>${weekScore}</strong>` + (total!==null?` · Tổng: <strong>${total}</strong>` : "");
-    info.appendChild(nm); info.appendChild(meta);
+    const meta = document.createElement("div"); 
+	meta.className = "student-meta";
+	meta.innerHTML = `
+	  Tuần ${currentWeek}: <strong class="score-cell">${weekScore}</strong>
+	  ${total!==null ? ` · Tổng: <strong>${total}</strong>` : ""}
+	`;
+
+	info.appendChild(nm); 
+	info.appendChild(meta);
 
     const actions = document.createElement("div");
     actions.className = "student-actions";
@@ -576,35 +583,61 @@ async function copyStudents(){
 }
 function refreshStudents(){ if(currentClass) loadStudents(); }
 
-/* =========== update point (week) =========== */
-async function updatePointWeek(id, delta, btnEl) {
-  if (!currentClass) {
-    alert("Chọn lớp trước");
-    return;
-  }
+	/* =========== update point (week) =========== */
+	async function updatePointWeek(id, delta, btnEl) {
+	  if (!currentClass) {
+		alert("Chọn lớp trước");
+		return;
+	  }
 
-  // Hiệu ứng nút
-  btnEl.animate([{ transform: "scale(1)" }, { transform: "scale(0.92)" }, { transform: "scale(1)" }], { duration: 180 });
+	  // Hiệu ứng click nút
+	  btnEl.animate(
+		[{ transform: "scale(1)" }, { transform: "scale(0.9)" }, { transform: "scale(1)" }],
+		{ duration: 200 }
+	  );
 
-  try {
-    // Gửi dữ liệu dạng FormData thay vì JSON để tránh lỗi CORS
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("action", delta > 0 ? "like" : "dislike");
-    formData.append("class", currentClass);
-    formData.append("week", currentWeek);
+	  // Tìm dòng học sinh tương ứng
+	  const row = btnEl.closest("tr");
+	  const scoreCell = row.querySelector(".score-cell"); // <td class="score-cell">10</td>
 
-    await fetch(scriptUrl, {
-      method: "POST",
-      body: formData
-    });
+	  // Cập nhật tạm trên giao diện
+	  if (scoreCell) {
+		const oldScore = parseInt(scoreCell.textContent) || 0;
+		const newScore = oldScore + delta;
+		scoreCell.textContent = newScore;
+	  }
 
-    await loadStudents(); // Cập nhật lại danh sách
-  } catch (e) {
-    console.error(e);
-    alert("Cập nhật thất bại");
-  }
-}
+	  // Hiệu ứng +1 / -1 bay lên
+	  const fx = document.createElement("div");
+	  fx.textContent = delta > 0 ? "+1" : "-1";
+	  fx.className = "fx-score";
+	  fx.style.color = delta > 0 ? "limegreen" : "red";
+	  fx.style.left = btnEl.offsetLeft + btnEl.offsetWidth / 2 + "px";
+	  fx.style.top = btnEl.offsetTop - 10 + "px";
+
+	  // Thêm hiệu ứng bay
+	  btnEl.parentElement.style.position = "relative";
+	  btnEl.parentElement.appendChild(fx);
+	  setTimeout(() => fx.remove(), 800);
+
+	  // Gửi dữ liệu lên Google Sheet (ngầm, không reload)
+	  try {
+		const formData = new FormData();
+		formData.append("id", id);
+		formData.append("action", delta > 0 ? "like" : "dislike");
+		formData.append("class", currentClass);
+		formData.append("week", currentWeek);
+
+		fetch(scriptUrl, { method: "POST", body: formData })
+		  .then(res => res.text())
+		  .then(txt => console.log("Đã cập nhật Google Sheet:", txt))
+		  .catch(err => console.warn("Không thể gửi dữ liệu:", err));
+	  } catch (e) {
+		console.error("Lỗi khi gửi dữ liệu:", e);
+	  }
+	}
+
+
 
 
 /* =========== set current week =========== */
