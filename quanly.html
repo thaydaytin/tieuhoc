@@ -614,26 +614,35 @@ async function updatePointWeek(id, delta, btnEl) {
     return;
   }
 
-  // Hiệu ứng click nút
+  // Hiệu ứng nhấn nút
   btnEl.animate(
     [{ transform: "scale(1)" }, { transform: "scale(0.9)" }, { transform: "scale(1)" }],
     { duration: 200 }
   );
 
-  // Tìm đúng phần tử điểm theo ID học sinh
+  // Tìm đúng phần tử điểm tuần theo ID
   const scoreCell = document.querySelector(`.score-cell[data-id="${id}"]`);
+  if (!scoreCell) return;
 
-  // Cập nhật tạm thời trên giao diện
-  if (scoreCell) {
-    const oldScore = parseInt(scoreCell.textContent) || 0;
-    const newScore = oldScore + delta;
-    scoreCell.textContent = newScore;
+  // Lấy thẻ chứa dòng tổng điểm (strong thứ 2 trong .student-meta)
+  const metaDiv = scoreCell.closest(".student-meta");
+  const totalStrong = metaDiv.querySelectorAll("strong")[1]; // strong đầu tiên là tuần, thứ 2 là tổng
 
-    // Hiệu ứng sáng ngắn (highlight)
-    scoreCell.style.transition = "background 0.4s";
-    scoreCell.style.background = delta > 0 ? "rgba(0,255,0,0.2)" : "rgba(255,0,0,0.2)";
-    setTimeout(() => (scoreCell.style.background = "transparent"), 400);
+  // Cập nhật điểm tuần ngay trên giao diện
+  const oldWeek = parseInt(scoreCell.textContent) || 0;
+  const newWeek = oldWeek + delta;
+  scoreCell.textContent = newWeek;
+
+  // Cập nhật tổng điểm nếu có
+  if (totalStrong) {
+    const oldTotal = parseInt(totalStrong.textContent) || 0;
+    totalStrong.textContent = oldTotal + delta;
   }
+
+  // Hiệu ứng sáng nhẹ (highlight)
+  scoreCell.style.transition = "background 0.4s";
+  scoreCell.style.background = delta > 0 ? "rgba(0,255,0,0.2)" : "rgba(255,0,0,0.2)";
+  setTimeout(() => (scoreCell.style.background = "transparent"), 400);
 
   // Hiệu ứng +1 / -1 bay lên
   const fx = document.createElement("div");
@@ -645,7 +654,6 @@ async function updatePointWeek(id, delta, btnEl) {
   const rect = btnEl.getBoundingClientRect();
   fx.style.left = rect.left + window.scrollX + rect.width / 2 + "px";
   fx.style.top = rect.top + window.scrollY - 10 + "px";
-
   document.body.appendChild(fx);
   setTimeout(() => fx.remove(), 800);
 
@@ -665,7 +673,6 @@ async function updatePointWeek(id, delta, btnEl) {
     console.error("Lỗi khi gửi dữ liệu:", e);
   }
 }
-
 
 /* =========== set current week =========== */
 function setCurrentWeek(v){
