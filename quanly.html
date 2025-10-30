@@ -174,11 +174,35 @@
     }
     #loginError { color:#c62828; margin-top:8px; }
 
+	/* === Hiệu ứng +1 / -1 bay lên === */
+	.fx-score {
+	  position: absolute;
+	  font-weight: bold;
+	  font-size: 22px;
+	  opacity: 1;
+	  animation: flyUp 0.8s ease-out forwards;
+	  pointer-events: none;
+	  z-index: 1000;
+	}
+
+	@keyframes flyUp {
+	  0% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	  }
+	  100% {
+		transform: translateY(-40px) scale(1.5);
+		opacity: 0;
+	  }
+	}
+
+	
     /* responsive */
     @media (max-width:640px){
       .students{ grid-template-columns: repeat(2, 1fr); }
       .student-card{ padding:10px }
     }
+	
   </style>
 </head>
 <body>
@@ -192,17 +216,17 @@
         <button class="btn-like" onclick="attemptLogin()">Đăng nhập</button>
       </div>
       <div id="loginError" class="muted" style="display:none"></div>
-      <div style="margin-top:10px; font-size:12px; color:#666">Mật khẩu được lưu trong <code>pw.json</code> (SHA-256 hash)</div>
+      <div style="margin-top:10px; font-size:12px; color:#666">Chào mừng Thầy đến với trang quản lý lớp học </div>
     </div>
   </div>
 
   <!-- HEADER -->
   <header class="app-header" style="display:none" id="mainHeader">
     <div class="brand">
-      <div class="dot">HS</div>
+      <div class="dot">AH1</div>
       <div>
         <div>Quản lý lớp học</div>
-        <div style="font-size:12px; opacity:0.9">GV. Đồng — Giao diện hiện đại</div>
+        <div style="font-size:12px; opacity:0.9">Thầy dạy tin</div>
       </div>
     </div>
 
@@ -245,7 +269,7 @@
     </div>
   </div>
 
-  <!-- Floating action buttons -->
+  <!-- Floating action buttons 
   <div class="fab" style="display:none" id="fabTools">
     <button class="fab-main" title="Công cụ">＋</button>
     <div style="display:flex;flex-direction:column;align-items:center;margin-top:8px;">
@@ -254,7 +278,7 @@
       <div class="fab-sub" title="Bảng xếp hạng" onclick="openRanking()">📊</div>
       <div class="fab-sub" title="Trò chơi" onclick="alert('Tính năng mini-game sẽ được thêm vào')">🎮</div>
     </div>
-  </div>
+  </div>-->
 
   <!-- Popup: Wheel -->
   <div id="wheelPopup" class="overlay" style="display:none; align-items:center; justify-content:center;">
@@ -355,12 +379,12 @@ let studentsData = []; // array of rows returned from sheet (including id + name
 let chartInstance = null;
 
 /* ============================
-  HÀM HASH SHA-256 (dùng cho checkPassword)
+  HÀM HASH SHA-256 (dùng cho checkP)
   ============================ */
 async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
 
 /* ============================
-  ĐĂNG NHẬP (pw.json phải nằm cùng thư mục)
+  ĐĂNG NHẬP 
   ============================ */
 async function attemptLogin(){
   const pass = document.getElementById("passwordInput").value || "";
