@@ -202,7 +202,31 @@
       .students{ grid-template-columns: repeat(2, 1fr); }
       .student-card{ padding:10px }
     }
-	
+	/* Bố cục popup bảng xếp hạng 2 cột */
+	.ranking-body {
+	  display: grid !important;
+	  grid-template-columns: 45% 55% !important;
+	  gap: 18px;
+	  align-items: start;
+	  padding: 10px;
+	}
+
+	.ranking-left {
+	  max-height: 420px;
+	  overflow-y: auto;
+	  padding-right: 6px;
+	}
+
+	.ranking-right {
+	  height: 420px;
+	}
+
+	#rankingChart {
+	  width: 100% !important;
+	  height: 420px !important;
+	  display: block;
+	}
+
   </style>
 </head>
 <body>
@@ -562,13 +586,13 @@ function renderStudents() {
     dislikeBtn.onclick = () => updatePointWeek(id, -1, dislikeBtn);
 
     // Nhãn nhỏ hiển thị điểm tuần
-    const badge = document.createElement("div");
-    badge.className = "score-badge muted";
-    badge.textContent = `Tuần: ${weekScore}`;
+    //const badge = document.createElement("div");
+   // badge.className = "score-badge muted";
+   // badge.textContent = `Tuần: ${weekScore}`;
 
     actions.appendChild(likeBtn);
     actions.appendChild(dislikeBtn);
-    actions.appendChild(badge);
+    //actions.appendChild(badge);
 
     // Ghép các phần vào card
     card.appendChild(avatar);
@@ -608,71 +632,84 @@ async function copyStudents(){
 function refreshStudents(){ if(currentClass) loadStudents(); }
 
 	/* =========== update point (week) =========== */
-async function updatePointWeek(id, delta, btnEl) {
-  if (!currentClass) {
-    alert("Chọn lớp trước");
-    return;
-  }
+	async function updatePointWeek(id, delta, btnEl) {
+	  if (!currentClass) {
+		alert("Chọn lớp trước");
+		return;
+	  }
 
-  // Hiệu ứng nhấn nút
-  btnEl.animate(
-    [{ transform: "scale(1)" }, { transform: "scale(0.9)" }, { transform: "scale(1)" }],
-    { duration: 200 }
-  );
+	  // Hiệu ứng nhấn nút
+	  btnEl.animate(
+		[{ transform: "scale(1)" }, { transform: "scale(0.9)" }, { transform: "scale(1)" }],
+		{ duration: 200 }
+	  );
 
-  // Tìm đúng phần tử điểm tuần theo ID
-  const scoreCell = document.querySelector(`.score-cell[data-id="${id}"]`);
-  if (!scoreCell) return;
+	  // Tìm đúng phần tử điểm tuần theo ID
+	  const scoreCell = document.querySelector(`.score-cell[data-id="${id}"]`);
+	  if (!scoreCell) return;
 
-  // Lấy thẻ chứa dòng tổng điểm (strong thứ 2 trong .student-meta)
-  const metaDiv = scoreCell.closest(".student-meta");
-  const totalStrong = metaDiv.querySelectorAll("strong")[1]; // strong đầu tiên là tuần, thứ 2 là tổng
+	  // Lấy thẻ chứa dòng tổng điểm (strong thứ 2 trong .student-meta)
+	  const metaDiv = scoreCell.closest(".student-meta");
+	  const totalStrong = metaDiv.querySelectorAll("strong")[1]; // strong đầu tiên là tuần, thứ 2 là tổng
 
-  // Cập nhật điểm tuần ngay trên giao diện
-  const oldWeek = parseInt(scoreCell.textContent) || 0;
-  const newWeek = oldWeek + delta;
-  scoreCell.textContent = newWeek;
+	  // Cập nhật điểm tuần trên giao diện
+	  const oldWeek = parseInt(scoreCell.textContent) || 0;
+	  const newWeek = oldWeek + delta;
+	  scoreCell.textContent = newWeek;
 
-  // Cập nhật tổng điểm nếu có
-  if (totalStrong) {
-    const oldTotal = parseInt(totalStrong.textContent) || 0;
-    totalStrong.textContent = oldTotal + delta;
-  }
+	  // Cập nhật tổng điểm nếu có
+	  if (totalStrong) {
+		const oldTotal = parseInt(totalStrong.textContent) || 0;
+		totalStrong.textContent = oldTotal + delta;
+	  }
 
-  // Hiệu ứng sáng nhẹ (highlight)
-  scoreCell.style.transition = "background 0.4s";
-  scoreCell.style.background = delta > 0 ? "rgba(0,255,0,0.2)" : "rgba(255,0,0,0.2)";
-  setTimeout(() => (scoreCell.style.background = "transparent"), 400);
+	  // 🔹 Cập nhật lại dữ liệu trong studentsData (để Leaderboard dùng đúng giá trị)
+	  if (Array.isArray(studentsData)) {
+		const idx = studentsData.findIndex(r => String(r[0]).trim() === String(id).trim());
+		if (idx !== -1) {
+		  const weekIdx = 2 + (currentWeek - 1);
+		  const totalIdx = studentsData[idx].length - 1;
 
-  // Hiệu ứng +1 / -1 bay lên
-  const fx = document.createElement("div");
-  fx.textContent = delta > 0 ? "+1" : "-1";
-  fx.className = "fx-score";
-  fx.style.color = delta > 0 ? "limegreen" : "red";
+		  const oldW = Number(studentsData[idx][weekIdx]) || 0;
+		  const oldT = Number(studentsData[idx][totalIdx]) || 0;
 
-  // Đặt vị trí hiệu ứng tại nút được nhấn
-  const rect = btnEl.getBoundingClientRect();
-  fx.style.left = rect.left + window.scrollX + rect.width / 2 + "px";
-  fx.style.top = rect.top + window.scrollY - 10 + "px";
-  document.body.appendChild(fx);
-  setTimeout(() => fx.remove(), 800);
+		  studentsData[idx][weekIdx] = oldW + delta;
+		  studentsData[idx][totalIdx] = oldT + delta;
+		}
+	  }
 
-  // Gửi dữ liệu lên Google Sheet (ngầm, không reload)
-  try {
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("action", delta > 0 ? "like" : "dislike");
-    formData.append("class", currentClass);
-    formData.append("week", currentWeek);
+	  // Hiệu ứng sáng nhẹ (highlight)
+	  scoreCell.style.transition = "background 0.4s";
+	  scoreCell.style.background = delta > 0 ? "rgba(0,255,0,0.2)" : "rgba(255,0,0,0.2)";
+	  setTimeout(() => (scoreCell.style.background = "transparent"), 400);
 
-    fetch(scriptUrl, { method: "POST", body: formData })
-      .then(res => res.text())
-      .then(txt => console.log("Đã cập nhật Google Sheet:", txt))
-      .catch(err => console.warn("Không thể gửi dữ liệu:", err));
-  } catch (e) {
-    console.error("Lỗi khi gửi dữ liệu:", e);
-  }
-}
+	  // Hiệu ứng +1 / -1 bay lên
+	  const fx = document.createElement("div");
+	  fx.textContent = delta > 0 ? "+1" : "-1";
+	  fx.className = "fx-score";
+	  fx.style.color = delta > 0 ? "limegreen" : "red";
+	  const rect = btnEl.getBoundingClientRect();
+	  fx.style.left = rect.left + window.scrollX + rect.width / 2 + "px";
+	  fx.style.top = rect.top + window.scrollY - 10 + "px";
+	  document.body.appendChild(fx);
+	  setTimeout(() => fx.remove(), 800);
+
+	  // Gửi dữ liệu lên Google Sheet (ngầm, không reload)
+	  try {
+		const formData = new FormData();
+		formData.append("id", id);
+		formData.append("action", delta > 0 ? "like" : "dislike");
+		formData.append("class", currentClass);
+		formData.append("week", currentWeek);
+
+		fetch(scriptUrl, { method: "POST", body: formData })
+		  .then(res => res.text())
+		  .then(txt => console.log("Đã cập nhật Google Sheet:", txt))
+		  .catch(err => console.warn("Không thể gửi dữ liệu:", err));
+	  } catch (e) {
+		console.error("Lỗi khi gửi dữ liệu:", e);
+	  }
+	}
 
 /* =========== set current week =========== */
 function setCurrentWeek(v){
@@ -692,73 +729,116 @@ function openRanking(){
 }
 function closeRanking(){ document.getElementById("rankingOverlay").style.display="none"; }
 
-async function renderRanking(){
-  if(!currentClass) return;
+/* =========== renderRanking (2-column: top10 + chart) =========== */
+async function renderRanking() {
+  if (!currentClass) return;
   const mode = document.getElementById("rankingMode").value;
   const weekSel = parseInt(document.getElementById("rankingWeek").value);
-  if(!studentsData || studentsData.length===0) await loadStudents();
+  if (!studentsData || studentsData.length === 0) await loadStudents();
 
-  const list = studentsData.map(row=>{
+  const list = studentsData.map(row => {
     const name = row[1];
     let score = 0;
-    if(mode === 'week'){
-      const idx = 2 + (weekSel-1);
+    if (mode === 'week') {
+      const idx = 2 + (weekSel - 1);
       score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
     } else {
-      const last = row[row.length-1];
+      const last = row[row.length - 1];
       score = last !== undefined && last !== "" ? Number(last) : 0;
     }
     return { name, score };
   });
 
-  list.sort((a,b)=>b.score - a.score);
-  const top10 = list.slice(0,10);
+  list.sort((a, b) => b.score - a.score);
+  const top10 = list.slice(0, 10);
 
-  const topListEl = document.getElementById("topList");
-  topListEl.innerHTML = "";
-  top10.forEach((it, idx)=>{
-    const div = document.createElement("div"); div.className="top-item";
-    const medal = document.createElement("div"); medal.className="medal";
-    if(idx===0){ medal.classList.add("gold"); medal.textContent="🥇"; }
-    else if(idx===1){ medal.classList.add("silver"); medal.textContent="🥈"; }
-    else if(idx===2){ medal.classList.add("bronze"); medal.textContent="🥉"; }
-    else { medal.style.background="#e9f3ff"; medal.style.color="#055983"; medal.textContent = (idx+1); }
+  // ========== Bố cục 2 cột ==========
+  const rankingBody = document.querySelector(".ranking-body");
+  rankingBody.innerHTML = `
+    <div id="rankingLeft" class="ranking-left"></div>
+    <div id="rankingRight" class="ranking-right">
+      <canvas id="rankingChart"></canvas>
+    </div>
+  `;
 
-    const info = document.createElement("div"); info.style.flex=1;
-    info.innerHTML = `<div style="font-weight:700">${it.name}</div><div class="muted">Điểm: <strong>${it.score}</strong></div>`;
-    div.appendChild(medal); div.appendChild(info);
+  // Cột trái: danh sách top 10
+  const topListEl = rankingBody.querySelector("#rankingLeft");
+  top10.forEach((it, idx) => {
+    const div = document.createElement("div");
+    div.className = "top-item";
+    const medal = document.createElement("div");
+    medal.className = "medal";
+    if (idx === 0) { medal.classList.add("gold"); medal.textContent = "🥇"; }
+    else if (idx === 1) { medal.classList.add("silver"); medal.textContent = "🥈"; }
+    else if (idx === 2) { medal.classList.add("bronze"); medal.textContent = "🥉"; }
+    else { medal.style.background = "#e9f3ff"; medal.style.color = "#055983"; medal.textContent = (idx + 1); }
+
+    const info = document.createElement("div");
+    info.style.flex = "1";
+    info.innerHTML = `
+      <div style="font-weight:700">${it.name}</div>
+      <div class="muted">Điểm: <strong>${it.score}</strong></div>
+    `;
+
+    div.appendChild(medal);
+    div.appendChild(info);
     topListEl.appendChild(div);
-    if(idx<3){
+
+    // hiệu ứng sáng nhẹ top 1-3
+    if (idx < 3) {
       div.style.boxShadow = "0 12px 30px rgba(255,215,0,0.12)";
-      div.animate([{boxShadow:"0 12px 30px rgba(255,215,0,0.12)"},{boxShadow:"0 12px 60px rgba(255,215,0,0.2)"}], {duration:1000, iterations: Infinity, direction:"alternate"});
+      div.animate(
+        [
+          { boxShadow: "0 12px 30px rgba(255,215,0,0.12)" },
+          { boxShadow: "0 12px 60px rgba(255,215,0,0.25)" }
+        ],
+        { duration: 1000, iterations: Infinity, direction: "alternate" }
+      );
     }
   });
 
-  const ctx = document.getElementById("rankingChart").getContext("2d");
-  if(chartInstance) chartInstance.destroy();
-  chartInstance = new Chart(ctx, {
-    type: 'bar',
+  // Cột phải: biểu đồ cột ngang
+  const ctx = rankingBody.querySelector("#rankingChart").getContext("2d");
+  if (window.chartInstance) window.chartInstance.destroy();
+
+  const labels = top10.map(t => t.name).reverse();
+  const dataVals = top10.map(t => t.score).reverse();
+  const bgColors = top10.map((t, i) =>
+    i === 0 ? "#FFD54A" :
+    i === 1 ? "#BDBDBD" :
+    i === 2 ? "#FFAB91" :
+    "rgba(33,150,243,0.8)"
+  ).reverse();
+
+  window.chartInstance = new Chart(ctx, {
+    type: "bar",
     data: {
-      labels: top10.map(t=>t.name).reverse(),
+      labels,
       datasets: [{
-        label: 'Điểm',
-        data: top10.map(t=>t.score).reverse(),
-        backgroundColor: top10.map((t,i)=> i<3 ? (i==0?"#FFD54A": i==1?"#BDBDBD":"#FFAB91") : "rgba(33,150,243,0.8)").reverse(),
+        label: "Điểm",
+        data: dataVals,
+        backgroundColor: bgColors,
+        borderRadius: 8
       }]
     },
     options: {
-      indexAxis: 'y',
-      responsive:true,
-      maintainAspectRatio:false,
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
-        x: { beginAtZero:true }
+        x: { beginAtZero: true },
+        y: { grid: { display: false } }
       },
       plugins: {
-        legend: { display: false }
+        legend: { display: false },
+        tooltip: {
+          callbacks: { label: ctx => `Điểm: ${ctx.raw}` }
+        }
       }
     }
   });
 }
+
 
 /* ============================
   WHEEL + FIREWORKS + WINNER
