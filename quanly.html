@@ -628,12 +628,15 @@ function refreshStudents(){ if(currentClass) loadStudents(); }
 		formData.append("class", currentClass);
 		formData.append("week", currentWeek);
 
-		fetch(scriptUrl, { method: "POST", body: formData })
-		  .then(res => res.text())
-		  .then(txt => console.log("Đã cập nhật Google Sheet:", txt))
-		  .catch(err => console.warn("Không thể gửi dữ liệu:", err));
+		await fetch(scriptUrl, {
+		  method: "POST",
+		  body: formData
+		});
+
+		//await loadStudents(); // Cập nhật lại danh sách
 	  } catch (e) {
-		console.error("Lỗi khi gửi dữ liệu:", e);
+		console.error(e);
+		alert("Cập nhật thất bại");
 	  }
 	}
 
