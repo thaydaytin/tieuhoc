@@ -897,24 +897,31 @@ function closeRanking(){ document.getElementById("rankingOverlay").style.display
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 	let audioSpin = null;
 
-	function openWheel() {
-	  const students = document.querySelectorAll(".student .name");
-	  if (students.length === 0) {
-		alert("Vui lòng chọn lớp trước!");
-		return;
-	  }
-
-	  studentsForWheel = Array.from(students).map(s => s.textContent);
-	  arc = Math.PI * 2 / studentsForWheel.length;
-
+	function openWheel(){
+	  if(!currentClass){ alert("Chọn lớp trước"); return; }
 	  document.getElementById("wheelPopup").style.display = "flex";
-	  document.getElementById("winnerPopup").style.display = "none";
-
-	  wheelCanvas = document.getElementById("wheelCanvas");
-	  ctx = wheelCanvas.getContext("2d");
-	  drawWheel();
+	  wheelStudents = studentsData.map(r=>r[1] || "");
+	  if(!wheelStudents || wheelStudents.length === 0){
+		loadStudents().then(()=> {
+		  wheelStudents = studentsData.map(r=>r[1] || "");
+		  if(wheelStudents.length === 0){
+			alert("Danh sách học sinh trống — kiểm tra dữ liệu lớp trên Google Sheet.");
+			return;
+		  }
+		  setupWheel();
+		});
+	  } else {
+		setupWheel();
+	  }
 	}
 
+	function setupWheel(){
+	  const canvas = document.getElementById("wheelCanvas");
+	  wheelCtx = canvas.getContext("2d");
+	  arc = Math.PI*2 / wheelStudents.length;
+	  startAngle = 0;
+	  drawWheel();
+	  
 	function closeWheel() {
 	  document.getElementById("wheelPopup").style.display = "none";
 	  document.getElementById("winnerPopup").style.display = "none";
