@@ -916,10 +916,14 @@ function closeRanking(){ document.getElementById("rankingOverlay").style.display
 	}
 
 	function setupWheel(){
-	  const canvas = document.getElementById("wheelCanvas");
-	  wheelCtx = canvas.getContext("2d");
-	  arc = Math.PI*2 / wheelStudents.length;
-	  startAngle = 0;
+	  studentsForWheel = Array.from(students).map(s => s.textContent);
+	  arc = Math.PI * 2 / studentsForWheel.length;
+
+	  document.getElementById("wheelPopup").style.display = "flex";
+	  document.getElementById("winnerPopup").style.display = "none";
+
+	  wheelCanvas = document.getElementById("wheelCanvas");
+	  ctx = wheelCanvas.getContext("2d");
 	  drawWheel();
 	}
 	function closeWheel() {
