@@ -70,7 +70,7 @@
     "answer": 1
   },
   {
-    "question": "Tên thư mục sau khi tạo có được phép chứa các kí tự đặc biệt như ' / \ * ? \" < > | ' không?",
+    "question": "Tên thư mục sau khi tạo có được phép chứa các kí tự đặc biệt như ' / \\ * ? \" < > | ' không?",
     "choices": [
       "Được phép",
       "Không được phép",
