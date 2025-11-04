@@ -220,34 +220,68 @@
 	  width: 100% !important;
 	  display: block;
 	}
+	/* --- Popup vòng quay --- */
+	.wheel-popup {
+	  position: fixed;
+	  top: 0; left: 0;
+	  width: 100vw; height: 100vh;
+	  background: rgba(0,0,0,0.7);
+	  display: none;
+	  align-items: center;
+	  justify-content: center;
+	  flex-direction: column;
+	  z-index: 9999;
+	}
+	.wheel-content {
+	  background: white;
+	  border-radius: 16px;
+	  padding: 20px;
+	  text-align: center;
+	  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+	  animation: fadeIn 0.3s ease-in-out;
+	}
+	@keyframes fadeIn {
+	  from { opacity: 0; transform: scale(0.8); }
+	  to { opacity: 1; transform: scale(1); }
+	}
+	#wheelCanvas {
+	  border-radius: 50%;
+	  border: 6px solid #1976d2;
+	  background: #e3f2fd;
+	  cursor: pointer;
+	}
 
+	/* --- Popup tên học sinh trúng --- */
+	.winner-popup {
+	  position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  font-size: 48px;
+	  font-weight: bold;
+	  color: #fff;
+	  background: rgba(46, 125, 50, 0.9);
+	  padding: 30px 60px;
+	  border-radius: 20px;
+	  display: none;
+	  z-index: 10000;
+	  animation: blink 1s infinite alternate;
+	}
+	@keyframes blink {
+	  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+	  to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+	}
+	#fireworksCanvas {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  height: 100%;
+	  pointer-events: none; /* không ảnh hưởng tới chuột */
+	  z-index: 0;
+	}
 
   </style>
-
-<style>
-.wheel-popup {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center;
-  flex-direction: column; z-index: 9999;
-}
-.wheel-content {
-  background: white; border-radius: 16px; padding: 20px; text-align: center;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4); animation: fadeIn 0.3s ease-in-out;
-}
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
-#wheelCanvas {
-  border-radius: 50%; border: 6px solid #1976d2; background: #e3f2fd; cursor: pointer;
-}
-.winner-popup {
-  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  font-size: 48px; font-weight: bold; color: #fff; background: rgba(46,125,50,0.9);
-  padding: 30px 60px; border-radius: 20px; display: none; z-index: 10000;
-  animation: blink 1s infinite alternate;
-}
-@keyframes blink { from { opacity: 1; transform: translate(-50%, -50%) scale(1);} to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05);} }
-#fireworksCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-</style>
-
 </head>
 <body>
 
@@ -324,22 +358,18 @@
     </div>
   </div>
 
-  <!-- Popup: Wheel -->
-  <div id="wheelPopup" class="overlay" style="display:none; align-items:center; justify-content:center;">
-    <div class="ranking-modal" style="max-width:720px;">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="margin:0">Vòng quay - Gọi tên học sinh</h3>
-        <button class="close-btn" onclick="closeWheel()">✖</button>
-      </div>
-      <div style="display:flex; gap:12px; margin-top:12px; align-items:center; justify-content:center; flex-direction:column;">
-        <canvas id="wheelCanvas" width="600" height="600" style="border-radius:8px;background:#eaf6ff;border:6px solid var(--primary)"></canvas>
-        <div style="display:flex; gap:10px;">
-          <button class="btn-like" onclick="spinWheel()">🎡 Quay</button>
-          <button class="btn-dislike" onclick="closeWheel()">✖ Đóng</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Popup vòng quay học sinh -->
+	<div id="wheelPopup" class="wheel-popup">
+	  <canvas id="fireworksCanvas"></canvas> <!-- Canvas pháo hoa -->
+	  <div class="wheel-content">
+		<canvas id="wheelCanvas" width="600" height="600"></canvas>
+		<div style="margin-top:20px;">
+		  <button onclick="spinWheel()">🎡 Quay</button>
+		  <button onclick="closeWheel()">✖ Đóng</button>
+		</div>
+	  </div>
+	  <div id="winnerPopup" class="winner-popup"></div>
+	</div>
 
   <!-- Popup: Ranking -->
   <div id="rankingOverlay" class="overlay" style="display:none;">
@@ -862,143 +892,194 @@ function closeRanking(){ document.getElementById("rankingOverlay").style.display
 /* ============================
   WHEEL + FIREWORKS + WINNER
   ============================ */
-let wheelCanvas = document.getElementById("wheelCanvas");
-let wheelCtx = wheelCanvas ? wheelCanvas.getContext("2d") : null;
-let wheelStudents = []; let startAngle = 0, arc = 0;
-let spinTimeout = null, spinTime = 0, spinTimeTotal = 0;
-let audioSpin = null;
+// ---------------- Vòng quay học sinh có âm thanh + lực quay ngẫu nhiên ----------------
+	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
+	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
+	let audioSpin = null;
 
-function openWheel(){
-  if(!currentClass){ alert("Chọn lớp trước"); return; }
-  document.getElementById("wheelPopup").style.display = "flex";
-  wheelStudents = studentsData.map(r=>r[1] || "");
-  if(!wheelStudents || wheelStudents.length === 0){
-    loadStudents().then(()=> {
-      wheelStudents = studentsData.map(r=>r[1] || "");
-      if(wheelStudents.length === 0){
-        alert("Danh sách học sinh trống — kiểm tra dữ liệu lớp trên Google Sheet.");
-        return;
-      }
-      setupWheel();
-    });
-  } else {
-    setupWheel();
-  }
-}
-function closeWheel(){ document.getElementById("wheelPopup").style.display="none"; }
-function setupWheel(){
-  const canvas = document.getElementById("wheelCanvas");
-  wheelCtx = canvas.getContext("2d");
-  arc = Math.PI*2 / wheelStudents.length;
-  startAngle = 0;
-  drawWheel();
-}
-function drawWheel(){
-  const canvas = document.getElementById("wheelCanvas");
-  const cx = canvas.width/2, cy = canvas.height/2;
-  const outsideRadius = Math.min(cx,cy) - 30;
-  const insideRadius = 60;
-  const textRadius = (outsideRadius + insideRadius)/2;
-  wheelCtx.clearRect(0,0,canvas.width,canvas.height);
-  wheelCtx.textAlign="center";
-  wheelCtx.textBaseline="middle";
-  wheelCtx.font = "bold 16px Poppins";
+	function openWheel(){
+	  if(!currentClass){ alert("Chọn lớp trước"); return; }
+	  document.getElementById("wheelPopup").style.display = "flex";
+	  wheelStudents = studentsData.map(r=>r[1] || "");
+	  if(!wheelStudents || wheelStudents.length === 0){
+		loadStudents().then(()=> {
+		  wheelStudents = studentsData.map(r=>r[1] || "");
+		  if(wheelStudents.length === 0){
+			alert("Danh sách học sinh trống — kiểm tra dữ liệu lớp trên Google Sheet.");
+			return;
+		  }
+		  setupWheel();
+		});
+	  } else {
+		setupWheel();
+	  }
+	}
 
-  for(let i=0;i<wheelStudents.length;i++){
-    const angle = startAngle + i*arc;
-    wheelCtx.fillStyle = `hsl(${i*360/wheelStudents.length}, 75%, 55%)`;
-    wheelCtx.beginPath();
-    wheelCtx.moveTo(cx,cy);
-    wheelCtx.arc(cx,cy,outsideRadius, angle, angle+arc);
-    wheelCtx.closePath();
-    wheelCtx.fill();
+	function setupWheel(){
+	  studentsForWheel = Array.from(students).map(s => s.textContent);
+	  arc = Math.PI * 2 / studentsForWheel.length;
 
-    wheelCtx.save();
-    wheelCtx.translate(cx + Math.cos(angle + arc/2)*textRadius, cy + Math.sin(angle + arc/2)*textRadius);
-    wheelCtx.rotate(angle + arc/2 + Math.PI/2);
-    wheelCtx.fillStyle = "#fff";
-    const text = wheelStudents[i];
-    wheelCtx.fillText(text, 0, 0);
-    wheelCtx.restore();
-  }
+	  document.getElementById("wheelPopup").style.display = "flex";
+	  document.getElementById("winnerPopup").style.display = "none";
 
-  wheelCtx.fillStyle = "#e53935";
-  wheelCtx.beginPath();
-  wheelCtx.moveTo(cx-18, cy - outsideRadius - 8);
-  wheelCtx.lineTo(cx+18, cy - outsideRadius - 8);
-  wheelCtx.lineTo(cx, cy - outsideRadius + 24);
-  wheelCtx.closePath();
-  wheelCtx.fill();
-}
+	  wheelCanvas = document.getElementById("wheelCanvas");
+	  ctx = wheelCanvas.getContext("2d");
+	  drawWheel();
+	}
+	function closeWheel() {
+	  document.getElementById("wheelPopup").style.display = "none";
+	  document.getElementById("winnerPopup").style.display = "none";
+	  clearTimeout(spinTimeout);
+	  if (audioSpin) audioSpin.pause();
+	}
 
-function spinWheel(){
-  if(!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
-  audioSpin.currentTime = 0;
-  audioSpin.play();
+	function drawWheel() {
+	  const cx = 300, cy = 300;
+	  const outsideRadius = 280;
+	  const insideRadius = 50;
+	  const textRadius = 200;
 
-  spinTime = 0;
-  spinTimeTotal = 6000;
-  spinAngleStart = Math.random()*20 + 15;
-  rotateWheel();
-}
-function rotateWheel(){
-  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-  startAngle += (spinAngle * Math.PI / 180);
-  drawWheel();
-  spinTime += 30;
-  if(spinTime >= spinTimeTotal){ stopRotateWheel(); return; }
-  spinTimeout = setTimeout(rotateWheel, 30);
-}
-function stopRotateWheel(){
-  clearTimeout(spinTimeout);
-  if(audioSpin) audioSpin.pause();
-  const degrees = startAngle * 180 / Math.PI + 90;
-  const arcd = arc * 180 / Math.PI;
-  const index = Math.floor((360 - (degrees % 360)) / arcd) % wheelStudents.length;
-  const winner = wheelStudents[index];
-  showWinner(winner);
-  triggerFireworks();
-}
-function easeOut(t,b,c,d){
-  const ts=(t/=d)*t; const tc=ts*t; return b + c*(tc + -3*ts + 3*t);
-}
-function showWinner(name){
-  const overlay = document.getElementById("winnerPopup");
-  const box = document.getElementById("winnerBox");
-  box.textContent = `🎉 ${name} 🎉`;
-  overlay.style.display = "flex";
-  setTimeout(()=>{ overlay.style.display = "none"; }, 5000);
-}
+	  ctx.clearRect(0, 0, 600, 600);
 
-/* FIREWORKS */
-const fireworksCanvas = document.getElementById("fireworksCanvas");
-const fctx = fireworksCanvas.getContext("2d");
-let fireworks = [];
-function resizeFW(){ fireworksCanvas.width = window.innerWidth; fireworksCanvas.height = window.innerHeight; }
-window.addEventListener("resize", resizeFW);
-resizeFW();
-function createFirework(x,y){
-  const colors = ["#ff5252","#ffca28","#69f0ae","#40c4ff","#ea80fc"];
-  for(let i=0;i<30;i++){
-    fireworks.push({x,y, vx: (Math.random()-0.5)*6, vy:(Math.random()-0.9)*6, life:Math.random()*60+40, r: Math.random()*3+1, c: colors[Math.floor(Math.random()*colors.length)]});
-  }
-}
-function drawFW(){
-  fctx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
-  for(let i=fireworks.length-1;i>=0;i--){
-    const p = fireworks[i];
-    p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.life--;
-    fctx.beginPath();
-    fctx.arc(p.x,p.y,p.r,0,Math.PI*2); fctx.fillStyle = p.c; fctx.fill();
-    if(p.life<=0) fireworks.splice(i,1);
-  }
-  requestAnimationFrame(drawFW);
-}
-drawFW();
-function triggerFireworks(){
-  const cx = window.innerWidth/2, cy = window.innerHeight/3;
-  for(let i=0;i<4;i++) setTimeout(()=>createFirework(cx + (Math.random()-0.5)*200, cy + (Math.random()-0.5)*80), i*200);
-}
+	  for (let i = 0; i < studentsForWheel.length; i++) {
+		const angle = startAngle + i * arc;
+		const hue = (i * 360 / studentsForWheel.length);
+		ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
+
+		ctx.beginPath();
+		ctx.arc(cx, cy, outsideRadius, angle, angle + arc, false);
+		ctx.arc(cx, cy, insideRadius, angle + arc, angle, true);
+		ctx.fill();
+
+		ctx.save();
+		ctx.fillStyle = "white";
+		ctx.translate(
+		  cx + Math.cos(angle + arc / 2) * textRadius,
+		  cy + Math.sin(angle + arc / 2) * textRadius
+		);
+		ctx.rotate(angle + arc / 2);
+		ctx.textAlign = "center";
+		ctx.font = "bold 18px Arial";
+		ctx.fillText(studentsForWheel[i], 0, 0);
+		ctx.restore();
+	  }
+
+	  // Mũi tên chỉ định
+	  ctx.fillStyle = "#e53935";
+	  ctx.beginPath();
+	  ctx.moveTo(cx - 20, cy - outsideRadius - 20);
+	  ctx.lineTo(cx + 20, cy - outsideRadius - 20);
+	  ctx.lineTo(cx, cy - outsideRadius + 10);
+	  ctx.closePath();
+	  ctx.fill();
+	}
+
+	function spinWheel() {
+	  if (!audioSpin) {
+		audioSpin = new Audio("sound/vongquay.mp3"); // 🔊 File âm thanh quay
+	  }
+	  audioSpin.currentTime = 0;
+	  audioSpin.play();
+
+	  // 🎯 Tốc độ khởi đầu ngẫu nhiên (tăng/giảm nhẹ)
+	  // Ví dụ dao động trong khoảng từ 15 đến 35 độ mỗi frame
+	  spinAngleStart = Math.random() * 20 + 15;
+
+	  spinTime = 0;
+	  spinTimeTotal = 6000; // quay 6 giây
+	  document.getElementById("winnerPopup").style.display = "none";
+	  rotateWheel();
+	}
+
+	function rotateWheel() {
+	  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+	  startAngle += (spinAngle * Math.PI / 180);
+	  drawWheel();
+
+	  spinTime += 30;
+	  if (spinTime >= spinTimeTotal) {
+		stopRotateWheel();
+		return;
+	  }
+	  spinTimeout = setTimeout(rotateWheel, 30);
+	}
+
+	function stopRotateWheel() {
+	  clearTimeout(spinTimeout);
+	  if (audioSpin) audioSpin.pause();
+
+	  const degrees = startAngle * 180 / Math.PI + 90;
+	  const arcd = arc * 180 / Math.PI;
+	  const index = Math.floor((360 - (degrees % 360)) / arcd) % studentsForWheel.length;
+	  const winner = studentsForWheel[index];
+
+	  const popup = document.getElementById("winnerPopup");
+	  popup.textContent = "🎉 " + winner + " 🎉";
+	  popup.style.display = "block";
+
+	  triggerFireworks(); // Gọi hiệu ứng pháo hoa
+	}
+
+	function easeOut(t, b, c, d) {
+	  const ts = (t /= d) * t;
+	  const tc = ts * t;
+	  return b + c * (tc + -3 * ts + 3 * t);
+	}
+
+
+	// ---------------- Hiệu ứng pháo hoa khi trúng thưởng ----------------
+	let fireworksCanvas = document.getElementById("fireworksCanvas");
+	let fCtx = fireworksCanvas.getContext("2d");
+	let fireworks = [];
+
+	function resizeFireworks() {
+	  fireworksCanvas.width = window.innerWidth;
+	  fireworksCanvas.height = window.innerHeight;
+	}
+	window.addEventListener("resize", resizeFireworks);
+	resizeFireworks();
+
+	function createFirework(x, y) {
+	  const colors = ["#ff5252", "#ffca28", "#69f0ae", "#40c4ff", "#ea80fc"];
+	  for (let i = 0; i < 30; i++) {
+		fireworks.push({
+		  x: x,
+		  y: y,
+		  radius: Math.random() * 3 + 2,
+		  color: colors[Math.floor(Math.random() * colors.length)],
+		  angle: Math.random() * Math.PI * 2,
+		  speed: Math.random() * 4 + 2,
+		  life: 100
+		});
+	  }
+	}
+
+	function drawFireworks() {
+	  fCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+	  for (let i = fireworks.length - 1; i >= 0; i--) {
+		const f = fireworks[i];
+		f.x += Math.cos(f.angle) * f.speed;
+		f.y += Math.sin(f.angle) * f.speed;
+		f.speed *= 0.98;
+		f.life -= 2;
+		fCtx.beginPath();
+		fCtx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+		fCtx.fillStyle = f.color;
+		fCtx.fill();
+		if (f.life <= 0) fireworks.splice(i, 1);
+	  }
+	  requestAnimationFrame(drawFireworks);
+	}
+	drawFireworks();
+
+	// Gọi khi học sinh trúng
+	function triggerFireworks() {
+	  const cx = window.innerWidth / 2;
+	  const cy = window.innerHeight / 2;
+	  for (let i = 0; i < 5; i++) {
+		setTimeout(() => createFirework(cx, cy), i * 200);
+	  }
+	}
 
 /* ============================
   TIMER
@@ -1064,93 +1145,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
-
-<!-- Popup vòng quay học sinh -->
-<div id="wheelPopup" class="wheel-popup">
-  <canvas id="fireworksCanvas"></canvas>
-  <div class="wheel-content">
-    <canvas id="wheelCanvas" width="600" height="600"></canvas>
-    <div style="margin-top:20px;">
-      <button onclick="spinWheel()">🎡 Quay</button>
-      <button onclick="closeWheel()">✖ Đóng</button>
-    </div>
-  </div>
-  <div id="winnerPopup" class="winner-popup"></div>
-</div>
-
 </body>
-
-<script>
-let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
-let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
-let audioSpin = null;
-
-function openWheel() {
-  if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
-  studentsForWheel = studentsData.map(r => r[1]);
-  arc = Math.PI * 2 / studentsForWheel.length;
-  document.getElementById("wheelPopup").style.display = "flex";
-  document.getElementById("winnerPopup").style.display = "none";
-  wheelCanvas = document.getElementById("wheelCanvas");
-  ctx = wheelCanvas.getContext("2d");
-  drawWheel();
-}
-function closeWheel() {
-  document.getElementById("wheelPopup").style.display = "none";
-  document.getElementById("winnerPopup").style.display = "none";
-  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
-}
-function drawWheel() {
-  const cx = 300, cy = 300, outsideRadius = 280, insideRadius = 50, textRadius = 200;
-  ctx.clearRect(0, 0, 600, 600);
-  for (let i = 0; i < studentsForWheel.length; i++) {
-    const angle = startAngle + i * arc;
-    const hue = (i * 360 / studentsForWheel.length);
-    ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
-    ctx.beginPath(); ctx.arc(cx, cy, outsideRadius, angle, angle + arc, false);
-    ctx.arc(cx, cy, insideRadius, angle + arc, angle, true); ctx.fill();
-    ctx.save(); ctx.fillStyle = "white";
-    ctx.translate(cx + Math.cos(angle + arc / 2) * textRadius, cy + Math.sin(angle + arc / 2) * textRadius);
-    ctx.rotate(angle + arc / 2); ctx.textAlign = "center"; ctx.font = "bold 18px Arial";
-    ctx.fillText(studentsForWheel[i], 0, 0); ctx.restore();
-  }
-  ctx.fillStyle = "#e53935"; ctx.beginPath();
-  ctx.moveTo(cx - 20, cy - outsideRadius - 20); ctx.lineTo(cx + 20, cy - outsideRadius - 20);
-  ctx.lineTo(cx, cy - outsideRadius + 10); ctx.closePath(); ctx.fill();
-}
-function spinWheel() {
-  if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
-  audioSpin.currentTime = 0; audioSpin.play();
-  spinAngleStart = Math.random() * 20 + 15; spinTime = 0; spinTimeTotal = 6000;
-  document.getElementById("winnerPopup").style.display = "none"; rotateWheel();
-}
-function rotateWheel() {
-  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-  startAngle += (spinAngle * Math.PI / 180); drawWheel();
-  spinTime += 30; if (spinTime >= spinTimeTotal) { stopRotateWheel(); return; }
-  spinTimeout = setTimeout(rotateWheel, 30);
-}
-function stopRotateWheel() {
-  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
-  const degrees = startAngle * 180 / Math.PI + 90, arcd = arc * 180 / Math.PI;
-  const index = Math.floor((360 - (degrees % 360)) / arcd) % studentsForWheel.length;
-  const winner = studentsForWheel[index];
-  const popup = document.getElementById("winnerPopup");
-  popup.textContent = "🎉 " + winner + " 🎉"; popup.style.display = "block"; triggerFireworks();
-}
-function easeOut(t,b,c,d){const ts=(t/=d)*t;const tc=ts*t;return b+c*(tc+-3*ts+3*t);}
-let fireworksCanvas=document.getElementById("fireworksCanvas"),fCtx=fireworksCanvas.getContext("2d"),fireworks=[];
-function resizeFireworks(){fireworksCanvas.width=window.innerWidth;fireworksCanvas.height=window.innerHeight;}
-window.addEventListener("resize",resizeFireworks);resizeFireworks();
-function createFirework(x,y){const colors=["#ff5252","#ffca28","#69f0ae","#40c4ff","#ea80fc"];
-  for(let i=0;i<30;i++){fireworks.push({x:x,y:y,radius:Math.random()*3+2,color:colors[Math.floor(Math.random()*colors.length)],
-  angle:Math.random()*Math.PI*2,speed:Math.random()*4+2,life:100});}}
-function drawFireworks(){fCtx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
-  for(let i=fireworks.length-1;i>=0;i--){const f=fireworks[i];f.x+=Math.cos(f.angle)*f.speed;f.y+=Math.sin(f.angle)*f.speed;
-  f.speed*=0.98;f.life-=2;fCtx.beginPath();fCtx.arc(f.x,f.y,f.radius,0,Math.PI*2);fCtx.fillStyle=f.color;fCtx.fill();
-  if(f.life<=0)fireworks.splice(i,1);}requestAnimationFrame(drawFireworks);}drawFireworks();
-function triggerFireworks(){const cx=window.innerWidth/2,cy=window.innerHeight/2;
-  for(let i=0;i<5;i++){setTimeout(()=>createFirework(cx,cy),i*200);}}
-</script>
-
 </html>
