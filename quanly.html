@@ -862,143 +862,6 @@ function closeRanking(){ document.getElementById("rankingOverlay").style.display
 /* ============================
   WHEEL + FIREWORKS + WINNER
   ============================ */
-let wheelCanvas = document.getElementById("wheelCanvas");
-let wheelCtx = wheelCanvas ? wheelCanvas.getContext("2d") : null;
-let wheelStudents = []; let startAngle = 0, arc = 0;
-let spinTimeout = null, spinTime = 0, spinTimeTotal = 0;
-let audioSpin = null;
-
-function openWheel(){
-  if(!currentClass){ alert("Chọn lớp trước"); return; }
-  document.getElementById("wheelPopup").style.display = "flex";
-  wheelStudents = studentsData.map(r=>r[1] || "");
-  if(!wheelStudents || wheelStudents.length === 0){
-    loadStudents().then(()=> {
-      wheelStudents = studentsData.map(r=>r[1] || "");
-      if(wheelStudents.length === 0){
-        alert("Danh sách học sinh trống — kiểm tra dữ liệu lớp trên Google Sheet.");
-        return;
-      }
-      setupWheel();
-    });
-  } else {
-    setupWheel();
-  }
-}
-function closeWheel(){ document.getElementById("wheelPopup").style.display="none"; }
-function setupWheel(){
-  const canvas = document.getElementById("wheelCanvas");
-  wheelCtx = canvas.getContext("2d");
-  arc = Math.PI*2 / wheelStudents.length;
-  startAngle = 0;
-  drawWheel();
-}
-function drawWheel(){
-  const canvas = document.getElementById("wheelCanvas");
-  const cx = canvas.width/2, cy = canvas.height/2;
-  const outsideRadius = Math.min(cx,cy) - 30;
-  const insideRadius = 60;
-  const textRadius = (outsideRadius + insideRadius)/2;
-  wheelCtx.clearRect(0,0,canvas.width,canvas.height);
-  wheelCtx.textAlign="center";
-  wheelCtx.textBaseline="middle";
-  wheelCtx.font = "bold 16px Poppins";
-
-  for(let i=0;i<wheelStudents.length;i++){
-    const angle = startAngle + i*arc;
-    wheelCtx.fillStyle = `hsl(${i*360/wheelStudents.length}, 75%, 55%)`;
-    wheelCtx.beginPath();
-    wheelCtx.moveTo(cx,cy);
-    wheelCtx.arc(cx,cy,outsideRadius, angle, angle+arc);
-    wheelCtx.closePath();
-    wheelCtx.fill();
-
-    wheelCtx.save();
-    wheelCtx.translate(cx + Math.cos(angle + arc/2)*textRadius, cy + Math.sin(angle + arc/2)*textRadius);
-    wheelCtx.rotate(angle + arc/2 + Math.PI/2);
-    wheelCtx.fillStyle = "#fff";
-    const text = wheelStudents[i];
-    wheelCtx.fillText(text, 0, 0);
-    wheelCtx.restore();
-  }
-
-  wheelCtx.fillStyle = "#e53935";
-  wheelCtx.beginPath();
-  wheelCtx.moveTo(cx-18, cy - outsideRadius - 8);
-  wheelCtx.lineTo(cx+18, cy - outsideRadius - 8);
-  wheelCtx.lineTo(cx, cy - outsideRadius + 24);
-  wheelCtx.closePath();
-  wheelCtx.fill();
-}
-
-function spinWheel(){
-  if(!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
-  audioSpin.currentTime = 0;
-  audioSpin.play();
-
-  spinTime = 0;
-  spinTimeTotal = 6000;
-  spinAngleStart = Math.random()*20 + 15;
-  rotateWheel();
-}
-function rotateWheel(){
-  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-  startAngle += (spinAngle * Math.PI / 180);
-  drawWheel();
-  spinTime += 30;
-  if(spinTime >= spinTimeTotal){ stopRotateWheel(); return; }
-  spinTimeout = setTimeout(rotateWheel, 30);
-}
-function stopRotateWheel(){
-  clearTimeout(spinTimeout);
-  if(audioSpin) audioSpin.pause();
-  const degrees = startAngle * 180 / Math.PI + 90;
-  const arcd = arc * 180 / Math.PI;
-  const index = Math.floor((360 - (degrees % 360)) / arcd) % wheelStudents.length;
-  const winner = wheelStudents[index];
-  showWinner(winner);
-  triggerFireworks();
-}
-function easeOut(t,b,c,d){
-  const ts=(t/=d)*t; const tc=ts*t; return b + c*(tc + -3*ts + 3*t);
-}
-function showWinner(name){
-  const overlay = document.getElementById("winnerPopup");
-  const box = document.getElementById("winnerBox");
-  box.textContent = `🎉 ${name} 🎉`;
-  overlay.style.display = "flex";
-  setTimeout(()=>{ overlay.style.display = "none"; }, 5000);
-}
-
-/* FIREWORKS */
-const fireworksCanvas = document.getElementById("fireworksCanvas");
-const fctx = fireworksCanvas.getContext("2d");
-let fireworks = [];
-function resizeFW(){ fireworksCanvas.width = window.innerWidth; fireworksCanvas.height = window.innerHeight; }
-window.addEventListener("resize", resizeFW);
-resizeFW();
-function createFirework(x,y){
-  const colors = ["#ff5252","#ffca28","#69f0ae","#40c4ff","#ea80fc"];
-  for(let i=0;i<30;i++){
-    fireworks.push({x,y, vx: (Math.random()-0.5)*6, vy:(Math.random()-0.9)*6, life:Math.random()*60+40, r: Math.random()*3+1, c: colors[Math.floor(Math.random()*colors.length)]});
-  }
-}
-function drawFW(){
-  fctx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
-  for(let i=fireworks.length-1;i>=0;i--){
-    const p = fireworks[i];
-    p.x += p.vx; p.y += p.vy; p.vy += 0.08; p.life--;
-    fctx.beginPath();
-    fctx.arc(p.x,p.y,p.r,0,Math.PI*2); fctx.fillStyle = p.c; fctx.fill();
-    if(p.life<=0) fireworks.splice(i,1);
-  }
-  requestAnimationFrame(drawFW);
-}
-drawFW();
-function triggerFireworks(){
-  const cx = window.innerWidth/2, cy = window.innerHeight/3;
-  for(let i=0;i<4;i++) setTimeout(()=>createFirework(cx + (Math.random()-0.5)*200, cy + (Math.random()-0.5)*80), i*200);
-}
 
 /* ============================
   TIMER
@@ -1109,10 +972,27 @@ function drawWheel() {
     ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
     ctx.beginPath(); ctx.arc(cx, cy, outsideRadius, angle, angle + arc, false);
     ctx.arc(cx, cy, insideRadius, angle + arc, angle, true); ctx.fill();
-    ctx.save(); ctx.fillStyle = "white";
-    ctx.translate(cx + Math.cos(angle + arc / 2) * textRadius, cy + Math.sin(angle + arc / 2) * textRadius);
-    ctx.rotate(angle + arc / 2); ctx.textAlign = "center"; ctx.font = "bold 18px Arial";
-    ctx.fillText(studentsForWheel[i], 0, 0); ctx.restore();
+    //ctx.save(); ctx.fillStyle = "white";
+   // ctx.translate(cx + Math.cos(angle + arc / 2) * textRadius, cy + Math.sin(angle + arc / 2) * textRadius);
+    //ctx.rotate(angle + arc / 2); ctx.textAlign = "center"; ctx.font = "bold 18px Arial";
+    //ctx.fillText(studentsForWheel[i], 0, 0); ctx.restore();
+	// ----- Vẽ tên theo hướng tâm → bán kính -----
+	ctx.save();
+	ctx.translate(cx, cy);
+
+	// xoay theo góc trung tâm của lát cắt
+	ctx.rotate(angle + arc / 2);
+
+	// vị trí chữ chạy dọc theo bán kính
+	ctx.textAlign = "left";
+	ctx.fillStyle = "#fff";
+	ctx.font = "bold 20px Arial";
+
+	// vẽ chữ chạy từ tâm ra ngoài
+	ctx.fillText(studentsForWheel[i], insideRadius + 20, 0);
+
+	ctx.restore();
+
   }
   ctx.fillStyle = "#e53935"; ctx.beginPath();
   ctx.moveTo(cx - 20, cy - outsideRadius - 20); ctx.lineTo(cx + 20, cy - outsideRadius - 20);
@@ -1137,6 +1017,7 @@ function stopRotateWheel() {
   const winner = studentsForWheel[index];
   const popup = document.getElementById("winnerPopup");
   popup.textContent = "🎉 " + winner + " 🎉"; popup.style.display = "block"; triggerFireworks();
+  popup.onclick = () => { popup.style.display = "none"; };
 }
 function easeOut(t,b,c,d){const ts=(t/=d)*t;const tc=ts*t;return b+c*(tc+-3*ts+3*t);}
 let fireworksCanvas=document.getElementById("fireworksCanvas"),fCtx=fireworksCanvas.getContext("2d"),fireworks=[];
