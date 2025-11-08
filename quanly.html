@@ -931,12 +931,74 @@ function openWheel() {
   wheelCanvas = document.getElementById("wheelCanvas");
   ctx = wheelCanvas.getContext("2d");
   drawWheel();
+  wheelCanvas.onclick = chooseStudentByClick;
 }
 function closeWheel() {
   document.getElementById("wheelPopup").style.display = "none";
   document.getElementById("winnerPopup").style.display = "none";
   clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
 }
+	function chooseStudentByClick(e) {
+		const rect = wheelCanvas.getBoundingClientRect();
+		const x = e.clientX - rect.left - wheelCanvas.width / 2;
+		const y = e.clientY - rect.top  - wheelCanvas.height / 2;
+
+		// tính góc click
+		let clickAngle = Math.atan2(y, x);
+		if (clickAngle < 0) clickAngle += Math.PI * 2;
+
+		// quy đổi theo startAngle hiện tại
+		let adjustedAngle = clickAngle - startAngle;
+		if (adjustedAngle < 0) adjustedAngle += Math.PI * 2;
+
+		// xác định index
+		const index = Math.floor(adjustedAngle / arc);
+
+		selectedIndex = index;   // biến global để spinWheel biết mục tiêu
+
+		// quay theo mục tiêu
+		spinWheelTarget();
+	}
+	function spinWheelTarget() {
+		if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
+		audioSpin.currentTime = 0;
+		audioSpin.play();
+
+		spinAngleStart = Math.random() * 10 + 20; 
+		spinTime = 0;
+		spinTimeTotal = 6000;
+
+		targetStopAngle = (Math.PI * 2 - (selectedIndex * arc + arc/2)) + Math.PI/2;
+
+		rotateWheelTarget();
+	}
+	function rotateWheelTarget() {
+		spinTime += 30;
+
+		if (spinTime >= spinTimeTotal) {
+			startAngle = targetStopAngle;
+			drawWheel();
+			stopRotateWheelTarget();
+			return;
+		}
+
+    const t = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+    startAngle += t * Math.PI / 180;
+
+    drawWheel();
+    requestAnimationFrame(rotateWheelTarget);
+}
+
+function stopRotateWheelTarget() {
+    audioSpin.pause();
+
+    const winner = studentsForWheel[selectedIndex];
+    const popup = document.getElementById("winnerPopup");
+
+    popup.textContent = "🎉 " + winner + " 🎉";
+    popup.style.display = "block";
+}
+
 function drawWheel() {
   const cx = 300, cy = 300;
   const outsideRadius = 280;
@@ -961,13 +1023,13 @@ function drawWheel() {
        — Auto scale chữ theo độ dài —
        =============================== */
     const name = studentsForWheel[i];
-    const maxFont = 18;        // cỡ chữ lớn nhất
+    const maxFont = 19;        // cỡ chữ lớn nhất
     let fontSize = maxFont;
 
     // Thu nhỏ chữ nếu tên dài
-    if (name.length > 10) fontSize = 14;
-    if (name.length > 14) fontSize = 12;
-    if (name.length > 18) fontSize = 10;
+    if (name.length > 10) fontSize = 15;
+    if (name.length > 14) fontSize = 13;
+    if (name.length > 18) fontSize = 11;
 
     ctx.save();
     ctx.translate(cx, cy);
