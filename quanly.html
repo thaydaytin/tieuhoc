@@ -346,7 +346,7 @@
     <div class="ranking-modal">
       <div class="ranking-header">
         <div style="display:flex; gap:12px; align-items:center;">
-          <h2 style="margin:0">Bảng xếp hạng — Top 10</h2>
+          <h2 style="margin:0">Bảng xếp hạng — Cả lớp</h2>
           <div class="muted">Hiển thị: <select id="rankingMode" onchange="renderRanking()"><option value="week">Tuần</option><option value="total">Tổng điểm</option></select></div>
           <div style="margin-left:6px;">
             <label class="muted">Tuần:</label>
@@ -359,12 +359,10 @@
       </div>
 
       <div class="ranking-body">
-        <div class="top-list" id="topList">
-          <!-- top items -->
+        <div class="ranking-chart-scroll">
+          <canvas id="rankingChart"></canvas>
         </div>
-        <div style="flex:1">
-          <canvas id="rankingChart" height="360"></canvas>
-        </div>
+    </div>
       </div>
     </div>
   </div>
@@ -750,22 +748,117 @@ function openRanking(){
 function closeRanking(){ document.getElementById("rankingOverlay").style.display="none"; }
 
 	/* =========== renderRanking (full class + huy chương đúng vị trí + cuộn dọc) =========== */
-	async function renderRanking() {
-	  if (!currentClass) return;
-	  const mode = document.getElementById("rankingMode").value;
-	  const weekSel = parseInt(document.getElementById("rankingWeek").value);
-	  if (!studentsData || studentsData.length === 0) await loadStudents();
+	
+async function renderRanking() {
+  if (!currentClass) return;
+  const modeEl = document.getElementById("rankingMode");
+  const weekEl = document.getElementById("rankingWeek");
+  const mode = modeEl ? modeEl.value : 'week';
+  const weekSel = weekEl ? parseInt(weekEl.value) : currentWeek;
 
-	  const list = studentsData.map(row => {
-		const name = row[1];
-		let score = 0;
-		if (mode === 'week') {
-		  const idx = 2 + (weekSel - 1);
-		  score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
-		} else {
-		  const last = row[row.length - 1];
-		  score = last !== undefined && last !== "" ? Number(last) : 0;
-		}
+  if (!studentsData || studentsData.length === 0) await loadStudents();
+
+  // Build list of {name, score}
+  const list = studentsData.map(row => {
+    const name = row[1];
+    let score = 0;
+    if (mode === 'week') {
+      const idx = 2 + (weekSel - 1);
+      score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
+    } else {
+      const last = row[row.length - 1];
+      score = last !== undefined && last !== "" ? Number(last) : 0;
+    }
+    return { name, score };
+  });
+
+  // Sort descending
+  list.sort((a, b) => b.score - a.score);
+
+  // Replace body with only a scrollable chart
+  const rankingBody = document.querySelector(".ranking-body");
+  if (rankingBody) {
+    rankingBody.innerHTML = `
+      <div class="ranking-chart-scroll">
+        <canvas id="rankingChart"></canvas>
+      </div>
+    `;
+  }
+
+  const canvas = document.getElementById("rankingChart");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+
+  const labels = list.map((t, i) => {
+    if (i === 0) return "🥇 " + t.name;
+    if (i === 1) return "🥈 " + t.name;
+    if (i === 2) return "🥉 " + t.name;
+    return t.name;
+  });
+
+  const dataVals = list.map(t => t.score);
+  const bgColors = list.map((t, i) =>
+    i === 0 ? "#FFD54A" :
+    i === 1 ? "#C0C0C0" :
+    i === 2 ? "#FFB26B" :
+    "rgba(33,150,243,0.85)"
+  );
+
+  // Dynamic height
+  const chartHeight = Math.max(420, list.length * 38);
+  canvas.style.height = chartHeight + "px";
+
+  if (window.chartInstance) {
+    try { window.chartInstance.destroy(); } catch (e) {}
+  }
+
+  window.chartInstance = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Điểm",
+        data: dataVals,
+        backgroundColor: bgColors,
+        borderRadius: 8,
+        barPercentage: 0.72,
+        categoryPercentage: 0.9
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { right: 24 } },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: "rgba(0,0,0,0.06)" },
+          ticks: { color: "#333", precision: 0 }
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            color: "#0b2540",
+            font: { size: 14, weight: "600" },
+            padding: 8
+          }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: (ctx) => ctx[0].label.replace(/^🥇 |^🥈 |^🥉 /, ""),
+            label: (ctx) => `Điểm: ${ctx.raw}`
+          }
+        }
+      },
+      animation: { duration: 900, easing: "easeOutQuart" }
+    }
+  });
+}
+
 		return { name, score };
 	  });
 
