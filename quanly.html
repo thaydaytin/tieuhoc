@@ -324,29 +324,12 @@
     </div>
   </div>
 
-  <!-- Popup: Wheel -->
-  <div id="wheelPopup" class="overlay" style="display:none; align-items:center; justify-content:center;">
-    <div class="ranking-modal" style="max-width:720px;">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="margin:0">Vòng quay - Gọi tên học sinh</h3>
-        <button class="close-btn" onclick="closeWheel()">✖</button>
-      </div>
-      <div style="display:flex; gap:12px; margin-top:12px; align-items:center; justify-content:center; flex-direction:column;">
-        <canvas id="wheelCanvas" width="600" height="600" style="border-radius:8px;background:#eaf6ff;border:6px solid var(--primary)"></canvas>
-        <div style="display:flex; gap:10px;">
-          <button class="btn-like" onclick="spinWheel()">🎡 Quay</button>
-          <button class="btn-dislike" onclick="closeWheel()">✖ Đóng</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Popup: Ranking -->
   <div id="rankingOverlay" class="overlay" style="display:none;">
     <div class="ranking-modal">
       <div class="ranking-header">
         <div style="display:flex; gap:12px; align-items:center;">
-          <h2 style="margin:0">Bảng xếp hạng — Cả lớp</h2>
+          <h2 style="margin:0">Bảng xếp hạng — Top 10</h2>
           <div class="muted">Hiển thị: <select id="rankingMode" onchange="renderRanking()"><option value="week">Tuần</option><option value="total">Tổng điểm</option></select></div>
           <div style="margin-left:6px;">
             <label class="muted">Tuần:</label>
@@ -359,10 +342,12 @@
       </div>
 
       <div class="ranking-body">
-        <div class="ranking-chart-scroll">
-          <canvas id="rankingChart"></canvas>
+        <div class="top-list" id="topList">
+          <!-- top items -->
         </div>
-    </div>
+        <div style="flex:1">
+          <canvas id="rankingChart" height="360"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -400,15 +385,6 @@
     </div>
   </div>
 
-  <!-- Winner big popup -->
-  <div id="winnerPopup" class="overlay" style="display:none; pointer-events:none;">
-    <div style="pointer-events:auto; text-align:center;">
-      <div id="winnerBox" style="background:linear-gradient(135deg,#2e7d32,#66bb6a); color:white; padding:30px 40px; border-radius:16px; font-size:36px; font-weight:800; box-shadow:0 20px 60px rgba(0,0,0,0.3)"></div>
-    </div>
-  </div>
-
-  <!-- fireworks canvas -->
-  <canvas id="fireworksCanvas" style="position:fixed; inset:0; pointer-events:none; z-index:90;"></canvas>
 
 <script>
 /* ============================
@@ -421,74 +397,53 @@ let studentsData = []; // array of rows returned from sheet (including id + name
 let chartInstance = null;
 
 /* ============================
-  HÀM HASH SHA-256 (dùng cho checkP) 
+  HÀM HASH SHA-256 (dùng cho checkP)
   ============================ */
-	async function sha256(str){
-	  const buffer = new TextEncoder().encode(str);
-	  const hash = await crypto.subtle.digest("SHA-256", buffer);
-	  return Array
-			.from(new Uint8Array(hash))
-			.map(b => b.toString(16).padStart(2,"0"))
-			.join("");
-	}
+async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
 
 /* ============================
   ĐĂNG NHẬP 
   ============================ */
-	async function attemptLogin() {
-	  const pass = document.getElementById("passwordInput").value || "";
-	  if (!pass) {
-		showLoginError("Vui lòng nhập mật khẩu");
-		return;
-	  }
+async function attemptLogin(){
+  const pass = document.getElementById("passwordInput").value || "";
+  if(!pass){ showLoginError("Vui lòng nhập mật khẩu"); return; }
+  try{
+    const resp = await fetch("pw.json");
+    if(!resp.ok){ showLoginError("Không tìm thấy pw.json"); return; }
+    const j = await resp.json();
+    const correctHash = j.hash;
+    const entered = await sha256(pass);
+    if(entered === correctHash){
+      // success
+      document.getElementById("loginOverlay").style.display = "none";
+      document.getElementById("mainHeader").style.display = "";
+      document.getElementById("mainContent").style.display = "";
+      document.getElementById("fabTools").style.display = "";
+      // render UI
+      renderClassCards();
+      populateWeekSelector();
+      populateRankingWeek();
+      // select first class automatically
+      const first = document.querySelector(".class-item");
+      if(first) first.click();
+    } else {
+      showLoginError("Mật khẩu sai");
+    }
+  }catch(e){
+    console.error("Login error:", e);
+    showLoginError("Lỗi khi kiểm tra mật khẩu");
+  }
+}
 
-	  try {
-		const resp = await fetch("pw.json");
-		if (!resp.ok) {
-		  showLoginError("Không tìm thấy pw.json");
-		  return;
-		}
-
-		const j = await resp.json();
-		const correctHash = j.hash;
-		const entered = await sha256(pass);
-
-		if (entered === correctHash) {
-
-		  // Ẩn màn hình đăng nhập
-		  document.getElementById("loginScreen").style.display = "none";
-
-		  // Hiện giao diện chính
-		  document.getElementById("mainContainer").style.display = "";
-
-		  // Khởi tạo UI
-		  renderClassCards();
-		  populateWeekSelector();
-		  populateRankingWeek();
-
-		  // Tự chọn lớp đầu tiên
-		  const first = document.querySelector(".class-item");
-		  if (first) first.click();
-
-		} else {
-		  showLoginError("Mật khẩu sai");
-		}
-
-	  } catch (e) {
-		console.error("Login error:", e);
-		showLoginError("Lỗi khi kiểm tra mật khẩu");
-	  }
-	}
-
-	function showLoginError(txt){
-	  const el = document.getElementById("loginError");
-	  el.style.display = "block";
-	  el.textContent = txt;
-	}
-	function logout(){
-	  // đơn giản reload trang để hiện lại login
-	  window.location.reload();
-	}
+function showLoginError(txt){
+  const el = document.getElementById("loginError");
+  el.style.display = "block";
+  el.textContent = txt;
+}
+function logout(){
+  // đơn giản reload trang để hiện lại login
+  window.location.reload();
+}
 
 /* =========== UI INIT =========== */
 // Render class cards etc only after login (renderClassCards called in attemptLogin on success)
@@ -769,117 +724,22 @@ function openRanking(){
 function closeRanking(){ document.getElementById("rankingOverlay").style.display="none"; }
 
 	/* =========== renderRanking (full class + huy chương đúng vị trí + cuộn dọc) =========== */
-	
-async function renderRanking() {
-  if (!currentClass) return;
-  const modeEl = document.getElementById("rankingMode");
-  const weekEl = document.getElementById("rankingWeek");
-  const mode = modeEl ? modeEl.value : 'week';
-  const weekSel = weekEl ? parseInt(weekEl.value) : currentWeek;
+	async function renderRanking() {
+	  if (!currentClass) return;
+	  const mode = document.getElementById("rankingMode").value;
+	  const weekSel = parseInt(document.getElementById("rankingWeek").value);
+	  if (!studentsData || studentsData.length === 0) await loadStudents();
 
-  if (!studentsData || studentsData.length === 0) await loadStudents();
-
-  // Build list of {name, score}
-  const list = studentsData.map(row => {
-    const name = row[1];
-    let score = 0;
-    if (mode === 'week') {
-      const idx = 2 + (weekSel - 1);
-      score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
-    } else {
-      const last = row[row.length - 1];
-      score = last !== undefined && last !== "" ? Number(last) : 0;
-    }
-    return { name, score };
-  });
-
-  // Sort descending
-  list.sort((a, b) => b.score - a.score);
-
-  // Replace body with only a scrollable chart
-  const rankingBody = document.querySelector(".ranking-body");
-  if (rankingBody) {
-    rankingBody.innerHTML = `
-      <div class="ranking-chart-scroll">
-        <canvas id="rankingChart"></canvas>
-      </div>
-    `;
-  }
-
-  const canvas = document.getElementById("rankingChart");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-
-  const labels = list.map((t, i) => {
-    if (i === 0) return "🥇 " + t.name;
-    if (i === 1) return "🥈 " + t.name;
-    if (i === 2) return "🥉 " + t.name;
-    return t.name;
-  });
-
-  const dataVals = list.map(t => t.score);
-  const bgColors = list.map((t, i) =>
-    i === 0 ? "#FFD54A" :
-    i === 1 ? "#C0C0C0" :
-    i === 2 ? "#FFB26B" :
-    "rgba(33,150,243,0.85)"
-  );
-
-  // Dynamic height
-  const chartHeight = Math.max(420, list.length * 38);
-  canvas.style.height = chartHeight + "px";
-
-  if (window.chartInstance) {
-    try { window.chartInstance.destroy(); } catch (e) {}
-  }
-
-  window.chartInstance = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [{
-        label: "Điểm",
-        data: dataVals,
-        backgroundColor: bgColors,
-        borderRadius: 8,
-        barPercentage: 0.72,
-        categoryPercentage: 0.9
-      }]
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      layout: { padding: { right: 24 } },
-      scales: {
-        x: {
-          beginAtZero: true,
-          grid: { color: "rgba(0,0,0,0.06)" },
-          ticks: { color: "#333", precision: 0 }
-        },
-        y: {
-          grid: { display: false },
-          ticks: {
-            color: "#0b2540",
-            font: { size: 14, weight: "600" },
-            padding: 8
-          }
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            title: (ctx) => ctx[0].label.replace(/^🥇 |^🥈 |^🥉 /, ""),
-            label: (ctx) => `Điểm: ${ctx.raw}`
-          }
-        }
-      },
-      animation: { duration: 900, easing: "easeOutQuart" }
-    }
-  });
-}
-
+	  const list = studentsData.map(row => {
+		const name = row[1];
+		let score = 0;
+		if (mode === 'week') {
+		  const idx = 2 + (weekSel - 1);
+		  score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
+		} else {
+		  const last = row[row.length - 1];
+		  score = last !== undefined && last !== "" ? Number(last) : 0;
+		}
 		return { name, score };
 	  });
 
