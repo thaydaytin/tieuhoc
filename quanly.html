@@ -423,52 +423,72 @@ let chartInstance = null;
 /* ============================
   HÀM HASH SHA-256 (dùng cho checkP) 
   ============================ */
-async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
+	async function sha256(str){
+	  const buffer = new TextEncoder().encode(str);
+	  const hash = await crypto.subtle.digest("SHA-256", buffer);
+	  return Array
+			.from(new Uint8Array(hash))
+			.map(b => b.toString(16).padStart(2,"0"))
+			.join("");
+	}
 
 /* ============================
   ĐĂNG NHẬP 
   ============================ */
-async function attemptLogin(){
-  const pass = document.getElementById("passwordInput").value || "";
-  if(!pass){ showLoginError("Vui lòng nhập mật khẩu"); return; }
-  try{
-    const resp = await fetch("pw.json");
-    if(!resp.ok){ showLoginError("Không tìm thấy pw.json"); return; }
-    const j = await resp.json();
-    const correctHash = j.hash;
-    const entered = await sha256(pass);
-	
-    if(entered === correctHash){
-      // success
-      document.getElementById("loginOverlay").style.display = "none";
-      document.getElementById("mainHeader").style.display = "";
-      document.getElementById("mainContent").style.display = "";
-      document.getElementById("fabTools").style.display = "";
-      // render UI
-      renderClassCards();
-      populateWeekSelector();
-      populateRankingWeek();
-      // select first class automatically
-      const first = document.querySelector(".class-item");
-      if(first) first.click();
-    } else {
-      showLoginError("Mật khẩu sai");
-    }
-  }catch(e){
-    console.error("Login error:", e);
-    showLoginError("Lỗi khi kiểm tra mật khẩu");
-  }
-}
+	async function attemptLogin() {
+	  const pass = document.getElementById("passwordInput").value || "";
+	  if (!pass) {
+		showLoginError("Vui lòng nhập mật khẩu");
+		return;
+	  }
 
-function showLoginError(txt){
-  const el = document.getElementById("loginError");
-  el.style.display = "block";
-  el.textContent = txt;
-}
-function logout(){
-  // đơn giản reload trang để hiện lại login
-  window.location.reload();
-}
+	  try {
+		const resp = await fetch("pw.json");
+		if (!resp.ok) {
+		  showLoginError("Không tìm thấy pw.json");
+		  return;
+		}
+
+		const j = await resp.json();
+		const correctHash = j.hash;
+		const entered = await sha256(pass);
+
+		if (entered === correctHash) {
+
+		  // Ẩn màn hình đăng nhập
+		  document.getElementById("loginScreen").style.display = "none";
+
+		  // Hiện giao diện chính
+		  document.getElementById("mainContainer").style.display = "";
+
+		  // Khởi tạo UI
+		  renderClassCards();
+		  populateWeekSelector();
+		  populateRankingWeek();
+
+		  // Tự chọn lớp đầu tiên
+		  const first = document.querySelector(".class-item");
+		  if (first) first.click();
+
+		} else {
+		  showLoginError("Mật khẩu sai");
+		}
+
+	  } catch (e) {
+		console.error("Login error:", e);
+		showLoginError("Lỗi khi kiểm tra mật khẩu");
+	  }
+	}
+
+	function showLoginError(txt){
+	  const el = document.getElementById("loginError");
+	  el.style.display = "block";
+	  el.textContent = txt;
+	}
+	function logout(){
+	  // đơn giản reload trang để hiện lại login
+	  window.location.reload();
+	}
 
 /* =========== UI INIT =========== */
 // Render class cards etc only after login (renderClassCards called in attemptLogin on success)
