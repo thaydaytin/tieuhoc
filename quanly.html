@@ -943,22 +943,26 @@ function closeWheel() {
 		const x = e.clientX - rect.left - wheelCanvas.width / 2;
 		const y = e.clientY - rect.top  - wheelCanvas.height / 2;
 
-		// tính góc click
+		// Góc click theo chuẩn “12 giờ = 0 rad”
 		let clickAngle = Math.atan2(y, x);
+		clickAngle = (clickAngle + Math.PI / 2);
+
 		if (clickAngle < 0) clickAngle += Math.PI * 2;
+		if (clickAngle >= Math.PI * 2) clickAngle -= Math.PI * 2;
 
-		// quy đổi theo startAngle hiện tại
-		let adjustedAngle = clickAngle - startAngle;
-		if (adjustedAngle < 0) adjustedAngle += Math.PI * 2;
+		// Chuẩn hóa theo startAngle hiện tại
+		let adjusted = clickAngle - startAngle;
+		if (adjusted < 0) adjusted += Math.PI * 2;
 
-		// xác định index
-		const index = Math.floor(adjustedAngle / arc);
+		// Tính index ứng với lát
+		let idx = Math.floor(adjusted / arc);
+		idx = idx % studentsForWheel.length;
 
-		selectedIndex = index;   // biến global để spinWheel biết mục tiêu
+		selectedIndex = idx;
 
-		// quay theo mục tiêu
 		spinWheelTarget();
 	}
+
 	function spinWheelTarget() {
 		if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
 		audioSpin.currentTime = 0;
@@ -968,10 +972,13 @@ function closeWheel() {
 		spinTime = 0;
 		spinTimeTotal = 6000;
 
-		targetStopAngle = (Math.PI * 2 - (selectedIndex * arc + arc/2)) + Math.PI/2;
+		let targetAngle = selectedIndex * arc;
+		// mũi tên ở hướng 12 giờ → phải bù thêm π/2
+		targetStopAngle = Math.PI * 2 - targetAngle + Math.PI / 2;
 
 		rotateWheelTarget();
 	}
+
 	function rotateWheelTarget() {
 		spinTime += 30;
 
@@ -982,12 +989,13 @@ function closeWheel() {
 			return;
 		}
 
-    const t = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-    startAngle += t * Math.PI / 180;
+		const t = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+		startAngle += t * Math.PI / 180;
 
-    drawWheel();
-    requestAnimationFrame(rotateWheelTarget);
-}
+		drawWheel();
+		requestAnimationFrame(rotateWheelTarget);
+	}
+
 
 function stopRotateWheelTarget() {
     audioSpin.pause();
