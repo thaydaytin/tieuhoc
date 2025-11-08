@@ -421,7 +421,7 @@ let studentsData = []; // array of rows returned from sheet (including id + name
 let chartInstance = null;
 
 /* ============================
-  HÀM HASH SHA-256 (dùng cho checkP)
+  HÀM HASH SHA-256 (dùng cho checkP) 
   ============================ */
 async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
 
@@ -437,6 +437,7 @@ async function attemptLogin(){
     const j = await resp.json();
     const correctHash = j.hash;
     const entered = await sha256(pass);
+	
     if(entered === correctHash){
       // success
       document.getElementById("loginOverlay").style.display = "none";
