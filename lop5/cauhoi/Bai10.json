@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Bản quyền tác giả là gì?",
+    "choices": [
+      "Là quyền sử dụng máy tính của mọi người",
+      "Là quyền sở hữu của người tạo ra tác phẩm đối với tác phẩm trí tuệ của họ",
+      "Là quyền được sao chép mọi thông tin miễn phí",
+      "Là quyền được tạo ra phần mềm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hành động nào thể hiện sự tôn trọng bản quyền tác giả khi em sử dụng thông tin từ Internet?",
+    "choices": [
+      "Tự nhận nội dung đó là của mình",
+      "Sao chép toàn bộ nội dung mà không ghi nguồn",
+      "Ghi rõ nguồn thông tin, tên tác giả (nếu có)",
+      "Thay đổi nội dung một chút rồi chia sẻ"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Tác phẩm trí tuệ có bản quyền có thể bao gồm những nội dung nào?",
+    "choices": [
+      "Bài hát, câu chuyện, ảnh chụp",
+      "Đoạn phim, chương trình máy tính",
+      "Cả A và B",
+      "Chỉ là các con số"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Mục đích của việc tôn trọng bản quyền tác giả là gì?",
+    "choices": [
+      "Giúp các tác giả không cần sáng tạo nữa",
+      "Khích lệ tác giả tiếp tục sáng tạo ra nhiều tác phẩm hơn",
+      "Làm cho thông tin ít đi",
+      "Tiết kiệm chi phí in ấn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hành động nào sau đây là vi phạm bản quyền?",
+    "choices": [
+      "Mua một quyển sách có bản quyền",
+      "Xem một bộ phim miễn phí đã được cấp phép",
+      "Sao chép và phân phối phần mềm có bản quyền mà chưa được phép",
+      "Tìm kiếm thông tin trên Google"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc tôn trọng bản quyền tác giả là thể hiện sự tôn trọng điều gì?",
+    "choices": [
+      "Quyền lực của người nổi tiếng",
+      "Công sức và chất xám của tác giả",
+      "Tốc độ của máy tính",
+      "Các thương hiệu lớn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em tìm thấy một hình ảnh đẹp trên mạng và muốn dùng nó trong bài trình chiếu của mình, em nên làm gì để tôn trọng bản quyền?",
+    "choices": [
+      "Sử dụng ngay mà không cần quan tâm nguồn gốc",
+      "Hỏi ý kiến tác giả hoặc ghi rõ nguồn của hình ảnh",
+      "Thay đổi màu sắc của hình ảnh",
+      "Xóa hình ảnh đó đi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sử dụng nội dung thông tin của người khác, em cần ghi rõ những thông tin nào?",
+    "choices": [
+      "Tên tác giả, tên tác phẩm, hoặc địa chỉ trang web",
+      "Ngày giờ em sử dụng",
+      "Loại máy tính em đang dùng",
+      "Cả A, B và C"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tôn trọng bản quyền tác giả là một hành động thể hiện sự:",
+    "choices": [
+      "Không cần thiết",
+      "Thiếu trách nhiệm",
+      "Tuân thủ pháp luật",
+      "Độc quyền"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em sử dụng một đoạn nhạc nền cho video mà không xin phép tác giả, đó có phải là hành động tôn trọng bản quyền không?",
+    "choices": [
+      "Có",
+      "Không",
+      "Chỉ là vi phạm nếu đoạn nhạc đó rất hay",
+      "Chỉ là vi phạm nếu em bán video đó"
+    ],
     "answer": 1
   }
 ]

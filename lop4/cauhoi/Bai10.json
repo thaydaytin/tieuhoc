@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Lệnh nào trên thanh công cụ File Explorer được sử dụng để tạo bản sao của tệp ở vị trí mới?",
+    "choices": [
+      "Move to",
+      "Cut",
+      "Copy to",
+      "Rename"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Sau khi Di chuyển (Move to) một thư mục, thư mục đó còn tồn tại ở vị trí cũ không?",
+    "choices": [
+      "Có",
+      "Không",
+      "Chỉ còn nếu là tệp văn bản",
+      "Tùy thuộc vào phím Shift"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào trên thanh công cụ File Explorer được sử dụng để thay đổi vị trí của tệp?",
+    "choices": [
+      "Copy to",
+      "New Folder",
+      "Move to",
+      "Delete"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Khi sử dụng lệnh Copy to, tệp gốc ở vị trí ban đầu sẽ như thế nào?",
+    "choices": [
+      "Bị xóa khỏi vị trí ban đầu",
+      "Vẫn còn ở vị trí ban đầu",
+      "Bị đổi tên tự động",
+      "Được chuyển vào Thùng rác"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em kéo thả tệp từ thư mục A sang thư mục B (cùng ổ đĩa) mà không nhấn phím Ctrl, thao tác này là gì?",
+    "choices": [
+      "Sao chép",
+      "Xóa",
+      "Di chuyển",
+      "Đổi tên"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để Sao chép (Copy) tệp bằng phương pháp kéo thả chuột, em cần nhấn giữ phím nào trong khi kéo?",
+    "choices": [
+      "Phím Shift",
+      "Phím Ctrl",
+      "Phím Alt",
+      "Phím Enter"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh Copy to và Move to thường nằm ở thẻ nào trên thanh công cụ (Ribbon) của File Explorer?",
+    "choices": [
+      "View",
+      "Share",
+      "Home",
+      "Help"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Mục đích chính của thao tác Move to là gì?",
+    "choices": [
+      "Tạo thêm bản sao để dự phòng",
+      "Thay đổi nơi lưu trữ chính thức của tệp",
+      "Xem nội dung tệp",
+      "Thay đổi thuộc tính tệp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thao tác nào sẽ diễn ra nếu em sử dụng lệnh Move to lên một thư mục?",
+    "choices": [
+      "Chỉ các tệp bên trong thư mục bị di chuyển",
+      "Thư mục đó và tất cả nội dung bên trong bị di chuyển",
+      "Thư mục đó bị xóa",
+      "Thư mục đó được đổi tên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điều gì là điểm khác biệt cơ bản giữa Copy to và Move to?",
+    "choices": [
+      "Copy to dùng cho thư mục, Move to dùng cho tệp",
+      "Copy to giữ lại bản gốc, Move to xóa bản gốc",
+      "Copy to cần hai bước, Move to chỉ cần một bước",
+      "Copy to dùng chuột, Move to dùng bàn phím"
+    ],
     "answer": 1
   }
 ]

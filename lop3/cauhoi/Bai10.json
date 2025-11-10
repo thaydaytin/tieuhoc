@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Thiết bị nào sau đây được dùng để nhập thông tin (chữ, số, kí hiệu) vào máy tính?",
+    "choices": [
+      "Màn hình",
+      "Chuột",
+      "Bàn phím",
+      "Máy in"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Phím nào trên bàn phím thường được dùng để tạo khoảng cách giữa các từ?",
+    "choices": [
+      "Phím Enter",
+      "Phím Shift",
+      "Phím cách (Spacebar)",
+      "Phím Backspace"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Phím nào được dùng để kết thúc một thao tác hoặc xuống dòng khi soạn thảo văn bản?",
+    "choices": [
+      "Phím cách (Spacebar)",
+      "Phím Enter",
+      "Phím Ctrl",
+      "Phím Alt"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Khu vực nào trên bàn phím bao gồm các phím có chữ cái?",
+    "choices": [
+      "Khu vực phím số",
+      "Khu vực phím chữ",
+      "Khu vực phím mũi tên",
+      "Khu vực phím chức năng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phím nào có chức năng xóa kí tự đứng ngay trước con trỏ văn bản?",
+    "choices": [
+      "Phím Enter",
+      "Phím Backspace",
+      "Phím Shift",
+      "Phím cách"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phím nào được sử dụng để viết chữ hoa khi gõ văn bản?",
+    "choices": [
+      "Phím Enter",
+      "Phím Ctrl",
+      "Phím Shift",
+      "Phím Tab"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phím cách (Spacebar) là phím có đặc điểm gì về kích thước so với các phím khác?",
+    "choices": [
+      "Là phím nhỏ nhất",
+      "Là phím dài nhất",
+      "Là phím hình vuông",
+      "Là phím tròn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phím nào trong khu vực phím chức năng có mũi tên chỉ lên, xuống, trái, phải?",
+    "choices": [
+      "Phím Enter",
+      "Phím Backspace",
+      "Phím mũi tên",
+      "Phím Shift"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Đâu là một trong các khu vực chính của bàn phím được nhắc đến trong bài học?",
+    "choices": [
+      "Khu vực phím màu đỏ",
+      "Khu vực phím cảm ứng",
+      "Khu vực phím chữ",
+      "Khu vực phím hình tròn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Số lượng phím trên bàn phím máy tính thường là bao nhiêu?",
+    "choices": [
+      "Khoảng 50 phím",
+      "Ít hơn 10 phím",
+      "Hơn 100 phím",
+      "Chính xác 26 phím"
+    ],
+    "answer": 2
   }
 ]

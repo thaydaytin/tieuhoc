@@ -921,6 +921,7 @@ document.addEventListener("DOMContentLoaded", () => {
 let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
 let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 let audioSpin = null;
+let selectedIndex = -1; // -1: chưa chọn
 
 function openWheel() {
   if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
@@ -968,13 +969,35 @@ function closeWheel() {
 		audioSpin.currentTime = 0;
 		audioSpin.play();
 
-		spinAngleStart = Math.random() * 10 + 20; 
+		// 1. Khởi tạo thời gian quay
 		spinTime = 0;
 		spinTimeTotal = 6000;
+		
+		// 2. Tính Góc Cần Dừng Tuyệt đối (Angle to Stop)
+		// Mỗi lát cắt có kích thước `arc`. Mục tiêu là tâm lát cắt dừng ở 12h.
+		// Góc tâm lát cắt mục tiêu (so với 3h, theo chiều CW): selectedIndex * arc + arc / 2
+		let angleForSelected = selectedIndex * arc + arc / 2;
+		
+		// Góc offset để mục tiêu nằm ở vị trí 12h (90 độ/π/2 CCW từ 3h)
+		let angleToStop = Math.PI * 2 - angleForSelected + Math.PI / 2; 
+		
+		// Đảm bảo góc dừng nằm trong khoảng [0, 2PI)
+		angleToStop = angleToStop % (Math.PI * 2);
 
-		let targetAngle = selectedIndex * arc;
-		// mũi tên ở hướng 12 giờ → phải bù thêm π/2
-		targetStopAngle = Math.PI * 2 - targetAngle + Math.PI / 2;
+		// 3. Thêm số vòng quay (Ví dụ: 5 vòng đầy đủ)
+		const extraSpins = 5; 
+		const fullSpinsAngle = extraSpins * Math.PI * 2;
+		
+		// 4. Tính Góc Quay Thêm Cần Thiết (từ vị trí hiện tại đến vị trí dừng)
+		// Góc cần quay để đi từ startAngle hiện tại đến angleToStop
+		let requiredAngle = angleToStop - startAngle;
+		if (requiredAngle < 0) {
+			requiredAngle += Math.PI * 2; // Quay thêm 1 vòng nếu điểm dừng đã bị vượt qua
+		}
+		
+		// Tổng góc quay = Số vòng quay thêm + Góc cần thiết để đến mục tiêu
+		// CHUYỂN TỪ RADIAN SANG ĐỘ để dùng với hàm Easing
+		spinAngleStart = (fullSpinsAngle + requiredAngle) * 180 / Math.PI;
 
 		rotateWheelTarget();
 	}
@@ -983,14 +1006,29 @@ function closeWheel() {
 		spinTime += 30;
 
 		if (spinTime >= spinTimeTotal) {
-			startAngle = targetStopAngle;
+			// 1. Tính tổng góc quay tích lũy (tính bằng độ)
+			const finalSpinAngleDegrees = easeOut(spinTimeTotal, 0, spinAngleStart, spinTimeTotal);
+			
+			// 2. Cập nhật startAngle cuối cùng (tính bằng Radian)
+			startAngle += finalSpinAngleDegrees * Math.PI / 180; 
+			
+			// 3. Đảm bảo startAngle nằm trong khoảng [0, 2PI)
+			startAngle = startAngle % (Math.PI * 2); 
+			if (startAngle < 0) startAngle += Math.PI * 2;
+			
 			drawWheel();
 			stopRotateWheelTarget();
 			return;
 		}
 
-		const t = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-		startAngle += t * Math.PI / 180;
+		// Góc quay hiện tại (tích lũy) tính bằng độ.
+		const currentSpinAngleDegrees = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+		
+		// Góc quay thay đổi trong lần này (lấy chênh lệch giữa khung hình hiện tại và khung hình trước)
+		const deltaAngle = currentSpinAngleDegrees - (spinTime === 30 ? 0 : easeOut(spinTime - 30, 0, spinAngleStart, spinTimeTotal));
+
+		// Cập nhật startAngle (bằng Radian)
+		startAngle += deltaAngle * Math.PI / 180;
 
 		drawWheel();
 		requestAnimationFrame(rotateWheelTarget);
