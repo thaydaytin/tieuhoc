@@ -981,11 +981,12 @@ function closeWheel() {
 		
 		// Vòng quay cần dừng lại ở vị trí 12h.
 		// Vị trí 12h tương đương với góc: 3 * PI / 2 (270 độ)
+		// Vị trí 12h tương đương với góc: 3 * PI / 2 (270 độ)
 		const targetStopPosition = 3 * Math.PI / 2;
-		
+
 		// Góc bù trừ cần thiết (TargetPosition - TargetAngle)
 		// Phải đảm bảo tâm của lát cắt dừng tại 12h, nên ta cần bù trừ:
-		let requiredStopOffset = targetStopPosition - targetAngle - arc / 2; // arc/2: đưa về tâm lát cắt
+		let requiredStopOffset = targetStopPosition - targetAngle - arc / 2 + Math.PI / 2; //
 		
 		// B. Thêm số vòng quay và tính Góc Quay Tổng
 		const extraSpins = 5; 
