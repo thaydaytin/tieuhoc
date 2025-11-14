@@ -959,17 +959,7 @@ function closeWheel() {
 		let idx = Math.floor(adjusted / arc);
 		idx = idx % studentsForWheel.length;
 
-		// SỬA LỖI LỆCH CHỈ SỐ: 
-		// Do vòng quay của bạn quay ngược chiều kim đồng hồ so với chỉ số mảng 
-		// và có sự bù trừ góc, chúng ta cần tính lại chỉ số đích.
-		
-		// 1. Tính toán chỉ số mục tiêu: (tổng số học sinh - index hiện tại)
-		let targetIndex = studentsForWheel.length - idx;
-		
-		// 2. Bù trừ và đảm bảo nó nằm trong phạm vi mảng
-		targetIndex = (targetIndex + 1) % studentsForWheel.length; // +1 là cần thiết để bù trừ pha
-
-		selectedIndex = targetIndex;
+		selectedIndex = idx;
 
 		spinWheelTarget();
 	}
@@ -1038,7 +1028,7 @@ function closeWheel() {
 			if (startAngle < 0) startAngle += Math.PI * 2;
 			
 			drawWheel();
-			stopRotateWheelTarget();
+			stopRotateWheel();
 			return;
 		}
 
