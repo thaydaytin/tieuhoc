@@ -932,7 +932,7 @@ function openWheel() {
   wheelCanvas = document.getElementById("wheelCanvas");
   ctx = wheelCanvas.getContext("2d");
   drawWheel();
-  //wheelCanvas.onclick = chooseStudentByClick;
+  wheelCanvas.onclick = chooseStudentByClick;
 }
 function closeWheel() {
   document.getElementById("wheelPopup").style.display = "none";
@@ -1027,7 +1027,7 @@ function closeWheel() {
 			if (startAngle < 0) startAngle += Math.PI * 2;
 			
 			drawWheel();
-			stopRotateWheelTarget();
+			stopRotateWheel();
 			return;
 		}
 
