@@ -955,11 +955,12 @@ function closeWheel() {
 		let adjusted = clickAngle - startAngle;
 		if (adjusted < 0) adjusted += Math.PI * 2;
 
-		// Tính index ứng với lát
+		// Chỉ số lát cắt được click
 		let idx = Math.floor(adjusted / arc);
 		idx = idx % studentsForWheel.length;
-
-		selectedIndex = idx;
+		
+		// Gán chỉ số chính xác vào biến toàn cục
+		selectedIndex = idx; // <--- KHÔNG CẦN BÙ TRỪ PHỨC TẠP NẾU LOGIC QUAY ĐÚNG
 
 		spinWheelTarget();
 	}
@@ -969,45 +970,38 @@ function closeWheel() {
 		audioSpin.currentTime = 0;
 		audioSpin.play();
 
-		// 1. Khởi tạo thời gian quay
 		spinTime = 0;
 		spinTimeTotal = 6000;
 		
-		// 2. Tính Góc Cần Dừng (Angle to Stop)
-		
-		// A. Góc tâm lát cắt mục tiêu (từ 3h, theo chiều kim đồng hồ, tính bằng Radian):
-		// Vị trí của lát cắt được chọn (selectedIndex)
-		let targetAngle = selectedIndex * arc;
-		
-		// Vòng quay cần dừng lại ở vị trí 12h.
-		// Vị trí 12h tương đương với góc: 3 * PI / 2 (270 độ)
-		// Vị trí 12h tương đương với góc: 3 * PI / 2 (270 độ)
-		const targetStopPosition = 3 * Math.PI / 2;
+		// 1. Vị trí dừng mục tiêu (Target Stop Position)
+		// Vị trí 12h tương đương với góc: 3 * PI / 2 (270 độ), tính từ 3h theo chiều kim đồng hồ
+		const TARGET_STOP_RADIAN = 3 * Math.PI / 2; 
 
-		// Góc bù trừ cần thiết (TargetPosition - TargetAngle)
-		// Phải đảm bảo tâm của lát cắt dừng tại 12h, nên ta cần bù trừ:
-		let requiredStopOffset = targetStopPosition - targetAngle - arc / 2 + Math.PI / 2; //
+		// 2. Góc tâm lát cắt mục tiêu (Target Center Angle)
+		// Góc của tâm lát cắt [selectedIndex] khi vòng quay ở trạng thái startAngle = 0
+		let targetCenterAngle = selectedIndex * arc + arc / 2; // Lấy góc bắt đầu + nửa kích thước lát cắt
 		
-		// B. Thêm số vòng quay và tính Góc Quay Tổng
+		// 3. Góc cần bù trừ (Angle Offset)
+		// Khoảng cách cần quay để đưa targetCenterAngle đến vị trí dừng 12h
+		let angleOffset = TARGET_STOP_RADIAN - targetCenterAngle; // <-- LOGIC ĐÃ ĐƯỢC ĐƠN GIẢN VÀ SỬA LỖI
+		
+		// Đảm bảo angleOffset dương và nhỏ hơn 2PI
+		angleOffset = angleOffset % (Math.PI * 2);
+		if (angleOffset < 0) angleOffset += Math.PI * 2;
+
+		// 4. Góc quay bổ sung (từ startAngle hiện tại)
+		let requiredAngle = angleOffset - (startAngle % (Math.PI * 2));
+		
+		// Đảm bảo requiredAngle dương và quay ít nhất 1 vòng nếu cần
+		if (requiredAngle < 0) {
+			requiredAngle += Math.PI * 2; 
+		}
+		
+		// 5. Thêm số vòng quay đầy đủ (Full Spins)
 		const extraSpins = 5; 
 		const fullSpinsAngle = extraSpins * Math.PI * 2;
 		
-		// Góc cần quay (từ 0) để đến điểm dừng mong muốn
-		let angleToStop = requiredStopOffset;
-		
-		// Đảm bảo góc dừng luôn là dương và nhỏ hơn 2PI
-		angleToStop = angleToStop % (Math.PI * 2); 
-		if (angleToStop < 0) {
-			angleToStop += Math.PI * 2;
-		}
-
-		// Góc quay bổ sung (từ startAngle hiện tại)
-		let requiredAngle = angleToStop - (startAngle % (Math.PI * 2));
-		if (requiredAngle < 0) {
-			requiredAngle += Math.PI * 2; // Nếu điểm dừng đã bị vượt qua, quay thêm 1 vòng
-		}
-		
-		// Tổng góc quay (tính bằng ĐỘ) = Số vòng quay thêm + Góc cần thiết
+		// 6. Tổng góc quay (Chuyển sang ĐỘ để dùng với hàm Easing)
 		spinAngleStart = (fullSpinsAngle + requiredAngle) * 180 / Math.PI;
 
 		rotateWheelTarget();
@@ -1028,7 +1022,7 @@ function closeWheel() {
 			if (startAngle < 0) startAngle += Math.PI * 2;
 			
 			drawWheel();
-			stopRotateWheel();
+			stopRotateWheelTarget();
 			return;
 		}
 
@@ -1049,19 +1043,23 @@ function closeWheel() {
 
 
 	function stopRotateWheelTarget() {
-		audioSpin.pause();
-
+		// 1. Dừng âm thanh và dọn dẹp
+		if (audioSpin) audioSpin.pause();
+		
+		// 2. Lấy tên học sinh dựa trên chỉ số đã chọn (selectedIndex)
 		const winner = studentsForWheel[selectedIndex];
 		const popup = document.getElementById("winnerPopup");
 
+		// 3. Hiển thị Popup
 		popup.textContent = "🎉 " + winner + " 🎉";
 		popup.style.display = "block";
 		
-		// THÊM: Kích hoạt hiệu ứng pháo hoa
-		triggerFireworks(); 
+		// 4. Hiệu ứng và Tương tác
+		triggerFireworks(); // Kích hoạt pháo hoa
+		popup.onclick = () => { popup.style.display = "none"; }; // Cho phép đóng popup
 		
-		// THÊM: Cho phép đóng popup khi click
-		popup.onclick = () => { popup.style.display = "none"; };
+		// 5. RẤT QUAN TRỌNG: Reset selectedIndex sau khi dừng quay
+		selectedIndex = -1; 
 	}
 
 function drawWheel() {
