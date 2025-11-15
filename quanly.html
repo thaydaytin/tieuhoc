@@ -918,149 +918,180 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 <script>
-let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
-let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
-let audioSpin = null;
-let selectedIndex = -1; // -1: chưa chọn
+	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
+	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
+	let audioSpin = null;
+	let selectedIndex = -1; // -1: chưa chọn
 
-function openWheel() {
-  if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
-  studentsForWheel = studentsData.map(r => r[1]);
-  arc = Math.PI * 2 / studentsForWheel.length;
-  document.getElementById("wheelPopup").style.display = "flex";
-  document.getElementById("winnerPopup").style.display = "none";
-  wheelCanvas = document.getElementById("wheelCanvas");
-  ctx = wheelCanvas.getContext("2d");
-  drawWheel();
-  wheelCanvas.onclick = chooseStudentByClick;
-}
-function closeWheel() {
-  document.getElementById("wheelPopup").style.display = "none";
-  document.getElementById("winnerPopup").style.display = "none";
-  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
-}
+	function openWheel() {
+	  if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
+	  studentsForWheel = studentsData.map(r => r[1]);
+	  arc = Math.PI * 2 / studentsForWheel.length;
+	  document.getElementById("wheelPopup").style.display = "flex";
+	  document.getElementById("winnerPopup").style.display = "none";
+	  wheelCanvas = document.getElementById("wheelCanvas");
+	  ctx = wheelCanvas.getContext("2d");
+	  drawWheel();
+	  wheelCanvas.onclick = chooseStudentByClick;
+	}
+	function closeWheel() {
+	  document.getElementById("wheelPopup").style.display = "none";
+	  document.getElementById("winnerPopup").style.display = "none";
+	  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
+	}
+		// ---------------- Helper: normalize góc về [0, 2PI)
+	function normalizeAngle(a){
+	  const TWO = Math.PI * 2;
+	  a = a % TWO;
+	  if (a < 0) a += TWO;
+	  return a;
+	}
+
+	/* ============================
+	   Chọn theo click -> quay tới lát được click
+	   ============================ */
 	function chooseStudentByClick(e) {
-		const rect = wheelCanvas.getBoundingClientRect();
-		const x = e.clientX - rect.left - wheelCanvas.width / 2;
-		const y = e.clientY - rect.top  - wheelCanvas.height / 2;
+	  if (!wheelCanvas || !ctx) return;
+	  const rect = wheelCanvas.getBoundingClientRect();
+	  const x = e.clientX - rect.left - wheelCanvas.width / 2;
+	  const y = e.clientY - rect.top  - wheelCanvas.height / 2;
 
-		// Góc click theo chuẩn “12 giờ = 0 rad”
-		let clickAngle = Math.atan2(y, x);
-		clickAngle = (clickAngle + Math.PI / 2);
+	  // atan2 trả về góc theo trục +X, với y dương về dưới (canvas)
+	  // Ta muốn 12h (top) = 0 → thêm +PI/2
+	  let clickAngle = Math.atan2(y, x) + Math.PI/2;
+	  clickAngle = normalizeAngle(clickAngle);
 
-		if (clickAngle < 0) clickAngle += Math.PI * 2;
-		if (clickAngle >= Math.PI * 2) clickAngle -= Math.PI * 2;
+	  // Chuẩn hóa startAngle về [0,2PI)
+	  const sa = normalizeAngle(startAngle);
 
-		// Chuẩn hóa theo startAngle hiện tại
-		let adjusted = clickAngle - startAngle;
-		if (adjusted < 0) adjusted += Math.PI * 2;
+	  // Góc tương đối so với startAngle: bao nhiêu rad tính từ 12h theo chiều kim đồng hồ
+	  // Nếu wheel đang xoay theo startAngle, thì lát i có góc trung tâm = sa + i*arc + arc/2
+	  // Ta tìm idx sao cho clickAngle nằm trong khoảng lát đó
+	  let adjusted = clickAngle - sa;
+	  adjusted = normalizeAngle(adjusted);
 
-		// Chỉ số lát cắt được click
-		let idx = Math.floor(adjusted / arc);
-		idx = idx % studentsForWheel.length;
-		
-		// Gán chỉ số chính xác vào biến toàn cục
-		selectedIndex = idx; // <--- KHÔNG CẦN BÙ TRỪ PHỨC TẠP NẾU LOGIC QUAY ĐÚNG
+	  let idx = Math.floor(adjusted / arc);
+	  // phòng trường hợp biên
+	  if (idx < 0) idx = 0;
+	  if (idx >= studentsForWheel.length) idx = studentsForWheel.length - 1;
 
-		spinWheelTarget();
+	  selectedIndex = idx;
+
+	  // Bắt đầu quay tới target này
+	  spinWheelTarget();
 	}
 
+	/* ============================
+	   Quay tới target đã set selectedIndex
+	   ============================ */
 	function spinWheelTarget() {
-		if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
-		audioSpin.currentTime = 0;
-		audioSpin.play();
+	  if (!studentsForWheel || studentsForWheel.length === 0) return;
+	  if (selectedIndex < 0 || selectedIndex >= studentsForWheel.length) {
+		console.warn("selectedIndex out of range:", selectedIndex);
+		return;
+	  }
 
-		spinTime = 0;
-		spinTimeTotal = 6000;
-		
-		// 1. Vị trí dừng mục tiêu (Target Stop Position)
-		// Vị trí 12h tương đương với góc: 3 * PI / 2 (270 độ), tính từ 3h theo chiều kim đồng hồ
-		const TARGET_STOP_RADIAN = 3 * Math.PI / 2; 
+	  if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
+	  audioSpin.currentTime = 0;
+	  audioSpin.play();
 
-		// 2. Góc tâm lát cắt mục tiêu (Target Center Angle)
-		// Góc của tâm lát cắt [selectedIndex] khi vòng quay ở trạng thái startAngle = 0
-		let targetCenterAngle = selectedIndex * arc + arc / 2; // Lấy góc bắt đầu + nửa kích thước lát cắt
-		
-		// 3. Góc cần bù trừ (Angle Offset)
-		// Khoảng cách cần quay để đưa targetCenterAngle đến vị trí dừng 12h
-		let angleOffset = TARGET_STOP_RADIAN - targetCenterAngle; // <-- LOGIC ĐÃ ĐƯỢC ĐƠN GIẢN VÀ SỬA LỖI
-		
-		// Đảm bảo angleOffset dương và nhỏ hơn 2PI
-		angleOffset = angleOffset % (Math.PI * 2);
-		if (angleOffset < 0) angleOffset += Math.PI * 2;
+	  spinTime = 0;
+	  spinTimeTotal = 6000; // tổng thời gian ms
 
-		// 4. Góc quay bổ sung (từ startAngle hiện tại)
-		let requiredAngle = angleOffset - (startAngle % (Math.PI * 2));
-		
-		// Đảm bảo requiredAngle dương và quay ít nhất 1 vòng nếu cần
-		if (requiredAngle < 0) {
-			requiredAngle += Math.PI * 2; 
-		}
-		
-		// 5. Thêm số vòng quay đầy đủ (Full Spins)
-		const extraSpins = 5; 
-		const fullSpinsAngle = extraSpins * Math.PI * 2;
-		
-		// 6. Tổng góc quay (Chuyển sang ĐỘ để dùng với hàm Easing)
-		spinAngleStart = (fullSpinsAngle + requiredAngle) * 180 / Math.PI;
+	  // Vị trí dừng mong muốn (12h): theo code ban đầu, 12h tương đương 3*PI/2
+	  const TARGET_STOP_RADIAN = 3 * Math.PI / 2;
 
-		rotateWheelTarget();
+	  // Góc tâm hiện tại của lát selectedIndex (tính theo rad)
+	  // drawWheel dùng: angle = startAngle + i*arc  => tâm = startAngle + i*arc + arc/2
+	  const currentCenter = normalizeAngle(startAngle + selectedIndex * arc + arc/2);
+
+	  // Nếu muốn lát đó dừng ở TARGET_STOP_RADIAN, cần quay thêm delta = desired - currentCenter
+	  let delta = TARGET_STOP_RADIAN - currentCenter;
+	  delta = normalizeAngle(delta); // giờ delta ∈ [0, 2π)
+
+	  // Thêm vài vòng quay đầy đủ để nhìn đẹp (extra spins)
+	  const extraSpins = 5;
+	  const totalRotateRad = delta + extraSpins * Math.PI * 2;
+
+	  // rotateWheelTarget sử dụng spinAngleStart (đơn vị độ) cho easing giống cũ
+	  spinAngleStart = totalRotateRad * 180 / Math.PI;
+
+	  // gọi hàm xoay (sử dụng requestAnimationFrame để mượt)
+	  rotateWheelTarget();
 	}
 
-	function rotateWheelTarget() {
-		spinTime += 30;
+	/* ============================
+	   Hàm xoay (dùng requestAnimationFrame)
+	   ============================ */
+	function rotateWheelTarget(timestamp) {
+	  // Sử dụng cơ chế spinTime tăng dần (ms)
+	  // Nếu spinTime là 0, khởi tạo biến timeStart
+	  if (!rotateWheelTarget._last) rotateWheelTarget._last = performance.now();
+	  const now = performance.now();
+	  const dt = now - rotateWheelTarget._last;
+	  rotateWheelTarget._last = now;
 
-		if (spinTime >= spinTimeTotal) {
-			// 1. Tính tổng góc quay tích lũy (tính bằng độ)
-			const finalSpinAngleDegrees = easeOut(spinTimeTotal, 0, spinAngleStart, spinTimeTotal);
-			
-			// 2. Cập nhật startAngle cuối cùng (tính bằng Radian)
-			startAngle += finalSpinAngleDegrees * Math.PI / 180; 
-			
-			// 3. Đảm bảo startAngle nằm trong khoảng [0, 2PI)
-			startAngle = startAngle % (Math.PI * 2); 
-			if (startAngle < 0) startAngle += Math.PI * 2;
-			
-			drawWheel();
-			stopRotateWheelTarget();
-			return;
-		}
+	  spinTime += dt;
 
-		// Góc quay hiện tại (tích lũy) tính bằng độ.
-		const currentSpinAngleDegrees = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-		
-		// Góc quay thay đổi trong lần này (lấy chênh lệch giữa khung hình hiện tại và khung hình trước)
-		// Điều này đảm bảo tốc độ thay đổi dần dần.
-		const deltaAngle = currentSpinAngleDegrees - (spinTime === 30 ? 0 : easeOut(spinTime - 30, 0, spinAngleStart, spinTimeTotal));
-
-		// Cập nhật startAngle (bằng Radian)
-		startAngle += deltaAngle * Math.PI / 180;
-
+	  if (spinTime >= spinTimeTotal) {
+		// Kết thúc: áp dụng góc cuối
+		const finalSpinAngleDegrees = easeOut(spinTimeTotal, 0, spinAngleStart, spinTimeTotal);
+		startAngle += finalSpinAngleDegrees * Math.PI / 180;
+		startAngle = normalizeAngle(startAngle);
 		drawWheel();
-		// Dùng requestAnimationFrame thay cho setTimeout để quay mượt mà hơn
-		requestAnimationFrame(rotateWheelTarget); 
+
+		// reset helper
+		rotateWheelTarget._last = null;
+		stopRotateWheelTarget();
+		return;
+	  }
+
+	  // Góc quay hiện tại (theo easing), đơn vị độ
+	  const currentSpinAngleDegrees = easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+	  // Tính delta góc (so với khung trước) để cộng vào startAngle
+	  // Ta cần biết giá trị easing ở lần tick trước để lấy delta; lưu tạm
+	  const prevSpinAngleDegrees = easeOut(Math.max(0, spinTime - dt), 0, spinAngleStart, spinTimeTotal);
+	  const deltaDeg = currentSpinAngleDegrees - prevSpinAngleDegrees;
+
+	  // Cộng delta (chuyển sang rad)
+	  startAngle += deltaDeg * Math.PI / 180;
+	  startAngle = normalizeAngle(startAngle);
+
+	  drawWheel();
+
+	  // request next frame
+	  requestAnimationFrame(rotateWheelTarget);
 	}
 
-
+	/* ============================
+	   Stop after rotateWheelTarget hoàn tất
+	   ============================ */
 	function stopRotateWheelTarget() {
-		// 1. Dừng âm thanh và dọn dẹp
-		if (audioSpin) audioSpin.pause();
-		
-		// 2. Lấy tên học sinh dựa trên chỉ số đã chọn (selectedIndex)
-		const winner = studentsForWheel[selectedIndex];
-		const popup = document.getElementById("winnerPopup");
+	  if (audioSpin) audioSpin.pause();
 
-		// 3. Hiển thị Popup
-		popup.textContent = "🎉 " + winner + " 🎉";
-		popup.style.display = "block";
-		
-		// 4. Hiệu ứng và Tương tác
-		triggerFireworks(); // Kích hoạt pháo hoa
-		popup.onclick = () => { popup.style.display = "none"; }; // Cho phép đóng popup
-		
-		// 5. RẤT QUAN TRỌNG: Reset selectedIndex sau khi dừng quay
-		selectedIndex = -1; 
+	  // selectedIndex phải còn để đọc tên
+	  let winnerName = "(không xác định)";
+	  if (selectedIndex >= 0 && selectedIndex < studentsForWheel.length) {
+		winnerName = studentsForWheel[selectedIndex];
+	  } else {
+		// phòng ngừa: nếu selectedIndex sai số, tính fallback theo startAngle
+		const degrees = startAngle * 180 / Math.PI + 90;
+		const arcd = arc * 180 / Math.PI;
+		const fallbackIndex = Math.floor((360 - (degrees % 360)) / arcd) % studentsForWheel.length;
+		if (fallbackIndex >= 0 && fallbackIndex < studentsForWheel.length) winnerName = studentsForWheel[fallbackIndex];
+	  }
+
+	  const popup = document.getElementById("winnerPopup");
+	  popup.textContent = "🎉 " + winnerName + " 🎉";
+	  popup.style.display = "block";
+	  triggerFireworks();
+	  popup.onclick = () => { popup.style.display = "none"; };
+
+	  // LƯU Ý: không reset selectedIndex ở đây trước khi dùng tên;
+	  // có thể reset sau vài giây nếu muốn:
+	  setTimeout(()=> { selectedIndex = -1; }, 1500);
 	}
+
 
 function drawWheel() {
   const cx = 300, cy = 300;
