@@ -940,7 +940,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
 	}
 		// ---------------- Helper: normalize góc về [0, 2PI)
-		// Helper
 	function normalizeAngle(a){
 	  const TWO = Math.PI * 2;
 	  a = a % TWO;
@@ -949,7 +948,41 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	/* ============================
-	   Quay tới lát được chọn (target)
+	   Chọn theo click -> quay tới lát được click
+	   ============================ */
+	function chooseStudentByClick(e) {
+	  if (!wheelCanvas || !ctx) return;
+	  const rect = wheelCanvas.getBoundingClientRect();
+	  const x = e.clientX - rect.left - wheelCanvas.width / 2;
+	  const y = e.clientY - rect.top  - wheelCanvas.height / 2;
+
+	  // atan2 trả về góc theo trục +X, với y dương về dưới (canvas)
+	  // Ta muốn 12h (top) = 0 → thêm +PI/2
+	  let clickAngle = Math.atan2(y, x) + Math.PI/2;
+	  clickAngle = normalizeAngle(clickAngle);
+
+	  // Chuẩn hóa startAngle về [0,2PI)
+	  const sa = normalizeAngle(startAngle);
+
+	  // Góc tương đối so với startAngle: bao nhiêu rad tính từ 12h theo chiều kim đồng hồ
+	  // Nếu wheel đang xoay theo startAngle, thì lát i có góc trung tâm = sa + i*arc + arc/2
+	  // Ta tìm idx sao cho clickAngle nằm trong khoảng lát đó
+	  let adjusted = clickAngle - sa;
+	  adjusted = normalizeAngle(adjusted);
+
+	  let idx = Math.floor(adjusted / arc);
+	  // phòng trường hợp biên
+	  if (idx < 0) idx = 0;
+	  if (idx >= studentsForWheel.length) idx = studentsForWheel.length - 1;
+
+	  selectedIndex = idx;
+
+	  // Bắt đầu quay tới target này
+	  spinWheelTarget();
+	}
+
+	/* ============================
+	   Quay tới target đã set selectedIndex
 	   ============================ */
 	function spinWheelTarget() {
 	  if (!studentsForWheel || studentsForWheel.length === 0) return;
@@ -1005,8 +1038,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	  rotateWheelTarget();
 	}
 
+
 	/* ============================
-	   Xoay (dùng requestAnimationFrame) — không thay đổi easing
+	   Hàm xoay (dùng requestAnimationFrame)
 	   ============================ */
 	function rotateWheelTarget(timestamp) {
 	  if (!rotateWheelTarget._last) rotateWheelTarget._last = performance.now();
@@ -1067,9 +1101,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	  // Giữ selectedIndex để đọc tên; reset sau 1.5s
 	  setTimeout(()=> { selectedIndex = -1; }, 1500);
 	}
-
-
-
 function drawWheel() {
   const cx = 300, cy = 300;
   const outsideRadius = 280;
