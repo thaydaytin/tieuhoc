@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để tạo thư mục mới, em cần nháy chuột vào nút lệnh nào trên dải lệnh Home?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Copy to",
+      "New folder",
+      "Delete",
+      "Rename"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Sau khi chọn một tệp, lệnh nào trên dải lệnh Home giúp em đặt tên khác cho tệp đó?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Move to",
+      "Delete",
+      "Rename",
+      "Copy to"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Để tạo ra một bản sao của thư mục ở vị trí khác, em cần sử dụng lệnh nào trên dải lệnh Home?",
+    "choices": [
+      "Move to",
+      "Delete",
+      "Copy to",
+      "New folder"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh nào trên dải lệnh Home cho phép em chuyển hẳn tệp tin từ vị trí hiện tại sang một vị trí mới?",
+    "choices": [
+      "Copy to",
+      "Rename",
+      "Move to",
+      "New folder"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi muốn loại bỏ một thư mục không cần thiết, em chọn thư mục đó rồi nháy vào lệnh nào trên dải lệnh Home?",
+    "choices": [
+      "Copy to",
+      "Delete",
+      "Rename",
+      "Move to"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em sử dụng lệnh 'Move to' để chuyển một tệp, điều gì xảy ra với tệp đó ở vị trí cũ?",
+    "choices": [
+      "Vẫn còn một bản sao",
+      "Bị xóa hoàn toàn",
+      "Bị chuyển vào Thùng rác",
+      "Không còn tệp đó nữa"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để đổi tên một thư mục, sau khi chọn thư mục đó và nháy 'Rename', em cần làm gì tiếp theo?",
+    "choices": [
+      "Nhấn phím Delete",
+      "Nháy vào lệnh Copy to",
+      "Gõ tên mới và nhấn Enter",
+      "Nháy vào lệnh New folder"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em muốn giữ lại tệp gốc và có thêm một bản sao ở thư mục khác, em sẽ dùng lệnh nào trên dải lệnh Home?",
+    "choices": [
+      "Move to",
+      "Delete",
+      "Copy to",
+      "Rename"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi nháy vào lệnh 'Delete' trên dải lệnh Home, tệp bị xóa sẽ được chuyển tới đâu?",
+    "choices": [
+      "Ổ đĩa C:",
+      "Thư mục gốc",
+      "Thùng rác (Recycle Bin)",
+      "Vị trí cố định (Hard Drive)"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi đang ở thư mục 'Baitap', em nháy vào 'New folder' và đặt tên là 'Hinh anh', thư mục 'Hinh anh' sẽ là gì của thư mục 'Baitap'?",
+    "choices": [
+      "Thư mục gốc",
+      "Thư mục cha",
+      "Thư mục con",
+      "Thư mục đã di chuyển"
+    ],
+    "answer": 2
   }
 ]

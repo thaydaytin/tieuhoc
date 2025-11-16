@@ -998,27 +998,43 @@ document.addEventListener("DOMContentLoaded", () => {
 	  spinTime = 0;
 	  spinTimeTotal = 6000; // tổng thời gian ms
 
-	  // Vị trí dừng mong muốn (12h): theo code ban đầu, 12h tương đương 3*PI/2
-	  const TARGET_STOP_RADIAN = 3 * Math.PI / 2;
+	  // --- TÍNH GÓC MŨI TÊN TỪ TOẠ ĐỘ (AN TOÀN)
+	  // Dùng cùng tham số mà drawWheel() dùng
+	  const cx = wheelCanvas.width / 2;
+	  const cy = wheelCanvas.height / 2;
+	  const outsideRadius = 280; // phải khớp với drawWheel()
+	  // vị trí đầu mũi tên theo drawWheel: (cx, cy - outsideRadius + 10)
+	  const arrowX = cx;
+	  const arrowY = cy - outsideRadius + 10;
 
-	  // Góc tâm hiện tại của lát selectedIndex (tính theo rad)
-	  // drawWheel dùng: angle = startAngle + i*arc  => tâm = startAngle + i*arc + arc/2
+	  // Góc mũi tên (tính bằng radian, theo atan2)
+	  // atan2(y - cy, x - cx) trả về góc tương ứng với vector từ tâm tới mũi tên
+	  function normalizeAngle(a){
+		const TWO = Math.PI * 2;
+		a = a % TWO;
+		if (a < 0) a += TWO;
+		return a;
+	  }
+	  const TARGET_STOP_RADIAN = normalizeAngle(Math.atan2(arrowY - cy, arrowX - cx));
+
+	  // Tính góc tâm hiện tại của lát selectedIndex (drawWheel dùng startAngle + i*arc + arc/2)
 	  const currentCenter = normalizeAngle(startAngle + selectedIndex * arc + arc/2);
 
-	  // Nếu muốn lát đó dừng ở TARGET_STOP_RADIAN, cần quay thêm delta = desired - currentCenter
+	  // Delta cần quay (nghiêng theo chiều dương) để đưa currentCenter tới target
 	  let delta = TARGET_STOP_RADIAN - currentCenter;
-	  delta = normalizeAngle(delta); // giờ delta ∈ [0, 2π)
+	  delta = normalizeAngle(delta); // ∈ [0, 2π)
 
-	  // Thêm vài vòng quay đầy đủ để nhìn đẹp (extra spins)
+	  // Thêm vòng để hiệu ứng đẹp
 	  const extraSpins = 5;
 	  const totalRotateRad = delta + extraSpins * Math.PI * 2;
 
-	  // rotateWheelTarget sử dụng spinAngleStart (đơn vị độ) cho easing giống cũ
+	  // spinAngleStart dùng easing (đơn vị độ)
 	  spinAngleStart = totalRotateRad * 180 / Math.PI;
 
-	  // gọi hàm xoay (sử dụng requestAnimationFrame để mượt)
+	  // gọi hàm xoay (dùng rotateWheelTarget như đã có)
 	  rotateWheelTarget();
 	}
+
 
 	/* ============================
 	   Hàm xoay (dùng requestAnimationFrame)

@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Hàng phím cơ sở nằm ở vị trí nào trên bàn phím chữ?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Hàng trên cùng",
+      "Hàng phím số",
+      "Chính giữa khu vực phím chữ",
+      "Hàng dưới cùng"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Các phím nào sau đây thuộc hàng phím cơ sở?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Q, W, E, R, T",
+      "Z, X, C, V, B",
+      "A, S, D, F, J, K, L, ;",
+      "1, 2, 3, 4, 5"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Khi gõ máy tính, hai ngón trỏ của em được đặt ở vị trí nào trên hàng phím cơ sở?",
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Phím A và phím L",
+      "Phím F và phím J",
+      "Phím S và phím K",
+      "Phím D và phím L"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Ngón út của tay trái được đặt ở phím nào trên hàng phím cơ sở?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Phím S",
+      "Phím A",
+      "Phím F",
+      "Phím G"
     ],
-    "answer": 0
+    "answer": 1
+  },
+  {
+    "question": "Ngón cái của hai tay được đặt ở đâu khi em gõ hàng phím cơ sở?",
+    "choices": [
+      "Trên phím Enter",
+      "Trên phím Shift",
+      "Trên phím cách (Spacebar)",
+      "Trên phím Backspace"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phím nào trên hàng phím cơ sở có dấu nổi (gờ nhỏ) giúp em định vị?",
+    "choices": [
+      "Phím A và phím ;",
+      "Phím S và phím L",
+      "Phím F và phím J",
+      "Phím D và phím K"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ngón áp út của tay phải được đặt ở phím nào?",
+    "choices": [
+      "Phím J",
+      "Phím K",
+      "Phím L",
+      "Phím ;"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Vị trí đặt tay trên hàng phím cơ sở còn được gọi là gì?",
+    "choices": [
+      "Vị trí kết thúc",
+      "Vị trí tạm dừng",
+      "Vị trí xuất phát",
+      "Vị trí ngẫu nhiên"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em nhìn xuống bàn phím, em sẽ sử dụng bộ phận nào để xác định vị trí đặt tay nhanh nhất?",
+    "choices": [
+      "Các phím số",
+      "Phím mũi tên",
+      "Dấu nổi trên phím F và J",
+      "Phím Enter"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ngón giữa của tay trái được đặt ở phím nào?",
+    "choices": [
+      "Phím A",
+      "Phím S",
+      "Phím D",
+      "Phím F"
+    ],
+    "answer": 2
   }
 ]

@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Thao tác đầu tiên cần làm để sao chép một đoạn văn bản là gì?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Nháy chuột vào nút Paste",
+      "Chọn khối văn bản cần sao chép",
+      "Gõ lại đoạn văn bản đó",
+      "Di chuyển con trỏ đến vị trí mới"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Để chọn một khối văn bản bằng chuột, em thực hiện thao tác nào?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Nháy chuột phải vào đoạn văn bản",
+      "Kéo thả chuột (nhấn giữ nút chuột trái và kéo) trên đoạn văn bản",
+      "Nhấn phím Enter",
+      "Nhấn nút Copy"
     ],
-    "answer": 0
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào trên dải lệnh Home được dùng để Sao chép (Copy) khối văn bản đã chọn?",
+    "choices": [
+      "Cut",
+      "Paste",
+      "Copy",
+      "Delete"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi sao chép (Copy) một khối văn bản, em cần dùng lệnh nào để chèn nó vào vị trí khác?",
+    "choices": [
+      "Cut",
+      "Paste",
+      "Select",
+      "Undo"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sao chép khối văn bản, khối văn bản đã chọn được lưu tạm thời ở đâu?",
+    "choices": [
+      "Trong thư mục My Documents",
+      "Trên màn hình nền",
+      "Trong bộ nhớ tạm (Clipboard)",
+      "Trong thùng rác"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em muốn chọn toàn bộ một câu, sau khi đặt con trỏ ở đầu câu, em cần làm gì tiếp theo?",
+    "choices": [
+      "Nhấn phím Enter",
+      "Nhấn phím Backspace",
+      "Kéo chuột đến cuối câu",
+      "Nhấn nút Paste"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong phần mềm soạn thảo văn bản, khối văn bản đã được chọn sẽ có đặc điểm nhận biết là gì?",
+    "choices": [
+      "Chữ được in đậm",
+      "Chữ được gạch chân",
+      "Văn bản được bôi đen (nền khác màu)",
+      "Văn bản bị xóa đi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em sao chép (Copy) một khối văn bản, nội dung gốc ở vị trí ban đầu có bị mất đi không?",
+    "choices": [
+      "Có, nội dung sẽ mất đi",
+      "Không, nội dung gốc vẫn còn",
+      "Tùy thuộc vào việc nhấn phím Shift",
+      "Nội dung sẽ bị đổi tên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thực hiện thao tác Dán (Paste), khối văn bản sẽ được chèn vào vị trí nào?",
+    "choices": [
+      "Vị trí ban đầu của nó",
+      "Vị trí con trỏ văn bản đang đứng",
+      "Cuối trang văn bản",
+      "Đầu trang văn bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Các lệnh Copy và Paste thường nằm trong nhóm lệnh nào trên thẻ Home của Word?",
+    "choices": [
+      "Font",
+      "Paragraph",
+      "Clipboard",
+      "Styles"
+    ],
+    "answer": 2
   }
 ]
