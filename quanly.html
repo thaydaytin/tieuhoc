@@ -998,45 +998,72 @@ document.addEventListener("DOMContentLoaded", () => {
 	  spinTime = 0;
 	  spinTimeTotal = 6000; // ms
 
-	  // --- TÍNH GÓC MŨI TÊN TỪ TOẠ ĐỘ (khớp drawWheel)
-	  const cx = wheelCanvas.width / 2;
-	  const cy = wheelCanvas.height / 2;
-	  const outsideRadius = 280; // PHẢI KHỚP drawWheel()
-	  // drawWheel vẽ mũi tên với tip tại (cx, cy - outsideRadius + 10)
+	  // Helper normalize
+	  function normalizeAngle(a){
+		const TWO = Math.PI * 2;
+		a = a % TWO;
+		if (a < 0) a += TWO;
+		return a;
+	  }
+
+	  // Tâm canvas (dùng bounding rect nếu canvas có thể bị scale bằng CSS)
+	  let cx = wheelCanvas.width / 2;
+	  let cy = wheelCanvas.height / 2;
+	  // Nếu bạn có dùng CSS scale, dùng bounding rect:
+	  // const rect = wheelCanvas.getBoundingClientRect();
+	  // cx = rect.width / 2; cy = rect.height / 2;
+
+	  const outsideRadius = 280; // phải khớp drawWheel()
 	  const arrowX = cx;
-	  const arrowY = cy - outsideRadius + 10;
-	  const targetAngle = normalizeAngle(Math.atan2(arrowY - cy, arrowX - cx)); // ∈ [0,2π)
+	  const arrowY = cy - outsideRadius + 10; // điểm mũi tên tip như drawWheel()
 
-	  // Tính startAngle mục tiêu sao cho: startAngle_target + selectedIndex*arc + arc/2 = targetAngle (mod 2π)
+	  // Góc từ tâm tới mũi tên theo hệ atan2
+	  const rawArrowAngle = Math.atan2(arrowY - cy, arrowX - cx); // có thể âm
+	  // Thử một số offset (radian) để dò đúng hướng tham chiếu
+	  const offsets = [0, Math.PI/2, -Math.PI/2, Math.PI, -Math.PI]; // các ứng viên
+	  let best = { offset: offsets[0], error: Number.POSITIVE_INFINITY, startTarget: 0, targetAngle: 0 };
+
 	  const sliceCenterOffset = normalizeAngle(selectedIndex * arc + arc / 2);
-	  let startAngleTarget = normalizeAngle(targetAngle - sliceCenterOffset);
 
-	  // Tính delta cần quay (từ startAngle hiện tại -> startAngleTarget)
-	  let currentStart = normalizeAngle(startAngle);
-	  let delta = normalizeAngle(startAngleTarget - currentStart); // quay theo chiều "tăng góc" để đạt target
-
-	  // Nếu Thầy muốn, có thể chọn chiều quay ngắn nhất:
-	  // if (delta > Math.PI) delta = delta - 2*Math.PI; // (giữ delta có thể âm)
-	  // Nhưng để đảm bảo hiệu ứng đẹp, ta chọn luôn quay "dương" (tăng góc) và thêm vòng
-	  const extraSpins = 5;
-	  const totalRotateRad = delta + extraSpins * Math.PI * 2;
-
-	  // spinAngleStart dùng easing và là số độ quay dương
-	  spinAngleStart = totalRotateRad * 180 / Math.PI;
-
-	  console.log({
-		selectedIndex,
-		targetAngleDeg: (targetAngle*180/Math.PI).toFixed(2),
-		sliceCenterOffsetDeg: (sliceCenterOffset*180/Math.PI).toFixed(2),
-		startAngleDeg: (currentStart*180/Math.PI).toFixed(2),
-		startAngleTargetDeg: (startAngleTarget*180/Math.PI).toFixed(2),
-		deltaDeg: (delta*180/Math.PI).toFixed(2),
-		spinAngleStart
+	  offsets.forEach(off => {
+		const candidateTarget = normalizeAngle(rawArrowAngle + off);
+		const startAngleTarget = normalizeAngle(candidateTarget - sliceCenterOffset);
+		// Nếu đặt startAngle = startAngleTarget, tâm lát selectedIndex sẽ là:
+		const alignedCenter = normalizeAngle(startAngleTarget + selectedIndex * arc + arc/2);
+		// Sai số giữa center và candidateTarget
+		const err = Math.abs(normalizeAngle(alignedCenter - candidateTarget));
+		// map to [0,pi]
+		const errMin = err > Math.PI ? Math.abs(err - 2*Math.PI) : err;
+		if (errMin < best.error) {
+		  best = { offset: off, error: errMin, startTarget: startAngleTarget, targetAngle: candidateTarget };
+		}
 	  });
 
-	  // gọi hàm xoay mượt (requestAnimationFrame)
+	  // Nếu lỗi quá lớn thì log cảnh báo (giúp debug)
+	  console.log("spinWheelTarget debug:", {
+		selectedIndex,
+		rawArrowAngleDeg: (rawArrowAngle*180/Math.PI).toFixed(2),
+		chosenOffsetDeg: (best.offset*180/Math.PI).toFixed(2),
+		targetAngleDeg: (best.targetAngle*180/Math.PI).toFixed(2),
+		sliceCenterOffsetDeg: (sliceCenterOffset*180/Math.PI).toFixed(2),
+		startAngleDeg: (normalizeAngle(startAngle)*180/Math.PI).toFixed(2),
+		startAngleTargetDeg: (best.startTarget*180/Math.PI).toFixed(2),
+		errorDeg: (best.error*180/Math.PI).toFixed(4)
+	  });
+
+	  // Dùng kết quả tốt nhất
+	  const startAngleTarget = best.startTarget;
+	  const currentStart = normalizeAngle(startAngle);
+	  let delta = normalizeAngle(startAngleTarget - currentStart); // quay dương
+	  // Thêm vòng quay cho đẹp
+	  const extraSpins = 5;
+	  const totalRotateRad = delta + extraSpins * Math.PI * 2;
+	  spinAngleStart = totalRotateRad * 180 / Math.PI;
+
+	  // start rotating
 	  rotateWheelTarget();
 	}
+
 
 
 	/* ============================
