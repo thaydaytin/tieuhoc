@@ -246,6 +246,28 @@
 }
 @keyframes blink { from { opacity: 1; transform: translate(-50%, -50%) scale(1);} to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05);} }
 #fireworksCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+/* Avatar image */
+.avatar { position: relative; overflow: hidden; }
+.avatar img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.avatar .initials {
+  width: 56px;
+  height: 56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  font-weight:700;
+  font-size:18px;
+  color:white;
+}
 </style>
 
 </head>
@@ -449,6 +471,8 @@ function logout(){
 // Render class cards etc only after login (renderClassCards called in attemptLogin on success)
 
 /* =========== class cards =========== */
+
+
 const classes = ["3A","3B","3C","4A","4B","4C","5A","5B1","5B2","5C"];
 function renderClassCards(){
   const grid = document.getElementById("classGrid");
@@ -488,6 +512,16 @@ function populateRankingWeek(){
 }
 
 /* =========== select class & load students =========== */
+function avatarSrcCandidates(className, id) {
+  // trả về các đường dẫn thử theo thứ tự ưu tiên
+  // giả sử file đặt tên theo id, không có tiền tố zero-pad
+  const exts = ['jpg', 'png', 'webp'];
+  const base = `hs/${encodeURIComponent(className)}/${encodeURIComponent(String(id))}`;
+  return exts.map(ext => `${base}.${ext}`);
+}
+
+
+
 async function selectClass(className){
   currentClass = className;
   await loadStudents();
@@ -519,7 +553,6 @@ function renderStudents() {
   const wrap = document.getElementById("studentList");
   wrap.innerHTML = "";
 
-  // Nếu không có dữ liệu
   if (!studentsData || studentsData.length === 0) {
     wrap.innerHTML = `
       <div style="grid-column:1/-1;text-align:center;padding:30px" class="muted">
@@ -528,7 +561,6 @@ function renderStudents() {
     return;
   }
 
-  // Tạo thẻ cho từng học sinh
   studentsData.forEach(row => {
     const id = row[0];
     const name = row[1];
@@ -536,15 +568,53 @@ function renderStudents() {
     const weekScore = (row[weekIdx] !== undefined && row[weekIdx] !== "") ? Number(row[weekIdx]) : 0;
     const total = (row[row.length - 1] !== undefined && row[row.length - 1] !== "") ? Number(row[row.length - 1]) : null;
 
-    // Thẻ bao ngoài
     const card = document.createElement("div");
     card.className = "student-card card";
 
-    // Ảnh đại diện (chữ cái tên)
+    // AVATAR: cố gắng load ảnh từ hs/<class>/<id>.(jpg|png|webp). Nếu không có => hiển thị chữ cái
     const avatar = document.createElement("div");
     avatar.className = "avatar";
-    avatar.style.background = randomColorForName(name);
-    avatar.textContent = initials(name);
+
+    const initialsDiv = document.createElement("div");
+    initialsDiv.className = "initials";
+    initialsDiv.style.background = randomColorForName(name);
+    initialsDiv.textContent = initials(name);
+
+    // tạo thẻ img nhưng chưa append ngay — sẽ append nếu load thành công
+    const imgEl = document.createElement("img");
+    imgEl.alt = name;
+    imgEl.style.display = "none"; // ẩn trước khi load thành công
+
+    // thử các đường dẫn khả dĩ
+    const candidates = avatarSrcCandidates(currentClass, id);
+    let attempt = 0;
+
+    function tryNextSrc() {
+      if (attempt >= candidates.length) {
+        // không tìm thấy file => giữ initials (không có ảnh)
+        if (!avatar.contains(initialsDiv)) avatar.appendChild(initialsDiv);
+        return;
+      }
+      const src = candidates[attempt++];
+      imgEl.src = src;
+      // khi load thành công
+      imgEl.onload = function () {
+        imgEl.style.display = "block";
+        // đảm bảo kích thước và bo tròn bằng CSS; thay initial nếu có
+        if (avatar.contains(initialsDiv)) avatar.removeChild(initialsDiv);
+        if (!avatar.contains(imgEl)) avatar.appendChild(imgEl);
+      };
+      // nếu lỗi, thử tiếp ext tiếp theo
+      imgEl.onerror = function () {
+        // tránh loop vô hạn: xóa handler cũ trước khi thử tiếp
+        imgEl.onload = imgEl.onerror = null;
+        tryNextSrc();
+      };
+      // start tải tự động (gán src ở trên sẽ kích hoạt)
+    }
+
+    // bắt đầu thử
+    tryNextSrc();
 
     // Thông tin học sinh
     const info = document.createElement("div");
@@ -565,7 +635,7 @@ function renderStudents() {
     info.appendChild(nm);
     info.appendChild(meta);
 
-    // Các nút hành động
+    // Actions
     const actions = document.createElement("div");
     actions.className = "student-actions";
 
@@ -579,24 +649,18 @@ function renderStudents() {
     dislikeBtn.innerHTML = "👎";
     dislikeBtn.onclick = () => updatePointWeek(id, -1, dislikeBtn);
 
-    // Nhãn nhỏ hiển thị điểm tuần
-    //const badge = document.createElement("div");
-   // badge.className = "score-badge muted";
-   // badge.textContent = `Tuần: ${weekScore}`;
-
     actions.appendChild(likeBtn);
     actions.appendChild(dislikeBtn);
-    //actions.appendChild(badge);
 
-    // Ghép các phần vào card
+    // build card
     card.appendChild(avatar);
     card.appendChild(info);
     card.appendChild(actions);
 
-    // Thêm card vào danh sách
     wrap.appendChild(card);
   });
 }
+
 
 
 /* =========== helper utilities =========== */
