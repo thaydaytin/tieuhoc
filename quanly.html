@@ -922,7 +922,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 	let audioSpin = null;
 	let selectedIndex = -1; // -1: chưa chọn
-	let targetAngleForSpin = TARGET_STOP_RADIAN;
+	let targetAngleForSpin = null;
 
 	function openWheel() {
 	  if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
@@ -954,25 +954,27 @@ document.addEventListener("DOMContentLoaded", () => {
 	function chooseStudentByClick(e) {
 	  if (!wheelCanvas || !ctx) return;
 	  const rect = wheelCanvas.getBoundingClientRect();
-	  const x = e.clientX - rect.left - wheelCanvas.width / 2;
-	  const y = e.clientY - rect.top  - wheelCanvas.height / 2;
 
-	  // atan2 trả về góc theo trục +X, với y dương về dưới (canvas)
-	  // Ta muốn 12h (top) = 0 → thêm +PI/2
-	  let clickAngle = Math.atan2(y, x) + Math.PI/2;
+	  // Tính tâm canvas theo hiển thị (bounding rect) — nhất quán với tọa độ chuột
+	  const cx = rect.left + rect.width / 2;
+	  const cy = rect.top + rect.height / 2;
+
+	  // tọa độ chuột so với tâm (sử dụng client coords)
+	  const x = e.clientX - cx;
+	  const y = e.clientY - cy;
+
+	  // atan2 trả về góc theo trục +X; muốn 12h = 270deg theo hệ used -> chỉnh bằng +PI/2 như trước
+	  let clickAngle = Math.atan2(y, x) + Math.PI / 2;
 	  clickAngle = normalizeAngle(clickAngle);
 
 	  // Chuẩn hóa startAngle về [0,2PI)
 	  const sa = normalizeAngle(startAngle);
 
-	  // Góc tương đối so với startAngle: bao nhiêu rad tính từ 12h theo chiều kim đồng hồ
-	  // Nếu wheel đang xoay theo startAngle, thì lát i có góc trung tâm = sa + i*arc + arc/2
-	  // Ta tìm idx sao cho clickAngle nằm trong khoảng lát đó
+	  // Góc tương đối so với startAngle
 	  let adjusted = clickAngle - sa;
 	  adjusted = normalizeAngle(adjusted);
 
 	  let idx = Math.floor(adjusted / arc);
-	  // phòng trường hợp biên
 	  if (idx < 0) idx = 0;
 	  if (idx >= studentsForWheel.length) idx = studentsForWheel.length - 1;
 
@@ -986,83 +988,108 @@ document.addEventListener("DOMContentLoaded", () => {
 	   Quay tới target đã set selectedIndex
 	   ============================ */
 	function spinWheelTarget() {
+  // đảm bảo có dữ liệu
 	  if (!studentsForWheel || studentsForWheel.length === 0) return;
 	  if (selectedIndex < 0 || selectedIndex >= studentsForWheel.length) {
-		console.warn("selectedIndex out of range:", selectedIndex);
+		console.warn("spinWheelTarget: selectedIndex out of range:", selectedIndex);
 		return;
 	  }
 
-	  if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
-	  audioSpin.currentTime = 0;
-	  audioSpin.play();
-
-	  spinTime = 0;
-	  spinTimeTotal = 6000; // ms
-
-	  // Helper normalize
-	  function normalizeAngle(a){
+	  // helper normalize góc về [0, 2PI)
+	  function normalizeAngle(a) {
 		const TWO = Math.PI * 2;
 		a = a % TWO;
 		if (a < 0) a += TWO;
 		return a;
 	  }
 
-	  // Tâm canvas (dùng bounding rect nếu canvas có thể bị scale bằng CSS)
-	  let cx = wheelCanvas.width / 2;
-	  let cy = wheelCanvas.height / 2;
-	  // Nếu bạn có dùng CSS scale, dùng bounding rect:
-	  // const rect = wheelCanvas.getBoundingClientRect();
-	  // cx = rect.width / 2; cy = rect.height / 2;
+	  // khởi tạo âm thanh quay nếu cần
+	  if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
+	  audioSpin.currentTime = 0;
+	  audioSpin.play();
 
-	  const outsideRadius = 280; // phải khớp drawWheel()
+	  // reset thời gian quay
+	  spinTime = 0;
+	  // spinTimeTotal giữ nguyên (được khai báo global); nếu không có, đặt mặc định
+	  if (typeof spinTimeTotal !== "number" || spinTimeTotal <= 0) spinTimeTotal = 6000;
+
+	  // Tính tâm và vị trí mũi tên dựa trên bounding rect (an toàn khi canvas bị CSS scale)
+	  const rect = wheelCanvas.getBoundingClientRect();
+	  const cx = rect.width / 2;
+	  const cy = rect.height / 2;
+
+	  // Giá trị outsideRadius và offset tip phải khớp với drawWheel()
+	  // Nếu drawWheel() dùng các giá trị khác, thay đổi tương ứng ở đây
+	  const outsideRadius = 280;
+	  const arrowTipOffset = 10; // tương ứng 'cy - outsideRadius + 10' trong drawWheel
 	  const arrowX = cx;
-	  const arrowY = cy - outsideRadius + 10; // điểm mũi tên tip như drawWheel()
+	  const arrowY = cy - outsideRadius + arrowTipOffset;
 
-	  // Góc từ tâm tới mũi tên theo hệ atan2
-	  const rawArrowAngle = Math.atan2(arrowY - cy, arrowX - cx); // có thể âm
-	  // Thử một số offset (radian) để dò đúng hướng tham chiếu
-	  const offsets = [0, Math.PI/2, -Math.PI/2, Math.PI, -Math.PI]; // các ứng viên
-	  let best = { offset: offsets[0], error: Number.POSITIVE_INFINITY, startTarget: 0, targetAngle: 0 };
+	  // Góc (raw) từ tâm tới mũi tên (theo hệ atan2)
+	  const rawArrowAngle = Math.atan2(arrowY - cy, arrowX - cx); // có thể ∈ (-PI, PI]
 
+	  // Tính offset tâm lát (center offset) cho selectedIndex
+	  arc = Math.PI * 2 / studentsForWheel.length; // đảm bảo arc là chính xác (nếu chưa có)
 	  const sliceCenterOffset = normalizeAngle(selectedIndex * arc + arc / 2);
 
+	  // Thử một tập orientation offsets để dò hướng tham chiếu đúng
+	  const offsets = [0, Math.PI / 2, -Math.PI / 2, Math.PI, -Math.PI];
+	  let best = { offset: offsets[0], error: Number.POSITIVE_INFINITY, startTarget: 0, targetAngle: 0 };
+
 	  offsets.forEach(off => {
-		const candidateTarget = normalizeAngle(rawArrowAngle + off);
+		const candidateTarget = normalizeAngle(rawArrowAngle + off); // targetAngle ứng viên
 		const startAngleTarget = normalizeAngle(candidateTarget - sliceCenterOffset);
-		// Nếu đặt startAngle = startAngleTarget, tâm lát selectedIndex sẽ là:
-		const alignedCenter = normalizeAngle(startAngleTarget + selectedIndex * arc + arc/2);
-		// Sai số giữa center và candidateTarget
-		const err = Math.abs(normalizeAngle(alignedCenter - candidateTarget));
-		// map to [0,pi]
-		const errMin = err > Math.PI ? Math.abs(err - 2*Math.PI) : err;
-		if (errMin < best.error) {
-		  best = { offset: off, error: errMin, startTarget: startAngleTarget, targetAngle: candidateTarget };
+		// Khi startAngle = startAngleTarget, center của slice selectedIndex sẽ là:
+		const alignedCenter = normalizeAngle(startAngleTarget + selectedIndex * arc + arc / 2);
+		// Sai số giữa tâm lát và candidateTarget (chọn giá trị nhỏ nhất)
+		let err = Math.abs(normalizeAngle(alignedCenter - candidateTarget));
+		if (err > Math.PI) err = Math.abs(err - 2 * Math.PI);
+		if (err < best.error) {
+		  best = { offset: off, error: err, startTarget: startAngleTarget, targetAngle: candidateTarget };
 		}
 	  });
 
-	  // Nếu lỗi quá lớn thì log cảnh báo (giúp debug)
-	  console.log("spinWheelTarget debug:", {
-		selectedIndex,
-		rawArrowAngleDeg: (rawArrowAngle*180/Math.PI).toFixed(2),
-		chosenOffsetDeg: (best.offset*180/Math.PI).toFixed(2),
-		targetAngleDeg: (best.targetAngle*180/Math.PI).toFixed(2),
-		sliceCenterOffsetDeg: (sliceCenterOffset*180/Math.PI).toFixed(2),
-		startAngleDeg: (normalizeAngle(startAngle)*180/Math.PI).toFixed(2),
-		startAngleTargetDeg: (best.startTarget*180/Math.PI).toFixed(2),
-		errorDeg: (best.error*180/Math.PI).toFixed(4)
-	  });
+	  // Lưu targetAngle cho stopRotateWheelTarget dùng (biến toàn cục)
+	  targetAngleForSpin = normalizeAngle(best.targetAngle);
 
-	  // Dùng kết quả tốt nhất
-	  const startAngleTarget = best.startTarget;
+	  // Tính startAngle hiện tại và delta cần quay (theo chiều dương để tạo chuyển động)
 	  const currentStart = normalizeAngle(startAngle);
-	  let delta = normalizeAngle(startAngleTarget - currentStart); // quay dương
-	  // Thêm vòng quay cho đẹp
+	  let delta = normalizeAngle(best.startTarget - currentStart); // ∈ [0, 2PI)
+
+	  // Nếu muốn giảm thời gian quay có thể giảm extraSpins, để hiệu ứng mượt giữ 4-6 vòng
 	  const extraSpins = 5;
 	  const totalRotateRad = delta + extraSpins * Math.PI * 2;
+
+	  // spinAngleStart (đơn vị độ) được dùng bởi rotateWheelTarget/easing
 	  spinAngleStart = totalRotateRad * 180 / Math.PI;
 
-	  // start rotating
-	  rotateWheelTarget();
+	  // Debug (giúp kiểm tra nếu cần)
+	  console.log("spinWheelTarget:", {
+		selectedIndex,
+		rawArrowAngleDeg: (rawArrowAngle * 180 / Math.PI).toFixed(2),
+		chosenOffsetDeg: (best.offset * 180 / Math.PI).toFixed(2),
+		targetAngleDeg: (best.targetAngle * 180 / Math.PI).toFixed(2),
+		sliceCenterOffsetDeg: (sliceCenterOffset * 180 / Math.PI).toFixed(2),
+		startAngleDeg: (currentStart * 180 / Math.PI).toFixed(2),
+		startAngleTargetDeg: (best.startTarget * 180 / Math.PI).toFixed(2),
+		deltaDeg: (delta * 180 / Math.PI).toFixed(2),
+		spinAngleStart
+	  });
+
+	  // Gọi hàm xoay (dùng requestAnimationFrame trong rotateWheelTarget)
+	  // Đảm bảo rotateWheelTarget tồn tại và sử dụng biến spinTime/spinAngleStart/spinTimeTotal
+	  if (typeof rotateWheelTarget === "function") {
+		// reset helper timestamp nếu có
+		if (rotateWheelTarget._last) rotateWheelTarget._last = null;
+		rotateWheelTarget();
+	  } else {
+		// Fallback: dùng rotateWheel() cũ nếu không có rotateWheelTarget
+		console.warn("rotateWheelTarget() không tồn tại; dùng rotateWheel() fallback.");
+		spinTime = 0;
+		spinAngleStart = totalRotateRad * 180 / Math.PI;
+		spinTimeTotal = spinTimeTotal || 6000;
+		rotateWheel(); // nếu hàm này tồn tại trong file
+	  }
 	}
 
 
@@ -1108,7 +1135,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	function stopRotateWheelTarget() {
 	  if (audioSpin) audioSpin.pause();
 
-	  // Helper normalize
 	  function normalizeAngle(a){
 		const TWO = Math.PI * 2;
 		a = a % TWO;
@@ -1116,32 +1142,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		return a;
 	  }
 
-	  // Lấy targetAngle từ biến toàn cục nếu có, ngược lại tính từ tọa độ mũi tên
+	  // Lấy targetAngle từ biến đã lưu; nếu không có, fallback tính từ tọa độ mũi tên (bounding rect)
 	  let targetAngle = null;
 	  if (typeof targetAngleForSpin === "number") {
 		targetAngle = normalizeAngle(targetAngleForSpin);
 	  } else {
-		// Fallback: tính từ tọa độ mũi tên như drawWheel()
 		const rect = wheelCanvas.getBoundingClientRect();
-		// dùng bounding rect để phòng trường hợp canvas bị CSS scale
 		const cx = rect.width / 2;
 		const cy = rect.height / 2;
-		// nếu drawWheel dùng wheelCanvas.width/height = 600, thì rect.width tương ứng; OK
 		const outsideRadius = 280;
 		const arrowX = cx;
 		const arrowY = cy - outsideRadius + 10;
 		targetAngle = normalizeAngle(Math.atan2(arrowY - cy, arrowX - cx));
 	  }
 
-	  // Chuẩn hóa startAngle cuối cùng
 	  const sa = normalizeAngle(startAngle);
 
-	  // Tính index dựa trên cùng một hệ tọa độ đã dùng trong spin
+	  // Tính index nhất quán từ targetAngle và startAngle cuối
 	  let adjusted = normalizeAngle(targetAngle - sa);
 	  let idx = Math.floor(adjusted / arc);
 	  idx = ((idx % studentsForWheel.length) + studentsForWheel.length) % studentsForWheel.length;
 
-	  // Fallback kiểm tra khoảng cách
+	  // Kiểm tra khoảng cách trung tâm lát → nếu không hợp lý thử nearest
 	  const centerOfIdx = normalizeAngle(sa + idx * arc + arc/2);
 	  const diff = Math.abs(normalizeAngle(centerOfIdx - targetAngle));
 	  if (diff > arc/2) {
@@ -1176,6 +1198,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	  // Reset an toàn sau khi hiển thị
 	  setTimeout(() => { selectedIndex = -1; targetAngleForSpin = null; }, 1500);
 	}
+	
 function drawWheel() {
   const cx = 300, cy = 300;
   const outsideRadius = 280;
