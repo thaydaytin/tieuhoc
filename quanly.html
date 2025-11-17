@@ -922,7 +922,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 	let audioSpin = null;
 	let selectedIndex = -1; // -1: chưa chọn
-	let targetAngleForSpin = null;
+	let targetAngleForSpin = TARGET_STOP_RADIAN;
 
 	function openWheel() {
 	  if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
@@ -1116,58 +1116,52 @@ document.addEventListener("DOMContentLoaded", () => {
 		return a;
 	  }
 
-	  // Nếu ta không có targetAngleForSpin (fallback), compute từ mũi tên như trước:
-	  let targetAngle = targetAngleForSpin;
-	  if (typeof targetAngle !== "number") {
-		// Tính tọa độ mũi tên giống drawWheel()
-		const cx = wheelCanvas.width / 2;
-		const cy = wheelCanvas.height / 2;
-		const outsideRadius = 280; // đảm bảo khớp với drawWheel()
+	  // Lấy targetAngle từ biến toàn cục nếu có, ngược lại tính từ tọa độ mũi tên
+	  let targetAngle = null;
+	  if (typeof targetAngleForSpin === "number") {
+		targetAngle = normalizeAngle(targetAngleForSpin);
+	  } else {
+		// Fallback: tính từ tọa độ mũi tên như drawWheel()
+		const rect = wheelCanvas.getBoundingClientRect();
+		// dùng bounding rect để phòng trường hợp canvas bị CSS scale
+		const cx = rect.width / 2;
+		const cy = rect.height / 2;
+		// nếu drawWheel dùng wheelCanvas.width/height = 600, thì rect.width tương ứng; OK
+		const outsideRadius = 280;
 		const arrowX = cx;
 		const arrowY = cy - outsideRadius + 10;
 		targetAngle = normalizeAngle(Math.atan2(arrowY - cy, arrowX - cx));
-	  } else {
-		targetAngle = normalizeAngle(targetAngle);
 	  }
 
-	  // Chuẩn hóa startAngle hiện tại
+	  // Chuẩn hóa startAngle cuối cùng
 	  const sa = normalizeAngle(startAngle);
 
-	  // Tính index lát trúng bằng công thức nhất quán:
-	  // adjusted = targetAngle - startAngle (tương quan với startAngle)
-	  // idx = floor(adjusted / arc)
+	  // Tính index dựa trên cùng một hệ tọa độ đã dùng trong spin
 	  let adjusted = normalizeAngle(targetAngle - sa);
 	  let idx = Math.floor(adjusted / arc);
-	  // đảm bảo trong khoảng
 	  idx = ((idx % studentsForWheel.length) + studentsForWheel.length) % studentsForWheel.length;
 
-	  // Nếu idx có vẻ sai (ví dụ do +-1), thử round nearest
-	  // (thường không cần, nhưng để an toàn)
+	  // Fallback kiểm tra khoảng cách
 	  const centerOfIdx = normalizeAngle(sa + idx * arc + arc/2);
 	  const diff = Math.abs(normalizeAngle(centerOfIdx - targetAngle));
 	  if (diff > arc/2) {
-		// thử round nearest
 		const nearest = Math.round((normalizeAngle(targetAngle - sa) / arc) - 0.5);
 		if (nearest >= 0 && nearest < studentsForWheel.length) idx = nearest;
 	  }
 
-	  // Lấy tên chiến thắng từ idx tính lại
 	  let winnerName = "(không xác định)";
 	  if (studentsForWheel && studentsForWheel.length > 0 && idx >= 0 && idx < studentsForWheel.length) {
 		winnerName = studentsForWheel[idx];
 	  } else if (selectedIndex >= 0 && selectedIndex < studentsForWheel.length) {
-		// fallback cuối cùng
 		winnerName = studentsForWheel[selectedIndex];
 	  }
 
-	  // Hiển thị popup
 	  const popup = document.getElementById("winnerPopup");
 	  popup.textContent = "🎉 " + winnerName + " 🎉";
 	  popup.style.display = "block";
 	  triggerFireworks();
 	  popup.onclick = () => { popup.style.display = "none"; };
 
-	  // Log debug giúp Thầy kiểm tra
 	  console.log("stopRotateWheelTarget debug:", {
 		computedIdx: idx,
 		selectedIndexBefore: selectedIndex,
@@ -1175,11 +1169,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		startAngleDeg: (sa*180/Math.PI).toFixed(2),
 		adjustedDeg: (adjusted*180/Math.PI).toFixed(2),
 		arcDeg: (arc*180/Math.PI).toFixed(4),
-		centerDeg: ( ( (sa + idx*arc + arc/2) * 180/Math.PI) % 360 ).toFixed(2),
+		centerDeg: ( (sa + idx*arc + arc/2) * 180/Math.PI % 360 ).toFixed(2),
 		winnerName
 	  });
 
-	  // reset selectedIndex & targetAngleForSpin nếu muốn
+	  // Reset an toàn sau khi hiển thị
 	  setTimeout(() => { selectedIndex = -1; targetAngleForSpin = null; }, 1500);
 	}
 function drawWheel() {
