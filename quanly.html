@@ -225,52 +225,50 @@
 	#stuAvatarLarge img { width:96px; height:96px; object-fit:cover; border-radius:50%; display:block; }
 	#stuAvatarLarge .initials { width:96px; height:96px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:800; color:white; font-size:28px; }
 
-  </style>
+  
+	.wheel-popup {
+	  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+	  background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center;
+	  flex-direction: column; z-index: 9999;
+	}
+	.wheel-content {
+	  background: white; border-radius: 16px; padding: 20px; text-align: center;
+	  box-shadow: 0 0 30px rgba(0,0,0,0.4); animation: fadeIn 0.3s ease-in-out;
+	}
+	@keyframes fadeIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
+	#wheelCanvas {
+	  border-radius: 50%; border: 6px solid #1976d2; background: #e3f2fd; cursor: pointer;
+	}
+	.winner-popup {
+	  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+	  font-size: 48px; font-weight: bold; color: #fff; background: rgba(46,125,50,0.9);
+	  padding: 30px 60px; border-radius: 20px; display: none; z-index: 10000;
+	  animation: blink 1s infinite alternate;
+	}
+	@keyframes blink { from { opacity: 1; transform: translate(-50%, -50%) scale(1);} to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05);} }
+	#fireworksCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
-<style>
-.wheel-popup {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center;
-  flex-direction: column; z-index: 9999;
-}
-.wheel-content {
-  background: white; border-radius: 16px; padding: 20px; text-align: center;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4); animation: fadeIn 0.3s ease-in-out;
-}
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
-#wheelCanvas {
-  border-radius: 50%; border: 6px solid #1976d2; background: #e3f2fd; cursor: pointer;
-}
-.winner-popup {
-  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  font-size: 48px; font-weight: bold; color: #fff; background: rgba(46,125,50,0.9);
-  padding: 30px 60px; border-radius: 20px; display: none; z-index: 10000;
-  animation: blink 1s infinite alternate;
-}
-@keyframes blink { from { opacity: 1; transform: translate(-50%, -50%) scale(1);} to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05);} }
-#fireworksCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-
-/* Avatar image */
-.avatar { position: relative; overflow: hidden; }
-.avatar img {
-  width: 56px;
-  height: 56px;
-  object-fit: cover;
-  display: block;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.12);
-}
-.avatar .initials {
-  width: 56px;
-  height: 56px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  font-weight:700;
-  font-size:18px;
-  color:white;
-}
+	/* Avatar image */
+	.avatar { position: relative; overflow: hidden; }
+	.avatar img {
+	  width: 56px;
+	  height: 56px;
+	  object-fit: cover;
+	  display: block;
+	  border-radius: 50%;
+	  border: 1px solid rgba(255,255,255,0.12);
+	}
+	.avatar .initials {
+	  width: 56px;
+	  height: 56px;
+	  display:flex;
+	  align-items:center;
+	  justify-content:center;
+	  border-radius:50%;
+	  font-weight:700;
+	  font-size:18px;
+	  color:white;
+	}
 </style>
 
 </head>
@@ -410,6 +408,57 @@
     </div>
   </div>
 
+  <!-- Popup vòng quay học sinh -->
+<div id="wheelPopup" class="wheel-popup">
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="wheel-content">
+    <canvas id="wheelCanvas" width="600" height="600"></canvas>
+    <div style="margin-top:20px;">
+      <button onclick="spinWheel()">🎡 Quay</button>
+      <button onclick="closeWheel()">✖ Đóng</button>
+    </div>
+  </div>
+  <div id="winnerPopup" class="winner-popup"></div>
+</div>
+
+<!-- Popup: Student detail -->
+<div id="studentOverlay" class="overlay" style="display:none; align-items:center; justify-content:center;">
+  <div class="ranking-modal" style="max-width:720px; width:92%;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0" id="stuNameTitle">Thông tin học sinh</h3>
+      <button class="close-btn" onclick="closeStudentPopup()">✖</button>
+    </div>
+
+    <div style="display:flex; gap:14px; margin-top:12px; align-items:flex-start; flex-wrap:wrap;">
+      <div style="flex:0 0 110px; text-align:center;">
+        <div id="stuAvatarLarge" style="width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 8px;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;"></div>
+        <div class="muted" id="stuMetaId"></div>
+        <div class="muted" id="stuMetaClass" style="margin-top:4px"></div>
+      </div>
+
+      <div style="flex:1; min-width:260px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <div style="font-weight:700">Điểm trung bình:</div>
+          <div id="stuAvg" style="font-size:20px;font-weight:800;color:#07324a">—</div>
+          <div class="muted" style="margin-left:8px;">(từ Tuần 1 → Tuần <span id="stuToWeek"></span>)</div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <canvas id="stuChart" height="200"></canvas>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div style="font-weight:700">Nhận xét ngắn:</div>
+          <div id="stuRemark" style="margin-top:6px; font-size:15px; color:#0b2540"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:right; margin-top:12px;">
+      <button class="btn-like" onclick="closeStudentPopup()">Đóng</button>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ============================
@@ -522,7 +571,6 @@ function avatarSrcCandidates(className, id) {
   const base = `hs/${encodeURIComponent(className)}/${encodeURIComponent(String(id))}`;
   return exts.map(ext => `${base}.${ext}`);
 }
-
 
 
 async function selectClass(className){
@@ -970,63 +1018,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // If you want to bypass login during testing, call attemptLogin() manually in console.
 });
 
-</script>
-
-<!-- Popup vòng quay học sinh -->
-<div id="wheelPopup" class="wheel-popup">
-  <canvas id="fireworksCanvas"></canvas>
-  <div class="wheel-content">
-    <canvas id="wheelCanvas" width="600" height="600"></canvas>
-    <div style="margin-top:20px;">
-      <button onclick="spinWheel()">🎡 Quay</button>
-      <button onclick="closeWheel()">✖ Đóng</button>
-    </div>
-  </div>
-  <div id="winnerPopup" class="winner-popup"></div>
-</div>
-
-<!-- Popup: Student detail -->
-<div id="studentOverlay" class="overlay" style="display:none; align-items:center; justify-content:center;">
-  <div class="ranking-modal" style="max-width:720px; width:92%;">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <h3 style="margin:0" id="stuNameTitle">Thông tin học sinh</h3>
-      <button class="close-btn" onclick="closeStudentPopup()">✖</button>
-    </div>
-
-    <div style="display:flex; gap:14px; margin-top:12px; align-items:flex-start; flex-wrap:wrap;">
-      <div style="flex:0 0 110px; text-align:center;">
-        <div id="stuAvatarLarge" style="width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 8px;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;"></div>
-        <div class="muted" id="stuMetaId"></div>
-        <div class="muted" id="stuMetaClass" style="margin-top:4px"></div>
-      </div>
-
-      <div style="flex:1; min-width:260px;">
-        <div style="display:flex; gap:10px; align-items:center;">
-          <div style="font-weight:700">Điểm trung bình:</div>
-          <div id="stuAvg" style="font-size:20px;font-weight:800;color:#07324a">—</div>
-          <div class="muted" style="margin-left:8px;">(từ Tuần 1 → Tuần <span id="stuToWeek"></span>)</div>
-        </div>
-
-        <div style="margin-top:10px;">
-          <canvas id="stuChart" height="200"></canvas>
-        </div>
-
-        <div style="margin-top:12px;">
-          <div style="font-weight:700">Nhận xét ngắn:</div>
-          <div id="stuRemark" style="margin-top:6px; font-size:15px; color:#0b2540"></div>
-        </div>
-      </div>
-    </div>
-
-    <div style="text-align:right; margin-top:12px;">
-      <button class="btn-like" onclick="closeStudentPopup()">Đóng</button>
-    </div>
-  </div>
-</div>
-
-</body>
-
-<script>
 	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
 	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
 	let audioSpin = null;
@@ -1304,5 +1295,5 @@ function triggerFireworks(){const cx=window.innerWidth/2,cy=window.innerHeight/2
 	}
 
 </script>
-
+</body>
 </html>
