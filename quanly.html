@@ -221,6 +221,9 @@
 	  display: block;
 	}
 
+	/* Student popup specifics (đặt cùng style hiện có) */
+	#stuAvatarLarge img { width:96px; height:96px; object-fit:cover; border-radius:50%; display:block; }
+	#stuAvatarLarge .initials { width:96px; height:96px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:800; color:white; font-size:28px; }
 
   </style>
 
@@ -616,6 +619,9 @@ function renderStudents() {
     // bắt đầu thử
     tryNextSrc();
 
+	avatar.style.cursor = "pointer";
+	avatar.onclick = () => openStudentPopup(id);
+
     // Thông tin học sinh
     const info = document.createElement("div");
     info.className = "student-info";
@@ -979,6 +985,45 @@ document.addEventListener("DOMContentLoaded", () => {
   <div id="winnerPopup" class="winner-popup"></div>
 </div>
 
+<!-- Popup: Student detail -->
+<div id="studentOverlay" class="overlay" style="display:none; align-items:center; justify-content:center;">
+  <div class="ranking-modal" style="max-width:720px; width:92%;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0" id="stuNameTitle">Thông tin học sinh</h3>
+      <button class="close-btn" onclick="closeStudentPopup()">✖</button>
+    </div>
+
+    <div style="display:flex; gap:14px; margin-top:12px; align-items:flex-start; flex-wrap:wrap;">
+      <div style="flex:0 0 110px; text-align:center;">
+        <div id="stuAvatarLarge" style="width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 8px;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;"></div>
+        <div class="muted" id="stuMetaId"></div>
+        <div class="muted" id="stuMetaClass" style="margin-top:4px"></div>
+      </div>
+
+      <div style="flex:1; min-width:260px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <div style="font-weight:700">Điểm trung bình:</div>
+          <div id="stuAvg" style="font-size:20px;font-weight:800;color:#07324a">—</div>
+          <div class="muted" style="margin-left:8px;">(từ Tuần 1 → Tuần <span id="stuToWeek"></span>)</div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <canvas id="stuChart" height="200"></canvas>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div style="font-weight:700">Nhận xét ngắn:</div>
+          <div id="stuRemark" style="margin-top:6px; font-size:15px; color:#0b2540"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:right; margin-top:12px;">
+      <button class="btn-like" onclick="closeStudentPopup()">Đóng</button>
+    </div>
+  </div>
+</div>
+
 </body>
 
 <script>
@@ -1101,6 +1146,163 @@ function drawFireworks(){fCtx.clearRect(0,0,fireworksCanvas.width,fireworksCanva
   if(f.life<=0)fireworks.splice(i,1);}requestAnimationFrame(drawFireworks);}drawFireworks();
 function triggerFireworks(){const cx=window.innerWidth/2,cy=window.innerHeight/2;
   for(let i=0;i<5;i++){setTimeout(()=>createFirework(cx,cy),i*200);}}
+  
+  
+  
+  // GLOBAL: lưu instance chart của popup để destroy khi mở lại
+	let studentChartInstance = null;
+
+	// Mở popup chi tiết học sinh theo id (stt)
+	function openStudentPopup(id) {
+	  if (!studentsData || studentsData.length === 0) return;
+	  // tìm row theo id (so sánh string trimmed)
+	  const idx = studentsData.findIndex(r => String(r[0]).trim() === String(id).trim());
+	  if (idx === -1) { alert("Không tìm thấy học sinh"); return; }
+
+	  const row = studentsData[idx];
+	  const name = row[1];
+	  const clas = currentClass || "";
+	  // Thu thập điểm từ Tuần 1 đến currentWeek (nếu sheet chứa ít cột hơn, sẽ fill 0)
+	  const weekCount = Math.min(currentWeek, row.length - 3 + 1); // cột 2..(n-2) là tuần, cuối cùng là tổng
+	  const scores = [];
+	  const labels = [];
+	  for (let w = 1; w <= currentWeek; w++) {
+		const colIdx = 2 + (w - 1);
+		const val = (row[colIdx] !== undefined && row[colIdx] !== "") ? Number(row[colIdx]) : 0;
+		scores.push(val);
+		labels.push("W" + w);
+	  }
+
+	  // Hiển thị meta
+	  document.getElementById("stuNameTitle").textContent = name;
+	  document.getElementById("stuMetaId").textContent = "Mã: " + id;
+	  document.getElementById("stuMetaClass").textContent = "Lớp: " + clas;
+	  document.getElementById("stuToWeek").textContent = currentWeek;
+
+	  // Avatar lớn: thử load ảnh giống như avatar nhỏ
+	  const avatarWrap = document.getElementById("stuAvatarLarge");
+	  avatarWrap.innerHTML = ""; // clear
+	  const img = document.createElement("img");
+	  img.alt = name;
+	  img.style.display = "none";
+	  const initialsDiv = document.createElement("div");
+	  initialsDiv.className = "initials";
+	  initialsDiv.style.background = randomColorForName(name);
+	  initialsDiv.textContent = initials(name);
+
+	  const candidates = avatarSrcCandidates(currentClass, id);
+	  let at = 0;
+	  function tryImg() {
+		if (at >= candidates.length) {
+		  if (!avatarWrap.contains(initialsDiv)) avatarWrap.appendChild(initialsDiv);
+		  return;
+		}
+		const src = candidates[at++];
+		img.src = src;
+		img.onload = function() {
+		  img.style.display = "block";
+		  if (avatarWrap.contains(initialsDiv)) avatarWrap.removeChild(initialsDiv);
+		  if (!avatarWrap.contains(img)) avatarWrap.appendChild(img);
+		};
+		img.onerror = function() {
+		  img.onload = img.onerror = null;
+		  tryImg();
+		};
+	  }
+	  tryImg();
+
+	  // Tính trung bình và nhận xét
+	  const avg = (scores.reduce((a,b)=>a+b,0)) / (scores.length || 1);
+	  document.getElementById("stuAvg").textContent = avg.toFixed(2);
+
+	  const remark = generateRemark(scores);
+	  document.getElementById("stuRemark").textContent = remark;
+
+	  // Vẽ biểu đồ (destroy trước nếu có)
+	  const ctx = document.getElementById("stuChart").getContext("2d");
+	  if (studentChartInstance) studentChartInstance.destroy();
+
+	  studentChartInstance = new Chart(ctx, {
+		type: 'line',
+		data: {
+		  labels: labels,
+		  datasets: [{
+			label: 'Điểm tuần',
+			data: scores,
+			fill: true,
+			tension: 0.25,
+			pointRadius: 6,
+			borderWidth: 2
+		  }]
+		},
+		options: {
+		  responsive: true,
+		  maintainAspectRatio: false,
+		  scales: {
+			y: {
+			  beginAtZero: true,
+			  ticks: { precision: 0 }
+			}
+		  },
+		  plugins: {
+			legend: { display: false },
+			tooltip: {
+			  callbacks: {
+				label: ctx => `Điểm: ${ctx.raw}`
+			  }
+			}
+		  }
+		}
+	  });
+
+	  // Hiển thị popup
+	  document.getElementById("studentOverlay").style.display = "flex";
+	}
+
+	// Đóng popup
+	function closeStudentPopup() {
+	  document.getElementById("studentOverlay").style.display = "none";
+	  if (studentChartInstance) { studentChartInstance.destroy(); studentChartInstance = null; }
+	}
+
+	// Sinh nhận xét ngắn dựa trên trung bình + xu hướng
+	function generateRemark(scores) {
+	  if (!scores || scores.length === 0) return "Chưa có dữ liệu điểm.";
+	  // Tính trung bình
+	  const sum = scores.reduce((a,b)=>a+b,0);
+	  const avg = sum / scores.length;
+
+	  // Tính xu hướng đơn giản bằng cách lấy độ dốc tuyến tính (least squares)
+	  const n = scores.length;
+	  let sx = 0, sy = 0, sxx = 0, sxy = 0;
+	  for (let i=0;i<n;i++){
+		const x = i+1;
+		const y = scores[i];
+		sx += x; sy += y; sxx += x*x; sxy += x*y;
+	  }
+	  const denom = (n*sxx - sx*sx) || 1;
+	  const slope = (n*sxy - sx*sy) / denom; // slope >0 => tăng
+
+	  // Phân loại mức điểm
+	  let level = "";
+	  if (avg >= 8) level = "Rất tốt";
+	  else if (avg >= 6.5) level = "Tốt";
+	  else if (avg >= 5) level = "Trung bình";
+	  else level = "Cần cố gắng";
+
+	  // Xu hướng
+	  let trend = "";
+	  if (slope > 0.12) trend = "điểm có xu hướng tăng rõ rệt";
+	  else if (slope > 0.03) trend = "xu hướng tăng nhẹ";
+	  else if (slope < -0.12) trend = "xu hướng giảm rõ rệt";
+	  else if (slope < -0.03) trend = "xu hướng giảm nhẹ";
+	  else trend = "tương đối ổn định";
+
+	  // Tạo câu nhận xét ngắn
+	  const remark = `${level}: điểm trung bình ${avg.toFixed(1)} — ${trend}.`;
+	  return remark;
+	}
+
 </script>
 
 </html>
