@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Hàng phím nào bao gồm các phím Q, W, E, R, T?",
+    "choices": [
+      "Hàng phím cơ sở",
+      "Hàng phím số",
+      "Hàng phím trên",
+      "Hàng phím dưới"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Sau khi gõ một phím ở hàng trên hoặc hàng dưới, ngón tay phải làm gì?",
+    "choices": [
+      "Giữ nguyên ở hàng đó",
+      "Trở về ngay vị trí trên hàng phím cơ sở",
+      "Di chuyển đến phím cách",
+      "Gõ tiếp phím Enter"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gõ phím R (hàng trên), ngón tay nào của tay trái phải vươn lên?",
+    "choices": [
+      "Ngón út",
+      "Ngón áp út",
+      "Ngón trỏ",
+      "Ngón giữa"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Ngón trỏ trái (đang đặt ở F) chịu trách nhiệm gõ các phím nào ở hàng dưới?",
+    "choices": [
+      "Phím Z và X",
+      "Phím V và B",
+      "Phím C và V",
+      "Phím N và M"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hàng phím nào bao gồm các phím Z, X, C, V, B?",
+    "choices": [
+      "Hàng phím số",
+      "Hàng phím trên",
+      "Hàng phím dưới",
+      "Hàng phím cơ sở"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi gõ phím U (hàng trên), ngón tay nào của tay phải phải vươn lên?",
+    "choices": [
+      "Ngón út",
+      "Ngón trỏ",
+      "Ngón áp út",
+      "Ngón giữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc luyện tập gõ hàng phím trên và dưới giúp em đạt được điều gì?",
+    "choices": [
+      "Tăng kích thước bàn phím",
+      "Giảm độ chính xác khi gõ",
+      "Tăng tốc độ và độ chính xác khi gõ",
+      "Chỉ dùng được hai ngón tay"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Vị trí xuất phát cố định của các ngón tay khi gõ là ở hàng phím nào?",
+    "choices": [
+      "Hàng phím trên",
+      "Hàng phím số",
+      "Hàng phím cơ sở",
+      "Hàng phím dưới"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi gõ các phím ở hàng dưới, ngón tay di chuyển theo hướng nào?",
+    "choices": [
+      "Vươn lên",
+      "Ngang sang hai bên",
+      "Khom nhẹ xuống",
+      "Giữ nguyên tại chỗ"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ngón út phải của em (đang ở dấu ;) sẽ khom xuống gõ phím nào ở hàng dưới?",
+    "choices": [
+      "Phím . (dấu chấm)",
+      "Phím / (dấu gạch chéo)",
+      "Phím M",
+      "Phím N"
+    ],
     "answer": 1
   }
 ]

@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Để xóa một khối văn bản đã chọn (bôi đen), em có thể sử dụng phím nào trên bàn phím?",
+    "choices": [
+      "Phím Enter",
+      "Phím Shift",
+      "Phím Delete hoặc Backspace",
+      "Phím Ctrl"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Lệnh nào trên dải lệnh Home được sử dụng để Cắt (Cut) khối văn bản?",
+    "choices": [
+      "Copy",
+      "Paste",
+      "Cut",
+      "Font"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Thao tác Di chuyển khối văn bản gồm hai lệnh là gì?",
+    "choices": [
+      "Copy và Delete",
+      "Cut và Paste",
+      "Rename và Paste",
+      "Delete và Cut"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Sau khi Cắt (Cut) một khối văn bản, khối văn bản đó còn ở vị trí ban đầu không?",
+    "choices": [
+      "Có, vẫn còn",
+      "Không, nó đã biến mất khỏi vị trí ban đầu",
+      "Chỉ còn nếu là câu ngắn",
+      "Nó được chuyển sang trang mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thực hiện lệnh Dán (Paste), khối văn bản đang được lưu ở đâu sẽ được chèn vào văn bản?",
+    "choices": [
+      "Trong thư mục My Documents",
+      "Trên màn hình nền",
+      "Trong bộ nhớ tạm (Clipboard)",
+      "Trong Thùng rác"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điểm khác biệt cơ bản giữa Copy và Cut là gì?",
+    "choices": [
+      "Cut dùng cho văn bản, Copy dùng cho hình ảnh",
+      "Copy giữ lại bản gốc, Cut loại bỏ bản gốc",
+      "Copy không cần Paste, Cut cần Paste",
+      "Copy nằm trên thẻ View, Cut nằm trên thẻ Home"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trước khi sử dụng lệnh Cut hoặc Copy, em phải thực hiện thao tác nào?",
+    "choices": [
+      "In tài liệu ra giấy",
+      "Lưu lại tài liệu",
+      "Chọn khối văn bản (bôi đen)",
+      "Tắt phần mềm soạn thảo"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong phần mềm soạn thảo văn bản, khối văn bản được chọn hiển thị như thế nào?",
+    "choices": [
+      "Chữ màu đỏ",
+      "Nền chữ bị bôi đen (thường là màu xanh hoặc xám)",
+      "Có đường gạch dưới",
+      "Chữ in nghiêng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chèn khối văn bản đã Cut/Copy vào vị trí mới, em cần làm gì trước khi nháy Paste?",
+    "choices": [
+      "Đóng văn bản",
+      "Thay đổi phông chữ",
+      "Di chuyển con trỏ văn bản đến vị trí muốn dán",
+      "Nhấn phím Enter"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em muốn loại bỏ hoàn toàn một đoạn văn bản mà không cần dùng nó ở nơi nào khác, em chỉ cần thực hiện thao tác nào?",
+    "choices": [
+      "Copy và Paste",
+      "Cut và Paste",
+      "Chọn và nhấn Delete",
+      "Chọn và nhấn Enter"
+    ],
+    "answer": 2
   }
 ]

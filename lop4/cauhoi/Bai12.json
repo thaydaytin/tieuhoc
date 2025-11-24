@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Phần mềm máy tính là gì?",
+    "choices": [
+      "Các bộ phận cứng của máy tính",
+      "Các chương trình được tạo ra để thực hiện một công việc nào đó",
+      "Các tệp văn bản do người dùng tạo ra",
+      "Các dây cáp kết nối máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quyền tác giả của phần mềm là quyền sở hữu đối với sản phẩm nào?",
+    "choices": [
+      "Bộ bàn phím và chuột",
+      "Tác phẩm trí tuệ là chương trình máy tính",
+      "Các bản nhạc miễn phí",
+      "Các bài báo trên mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hành vi nào thể hiện sự tôn trọng quyền tác giả của phần mềm?",
+    "choices": [
+      "Tự ý sao chép phần mềm có bản quyền cho bạn bè",
+      "Tải và sử dụng phần mềm lậu (bẻ khóa)",
+      "Chỉ cài đặt và sử dụng phần mềm đã được mua bản quyền",
+      "Phân phối lại phần mềm miễn phí đã bị thay đổi"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Điều gì xảy ra khi chúng ta tôn trọng quyền tác giả của phần mềm?",
+    "choices": [
+      "Tác giả sẽ ngừng tạo ra phần mềm mới",
+      "Khuyến khích tác giả tiếp tục sáng tạo và phát triển phần mềm tốt hơn",
+      "Làm cho máy tính chạy chậm hơn",
+      "Phần mềm sẽ trở nên miễn phí"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm được phép sử dụng là phần mềm như thế nào?",
+    "choices": [
+      "Phần mềm có bản quyền đã mua",
+      "Phần mềm được tác giả cho phép sử dụng miễn phí",
+      "Cả A và B đều đúng",
+      "Phần mềm được tìm thấy bất kỳ trên mạng"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Hành vi nào dưới đây được coi là vi phạm bản quyền phần mềm?",
+    "choices": [
+      "Mua một đĩa CD phần mềm gốc",
+      "Sao chép phần mềm có bản quyền để sử dụng trên nhiều máy tính cá nhân mà không mua thêm giấy phép",
+      "Sử dụng phần mềm miễn phí",
+      "Xóa phần mềm đã cài đặt"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc tôn trọng quyền tác giả của phần mềm còn thể hiện điều gì?",
+    "choices": [
+      "Khả năng lập trình của người dùng",
+      "Trách nhiệm công dân và tôn trọng pháp luật",
+      "Sự tiện lợi khi sử dụng máy tính",
+      "Tốc độ của mạng Internet"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Ai là người sở hữu quyền tác giả đối với một phần mềm?",
+    "choices": [
+      "Người sử dụng phần mềm đó",
+      "Người bán máy tính",
+      "Người tạo ra (lập trình) phần mềm đó",
+      "Người cài đặt phần mềm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phần mềm lậu (bẻ khóa) là gì?",
+    "choices": [
+      "Phần mềm miễn phí được cho phép dùng",
+      "Phần mềm được sử dụng mà không có sự cho phép của tác giả",
+      "Phần mềm giúp máy tính chạy nhanh hơn",
+      "Phần mềm được mua với giá rẻ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em sử dụng phần mềm không hợp pháp, em đang:",
+    "choices": [
+      "Giúp tác giả tiết kiệm tiền",
+      "Vi phạm pháp luật về sở hữu trí tuệ",
+      "Tăng cường an ninh mạng",
+      "Giảm dung lượng ổ đĩa"
+    ],
     "answer": 1
   }
 ]
