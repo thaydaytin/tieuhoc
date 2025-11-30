@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để chèn ảnh vào văn bản, em cần chọn thẻ lệnh nào trên dải lệnh?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Home",
+      "Insert",
+      "View",
+      "Layout"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Sau khi chọn thẻ Insert, em cần chọn nút lệnh nào để mở cửa sổ chèn ảnh?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Table",
+      "Shape",
+      "Picture",
+      "Chart"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Trước khi chèn ảnh, thao tác quan trọng nhất em cần thực hiện là gì?",
+    "choices": [
+      "Lưu tài liệu",
+      "Thay đổi phông chữ",
+      "Đặt con trỏ văn bản tại vị trí muốn chèn",
+      "In tài liệu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Chức năng 'Wrap Text' (Bố trí văn bản) dùng để làm gì?",
+    "choices": [
+      "Thay đổi màu sắc của ảnh",
+      "Cắt xén ảnh",
+      "Điều chỉnh cách văn bản bao quanh và vị trí của ảnh",
+      "Xóa ảnh khỏi văn bản"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Kiểu bố trí ảnh nào sẽ làm cho ảnh nằm phía sau lớp văn bản?",
+    "choices": [
+      "Square",
+      "Tight",
+      "In Front of Text",
+      "Behind Text"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Khi muốn văn bản bám sát theo hình dạng của ảnh (không phải hình vuông), em nên chọn kiểu Wrap Text nào?",
+    "choices": [
+      "In Line with Text",
+      "Square",
+      "Tight",
+      "Top and Bottom"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi chèn ảnh, thẻ lệnh nào sẽ tự động xuất hiện để em định dạng ảnh?",
+    "choices": [
+      "Home",
+      "Review",
+      "Picture Format (hoặc Format)",
+      "Mailings"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nhóm lệnh nào trên thẻ Picture Format chứa lệnh Wrap Text?",
+    "choices": [
+      "Adjust",
+      "Picture Styles",
+      "Arrange",
+      "Size"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em chọn kiểu 'In Line with Text' cho ảnh, ảnh sẽ được coi là gì trong văn bản?",
+    "choices": [
+      "Một trang mới",
+      "Một đoạn văn bản",
+      "Một kí tự lớn",
+      "Một ô trong bảng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi chọn ảnh, em cần nháy vào nút nào trong cửa sổ Insert Picture để hoàn tất việc chèn ảnh?",
+    "choices": [
+      "Cancel",
+      "Open",
+      "Insert",
+      "Delete"
+    ],
+    "answer": 2
   }
 ]

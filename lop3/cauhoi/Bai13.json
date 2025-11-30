@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Mục tiêu chính của bài 'Cùng thi đua gõ phím' là gì?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Học cách sử dụng chuột máy tính",
+      "Luyện tập và kiểm tra kĩ năng gõ 10 ngón",
+      "Học cách tạo thư mục mới",
+      "Học cách vẽ hình"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Vị trí đặt tay xuất phát chuẩn (hàng phím cơ sở) là các phím nào?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Q, W, E, R, T, Y, U, I, O, P",
+      "Z, X, C, V, B, N, M, , . /",
+      "A, S, D, F, J, K, L, ;",
+      "1, 2, 3, 4, 5, 6, 7, 8, 9, 0"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Khi gõ phím, sau khi vươn lên hàng phím trên, ngón tay phải làm gì ngay lập tức?",
+    "choices": [
+      "Giữ nguyên ở hàng phím trên",
+      "Trở về vị trí cố định trên hàng phím cơ sở",
+      "Gõ phím cách",
+      "Gõ phím Enter"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hàng phím trên bao gồm các phím nào?",
+    "choices": [
+      "A S D F J K L ;",
+      "Z X C V B N M",
+      "Q W E R T Y U I O P",
+      "Phím số 1 đến 0"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tiêu chí nào được sử dụng để đánh giá kết quả thi đua gõ phím?",
+    "choices": [
+      "Độ tuổi của người gõ",
+      "Số lỗi gõ và tốc độ gõ",
+      "Màu sắc của bàn phím",
+      "Số lần nhấn chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gõ phím B (hàng phím dưới), ngón tay nào của tay trái chịu trách nhiệm gõ?",
+    "choices": [
+      "Ngón út",
+      "Ngón giữa",
+      "Ngón trỏ",
+      "Ngón áp út"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Luyện tập gõ phím 10 ngón đúng cách giúp em đạt được hai yếu tố quan trọng là gì?",
+    "choices": [
+      "Tốc độ và màu sắc",
+      "Độ bền và giá thành",
+      "Tốc độ và độ chính xác",
+      "Sự im lặng và kích thước"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phím nào trên hàng phím cơ sở được dùng làm mốc (có gờ nổi) để đặt ngón trỏ phải?",
+    "choices": [
+      "Phím F",
+      "Phím J",
+      "Phím A",
+      "Phím L"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Ngón cái của hai tay được sử dụng để gõ phím nào?",
+    "choices": [
+      "Phím Shift",
+      "Phím Enter",
+      "Phím Delete",
+      "Phím cách (Spacebar)"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Khi gõ các phím ở hàng dưới (ví dụ phím Z), ngón tay di chuyển theo hướng nào so với hàng phím cơ sở?",
+    "choices": [
+      "Vươn lên",
+      "Khom nhẹ xuống",
+      "Sang bên trái",
+      "Sang bên phải"
+    ],
+    "answer": 1
   }
 ]

@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Thao tác nào sau đây giúp em khởi động phần mềm trình chiếu trên màn hình nền?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Nháy chuột phải một lần vào biểu tượng",
+      "Nhấn giữ phím Shift",
+      "Nháy đúp chuột (double-click) vào biểu tượng",
+      "Kéo biểu tượng vào thùng rác"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Nút lệnh nào được sử dụng để tạo thêm một trang chiếu mới trong bài trình bày?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Save",
+      "New Slide",
+      "Print",
+      "Open"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh 'New Slide' thường nằm ở thẻ nào trên dải lệnh của phần mềm trình chiếu?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Insert",
+      "Animations",
+      "Home",
+      "View"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Khi nháy vào lệnh 'New Slide', em có thể chọn được gì cho trang chiếu mới?",
+    "choices": [
+      "Tên máy tính",
+      "Tốc độ mạng",
+      "Bố cục (Layout) của trang chiếu",
+      "Màu của con trỏ chuột"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để chèn ảnh bằng cách sử dụng biểu tượng trên trang chiếu, em cần tìm biểu tượng có hình dạng gì?",
+    "choices": [
+      "Biểu tượng chiếc bút chì",
+      "Biểu tượng máy in",
+      "Biểu tượng Picture (có hình ngọn núi và mặt trời)",
+      "Biểu tượng máy tính"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi nháy vào biểu tượng Picture trong vùng nội dung, cửa sổ nào sẽ hiện ra?",
+    "choices": [
+      "Save As",
+      "Insert Picture",
+      "New Folder",
+      "Delete File"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bố cục 'Title and Content' (Tiêu đề và Nội dung) cung cấp vùng chứa nội dung để em có thể chèn những gì?",
+    "choices": [
+      "Chỉ văn bản",
+      "Chỉ tiêu đề",
+      "Văn bản, hình ảnh, bảng biểu, v.v...",
+      "Chỉ các phím tắt"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em chọn bố cục 'Blank' (Trống) khi tạo trang chiếu mới, trang đó sẽ có những vùng nội dung nào?",
+    "choices": [
+      "Chỉ có tiêu đề",
+      "Một vùng tiêu đề và một vùng nội dung",
+      "Không có vùng nội dung có sẵn nào",
+      "Hai vùng nội dung song song"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Mục đích của việc chèn hình ảnh vào trang chiếu là gì?",
+    "choices": [
+      "Làm nặng tệp tin",
+      "Làm cho bài trình bày sinh động, dễ hiểu hơn",
+      "Thay thế hoàn toàn văn bản",
+      "Làm cho máy tính nóng lên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chèn ảnh từ máy tính của em, sau khi chọn tệp ảnh trong cửa sổ Insert Picture, em cần nháy vào nút nào?",
+    "choices": [
+      "Cancel",
+      "Rename",
+      "Delete",
+      "Insert"
+    ],
+    "answer": 3
   }
 ]
