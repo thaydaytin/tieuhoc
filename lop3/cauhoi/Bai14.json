@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Internet là gì?",
+    "choices": [
+      "Một cuốn sách giáo khoa lớn",
+      "Một mạng lưới máy tính kết nối toàn thế giới",
+      "Một loại phần mềm vẽ hình",
+      "Một bộ phận của bàn phím"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để máy tính có thể sử dụng được Internet, nó cần được kết nối bằng cách nào?",
+    "choices": [
+      "Chỉ cần cắm điện",
+      "Thông qua dây cáp hoặc kết nối không dây (Wi-Fi)",
+      "Bằng cách nhấn phím Enter",
+      "Sử dụng chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin nào sau đây có thể tìm thấy trên Internet?",
+    "choices": [
+      "Văn bản (bài báo, câu chuyện)",
+      "Hình ảnh và Video",
+      "Âm thanh (bài hát)",
+      "Tất cả các loại trên"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Internet giống như một thư viện lớn vì nó giúp em:",
+    "choices": [
+      "Chơi trò chơi điện tử",
+      "Làm toán",
+      "Tìm kiếm và học hỏi nhiều kiến thức",
+      "Vẽ tranh"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Khi sử dụng Internet để học tập và giải trí, em nên có sự giám sát của ai?",
+    "choices": [
+      "Bạn bè cùng lớp",
+      "Bố mẹ hoặc thầy cô",
+      "Người lạ",
+      "Tự mình sử dụng mà không cần ai"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi tìm kiếm một bài hát trên Internet, em đang truy cập loại tài nguyên thông tin nào?",
+    "choices": [
+      "Video",
+      "Văn bản",
+      "Âm thanh",
+      "Hình ảnh"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để xem các trang web trên Internet, em cần mở ứng dụng nào trên máy tính?",
+    "choices": [
+      "Phần mềm soạn thảo văn bản (Word)",
+      "Phần mềm Trình duyệt web (ví dụ: Chrome)",
+      "Phần mềm vẽ (Paint)",
+      "Phần mềm Bảng tính (Excel)"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điều nào sau đây là **ĐÚNG** về Internet?",
+    "choices": [
+      "Internet chỉ có ở Việt Nam",
+      "Internet chỉ dùng để chơi game",
+      "Internet kết nối các máy tính trên khắp thế giới",
+      "Internet là một bộ phận cứng của máy tính"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi một máy tính kết nối Internet bằng Wi-Fi, đó là loại kết nối nào?",
+    "choices": [
+      "Kết nối có dây",
+      "Kết nối không dây",
+      "Kết nối trực tiếp",
+      "Kết nối bằng phím"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc xem các bài giảng trực tuyến trên Internet giúp em thực hiện mục đích gì?",
+    "choices": [
+      "Giả trí",
+      "Học tập",
+      "Lưu trữ",
+      "Sao chép"
+    ],
     "answer": 1
   }
 ]

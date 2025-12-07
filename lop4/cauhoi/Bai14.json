@@ -1,17 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Để thay đổi cỡ chữ trong bài trình chiếu, em sử dụng lệnh nào trong nhóm Font?",
+    "choices": [
+      "Font Color",
+      "Bold",
+      "Font Size",
+      "Underline"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Lệnh nào có chức năng làm cho văn bản bị gạch chân?",
+    "choices": [
+      "I",
+      "B",
+      "U",
+      "Align Text Right"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để thay đổi kiểu căn lề cho đoạn văn bản, em cần tìm lệnh trong nhóm nào trên thẻ Home?",
+    "choices": [
+      "Slides",
+      "Font",
+      "Paragraph",
+      "Editing"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh 'Center' (Căn giữa) dùng để làm gì?",
+    "choices": [
+      "Chuyển văn bản sang màu đỏ",
+      "Căn đều văn bản sang hai bên (trái và phải)",
+      "Căn đoạn văn bản vào giữa khung",
+      "In nghiêng văn bản"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi muốn tạo danh sách có thứ tự (1, 2, 3...), em sử dụng lệnh nào?",
+    "choices": [
+      "Bullets",
+      "Numbering",
+      "Justify",
+      "Text Direction"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Theo nguyên tắc, cỡ chữ tối thiểu trên trang chiếu nên là bao nhiêu để người xem dễ đọc?",
+    "choices": [
+      "12pt",
+      "18pt",
+      "24pt",
+      "36pt"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi định dạng văn bản, bước đầu tiên em cần làm là gì?",
+    "choices": [
+      "Chọn thẻ Design",
+      "Lưu bài trình chiếu",
+      "Chọn (Bôi đen) phần văn bản cần định dạng",
+      "Chèn ảnh vào trang chiếu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em nên chọn màu chữ như thế nào so với màu nền để trang chiếu dễ đọc?",
+    "choices": [
+      "Màu giống với màu nền",
+      "Màu tương phản với màu nền",
+      "Màu tối trên nền tối",
+      "Màu sáng trên nền sáng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào có chức năng tô đậm văn bản?",
+    "choices": [
+      "Underline",
+      "Italic",
+      "Bold",
+      "Font Color"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Căn lề 'Justify' có nghĩa là gì?",
+    "choices": [
+      "Chỉ căn lề phải",
+      "Chỉ căn lề trái",
+      "Căn đều cả lề trái và lề phải",
+      "Căn vào giữa"
+    ],
+    "answer": 2
   }
 ]
