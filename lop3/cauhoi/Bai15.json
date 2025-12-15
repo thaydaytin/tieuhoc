@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Loại thông tin nào sau đây được coi là thông tin phù hợp với học sinh tiểu học trên Internet?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Các hình ảnh bạo lực",
+      "Bài giảng về khoa học và tự nhiên",
+      "Các nội dung mê tín dị đoan",
+      "Quảng cáo lừa đảo"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Khi em thấy một trang web có hình ảnh đáng sợ, bạo lực, em nên làm gì ngay lập tức?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Nháy chuột vào để xem tiếp",
+      "Chia sẻ cho bạn bè xem cùng",
+      "Thoát ra khỏi trang web đó ngay lập tức",
+      "Gửi email cho người tạo trang web"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Thông tin nào sau đây là dấu hiệu của thông tin không phù hợp?",
+    "choices": [
+      "Hình ảnh về các loài động vật",
+      "Sử dụng ngôn ngữ thô tục hoặc xúc phạm",
+      "Bài viết về lợi ích của rau xanh",
+      "Các câu chuyện cổ tích"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gặp thông tin không phù hợp, hành động quan trọng nhất sau khi thoát ra là gì?",
+    "choices": [
+      "Tự mình xóa thông tin đó",
+      "Kể cho cha mẹ, thầy cô giáo hoặc người lớn tin cậy biết",
+      "Đóng máy tính lại và đi ngủ",
+      "Mở thêm một trang web khác"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em tuyệt đối không nên cung cấp thông tin cá nhân nào cho người lạ trên mạng?",
+    "choices": [
+      "Tên trường học",
+      "Địa chỉ nhà",
+      "Mật khẩu tài khoản",
+      "Tất cả các thông tin trên"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thông tin 'fake news' (tin giả, sai sự thật) được xếp vào loại thông tin nào?",
+    "choices": [
+      "Thông tin giáo dục",
+      "Thông tin giải trí",
+      "Thông tin không phù hợp",
+      "Thông tin khoa học"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc nhận biết và tránh thông tin không phù hợp trên mạng là trách nhiệm của ai?",
+    "choices": [
+      "Chỉ là trách nhiệm của giáo viên",
+      "Chỉ là trách nhiệm của bố mẹ",
+      "Là trách nhiệm tự bảo vệ của chính em",
+      "Là trách nhiệm của nhà mạng Internet"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Một trang web không rõ nguồn gốc, không có tên tác giả, thì thông tin trên đó có đáng tin cậy không?",
+    "choices": [
+      "Hoàn toàn đáng tin cậy",
+      "Nên tin tưởng tuyệt đối",
+      "Nên cảnh giác và không nên tin theo",
+      "Chỉ đúng nếu có hình ảnh đẹp"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi chơi game trực tuyến, nếu có người lạ hỏi số điện thoại và địa chỉ nhà em, em nên làm gì?",
+    "choices": [
+      "Cung cấp ngay lập tức",
+      "Giả vờ không thấy",
+      "Tuyệt đối không cung cấp và báo cho người lớn",
+      "Chỉ cung cấp cho họ nếu họ tặng quà"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nội dung 'người lớn' là loại nội dung như thế nào?",
+    "choices": [
+      "Nội dung do người lớn tạo ra",
+      "Nội dung không phù hợp với lứa tuổi học sinh tiểu học",
+      "Nội dung về công việc",
+      "Nội dung về các bộ phim hay"
+    ],
+    "answer": 1
   }
 ]

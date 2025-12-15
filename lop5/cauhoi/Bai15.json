@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để làm cho một từ được bôi đậm (In đậm) trong văn bản, em sử dụng lệnh nào trên thẻ Home?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "I",
+      "U",
+      "B (Bold)",
+      "Font Color"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Thao tác nào sau đây sẽ làm mất khối văn bản đã chọn ở vị trí cũ và chuyển nó sang vị trí mới?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Copy và Paste",
+      "Cut và Paste",
+      "Chỉ dùng Delete",
+      "Chỉ dùng Copy"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trước khi thực hiện bất kỳ thao tác định dạng nào (như đổi cỡ chữ, in nghiêng), bước đầu tiên em cần làm là gì?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Nhấn phím Enter",
+      "Chọn (Bôi đen) khối văn bản cần định dạng",
+      "Chèn thêm ảnh",
+      "Lưu tài liệu"
     ],
-    "answer": 0
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào được dùng để chèn một hình ảnh từ máy tính vào văn bản?",
+    "choices": [
+      "New Slide (Trang chiếu mới)",
+      "Picture (Ảnh) trên thẻ Insert",
+      "Copy (Sao chép)",
+      "Rename (Đổi tên)"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'Wrap Text' (Bố trí văn bản) có công dụng gì đối với hình ảnh đã chèn?",
+    "choices": [
+      "Thay đổi màu sắc của ảnh",
+      "Cắt xén ảnh",
+      "Điều chỉnh cách văn bản bao quanh và vị trí của ảnh",
+      "Xóa ảnh khỏi văn bản"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phím tắt Ctrl + U được dùng để thực hiện định dạng nào?",
+    "choices": [
+      "In đậm (Bold)",
+      "In nghiêng (Italic)",
+      "Gạch chân (Underline)",
+      "Căn giữa (Center)"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để căn một đoạn văn bản ra chính giữa trang, em chọn lệnh căn lề nào trong nhóm Paragraph?",
+    "choices": [
+      "Align Text Left",
+      "Center",
+      "Align Text Right",
+      "Justify"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em dùng lệnh 'Copy' một khối văn bản, điều gì xảy ra với bản gốc ở vị trí ban đầu?",
+    "choices": [
+      "Bản gốc biến mất",
+      "Bản gốc bị chuyển sang màu đỏ",
+      "Bản gốc vẫn còn",
+      "Bản gốc bị di chuyển lên đầu trang"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong quy tắc gõ văn bản tiếng Việt, dấu cách được đặt như thế nào so với dấu câu (dấu chấm, dấu phẩy)?",
+    "choices": [
+      "Đặt trước dấu câu",
+      "Đặt sau dấu câu",
+      "Đặt cả trước và sau dấu câu",
+      "Không bao giờ dùng dấu cách"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu muốn tạo danh sách có đánh số thứ tự (1, 2, 3...), em sẽ sử dụng lệnh nào trong nhóm Paragraph?",
+    "choices": [
+      "Bullets",
+      "Numbering",
+      "Justify",
+      "Line Spacing"
+    ],
+    "answer": 1
   }
 ]

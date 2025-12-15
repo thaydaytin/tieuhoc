@@ -1,42 +1,102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Hiệu ứng chuyển trang chiếu (Transition) là hiệu ứng xuất hiện khi nào?",
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Khi em mở phần mềm trình chiếu",
+      "Khi em chèn hình ảnh vào trang chiếu",
+      "Khi chuyển từ trang chiếu này sang trang chiếu kế tiếp",
+      "Khi em lưu bài trình chiếu"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để áp dụng hiệu ứng chuyển trang chiếu, em cần chọn thẻ lệnh nào trên dải lệnh?",
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Home",
+      "Insert",
+      "Transitions",
+      "Animations"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Sau khi chọn hiệu ứng, em có thể xem trước (preview) hiệu ứng đó ở đâu?",
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Ở thanh tiêu đề",
+      "Ngay trên trang chiếu em đang chọn",
+      "Trong thư mục chứa tệp",
+      "Trong phần mềm soạn thảo văn bản"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Nút lệnh nào giúp em áp dụng cùng một hiệu ứng cho tất cả các trang chiếu trong bài?",
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Duration",
+      "Apply To All",
+      "Sound",
+      "Preview"
     ],
-    "answer": 0
+    "answer": 1
+  },
+  {
+    "question": "Nếu em muốn hiệu ứng chuyển trang chiếu diễn ra nhanh hơn, em nên điều chỉnh thời gian (Duration) như thế nào?",
+    "choices": [
+      "Tăng thời gian (Duration) lên",
+      "Giữ nguyên thời gian",
+      "Giảm thời gian (Duration) xuống",
+      "Xóa hiệu ứng đi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nhóm lệnh nào trên thẻ Transitions chứa các kiểu hiệu ứng như Fade, Push, Wipe?",
+    "choices": [
+      "Preview",
+      "Timing",
+      "Transition to This Slide",
+      "Slide Show"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Việc sử dụng quá nhiều loại hiệu ứng Transition khác nhau trong một bài trình chiếu có tốt không?",
+    "choices": [
+      "Rất tốt, làm bài trình bày thêm phong phú",
+      "Không tốt, dễ gây rối mắt cho người xem",
+      "Không ảnh hưởng gì",
+      "Chỉ tốt nếu bài trình bày dài"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chỉnh sửa tốc độ của hiệu ứng Transition, em tìm đến nhóm lệnh nào trên thẻ Transitions?",
+    "choices": [
+      "Preview",
+      "Timing",
+      "Transition Effects",
+      "Insert"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trước khi chọn một hiệu ứng chuyển trang, em cần thực hiện thao tác nào?",
+    "choices": [
+      "Nhấn phím Enter",
+      "Chọn (click) vào trang chiếu muốn thêm hiệu ứng",
+      "Đổi màu chữ",
+      "Lưu lại bài trình chiếu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong phần mềm trình chiếu, mục đích chính của việc thêm hiệu ứng Transition là gì?",
+    "choices": [
+      "Để ẩn nội dung văn bản",
+      "Để làm cho bài trình chiếu hấp dẫn, sinh động hơn",
+      "Để giảm kích thước tệp tin",
+      "Để tăng thời gian soạn thảo"
+    ],
+    "answer": 1
   }
 ]
