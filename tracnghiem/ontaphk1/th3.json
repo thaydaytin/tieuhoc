@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "level": "M1",
+    "question": "Thành phần nào của máy tính dùng để nhập chữ và số?",
+    "options": ["Màn hình", "Chuột", "Bàn phím", "Loa"],
+    "answer": "C"
+  },
+  {
+    "id": 2,
+    "level": "M1",
+    "question": "Đâu là các loại máy tính thông dụng hiện nay?",
+    "options": ["Máy tính để bàn, xách tay", "Máy tính bảng, điện thoại thông minh", "Cả A và B đều đúng", "Chỉ có phương án A đúng"],
+    "answer": "C"
+  },
+  {
+    "id": 3,
+    "level": "M1",
+    "question": "Thiết bị nào sau đây của máy tính có chức năng phát ra âm thanh?",
+    "options": ["Màn hình", "Loa", "Bàn phím", "Thân máy"],
+    "answer": "B"
+  },
+  {
+    "id": 4,
+    "level": "M1",
+    "question": "Trên bàn phím, hai phím có gai (F và J) nằm ở hàng phím nào?",
+    "options": ["Hàng phím trên", "Hàng phím dưới", "Hàng phím cơ sở", "Hàng phím số"],
+    "answer": "C"
+  },
+  {
+    "id": 5,
+    "level": "M1",
+    "question": "Thông tin thường gặp có mấy dạng chính?",
+    "options": ["2 dạng", "3 dạng (Chữ, hình ảnh, âm thanh)", "4 dạng", "5 dạng"],
+    "answer": "B"
+  },
+  {
+    "id": 6,
+    "level": "M1",
+    "question": "Bộ phận nào của máy tính xách tay có chức năng tương tự như chuột máy tính?",
+    "options": ["Màn hình", "Vùng cảm ứng chuột", "Bàn phím", "Loa"],
+    "answer": "B"
+  },
+  {
+    "id": 7,
+    "level": "M1",
+    "question": "Internet giúp em làm gì?",
+    "options": ["Xem tin tức, học tập", "Giải trí", "Tìm kiếm thông tin", "Tất cả các phương án trên"],
+    "answer": "D"
+  },
+  {
+    "id": 8,
+    "level": "M2",
+    "question": "Tại sao khi ngồi làm việc với máy tính, em cần ngồi đúng tư thế?",
+    "options": ["Máy chạy nhanh hơn", "Bảo vệ cột sống và đôi mắt", "Gõ phím nhanh hơn", "Nghe nhạc rõ hơn"],
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "level": "M2",
+    "question": "Khi em nghe tiếng chuông báo thức và thức dậy, tiếng chuông là gì?",
+    "options": ["Thông tin vào", "Kết quả xử lí", "Thông tin ra", "Quyết định"],
+    "answer": "A"
+  },
+  {
+    "id": 10,
+    "level": "M2",
+    "question": "Đặc điểm nổi bật nhất của máy tính bảng và điện thoại thông minh là gì?",
+    "options": ["Có bàn phím rời to", "Có màn hình cảm ứng", "Phải cắm điện liên tục", "Không thể kết nối Internet"],
+    "answer": "B"
+  },
+  {
+    "id": 11,
+    "level": "M2",
+    "question": "Đâu là hành động nhận biết thông tin KHÔNG phù hợp trên Internet?",
+    "options": ["Xem video thủ công", "Đọc truyện cổ tích", "Xem trò chơi bạo lực", "Tìm hiểu động vật"],
+    "answer": "C"
+  },
+  {
+    "id": 12,
+    "level": "M2",
+    "question": "Vì sao chúng ta nên tập gõ bàn phím bằng 10 ngón?",
+    "options": ["Bàn phím không hỏng", "Gõ nhanh, chính xác, không cần nhìn", "Tay không mỏi", "Quy định bắt buộc"],
+    "answer": "B"
+  },
+  {
+    "id": 13,
+    "level": "M2",
+    "question": "Trong quá trình xử lí thông tin của máy tính, thành phần nào đảm nhiệm việc xử lí?",
+    "options": ["Màn hình", "Thân máy", "Chuột", "Loa"],
+    "answer": "B"
+  },
+  {
+    "id": 14,
+    "level": "M3",
+    "question": "Nếu máy tính bốc khói hoặc có mùi khét, em nên làm gì?",
+    "options": ["Đổ nước vào máy", "Tiếp tục dùng", "Tắt máy và báo người lớn", "Tự tháo máy sửa"],
+    "answer": "C"
+  },
+  {
+    "id": 15,
+    "level": "M3",
+    "question": "Trang web yêu cầu nhập số điện thoại bố mẹ để nhận quà, em sẽ làm gì?",
+    "options": ["Nhập ngay", "Tắt và không nhập thông tin", "Nhập số của mình", "Gọi bạn cùng nhập"],
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "level": "M3",
+    "question": "Khoảng cách từ mắt đến màn hình bao nhiêu là hợp lí?",
+    "options": ["Càng sát càng tốt", "20cm - 30cm", "50cm - 80cm", "2 mét"],
+    "answer": "C"
+  },
+  {
+    "id": 17,
+    "level": "M1",
+    "type": "essay",
+    "question": "Em hãy kể tên 4 thành phần cơ bản của một bộ máy tính để bàn.",
+    "answer": "Màn hình, Thân máy, Bàn phím và Chuột."
+  },
+  {
+    "id": 18,
+    "level": "M1",
+    "type": "essay",
+    "question": "Hãy nêu 3 dạng thông tin thường gặp mà em đã được học.",
+    "answer": "Văn bản, Hình ảnh và Âm thanh."
+  },
+  {
+    "id": 19,
+    "level": "M2",
+    "type": "essay",
+    "question": "Tại sao khi sử dụng Internet, em cần sự hướng dẫn của người lớn?",
+    "answer": "Để tránh nội dung xấu, không phù hợp và đảm bảo an toàn trên mạng."
+  },
+  {
+    "id": 20,
+    "level": "M3",
+    "type": "essay",
+    "question": "Làm cách nào để nhập văn bản tạm thời nếu bàn phím vật lý bị hỏng trên máy tính bảng?",
+    "answer": "Sử dụng bàn phím ảo hiển thị trên màn hình cảm ứng."
+  }
+]

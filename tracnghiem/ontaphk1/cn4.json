@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "level": "M1",
+    "question": "Lợi ích nào sau đây không phải của hoa và cây cảnh?",
+    "options": ["Làm sạch không khí", "Làm thức ăn cho gia súc", "Trang trí cảnh quan", "Làm hương liệu"],
+    "answer": "B"
+  },
+  {
+    "id": 2,
+    "level": "M1",
+    "question": "Hoa đào thường nở vào mùa nào trong năm?",
+    "options": ["Mùa hạ", "Mùa thu", "Mùa đông", "Mùa xuân"],
+    "answer": "D"
+  },
+  {
+    "id": 3,
+    "level": "M1",
+    "question": "Loại hoa nào sau đây có màu vàng rực rỡ và thường nở vào dịp Tết ở miền Nam?",
+    "options": ["Hoa hồng", "Hoa đào", "Hoa mai", "Hoa sen"],
+    "answer": "C"
+  },
+  {
+    "id": 4,
+    "level": "M1",
+    "question": "Đâu là một loại cây cảnh phổ biến được nhắc đến trong chương trình học?",
+    "options": ["Cây lúa", "Cây lưỡi hổ", "Cây ngô", "Cây mía"],
+    "answer": "B"
+  },
+  {
+    "id": 5,
+    "level": "M1",
+    "question": "Loại giá thể nào thường được dùng để trồng hoa trong chậu?",
+    "options": ["Cát biển", "Sỏi đá lớn", "Xơ dừa, tro trấu", "Xi măng"],
+    "answer": "C"
+  },
+  {
+    "id": 6,
+    "level": "M1",
+    "question": "Chậu trồng hoa có thể được làm bằng chất liệu gì?",
+    "options": ["Nhựa, sứ hoặc đất nung", "Giấy vở", "Vải mỏng", "Lá cây khô"],
+    "answer": "A"
+  },
+  {
+    "id": 7,
+    "level": "M1",
+    "question": "Bước đầu tiên trong quy trình gieo hạt trong chậu là gì?",
+    "options": ["Tưới nước", "Chuẩn bị vật liệu, dụng cụ", "Phun thuốc", "Thu hoạch"],
+    "answer": "B"
+  },
+  {
+    "id": 8,
+    "level": "M1",
+    "question": "Để cây cảnh có hình dáng đẹp, chúng ta cần thực hiện công việc gì?",
+    "options": ["Bón thật nhiều phân", "Cắt tỉa cành, lá", "Để trong bóng tối", "Tưới ngập chậu"],
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "level": "M2",
+    "question": "Tại sao người ta thường đặt cây cảnh trong phòng làm việc?",
+    "options": ["Để nhanh ra quả", "Làm đẹp và sạch không khí", "Thay thế đèn chiếu sáng", "Đuổi mọi côn trùng"],
+    "answer": "B"
+  },
+  {
+    "id": 10,
+    "level": "M2",
+    "question": "Khi tưới nước cho hoa trong chậu, em nên lưu ý điều gì?",
+    "options": ["Tưới càng nhiều càng tốt", "Chỉ tưới khi cây héo khô", "Tưới vừa đủ, tránh ngập úng", "Tưới vào buổi trưa nắng"],
+    "answer": "C"
+  },
+  {
+    "id": 11,
+    "level": "M2",
+    "question": "Vì sao đáy chậu trồng hoa thường phải có lỗ thoát nước?",
+    "options": ["Để trang trí", "Để rễ chui ra", "Để thoát nước thừa, tránh úng", "Để tiết kiệm đất"],
+    "answer": "C"
+  },
+  {
+    "id": 12,
+    "level": "M2",
+    "question": "Việc bón phân cho cây cảnh nhằm mục đích chính là gì?",
+    "options": ["Làm chậu nặng hơn", "Cung cấp dinh dưỡng phát triển", "Làm lá chuyển màu đỏ", "Giúp cây sống thiếu sáng"],
+    "answer": "B"
+  },
+  {
+    "id": 13,
+    "level": "M2",
+    "question": "Tại sao cần lau bụi trên lá cây cảnh thường xuyên?",
+    "options": ["Để lá đẹp và cây trao đổi khí tốt", "Để không bị sâu cắn", "Để đổi màu lá", "Để mọc thêm cành"],
+    "answer": "A"
+  },
+  {
+    "id": 14,
+    "level": "M3",
+    "question": "Nếu cây bị héo dù vẫn tưới nước, em nên kiểm tra gì trước tiên?",
+    "options": ["Kiểm tra lỗ thoát nước đáy chậu", "Đổ thêm phân hóa học", "Đưa vào chỗ tối", "Ngắt bỏ hết lá"],
+    "answer": "A"
+  },
+  {
+    "id": 15,
+    "level": "M3",
+    "question": "Thứ tự trồng cây từ cành vào chậu hợp lí nhất là:",
+    "options": ["Tưới nước -> Cho đất -> Cắm cành", "Chuẩn bị -> Cho đất -> Cắm cành -> Tưới nước", "Cắm cành -> Cho đất -> Tưới nước", "Cho đất -> Tưới nước -> Cắm cành"],
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "level": "M3",
+    "question": "Để cây không chết khi đi vắng một tuần, em nên làm gì?",
+    "options": ["Đổ đầy nước vào chậu", "Nhờ hàng xóm hoặc dùng bình nhỏ giọt", "Phơi cây dưới nắng gắt", "Bón thật nhiều phân lân"],
+    "answer": "B"
+  },
+  {
+    "id": 17,
+    "level": "M1",
+    "type": "essay",
+    "question": "Em hãy kể tên 3 loại hoa và 3 loại cây cảnh phổ biến.",
+    "answer": "Hoa: Hồng, Cúc, Mai/Đào. Cây cảnh: Lưỡi hổ, Kim tiền, Vạn lộc."
+  },
+  {
+    "id": 18,
+    "level": "M2",
+    "type": "essay",
+    "question": "Nêu các công việc chính để chăm sóc hoa và cây cảnh trong chậu.",
+    "answer": "Tưới nước, bón phân, cắt tỉa cành lá, bắt sâu và đảm bảo ánh sáng."
+  },
+  {
+    "id": 19,
+    "level": "M2",
+    "type": "essay",
+    "question": "Tại sao không nên để quá nhiều cây xanh trong phòng ngủ kín vào ban đêm?",
+    "answer": "Vì ban đêm cây lấy ô-xy và thải các-bô-níc, dễ gây ngạt thở trong phòng kín."
+  },
+  {
+    "id": 20,
+    "level": "M3",
+    "type": "essay",
+    "question": "Đề xuất 2 hành động cụ thể để bảo vệ cây xanh ở trường học.",
+    "answer": "1. Không ngắt hoa bẻ cành. 2. Tích cực tưới nước, nhổ cỏ cho cây của trường."
+  }
+]

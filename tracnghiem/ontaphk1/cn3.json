@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "level": "M1",
+    "question": "Đâu là đối tượng tự nhiên trong các phương án sau?",
+    "options": ["Máy bay", "Cây bàng", "Bút chì", "Điện thoại"],
+    "answer": "B"
+  },
+  {
+    "id": 2,
+    "level": "M1",
+    "question": "Sản phẩm công nghệ là những sản phẩm được tạo ra bởi:",
+    "options": ["Thiên nhiên", "Con người", "Các loài động vật", "Có sẵn trong rừng"],
+    "answer": "B"
+  },
+  {
+    "id": 3,
+    "level": "M1",
+    "question": "Bộ phận nào của đèn học có tác dụng phát ra ánh sáng?",
+    "options": ["Chụp đèn", "Đế đèn", "Bóng đèn", "Công tắc"],
+    "answer": "C"
+  },
+  {
+    "id": 4,
+    "level": "M1",
+    "question": "Quạt điện là sản phẩm công nghệ dùng để làm gì?",
+    "options": ["Chiếu sáng", "Tạo ra gió mát", "Thu tín hiệu hình ảnh", "Giữ thực phẩm tươi lâu"],
+    "answer": "B"
+  },
+  {
+    "id": 5,
+    "level": "M1",
+    "question": "Bộ phận nào của quạt điện giúp bảo vệ người dùng không chạm vào cánh quạt?",
+    "options": ["Động cơ", "Lồng quạt", "Đế quạt", "Dây nguồn"],
+    "answer": "B"
+  },
+  {
+    "id": 6,
+    "level": "M1",
+    "question": "Máy thu thanh (ra-đi-ô) dùng để thu nhận thông tin qua hình thức nào?",
+    "options": ["Hình ảnh", "Chữ viết", "Âm thanh", "Phim ảnh"],
+    "answer": "C"
+  },
+  {
+    "id": 7,
+    "level": "M1",
+    "question": "Máy thu hình còn được gọi tên phổ biến là gì?",
+    "options": ["Ti vi", "Đài", "Máy tính", "Loa cầm tay"],
+    "answer": "A"
+  },
+  {
+    "id": 8,
+    "level": "M1",
+    "question": "Để thay đổi âm lượng của máy thu hình, em sử dụng bộ phận nào?",
+    "options": ["Nút nguồn", "Nút điều chỉnh Volume", "Màn hình", "Loa"],
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "level": "M2",
+    "question": "Tại sao khi không học bài nữa, em cần phải tắt đèn học?",
+    "options": ["Để đèn nhanh hỏng hơn", "Để tiết kiệm điện và bảo vệ bóng đèn", "Để phòng tối dễ ngủ hơn", "Để bố mẹ khen ngợi"],
+    "answer": "B"
+  },
+  {
+    "id": 10,
+    "level": "M2",
+    "question": "Khi sử dụng máy thu hình, nếu ngồi quá gần màn hình sẽ dẫn đến hậu quả gì?",
+    "options": ["Giúp nhìn rõ hình ảnh hơn", "Làm tivi bền hơn", "Gây mỏi mắt, cận thị", "Tiết kiệm điện"],
+    "answer": "C"
+  },
+  {
+    "id": 11,
+    "level": "M2",
+    "question": "Vì sao chúng ta cần lau chùi cánh quạt điện sau một thời gian sử dụng?",
+    "options": ["Để quạt trông đẹp hơn", "Để quạt quay nhanh và gió sạch hơn", "Để thay đổi màu sắc", "Vì quạt không tự sạch được"],
+    "answer": "B"
+  },
+  {
+    "id": 12,
+    "level": "M2",
+    "question": "Điểm khác nhau cơ bản nhất giữa máy thu thanh và máy thu hình là gì?",
+    "options": ["Máy thu thanh có hình ảnh", "Máy thu hình có cả hình và tiếng, máy thu thanh chỉ có tiếng", "Giá tiền", "Kích thước"],
+    "answer": "B"
+  },
+  {
+    "id": 13,
+    "level": "M2",
+    "question": "Nếu nghe tiếng kêu lạ hoặc mùi khét khi dùng quạt, em nên làm gì?",
+    "options": ["Dùng bình thường", "Tắt ngay và báo người lớn", "Đổ nước vào quạt", "Tự tháo ra sửa"],
+    "answer": "B"
+  },
+  {
+    "id": 14,
+    "level": "M2",
+    "question": "Tại sao không nên đặt đèn học ở nơi quá tối hoặc bị bóng che khuất?",
+    "options": ["Tốn điện", "Thiếu sáng gây hại mắt", "Đèn không bật được", "Làm hỏng đèn"],
+    "answer": "B"
+  },
+  {
+    "id": 15,
+    "level": "M3",
+    "question": "Tay em đang bị ướt, em có nên chạm vào công tắc điện không?",
+    "options": ["Có, vì an toàn", "Không, vì dễ gây giật điện", "Có, nếu hơi ướt", "Không, vì bẩn"],
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "level": "M3",
+    "question": "Hành động nào đúng khi sử dụng máy thu hình tiết kiệm?",
+    "options": ["Bật cả ngày", "Điều chỉnh âm lượng vừa đủ, tắt khi không xem", "Vừa xem vừa chơi bóng", "Ngồi sát màn hình"],
+    "answer": "B"
+  },
+  {
+    "id": 17,
+    "level": "M1",
+    "type": "essay",
+    "question": "Em hãy kể tên 4 bộ phận chính của một chiếc đèn học.",
+    "answer": "Bóng đèn, chụp đèn, thân đèn, đế đèn."
+  },
+  {
+    "id": 18,
+    "level": "M2",
+    "type": "essay",
+    "question": "Sử dụng sản phẩm công nghệ đúng cách mang lại lợi ích gì?",
+    "answer": "Tiện nghi, tiết kiệm thời gian, sức lao động và phục vụ học tập, giải trí tốt hơn."
+  },
+  {
+    "id": 19,
+    "level": "M3",
+    "type": "essay",
+    "question": "Cần làm gì an toàn trước khi vệ sinh quạt điện?",
+    "answer": "Rút phích cắm điện và đợi cánh quạt dừng hẳn."
+  },
+  {
+    "id": 20,
+    "level": "M3",
+    "type": "essay",
+    "question": "Trước khi đi du lịch dài ngày, em xử lý thiết bị điện thế nào?",
+    "answer": "Tắt tất cả thiết bị và rút phích cắm để đảm bảo an toàn, tiết kiệm điện."
+  }
+]
