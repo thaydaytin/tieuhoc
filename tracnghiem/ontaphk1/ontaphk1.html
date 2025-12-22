@@ -25,11 +25,8 @@
         cursor: pointer;
         font-size: 18px;
         box-shadow: 0 4px #e67faa;
-        transition: 0.2s;
     }
-    .subject-btn:hover {
-        background: #ff76ad;
-    }
+    .subject-btn:hover { background:#ff76ad; }
 
     #quiz-box {
         display:none;
@@ -42,13 +39,6 @@
         border:4px solid #ffd6e8;
     }
 
-    #question-text {
-        font-size:20px;
-        font-weight:bold;
-        color:#ff6f91;
-        margin-bottom:10px;
-    }
-
     .answer {
         padding:12px;
         border:2px solid #cce6ff;
@@ -57,10 +47,10 @@
         cursor:pointer;
         background:#f2faff;
         transition:0.2s;
+        position:relative;
+        font-size:17px;
     }
-    .answer:hover {
-        background:#dff1ff;
-    }
+    .answer:hover { background:#dff1ff; }
 
     .correct {
         background:#c3ffcf !important;
@@ -70,6 +60,17 @@
         background:#ffd3d3 !important;
         border-color:#ff6b6b;
     }
+
+    .icon {
+        position:absolute;
+        right:12px;
+        top:50%;
+        transform:translateY(-50%);
+        font-weight:bold;
+        font-size:20px;
+    }
+    .correct-icon { color:#1aa920; }
+    .wrong-icon { color:#ff3b30; }
 
     #controls {
         margin-top:20px;
@@ -83,11 +84,9 @@
         font-size:16px;
         cursor:pointer;
     }
-    #next-btn { background:#6ecbff; color:white; box-shadow:0 3px #4aa8dd; }
-    #see-answer-btn { background:#ffb347; color:white; box-shadow:0 3px #db9831; }
-    #restart-btn { background:#8ef58e; color:white; box-shadow:0 3px #63d263; }
+    #next-btn { background:#6ecbff; color:white; }
+    #see-answer-btn { background:#ffb347; color:white; }
 
-    /* bảng kết quả */
     #result-box {
         display:none;
         background:white;
@@ -100,6 +99,16 @@
         text-align:center;
     }
     #result-box h2 { color:#ff6f91; }
+
+    #answer-display {
+        margin-top:15px;
+        background:#fff6d1;
+        padding:12px;
+        border-radius:10px;
+        border:2px solid #ffe39b;
+        font-size:17px;
+        display:none;
+    }
 </style>
 </head>
 
@@ -120,12 +129,13 @@
 <div id="quiz-box">
     <h2 id="question-text"></h2>
     <div id="answers"></div>
+    <div id="answer-display"></div>
 
     <div id="controls">
-        <button id="next-btn" onclick="nextQuestion()">Câu tiếp ➜</button>
         <button id="see-answer-btn" onclick="showEssayAnswer()" style="display:none;">
             Xem đáp án
         </button>
+        <button id="next-btn" onclick="nextQuestion()">Câu tiếp ➜</button>
     </div>
 </div>
 
@@ -136,7 +146,9 @@
     <p id="essay-score"></p>
     <h3 id="total-score"></h3>
 
-    <button id="restart-btn" onclick="restartQuiz()">🔄 Làm lại</button>
+    <button onclick="restartQuiz()" style="padding:12px 25px; background:#8ef58e; color:white; border-radius:10px;">
+        🔄 Làm lại bài
+    </button>
 </div>
 
 <script>
@@ -144,9 +156,9 @@ let data = [];
 let mcq = [];
 let essay = [];
 let index = 0;
-let scoreMCQ = 0;       
-let scoreEssay = 0;     
-let viewedEssay = {};   
+let scoreMCQ = 0;
+let scoreEssay = 0;
+let viewedEssay = {};
 
 function loadSubject(filename) {
     fetch(filename)
@@ -174,15 +186,16 @@ function loadSubject(filename) {
 function showQuestion() {
     let q;
 
+    document.getElementById("answer-display").style.display = "none";
+    document.getElementById("answers").innerHTML = "";
+
     if (index < mcq.length) q = mcq[index];
     else q = essay[index - mcq.length];
 
-    document.getElementById("answers").innerHTML = "";
     document.getElementById("question-text").innerText =
         "Câu " + (index + 1) + ": " + q.question;
 
     if (!q.type) {
-        document.getElementById("next-btn").style.display = "inline-block";
         document.getElementById("see-answer-btn").style.display = "none";
 
         q.options.forEach((opt, i) => {
@@ -192,25 +205,33 @@ function showQuestion() {
             div.onclick = () => checkAnswer(div, i, q.answer);
             document.getElementById("answers").appendChild(div);
         });
-    } else {
-        document.getElementById("answers").innerHTML =
-            "<p style='font-size:18px; color:#777;'>Hãy tự đọc và suy nghĩ trước khi bấm xem đáp án nhé!</p>";
 
+    } else {
         document.getElementById("see-answer-btn").style.display = "inline-block";
+        document.getElementById("answers").innerHTML =
+            "<p style='font-size:18px; color:#999;'>Hãy tự suy nghĩ trước khi xem đáp án nhé!</p>";
     }
 }
 
 function checkAnswer(div, idx, correctLetter) {
-    let letter = ["A","B","C","D"][idx];
+    let all = document.querySelectorAll(".answer");
+    let letters = ["A","B","C","D"];
+    let chosen = letters[idx];
 
-    if (letter === correctLetter) {
+    if (chosen === correctLetter) {
         div.classList.add("correct");
+        div.innerHTML += `<span class="icon correct-icon">✓</span>`;
         scoreMCQ += 0.5;
     } else {
         div.classList.add("wrong");
+        div.innerHTML += `<span class="icon wrong-icon">✗</span>`;
+
+        let correctIndex = letters.indexOf(correctLetter);
+        all[correctIndex].classList.add("correct");
+        all[correctIndex].innerHTML += `<span class="icon correct-icon">✓</span>`;
     }
 
-    document.querySelectorAll(".answer").forEach(a => a.onclick = null);
+    all.forEach(a => a.onclick = null);
 }
 
 function showEssayAnswer() {
@@ -221,7 +242,10 @@ function showEssayAnswer() {
         viewedEssay[q.id] = true;
     }
 
-    alert("📘 Đáp án:\n" + q.answer);
+    document.getElementById("answer-display").innerHTML =
+        `<b>📘 Đáp án:</b><br>${q.answer}`;
+
+    document.getElementById("answer-display").style.display = "block";
 }
 
 function nextQuestion() {
@@ -229,9 +253,7 @@ function nextQuestion() {
 
     if (index < mcq.length + essay.length) {
         showQuestion();
-    } else {
-        showResult();
-    }
+    } else showResult();
 }
 
 function showResult() {
@@ -242,7 +264,7 @@ function showResult() {
         "💡 Điểm trắc nghiệm: " + scoreMCQ.toFixed(1);
 
     document.getElementById("essay-score").innerText =
-        "📝 Điểm tự luận (đã xem đáp án): " + scoreEssay.toFixed(1);
+        "📝 Điểm tự luận: " + scoreEssay.toFixed(1);
 
     let total = (scoreMCQ + scoreEssay).toFixed(1);
 
