@@ -7,10 +7,14 @@
 <style>
     body {
         font-family: "Nunito", Arial, sans-serif;
-        background: #eef6ff;
-        padding: 20px;
+		background: linear-gradient(#d8ecff, #f0f8ff);
+		background-image: url('https://i.imgur.com/uR4l0LS.png');  /* hình mây dễ thương */
+		background-size: cover;
+		background-attachment: fixed;
+		padding: 20px;
     }
 
+    /* Trang giấy */
     .paper {
         max-width: 900px;
         margin: auto;
@@ -18,12 +22,46 @@
         padding: 30px;
         border-radius: 15px;
         box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        display:none;
     }
 
     h1 {
         text-align: center;
         color: #4a8cff;
         margin-bottom: 20px;
+    }
+
+    /* Màn hình chọn môn */
+    #subject-screen {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+
+    .grade-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #4a8cff;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .subject-btn {
+        padding: 12px 18px;
+        margin: 6px;
+        background: #4a8cff;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        display:inline-block;
+    }
+    .subject-btn:hover {
+        background:#2f6bd4;
     }
 
     .question {
@@ -67,10 +105,6 @@
         border: 3px solid #4a8cff;
         background: #dcebff;
         color: #1a4fd1;
-    }
-
-    .option:hover {
-        background: #f4f9ff;
     }
 
     /* Kết quả */
@@ -134,7 +168,25 @@
 
 <body>
 
-<div class="paper">
+<!-- MÀN HÌNH CHỌN MÔN -->
+<div id="subject-screen">
+    <h2 style="text-align:center; color:#4a8cff;">Chọn môn học</h2>
+
+    <div class="grade-title">Lớp 3</div>
+    <button class="subject-btn" onclick="startExam('th3.json')">Tin học 3</button>
+    <button class="subject-btn" onclick="startExam('cn3.json')">Công nghệ 3</button>
+
+    <div class="grade-title">Lớp 4</div>
+    <button class="subject-btn" onclick="startExam('th4.json')">Tin học 4</button>
+    <button class="subject-btn" onclick="startExam('cn4.json')">Công nghệ 4</button>
+
+    <div class="grade-title">Lớp 5</div>
+    <button class="subject-btn" onclick="startExam('th5.json')">Tin học 5</button>
+    <button class="subject-btn" onclick="startExam('cn5.json')">Công nghệ 5</button>
+</div>
+
+<!-- TRANG GIẤY BÀI LÀM -->
+<div class="paper" id="paper">
     <h1 id="subject-title">Bài Ôn Tập</h1>
 
     <div id="questions-container"></div>
@@ -147,52 +199,63 @@
 
 <script>
 let data = [];
-let studentAnswers = {};  
-let studentEssay = {};
 let mcq = [];
 let essay = [];
+let studentAnswers = {};
+let studentEssay = {};
+
+function startExam(jsonFile) {
+    document.getElementById("subject-screen").style.display = "none";
+    document.getElementById("paper").style.display = "block";
+    loadExam(jsonFile);
+}
 
 function loadExam(jsonFile) {
-    let subjectName = "";
-    if (jsonFile.includes("cn3")) subjectName = "Công nghệ 3";
-    if (jsonFile.includes("th3")) subjectName = "Tin học 3";
-    if (jsonFile.includes("cn4")) subjectName = "Công nghệ 4";
-    if (jsonFile.includes("th4")) subjectName = "Tin học 4";
-    if (jsonFile.includes("cn5")) subjectName = "Công nghệ 5";
-    if (jsonFile.includes("th5")) subjectName = "Tin học 5";
+    let subjectName = jsonFile.includes("th3") ? "Tin học 3" :
+                      jsonFile.includes("cn3") ? "Công nghệ 3" :
+                      jsonFile.includes("th4") ? "Tin học 4" :
+                      jsonFile.includes("cn4") ? "Công nghệ 4" :
+                      jsonFile.includes("th5") ? "Tin học 5" :
+                      "Công nghệ 5";
 
     document.getElementById("subject-title").innerText = subjectName;
 
-    fetch(jsonFile)
-    .then(res => res.json())
-    .then(json => {
+    fetch(jsonFile).then(res => res.json()).then(json => {
         data = json;
+
         mcq = data.filter(q => !q.type);
         essay = data.filter(q => q.type === "essay");
+
+        mcq = shuffle(mcq); // <-- XÁO TRỘN 16 CÂU
+
         renderQuestions();
     });
+}
+
+function shuffle(arr) {
+    return arr.sort(() => Math.random() - 0.5);
 }
 
 function renderQuestions() {
     let container = document.getElementById("questions-container");
     container.innerHTML = "";
 
-    let allQuestions = [...mcq, ...essay];
+    let all = [...mcq, ...essay];
 
-    allQuestions.forEach((q, index) => {
+    all.forEach((q, i) => {
         let div = document.createElement("div");
         div.className = "question";
-        
-        div.innerHTML = `<div class="question-title">Câu ${index+1}: ${q.question}</div>`;
+
+        div.innerHTML = `<div class="question-title">Câu ${i+1}: ${q.question}</div>`;
 
         if (!q.type) {
             let letters = ["A","B","C","D"];
-            q.options.forEach((opt, i) => {
+            q.options.forEach((opt, idx) => {
                 div.innerHTML += `
-                    <div class="option" onclick="selectOption(${q.id}, '${letters[i]}', this)">
-                        <div class="circle">${letters[i]}</div>
-                        ${opt}
-                    </div>`;
+                    <div class="option" onclick="selectOption(${q.id}, '${letters[idx]}', this)">
+                        <div class="circle">${letters[idx]}</div> ${opt}
+                    </div>
+                `;
             });
         } else {
             div.innerHTML += `
@@ -229,67 +292,51 @@ function similarity(a, b) {
 
     let match = 0;
     a.forEach(w1 => b.forEach(w2 => { if (w1 === w2) match++; }));
-
     return match / Math.max(a.length, b.length);
 }
 
 function submitExam() {
     let score = 0;
 
-    // CHẤM TRẮC NGHIỆM
     mcq.forEach(q => {
         let chosen = studentAnswers[q.id];
         let correct = q.answer;
 
-        let letters = ["A","B","C","D"];
-        let options = document.querySelectorAll(`.question:nth-child(${q.id}) .option`);
-
-        let questionDiv = document.querySelectorAll(".question")[q.id - 1];
+        let questionDiv = [...document.querySelectorAll(".question")][mcq.indexOf(q)];
         let optionDivs = questionDiv.querySelectorAll(".option");
 
         optionDivs.forEach(opt => {
             let letter = opt.querySelector(".circle").innerText;
-
-            if (letter === correct) {
-                opt.classList.add("correct");
-            }
-
-            if (letter === chosen && chosen !== correct) {
-                opt.classList.add("wrong");
-            }
+            if (letter === correct) opt.classList.add("correct");
+            if (letter === chosen && chosen !== correct) opt.classList.add("wrong");
         });
 
         if (chosen === correct) score += 0.5;
     });
 
-    // CHẤM TỰ LUẬN
     essay.forEach(q => {
-        let input = document.getElementById(`essay-${q.id}`).value;
+        let student = document.getElementById(`essay-${q.id}`).value;
+        let sN = normalize(student);
+        let aN = normalize(q.answer);
 
-        let student = normalize(input);
-        let correct = normalize(q.answer);
+        let sim = similarity(sN, aN);
+        let box = document.getElementById(`essay-answer-${q.id}`);
 
-        let sim = similarity(student, correct);
-
-        let answerBox = document.getElementById(`essay-answer-${q.id}`);
-        answerBox.style.display = "block";
-
+        box.style.display = "block";
         if (sim >= 0.5) {
-            answerBox.innerHTML = `<b style="color:green;">✓ Chính xác!</b>`;
+            box.innerHTML = `<b style="color:green;">✓ Chính xác!</b>`;
             score += 0.5;
         } else {
-            answerBox.innerHTML = `<b style="color:red;">✗ Chưa đúng!</b><br><i>Gợi ý: ${q.answer}</i>`;
+            box.innerHTML = `<b style="color:red;">✗ Chưa đúng!</b><br><i>Gợi ý: ${q.answer}</i>`;
         }
     });
 
     document.getElementById("score-box").style.display = "block";
     document.getElementById("score-box").innerText = `Tổng điểm: ${score}/10`;
+
     document.getElementById("submit-btn").style.display = "none";
     document.getElementById("retry-btn").style.display = "block";
 }
-
-// ---- Thay file JSON ở đây -----
-loadExam("cn3.json");
 </script>
 
 </body>
