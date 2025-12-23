@@ -2,111 +2,131 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Ôn Tập Trắc Nghiệm – Dễ Thương</title>
+<title>Bài Ôn Tập</title>
+
 <style>
     body {
-        font-family: "Comic Sans MS", Arial;
-        background: linear-gradient(#dff3ff, #fef6ff);
+        font-family: "Nunito", Arial, sans-serif;
+        background: #eef6ff;
         padding: 20px;
     }
+
+    .paper {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
     h1 {
         text-align: center;
-        color: #ff6f91;
-        text-shadow: 2px 2px #ffe7ef;
+        color: #4a8cff;
+        margin-bottom: 20px;
     }
 
-    .subject-btn {
-        padding: 14px 24px;
-        margin: 8px;
-        background: #ff9ec4;
-        color: white;
-        border: none;
-        border-radius: 14px;
-        cursor: pointer;
+    .question {
+        margin-bottom: 25px;
+        padding: 15px;
+        border-bottom: 1px solid #e4e4e4;
+    }
+
+    .question-title {
+        font-weight: bold;
+        margin-bottom: 10px;
         font-size: 18px;
-        box-shadow: 0 4px #e67faa;
-    }
-    .subject-btn:hover { background:#ff76ad; }
-
-    #quiz-box {
-        display:none;
-        background:white;
-        padding:25px;
-        border-radius:20px;
-        max-width:750px;
-        margin:auto;
-        box-shadow:0 0 20px rgba(255,150,200,0.5);
-        border:4px solid #ffd6e8;
     }
 
-    .answer {
-        padding:12px;
-        border:2px solid #cce6ff;
-        border-radius:12px;
-        margin-top:10px;
-        cursor:pointer;
-        background:#f2faff;
-        transition:0.2s;
-        position:relative;
-        font-size:17px;
+    /* Trắc nghiệm */
+    .option {
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        margin: 6px 0;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+        border: 2px solid transparent;
     }
-    .answer:hover { background:#dff1ff; }
 
+    .circle {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 2px solid #888;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .option.selected .circle {
+        border: 3px solid #4a8cff;
+        background: #dcebff;
+        color: #1a4fd1;
+    }
+
+    .option:hover {
+        background: #f4f9ff;
+    }
+
+    /* Kết quả */
     .correct {
-        background:#c3ffcf !important;
-        border-color:#52d468;
+        background: #d7ffd9 !important;
+        border: 2px solid #45c162 !important;
     }
     .wrong {
-        background:#ffd3d3 !important;
-        border-color:#ff6b6b;
+        background: #ffd7d7 !important;
+        border: 2px solid #ff5959 !important;
     }
 
-    .icon {
-        position:absolute;
-        right:12px;
-        top:50%;
-        transform:translateY(-50%);
-        font-weight:bold;
-        font-size:20px;
+    /* Tự luận */
+    textarea {
+        width: 100%;
+        height: 90px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 2px solid #cddfff;
+        font-size: 15px;
     }
-    .correct-icon { color:#1aa920; }
-    .wrong-icon { color:#ff3b30; }
 
-    #controls {
-        margin-top:20px;
-        text-align:center;
+    .essay-answer {
+        background: #fff7d6;
+        padding: 12px;
+        margin-top: 8px;
+        border-radius: 10px;
+        border: 2px solid #ffdea1;
+        display: none;
     }
-    button {
-        padding:12px 20px;
-        margin:8px;
-        border:none;
-        border-radius:10px;
-        font-size:16px;
-        cursor:pointer;
-    }
-    #next-btn { background:#6ecbff; color:white; }
-    #see-answer-btn { background:#ffb347; color:white; }
 
-    #result-box {
+    #submit-btn, #retry-btn {
+        padding: 12px 25px;
+        margin-top: 20px;
+        background: #4a8cff;
+        color: white;
+        font-size: 17px;
+        border: none;
+        border-radius: 10px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+
+    #retry-btn {
+        background: #45c162;
         display:none;
-        background:white;
-        padding:20px;
-        border-radius:16px;
-        max-width:650px;
-        margin:20px auto;
-        box-shadow:0 0 15px rgba(150,200,255,0.5);
-        border:3px solid #bfe4ff;
-        text-align:center;
     }
-    #result-box h2 { color:#ff6f91; }
 
-    #answer-display {
-        margin-top:15px;
-        background:#fff6d1;
-        padding:12px;
-        border-radius:10px;
-        border:2px solid #ffe39b;
-        font-size:17px;
+    #score-box {
+        margin-top: 25px;
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+        color: #4a8cff;
         display:none;
     }
 </style>
@@ -114,239 +134,162 @@
 
 <body>
 
-<h1>🌟 Ôn Tập Kiến Thức – Học Mà Chơi 🌟</h1>
+<div class="paper">
+    <h1 id="subject-title">Bài Ôn Tập</h1>
 
-<div id="subject-box" style="text-align:center;">
-    <button class="subject-btn" onclick="loadSubject('cn3.json')">Công Nghệ 3</button>
-    <button class="subject-btn" onclick="loadSubject('th3.json')">Tin Học 3</button><br>
-    <button class="subject-btn" onclick="loadSubject('cn4.json')">Công Nghệ 4</button>
-    <button class="subject-btn" onclick="loadSubject('th4.json')">Tin Học 4</button><br>
-    <button class="subject-btn" onclick="loadSubject('cn5.json')">Công Nghệ 5</button>
-    <button class="subject-btn" onclick="loadSubject('th5.json')">Tin Học 5</button>
-</div>
+    <div id="questions-container"></div>
 
-<!-- ================= KHUNG CÂU HỎI ================= -->
-<div id="quiz-box">
-    <h2 id="question-text"></h2>
-    <div id="answers"></div>
-    <div id="answer-display"></div>
+    <button id="submit-btn" onclick="submitExam()">Nộp bài</button>
+    <button id="retry-btn" onclick="location.reload()">Làm lại</button>
 
-    <div id="controls">
-        <button id="see-answer-btn" onclick="showEssayAnswer()" style="display:none;">
-            Xem đáp án
-        </button>
-        <button id="next-btn" onclick="nextQuestion()">Câu tiếp ➜</button>
-    </div>
-</div>
-
-<!-- ================ BẢNG KẾT QUẢ ================ -->
-<div id="result-box">
-    <h2>🎉 Hoàn thành bài làm! 🎉</h2>
-    <p id="mcq-score"></p>
-    <p id="essay-score"></p>
-    <h3 id="total-score"></h3>
-
-    <button onclick="restartQuiz()" style="padding:12px 25px; background:#8ef58e; color:white; border-radius:10px;">
-        🔄 Làm lại bài
-    </button>
+    <div id="score-box"></div>
 </div>
 
 <script>
 let data = [];
+let studentAnswers = {};  
+let studentEssay = {};
 let mcq = [];
 let essay = [];
-let index = 0;
-let scoreMCQ = 0;
-let scoreEssay = 0;
-let viewedEssay = {};
 
-function loadSubject(filename) {
-    fetch(filename)
+function loadExam(jsonFile) {
+    let subjectName = "";
+    if (jsonFile.includes("cn3")) subjectName = "Công nghệ 3";
+    if (jsonFile.includes("th3")) subjectName = "Tin học 3";
+    if (jsonFile.includes("cn4")) subjectName = "Công nghệ 4";
+    if (jsonFile.includes("th4")) subjectName = "Tin học 4";
+    if (jsonFile.includes("cn5")) subjectName = "Công nghệ 5";
+    if (jsonFile.includes("th5")) subjectName = "Tin học 5";
+
+    document.getElementById("subject-title").innerText = subjectName;
+
+    fetch(jsonFile)
     .then(res => res.json())
     .then(json => {
         data = json;
         mcq = data.filter(q => !q.type);
         essay = data.filter(q => q.type === "essay");
-
-        mcq = shuffle(mcq);
-
-        index = 0;
-        scoreMCQ = 0;
-        scoreEssay = 0;
-        viewedEssay = {};
-
-        document.getElementById("subject-box").style.display = "none";
-        document.getElementById("result-box").style.display = "none";
-        document.getElementById("quiz-box").style.display = "block";
-
-        showQuestion();
+        renderQuestions();
     });
 }
 
-function showQuestion() {
-    let q;
+function renderQuestions() {
+    let container = document.getElementById("questions-container");
+    container.innerHTML = "";
 
-    document.getElementById("answer-display").style.display = "none";
-    document.getElementById("answers").innerHTML = "";
+    let allQuestions = [...mcq, ...essay];
 
-    if (index < mcq.length) q = mcq[index];
-    else q = essay[index - mcq.length];
+    allQuestions.forEach((q, index) => {
+        let div = document.createElement("div");
+        div.className = "question";
+        
+        div.innerHTML = `<div class="question-title">Câu ${index+1}: ${q.question}</div>`;
 
-    document.getElementById("question-text").innerText =
-        "Câu " + (index + 1) + ": " + q.question;
+        if (!q.type) {
+            let letters = ["A","B","C","D"];
+            q.options.forEach((opt, i) => {
+                div.innerHTML += `
+                    <div class="option" onclick="selectOption(${q.id}, '${letters[i]}', this)">
+                        <div class="circle">${letters[i]}</div>
+                        ${opt}
+                    </div>`;
+            });
+        } else {
+            div.innerHTML += `
+                <textarea id="essay-${q.id}" placeholder="Nhập câu trả lời..."></textarea>
+                <div id="essay-answer-${q.id}" class="essay-answer"></div>
+            `;
+        }
 
-    if (!q.type) {
-        document.getElementById("see-answer-btn").style.display = "none";
-
-        q.options.forEach((opt, i) => {
-            let div = document.createElement("div");
-            div.className = "answer";
-            div.innerText = opt;
-            div.onclick = () => checkAnswer(div, i, q.answer);
-            document.getElementById("answers").appendChild(div);
-        });
-
-    } else {
-       document.getElementById("answers").innerHTML = `
-		<p style="font-size:18px; color:#999;">Hãy nhập câu trả lời của em:</p>
-		<textarea id="essay-input"
-			style="width:100%; height:80px; padding:10px; border-radius:10px; border:2px solid #ffd6a5; font-size:16px;">
-		</textarea>
-
-		<button onclick="checkEssayAnswer()" 
-			style="margin-top:10px; background:#ffb347; color:white; padding:10px 20px; border-radius:10px; font-size:16px;">
-			Trả lời
-		</button>
-	`;
-
-	document.getElementById("see-answer-btn").style.display = "none";
-
-    }
+        container.appendChild(div);
+    });
 }
 
-function checkAnswer(div, idx, correctLetter) {
-    let all = document.querySelectorAll(".answer");
-    let letters = ["A","B","C","D"];
-    let chosen = letters[idx];
+function selectOption(id, answer, el) {
+    studentAnswers[id] = answer;
 
-    if (chosen === correctLetter) {
-        div.classList.add("correct");
-        div.innerHTML += `<span class="icon correct-icon">✓</span>`;
-        scoreMCQ += 0.5;
-    } else {
-        div.classList.add("wrong");
-        div.innerHTML += `<span class="icon wrong-icon">✗</span>`;
+    let parent = el.parentNode;
+    let options = parent.querySelectorAll(".option");
+    options.forEach(o => o.classList.remove("selected"));
 
-        let correctIndex = letters.indexOf(correctLetter);
-        all[correctIndex].classList.add("correct");
-        all[correctIndex].innerHTML += `<span class="icon correct-icon">✓</span>`;
-    }
-
-    all.forEach(a => a.onclick = null);
+    el.classList.add("selected");
 }
 
-function checkEssayAnswer() {
-    let q = essay[index - mcq.length];
-    let student = document.getElementById("essay-input").value;
-
-    if (student.trim() === "") {
-        alert("Em hãy nhập câu trả lời trước nhé!");
-        return;
-    }
-
-    // Chuẩn hóa chuỗi
-    let studentN = normalizeText(student);
-    let answerN = normalizeText(q.answer);
-
-    // Tính độ tương đồng
-    let score = similarity(studentN, answerN);
-
-    // Hiện đáp án phía dưới
-    let answerBox = document.getElementById("answer-display");
-    answerBox.style.display = "block";
-
-    if (score >= 0.5) {
-        answerBox.innerHTML = `<b style="color:green;">✓ Chính xác!</b><br>📘 Đáp án đầy đủ: ${q.answer}`;
-        scoreEssay += 0.5;
-    } else {
-        answerBox.innerHTML = `<b style="color:red;">✗ Chưa đúng!</b><br>📘 Đáp án đúng là: ${q.answer}`;
-    }
-
-    document.getElementById("essay-input").disabled = true;
+function normalize(str) {
+    return str.normalize("NFD")
+              .replace(/[\u0300-\u036f]/g,"")
+              .toLowerCase()
+              .replace(/[^a-z0-9 ]/g,"")
+              .trim();
 }
 
-
-function showEssayAnswer() {
-    let q = essay[index - mcq.length];
-
-    if (!viewedEssay[q.id]) {
-        scoreEssay += 0.5;
-        viewedEssay[q.id] = true;
-    }
-
-    document.getElementById("answer-display").innerHTML =
-        `<b>📘 Đáp án:</b><br>${q.answer}`;
-
-    document.getElementById("answer-display").style.display = "block";
-}
-
-function nextQuestion() {
-    index++;
-
-    if (index < mcq.length + essay.length) {
-        showQuestion();
-    } else showResult();
-}
-
-function showResult() {
-    document.getElementById("quiz-box").style.display = "none";
-    document.getElementById("result-box").style.display = "block";
-
-    document.getElementById("mcq-score").innerText =
-        "💡 Điểm trắc nghiệm: " + scoreMCQ.toFixed(1);
-
-    document.getElementById("essay-score").innerText =
-        "📝 Điểm tự luận: " + scoreEssay.toFixed(1);
-
-    let total = (scoreMCQ + scoreEssay).toFixed(1);
-
-    document.getElementById("total-score").innerHTML =
-        "<b>⭐ Tổng điểm: " + total + " / 10 ⭐</b>";
-}
-
-function restartQuiz() {
-    location.reload();
-}
-
-function shuffle(arr) {
-    return arr.sort(() => Math.random() - 0.5);
-}
-
-// Bỏ dấu tiếng Việt để dễ so sánh
-function normalizeText(str) {
-    return str
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[^a-z0-9 ]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
-}
-
-// Tính độ tương đồng giữa hai câu
 function similarity(a, b) {
-    let A = a.split(" ");
-    let B = b.split(" ");
-    let matches = 0;
+    a = a.split(" ");
+    b = b.split(" ");
 
-    A.forEach(wordA => {
-        B.forEach(wordB => {
-            if (wordA === wordB) matches++;
+    let match = 0;
+    a.forEach(w1 => b.forEach(w2 => { if (w1 === w2) match++; }));
+
+    return match / Math.max(a.length, b.length);
+}
+
+function submitExam() {
+    let score = 0;
+
+    // CHẤM TRẮC NGHIỆM
+    mcq.forEach(q => {
+        let chosen = studentAnswers[q.id];
+        let correct = q.answer;
+
+        let letters = ["A","B","C","D"];
+        let options = document.querySelectorAll(`.question:nth-child(${q.id}) .option`);
+
+        let questionDiv = document.querySelectorAll(".question")[q.id - 1];
+        let optionDivs = questionDiv.querySelectorAll(".option");
+
+        optionDivs.forEach(opt => {
+            let letter = opt.querySelector(".circle").innerText;
+
+            if (letter === correct) {
+                opt.classList.add("correct");
+            }
+
+            if (letter === chosen && chosen !== correct) {
+                opt.classList.add("wrong");
+            }
         });
+
+        if (chosen === correct) score += 0.5;
     });
 
-    return matches / Math.max(A.length, B.length);
+    // CHẤM TỰ LUẬN
+    essay.forEach(q => {
+        let input = document.getElementById(`essay-${q.id}`).value;
+
+        let student = normalize(input);
+        let correct = normalize(q.answer);
+
+        let sim = similarity(student, correct);
+
+        let answerBox = document.getElementById(`essay-answer-${q.id}`);
+        answerBox.style.display = "block";
+
+        if (sim >= 0.5) {
+            answerBox.innerHTML = `<b style="color:green;">✓ Chính xác!</b>`;
+            score += 0.5;
+        } else {
+            answerBox.innerHTML = `<b style="color:red;">✗ Chưa đúng!</b><br><i>Gợi ý: ${q.answer}</i>`;
+        }
+    });
+
+    document.getElementById("score-box").style.display = "block";
+    document.getElementById("score-box").innerText = `Tổng điểm: ${score}/10`;
+    document.getElementById("submit-btn").style.display = "none";
+    document.getElementById("retry-btn").style.display = "block";
 }
+
+// ---- Thay file JSON ở đây -----
+loadExam("cn3.json");
 </script>
 
 </body>
