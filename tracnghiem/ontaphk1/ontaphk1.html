@@ -207,9 +207,20 @@ function showQuestion() {
         });
 
     } else {
-        document.getElementById("see-answer-btn").style.display = "inline-block";
-        document.getElementById("answers").innerHTML =
-            "<p style='font-size:18px; color:#999;'>Hãy tự suy nghĩ trước khi xem đáp án nhé!</p>";
+       document.getElementById("answers").innerHTML = `
+		<p style="font-size:18px; color:#999;">Hãy nhập câu trả lời của em:</p>
+		<textarea id="essay-input"
+			style="width:100%; height:80px; padding:10px; border-radius:10px; border:2px solid #ffd6a5; font-size:16px;">
+		</textarea>
+
+		<button onclick="checkEssayAnswer()" 
+			style="margin-top:10px; background:#ffb347; color:white; padding:10px 20px; border-radius:10px; font-size:16px;">
+			Trả lời
+		</button>
+	`;
+
+	document.getElementById("see-answer-btn").style.display = "none";
+
     }
 }
 
@@ -233,6 +244,37 @@ function checkAnswer(div, idx, correctLetter) {
 
     all.forEach(a => a.onclick = null);
 }
+
+function checkEssayAnswer() {
+    let q = essay[index - mcq.length];
+    let student = document.getElementById("essay-input").value;
+
+    if (student.trim() === "") {
+        alert("Em hãy nhập câu trả lời trước nhé!");
+        return;
+    }
+
+    // Chuẩn hóa chuỗi
+    let studentN = normalizeText(student);
+    let answerN = normalizeText(q.answer);
+
+    // Tính độ tương đồng
+    let score = similarity(studentN, answerN);
+
+    // Hiện đáp án phía dưới
+    let answerBox = document.getElementById("answer-display");
+    answerBox.style.display = "block";
+
+    if (score >= 0.5) {
+        answerBox.innerHTML = `<b style="color:green;">✓ Chính xác!</b><br>📘 Đáp án đầy đủ: ${q.answer}`;
+        scoreEssay += 0.5;
+    } else {
+        answerBox.innerHTML = `<b style="color:red;">✗ Chưa đúng!</b><br>📘 Đáp án đúng là: ${q.answer}`;
+    }
+
+    document.getElementById("essay-input").disabled = true;
+}
+
 
 function showEssayAnswer() {
     let q = essay[index - mcq.length];
@@ -278,6 +320,32 @@ function restartQuiz() {
 
 function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
+}
+
+// Bỏ dấu tiếng Việt để dễ so sánh
+function normalizeText(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+// Tính độ tương đồng giữa hai câu
+function similarity(a, b) {
+    let A = a.split(" ");
+    let B = b.split(" ");
+    let matches = 0;
+
+    A.forEach(wordA => {
+        B.forEach(wordB => {
+            if (wordA === wordB) matches++;
+        });
+    });
+
+    return matches / Math.max(A.length, B.length);
 }
 </script>
 
