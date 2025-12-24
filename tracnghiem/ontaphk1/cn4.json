@@ -16,7 +16,7 @@
   {
     "id": 3,
     "level": "M1",
-    "question": "Loại hoa nào sau đây có màu vàng rực rỡ và thường nở vào dịp Tết ở miền Nam?",
+    "question": "Loại hoa nào sau đây có màu vàng rực rỡ và thường nở vào dịp Tết?",
     "options": ["Hoa hồng", "Hoa đào", "Hoa mai", "Hoa sen"],
     "answer": "C"
   },
@@ -38,7 +38,7 @@
     "id": 6,
     "level": "M1",
     "question": "Chậu trồng hoa có thể được làm bằng chất liệu gì?",
-    "options": ["Nhựa, sứ hoặc đất nung", "Giấy vở", "Vải mỏng", "Lá cây khô"],
+    "options": ["Nhựa, sứ hoặc đất nung", "Giấy vở, nhựa, keo dán", "Vải mỏng, túi bóng", "Lá cây khô, cành cây khô"],
     "answer": "A"
   },
   {
@@ -87,21 +87,21 @@
     "id": 13,
     "level": "M2",
     "question": "Tại sao cần lau bụi trên lá cây cảnh thường xuyên?",
-    "options": ["Để lá đẹp và cây trao đổi khí tốt", "Để không bị sâu cắn", "Để đổi màu lá", "Để mọc thêm cành"],
+    "options": ["Để lá đẹp và cây trao đổi khí tốt", "Để không bị sâu cắn, lá cây sáng đẹp", "Để đổi màu lá giúp lá cây đẹp hơn", "Để mọc thêm cành"],
     "answer": "A"
   },
   {
     "id": 14,
     "level": "M3",
     "question": "Nếu cây bị héo dù vẫn tưới nước, em nên kiểm tra gì trước tiên?",
-    "options": ["Kiểm tra lỗ thoát nước đáy chậu", "Đổ thêm phân hóa học", "Đưa vào chỗ tối", "Ngắt bỏ hết lá"],
+    "options": ["Kiểm tra lỗ thoát nước đáy chậu", "Đổ thêm phân hóa học cho cây phát triển hơn", "Đưa vào chỗ tối", "Ngắt bỏ hết lá"],
     "answer": "A"
   },
   {
     "id": 15,
     "level": "M3",
     "question": "Thứ tự trồng cây từ cành vào chậu hợp lí nhất là:",
-    "options": ["Tưới nước -> Cho đất -> Cắm cành", "Chuẩn bị -> Cho đất -> Cắm cành -> Tưới nước", "Cắm cành -> Cho đất -> Tưới nước", "Cho đất -> Tưới nước -> Cắm cành"],
+    "options": ["Tưới nước -> Cho đất -> Cắm cành", "Cho đất -> Cắm cành -> Tưới nước", "Cắm cành -> Cho đất -> Tưới nước", "Cho đất -> Tưới nước -> Cắm cành"],
     "answer": "B"
   },
   {
@@ -116,7 +116,7 @@
     "level": "M1",
     "type": "essay",
     "question": "Em hãy kể tên 3 loại hoa và 3 loại cây cảnh phổ biến.",
-    "answer": "Hoa: Hồng, Cúc, Mai/Đào. Cây cảnh: Lưỡi hổ, Kim tiền, Vạn lộc."
+    "answer": "Hoa: Hồng, Cúc, Mai/Đào. Cây cảnh: Lưỡi hổ, Kim tiền, cây mai, thiết mộc lan."
   },
   {
     "id": 18,
