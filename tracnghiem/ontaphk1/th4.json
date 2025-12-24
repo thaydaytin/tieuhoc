@@ -10,21 +10,21 @@
     "id": 2,
     "level": "M1",
     "question": "Trong máy tính, các tệp (files) được lưu trữ ở đâu?",
-    "options": ["Trong các thiết bị nhớ (như ổ đĩa, USB)", "Trong chuột máy tính", "Trong dây nguồn", "Trong loa máy tính"],
+    "options": ["Trong các ổ đĩa, USB", "Trong chuột máy tính", "Trong dây nguồn", "Trong loa máy tính"],
     "answer": "A"
   },
   {
     "id": 3,
     "level": "M1",
     "question": "Biểu tượng nào sau đây đại diện cho trình duyệt web dùng để truy cập Internet?",
-    "options": ["Biểu tượng hình cái loa", "Biểu tượng Microsoft Edge hoặc Google Chrome", "Biểu tượng thùng rác", "Biểu tượng Unikey"],
+    "options": ["Biểu tượng hình cái máy tính", "Biểu tượng Google Chrome", "Biểu tượng thùng rác", "Biểu tượng Unikey"],
     "answer": "B"
   },
   {
     "id": 4,
     "level": "M1",
     "question": "Phần mềm nào giúp em quản lý tệp và thư mục trong máy tính?",
-    "options": ["Phần mềm soạn thảo văn bản", "Phần mềm quản lý tệp (File Explorer)", "Phần mềm trò chơi", "Phần mềm xem video"],
+    "options": ["Phần mềm soạn thảo văn bản", "Phần mềm quản lý tệp", "Phần mềm trò chơi", "Phần mềm xem video"],
     "answer": "B"
   },
   {
@@ -38,7 +38,7 @@
     "id": 6,
     "level": "M1",
     "question": "Các tệp có cùng chủ đề thường được sắp xếp chung vào đâu để dễ quản lý?",
-    "options": ["Thùng rác", "Thư mục (Folder)", "Màn hình nền", "Bàn phím"],
+    "options": ["Thùng rác", "Thư mục ", "Màn hình nền", "Bàn phím"],
     "answer": "B"
   },
   {
@@ -52,14 +52,14 @@
     "id": 8,
     "level": "M1",
     "question": "Để tìm kiếm thông tin trên Internet, em cần nhập từ gì vào ô tìm kiếm?",
-    "options": ["Một chữ cái bất kỳ", "Từ khóa (Keywords)", "Tên của em", "Ngày tháng năm sinh"],
+    "options": ["Một chữ cái bất kỳ", "Từ khóa ", "Tên của em", "Ngày tháng năm sinh"],
     "answer": "B"
   },
   {
     "id": 9,
     "level": "M2",
     "question": "Tại sao cần phải phân loại và lưu trữ tệp vào các thư mục khác nhau?",
-    "options": ["Để máy tính chạy nhanh hơn", "Để dễ dàng tìm kiếm và sử dụng lại thông tin khi cần", "Để trang trí cho máy tính đẹp hơn", "Vì bộ nhớ không cho phép lưu bên ngoài"],
+    "options": ["Để máy tính chạy nhanh hơn và không bị nóng", "Để dễ dàng tìm kiếm và sử dụng lại thông tin khi cần", "Để trang trí cho máy tính đẹp hơn", "Vì bộ nhớ không cho phép lưu bên ngoài"],
     "answer": "B"
   },
   {
@@ -73,7 +73,7 @@
     "id": 11,
     "level": "M2",
     "question": "Sử dụng từ khóa quá chung chung (ví dụ: 'Hoa') khi tìm kiếm sẽ dẫn đến kết quả gì?",
-    "options": ["Đúng ngay trang web cần", "Quá nhiều kết quả không liên quan, khó tìm kiếm", "Máy tính báo lỗi", "Không có kết quả nào"],
+    "options": ["Có được nhiều kết quả tìm kiếm hơn và tìm được nhiều hơn", "Quá nhiều kết quả không liên quan, khó tìm kiếm", "Máy tính báo lỗi", "Không có kết quả nào"],
     "answer": "B"
   },
   {
@@ -87,7 +87,7 @@
     "id": 13,
     "level": "M2",
     "question": "Thao tác nào sau đây giúp em tìm kiếm thông tin hiệu quả hơn?",
-    "options": ["Nhập thật nhiều từ khóa không liên quan", "Sử dụng từ khóa ngắn gọn, chính xác", "Chỉ nhấn phím Enter liên tục", "Tắt máy tính và tìm lại sau"],
+    "options": ["Nhập thật nhiều từ khóa vào càng nhiều càng tốt", "Sử dụng từ khóa ngắn gọn, chính xác", "Chỉ nhấn phím Enter liên tục", "Tắt máy tính và tìm lại sau"],
     "answer": "B"
   },
   {
@@ -101,14 +101,14 @@
     "id": 15,
     "level": "M3",
     "question": "Để đổi tên một thư mục từ 'Bai tap' thành 'Toan', em thực hiện thao tác nào?",
-    "options": ["Nháy đúp chuột vào thư mục", "Chuột phải vào thư mục, chọn Rename và gõ tên mới", "Kéo thư mục vào thùng rác", "Tắt máy tính"],
+    "options": ["Nháy đúp chuột vào thư mục", "Chuột phải chọn Rename và gõ tên mới", "Kéo thư mục vào thùng rác", "Tắt máy tính và chờ đợi máy tính tự đổi tên"],
     "answer": "B"
   },
   {
     "id": 16,
     "level": "M3",
     "question": "Khi thấy trang web có nội dung không phù hợp hoặc yêu cầu thông tin cá nhân, em nên làm gì?",
-    "options": ["Nhập ngay thông tin", "Chia sẻ link cho bạn bè", "Đóng trang web và báo cho người lớn", "Lưu vào thư mục yêu thích"],
+    "options": ["Nhập ngay thông tin", "Chia sẻ link cho bạn bè", "Đóng trang web và báo cho người lớn", "Lưu vào thư mục yêu thích và gởi cho bạn bè"],
     "answer": "C"
   },
   {
@@ -122,8 +122,8 @@
     "id": 18,
     "level": "M2",
     "type": "essay",
-    "question": "Em hãy giải thích các bước cơ bản để tìm kiếm một bức ảnh trên Internet.",
-    "answer": "Mở trình duyệt; Truy cập Google.com; Gõ từ khóa và chọn mục Hình ảnh."
+    "question": "Em hãy nêu rõ các bước cơ bản để tìm kiếm một bức ảnh trên Internet.",
+    "answer": "bước một: khởi động trình duyệt web. bước hai: nhập vào địa chỉ trang web của máy tìm kiếm. Bước ba: nhập từ khoá tìm kiếm và nhấn nút enter. Bước bốn: lựa chọn kết quả hình ảnh."
   },
   {
     "id": 19,
@@ -137,6 +137,6 @@
     "level": "M3",
     "type": "essay",
     "question": "Nếu bạn gửi tệp trò chơi bẻ khóa (crack) rủ em chơi cùng, em xử lý thế nào?",
-    "answer": "Từ chối và giải thích dùng phần mềm crack là vi phạm bản quyền và dễ làm hỏng máy."
+    "answer": "em sẽ không chơi và nhắc nhở bạn không nên chơi vì trò chơi đã được bẻ khoá là vi phạm bản quyền và máy tính sẽ có nguy cơ bị hư hại, và có nguy co bị lộ thông tin cá nhân."
   }
 ]
