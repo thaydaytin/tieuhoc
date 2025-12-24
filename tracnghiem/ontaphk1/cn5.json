@@ -17,14 +17,14 @@
     "id": 3,
     "level": "M1",
     "question": "Tô-mát Ê-đi-xơn nổi tiếng với sáng chế nào?",
-    "options": ["Máy bay", "Máy tính", "Bóng đèn sợi đốt", "Động cơ hơi nước"],
+    "options": ["Máy bay", "Bóng đèn led", "Bóng đèn sợi đốt", "Động cơ hơi nước"],
     "answer": "C"
   },
   {
     "id": 4,
     "level": "M1",
     "question": "Đâu là đức tính quan trọng của nhà sáng chế?",
-    "options": ["Thích ngủ muộn", "Kiên trì, không ngại thất bại", "Làm việc một mình", "Thích mua sắm"],
+    "options": ["Thích máy tính", "Kiên trì, không ngại thất bại", "Làm việc một mình", "Thích mua sắm"],
     "answer": "B"
   },
   {
@@ -86,15 +86,15 @@
   {
     "id": 13,
     "level": "M2",
-    "question": "Biểu tượng chiếc chuông gạch chéo có nghĩa là gì?",
+    "question": "Biểu tượng chiếc chuông gạch chéo trên điện thoại có nghĩa là gì?",
     "options": ["Tin nhắn mới", "Pin yếu", "Tắt âm thanh/Im lặng", "Có cuộc gọi"],
     "answer": "C"
   },
   {
     "id": 14,
     "level": "M3",
-    "question": "Sau khi vẽ phác thảo, bước tiếp theo là gì?",
-    "options": ["Bán sản phẩm", "Chọn vật liệu và làm mẫu", "Vẽ lại bản khác", "Nhờ đánh giá ý tưởng"],
+    "question": "Sau khi vẽ phác thảo, bước tiếp theo trong thiết kế sản phẩm công nghệ là gì?",
+    "options": ["Bán sản phẩm", "Chọn vật liệu và làm mẫu", "Cho giáo viên chấm điểm bản vẽ", "Nhờ đánh giá ý tưởng"],
     "answer": "B"
   },
   {
@@ -116,7 +116,7 @@
     "level": "M1",
     "type": "essay",
     "question": "Nêu 3 nhà sáng chế và sản phẩm tiêu biểu.",
-    "answer": "James Watt (Động cơ hơi nước), Edison (Bóng đèn), Graham Bell (Điện thoại)."
+    "answer": "Giêm Oát sáng chế Động cơ hơi nước, En-ni-ốt Giéc-lít sáng chế ra động cơ điện, Ê-đi-xơn sáng chế Bóng đèn sợi đối, Gra-ham Beo sáng chế Điện thoại..."
   },
   {
     "id": 18,
@@ -136,7 +136,7 @@
     "id": 20,
     "level": "M3",
     "type": "essay",
-    "question": "Mô tả ý tưởng thiết kế giá đỡ điện thoại bằng bìa các-tông.",
-    "answer": "HS mô tả hình dáng (L hoặc kẹp), vật liệu bìa các-tông và cách giữ điện thoại ổn định."
+    "question": "Mô tả ý tưởng thiết kế giá đỡ điện thoại.",
+    "answer": "HS mô tả hình dáng (dạng Chữ L, hình hộp vuông, tròn,... tùy thuộc vào ý tưởng của HS), lựa chọn vật liệu (có thể là bìa các-tông, vỏ chai nhựa, hộp giấy,...) và các chức năng đặc biệt em muốn thiết kế trên sản phẩm (ví dụ như thêm cổng sạc, tích hợp thêm loa, thêm đèn trang trí,...tùy theo ý tưởng của HS)"
   }
 ]

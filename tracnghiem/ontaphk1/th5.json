@@ -17,56 +17,56 @@
     "id": 3,
     "level": "M1",
     "question": "Kí hiệu bản quyền thường được thể hiện bằng biểu tượng nào?",
-    "options": ["Hình cái loa", "Chữ C trong vòng tròn ©", "Hình lá cờ", "Hình dấu hỏi"],
+    "options": ["Hình cái loa", "Chữ C trong vòng tròn ©", "Chữ @ trong vòng tròn", "Hình dấu hỏi"],
     "answer": "B"
   },
   {
     "id": 4,
     "level": "M1",
     "question": "Để tìm kiếm thông tin trên Internet, em thường sử dụng công cụ nào?",
-    "options": ["Phần mềm luyện gõ phím", "Máy tìm kiếm (ví dụ: Google)", "Phần mềm Paint", "Thùng rác"],
+    "options": ["Phần mềm luyện gõ phím", "Máy tìm kiếm ", "Phần mềm Paint", "This PC"],
     "answer": "B"
   },
   {
     "id": 5,
     "level": "M1",
-    "question": "Trong MS Word, thao tác nào giúp em sao chép một khối văn bản?",
-    "options": ["Chọn khối rồi nhấn Ctrl + C", "Chọn khối rồi nhấn Delete", "Chọn khối rồi nhấn Enter", "Nhấn tổ hợp phím Alt + F4"],
+    "question": "Trong phần mền soạn thảo văn bản, thao tác nào giúp em sao chép một khối văn bản?",
+    "options": ["Chọn khối rồi nhấn Ctrl + C", "Chọn khối rồi nhấn Delete", "Chọn khối rồi nhấn Enter", "Nhấn tổ hợp phím Ctrl + X"],
     "answer": "A"
   },
   {
     "id": 6,
     "level": "M1",
     "question": "Đâu là lợi ích của việc sử dụng máy tính thành thạo?",
-    "options": ["Giải quyết công việc nhanh và hiệu quả hơn", "Chỉ để làm quen bàn phím", "Giúp máy tính không bị hỏng", "Không mang lại lợi ích gì"],
+    "options": ["Giải quyết công việc nhanh và hiệu quả hơn", "Chỉ để làm quen bàn phím và gõ phím nhanh hơn", "Giúp máy tính không bị hỏng và bền hơn", "Không mang lại lợi ích gì"],
     "answer": "A"
   },
   {
     "id": 7,
     "level": "M1",
-    "question": "Trong PowerPoint, trang đầu tiên thường được gọi là gì?",
+    "question": "Trong một bài trình chiếu, trang đầu tiên thường được gọi là gì?",
     "options": ["Trang nội dung", "Trang tiêu đề", "Trang kết thúc", "Trang hình ảnh"],
     "answer": "B"
   },
   {
     "id": 8,
     "level": "M1",
-    "question": "Để lưu một tệp trong PowerPoint, em cần làm gì?",
-    "options": ["Tắt máy tính ngay", "Vào thực đơn lưu tệp và đặt tên phù hợp", "Nhấn nút Reset trên máy", "Xóa tệp đó đi"],
+    "question": "Để lưu một tệp trong phần mềm trình chiếu, em cần làm gì?",
+    "options": ["Vào dãi lệnh Insert chọn lệnh Pictures", "Chọn lệnh Save và đặt tên phù hợp", "Nhấn nút Reset trên máy", "Thoát khỏi phần mềm nó sẽ tự lưu"],
     "answer": "B"
   },
   {
     "id": 9,
     "level": "M2",
     "question": "Tại sao việc tạo cây thư mục lại quan trọng?",
-    "options": ["Để máy tính đẹp hơn", "Để tổ chức lưu trữ khoa học, tìm kiếm nhanh", "Vì bắt buộc phải có", "Để chiếm thêm dung lượng"],
+    "options": ["Để máy tính đẹp hơn và chứa được nhiều tệp hơn", "Để tổ chức lưu trữ khoa học, tìm kiếm nhanh", "Vì máy tính bắt buộc phải có mới chạy được", "Để chiếm thêm dung lượng"],
     "answer": "B"
   },
   {
     "id": 10,
     "level": "M2",
     "question": "Sử dụng từ khóa chính xác khi tìm kiếm có tác dụng gì?",
-    "options": ["Làm máy tìm kiếm bị lỗi", "Giúp tìm đúng và nhanh thông tin cần thiết", "Để hiển thị nhiều quảng cáo", "Không có tác dụng gì"],
+    "options": ["Làm máy tìm kiếm ra được nhiều kết quả hơn", "Giúp tìm đúng và nhanh thông tin cần thiết", "Để hiển thị nhiều quảng cáo", "Không có tác dụng gì"],
     "answer": "B"
   },
   {
@@ -80,28 +80,28 @@
     "id": 12,
     "level": "M2",
     "question": "Sự khác nhau giữa sao chép (Copy) và di chuyển (Cut) là gì?",
-    "options": ["Sao chép làm mất gốc", "Sao chép tạo bản sao giữ gốc; di chuyển đưa gốc sang vị trí mới", "Cả hai đều xóa văn bản", "Không có sự khác biệt"],
+    "options": ["Sao chép làm mất gốc; di chuyển đưa gốc sang vị trí mới", "Sao chép tạo bản sao giữ gốc; di chuyển đưa gốc sang vị trí mới", "Cả hai đều xóa văn bản", "Không có sự khác biệt"],
     "answer": "B"
   },
   {
     "id": 13,
     "level": "M2",
     "question": "Mục đích của việc định dạng kí tự trong văn bản là gì?",
-    "options": ["Để văn bản dài hơn", "Để rõ ràng, đẹp mắt và nhấn mạnh nội dung", "Để máy nhận diện ngôn ngữ", "Để tiết kiệm mực in"],
+    "options": ["Để văn bản dài hơn và đậm màu hơn", "Để rõ ràng, đẹp mắt và nhấn mạnh nội dung", "Để máy nhận diện ngôn ngữ", "Để tiết kiệm mực in và giấy in"],
     "answer": "B"
   },
   {
     "id": 14,
     "level": "M3",
     "question": "Từ khóa nào hiệu quả nhất để tìm 'Cách phòng chống đuối nước'?",
-    "options": ["Bơi lội", "Nước", "\"Cách phòng chống đuối nước\"", "Thể thao dưới nước"],
+    "options": ["Học cách Bơi lội", "Đuối nước", "Cách phòng chống đuối nước", "Các môn thể thao dưới nước"],
     "answer": "C"
   },
   {
     "id": 15,
     "level": "M3",
     "question": "Bước đầu tiên để tạo bài trình chiếu giới thiệu website là gì?",
-    "options": ["In ra giấy", "Kích hoạt PowerPoint và tạo tệp mới", "Chia sẻ lên mạng", "Tắt trình duyệt web"],
+    "options": ["In website ra giấy", "Kích hoạt PowerPoint và tạo tệp mới", "Chia sẻ website lên mạng", "Tắt trình duyệt web"],
     "answer": "B"
   },
   {
@@ -115,28 +115,28 @@
     "id": 17,
     "level": "M1",
     "type": "essay",
-    "question": "Nêu 2 ví dụ máy tính giúp em học tập và 2 ví dụ giải trí.",
-    "answer": "Học tập: Soạn văn bản, tìm tài liệu. Giải trí: Nghe nhạc, xem phim."
+    "question": "Nêu 3 ví dụ máy tính giúp em học tập và 3 ví dụ giải trí.",
+    "answer": "Học tập: máy tính giúp em soạn văn bản, tìm tài liệu, học online, giải bài tập. Giải trí: Nghe nhạc, xem phim, chơi các trò chơi học tập."
   },
   {
     "id": 18,
     "level": "M2",
     "type": "essay",
-    "question": "Vì sao cần học cách sử dụng máy tính thành thạo?",
-    "answer": "Để khai thác tốt lợi ích máy tính, làm việc nhanh, tạo sản phẩm chất lượng."
+    "question": "Vì sao cần học cách sử dụng máy tính thành thạo? Kể ra một số việc mà em đã làm được khi sử dụng máy tính",
+    "answer": "Để hỗ trợ học tập tốt hơn, làm việc nhanh, tạo sản phẩm số chất lượng. Em đã làm được bài trình chiếu hay bài soạn thảo văn bản đơn giản giới thiệu về ...."
   },
   {
     "id": 19,
     "level": "M3",
     "type": "essay",
-    "question": "Nêu các bước chèn hình ảnh vào văn bản trong Word.",
-    "answer": "Đặt con trỏ -> Insert -> Pictures -> Chọn ảnh -> Insert."
+    "question": "Em hãy mô tả các bước chèn hình ảnh vào văn bản trong phần mềm soạn thảo văn bản.",
+    "answer": "Đặt con trỏ chuột ở vị trí cần chèn ảnh vào văn bản -> vào dãi lệnh Insert -> chọn lệnh Pictures -> Chọn ảnh cần chèn -> nhấn nút Insert để chèn ảnh."
   },
   {
     "id": 20,
     "level": "M3",
     "type": "essay",
-    "question": "Cách xử lý khi dùng bài thơ từ mạng để đảm bảo đạo đức?",
-    "answer": "Trích dẫn rõ tên tác giả và địa chỉ website nguồn."
+    "question": "Cách xử lý khi dùng bài thơ hoặc một hình ảnh từ trên mạng interner để đưa vào bài trình chiếu của mình sao cho đảm bảo về đạo đức?",
+    "answer": "Trích dẫn rõ tên tác giả của bài thơ hoặc hình ảnh đó nếu em có thông tin tác giả hoặc ghi rõ địa chỉ website nguồn mà mình đã lấy về sử dụng."
   }
 ]
