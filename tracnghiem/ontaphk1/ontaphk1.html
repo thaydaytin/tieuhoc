@@ -6,8 +6,18 @@
 
 <style>
     body {
-        font-family: "Nunito", Arial, sans-serif;
+        
+		font-family: "Nunito", Arial, sans-serif;
 		background: linear-gradient(to bottom right, #87CEEB, #FFFACD);
+		background-size: cover;
+		background-attachment: fixed; /* không bị ngắt khi cuộn */
+		
+		min-height: 100vh;
+		margin: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;   /* căn giữa dọc màn hình */
 		padding: 20px;
     }
 
@@ -30,12 +40,12 @@
 
     /* Màn hình chọn môn */
     #subject-screen {
-        max-width: 600px;
-        margin: auto;
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        width: 100%;
+		max-width: 600px;
+		background: white;
+		padding: 30px;
+		border-radius: 15px;
+		box-shadow: 0 0 15px rgba(0,0,0,0.15);
     }
 
     .grade-title {
@@ -201,6 +211,14 @@ let essay = [];
 let studentAnswers = {};
 let studentEssay = {};
 
+
+function shuffleOptions(options) {
+    return options
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(item => item.value);
+}
+
 function startExam(jsonFile) {
     document.getElementById("subject-screen").style.display = "none";
     document.getElementById("paper").style.display = "block";
@@ -246,14 +264,22 @@ function renderQuestions() {
         div.innerHTML = `<div class="question-title">Câu ${i+1}: ${q.question}</div>`;
 
         if (!q.type) {
-            let letters = ["A","B","C","D"];
-            q.options.forEach((opt, idx) => {
-                div.innerHTML += `
-                    <div class="option" onclick="selectOption(${q.id}, '${letters[idx]}', this)">
-                        <div class="circle">${letters[idx]}</div> ${opt}
-                    </div>
-                `;
-            });
+            let letters = ["A", "B", "C", "D"];
+			let shuffled = shuffleOptions(
+				letters.map((l, i) => ({
+					letter: l,
+					text: q.options[i]
+				}))
+			);
+
+			shuffled.forEach(item => {
+				div.innerHTML += `
+					<div class="option" onclick="selectOption(${q.id}, '${item.letter}', this)">
+						<div class="circle">${item.letter}</div> 
+						${item.text}
+					</div>
+				`;
+			});
         } else {
             div.innerHTML += `
                 <textarea id="essay-${q.id}" placeholder="Nhập câu trả lời..."></textarea>
