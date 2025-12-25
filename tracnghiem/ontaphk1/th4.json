@@ -17,8 +17,8 @@
     "id": 3,
     "level": "M1",
     "question": "Biểu tượng nào sau đây đại diện cho trình duyệt web dùng để truy cập Internet?",
-    "options": ["Biểu tượng hình cái máy tính", "Biểu tượng Google Chrome", "Biểu tượng thùng rác", "Biểu tượng Unikey"],
-    "answer": "B"
+    "options": ["Biểu tượng hình cái máy tính", "Biểu tượng thùng rác", "Biểu tượng Unikey", "Biểu tượng Google Chrome"],
+    "answer": "D"
   },
   {
     "id": 4,
@@ -31,8 +31,8 @@
     "id": 5,
     "level": "M1",
     "question": "Đâu là địa chỉ của một 'máy tìm kiếm' phổ biến trên Internet?",
-    "options": ["Facebook.com", "Google.com", "Youtube.com", "Zalo.me"],
-    "answer": "B"
+    "options": ["Facebook.com", "Youtube.com", "Google.com", "Zalo.me"],
+    "answer": "C"
   },
   {
     "id": 6,
@@ -52,8 +52,8 @@
     "id": 8,
     "level": "M1",
     "question": "Để tìm kiếm thông tin trên Internet, em cần nhập từ gì vào ô tìm kiếm?",
-    "options": ["Một chữ cái bất kỳ", "Từ khóa ", "Tên của em", "Ngày tháng năm sinh"],
-    "answer": "B"
+    "options": ["Một chữ cái bất kỳ", "Tên của em", "Ngày tháng năm sinh", "Từ khóa "],
+    "answer": "D"
   },
   {
     "id": 9,
@@ -73,8 +73,8 @@
     "id": 11,
     "level": "M2",
     "question": "Sử dụng từ khóa quá chung chung (ví dụ: 'Hoa') khi tìm kiếm sẽ dẫn đến kết quả gì?",
-    "options": ["Có được nhiều kết quả tìm kiếm hơn và tìm được nhiều hơn", "Quá nhiều kết quả không liên quan, khó tìm kiếm", "Máy tính báo lỗi", "Không có kết quả nào"],
-    "answer": "B"
+    "options": ["Có được nhiều kết quả tìm kiếm hơn và tìm được nhiều hơn", "Máy tính báo lỗi", "Quá nhiều kết quả không liên quan, khó tìm kiếm", "Không có kết quả nào"],
+    "answer": "C"
   },
   {
     "id": 12,
