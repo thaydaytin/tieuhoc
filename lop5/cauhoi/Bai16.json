@@ -1,83 +1,42 @@
 [
   {
-    "question": "Theo bài học, máy tính là công cụ hữu ích giúp em làm gì?",
-    "options": ["Chỉ dùng để chơi trò chơi điện tử", "Học tập, giải trí, tìm kiếm, trao đổi thông tin và hợp tác với bạn bè", "Thay thế hoàn toàn việc đọc sách giấy", "Máy tính không có lợi ích gì"],
-    "answer": 1
-  },
-  {
-    "question": "Phần mềm nào sau đây chuyên dùng để soạn thảo văn bản?",
-    "options": ["PowerPoint", "RapidTyping", "Microsoft Word", "MS Paint"],
-    "answer": 2
-  },
-  {
-    "question": "Kí hiệu bản quyền thường được thể hiện bằng biểu tượng nào?",
-    "options": ["Hình cái loa", "Chữ C trong vòng tròn ©", "Hình lá cờ", "Hình dấu hỏi"],
-    "answer": 1
-  },
-  {
-    "question": "Để tìm kiếm thông tin trên Internet, em thường sử dụng công cụ nào?",
-    "options": ["Phần mềm luyện gõ phím", "Máy tìm kiếm (ví dụ: Google)", "Phần mềm Paint", "Thùng rác"],
-    "answer": 1
-  },
-  {
-    "question": "Trong MS Word, thao tác nào giúp em sao chép một khối văn bản?",
-    "options": ["Chọn khối rồi nhấn Ctrl + C", "Chọn khối rồi nhấn Delete", "Chọn khối rồi nhấn Enter", "Nhấn tổ hợp phím Alt + F4"],
+    "question": "Tuần này làm bài kiểm tra, em đã ôn bài tốt chưa?",
+    "choices": [
+      "Ôn bài rất tốt",
+      "Chưa ôn bài",
+      "Ôn bài sơ sơ",
+      "Ôn bài được một nữa"
+    ],
     "answer": 0
   },
   {
-    "question": "Đâu là lợi ích của việc sử dụng máy tính thành thạo?",
-    "options": ["Giải quyết công việc nhanh và hiệu quả hơn", "Chỉ để làm quen bàn phím", "Giúp máy tính không bị hỏng", "Không mang lại lợi ích gì"],
-    "answer": 0
-  },
-  {
-    "question": "Trong PowerPoint, trang đầu tiên thường được gọi là gì?",
-    "options": ["Trang nội dung", "Trang tiêu đề", "Trang kết thúc", "Trang hình ảnh"],
-    "answer": 1
-  },
-  {
-    "question": "Để lưu một tệp trong PowerPoint, em cần làm gì?",
-    "options": ["Tắt máy tính ngay", "Vào thực đơn lưu tệp và đặt tên phù hợp", "Nhấn nút Reset trên máy", "Xóa tệp đó đi"],
-    "answer": 1
-  },
-  {
-    "question": "Tại sao việc tạo cây thư mục lại quan trọng?",
-    "options": ["Để máy tính đẹp hơn", "Để tổ chức lưu trữ khoa học, tìm kiếm nhanh", "Vì bắt buộc phải có", "Để chiếm thêm dung lượng"],
-    "answer": 1
-  },
-  {
-    "question": "Sử dụng từ khóa chính xác khi tìm kiếm có tác dụng gì?",
-    "options": ["Làm máy tìm kiếm bị lỗi", "Giúp tìm đúng và nhanh thông tin cần thiết", "Để hiển thị nhiều quảng cáo", "Không có tác dụng gì"],
-    "answer": 1
-  },
-  {
-    "question": "Em nên làm gì để tôn trọng quyền tác giả khi dùng thông tin từ Internet?",
-    "options": ["Tự nhận là của mình", "Sao chép không ghi nguồn", "Trích dẫn nguồn và tên tác giả", "Xóa tên tác giả gốc"],
-    "answer": 2
-  },
-  {
-    "question": "Sự khác nhau giữa sao chép (Copy) và di chuyển (Cut) là gì?",
-    "options": ["Sao chép làm mất gốc", "Sao chép tạo bản sao giữ gốc; di chuyển đưa gốc sang vị trí mới", "Cả hai đều xóa văn bản", "Không có sự khác biệt"],
-    "answer": 1
-  },
-  {
-    "question": "Mục đích của việc định dạng kí tự trong văn bản là gì?",
-    "options": ["Để văn bản dài hơn", "Để rõ ràng, đẹp mắt và nhấn mạnh nội dung", "Để máy nhận diện ngôn ngữ", "Để tiết kiệm mực in"],
-    "answer": 1
-  },
-  {
-    "question": "Từ khóa nào hiệu quả nhất để tìm 'Cách phòng chống đuối nước'?",
-    "options": ["Bơi lội", "Nước", "\"Cách phòng chống đuối nước\"", "Thể thao dưới nước"],
+    "question": "Em nghĩ mình sẽ được bao nhiêu điểm?",
+    "choices": [
+      "Dưới 5 điểm",
+      "5 đến 7 điểm",
+      "7 đến 10 điểm",
+      "Hên xui"
+    ],
     "answer": 3
   },
   {
-    "question": "Bước đầu tiên để tạo bài trình chiếu giới thiệu website là gì?",
-    "options": ["In ra giấy", "Kích hoạt PowerPoint và tạo tệp mới", "Chia sẻ lên mạng", "Tắt trình duyệt web"],
-    "answer": 1
+    "question": "Em nghĩ đề thi HK1 năm nay như thế nào?",
+    "choices": [
+      "Rất dễ",
+      "Dễ",
+      "Khó",
+      "Rất khó"
+    ],
+    "answer": 0
   },
   {
-    "question": "Tổ hợp phím để khôi phục lại thao tác vừa xóa trong Word?",
-    "options": ["Ctrl + S", "Ctrl + Z", "Ctrl + P", "Ctrl + A"],
+    "question": "Cảm nhận của em về THẦY DẠY TIN như thế nào?",
+    "choices": [
+      "Thầy rất khó tính",
+      "Thầy rất hiền lành, vui vẻ, dễ thương, dễ tính",
+      "Thầy rất hung dữ, khó chịu",
+      "Không có cảm tình"
+    ],
     "answer": 1
   }
-
 ]
