@@ -1,9 +1,167 @@
 [
   {
-    "question": "Hệ thống lớp học đang bảo trì, sửa chữa một số lỗi, hãy quay lại sau!",
+    "question": "YouTube Kids là website dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      
+      "Để mua sắm trực tuyến",
+      "Để xem video phù hợp với lứa tuổi thiếu nhi",
+      "Để soạn thảo văn bản tiếng Việt",
+      "Để lập trình chương trình Scratch"
     ],
-    "answer": 4
+    "answer": 1
+  },
+  {
+    "question": "Để tạm dừng hoặc tiếp tục xem video trên YouTube Kids, em nháy chuột vào nút lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Nút Phóng to màn hình",
+      "Nút Tạm dừng/Tiếp tục",
+      "Nút Chuyển tới video tiếp theo",
+      "Nút Điều chỉnh âm lượng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nút lệnh nào giúp em xem video ở chế độ toàn màn hình?",
+    "Lever": 1,
+    "choices": [
+      "Nút Tạm dừng",
+      "Nút Phóng to màn hình",
+      "Thanh trượt thời gian",
+      "Nút Chuyển tiếp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Vật liệu nào sau đây thường được chuẩn bị để làm sản phẩm thủ công theo hướng dẫn trong bài học?",
+    "Lever": 1,
+    "choices": [
+      "Đất sét và màu nước",
+      "Giấy thủ công, kéo, dao",
+      "Vải và kim chỉ",
+      "Gỗ và đinh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi âm thanh của video to hoặc nhỏ hơn, em sử dụng chức năng nào?",
+    "Lever": 1,
+    "choices": [
+      "Điều chỉnh âm lượng",
+      "Phóng to màn hình",
+      "Tạm dừng video",
+      "Nháy chuột trên dòng thời gian"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Theo hướng dẫn trong sách, bước đầu tiên để tạo sản phẩm thủ công là gì?",
+    "Lever": 1,
+    "choices": [
+      "Chuẩn bị vật liệu",
+      "Lựa chọn một sản phẩm thủ công bằng giấy em thích",
+      "Trang trí sản phẩm",
+      "Cắt giấy theo mẫu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc sử dụng nút 'Tạm dừng' khi đang làm theo video có lợi ích gì?",
+    "Lever": 2,
+    "choices": [
+      "Để video kết thúc nhanh hơn",
+      "Để có đủ thời gian thực hiện các thao tác theo hướng dẫn",
+      "Để thay đổi nội dung video",
+      "Để lưu video vào máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi muốn xem lại một thao tác khó mà video đã chạy qua, em nên thực hiện thao tác nào?",
+    "Lever": 2,
+    "choices": [
+      "Tắt video và mở lại từ đầu",
+      "Nháy chuột trên dòng thời gian để quay lại thời điểm cần xem",
+      "Phóng to màn hình",
+      "Chờ video chạy hết rồi xem lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Chế độ phóng to màn hình khi xem video hướng dẫn thủ công giúp ích gì cho em?",
+    "Lever": 2,
+    "choices": [
+      "Làm video chạy chậm lại",
+      "Giúp em nhìn rõ các thao tác nhỏ của người hướng dẫn",
+      "Tự động chuẩn bị vật liệu cho em",
+      "Thay đổi màu sắc của giấy thủ công"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tiêu chí 'Sản phẩm gấp cân đối, nếp gấp thẳng, phẳng' dùng để đánh giá điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Đánh giá màu sắc của video",
+      "Đánh giá chất lượng kỹ thuật của sản phẩm em làm ra",
+      "Đánh giá tốc độ mạng Internet",
+      "Đánh giá âm thanh của người hướng dẫn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tìm kiếm video hướng dẫn làm đèn lồng bằng giấy trên YouTube Kids, em cần làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Nháy vào nút Phóng to",
+      "Nhập từ khóa về đèn lồng vào ô tìm kiếm",
+      "Chờ video tự hiện ra",
+      "Nháy vào dòng thời gian"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em hãy sắp xếp các bước sau theo đúng trình tự để tạo một sản phẩm thủ công từ video:",
+    "Lever": 3,
+    "choices": [
+      "Lựa chọn sản phẩm -> Chuẩn bị vật liệu -> Truy cập YouTube Kids tìm video -> Làm theo các bước",
+      "Lựa chọn sản phẩm -> Truy cập YouTube Kids tìm video -> Chuẩn bị vật liệu -> Làm theo các bước",
+      "Chuẩn bị vật liệu -> Làm theo các bước -> Tìm video -> Trang trí",
+      "Làm theo các bước -> Chuẩn bị vật liệu -> Tìm video -> Lựa chọn sản phẩm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là bộ tiêu chí đầy đủ để đánh giá sản phẩm thủ công sau khi hoàn thành?",
+    "Lever": 3,
+    "choices": [
+      "Sản phẩm đẹp và video hay",
+      "Sản phẩm sử dụng được; Gấp cân đối, nếp gấp thẳng, phẳng; Trang trí đẹp",
+      "Sản phẩm giống hệt video và âm thanh to",
+      "Sản phẩm làm nhanh và không cần trang trí"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu người hướng dẫn trong video nói quá nhỏ khiến em không nghe rõ yêu cầu về vật liệu, em sẽ xử lý như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Bỏ qua bước chuẩn bị và làm đại",
+      "Sử dụng chức năng tăng âm lượng trên YouTube Kids và máy tính",
+      "Tắt video vì không xem được",
+      "Chỉ xem hình và tự đoán"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi làm sản phẩm 'Chú ếch bằng giấy', nếu em gặp một bước gấp rất phức tạp và nhanh, em nên phối hợp các nút lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Phóng to màn hình và Chuyển tới video tiếp theo",
+      "Phóng to màn hình, Tạm dừng và quay lại thời điểm đó trên dòng thời gian để xem kỹ",
+      "Điều chỉnh âm lượng và tắt video",
+      "Chỉ cần nháy chuột liên tiếp vào nút Tạm dừng"
+    ],
+    "answer": 1
   }
 ]

@@ -1,9 +1,167 @@
 [
   {
-    "question": "Hệ thống lớp học đang bảo trì, sửa chữa một số lỗi, hãy quay lại sau!",
+    "question": "Để mở một tệp văn bản đã có trên máy tính, em sử dụng lệnh nào trong bảng chọn File?",
+    "Lever": 1,
     "choices": [
-      
+      "Save",
+      "Open",
+      "New",
+      "Close"
     ],
-    "answer": 4
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào sau đây được dùng để lưu tệp văn bản đang mở với một tên mới?",
+    "Lever": 1,
+    "choices": [
+      "Save",
+      "Open",
+      "Save As",
+      "Print"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong kiểu gõ Telex, để gõ chữ 'đ', em cần gõ các phím nào?",
+    "Lever": 1,
+    "choices": [
+      "aa",
+      "ee",
+      "dd",
+      "oo"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để gõ dấu 'Hỏi' theo kiểu Telex, em sử dụng phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Phím s",
+      "Phím f",
+      "Phím r",
+      "Phím x"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phần mềm nào sau đây là phần mềm hỗ trợ gõ tiếng Việt phổ biến nhất hiện nay?",
+    "Lever": 1,
+    "choices": [
+      "Microsoft Word",
+      "UniKey",
+      "PowerPoint",
+      "RapidTyping"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong hộp thoại Save As, em gõ tên tệp mới vào ô nào?",
+    "Lever": 1,
+    "choices": [
+      "File name",
+      "Save as type",
+      "Browse",
+      "Open"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi sử dụng lệnh Save As để lưu tệp với tên mới, tệp cũ có bị mất đi không?",
+    "Lever": 2,
+    "choices": [
+      "Có, tệp cũ sẽ bị xóa hoàn toàn",
+      "Không, tệp cũ vẫn được giữ nguyên với tên cũ",
+      "Có, tệp cũ sẽ tự động đổi tên theo tệp mới",
+      "Chỉ mất nếu em lưu vào cùng một thư mục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quy tắc chung khi gõ văn bản tiếng Việt có dấu là gì?",
+    "Lever": 2,
+    "choices": [
+      "Gõ dấu trước, gõ chữ sau",
+      "Gõ chữ đến đâu gõ dấu đến đó",
+      "Gõ hết các chữ trong một từ rồi mới gõ dấu",
+      "Không cần theo quy tắc nào"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để gõ từ 'đọc sách' theo kiểu Telex, chuỗi phím nào sau đây là đúng?",
+    "Lever": 2,
+    "choices": [
+      "d-o-c-j s-a-c-h-s",
+      "d-d-o-c-j s-a-c-h-s",
+      "d-d-o-c-s s-a-c-h-j",
+      "d-o-c-s s-a-c-h-f"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để gõ được các chữ cái 'ă, ư, ơ' theo kiểu Telex, em sử dụng phím nào kết hợp với chữ gốc?",
+    "Lever": 2,
+    "choices": [
+      "Phím a",
+      "Phím w",
+      "Phím z",
+      "Phím d"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong hộp thoại Open hoặc Save As, lệnh 'Browse' có tác dụng gì?",
+    "Lever": 2,
+    "choices": [
+      "Để xóa tệp văn bản",
+      "Để đổi màu chữ",
+      "Để mở cửa sổ tìm đến thư mục lưu trữ tệp",
+      "Để đóng phần mềm Word"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em đang mở tệp 'Bai tap 1', sau khi chỉnh sửa em muốn lưu thành tệp 'Bai tap 2' nhưng vẫn muốn giữ lại tệp 'Bai tap 1' như cũ. Em cần thực hiện những bước nào?",
+    "Lever": 3,
+    "choices": [
+      "File -> Save -> Gõ tên Bai tap 2",
+      "File -> Open -> Bai tap 2",
+      "File -> Save As -> Browse -> Gõ tên Bai tap 2 -> Save",
+      "Nhấn nút X ở góc phải màn hình"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để soạn thảo câu: 'Trường tiểu học của em', em gõ chuỗi phím Telex nào sau đây?",
+    "Lever": 3,
+    "choices": [
+      "T-r-u-o-n-g-s t-i-e-e-u-s h-o-c-j c-u-a-a e-m",
+      "T-r-u-o-n-g-f t-i-e-u-r h-o-c-s c-u-a-j e-m",
+      "T-r-u-o-w-n-g-f t-i-e-e-u-r h-o-c-j c-u-a-r e-m",
+      "T-r-u-w-o-w-n-g-s t-i-e-e-u-r h-o-c-j c-u-a-r e-m"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Nếu em gõ phím 'aa' mà màn hình không hiện ra chữ 'â', nguyên nhân có thể là gì?",
+    "Lever": 3,
+    "choices": [
+      "Bàn phím bị hỏng",
+      "Phần mềm Word bị lỗi",
+      "Phần mềm UniKey chưa được bật hoặc đang ở chế độ gõ tiếng Anh (E)",
+      "Chuột máy tính không hoạt động"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tại sao khi lưu tệp văn bản, chúng ta nên đặt tên tệp gợi nhớ đến nội dung của văn bản đó?",
+    "Lever": 3,
+    "choices": [
+      "Để máy tính hoạt động nhanh hơn",
+      "Để dễ dàng tìm kiếm và quản lý các tệp đã lưu sau này",
+      "Để phần mềm Word không bị lỗi",
+      "Vì quy định bắt buộc của máy tính"
+    ],
+    "answer": 1
   }
 ]

@@ -1,9 +1,167 @@
 [
   {
-    "question": "Hệ thống lớp học đang bảo trì, sửa chữa một số lỗi, hãy quay lại sau!",
+    "question": "Sơ đồ hình cây được dùng để biểu diễn điều gì trong sắp xếp?",
+    "Lever": 1,
     "choices": [
-      
+      "Sắp xếp có thứ tự các con số",
+      "Một cách sắp xếp phân loại đồ vật",
+      "Danh sách tên các bạn trong lớp",
+      "Vị trí các phím trên bàn phím"
     ],
-    "answer": 4
+    "answer": 1
+  },
+  {
+    "question": "Trong một sơ đồ hình cây, các nhánh được chia ra từ đâu?",
+    "Lever": 1,
+    "choices": [
+      "Chia ra từ các lá",
+      "Chia ra từ các nhánh nhỏ hơn",
+      "Chia ra từ một gốc",
+      "Chia ra từ phần ngọn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sách giáo khoa Tin học 3 giới thiệu mấy dạng sơ đồ hình cây chính?",
+    "Lever": 1,
+    "choices": [
+      "1 dạng (dạng đứng)",
+      "2 dạng (dạng ngang và dạng dọc)",
+      "3 dạng (ngang, dọc và tròn)",
+      "4 dạng (tương ứng 4 chủ đề)"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lợi ích lớn nhất của việc sắp xếp đồ vật, dữ liệu một cách hợp lý là gì?",
+    "Lever": 1,
+    "choices": [
+      "Để đồ vật trông đẹp hơn",
+      "Để tiết kiệm không gian lưu trữ",
+      "Để tìm được chúng dễ dàng và nhanh chóng",
+      "Để người khác không lấy được đồ của mình"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong ví dụ về đoàn tàu hỏa, các toa được đánh số thứ tự giúp em điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Biết tàu có bao nhiêu bánh xe",
+      "Biết tên người lái tàu",
+      "Tìm đến đúng toa tàu mình cần một cách nhanh nhất",
+      "Biết tàu đang đi đến đâu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Quan sát sơ đồ ở Hình 1 trang 41, sơ đồ đó được gọi là sơ đồ hình cây dạng gì?",
+    "Lever": 1,
+    "choices": [
+      "Dạng ngang",
+      "Dạng dọc",
+      "Dạng vòng tròn",
+      "Dạng hình chữ nhật"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu muốn lấy được sách 'Giáo khoa Tin học 3' trong sơ đồ của bạn Minh Khuê, em cần tìm ở nhánh nào?",
+    "Lever": 2,
+    "choices": [
+      "Nhánh 'Sách, truyện thiếu nhi'",
+      "Nhánh 'Các loại sách khác'",
+      "Nhánh 'Sách giáo khoa và vở bài tập lớp 3'",
+      "Nhánh 'Vở bài tập lớp 3'"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điểm chung giữa sơ đồ hình cây dạng ngang và dạng dọc là gì?",
+    "Lever": 2,
+    "choices": [
+      "Cùng mô tả một cách sắp xếp phân loại đồ vật",
+      "Cùng có số lượng nhánh giống hệt nhau",
+      "Cùng bắt đầu từ phía bên trái",
+      "Cùng bắt đầu từ phía trên cùng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao việc sắp xếp các toa tàu theo thứ tự liên tiếp (toa 1, toa 2, toa 3...) lại được coi là sắp xếp hợp lý?",
+    "Lever": 2,
+    "choices": [
+      "Vì nó giúp đoàn tàu chạy nhanh hơn",
+      "Vì nó giúp hành khách dễ dàng xác định vị trí các toa tiếp theo",
+      "Vì nó giúp tàu chở được nhiều khách hơn",
+      "Vì quy định bắt buộc phải như vậy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong sơ đồ phân loại tủ sách, nếu ta thêm nhánh 'Truyện tranh' vào dưới nhánh 'Sách, truyện thiếu nhi', điều này có nghĩa là gì?",
+    "Lever": 2,
+    "choices": [
+      "Truyện tranh là một loại sách giáo khoa",
+      "Truyện tranh không thuộc bộ sưu tập của Minh Khuê",
+      "Truyện tranh là một nhóm nhỏ nằm trong nhóm sách truyện thiếu nhi",
+      "Tủ sách đã bị sắp xếp sai"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt khi tìm một đồ vật đã được sắp xếp so với đồ vật chưa được sắp xếp là gì?",
+    "Lever": 2,
+    "choices": [
+      "Không có sự khác biệt nào",
+      "Sắp xếp rồi thì không cần tìm nữa",
+      "Sắp xếp giúp thu hẹp phạm vi tìm kiếm và tìm nhanh hơn",
+      "Chưa sắp xếp giúp em ghi nhớ vị trí tốt hơn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em có rất nhiều ảnh về các loài động vật khác nhau. Để quản lý chúng trên máy tính, em nên làm gì dựa theo bài học?",
+    "Lever": 3,
+    "choices": [
+      "Để tất cả ảnh vào một thư mục duy nhất",
+      "Đặt tên ảnh thật dài để dễ phân biệt",
+      "Tạo sơ đồ hình cây để phân loại ảnh theo từng nhóm loài vật",
+      "Xóa bớt ảnh để tìm cho nhanh"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong tủ sách có 20 quyển truyện Doraemon đánh số từ 1 đến 20. Để tìm quyển tập 14, cách tìm nào sau đây là nhanh nhất?",
+    "Lever": 3,
+    "choices": [
+      "Lật từng quyển từ đầu đến khi thấy số 14",
+      "Dựa vào thứ tự sắp xếp từ 1 đến 20 để xác định vị trí của số 14",
+      "Nhờ người khác tìm hộ",
+      "Lấy ngẫu nhiên các quyển ra xem"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em muốn tạo một sơ đồ hình cây để quản lý 'Tài liệu học tập' gồm: Toán, Tiếng Việt, Tin học. Gốc của sơ đồ này nên là gì?",
+    "Lever": 3,
+    "choices": [
+      "Môn Toán",
+      "Môn Tin học",
+      "Tài liệu học tập",
+      "Sách giáo khoa"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trên sân ga, em đang đứng ở toa số 5. Nếu các toa đánh số tăng dần về phía cuối tàu, để đến toa số 8 em nên làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Đi ngược lại về phía đầu máy",
+      "Đứng yên tại chỗ chờ toa số 8 đi qua",
+      "Đi về phía cuối tàu, qua toa số 6 và số 7 sẽ thấy toa số 8",
+      "Đi vào bên trong toa số 5 và ngồi xuống"
+    ],
+    "answer": 2
   }
 ]
