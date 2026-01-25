@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để thêm nhóm lệnh Bút vẽ vào vùng Thư viện lệnh của Scratch, em cần chọn nút nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Nút lệnh Chuyển động",
+      "Nút lệnh Sự kiện",
+      "Nút lệnh Thêm phần mở rộng",
+      "Nút lệnh Âm thanh"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Lệnh nào dùng để xóa tất cả các hình và đường đã vẽ trên vùng Sân khấu?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Lệnh nhấc bút",
+      "Lệnh đặt bút",
+      "Lệnh in hình",
+      "Lệnh Xoá tất cả"
     ],
-    "answer": 2
+    "answer": 3
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Để nhân vật bắt đầu để lại nét vẽ khi di chuyển, em phải sử dụng lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Lệnh nhấc bút",
+      "Lệnh đặt bút",
+      "Lệnh di chuyển",
+      "Lệnh in hình"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Ý nghĩa của lệnh 'in hình' trong nhóm lệnh Bút vẽ là gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Lưu lại vệt di chuyển của nhân vật",
+      "In hình ảnh nhân vật tại vị trí hiện tại trên sân khấu",
+      "Thay đổi màu sắc của nhân vật",
+      "Xóa hình ảnh nhân vật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'nhấc bút' có tác dụng gì đối với nhân vật?",
+    "Lever": 1,
+    "choices": [
+      "Làm nhân vật bay lên cao",
+      "Làm nhân vật ngừng vẽ khi di chuyển",
+      "Làm nhân vật di chuyển nhanh hơn",
+      "Làm nhân vật biến mất"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi độ dày của nét vẽ trong Scratch, em sử dụng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh đặt màu bút bằng ...",
+      "Lệnh di chuyển ... bước",
+      "Lệnh đặt kích thước bút vẽ bằng ...",
+      "Lệnh thay đổi hiệu ứng màu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt chính giữa việc di chuyển khi 'đặt bút' và di chuyển khi 'nhấc bút' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Đặt bút làm nhân vật đi chậm hơn",
+      "Đặt bút để lại vệt màu trên đường đi, nhấc bút thì không",
+      "Nhấc bút làm nhân vật xoay tròn",
+      "Không có sự khác biệt nào"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao trong các chương trình vẽ hình, lệnh 'Xoá tất cả' thường được đặt ngay sau lệnh 'Khi bấm vào lá cờ xanh'?",
+    "Lever": 2,
+    "choices": [
+      "Để nhân vật di chuyển đúng hướng",
+      "Để dọn sạch các nét vẽ cũ từ lần chạy trước, giúp sân khấu sạch sẽ",
+      "Để thay đổi màu bút về mặc định",
+      "Để nhân vật hiện ra trên sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để vẽ một đoạn thẳng có màu đỏ, em cần kết hợp các nhóm lệnh nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Nhóm Bút vẽ và nhóm Chuyển động",
+      "Nhóm Chuyển động và nhóm Âm thanh",
+      "Nhóm Sự kiện và nhóm Cảm biến",
+      "Nhóm Hiển thị và nhóm Bút vẽ"
     ],
     "answer": 0
+  },
+  {
+    "question": "Lệnh 'in hình' khác với lệnh 'đặt bút' ở điểm nào khi nhân vật di chuyển?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh in hình tạo ra nét vẽ liền mạch",
+      "Lệnh in hình để lại bản sao hình ảnh nhân vật tại điểm đó, còn đặt bút tạo ra đường kẻ",
+      "Lệnh đặt bút chỉ dùng được cho nhân vật mèo",
+      "Lệnh in hình làm thay đổi màu sắc sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong chương trình vẽ 'Hàng cây' (trang 52), lệnh 'in hình' được sử dụng nhằm mục đích gì?",
+    "Lever": 2,
+    "choices": [
+      "Để vẽ đường mòn dưới gốc cây",
+      "Để tạo ra hình ảnh các cây tại các vị trí khác nhau trên sân khấu",
+      "Để xóa các cây bị vẽ sai",
+      "Để đổi màu lá cây"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để vẽ một nét đứt (vẽ một đoạn, sau đó một khoảng trống rồi lại vẽ), em cần phối hợp cặp lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh đặt bút và lệnh in hình",
+      "Lệnh di chuyển và lệnh xoay",
+      "Lệnh đặt bút và lệnh nhấc bút kết hợp với di chuyển",
+      "Lệnh đặt bút và lệnh Xoá tất cả"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Muốn vẽ một hình vuông cạnh 100 bước với nét vẽ dày là 5, thứ tự thiết lập thông số nào là đúng?",
+    "Lever": 3,
+    "choices": [
+      "Đặt bút -> Di chuyển 100 bước -> Đặt kích thước bút vẽ bằng 5",
+      "Đặt kích thước bút vẽ bằng 5 -> Đặt bút -> Di chuyển và xoay để vẽ các cạnh",
+      "Nhấc bút -> Di chuyển 100 bước -> Đặt kích thước bút vẽ bằng 5",
+      "Xoá tất cả -> Nhấc bút -> Đặt màu bút"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em muốn tạo một chương trình vẽ 3 đoạn thẳng với 3 màu khác nhau, em cần phải làm gì giữa mỗi lần di chuyển vẽ đoạn thẳng?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng lệnh Xoá tất cả",
+      "Sử dụng lệnh đặt màu bút bằng ... và chọn màu mới",
+      "Sử dụng lệnh in hình",
+      "Sử dụng lệnh nhấc bút rồi đặt bút lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu chương trình của em có lệnh 'đặt bút' nhưng khi nhân vật di chuyển vẫn không thấy nét vẽ, nguyên nhân có thể là gì?",
+    "Lever": 3,
+    "choices": [
+      "Do chưa chọn màu cho bút",
+      "Do trước đó có lệnh 'Xoá tất cả' đặt sai vị trí hoặc chưa có lệnh 'đặt bút' trước khi di chuyển",
+      "Do nhân vật di chuyển quá nhanh",
+      "Do kích thước bút vẽ bằng 0"
+    ],
+    "answer": 1
   }
 ]

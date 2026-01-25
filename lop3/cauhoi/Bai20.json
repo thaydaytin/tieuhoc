@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong máy tính, tệp thường được dùng để chứa loại thông tin nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Văn bản, hình ảnh, âm thanh hoặc video",
+      "Chỉ chứa các con số",
+      "Chỉ chứa các trò chơi",
+      "Chỉ chứa tên của các bạn trong lớp"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để quan sát các tệp và thư mục trong máy tính, em thường nháy đúp chuột vào biểu tượng nào?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Biểu tượng Recycle Bin",
+      "Biểu tượng This PC",
+      "Biểu tượng Google Chrome",
+      "Biểu tượng Word"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Thư mục thường có biểu tượng hình gì để em dễ nhận ra?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Hình một tờ giấy trắng",
+      "Hình một nốt nhạc",
+      "Hình kẹp giấy màu vàng",
+      "Hình một bức tranh"
     ],
-    "answer": 0
+    "answer": 2
+  },
+  {
+    "question": "Một thư mục được tạo ra ở bên trong một thư mục khác thì được gọi là gì?",
+    "Lever": 1,
+    "choices": [
+      "Thư mục gốc",
+      "Thư mục cha",
+      "Thư mục con",
+      "Thư mục tệp"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong máy tính, ổ đĩa được coi là gì?",
+    "Lever": 1,
+    "choices": [
+      "Một tệp dữ liệu",
+      "Một thư mục gốc",
+      "Một phần mềm quản lý",
+      "Một thiết bị ngoại vi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin trong máy tính được lưu trữ ở đâu?",
+    "Lever": 1,
+    "choices": [
+      "Trong các phím của bàn phím",
+      "Trong các tệp",
+      "Trên màn hình nền",
+      "Trong con trỏ chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo sách giáo khoa, thư mục trong máy tính giống như bộ phận nào của giá sách?",
+    "Lever": 2,
+    "choices": [
+      "Giống như các quyển sách",
+      "Giống như tấm gỗ làm giá",
+      "Giống như các ngăn của giá sách",
+      "Giống như lớp bụi trên giá"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lợi ích chính của việc sắp xếp phân loại tệp và thư mục một cách hợp lý là gì?",
+    "Lever": 2,
+    "choices": [
+      "Giúp máy tính chạy nhanh hơn",
+      "Giúp tiết kiệm điện năng",
+      "Giúp tìm kiếm dữ liệu dễ dàng và nhanh chóng",
+      "Giúp máy tính không bị nhiễm virus"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Một thư mục có thể chứa những gì bên trong nó?",
+    "Lever": 2,
+    "choices": [
+      "Chỉ chứa các tệp văn bản",
+      "Chỉ chứa các thư mục con",
+      "Có thể chứa cả tệp và các thư mục con",
+      "Không chứa gì cả"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em nhìn thấy một biểu tượng có hình nốt nhạc và đuôi là .mp3, em có thể khẳng định đó là loại tệp gì?",
+    "Lever": 2,
+    "choices": [
+      "Tệp hình ảnh",
+      "Tệp âm thanh",
+      "Tệp văn bản",
+      "Tệp video"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt chính giữa tệp và thư mục là gì?",
+    "Lever": 2,
+    "choices": [
+      "Tệp có thể chứa thư mục, còn thư mục thì không",
+      "Thư mục dùng để lưu trữ và tổ chức, còn tệp chứa nội dung dữ liệu cụ thể",
+      "Tệp luôn có màu vàng, thư mục có màu trắng",
+      "Thư mục chỉ có trên ổ đĩa C, tệp chỉ có trên ổ đĩa D"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em có rất nhiều ảnh về các loài hoa và các loài chim. Cách sắp xếp nào dưới đây là khoa học nhất?",
+    "Lever": 3,
+    "choices": [
+      "Để tất cả ảnh vào một thư mục chung",
+      "Tạo thư mục 'Ảnh', bên trong tạo hai thư mục con là 'Hoa' và 'Chim'",
+      "Đổi tên tất cả ảnh thành số thứ tự từ 1 đến hết",
+      "Xóa bớt ảnh để thư mục gọn gàng hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An lưu tệp bài soạn 'Tiếng Việt' vào thư mục 'Giải trí'. Theo em, việc này có hợp lý không? Vì sao?",
+    "Lever": 3,
+    "choices": [
+      "Hợp lý, vì lưu ở đâu cũng được",
+      "Không hợp lý, vì tệp bài học nên được lưu vào thư mục 'Học tập' để dễ quản lý và tìm kiếm",
+      "Hợp lý, vì thư mục 'Giải trí' thường trống",
+      "Không hợp lý, vì máy tính sẽ báo lỗi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em mở ổ đĩa (D:), em thấy có thư mục 'Hoc tap' và trong đó có tệp 'Toan.docx'. Sơ đồ nào mô tả đúng cấu trúc này?",
+    "Lever": 3,
+    "choices": [
+      "Tệp Toan.docx -> Thư mục Hoc tap -> Ổ đĩa (D:)",
+      "Ổ đĩa (D:) -> Tệp Toan.docx -> Thư mục Hoc tap",
+      "Ổ đĩa (D:) -> Thư mục Hoc tap -> Tệp Toan.docx",
+      "Thư mục Hoc tap -> Ổ đĩa (D:) -> Tệp Toan.docx"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để tìm lại một bức ảnh chụp kỷ niệm gia đình từ năm ngoái giữa hàng nghìn tệp trong máy tính, em sẽ tìm nhanh nhất nếu:",
+    "Lever": 3,
+    "choices": [
+      "Mở từng tệp một để xem",
+      "Dùng công cụ tìm kiếm hoặc mở thư mục 'Ảnh gia đình' đã được phân loại trước đó",
+      "Nhờ người khác tìm hộ",
+      "Tắt máy tính và tìm ảnh giấy"
+    ],
+    "answer": 1
   }
 ]

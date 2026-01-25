@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để tạo một tệp văn bản mới hoàn toàn trong Microsoft Word, em chọn lệnh nào trong bảng chọn File?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Open",
+      "New",
+      "Save",
+      "Save As"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh Open trong bảng chọn File của phần mềm soạn thảo văn bản dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Xóa một tệp văn bản",
+      "Lưu tệp văn bản đang soạn thảo",
+      "Mở một tệp văn bản đã có trên máy tính",
+      "Tạo một thư mục mới"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong khi soạn thảo văn bản, phím nào được dùng để đưa con trỏ xuống đầu dòng mới?",
+    "Lever": 1,
+    "choices": [
+      "Phím Shift",
+      "Phím Ctrl",
+      "Phím Enter",
+      "Phím Space"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để lưu tệp văn bản lần đầu tiên và đặt tên cho tệp, em sử dụng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh Save trong bảng chọn File",
+      "Lệnh New trong bảng chọn File",
+      "Lệnh Close ở góc phải màn hình",
+      "Lệnh Open trong bảng chọn File"
     ],
     "answer": 0
+  },
+  {
+    "question": "Theo sách giáo khoa, lệnh nào cho phép em lưu nội dung tệp đang mở sang một tệp mới với tên khác?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh Save",
+      "Lệnh Open",
+      "Lệnh New",
+      "Lệnh Save As"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Bảng chọn File chứa các lệnh New, Open, Save thường nằm ở vị trí nào trong cửa sổ Word?",
+    "Lever": 1,
+    "choices": [
+      "Góc dưới cùng bên phải",
+      "Góc trên cùng bên trái",
+      "Ở giữa thanh công cụ",
+      "Nằm trong dải lệnh Insert"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sử dụng lệnh Open, nếu không thấy tệp cần mở ngay trong danh sách, em cần nháy chuột vào nút nào để tìm trong các thư mục khác?",
+    "Lever": 2,
+    "choices": [
+      "Nút Cancel",
+      "Nút Browse",
+      "Nút New Folder",
+      "Nút Delete"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để gõ được văn bản tiếng Việt có dấu trong phần mềm Word, em cần thêm điều kiện gì?",
+    "Lever": 2,
+    "choices": [
+      "Chỉ cần cài đặt phần mềm Word",
+      "Phải tắt bàn phím số",
+      "Phần mềm hỗ trợ gõ tiếng Việt (như Unikey) phải được kích hoạt và đang ở chế độ gõ tiếng Việt",
+      "Phải nhấn giữ phím Shift trong suốt quá trình gõ"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điểm khác biệt chính giữa lệnh Save và Save As khi em đã có một tệp văn bản cũ là gì?",
+    "Lever": 2,
+    "choices": [
+      "Save dùng để mở tệp, Save As dùng để đóng tệp",
+      "Save cập nhật thay đổi vào chính tệp đang mở, Save As tạo ra một bản sao mới với tên hoặc vị trí khác",
+      "Save chỉ dùng cho văn bản ngắn, Save As dùng cho văn bản dài",
+      "Không có sự khác biệt nào giữa hai lệnh này"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trình tự đúng để mở tệp 'Lam theo loi Bac' đã lưu trên máy tính là gì?",
+    "Lever": 2,
+    "choices": [
+      "Chọn File -> Chọn New -> Chọn Browse -> Chọn tệp -> Open",
+      "Chọn File -> Chọn Save -> Gõ tên tệp -> Open",
+      "Chọn File -> Chọn Open -> Chọn Browse -> Chọn tệp 'Lam theo loi Bac' -> Chọn nút Open",
+      "Nháy đúp vào biểu tượng Word trên màn hình nền"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tại sao khi soạn thảo văn bản, chúng ta nên thường xuyên nhấn lệnh Save?",
+    "Lever": 2,
+    "choices": [
+      "Để văn bản trông đẹp hơn",
+      "Để máy tính không bị virus",
+      "Để lưu lại những gì vừa gõ, tránh mất dữ liệu nếu máy tính bị tắt đột ngột",
+      "Để phần mềm Word chạy nhanh hơn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bạn An đang mở tệp 'Bai_tap_1.docx'. Bạn muốn sửa nội dung và lưu thành một tệp mới tên là 'Bai_tap_hoan_thien.docx' mà vẫn giữ nguyên tệp cũ. Bạn An nên thực hiện thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Sửa xong rồi nhấn nút Save",
+      "Sửa xong rồi chọn File -> Save As -> Gõ tên mới 'Bai_tap_hoan_thien' -> Chọn Save",
+      "Sửa xong rồi chọn File -> New",
+      "Sửa xong rồi tắt máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong tệp văn bản bài thơ, em muốn thêm tiêu đề vào trên cùng. Em cần thực hiện thao tác nào theo hướng dẫn thực hành?",
+    "Lever": 3,
+    "choices": [
+      "Đưa con trỏ soạn thảo đến cuối văn bản rồi gõ",
+      "Xóa toàn bộ bài thơ rồi gõ lại từ đầu kèm tiêu đề",
+      "Đưa con trỏ soạn thảo đến đầu dòng thứ nhất, nhấn Enter để tạo dòng trống rồi gõ tiêu đề vào dòng đó",
+      "Nhấn phím Space thật nhiều lần"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để gõ cụm từ 'Học tập tốt' bằng kiểu gõ Telex, em cần gõ trình tự phím nào sau đây?",
+    "Lever": 3,
+    "choices": [
+      "H-o-c-j t-a-p-j t-o-t-s",
+      "H-o-j-c t-a-p-j t-o-o-t-s",
+      "H-o-c-s t-a-w-p-s t-o-t-s",
+      "H-o-o-c-j t-a-w-p-j t-o-o-t-s"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong hộp thoại Save As, nếu em muốn lưu tệp vào một thư mục cụ thể trên ổ đĩa D, em cần thực hiện bước nào trước khi nhấn nút Save?",
+    "Lever": 3,
+    "choices": [
+      "Gõ tên tệp thật dài",
+      "Thay đổi phông chữ của văn bản",
+      "Chọn ổ đĩa (D:) ở khung bên trái, sau đó tìm và chọn thư mục muốn lưu",
+      "Nhấn phím Enter trên bàn phím 2 lần"
+    ],
+    "answer": 2
   }
 ]
