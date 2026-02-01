@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong nhóm lệnh Chuyển động, lệnh nào dùng để quy định hướng di chuyển của nhân vật?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "di chuyển ... bước",
+      "xoay ... độ",
+      "đặt hướng bằng ...",
+      "đi tới vị trí ngẫu nhiên"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để vẽ hình vuông có cạnh dài 100 bước, em cần điền số bao nhiêu vào lệnh 'di chuyển'?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "50",
+      "90",
+      "100",
+      "180"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Theo hướng dẫn ở Hình 1 trang 50, giá trị hướng bằng 0 tương ứng với hướng nào?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Hướng sang phải",
+      "Hướng lên trên",
+      "Hướng xuống dưới",
+      "Hướng sang trái"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh nào được dùng để dọn sạch các nét vẽ cũ trên sân khấu trước khi bắt đầu vẽ hình mới?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "nhấc bút",
+      "Xoá tất cả",
+      "in hình",
+      "đặt bút"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong bài thực hành vẽ 'Hàng cây', lệnh nào dùng để để lại hình ảnh nhân vật cây tại vị trí hiện tại?",
+    "Lever": 1,
+    "choices": [
+      "đặt bút",
+      "di chuyển",
+      "in hình",
+      "nhấc bút"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Giá trị hướng bằng 180 trong Scratch tương ứng với hướng di chuyển nào?",
+    "Lever": 1,
+    "choices": [
+      "Hướng sang phải",
+      "Hướng sang trái",
+      "Hướng lên trên",
+      "Hướng xuống dưới"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để vẽ cạnh bên phải của hình vuông (di chuyển từ trên xuống dưới), em cần đặt hướng bằng bao nhiêu?",
+    "Lever": 2,
+    "choices": [
+      "90",
+      "180",
+      "-90",
+      "0"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong chương trình vẽ hình vuông ở Hình 3 trang 51, tại sao cần sử dụng lệnh 'đợi 1 giây' sau mỗi cạnh?",
+    "Lever": 2,
+    "choices": [
+      "Để nhân vật nghỉ ngơi",
+      "Để nét vẽ được đậm hơn",
+      "Để em có thể quan sát nhân vật vẽ từng cạnh một",
+      "Để chương trình không bị lỗi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thứ tự các bước đúng để vẽ một đoạn thẳng là gì?",
+    "Lever": 2,
+    "choices": [
+      "Di chuyển -> Đặt hướng -> Đặt bút",
+      "Đặt bút -> Di chuyển -> Nhấc bút",
+      "Đặt hướng -> Đặt bút -> Di chuyển",
+      "Nhấc bút -> Di chuyển -> Đặt bút"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu muốn vẽ 5 cây cách đều nhau 100 bước, sau mỗi lần dùng lệnh 'in hình', em cần dùng lệnh di chuyển bao nhiêu bước?",
+    "Lever": 2,
+    "choices": [
+      "50 bước",
+      "100 bước",
+      "150 bước",
+      "200 bước"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt chính giữa việc vẽ hình bằng lệnh 'đặt bút' và tạo hàng cây bằng lệnh 'in hình' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Đặt bút tạo ra đường kẻ, in hình để lại bản sao của nhân vật",
+      "In hình làm nhân vật di chuyển nhanh hơn",
+      "Đặt bút chỉ vẽ được đường thẳng, in hình vẽ được đường cong",
+      "Không có sự khác biệt"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em muốn vẽ một hình chữ nhật có chiều rộng 70 bước và chiều dài 100 bước. Em cần thay đổi thông số ở các lệnh 'di chuyển' như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Tất cả các lệnh di chuyển đều để 100 bước",
+      "Hai cạnh đối diện để 100 bước, hai cạnh còn lại để 70 bước",
+      "Tất cả các lệnh di chuyển đều để 70 bước",
+      "Sử dụng lệnh di chuyển 170 bước cho mỗi cạnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu chương trình vẽ hình vuông của em có lệnh 'đặt bút' nhưng khi chạy nhân vật di chuyển mà không để lại nét vẽ, nguyên nhân có thể là do đâu?",
+    "Lever": 3,
+    "choices": [
+      "Do em chưa chọn màu bút vẽ",
+      "Do em chưa đặt hướng di chuyển",
+      "Do trước đó có lệnh 'Xoá tất cả' đặt sai vị trí hoặc kích thước bút quá nhỏ",
+      "Do nhân vật di chuyển quá chậm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để vẽ một nét đứt (vẽ một đoạn rồi cách ra một đoạn mới vẽ tiếp), em cần phối hợp những lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ dùng lệnh đặt bút và di chuyển",
+      "Dùng lệnh đặt bút, di chuyển, sau đó nhấc bút và di chuyển tiếp",
+      "Dùng lệnh in hình liên tục",
+      "Dùng lệnh Xoá tất cả xen kẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong bài tập vận dụng vẽ hình chữ nhật (trang 52), nếu bắt đầu từ góc trên bên trái và vẽ theo chiều kim đồng hồ, thứ tự các hướng cần đặt lần lượt là:",
+    "Lever": 3,
+    "choices": [
+      "90 (phải) -> 180 (xuống) -> -90 (trái) -> 0 (lên)",
+      "0 (lên) -> 90 (phải) -> 180 (xuống) -> -90 (trái)",
+      "180 (xuống) -> 90 (phải) -> 0 (lên) -> -90 (trái)",
+      "90 (phải) -> 0 (lên) -> -90 (trái) -> 180 (xuống)"
     ],
     "answer": 0
   }

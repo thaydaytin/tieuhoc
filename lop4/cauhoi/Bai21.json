@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để bắt đầu chèn ảnh vào trang văn bản, em cần chọn dải lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Dải lệnh Home",
+      "Dải lệnh Insert",
+      "Dải lệnh Design",
+      "Dải lệnh View"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trong dải lệnh Insert, lệnh nào được dùng để chèn ảnh từ máy tính?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Table",
+      "Shapes",
+      "Pictures",
+      "Screenshot"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi nháy chuột chọn một ảnh đã chèn, có bao nhiêu điểm mốc xuất hiện xung quanh ảnh?",
+    "Lever": 1,
+    "choices": [
+      "4 điểm",
+      "6 điểm",
+      "8 điểm",
+      "10 điểm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để xóa một ảnh đã chèn vào văn bản, em chọn ảnh đó và nhấn phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Phím Enter",
+      "Phím Shift",
+      "Phím Delete",
+      "Phím Ctrl"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác kéo thả chuột tại điểm neo (mũi tên xoay) phía trên ảnh dùng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Để xóa ảnh",
+      "Để xoay ảnh",
+      "Để phóng to ảnh",
+      "Để thay đổi màu ảnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi kích thước của ảnh, em thực hiện thao tác kéo thả chuột tại vị trí nào?",
+    "Lever": 1,
+    "choices": [
+      "Tại một trong các điểm mốc xung quanh ảnh",
+      "Tại vị trí giữa tấm ảnh",
+      "Tại thanh dải lệnh",
+      "Tại nút lệnh Insert"
     ],
     "answer": 0
+  },
+  {
+    "question": "Sắp xếp các bước sau theo thứ tự đúng để chèn ảnh vào văn bản:\n1. Chọn lệnh Pictures.\n2. Chọn tệp ảnh cần chèn.\n3. Chọn dải lệnh Insert.\n4. Chọn nút Insert.",
+    "Lever": 2,
+    "choices": [
+      "3-1-2-4",
+      "1-2-3-4",
+      "3-2-1-4",
+      "2-3-1-4"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Dải lệnh Picture Format (Định dạng hình ảnh) xuất hiện khi nào?",
+    "Lever": 2,
+    "choices": [
+      "Khi em vừa mở phần mềm Word",
+      "Khi em nháy chuột chọn vào một ảnh trong văn bản",
+      "Khi em nhấn phím Enter",
+      "Khi em lưu tệp văn bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh Wrap Text -> Square có tác dụng gì đối với ảnh được chèn?",
+    "Lever": 2,
+    "choices": [
+      "Làm ảnh biến mất",
+      "Làm ảnh trở nên sắc nét hơn",
+      "Giúp em có thể kéo thả ảnh đến vị trí mong muốn trong văn bản",
+      "Thay đổi màu sắc của ảnh thành đen trắng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tại sao khi muốn thu nhỏ ảnh mà không làm méo hình, em nên kéo thả chuột ở các điểm mốc nằm ở góc ảnh?",
+    "Lever": 2,
+    "choices": [
+      "Vì kéo ở góc sẽ giúp ảnh giữ nguyên tỉ lệ chiều rộng và chiều cao",
+      "Vì kéo ở góc nhanh hơn kéo ở giữa các cạnh",
+      "Vì đó là quy định của phần mềm",
+      "Vì kéo ở góc sẽ làm ảnh xoay tròn"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Theo bài đọc thêm, để chèn ảnh trực tiếp từ Internet mà không cần tải về máy, em dùng lệnh nào?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh Pictures",
+      "Lệnh Online Pictures",
+      "Lệnh Shapes",
+      "Lệnh Screenshot"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em đang soạn thảo bài văn về loài hoa em yêu thích. Sau khi chèn ảnh hoa hồng, ảnh quá to và che hết phần chữ. Em nên làm gì để văn bản trông hợp lý hơn?",
+    "Lever": 3,
+    "choices": [
+      "Xóa bớt văn bản để ảnh không che chữ",
+      "Nháy chuột chọn ảnh, kéo điểm mốc ở góc vào phía tâm ảnh để thu nhỏ kích thước",
+      "Thay đổi phông chữ thật to để vượt lên trên ảnh",
+      "Tắt phần mềm và không chèn ảnh nữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tạo một bức thư chúc mừng ngày 8-3 có ảnh bông hoa nằm ở bên phải của đoạn văn (như Hình 2 trang 42), em cần kết hợp những thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ cần chèn ảnh bằng lệnh Pictures",
+      "Chèn ảnh, sau đó chọn lệnh Wrap Text và Square rồi kéo ảnh sang bên phải đoạn văn",
+      "Dùng phím Space để đẩy ảnh sang phải",
+      "Chèn ảnh rồi chọn lệnh xoay ảnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An muốn chèn ảnh 'Hoa sen' vào sau nội dung văn bản '5 điều Bác Hồ dạy'. Tuy nhiên, khi chèn xong ảnh lại nằm ở giữa dòng chữ. An đã thiếu bước nào trước khi chèn ảnh?",
+    "Lever": 3,
+    "choices": [
+      "An thiếu bước chọn màu cho ảnh",
+      "An thiếu bước đặt con trỏ soạn thảo tại vị trí muốn chèn (cuối văn bản) trước khi thực hiện lệnh Insert",
+      "An thiếu bước lưu văn bản",
+      "An thiếu bước chọn phông chữ phù hợp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thực hành bài tập chèn ảnh minh họa cho bài thơ, em thấy ảnh bị ngược. Em sẽ sử dụng công cụ nào đã học để điều chỉnh lại cho đúng hướng?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng các điểm mốc để thu nhỏ ảnh",
+      "Sử dụng lệnh Wrap Text",
+      "Sử dụng điểm neo mũi tên xoay phía trên ảnh để xoay ảnh về hướng đúng",
+      "Xóa ảnh đi và chụp lại ảnh mới"
+    ],
+    "answer": 2
   }
 ]
