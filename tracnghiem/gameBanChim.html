@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Thầy Dạy Tin - Ná Cao Su</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sky: #a5f3fc;
+            --grass-dark: #2d6a4f;
+            --grass-light: #52b788;
+            --panel-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            margin: 0; padding: 0; overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to bottom, #74ebd5, #acb6e5);
+            touch-action: none;
+        }
+
+        .ui-panel {
+            position: fixed;
+            background: var(--panel-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid #fff;
+            z-index: 100;
+        }
+
+        #start-screen, #end-screen {
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px; text-align: center;
+            width: 85%; max-width: 400px;
+        }
+
+        #quiz-footer {
+            bottom: 10px; left: 50%;
+            transform: translateX(-50%);
+            width: 95%; max-width: 700px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        #question-text {
+            font-size: clamp(0.95rem, 4vw, 1.2rem); 
+            font-weight: 800; color: #1b4332;
+            margin-bottom: 8px; text-align: center;
+            background: #fff; padding: 10px 15px; border-radius: 12px;
+            border: 2px solid #52b788; width: 95%;
+        }
+
+        #options-grid {
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px; width: 100%;
+        }
+
+        .option-tag {
+            background: white; padding: 10px; border-radius: 10px;
+            font-size: clamp(0.8rem, 3.5vw, 0.9rem); 
+            font-weight: 700; border: 2px solid #dee2e6;
+            display: flex; align-items: center;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+        }
+
+        .tag-letter { 
+            background: #ff6347; color: white; border-radius: 50%;
+            width: 24px; height: 24px; display: inline-flex;
+            align-items: center; justify-content: center; margin-right: 8px;
+            font-size: 0.8rem; flex-shrink: 0;
+        }
+
+        #stats-bar { 
+            top: 10px; left: 50%; transform: translateX(-50%);
+            padding: 5px 15px; font-size: 0.85rem; 
+            display: none; gap: 15px; width: fit-content;
+        }
+
+        h2 { font-family: 'Patrick Hand', sans-serif; color: #2d6a4f; font-size: 2rem; margin: 0 0 10px; }
+        
+        input[type="text"] {
+            width: 80%; padding: 12px; border: 2px solid #b7e4c7;
+            border-radius: 10px; font-size: 1rem; text-align: center; margin-bottom: 15px;
+        }
+
+        button {
+            font-family: 'Patrick Hand', sans-serif; font-weight: 800; font-size: 1.3rem;
+            padding: 10px 30px; border-radius: 20px; cursor: pointer; border: none;
+            background: linear-gradient(to bottom, #40916c, #1b4332); color: white;
+            box-shadow: 0 4px 0 #081c15; transition: 0.1s;
+        }
+        button:active { transform: translateY(2px); box-shadow: 0 2px 0 #081c15; }
+
+        #toast {
+            position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+            padding: 10px 25px; border-radius: 50px; color: white; font-weight: 800;
+            display: none; z-index: 300; font-size: 1.1rem;
+        }
+
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+
+    <div id="start-screen" class="ui-panel">
+        <h2>🌳 THỬ THÁCH NÁ CAO SU</h2>
+        <input type="text" id="studentName" placeholder="Tên của em là gì?" />
+        <button id="btn-start">CHƠI NGAY</button>
+        <p id="load-status" style="margin-top:10px; font-size:0.85rem; color:#40916c;">⏳ Đang tải rừng xanh...</p>
+    </div>
+
+    <div id="stats-bar" class="ui-panel">
+        <div style="color:#1b4332;">👤 <span id="ui-name">-</span></div>
+        <div style="color:#d90429;">⭐ <span id="ui-score">0</span></div>
+        <div style="color:#0077b6;">📝 <span id="ui-progress">0/0</span></div>
+    </div>
+
+    <div id="quiz-footer" class="ui-panel">
+        <div id="question-text">Đang tải câu hỏi...</div>
+        <div id="options-grid">
+            <div class="option-tag"><span class="tag-letter" style="background:#ef233c">A</span> <span id="opt-0">...</span></div>
+            <div class="option-tag"><span class="tag-letter" style="background:#00b4d8">B</span> <span id="opt-1">...</span></div>
+            <div class="option-tag"><span class="tag-letter" style="background:#70e000">C</span> <span id="opt-2">...</span></div>
+            <div class="option-tag"><span class="tag-letter" style="background:#ffb703">D</span> <span id="opt-3">...</span></div>
+        </div>
+    </div>
+
+    <div id="end-screen" class="ui-panel" style="display:none;">
+        <h2>🏆 KẾT QUẢ</h2>
+        <p id="final-result" style="font-size:1.1rem; font-weight:800; white-space: pre-wrap;"></p>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
+            <button onclick="location.reload()">CHƠI LẠI</button>
+            <button style="background:#bc4749; box-shadow:0 4px 0 #6a040f;" id="btn-submit">NỘP ĐIỂM</button>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    <canvas id="gameCanvas"></canvas>
+
+<script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxy-3x5N1pmswuykwdjPGtB5qoOybiYBP4ycumyShkPoQFKQdbLQNjPZShQPVC8F240/exec";
+    
+    let questions = [];
+    let currentIdx = 0;
+    let score = 0;
+    let studentName = "";
+    let isGameOver = false;
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let birds = [];
+    let particles = [];
+    let projectile = null;
+    let slingshot = { anchorX: 0, anchorY: 0, isDragging: false };
+    let mouse = { x: 0, y: 0 };
+    let scenery = { clouds: [], trees: [], grass: [], backgroundTrees: [] };
+
+    function getParam(key) { return new URLSearchParams(window.location.search).get(key); }
+    const jsonUrl = getParam('json');
+
+    if (jsonUrl) {
+        fetch(decodeURIComponent(jsonUrl))
+            .then(r => r.json())
+            .then(data => {
+                questions = data;
+                document.getElementById('load-status').innerText = `✅ Đã sẵn sàng ${questions.length} thử thách.`;
+            })
+            .catch(() => document.getElementById('load-status').innerText = "❌ Lỗi tải câu hỏi!");
+    } else {
+        questions = [
+            { question: "Màu nào là sự kết hợp giữa đỏ và vàng?", choices: ["Xanh lá", "Cam", "Tím", "Hồng"], answer: 1 },
+            { question: "Động vật nào được mệnh danh là chúa sơn lâm?", choices: ["Voi", "Hươu cao cổ", "Hổ", "Sư tử"], answer: 2 },
+            { question: "Sông nào dài nhất thế giới?", choices: ["Sông Amazon", "Sông Nile", "Sông Mê Kông", "Sông Hồng"], answer: 1 }
+        ];
+        document.getElementById('load-status').innerText = "💡 Chế độ luyện tập.";
+    }
+
+    function initGame() {
+        const name = document.getElementById('studentName').value.trim();
+        if (!name) { showToast("Vui lòng nhập tên!", "#ef233c"); return; }
+        
+        studentName = name;
+        document.getElementById('ui-name').innerText = studentName;
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('stats-bar').style.display = 'flex';
+        document.getElementById('quiz-footer').style.display = 'flex';
+        
+        resize();
+        createScenery();
+        loadQuestion();
+        animate();
+    }
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        slingshot.anchorX = canvas.width / 2;
+        slingshot.anchorY = canvas.height - 240;
+    }
+
+    function createScenery() {
+        scenery = { clouds: [], trees: [], grass: [], backgroundTrees: [] };
+        
+        // Clouds
+        for(let i=0; i<5; i++) scenery.clouds.push({ x: Math.random()*canvas.width, y: 30+Math.random()*80, s: 0.15+Math.random()*0.2 });
+
+        // Background Trees (Distant)
+        for(let i=0; i<12; i++) {
+            scenery.backgroundTrees.push({
+                x: Math.random() * canvas.width,
+                scale: 0.5 + Math.random() * 0.4,
+                type: Math.floor(Math.random() * 3),
+                shade: Math.random() * 20
+            });
+        }
+
+        // Foreground Trees (Detailed)
+        const treeCount = Math.floor(canvas.width / 200) + 2;
+        for(let i=0; i<treeCount; i++) {
+            scenery.trees.push({ 
+                x: (canvas.width / (treeCount-1)) * i + (Math.random()-0.5)*100,
+                scale: 0.8 + Math.random() * 0.5,
+                type: Math.floor(Math.random() * 3)
+            });
+        }
+
+        // Grass
+        for(let i=0; i<100; i++) {
+            scenery.grass.push({ x: Math.random()*canvas.width, y: canvas.height-180+Math.random()*180, h: 5+Math.random()*10 });
+        }
+    }
+
+    function drawFancyTree(x, y, scale, type, isBack) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(scale, scale);
+        ctx.globalAlpha = isBack ? 0.6 : 1;
+
+        const trunkW = 15;
+        const trunkH = type === 0 ? 80 : (type === 1 ? 50 : 100);
+        
+        ctx.fillStyle = "#3e2723";
+        ctx.fillRect(-trunkW/2 + 2, -trunkH, trunkW, trunkH);
+        ctx.fillStyle = isBack ? "#5d4037" : "#795548";
+        ctx.fillRect(-trunkW/2, -trunkH, trunkW, trunkH);
+        
+        const drawFoliage = (dx, dy, r, baseColor) => {
+            ctx.fillStyle = "rgba(0,0,0,0.15)";
+            ctx.beginPath(); ctx.arc(dx+3, dy+3, r, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = baseColor;
+            ctx.beginPath(); ctx.arc(dx, dy, r, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = "rgba(255,255,255,0.2)";
+            ctx.beginPath(); ctx.arc(dx-r*0.3, dy-r*0.3, r*0.4, 0, Math.PI*2); ctx.fill();
+        };
+
+        const colors = isBack ? ["#2d6a4f", "#1b4332", "#40916c"] : ["#52b788", "#40916c", "#74c69d"];
+
+        if (type === 0) {
+            for(let i=0; i<3; i++) {
+                const ty = -trunkH - i*30;
+                const tw = 50 - i*10;
+                ctx.fillStyle = colors[i%3];
+                ctx.beginPath();
+                ctx.moveTo(0, ty - 40);
+                ctx.lineTo(-tw, ty);
+                ctx.lineTo(tw, ty);
+                ctx.closePath();
+                ctx.fill();
+            }
+        } else if (type === 1) {
+            drawFoliage(0, -trunkH-20, 45, colors[0]);
+            drawFoliage(-25, -trunkH, 35, colors[1]);
+            drawFoliage(25, -trunkH, 35, colors[1]);
+            drawFoliage(0, -trunkH+10, 30, colors[2]);
+        } else {
+            drawFoliage(0, -trunkH, 30, colors[0]);
+            drawFoliage(-15, -trunkH-30, 25, colors[1]);
+            drawFoliage(15, -trunkH-30, 25, colors[2]);
+            drawFoliage(0, -trunkH-55, 20, colors[0]);
+        }
+
+        ctx.restore();
+    }
+
+    function loadQuestion() {
+        if (currentIdx >= questions.length) { finishGame(); return; }
+        const q = questions[currentIdx];
+        document.getElementById('question-text').innerText = q.question;
+        document.getElementById('ui-progress').innerText = `${currentIdx + 1}/${questions.length}`;
+        for(let i=0; i<4; i++) document.getElementById(`opt-${i}`).innerText = q.choices[i] || "";
+        createBirds();
+    }
+
+    function createBirds() {
+        birds = [];
+        const labels = ['A', 'B', 'C', 'D'];
+        const colors = ['#ef233c', '#00b4d8', '#70e000', '#ffb703'];
+        for (let i = 0; i < 8; i++) {
+            const lIdx = i % 4;
+            const dir = Math.random() > 0.5 ? 1 : -1;
+            birds.push({
+                x: dir > 0 ? -100 : canvas.width + 100,
+                y: 80 + Math.random() * (canvas.height - 450),
+                vx: dir * (1.2 + Math.random() * 2),
+                radius: 28, color: colors[lIdx], label: labels[lIdx],
+                answerIdx: lIdx, isHit: false, wing: Math.random() * 6
+            });
+        }
+    }
+
+    function drawSlingshot() {
+        const { anchorX: ax, anchorY: ay } = slingshot;
+        const pullX = slingshot.isDragging ? mouse.x : ax;
+        const pullY = slingshot.isDragging ? mouse.y : ay - 55;
+
+        ctx.save();
+        ctx.lineCap = "round";
+        ctx.strokeStyle = "#3e2723"; ctx.lineWidth = 5;
+        ctx.beginPath(); ctx.moveTo(ax - 32, ay - 60); ctx.lineTo(pullX, pullY); ctx.stroke();
+
+        ctx.lineWidth = 14; ctx.strokeStyle = "#4e342e";
+        ctx.beginPath(); ctx.moveTo(ax, ay + 70); ctx.lineTo(ax, ay); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ax - 35, ay - 65); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ax + 35, ay - 65); ctx.stroke();
+
+        ctx.strokeStyle = "#5d4037"; ctx.lineWidth = 5;
+        ctx.beginPath(); ctx.moveTo(ax + 32, ay - 60); ctx.lineTo(pullX, pullY); ctx.stroke();
+
+        if (!projectile) {
+            ctx.save();
+            ctx.translate(pullX, pullY);
+            ctx.rotate(Math.atan2(pullY - (ay-60), pullX - ax));
+            ctx.fillStyle = "#333"; ctx.fillRect(-12, -8, 24, 16);
+            ctx.fillStyle = "#6c757d"; ctx.beginPath(); ctx.arc(0, 0, 10, 0, Math.PI*2); ctx.fill();
+            ctx.restore();
+        }
+        ctx.restore();
+    }
+
+    function animate() {
+        if (isGameOver) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        scenery.backgroundTrees.forEach(t => drawFancyTree(t.x, canvas.height-180, t.scale, t.type, true));
+
+        ctx.fillStyle = "#40916c";
+        ctx.fillRect(0, canvas.height-180, canvas.width, 180);
+
+        birds.forEach(b => {
+            if (!b.isHit) {
+                b.x += b.vx; b.wing += 0.2;
+                if (b.x > canvas.width + 120) b.x = -120;
+                if (b.x < -120) b.x = canvas.width + 120;
+            } else { b.y += 10; b.vx *= 0.98; }
+            
+            ctx.save();
+            ctx.translate(b.x, b.y);
+            if(b.vx < 0) ctx.scale(-1, 1);
+            ctx.fillStyle = b.color;
+            ctx.beginPath(); ctx.ellipse(0, 0, 30, 22, 0, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc(20, -10, 15, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(25, -13, 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = "black"; ctx.beginPath(); ctx.arc(27, -13, 2, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = "#ffb703"; ctx.beginPath(); ctx.moveTo(35, -12); ctx.lineTo(45, -8); ctx.lineTo(35, -4); ctx.fill();
+            ctx.fillStyle = "white"; ctx.font = "bold 20px Nunito"; ctx.textAlign = "center";
+            ctx.fillText(b.label, 0, 8);
+            ctx.restore();
+        });
+
+        scenery.trees.forEach(t => drawFancyTree(t.x, canvas.height-160, t.scale, t.type, false));
+
+        drawSlingshot();
+
+        if (projectile) {
+            projectile.x += projectile.vx; projectile.y += projectile.vy; projectile.vy += 0.3;
+            ctx.fillStyle = "#495057"; ctx.beginPath(); ctx.arc(projectile.x, projectile.y, 10, 0, Math.PI*2); ctx.fill();
+            
+            for (let b of birds) {
+                if (!b.isHit && Math.hypot(projectile.x - b.x, projectile.y - b.y) < b.radius + 10) {
+                    b.isHit = true; handleHit(b.answerIdx); projectile = null; break;
+                }
+            }
+            if (projectile && (projectile.y > canvas.height || projectile.x < 0 || projectile.x > canvas.width)) projectile = null;
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+            let p = particles[i]; p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+            if (p.life <= 0) particles.splice(i, 1);
+            else { 
+                ctx.globalAlpha = p.life; ctx.fillStyle = p.color; 
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill(); 
+                ctx.globalAlpha = 1; 
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    function handleHit(ansIdx) {
+        const correct = questions[currentIdx].answer;
+        if (ansIdx === correct) {
+            score += 10; showToast("🎯 CHÍNH XÁC!", "#70e000");
+            setTimeout(() => { currentIdx++; loadQuestion(); }, 800);
+        } else {
+            score = Math.max(0, score - 5); showToast("❌ SAI RỒI!", "#ef233c");
+        }
+        document.getElementById('ui-score').innerText = score;
+    }
+
+    function showToast(msg, color) {
+        const t = document.getElementById('toast');
+        t.innerText = msg; t.style.background = color;
+        t.style.display = 'block';
+        setTimeout(() => t.style.display = 'none', 1200);
+    }
+
+    function finishGame() {
+        isGameOver = true;
+        document.getElementById('end-screen').style.display = 'block';
+        document.getElementById('quiz-footer').style.display = 'none';
+        document.getElementById('final-result').innerText = `Tên: ${studentName}\nĐiểm số: ${score}\nSố câu: ${questions.length}`;
+    }
+
+    function getPos(e) {
+        const t = e.touches ? e.touches[0] : e;
+        return { x: t.clientX, y: t.clientY };
+    }
+
+    function onDown(e) {
+        if (isGameOver || projectile) return;
+        const p = getPos(e);
+        const dist = Math.hypot(p.x - slingshot.anchorX, p.y - (slingshot.anchorY - 55));
+        if (dist < 80) { slingshot.isDragging = true; mouse.x = p.x; mouse.y = p.y; }
+    }
+
+    function onMove(e) {
+        if (!slingshot.isDragging) return;
+        const p = getPos(e);
+        const dx = p.x - slingshot.anchorX;
+        const dy = p.y - (slingshot.anchorY - 55);
+        const dist = Math.min(Math.hypot(dx, dy), 120);
+        const angle = Math.atan2(dy, dx);
+        mouse.x = slingshot.anchorX + Math.cos(angle) * dist;
+        mouse.y = (slingshot.anchorY - 55) + Math.sin(angle) * dist;
+    }
+
+    function onUp() {
+        if (!slingshot.isDragging) return;
+        slingshot.isDragging = false;
+        const dx = slingshot.anchorX - mouse.x;
+        const dy = (slingshot.anchorY - 55) - mouse.y;
+        // ĐÃ TĂNG LỰC BẮN: Chỉnh hệ số từ 0.15 lên 0.20 để đạn bay mạnh hơn
+        if (Math.hypot(dx, dy) > 15) projectile = { x: slingshot.anchorX, y: slingshot.anchorY - 55, vx: dx * 0.20, vy: dy * 0.20 };
+    }
+
+    canvas.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    canvas.addEventListener('touchstart', (e) => { onDown(e); e.preventDefault(); }, {passive: false});
+    window.addEventListener('touchmove', (e) => { onMove(e); }, {passive: false});
+    window.addEventListener('touchend', onUp);
+
+    document.getElementById('btn-start').onclick = initGame;
+    document.getElementById('btn-submit').onclick = () => {
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST", mode: "no-cors",
+            body: JSON.stringify({ tenHS: studentName, diem: score, lop: getParam("lop")||"N/A" })
+        }).then(() => { alert("Đã nộp điểm!"); history.back(); });
+    };
+
+    window.onresize = () => { resize(); createScenery(); };
+</script>
+</body>
+</html>
