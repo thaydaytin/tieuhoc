@@ -468,14 +468,33 @@
     window.addEventListener('touchend', onUp);
 
     document.getElementById('btn-start').onclick = initGame;
-    document.getElementById('btn-submit').onclick = () => {
-        fetch(GOOGLE_SCRIPT_URL, {
-            method: "POST", mode: "no-cors",
-            body: JSON.stringify({ tenHS: studentName, diem: score, lop: getParam("lop")||"N/A" })
-        }).then(() => { alert("Đã nộp điểm!"); history.back(); });
-    };
+    document.getElementById('btn-submit').onclick = sendScoreBanChim;
 
     window.onresize = () => { resize(); createScenery(); };
+	
+	function sendScoreBanChim() {
+		const lop = getParam("lop") || "N/A";
+		const tuan = getParam("tuan") || "N/A";
+
+		fetch(GOOGLE_SCRIPT_URL, {
+			method: "POST",
+			mode: "no-cors",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				game: "BanChim",
+				tenHS: studentName,
+				diem: score,
+				lop: lop,
+				tuan: tuan,
+				thoigian: new Date().toISOString()
+			})
+		}).then(() => {
+			alert("✅ Đã nộp điểm thành công!");
+		});
+	}
+
 </script>
 </body>
 </html>
