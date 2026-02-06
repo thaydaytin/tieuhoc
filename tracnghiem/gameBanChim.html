@@ -490,10 +490,12 @@
 				tuan: tuan,
 				thoigian: new Date().toISOString()
 			})
-		}).then(() => {
-			alert("✅ Đã nộp điểm thành công!");
 		});
+
+		// 👉 Quay lại trang trước NGAY, không chờ
+		history.back();
 	}
+
 
 </script>
 </body>
