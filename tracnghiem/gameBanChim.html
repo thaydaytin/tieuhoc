@@ -107,25 +107,42 @@
 		
 		@media (max-width: 768px) {
 
-		  /* Bảng câu hỏi */
-		  #question-box {
-			  font-size: 16px;
+		  /* Toàn bộ bảng câu hỏi */
+		  #quiz-footer {
+			  max-height: 32vh;          /* chiếm tối đa ~1/3 màn hình */
 			  padding: 8px;
-			  margin: 6px;
-			  max-height: 25vh;      /* không vượt quá 1/4 màn hình */
-			  overflow-y: auto;     /* nếu dài thì cuộn */
-		  }
-
-		  #question-text {
-			  font-size: 16px;
-			  line-height: 1.3;
-		  }
-
-		  /* Nút đáp án */
-		  .answer-btn {
+			  margin: 4px;
+			  overflow-y: auto;          /* cho phép cuộn nếu dài */
 			  font-size: 14px;
-			  padding: 6px 8px;
-			  margin: 4px 0;
+		  }
+
+		  /* Nội dung câu hỏi */
+		  #question-text {
+			  font-size: 15px;
+			  line-height: 1.3;
+			  margin-bottom: 6px;
+		  }
+
+		  /* Lưới đáp án */
+		  #options-grid {
+			  display: grid;
+			  grid-template-columns: 1fr 1fr;   /* 2 đáp án / hàng */
+			  gap: 6px;
+		  }
+
+		  /* Mỗi lựa chọn */
+		  .option-tag {
+			  font-size: 13px;
+			  padding: 6px;
+			  border-radius: 8px;
+		  }
+
+		  /* Chữ A B C D */
+		  .tag-letter {
+			  width: 22px;
+			  height: 22px;
+			  font-size: 12px;
+			  line-height: 22px;
 		  }
 		}
     </style>
