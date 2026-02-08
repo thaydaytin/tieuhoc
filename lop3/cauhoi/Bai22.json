@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để tạo một thư mục mới trong phần mềm quản lý tệp, em sử dụng lệnh nào trên dải lệnh Home?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh Rename",
+      "Lệnh New folder",
+      "Lệnh Delete",
+      "Lệnh Open"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Lệnh Rename trong dải lệnh Home được dùng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Xóa thư mục",
+      "Tạo thư mục mới",
+      "Đổi tên thư mục",
+      "Mở thư mục"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để xóa một thư mục đã chọn, em có thể nhấn phím nào trên bàn phím?",
+    "Lever": 1,
+    "choices": [
+      "Phím Enter",
+      "Phím Shift",
+      "Phím Delete",
+      "Phím Ctrl"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Các lệnh New folder, Rename và Delete nằm ở dải lệnh (thẻ) nào?",
+    "Lever": 1,
+    "choices": [
+      "Dải lệnh View",
+      "Dải lệnh Home",
+      "Dải lệnh File",
+      "Dải lệnh Insert"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sau khi gõ tên cho thư mục mới tạo, em cần nhấn phím nào để hoàn tất?",
+    "Lever": 1,
+    "choices": [
+      "Phím Space",
+      "Phím Enter",
+      "Phím Esc",
+      "Phím Alt"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn tìm một tệp nằm trong thư mục 'Ảnh', thao tác đầu tiên em cần làm là gì?",
+    "Lever": 1,
+    "choices": [
+      "Xóa thư mục Ảnh",
+      "Đổi tên thư mục Ảnh",
+      "Nháy đúp chuột để mở thư mục Ảnh",
+      "Tạo một thư mục mới"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sắp xếp các bước sau theo thứ tự đúng để tạo một thư mục mới:\n1. Chọn thư mục sẽ chứa thư mục mới.\n2. Gõ tên thư mục và nhấn Enter.\n3. Nháy chuột vào lệnh New folder.",
+    "Lever": 2,
+    "choices": [
+      "1 - 2 - 3",
+      "1 - 3 - 2",
+      "3 - 1 - 2",
+      "2 - 3 - 1"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em thực hiện lệnh Delete đối với một thư mục, điều gì sẽ xảy ra?",
+    "Lever": 2,
+    "choices": [
+      "Thư mục đó sẽ được đổi tên",
+      "Thư mục đó và toàn bộ các tệp, thư mục con bên trong nó sẽ bị xóa",
+      "Thư mục đó sẽ được di chuyển sang ổ đĩa khác",
+      "Chỉ có các tệp bên trong bị xóa, còn thư mục vẫn tồn tại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao sách giáo khoa khuyên em cần kiểm tra cẩn thận trước khi quyết định xóa một thư mục?",
+    "Lever": 2,
+    "choices": [
+      "Vì xóa thư mục mất rất nhiều thời gian",
+      "Vì xóa nhầm thư mục có thể làm mất dữ liệu quan trọng hoặc làm máy tính không hoạt động được",
+      "Vì máy tính sẽ bị hỏng màn hình nếu xóa nhầm",
+      "Vì thao tác xóa rất khó thực hiện"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để đổi tên thư mục 'Giai tri' thành 'Am nhac', sau khi chọn thư mục 'Giai tri', bước tiếp theo em nên làm là gì?",
+    "Lever": 2,
+    "choices": [
+      "Chọn lệnh New folder",
+      "Chọn lệnh Delete",
+      "Chọn lệnh Rename rồi gõ tên 'Am nhac'",
+      "Nhấn phím Enter"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điểm khác biệt chính giữa việc sử dụng lệnh New folder và lệnh Rename là gì?",
+    "Lever": 2,
+    "choices": [
+      "New folder tạo thêm đối tượng mới, còn Rename thay đổi tên của đối tượng đã có",
+      "New folder dùng để xóa, còn Rename dùng để mở",
+      "New folder nằm ở dải lệnh Home, còn Rename nằm ở dải lệnh View",
+      "Không có sự khác biệt nào"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Bạn An muốn tạo một thư mục mang tên mình bên trong thư mục 'Học tập' ở ổ đĩa D. Em hãy giúp An xác định bước đầu tiên phải làm?",
+    "Lever": 3,
+    "choices": [
+      "Nhấn lệnh New folder ngay khi vừa mở máy tính",
+      "Mở ổ đĩa D, sau đó mở thư mục 'Học tập'",
+      "Gõ tên 'An' vào ô tìm kiếm",
+      "Xóa thư mục 'Học tập' để tạo lại từ đầu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong thư mục 'Lớp 3' có thư mục 'Tổ 1'. Em phát hiện tên bị gõ sai thành 'To 1' (không dấu). Em sẽ thực hiện thao tác nào để sửa lỗi này nhanh nhất?",
+    "Lever": 3,
+    "choices": [
+      "Xóa thư mục 'To 1' và tạo lại thư mục mới tên là 'Tổ 1'",
+      "Chọn thư mục 'To 1', chọn lệnh Rename, gõ lại thành 'Tổ 1' rồi nhấn Enter",
+      "Tạo một thư mục mới tên là 'Tổ 1' nằm cạnh thư mục 'To 1'",
+      "Nháy đúp chuột vào thư mục 'To 1'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quan sát sơ đồ cây thư mục: D: -> Giai tri -> Bai hat. Nếu em thực hiện lệnh Delete đối với thư mục 'Giai tri', sơ đồ cây thư mục sẽ thay đổi như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ còn lại ổ đĩa D: và thư mục Bai hat",
+      "Thư mục Bai hat sẽ nhảy ra ngoài ổ đĩa D:",
+      "Cả thư mục 'Giai tri' và thư mục con 'Bai hat' đều biến mất khỏi ổ đĩa D:",
+      "Tên thư mục 'Giai tri' sẽ biến thành một khoảng trống"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để chuyển đổi cây thư mục từ trạng thái 'D: -> Giai tri' sang 'D: -> Am nhac' (như Hình 1 và 2 trang 45), em cần sử dụng lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh New folder",
+      "Lệnh Delete",
+      "Lệnh Rename",
+      "Lệnh Open"
+    ],
+    "answer": 2
   }
 ]

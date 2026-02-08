@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Trong Scratch, mỗi hình ảnh là một thể hiện của nhân vật được gọi là gì?",
+    "Lever": 1,
+    "choices": [
+      "Một phông nền",
+      "Một trang phục",
+      "Một biến số",
+      "Một lệnh điều khiển"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Nhóm lệnh nào chứa các lệnh dùng để thay đổi trang phục của nhân vật?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Sự kiện",
+      "Nhóm lệnh Hiển thị",
+      "Nhóm lệnh Âm thanh"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để thay đổi trang phục của nhân vật sang một trang phục cụ thể theo tên, em dùng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh trang phục kế tiếp",
+      "Lệnh chuyển sang trang phục ...",
+      "Lệnh đổi kích thước một lượng",
+      "Lệnh hiển thị"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'trang phục kế tiếp' có ý nghĩa gì?",
+    "Lever": 1,
+    "choices": [
+      "Thay đổi trang phục của nhân vật sang trang phục tiếp theo trong danh sách",
+      "Xóa trang phục hiện tại của nhân vật",
+      "Tạo một trang phục mới cho nhân vật",
+      "Quay lại trang phục đầu tiên"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thẻ (tab) nào trong cửa sổ Scratch cho phép em xem và chỉnh sửa danh sách các hình ảnh của nhân vật?",
+    "Lever": 1,
+    "choices": [
+      "Thẻ Code",
+      "Thẻ Âm thanh",
+      "Thẻ Trang phục",
+      "Thẻ Phông nền"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nhân vật Dove (chim bồ câu) trong ví dụ của sách giáo khoa có mấy trang phục cơ bản để tạo hiệu ứng bay?",
+    "Lever": 1,
+    "choices": [
+      "1 trang phục",
+      "2 trang phục (dove-a và dove-b)",
+      "3 trang phục",
+      "4 trang phục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao cần sử dụng lệnh 'đợi ... giây' giữa các lần thay đổi trang phục khi tạo hoạt hình?",
+    "Lever": 2,
+    "choices": [
+      "Để nhân vật không bị biến mất",
+      "Để chương trình chạy nhanh hơn",
+      "Để mắt người kịp quan sát sự thay đổi, tạo cảm giác chuyển động tự nhiên",
+      "Để thay đổi màu sắc của nhân vật"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điểm khác biệt chính giữa lệnh 'chuyển sang trang phục ...' và 'trang phục kế tiếp' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh 'chuyển sang trang phục ...' cho phép chọn đích danh tên trang phục, còn 'trang phục kế tiếp' thay đổi theo thứ tự",
+      "Lệnh 'trang phục kế tiếp' chỉ dùng được cho nhân vật mèo",
+      "Lệnh 'chuyển sang trang phục ...' nằm trong nhóm lệnh Chuyển động",
+      "Không có sự khác biệt nào"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tạo hiệu ứng một con vật đang bước đi liên tục, em nên đặt lệnh 'trang phục kế tiếp' vào bên trong cấu trúc lệnh nào?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh nếu ... thì",
+      "Lệnh lặp (ví dụ: liên tục hoặc lặp lại ... lần)",
+      "Lệnh đợi 1 giây",
+      "Lệnh khi bấm vào nhân vật này"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu một nhân vật có 3 trang phục được đánh số 1, 2, 3. Nếu đang ở trang phục số 3, em thực hiện lệnh 'trang phục kế tiếp' thì nhân vật sẽ chuyển sang trang phục nào?",
+    "Lever": 2,
+    "choices": [
+      "Vẫn ở trang phục số 3",
+      "Biến mất",
+      "Quay lại trang phục số 1",
+      "Trang phục số 2"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong bài thực hành thay đổi trang phục quần áo (trang 55), lệnh 'đi tới lớp phía trên cùng' có tác dụng gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm nhân vật to lên",
+      "Làm nhân vật hiện lên phía trên (đè lên) các nhân vật khác",
+      "Làm nhân vật di chuyển lên cạnh trên sân khấu",
+      "Thay đổi màu sắc trang phục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em muốn tạo chương trình mô tả đèn giao thông chuyển từ Đỏ sang Xanh. Theo bài học, cách làm nào là hợp lý nhất?",
+    "Lever": 3,
+    "choices": [
+      "Dùng 1 trang phục và dùng lệnh đổi màu liên tục",
+      "Tạo 2 trang phục tên là 'Đỏ' và 'Xanh', dùng lệnh 'chuyển sang trang phục' tương ứng kèm lệnh đợi",
+      "Chỉ dùng lệnh di chuyển nhân vật",
+      "Dùng lệnh in hình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An tạo chương trình cho chim bay nhưng chim đập cánh quá nhanh khiến em không nhìn rõ. Em hãy giúp An sửa lỗi này?",
+    "Lever": 3,
+    "choices": [
+      "Xóa bớt trang phục của chim",
+      "Thay lệnh 'trang phục kế tiếp' bằng lệnh 'di chuyển'",
+      "Tăng thời gian ở lệnh 'đợi ... giây' giữa các lần đổi trang phục",
+      "Thay đổi phông nền sân khấu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Dựa trên kịch bản 'Gấu bước đi' (trang 54), nếu em muốn con gấu đi hết sân khấu rồi mới dừng lại, em cần kết hợp những lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Liên tục (Di chuyển + Trang phục kế tiếp + Đợi)",
+      "Chỉ cần lệnh di chuyển 1000 bước",
+      "Khi bấm vào lá cờ xanh + Trang phục kế tiếp",
+      "Đặt màu bút + Di chuyển"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong bài thực hành 'Cá biến hình' (trang 56), để nhân vật Vũ công thực hiện động tác múa liên tục 3 lần rồi quay về trạng thái cũ, em cần thực hiện trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Lặp lại 3 lần (trang phục kế tiếp + đợi) -> chuyển sang trang phục ban đầu",
+      "Chỉ cần dùng lệnh liên tục",
+      "Xoá tất cả -> Đặt bút -> Di chuyển",
+      "Chuyển sang trang phục kế tiếp 3 lần không cần đợi"
+    ],
+    "answer": 0
   }
 ]
