@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Trong Scratch, để đưa một nhân vật hiện lên phía trên cùng, đè lên các nhân vật khác, em dùng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh đi tới lớp phía sau cùng",
+      "Lệnh đi tới lớp phía trên cùng",
+      "Lệnh trang phục kế tiếp",
+      "Lệnh chuyển sang trang phục"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Nhóm lệnh nào chứa các lệnh dùng để thay đổi trang phục và lớp hiển thị của nhân vật?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Hiển thị",
+      "Nhóm lệnh Sự kiện",
+      "Nhóm lệnh Điều khiển"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật hiển thị một bóng nói trong một khoảng thời gian nhất định, em sử dụng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh đợi ... giây",
+      "Lệnh hiển thị",
+      "Lệnh nói ... trong ... giây",
+      "Lệnh trang phục kế tiếp"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh 'trang phục kế tiếp' có tác dụng gì đối với nhân vật?",
+    "Lever": 1,
+    "choices": [
+      "Thay đổi sang trang phục tiếp theo trong danh sách của nhân vật",
+      "Xóa trang phục hiện tại",
+      "Tạo một trang phục mới",
+      "Quay lại trang phục đầu tiên ngay lập tức"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong bài thực hành thay đổi trang phục quần áo (Hình 2 trang 55), lệnh nào giúp nhân vật Váy hiển thị bao quanh nhân vật Bé gái?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh ẩn",
+      "Lệnh trang phục kế tiếp",
+      "Lệnh đi tới lớp phía trên cùng",
+      "Lệnh nhấc bút"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để thay đổi trang phục của nhân vật sang một trang phục cụ thể theo tên (ví dụ: Glow-1), em dùng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh trang phục kế tiếp",
+      "Lệnh chuyển sang trang phục ...",
+      "Lệnh đặt hiệu ứng màu",
+      "Lệnh hiển thị"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao trong chương trình tạo hoạt hình, chúng ta thường đặt lệnh 'đợi ... giây' xen kẽ giữa các lệnh thay đổi trang phục?",
+    "Lever": 2,
+    "choices": [
+      "Để tiết kiệm bộ nhớ máy tính",
+      "Để chương trình chạy nhanh hơn",
+      "Để người xem có thể quan sát rõ sự thay đổi hình ảnh của nhân vật",
+      "Để nhân vật không bị biến mất"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu một nhân vật có 4 trang phục. Khi đang ở trang phục thứ tư, nếu thực hiện lệnh 'trang phục kế tiếp', nhân vật sẽ hiển thị trang phục nào?",
+    "Lever": 2,
+    "choices": [
+      "Trang phục thứ ba",
+      "Trang phục thứ nhất",
+      "Nhân vật sẽ bị ẩn đi",
+      "Vẫn giữ nguyên trang phục thứ tư"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt chính giữa lệnh 'chuyển sang trang phục' và lệnh 'trang phục kế tiếp' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh 'chuyển sang trang phục' cho phép chọn chính xác tên trang phục, còn 'trang phục kế tiếp' thay đổi theo thứ tự",
+      "Lệnh 'trang phục kế tiếp' chỉ dùng được cho nhân vật mèo",
+      "Lệnh 'chuyển sang trang phục' làm nhân vật di chuyển",
+      "Không có sự khác biệt nào"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong kịch bản 'Giới thiệu động tác múa' (trang 56), mục đích của việc lặp lại thay đổi trang phục 3 lần là gì?",
+    "Lever": 2,
+    "choices": [
+      "Để thay đổi màu sắc sân khấu",
+      "Để tạo ra hiệu ứng nhân vật đang thực hiện các động tác múa liên tục",
+      "Để nhân vật nói lời chào",
+      "Để xóa các nét vẽ cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quan sát Hình 1 trang 55, nếu nhân vật Váy ở lớp 'phía sau cùng' so với nhân vật Bé gái, điều gì sẽ xảy ra?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật Váy sẽ bị nhân vật Bé gái che khuất",
+      "Nhân vật Váy sẽ hiển thị đè lên nhân vật Bé gái",
+      "Cả hai nhân vật đều biến mất",
+      "Màu sắc của Váy sẽ bị thay đổi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em muốn tạo chương trình mô phỏng một chiếc đồng hồ đếm ngược từ 3 về 1. Theo em, trình tự khối lệnh nào sau đây là hợp lý nhất?",
+    "Lever": 3,
+    "choices": [
+      "Chuyển sang trang phục '3' -> đợi 1 giây -> Chuyển sang trang phục '2' -> đợi 1 giây -> Chuyển sang trang phục '1'",
+      "Chuyển sang trang phục '3' -> Chuyển sang trang phục '2' -> Chuyển sang trang phục '1'",
+      "Trang phục kế tiếp -> Đợi 1 giây -> Trang phục kế tiếp",
+      "Lặp lại liên tục lệnh trang phục kế tiếp"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi chạy chương trình hoạt hình, nếu nhân vật thay đổi hình dáng quá nhanh khiến em không nhìn rõ các động tác, em cần sửa lỗi như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Xóa bớt trang phục của nhân vật",
+      "Tăng giá trị thời gian trong lệnh 'đợi ... giây' nằm giữa các lệnh đổi trang phục",
+      "Sử dụng thêm lệnh 'đi tới vị trí ngẫu nhiên'",
+      "Thay đổi phông nền sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tạo hoạt hình cho nhân vật Ben thực hiện các động tác thể dục theo thứ tự các trang phục ben-c, ben-b, ben-d (Hình 9 trang 57), em cần thực hiện điều gì?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ cần sử dụng lệnh liên tục",
+      "Lắp ghép các lệnh 'chuyển sang trang phục' theo đúng tên và xen kẽ lệnh 'đợi ... giây'",
+      "Sử dụng lệnh đặt bút trước khi di chuyển",
+      "Sử dụng lệnh di chuyển 10 bước"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong bài thực hành 'Cá biến hình', để sân khấu đổi sang màu khác trong một khoảnh khắc rồi quay về màu cũ, em nên phối hợp các lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Đặt hiệu ứng màu -> Đợi ... giây -> Bỏ các hiệu ứng đồ họa",
+      "Trang phục kế tiếp -> Đợi ... giây -> Trang phục kế tiếp",
+      "Đi tới lớp phía trên cùng -> Đi tới lớp phía sau cùng",
+      "Xóa tất cả -> Đặt bút"
+    ],
+    "answer": 0
   }
 ]

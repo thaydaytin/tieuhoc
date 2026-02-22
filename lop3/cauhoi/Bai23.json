@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Thông tin cá nhân và các thành viên trong gia đình có tính chất gì?",
+    "Lever": 1,
+    "choices": [
+      "Công khai cho mọi người biết",
+      "Tính chất riêng tư",
+      "Không quan trọng",
+      "Ai cũng có quyền xem"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo sách giáo khoa, đâu là một ví dụ về thông tin cá nhân?",
+    "Lever": 1,
+    "choices": [
+      "Số điện thoại của bố mẹ",
+      "Tên của một ngôi trường bất kỳ",
+      "Dự báo thời tiết",
+      "Danh sách các loại máy tính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thiết bị nào giúp mọi người trong gia đình có thể lưu trữ và gửi thông tin cho nhau?",
+    "Lever": 1,
+    "choices": [
+      "Bàn phím",
+      "Máy tính",
+      "Chuột máy tính",
+      "Màn hình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kẻ xấu có thể sử dụng thông tin cá nhân của em để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Để giúp đỡ gia đình em",
+      "Để kết bạn",
+      "Để lừa đảo người thân của em",
+      "Để gửi quà tặng miễn phí"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Khi sử dụng Internet, một người có thể vô tình làm lộ điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Màn hình nền máy tính",
+      "Thông tin cá nhân",
+      "Tốc độ mạng",
+      "Cách cầm chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Ví dụ nào sau đây là thông tin gia đình có thể được lưu trữ nhờ máy tính?",
+    "Lever": 1,
+    "choices": [
+      "Ảnh kỉ niệm và video về sự kiện gia đình",
+      "Tên của các bạn cùng khối",
+      "Thời khóa biểu của lớp khác",
+      "Địa chỉ một cửa hàng đồ chơi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao em cần có ý thức bảo vệ thông tin cá nhân khi giao tiếp qua máy tính?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính chạy nhanh hơn",
+      "Để kẻ xấu không thể lợi dụng thông tin gây hại cho em và gia đình",
+      "Để bạn bè không biết tên mình",
+      "Để tiết kiệm điện khi dùng máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin đăng nhập vào mạng xã hội (Facebook, Zalo) bị lộ sẽ dẫn đến hậu quả gì?",
+    "Lever": 2,
+    "choices": [
+      "Máy tính bị hỏng màn hình",
+      "Tài khoản bị kẻ xấu chiếm đoạt để đi lừa đảo",
+      "Em sẽ có nhiều bạn hơn",
+      "Không có hậu quả gì"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mối quan hệ giữa máy tính và thông tin cá nhân là gì?",
+    "Lever": 2,
+    "choices": [
+      "Máy tính không thể lưu trữ thông tin cá nhân",
+      "Máy tính chỉ dùng để chơi trò chơi",
+      "Máy tính giúp lưu trữ, trao đổi nhưng cũng có nguy cơ làm lộ thông tin",
+      "Máy tính tự động bảo mật mọi thông tin mà không cần con người"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Việc gửi ảnh kỉ niệm của gia đình qua máy tính cho người thân được coi là gì?",
+    "Lever": 2,
+    "choices": [
+      "Lưu trữ và trao đổi thông tin nhờ máy tính",
+      "Làm lộ bí mật quốc gia",
+      "Hành động vi phạm pháp luật",
+      "Làm hỏng dữ liệu máy tính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Kẻ xấu thường lấy cắp thông tin cá nhân của người khác ở đâu?",
+    "Lever": 2,
+    "choices": [
+      "Trong sách giáo khoa",
+      "Trên Internet",
+      "Ở loa máy tính",
+      "Ở nút nguồn thân máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Một người lạ trên mạng hỏi địa chỉ nhà và số điện thoại của em để gửi quà. Em nên làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Cung cấp ngay để được nhận quà",
+      "Hỏi ý kiến bạn bè cùng lớp",
+      "Từ chối cung cấp và báo ngay cho bố mẹ hoặc thầy cô",
+      "Cung cấp địa chỉ nhà hàng xóm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để bảo vệ thông tin cá nhân khi sử dụng máy tính ở trường, em nên làm gì sau khi đăng nhập tài khoản học tập?",
+    "Lever": 3,
+    "choices": [
+      "Cứ để vậy và đi về",
+      "Đăng xuất tài khoản sau khi đã sử dụng xong",
+      "Cho bạn bên cạnh biết mật khẩu",
+      "Lưu mật khẩu trên trình duyệt của máy tính ở trường"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thấy bạn mình đăng ảnh chụp thẻ học sinh có đầy đủ thông tin cá nhân lên mạng, em sẽ khuyên bạn như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Khen ảnh đẹp và chia sẻ lại",
+      "Khuyên bạn nên gỡ ảnh đó xuống để tránh bị kẻ xấu lợi dụng thông tin",
+      "Không quan tâm vì đó là việc của bạn",
+      "Bảo bạn đăng thêm ảnh địa chỉ nhà cho đủ bộ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thói quen nào sau đây giúp em bảo vệ thông tin cá nhân tốt nhất?",
+    "Lever": 3,
+    "choices": [
+      "Đặt mật khẩu dễ đoán như 123456",
+      "Không tùy tiện cung cấp thông tin riêng tư cho người lạ trên môi trường số",
+      "Lưu tất cả mật khẩu vào một tệp văn bản công khai",
+      "Gửi thông tin tài khoản cho bất cứ ai yêu cầu"
+    ],
     "answer": 1
   }
 ]

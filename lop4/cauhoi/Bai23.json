@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để chọn một khối văn bản bằng chuột, em thực hiện thao tác nào?",
+    "Lever": 1,
+    "choices": [
+      "Nháy đúp chuột vào giữa khối văn bản",
+      "Di chuyển chuột đến vị trí đầu, kéo thả chuột đến vị trí cuối khối văn bản",
+      "Nhấn phím Enter",
+      "Nháy chuột phải vào văn bản"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Để xóa một khối văn bản đã được chọn, em sử dụng phím nào trên bàn phím?",
+    "Lever": 1,
+    "choices": [
+      "Phím Shift",
+      "Phím Delete hoặc Backspace",
+      "Phím Caps Lock",
+      "Phím Ctrl"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong phần mềm soạn thảo, khối văn bản được chọn thường hiển thị như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Chữ được in đậm và gạch chân",
+      "Chữ chuyển sang màu đỏ",
+      "Nền chữ bị đánh dấu bằng màu xám hoặc xanh",
+      "Chữ bị mất đi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Các lệnh Cut, Copy, Paste nằm ở dải lệnh (thẻ) nào trong cửa sổ Word?",
+    "Lever": 1,
+    "choices": [
+      "Dải lệnh Insert",
+      "Dải lệnh View",
+      "Dải lệnh Home",
+      "Dải lệnh File"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh nào được dùng để 'cắt' khối văn bản ra khỏi vị trí cũ?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh Copy",
+      "Lệnh Paste",
+      "Lệnh Cut",
+      "Lệnh Rename"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh Paste trong dải lệnh Home có tác dụng gì?",
+    "Lever": 1,
+    "choices": [
+      "Để xóa khối văn bản",
+      "Để sao chép khối văn bản",
+      "Để dán khối văn bản vào vị trí con trỏ soạn thảo",
+      "Để chọn toàn bộ văn bản"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác di chuyển khối văn bản từ vị trí này sang vị trí khác gồm sự kết hợp của hai lệnh nào?",
+    "Lever": 2,
+    "choices": [
+      "Copy và Paste",
+      "Cut và Paste",
+      "Cut và Copy",
+      "Select và Delete"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chọn một khối văn bản bằng bàn phím, em đặt con trỏ ở đầu khối rồi nhấn giữ phím nào kết hợp phím mũi tên?",
+    "Lever": 2,
+    "choices": [
+      "Phím Ctrl",
+      "Phím Alt",
+      "Phím Shift",
+      "Phím Enter"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt chính giữa thao tác Sao chép (Copy) và Di chuyển (Cut) là gì?",
+    "Lever": 2,
+    "choices": [
+      "Copy làm mất bản gốc, Cut giữ lại bản gốc",
+      "Copy giữ lại bản gốc ở vị trí cũ, Cut loại bỏ bản gốc ở vị trí cũ",
+      "Copy dùng lệnh Paste, Cut không dùng lệnh Paste",
+      "Cả hai thao tác đều giống hệt nhau"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em thực hiện lệnh Copy, khối văn bản đang được lưu ở đâu để chờ dán vào vị trí mới?",
+    "Lever": 2,
+    "choices": [
+      "Trong ổ đĩa C",
+      "Trong thùng rác (Recycle Bin)",
+      "Trong bộ nhớ tạm (Clipboard)",
+      "Trên màn hình nền"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi thực hiện Sao chép (Copy) và Dán (Paste), khối văn bản đó sẽ xuất hiện ở bao nhiêu nơi?",
+    "Lever": 2,
+    "choices": [
+      "Chỉ xuất hiện ở nơi mới",
+      "Chỉ xuất hiện ở nơi cũ",
+      "Xuất hiện ở cả hai nơi (nơi cũ và nơi mới)",
+      "Biến mất hoàn toàn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bạn Nam đang soạn bài thơ có đoạn điệp khúc lặp lại 3 lần. Để hoàn thành nhanh nhất, Nam nên sử dụng thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Gõ lại từng câu cho nhớ bài",
+      "Dùng lệnh Cut và Paste",
+      "Chọn đoạn điệp khúc, dùng lệnh Copy rồi Paste vào các vị trí cần thiết",
+      "Xóa đoạn đã gõ để gõ lại từ đầu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bạn An gõ nhầm câu thơ thứ tư lên trước câu thơ thứ ba. Để sửa lỗi này theo cách nhanh nhất, An nên thực hiện trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Chọn câu thứ tư -> Nháy Cut -> Đặt con trỏ sau câu thứ ba -> Nháy Paste",
+      "Xóa toàn bộ bài rồi gõ lại",
+      "Chọn câu thứ tư -> Nháy Copy -> Đặt con trỏ sau câu thứ ba -> Nháy Paste",
+      "Dùng phím Space để đẩy câu thơ xuống"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi muốn loại bỏ hoàn toàn một đoạn văn bản dư thừa mà không cần dán nó vào chỗ khác, em thực hiện thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Chọn đoạn văn bản và nhấn lệnh Copy",
+      "Chọn đoạn văn bản và nhấn phím Delete",
+      "Dùng lệnh Cut rồi không Paste nữa",
+      "Gõ đè đoạn văn bản mới lên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chèn khối văn bản đã được Copy vào một vị trí hoàn toàn mới trong văn bản, bước quan trọng nhất trước khi nhấn lệnh Paste là gì?",
+    "Lever": 3,
+    "choices": [
+      "Phải xóa khối văn bản ở vị trí cũ",
+      "Phải lưu văn bản trước",
+      "Phải di chuyển con trỏ soạn thảo đến đúng vị trí muốn dán",
+      "Phải tắt phần mềm Word rồi mở lại"
+    ],
+    "answer": 2
   }
 ]
