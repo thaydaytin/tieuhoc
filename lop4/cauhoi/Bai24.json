@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Phần mềm soạn thảo văn bản Word KHÔNG giúp em làm được việc nào sau đây?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Tạo và lưu tệp văn bản",
+      "Chèn hình ảnh vào văn bản",
+      "Chuyển đổi văn bản tiếng Việt sang tiếng Anh tự động",
+      "Thay đổi kích thước và vị trí của ảnh"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để sao chép một cụm từ lặp lại nhiều lần trong bài 'Khi mẹ vắng nhà', em sử dụng cặp lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Cut và Paste",
+      "Copy và Paste",
+      "New và Save",
+      "Open và Close"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh nào dùng để lưu tệp văn bản đang soạn thảo với một tên mới?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Save",
+      "Save As",
+      "Open",
+      "New"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chèn hình ảnh minh họa từ máy tính vào bài soạn thảo, em chọn dải lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Dải lệnh Home",
+      "Dải lệnh View",
+      "Dải lệnh Insert",
+      "Dải lệnh Design"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong khi thực hành, để xóa một khối văn bản đã chọn, em sử dụng phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Phím Shift",
+      "Phím Delete",
+      "Phím Enter",
+      "Phím Ctrl"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo quy tắc gõ Telex, để gõ được chữ 'ă' trong từ 'vắng', em gõ phím nào sau chữ 'a'?",
+    "Lever": 1,
+    "choices": [
+      "Phím w",
+      "Phím a",
+      "Phím s",
+      "Phím f"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi thực hiện thao tác 'Di chuyển' một câu văn, câu văn đó sẽ như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Xuất hiện ở cả vị trí cũ và vị trí mới",
+      "Biến mất ở vị trí cũ và chỉ xuất hiện ở vị trí mới",
+      "Bị xóa vĩnh viễn khỏi văn bản",
+      "Chỉ thay đổi màu sắc của chữ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mục đích của việc sử dụng lệnh 'Wrap Text' rồi chọn 'Square' cho ảnh là gì?",
+    "Lever": 2,
+    "choices": [
+      "Để làm ảnh đẹp hơn",
+      "Để ảnh có thể di chuyển tự do và chữ bao quanh hình ảnh",
+      "Để xóa ảnh nhanh hơn",
+      "Để thay đổi độ sáng của ảnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao khi thay đổi kích thước ảnh, em nên kéo thả các điểm mốc ở góc ảnh?",
+    "Lever": 2,
+    "choices": [
+      "Để ảnh không bị mất nét",
+      "Để thay đổi cả chiều rộng và chiều cao đồng thời, giúp ảnh không bị méo",
+      "Để xoay ảnh theo ý muốn",
+      "Để ảnh tự động nhảy sang trang mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để mở tệp văn bản 'Khi me vang nha' đã lưu trước đó để chỉnh sửa, trình tự đúng là:",
+    "Lever": 2,
+    "choices": [
+      "File -> New -> Chọn tệp",
+      "File -> Save -> Gõ tên tệp",
+      "File -> Open -> Browse -> Chọn tệp -> Open",
+      "Insert -> Pictures -> Chọn tệp"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt khi em dùng lệnh 'Copy' so với lệnh 'Cut' trước khi 'Paste' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Copy giữ lại bản gốc, Cut xóa bản gốc ở vị trí cũ",
+      "Copy làm văn bản dài hơn, Cut làm văn bản ngắn đi",
+      "Copy chỉ dùng cho ảnh, Cut chỉ dùng cho chữ",
+      "Không có sự khác biệt nào"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong bài thực hành số 1 (trang 46), sau khi gõ xong câu 'Khi mẹ vắng nhà', làm sao để có thêm 4 cụm từ giống hệt ở các dòng dưới mà không cần gõ lại?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng lệnh Save As",
+      "Chọn cụm từ đó, dùng lệnh Copy rồi nhấn Paste ở các dòng tiếp theo",
+      "Sử dụng lệnh Cut và Paste",
+      "Nhấn phím Enter thật nhiều lần"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để biến tệp 'Khi me vang nha' thành tệp 'Văn bản sửa' mà vẫn giữ nguyên tệp gốc ban đầu, em cần làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Mở tệp gốc, sửa nội dung rồi chọn lệnh Save As với tên 'Văn bản sửa'",
+      "Mở tệp gốc, sửa nội dung rồi chọn lệnh Save",
+      "Xóa tệp gốc và tạo tệp mới tên 'Văn bản sửa'",
+      "Đổi tên tệp gốc trực tiếp trên màn hình nền"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em muốn chèn ảnh một chú gấu trúc từ Internet vào bài viết của mình nhưng máy tính không có sẵn ảnh. Em sẽ sử dụng công cụ nào theo bài đọc thêm?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh Pictures",
+      "Lệnh Shapes",
+      "Lệnh Online Pictures, gõ từ khóa 'gấu trúc' rồi chọn Insert",
+      "Chụp ảnh màn hình rồi dán vào"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để thực hiện yêu cầu 'Di chuyển câu thơ thứ hai xuống dưới câu thơ thứ nhất' trong bài 'Văn bản sửa', em thực hiện trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Chọn câu thứ hai -> Cut -> Đặt con trỏ dưới câu thứ nhất -> Paste",
+      "Chọn câu thứ hai -> Copy -> Paste vào cuối bài",
+      "Xóa câu thứ hai rồi gõ lại ở dưới",
+      "Chọn cả hai câu rồi nhấn phím Delete"
     ],
     "answer": 0
   }

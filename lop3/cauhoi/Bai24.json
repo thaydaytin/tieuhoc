@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Phần mềm nào sau đây là phần mềm trình chiếu được giới thiệu trong bài học?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Microsoft Word",
+      "Microsoft PowerPoint",
+      "Mouse Skills",
+      "RapidTyping"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Biểu tượng của phần mềm trình chiếu PowerPoint có đặc điểm gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Hình chữ W màu xanh dương",
+      "Hình chữ P trắng trên nền màu đỏ cam",
+      "Hình một chú chuột máy tính",
+      "Hình một thư mục màu vàng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để kích hoạt phần mềm trình chiếu PowerPoint trên màn hình nền, em thực hiện thao tác nào?",
+    "Lever": 1,
+    "choices": [
+      "Nháy chuột vào biểu tượng",
+      "Nháy chuột phải vào biểu tượng",
+      "Nháy đúp chuột vào biểu tượng",
+      "Kéo thả biểu tượng vào thùng rác"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để lưu bài trình chiếu lần đầu tiên, em chọn lệnh nào trong bảng chọn File?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh New",
+      "Lệnh Open",
+      "Lệnh Save",
+      "Lệnh Close"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh New Slide dùng để thực hiện công việc gì?",
+    "Lever": 1,
+    "choices": [
+      "Tạo một tệp trình chiếu mới hoàn toàn",
+      "Xóa trang trình chiếu hiện tại",
+      "Tạo thêm một trang trình chiếu mới trong tệp đang mở",
+      "Thay đổi màu sắc của trang trình chiếu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để bắt đầu tạo một tệp trình chiếu mới hoàn toàn, sau khi chọn File -> New, em chọn tiếp mục nào?",
+    "Lever": 1,
+    "choices": [
+      "Blank Presentation",
+      "Recent",
+      "Open",
+      "Save As"
     ],
     "answer": 0
+  },
+  {
+    "question": "Lệnh New Slide (tạo trang mới) nằm ở dải lệnh (thẻ) nào trên thanh công cụ?",
+    "Lever": 2,
+    "choices": [
+      "Dải lệnh File",
+      "Dải lệnh Home",
+      "Dải lệnh Insert",
+      "Dải lệnh Design"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trình tự đúng để lưu một bài trình chiếu là gì?",
+    "Lever": 2,
+    "choices": [
+      "Chọn File -> Gõ tên tệp -> Chọn Save -> Chọn lệnh Save",
+      "Chọn File -> Chọn lệnh Save -> Gõ tên cho tệp trình chiếu -> Chọn Save",
+      "Gõ tên tệp -> Chọn File -> Chọn lệnh New",
+      "Chọn nút đóng (x) -> Gõ tên tệp -> Chọn Save"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để gõ tiêu đề cho trang trình chiếu đầu tiên, em cần nháy chuột vào dòng chữ nào trên màn hình?",
+    "Lever": 2,
+    "choices": [
+      "Click to add title",
+      "New Slide",
+      "Blank Presentation",
+      "File Name"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sự khác biệt giữa lệnh New và lệnh New Slide là gì?",
+    "Lever": 2,
+    "choices": [
+      "New dùng để lưu, New Slide dùng để mở",
+      "New tạo ra một tệp trình chiếu mới, New Slide tạo thêm một trang mới trong tệp hiện có",
+      "Cả hai lệnh này đều có chức năng giống hệt nhau",
+      "New nằm ở dải lệnh Home, New Slide nằm ở bảng chọn File"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao khi đang soạn thảo bài trình chiếu, chúng ta nên thỉnh thoảng nhấn lệnh Save?",
+    "Lever": 2,
+    "choices": [
+      "Để bài trình chiếu trông đẹp hơn",
+      "Để máy tính chạy nhanh hơn",
+      "Để lưu lại kết quả đã làm, tránh mất dữ liệu nếu máy tính bị tắt đột ngột",
+      "Để tự động thêm trang mới"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Bạn Duy Khoa muốn giới thiệu về bản thân mình trước lớp một cách sinh động trên màn hình máy tính. Theo em, Duy Khoa nên sử dụng phần mềm nào để hiệu quả nhất?",
+    "Lever": 3,
+    "choices": [
+      "Phần mềm soạn thảo văn bản Word",
+      "Phần mềm trình chiếu PowerPoint",
+      "Phần mềm luyện tập chuột Mouse Skills",
+      "Phần mềm luyện gõ bàn phím RapidTyping"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em đang ở trang số 1 của bài trình chiếu và muốn tạo thêm trang số 2 để gõ nội dung tiếp theo, em sẽ thực hiện thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Vào bảng chọn File và nhấn New",
+      "Nháy chuột vào lệnh New Slide trên dải lệnh Home",
+      "Nháy đúp chuột vào biểu tượng chữ P trên màn hình nền",
+      "Nhấn phím Enter nhiều lần trên trang số 1"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn Lan Anh muốn tạo một bài trình chiếu giới thiệu về gia đình gồm 2 trang. Em hãy giúp Lan Anh xác định các bước cơ bản cần thực hiện theo đúng bài học?",
+    "Lever": 3,
+    "choices": [
+      "Kích hoạt PowerPoint -> Tạo trang 1 -> Dùng New Slide tạo trang 2 -> Lưu tệp",
+      "Kích hoạt PowerPoint -> Lưu tệp -> Nhấn nút đóng (x)",
+      "Mở tệp đã có -> Thay đổi nội dung -> Chọn New",
+      "Kích hoạt PowerPoint -> Gõ nội dung vào trang 1 -> Chọn New"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi em thực hiện thao tác lưu bài với tên 'Lam quen', tên này sẽ được hiển thị ở đâu sau khi lưu thành công?",
+    "Lever": 3,
+    "choices": [
+      "Trên biểu tượng của phần mềm PowerPoint",
+      "Trong nội dung của trang trình chiếu",
+      "Tại ô 'File name' trong hộp thoại Save As và phía trên cùng cửa sổ phần mềm",
+      "Trên bàn phím máy tính"
+    ],
+    "answer": 2
   }
 ]

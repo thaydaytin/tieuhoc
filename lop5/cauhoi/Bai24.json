@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Cấu trúc tuần tự được dùng để biểu thị điều gì trong một công việc?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Biểu thị việc lựa chọn giữa hai công việc",
+      "Biểu thị thứ tự các bước của công việc",
+      "Biểu thị việc lặp lại một hành động nhiều lần",
+      "Biểu thị việc dừng lại không làm gì cả"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trong cấu trúc tuần tự, mỗi bước được thực hiện khi nào?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Thực hiện bất cứ lúc nào tùy thích",
+      "Thực hiện trước khi bước trước đó hoàn thành",
+      "Thực hiện sau khi bước trước đó đã được hoàn thành",
+      "Thực hiện cùng một lúc với tất cả các bước"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Đặc điểm quan trọng nhất của cấu trúc tuần tự là gì?",
+    "Lever": 1,
+    "choices": [
+      "Có thể bỏ qua một vài bước cho nhanh",
+      "Thực hiện theo đúng thứ tự và không bỏ qua bước nào",
+      "Luôn luôn phải có lệnh lặp lại",
+      "Các lệnh phải có màu sắc giống nhau"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, một chương trình có cấu trúc tuần tự khi các lệnh được ghép như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Ghép tách rời nhau trên vùng lập trình",
+      "Ghép lồng vào bên trong lệnh 'nếu... thì'",
+      "Ghép liên tiếp với nhau từ trên xuống dưới",
+      "Ghép vòng tròn với nhau"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo bảng giải thích thuật ngữ, cấu trúc tuần tự là gì?",
+    "Lever": 1,
+    "choices": [
+      "Cấu trúc có các công việc thực hiện theo đúng thứ tự mà chúng được chỉ ra",
+      "Cấu trúc có các công việc được thực hiện lặp lại nhiều lần",
+      "Cấu trúc có công việc thực hiện hay không tùy thuộc vào giá trị điều kiện",
+      "Cấu trúc giúp máy tính chạy nhanh hơn"
     ],
     "answer": 0
+  },
+  {
+    "question": "Khi chạy một khối lệnh tuần tự trong Scratch, các lệnh sẽ được thực hiện theo trình tự nào?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện từ dưới lên trên",
+      "Thực hiện từ lệnh ở giữa trước",
+      "Thực hiện lần lượt từ trên xuống dưới",
+      "Thực hiện ngẫu nhiên không theo thứ tự"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Quan sát Hình 5 trang 59, tại sao hai khối lệnh A và B đều có các lệnh giống nhau nhưng khi thực hiện lại cho kết quả khác nhau?",
+    "Lever": 2,
+    "choices": [
+      "Do màu sắc của các lệnh khác nhau",
+      "Do vị trí của nhân vật ban đầu khác nhau",
+      "Do thứ tự các lệnh trong khối lệnh khác nhau",
+      "Do phần mềm Scratch bị lỗi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong bài thực hành vẽ 3 con bọ (Hình 3 trang 58), lệnh ở Bước 3 được thực hiện khi nào?",
+    "Lever": 2,
+    "choices": [
+      "Trước khi thực hiện Bước 1",
+      "Sau khi đã hoàn thành Bước 2",
+      "Cùng lúc với Bước 2",
+      "Ngay sau khi nhấn lá cờ xanh mà không cần qua Bước 2"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em có một công việc gồm 3 bước: A, B, C. Để thực hiện theo cấu trúc tuần tự, trình tự nào sau đây là đúng?",
+    "Lever": 2,
+    "choices": [
+      "Thực hiện A -> C (bỏ qua B)",
+      "Thực hiện B -> A -> C",
+      "Thực hiện A -> B -> C",
+      "Thực hiện đồng thời A, B và C"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong chương trình vẽ nhân vật ở Hình 6 trang 60, việc ghép thêm các lệnh 'đặt hướng bằng' xen kẽ các lệnh 'in hình' và 'di chuyển' nhằm mục đích gì?",
+    "Lever": 2,
+    "choices": [
+      "Để làm cho nhân vật biến mất",
+      "Để nhân vật được in ra ở các hướng khác nhau theo đúng thứ tự",
+      "Để chương trình chạy chậm lại",
+      "Để nhân vật đổi sang trang phục mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'đợi 1 giây' thường được đặt xen kẽ giữa các lệnh trong cấu trúc tuần tự của chương trình hoạt hình nhằm mục đích gì?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị quá nóng",
+      "Để các lệnh thực hiện nhanh hơn",
+      "Để mắt người có thể quan sát rõ từng bước nhân vật thực hiện theo đúng thứ tự",
+      "Để xóa các nét vẽ cũ"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để mô tả công việc 'Một ngày của Minh' (trang 60), Minh nên sử dụng loại cấu trúc nào để kể lại các hoạt động từ sáng đến tối?",
+    "Lever": 3,
+    "choices": [
+      "Cấu trúc rẽ nhánh",
+      "Cấu trúc lặp",
+      "Cấu trúc tuần tự",
+      "Cấu trúc điều kiện"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em thực hiện chèn ảnh vào văn bản theo các bước: 1. Chọn Insert; 2. Chọn Pictures; 3. Chọn tệp ảnh; 4. Chọn nút Insert. Nếu em thực hiện Bước 4 trước Bước 2 thì điều gì xảy ra?",
+    "Lever": 3,
+    "choices": [
+      "Vẫn chèn được ảnh bình thường",
+      "Ảnh sẽ tự động hiện ra ở đầu trang",
+      "Không thể thực hiện được việc chèn ảnh vì sai cấu trúc tuần tự của thao tác",
+      "Máy tính sẽ tự động sửa lỗi cho em"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong chương trình 'Một ngày của Minh', Minh dùng lệnh 'Nói... trong 2 giây'. Để kể 3 việc liên tiếp, Minh cần ghép 3 lệnh này lại. Tại sao thứ tự ghép lệnh lại quan trọng?",
+    "Lever": 3,
+    "choices": [
+      "Vì nó giúp nhân vật nói nhanh hơn",
+      "Vì nếu ghép sai thứ tự, các sự việc trong ngày của Minh sẽ bị kể lộn xộn, không đúng thực tế",
+      "Vì Scratch bắt buộc phải ghép theo bảng chữ cái",
+      "Vì nếu ghép sai nhân vật sẽ không nói được"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để vẽ một đoạn thẳng sau đó mới nhấc bút để di chuyển sang chỗ khác, em cần sắp xếp các lệnh nào theo cấu trúc tuần tự?",
+    "Lever": 3,
+    "choices": [
+      "Nhấc bút -> Di chuyển -> Đặt bút",
+      "Đặt bút -> Nhấc bút -> Di chuyển",
+      "Đặt bút -> Di chuyển -> Nhấc bút",
+      "Di chuyển -> Nhấc bút -> Đặt bút"
+    ],
+    "answer": 2
   }
 ]
