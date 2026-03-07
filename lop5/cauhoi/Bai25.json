@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Cấu trúc lặp với số lần biết trước được dùng để mô tả điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Một công việc chỉ thực hiện đúng một lần",
+      "Một công việc không bao giờ thực hiện",
+      "Một công việc được lặp lại với một số lần cho trước",
+      "Một công việc thực hiện hay không tùy vào điều kiện"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Trong Scratch, lệnh nào thể hiện cấu trúc lặp với số lần biết trước?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh di chuyển ... bước",
+      "Lệnh nếu ... thì",
+      "Lệnh lặp lại ...",
+      "Lệnh liên tục"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Lệnh 'lặp lại' thuộc nhóm lệnh nào trong phần mềm Scratch?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Sự kiện",
+      "Nhóm lệnh Điều khiển",
+      "Nhóm lệnh Hiển thị"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Số được điền vào ô trắng trong lệnh 'lặp lại' có ý nghĩa gì?",
+    "Lever": 1,
+    "choices": [
+      "Là tốc độ di chuyển của nhân vật",
+      "Là số lần thực hiện các lệnh nằm bên trong khối lặp",
+      "Là thời gian chờ của nhân vật",
+      "Là tọa độ của nhân vật trên sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Dựa trên bài học, các lệnh được ghép như thế nào để tạo thành cấu trúc lặp?",
+    "Lever": 1,
+    "choices": [
+      "Ghép rời rạc trên vùng lập trình",
+      "Ghép lồng vào bên trong khối lệnh 'lặp lại'",
+      "Chỉ ghép ở phía trên lệnh 'lặp lại'",
+      "Chỉ ghép ở phía dưới lệnh 'lặp lại'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong ví dụ hướng dẫn luyện tập động tác bắt bóng (Hình 1 trang 61), các động tác được lặp lại bao nhiêu lần?",
+    "Lever": 1,
+    "choices": [
+      "5 lần",
+      "10 lần",
+      "15 lần",
+      "Không giới hạn số lần"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để vẽ một hình vuông có 4 cạnh bằng nhau, em nên thiết lập giá trị bao nhiêu vào lệnh 'lặp lại'?",
+    "Lever": 2,
+    "choices": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lợi ích chính của việc sử dụng lệnh 'lặp lại' thay vì ghép nhiều lệnh giống hệt nhau là gì?",
+    "Lever": 2,
+    "choices": [
+      "Giúp nhân vật di chuyển nhanh hơn",
+      "Làm cho chương trình ngắn gọn, dễ hiểu và dễ chỉnh sửa",
+      "Làm cho màu sắc của lệnh đẹp hơn",
+      "Giúp máy tính không bị hỏng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quan sát Hình 3 trang 63, nếu đặt lệnh 'nói Xong rồi! trong 2 giây' ở bên ngoài và phía dưới khối lặp, khi nào nhân vật sẽ nói?",
+    "Lever": 2,
+    "choices": [
+      "Nói ngay khi bắt đầu chương trình",
+      "Nói liên tục trong khi đang lặp",
+      "Nói sau khi đã hoàn thành xong tất cả các vòng lặp",
+      "Không bao giờ nói"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong chương trình vẽ ở Hình 2 trang 62, nếu thay số 4 bằng số 10, điều gì sẽ xảy ra?",
+    "Lever": 2,
+    "choices": [
+      "Vẽ được 10 đoạn thẳng theo quy luật lặp",
+      "Nhân vật sẽ đứng yên",
+      "Chương trình báo lỗi",
+      "Nhân vật sẽ biến mất"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu em muốn nhân vật xoay một vòng tròn (360 độ) bằng các bước xoay 15 độ, em cần lặp lại lệnh xoay bao nhiêu lần?",
+    "Lever": 2,
+    "choices": [
+      "10 lần",
+      "20 lần",
+      "24 lần",
+      "30 lần"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em muốn tạo chương trình vẽ 10 ngôi sao ở các vị trí ngẫu nhiên (trang 63). Em nên kết hợp lệnh 'lặp lại 10' với lệnh nào sau đây bên trong nó?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ dùng lệnh di chuyển",
+      "Dùng lệnh 'đi tới vị trí ngẫu nhiên' và lệnh 'in hình' (hoặc đặt bút)",
+      "Dùng lệnh 'đợi 1 giây'",
+      "Dùng lệnh 'hiện' và 'ẩn'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An có đoạn lệnh: 'Lặp lại 5 lần [Di chuyển 20 bước]'. Tổng quãng đường nhân vật đã đi được sau khi kết thúc là bao nhiêu?",
+    "Lever": 3,
+    "choices": [
+      "20 bước",
+      "25 bước",
+      "100 bước",
+      "5 bước"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để nhân vật thực hiện động tác 'Vỗ tay' 3 lần, sau đó mới 'Cúi chào' 1 lần. Cách sắp xếp nào là đúng cấu trúc?",
+    "Lever": 3,
+    "choices": [
+      "Lồng cả lệnh Vỗ tay và Cúi chào vào trong 'Lặp lại 3'",
+      "Đặt lệnh Cúi chào ở trên, sau đó đến khối 'Lặp lại 3' chứa Vỗ tay",
+      "Đặt khối 'Lặp lại 3' chứa Vỗ tay, sau đó đặt lệnh Cúi chào ở phía dưới khối lặp",
+      "Chỉ cần dùng lệnh liên tục"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong chương trình điều khiển nhân vật bay, nếu em muốn cánh chim đập liên tục 20 lần rồi dừng lại, em sẽ thực hiện như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Ghép 20 lệnh 'trang phục kế tiếp'",
+      "Sử dụng lệnh 'lặp lại 20' bên trong chứa lệnh 'trang phục kế tiếp' và lệnh 'đợi'",
+      "Sử dụng lệnh 'liên tục'",
+      "Sử dụng lệnh 'nếu ... thì'"
+    ],
     "answer": 1
   }
 ]

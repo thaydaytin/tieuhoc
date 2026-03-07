@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Trang web của Bảo tàng Lịch sử Quốc gia cung cấp hình thức tham quan nào giúp em tìm hiểu lịch sử sinh động hơn?",
+    "Lever": 1,
+    "choices": [
+      "Đọc văn bản thuần túy",
+      "Tham quan trực tiếp tại bảo tàng",
+      "Tham quan ảo 3D",
+      "Xem danh sách tên hiện vật"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Để truy cập vào trang web của Bảo tàng Lịch sử Quốc gia, em cần nhập địa chỉ nào vào thanh địa chỉ của trình duyệt?",
+    "Lever": 1,
+    "choices": [
+      "google.com.vn",
+      "baotanglichsu.vn/vi",
+      "lichsuvietnam.com",
+      "youtube.com"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong trang web của Bảo tàng Lịch sử Quốc gia, các thông tin đa phương tiện bao gồm những gì?",
+    "Lever": 1,
+    "choices": [
+      "Chỉ có văn bản và hình ảnh",
+      "Video, hình ảnh và âm thanh",
+      "Chỉ có các đoạn phim tư liệu",
+      "Chỉ có sơ đồ các phòng trưng bày"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chọn một chủ đề lịch sử cụ thể trong mục Trưng bày ảo 3D, thao tác đầu tiên em cần làm là nháy chuột vào mục nào?",
+    "Lever": 1,
+    "choices": [
+      "Nghiên cứu",
+      "Tin tức",
+      "Trưng bày",
+      "Giới thiệu"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Khi tham quan 3D, công cụ nào giúp em di chuyển tới các vị trí khác nhau trong không gian ảo của bảo tàng?",
+    "Lever": 1,
+    "choices": [
+      "Các phím số trên bàn phím",
+      "Các mũi tên trên màn hình",
+      "Nút cuộn chuột",
+      "Lệnh in hình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Chủ đề nào sau đây nằm trong danh sách Tham quan 3D của Bảo tàng Lịch sử Quốc gia?",
+    "Lever": 1,
+    "choices": [
+      "Các quốc gia trên thế giới",
+      "Địa lý Việt Nam",
+      "Văn hóa Đông Sơn",
+      "Động vật quý hiếm"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lợi ích chính của việc sử dụng công cụ đa phương tiện trên máy tính để học lịch sử là gì?",
+    "Lever": 2,
+    "choices": [
+      "Giúp em học thuộc lòng nhanh hơn",
+      "Giúp tìm hiểu lịch sử một cách trực quan và sinh động",
+      "Giúp máy tính chạy nhanh hơn",
+      "Thay thế hoàn toàn việc đọc sách giáo khoa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Chức năng 'Tra cứu các thông tin liên quan' trong màn hình tham quan 3D giúp em điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Để xóa các hình ảnh hiện vật",
+      "Để tìm tên các bạn đang cùng truy cập",
+      "Để tìm hiểu chi tiết hơn về các hiện vật hoặc nội dung lịch sử đang xem",
+      "Để thay đổi màu sắc của trang web"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em muốn tìm kiếm các bài viết chuyên sâu về 'Kiến thức Lịch sử - Văn hóa', em nên chọn mục nào trên thanh bảng chọn?",
+    "Lever": 2,
+    "choices": [
+      "Trưng bày",
+      "Nghiên cứu",
+      "Tin tức",
+      "Giới thiệu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt lớn nhất giữa việc xem tranh ảnh trong sách và tham quan 3D trên máy tính là gì?",
+    "Lever": 2,
+    "choices": [
+      "Tham quan 3D không có màu sắc",
+      "Tham quan 3D cho phép tương tác, di chuyển và quan sát đa chiều",
+      "Trong sách có nhiều video hơn",
+      "Không có sự khác biệt nào"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao mục 'Tương tác với nhà sử học' lại quan trọng đối với người tham quan trực tuyến?",
+    "Lever": 2,
+    "choices": [
+      "Để người dùng có thể chơi trò chơi lịch sử",
+      "Để giải đáp những thắc mắc về kiến thức lịch sử một cách chính xác",
+      "Để tải các phần mềm miễn phí",
+      "Để thay đổi giao diện của bảo tàng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An muốn tìm thông tin về triều đại 'Triều Ngô - Đinh - Tiền Lê' để làm bài tập nhóm. Theo em, An nên thực hiện trình tự nào trên trang web bảo tàng?",
+    "Lever": 3,
+    "choices": [
+      "Vào mục Tin tức -> Tìm kiếm -> Nhập tên triều đại",
+      "Vào mục Trưng bày -> Trưng bày ảo 3D -> Chọn chủ đề 'Triều Ngô - Đinh - Tiền Lê'",
+      "Vào mục Giới thiệu để đọc tiểu sử bảo tàng",
+      "Chỉ cần nhìn vào sơ đồ trang chủ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em đang ở trong phòng trưng bày ảo và thấy một chiếc Trống đồng nhưng không biết ý nghĩa của nó. Thao tác nào dưới đây giúp em biết thông tin nhanh nhất?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng mũi tên di chuyển ra khỏi phòng",
+      "Nháy chuột vào biểu tượng tra cứu thông tin (hoặc thông tin hiện vật) ngay tại vị trí đó",
+      "Tắt trình duyệt và tìm trong sách giáo khoa",
+      "Nhấn phím F5 để tải lại trang"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chuẩn bị một bài kể chuyện về 'Một ngày tham quan bảo tàng ảo', em cần thu thập những loại tư liệu nào từ trang web?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ cần ghi lại địa chỉ trang web",
+      "Chụp ảnh màn hình các hiện vật, ghi chép thông tin từ mục Tra cứu và xem video minh họa",
+      "Tải sơ đồ tổ chức của bảo tàng",
+      "Lưu danh sách các nhà sử học"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong quá trình tham quan 3D, nếu muốn tìm hiểu về các mốc thời gian lịch sử một cách hệ thống, em nên kết hợp sử dụng mục Trưng bày ảo với mục nào trong phần Nghiên cứu?",
+    "Lever": 3,
+    "choices": [
+      "Thông tin khoa học",
+      "Theo dòng lịch sử",
+      "Khảo cổ học",
+      "Chuyên khảo"
+    ],
     "answer": 1
   }
 ]

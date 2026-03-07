@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Để bắt đầu chèn ảnh vào trang trình chiếu, em cần chọn dải lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Dải lệnh Home",
+      "Dải lệnh Insert",
+      "Dải lệnh Design",
+      "Dải lệnh View"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Trong dải lệnh Insert, lệnh nào được dùng để chọn ảnh từ máy tính?",
+    "Lever": 1,
+    "choices": [
+      "Table",
+      "Shapes",
+      "Pictures",
+      "Online Pictures"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh Open trong bảng chọn File được sử dụng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Tạo một bài trình chiếu mới",
+      "Lưu bài trình chiếu đang soạn thảo",
+      "Mở tệp trình chiếu đã có trên máy tính",
+      "Xóa một tệp trình chiếu"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi nháy chuột chọn một ảnh đã chèn, các chấm tròn xuất hiện xung quanh ảnh giúp em nhận biết điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Ảnh đang được chọn để chỉnh sửa",
+      "Ảnh bị lỗi hiển thị",
+      "Ảnh đang được lưu vào máy",
+      "Ảnh sắp bị xóa"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Theo sách giáo khoa, việc thêm ảnh vào bài trình chiếu có ích lợi gì?",
+    "Lever": 1,
+    "choices": [
+      "Giúp máy tính chạy nhanh hơn",
+      "Giúp bài trình chiếu sinh động và hấp dẫn hơn",
+      "Giúp tệp trình chiếu nhẹ hơn",
+      "Để không phải gõ chữ nữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để hoàn tất việc đưa ảnh đã chọn vào trang trình chiếu, em nháy chuột vào nút lệnh nào trong hộp thoại?",
+    "Lever": 1,
+    "choices": [
+      "Nút Open",
+      "Nút Cancel",
+      "Nút Insert",
+      "Nút Save"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sắp xếp thứ tự các bước đúng để thêm ảnh vào trang trình chiếu:\n1. Chọn dải lệnh Insert, chọn lệnh Pictures.\n2. Nháy chuột chọn ảnh muốn thêm.\n3. Mở thư mục chứa ảnh.\n4. Chọn nút Insert.",
+    "Lever": 2,
+    "choices": [
+      "1 - 2 - 3 - 4",
+      "1 - 3 - 2 - 4",
+      "3 - 1 - 2 - 4",
+      "2 - 1 - 3 - 4"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi kích thước của ảnh, khi đưa con trỏ chuột vào các chấm tròn quanh ảnh, con trỏ phải có dạng nào?",
+    "Lever": 2,
+    "choices": [
+      "Mũi tên 4 chiều",
+      "Mũi tên 2 chiều",
+      "Hình bàn tay",
+      "Hình dấu cộng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi muốn di chuyển ảnh đến vị trí khác trên trang, con trỏ chuột cần có dạng nào khi em kéo thả?",
+    "Lever": 2,
+    "choices": [
+      "Mũi tên 2 chiều",
+      "Hình mũi tên đơn",
+      "Mũi tên 4 chiều",
+      "Hình tròn màu trắng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trình tự các thao tác để mở tệp trình chiếu 'Lam quen' đã lưu trong thư mục 'Documents' là gì?",
+    "Lever": 2,
+    "choices": [
+      "File -> Open -> Chọn Documents -> Chọn tệp 'Lam quen' -> Open",
+      "File -> New -> Chọn Documents -> Chọn tệp 'Lam quen' -> Open",
+      "File -> Save -> Gõ tên 'Lam quen' -> Save",
+      "Nháy đúp vào dải lệnh Insert"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Điểm khác biệt cơ bản giữa việc dùng lệnh Open và lệnh Insert là gì?",
+    "Lever": 2,
+    "choices": [
+      "Open dùng để mở tệp trình chiếu, Insert dùng để chèn thêm đối tượng (như ảnh) vào trang",
+      "Open dùng cho ảnh, Insert dùng cho văn bản",
+      "Open nằm ở dải lệnh Home, Insert nằm ở dải lệnh File",
+      "Cả hai lệnh đều có chức năng giống hệt nhau"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Bạn An đang làm bài trình chiếu về gia đình. Để có một trang trình chiếu giới thiệu thành viên kèm một hình ảnh minh họa, An nên thực hiện theo trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Gõ nội dung văn bản -> Vào Insert chọn Pictures -> Chọn ảnh phù hợp -> Chỉnh lại kích thước và vị trí ảnh",
+      "Chỉ cần chèn ảnh vào trang trắng",
+      "Gõ văn bản rồi nhấn lệnh Save",
+      "Vào File chọn New rồi chọn ảnh"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Ảnh em vừa chèn vào trang trình chiếu quá lớn và che mất phần tiêu đề. Em sẽ xử lý như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Xóa phần tiêu đề đi",
+      "Nháy chuột vào ảnh, đưa con trỏ vào chấm tròn ở góc để kéo thả thu nhỏ ảnh lại",
+      "Xóa ảnh đi chèn lại ảnh khác",
+      "Tắt phần mềm rồi mở lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em muốn chèn ảnh 'Con mèo' nằm trong thư mục 'Dong vat' ở ổ đĩa (D:). Trong hộp thoại Insert Picture, bước nào là đúng?",
+    "Lever": 3,
+    "choices": [
+      "Chọn ổ đĩa (D:) ở khung bên trái -> Mở thư mục 'Dong vat' -> Chọn ảnh 'Con mèo' -> Insert",
+      "Gõ chữ 'Con mèo' vào trang trình chiếu rồi nhấn Enter",
+      "Chọn File -> Open -> Chọn ảnh 'Con mèo'",
+      "Chọn dải lệnh Home -> Chọn Pictures -> Chọn ảnh"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sau khi chèn ảnh và căn chỉnh vị trí rất đẹp cho bài trình chiếu, em cần làm gì để đảm bảo kết quả không bị mất khi đóng phần mềm?",
+    "Lever": 3,
+    "choices": [
+      "Nháy chuột vào nút lệnh New Slide",
+      "Nháy chuột vào lệnh Pictures",
+      "Vào bảng chọn File và nháy chuột chọn lệnh Save",
+      "Nhấn phím Delete trên bàn phím"
+    ],
+    "answer": 2
   }
 ]
