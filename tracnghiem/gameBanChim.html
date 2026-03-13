@@ -343,15 +343,14 @@
         createBirds();
 		
 		// chim đặc biệt ở câu 5,10,15
-		if ([4,9,14].includes(currentIdx) && !specialBirdShown) {
+		if ([2,4,9,11,14].includes(currentIdx)) {
 			specialBird = {
 				x: -120,
 				y: 120 + Math.random()*120,
-				vx: 1.5 + Math.random()*1.2,
+				vx: 2,
 				radius: 35,
 				isHit:false
 			};
-			specialBirdShown = true;
 		} else {
 			specialBird = null;
 		}
