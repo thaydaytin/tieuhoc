@@ -198,6 +198,10 @@
     
     let birds = [];
     let particles = [];
+	
+	let specialBird = null;
+	let specialBirdShown = false;
+	
     let projectile = null;
     let slingshot = { anchorX: 0, anchorY: 0, isDragging: false };
     let mouse = { x: 0, y: 0 };
@@ -337,6 +341,20 @@
         document.getElementById('ui-progress').innerText = `${currentIdx + 1}/${questions.length}`;
         for(let i=0; i<4; i++) document.getElementById(`opt-${i}`).innerText = q.choices[i] || "";
         createBirds();
+		
+		// chim đặc biệt ở câu 5,10,15
+		if ([4,9,14].includes(currentIdx) && !specialBirdShown) {
+			specialBird = {
+				x: -120,
+				y: 120 + Math.random()*120,
+				vx: 4,
+				radius: 35,
+				isHit:false
+			};
+			specialBirdShown = true;
+		} else {
+			specialBird = null;
+		}
     }
 
     function createBirds() {
@@ -395,6 +413,51 @@
         ctx.fillRect(0, canvas.height-180, canvas.width, 180);
 
         birds.forEach(b => {
+		
+		// Vẽ chim đặc biệt
+		if (specialBird && !specialBird.isHit) {
+
+			specialBird.x += specialBird.vx;
+
+			ctx.save();
+			ctx.translate(specialBird.x, specialBird.y);
+
+			// thân chim
+			ctx.fillStyle = "#ff00ff";
+			ctx.beginPath();
+			ctx.ellipse(0,0,35,25,0,0,Math.PI*2);
+			ctx.fill();
+
+			// đầu
+			ctx.beginPath();
+			ctx.arc(25,-10,18,0,Math.PI*2);
+			ctx.fill();
+
+			// mắt
+			ctx.fillStyle="white";
+			ctx.beginPath();
+			ctx.arc(30,-13,6,0,Math.PI*2);
+			ctx.fill();
+
+			ctx.fillStyle="black";
+			ctx.beginPath();
+			ctx.arc(32,-13,3,0,Math.PI*2);
+			ctx.fill();
+
+			// biểu tượng sao
+			ctx.fillStyle="yellow";
+			ctx.font="bold 22px Nunito";
+			ctx.textAlign="center";
+			ctx.fillText("★",0,8);
+
+			ctx.restore();
+
+			// bay hết màn hình thì biến mất
+			if(specialBird.x > canvas.width + 120){
+				specialBird = null;
+			}
+		}
+		
             if (!b.isHit) {
                 b.x += b.vx; b.wing += 0.2;
                 if (b.x > canvas.width + 120) b.x = -120;
@@ -424,6 +487,19 @@
             ctx.fillStyle = "#495057"; ctx.beginPath(); ctx.arc(projectile.x, projectile.y, 10, 0, Math.PI*2); ctx.fill();
             
             for (let b of birds) {
+			
+				// va chạm chim đặc biệt
+				if (projectile && specialBird && !specialBird.isHit) {
+					if (Math.hypot(projectile.x - specialBird.x, projectile.y - specialBird.y) < specialBird.radius + 10) {
+						specialBird.isHit = true;
+						projectile = null;
+						score += 5;
+						document.getElementById('ui-score').innerText = score;
+						showToast("🌟 +5 ĐIỂM THƯỞNG!", "#ffbe0b");
+						specialBird = null;
+					}
+				}
+			
                 if (!b.isHit && Math.hypot(projectile.x - b.x, projectile.y - b.y) < b.radius + 10) {
                     b.isHit = true; handleHit(b.answerIdx); projectile = null; break;
                 }
