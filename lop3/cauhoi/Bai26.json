@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Theo hướng dẫn trong sách giáo khoa, một bài trình chiếu nên có ít nhất bao nhiêu trang?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "1 trang",
+      "2 trang",
+      "3 trang",
+      "4 trang hoặc nhiều hơn"
     ],
-    "answer": 2
+    "answer": 3
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Thông tin nào sau đây NÊN có trong một bài trình chiếu tốt theo Bảng 1 trang 55?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Danh sách các trò chơi trên máy tính",
+      "Giới thiệu về chủ đề và tên người trình bày",
+      "Địa chỉ email cá nhân của tất cả bạn bè",
+      "Mật khẩu đăng nhập máy tính"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Để bài trình chiếu thêm sinh động và hấp dẫn, em nên thêm đối tượng nào vào các trang nội dung?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Thật nhiều chữ viết hoa",
+      "Hình ảnh minh họa liên quan đến chủ đề",
+      "Các ký hiệu toán học phức tạp",
+      "Tên của tất cả các giáo viên trong trường"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bước đầu tiên trong quy trình tạo bài trình chiếu được nêu ở mục 2 (trang 55) là gì?",
+    "Lever": 1,
+    "choices": [
+      "Lưu tệp trình chiếu",
+      "Nhập nội dung cho từng trang",
+      "Kích hoạt phần mềm trình chiếu",
+      "Thêm hình ảnh minh họa"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong bài học này, chủ đề nào được gợi ý để em thực hành tạo bài trình chiếu?",
+    "Lever": 1,
+    "choices": [
+      "Cách sửa chữa máy tính",
+      "Gia đình và bạn bè",
+      "Lập trình trò chơi Scratch",
+      "Cấu tạo bên trong thân máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi trình bày một bài trình chiếu trước lớp, mục đích chính của em là gì?",
+    "Lever": 1,
+    "choices": [
+      "Để tập gõ bàn phím nhanh hơn",
+      "Để giới thiệu nội dung cho thầy cô và các bạn quan sát, lắng nghe",
+      "Để xóa các tệp dữ liệu cũ",
+      "Để thay đổi phông nền của máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em cần chuẩn bị nội dung và hình ảnh trước khi bắt đầu tạo bài trình chiếu trên máy tính?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị hỏng",
+      "Để có một bài trình chiếu tốt và thực hiện các bước nhanh chóng, hiệu quả",
+      "Để không cần phải sử dụng chuột nữa",
+      "Vì phần mềm PowerPoint yêu cầu phải có sẵn ảnh mới cho mở"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc ghi tên người trình bày ở trang đầu tiên có ý nghĩa gì?",
+    "Lever": 2,
+    "choices": [
+      "Để trang trình chiếu bớt trống trải",
+      "Để người xem biết ai là tác giả của bài trình chiếu đó",
+      "Để phần mềm tự động lưu tệp",
+      "Để máy tính nhận diện được khuôn mặt người dùng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em chọn chủ đề 'Loài vật nuôi em yêu thích', những hình ảnh nào sau đây là phù hợp nhất để đưa vào bài?",
+    "Lever": 2,
+    "choices": [
+      "Hình ảnh các loại sách giáo khoa lớp 3",
+      "Hình ảnh các danh lam thắng cảnh thế giới",
+      "Hình ảnh con chó, con mèo hoặc con thỏ em đang nuôi",
+      "Hình ảnh các thiết bị phần cứng máy tính"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Mối liên hệ giữa chủ đề bài trình chiếu và hình ảnh minh họa là gì?",
+    "Lever": 2,
+    "choices": [
+      "Hình ảnh phải liên quan và làm rõ nội dung của chủ đề",
+      "Hình ảnh càng to thì chủ đề càng rõ",
+      "Không cần liên quan, chỉ cần hình ảnh đẹp là được",
+      "Chỉ nên dùng hình ảnh đen trắng cho mọi chủ đề"
     ],
     "answer": 0
+  },
+  {
+    "question": "Trong phần Luyện tập trang 55, sau khi tạo tệp trình chiếu mới, bước tiếp theo em cần làm là gì?",
+    "Lever": 2,
+    "choices": [
+      "Tắt máy tính đi ngủ",
+      "Nhập nội dung cho từng trang trình chiếu",
+      "Xóa phần mềm trình chiếu",
+      "Nhờ bạn làm hộ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em hãy sắp xếp các bước sau theo thứ tự đúng để hoàn thành bài trình chiếu: \n1. Nhập nội dung và thêm ảnh. \n2. Lưu tệp với tên phù hợp. \n3. Kích hoạt PowerPoint. \n4. Tạo tệp mới.",
+    "Lever": 3,
+    "choices": [
+      "3 - 4 - 1 - 2",
+      "1 - 2 - 3 - 4",
+      "4 - 3 - 2 - 1",
+      "2 - 1 - 4 - 3"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Bạn An muốn tạo bài trình chiếu về 'Trường em'. Trang 1 ghi tiêu đề, trang 2 giới thiệu các thầy cô, trang 3 giới thiệu các hoạt động. Theo em, trang 4 An nên làm nội dung gì để bài hoàn thiện hơn?",
+    "Lever": 3,
+    "choices": [
+      "Ghi danh sách các món ăn yêu thích của An",
+      "Hình ảnh ngôi trường và lời cảm ơn người xem",
+      "Để trang trắng hoàn toàn",
+      "Gõ lại nội dung của trang 1"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chuẩn bị nội dung cho bài trình chiếu 'Một cảnh đẹp của quê hương em', bước chuẩn bị nào dưới đây là hợp lý nhất?",
+    "Lever": 3,
+    "choices": [
+      "Chụp ảnh hoặc sưu tầm ảnh về cảnh đẹp đó và viết ra các ý chính muốn giới thiệu",
+      "Mở máy tính lên và gõ bất cứ chữ gì hiện ra trong đầu",
+      "Vẽ một bức tranh trên giấy rồi dán vào màn hình máy tính",
+      "Chỉ cần nhớ trong đầu, không cần chuẩn bị gì cả"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sau khi trình diễn xong bài trình chiếu 'Gia đình em' cho cả lớp xem, em muốn bình chọn bài của nhóm bạn khác. Tiêu chí nào dưới đây là đúng với gợi ý trong sách?",
+    "Lever": 3,
+    "choices": [
+      "Bài nào có nhiều chữ nhất là bài tốt nhất",
+      "Bài nào có nội dung phù hợp chủ đề, hình ảnh đẹp và trình bày rõ ràng",
+      "Bài nào làm nhanh nhất là bài thắng cuộc",
+      "Bài nào có tên người trình bày dài nhất"
+    ],
+    "answer": 1
   }
 ]

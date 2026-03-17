@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Cấu trúc lặp có điều kiện được sử dụng để mô tả các hành động như thế nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Hành động lặp lại mãi mãi",
+      "Hành động chỉ thực hiện một lần",
+      "Hành động lặp lại đến khi thỏa điều kiện",
+      "Hành động lặp theo một số lần cố định"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Trong phần mềm Scratch, lệnh nào sau đây thể hiện cấu trúc lặp có điều kiện?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Lệnh lặp lại 10 lần",
+      "Lệnh lặp lại cho đến khi",
+      "Lệnh nếu thì nếu không",
+      "Lệnh di chuyển 10 bước"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Nhóm lệnh nào trong Scratch chứa khối lệnh lặp lại cho đến khi?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Cảm biến",
+      "Nhóm lệnh Điều khiển",
+      "Nhóm lệnh Hiển thị"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Biểu thức điều kiện trong cấu trúc lặp thường trả về giá trị nào sau đây?",
+    "Lever": 1,
+    "choices": [
+      "Giá trị là số tự nhiên",
+      "Giá trị là đúng hoặc sai",
+      "Giá trị là tên nhân vật",
+      "Giá trị là một màu sắc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'phím [phím trắng] được bấm?' thuộc nhóm lệnh nào sau đây?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Điều khiển",
+      "Nhóm lệnh Cảm biến",
+      "Nhóm lệnh Hiển thị"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Vòng lặp 'lặp lại cho đến khi' trong Scratch sẽ dừng lại khi nào?",
+    "Lever": 1,
+    "choices": [
+      "Khi điều kiện có giá trị sai",
+      "Khi điều kiện có giá trị đúng",
+      "Khi nhân vật thay đổi màu sắc",
+      "Khi chương trình vừa bắt đầu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Bảng 1 (trang 65), lệnh 'chuột được nhấn?' có ý nghĩa gì?",
+    "Lever": 2,
+    "choices": [
+      "Kiểm tra màu sắc của sân khấu",
+      "Kiểm tra phím trắng có được bấm",
+      "Kiểm tra chuột máy tính được nhấn",
+      "Kiểm tra tọa độ của nhân vật"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt chính giữa lặp số lần biết trước và lặp có điều kiện là gì?",
+    "Lever": 2,
+    "choices": [
+      "Lặp điều kiện dừng khi thỏa mãn",
+      "Lặp điều kiện dừng theo số lần",
+      "Lặp điều kiện không thể dừng lại",
+      "Cả hai loại lệnh này là như nhau"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao các lệnh cảm biến thường được đặt vào ô lục giác của khối lặp?",
+    "Lever": 2,
+    "choices": [
+      "Để làm cho nhân vật đẹp hơn",
+      "Để làm điều kiện dừng vòng lặp",
+      "Để thay đổi kích thước nhân vật",
+      "Để xóa các nét vẽ trên sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, khối lệnh nằm bên trong vòng lặp sẽ thực hiện khi nào?",
+    "Lever": 2,
+    "choices": [
+      "Khi điều kiện đang là sai (false)",
+      "Khi điều kiện đang là đúng (true)",
+      "Khi nhân vật chạm vào cạnh trên",
+      "Khi người dùng nhấn phím Enter"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh 'đang chạm màu đỏ?' (trang 65) được dùng để làm nhiệm vụ gì?",
+    "Lever": 2,
+    "choices": [
+      "Kiểm tra nhân vật có di chuyển",
+      "Kiểm tra nhân vật chạm màu đỏ",
+      "Kiểm tra nhân vật đang lặp lại",
+      "Kiểm tra nhân vật có biến mất"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Dựa vào Hình 3 (trang 66), nhân vật sẽ nói 'Xin chào!' trong điều kiện nào?",
+    "Lever": 3,
+    "choices": [
+      "Khi chuột máy tính được nhấn vào",
+      "Khi chuột máy tính chưa được nhấn",
+      "Khi nhân vật chạm vào màu đỏ",
+      "Khi nhân vật vừa mới xuất hiện"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quan sát Hình 2 (trang 65), khi nào nhân vật mèo sẽ hiển thị bóng nói 'Dừng lại!'?",
+    "Lever": 3,
+    "choices": [
+      "Khi người dùng nhấn vào phím S",
+      "Khi người dùng di chuyển chuột",
+      "Khi nhân vật vừa chạm con trỏ",
+      "Khi nhân vật đang thực hiện lặp"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu điều kiện trong lệnh 'lặp lại cho đến khi' đúng ngay từ đầu thì sao?",
+    "Lever": 3,
+    "choices": [
+      "Vòng lặp thực hiện mãi mãi",
+      "Vòng lặp thực hiện mười lần",
+      "Vòng lặp không được thực hiện",
+      "Máy tính tự động báo lỗi lệnh"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để nhân vật dừng lại khi chạm vào một vật cản bất kỳ, em nên dùng lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh lặp lại cho đến khi đang chạm vật cản",
+      "Lệnh lặp lại mười lần di chuyển tới vật cản",
+      "Lệnh liên tục di chuyển đè lên trên vật cản",
+      "Lệnh nếu chạm vào cạnh sân khấu thì bật lại"
     ],
     "answer": 0
   }

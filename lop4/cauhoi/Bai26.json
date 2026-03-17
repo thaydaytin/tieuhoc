@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Chương trình máy tính Google Earth được dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Hiển thị bản đồ 3D Trái Đất",
+      "Soạn thảo các tệp văn bản",
+      "Vẽ các hình học đơn giản",
+      "Lập trình trò chơi điện tử"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để truy cập Google Earth, em cần nhập địa chỉ web nào?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Địa chỉ earth.google.com",
+      "Địa chỉ google.com.vn",
+      "Địa chỉ baotanglichsu.vn",
+      "Địa chỉ scratch.mit.edu"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Nguồn dữ liệu hình ảnh của Google Earth được khai thác từ đâu?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Dữ liệu từ ảnh vệ tinh",
+      "Ảnh chụp bằng điện thoại",
+      "Các bức tranh vẽ tay",
+      "Video trên mạng xã hội"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Biểu tượng chiếc kính lúp trong Google Earth dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Tìm kiếm một địa điểm",
+      "Đo đạc khoảng cách dài",
+      "Thay đổi kiểu bản đồ",
+      "Xóa các dữ liệu cũ"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Ngoài máy tính, phần mềm Google Earth còn dùng được trên đâu?",
+    "Lever": 1,
+    "choices": [
+      "Trên điện thoại di động",
+      "Trên máy in màu văn phòng",
+      "Trên loa nghe nhạc thông minh",
+      "Trên các loại máy ảnh số"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em chọn nút lệnh nào để xem thông tin chi tiết về một quốc gia?",
+    "Lever": 1,
+    "choices": [
+      "Nút lệnh Thông tin khác",
+      "Nút lệnh Kiểu bản đồ",
+      "Nút lệnh Tìm kiếm",
+      "Nút lệnh Đo diện tích"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Google Earth thực hiện việc gì khi em gõ tên một quốc gia?",
+    "Lever": 2,
+    "choices": [
+      "Di chuyển đến vị trí đó",
+      "Tự động xóa tên quốc gia",
+      "Mở một tệp văn bản mới",
+      "Thay đổi màu sắc biểu tượng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Google Earth khác với bản đồ giấy thông thường ở điểm nào?",
+    "Lever": 2,
+    "choices": [
+      "Cung cấp bản đồ dạng 3D",
+      "Có nhiều màu sắc rực rỡ",
+      "Tìm kiếm địa điểm lâu hơn",
+      "Không có tên các quốc gia"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Chức năng đo khoảng cách giúp ích gì khi em tìm hiểu thế giới?",
+    "Lever": 2,
+    "choices": [
+      "Biết độ dài các quãng đường",
+      "Biết tên thủ đô quốc gia",
+      "Biết số lượng người dân",
+      "Biết phông nền máy tính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Vì sao sử dụng Google Earth lại giúp em học tốt môn Địa lý?",
+    "Lever": 2,
+    "choices": [
+      "Quan sát hình ảnh thực tế",
+      "Máy tính chạy nhanh hơn",
+      "Làm hộ các bài kiểm tra",
+      "Không cần phải đi đến trường"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Chế độ xem trực tiếp đường phố cho phép em quan sát điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Hình ảnh 3D tại vị trí đó",
+      "Trái Đất từ ngoài không gian",
+      "Danh sách tên các con đường",
+      "Đoạn phim về giao thông"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để xem số dân Việt Nam năm 2020, em thực hiện trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Tìm kiếm - Việt Nam - Thông tin",
+      "Kiểu bản đồ - Việt Nam - Tìm",
+      "Xoay bản đồ - Tìm số dân - Mở",
+      "Nháy This PC - Việt Nam - Mở"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em khai thác tư liệu nào để giới thiệu về du lịch nước Pháp?",
+    "Lever": 3,
+    "choices": [
+      "Hình ảnh 3D và giới thiệu",
+      "Danh sách bài hát dân ca",
+      "Danh sách tên thành phố",
+      "Giá thuê các phòng khách sạn"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Muốn biết đường từ Hà Nội đến Paris dài bao nhiêu, em dùng gì?",
+    "Lever": 3,
+    "choices": [
+      "Công cụ Đo khoảng cách",
+      "Công cụ Tìm kiếm địa điểm",
+      "Công cụ Chọn kiểu bản đồ",
+      "Công cụ Xem đường phố"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tìm hiểu văn hóa quốc gia mới, em cần chú ý mục nào?",
+    "Lever": 3,
+    "choices": [
+      "Mục Thông tin khác ở kết quả",
+      "Mục màu sắc trên bản đồ 3D",
+      "Mục ngày cập nhật phần mềm",
+      "Mục dung lượng của chương trình"
     ],
     "answer": 0
   }
