@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Trong môi trường Scratch, vùng chứa các khối lệnh có sẵn gọi là gì?",
+    "Lever": 1,
+    "choices": [
+      "Vùng Thư viện lệnh của chương trình",
+      "Vùng Lập trình của các nhân vật",
+      "Vùng Sân khấu hiển thị hoạt động",
+      "Vùng Nhân vật và vùng Phông nền"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Môi trường lập trình Scratch giúp em có thể tạo ra sản phẩm nào?",
+    "Lever": 1,
+    "choices": [
+      "Các chương trình trò chơi, hoạt hình",
+      "Các bảng tính toán số liệu phức tạp",
+      "Các tệp tin hình ảnh được chụp lại",
+      "Các linh kiện bên trong thân máy tính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để chọn ngôn ngữ Tiếng Việt cho Scratch, em nháy chuột vào đâu?",
+    "Lever": 1,
+    "choices": [
+      "Biểu tượng hình chiếc lá cờ màu đỏ",
+      "Biểu tượng hình chiếc lá cờ màu xanh",
+      "Biểu tượng hình quả địa cầu trên máy",
+      "Biểu tượng hình một chú mèo màu cam"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
+    "question": "Nhóm lệnh Sự kiện trong Scratch thường được dùng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Để bắt đầu khởi chạy một chương trình",
+      "Để xóa bỏ các nhân vật trên sân khấu",
+      "Để thay đổi kích thước của các câu lệnh",
+      "Để lưu lại kết quả bài tập đã thực hiện"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Màn hình làm việc của môi trường Scratch gồm có bao nhiêu vùng chính?",
+    "Lever": 1,
+    "choices": [
+      "Gồm có ba vùng làm việc chính yếu",
+      "Gồm có bốn vùng làm việc chính yếu",
+      "Gồm có năm vùng làm việc chính yếu",
+      "Gồm có sáu vùng làm việc chính yếu"
+    ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Nơi thực hiện các thao tác ghép lệnh thành chương trình gọi là gì?",
+    "Lever": 1,
+    "choices": [
+      "Vùng Thư viện lệnh của chương trình",
+      "Vùng Lập trình của các khối lệnh",
+      "Vùng Sân khấu hiển thị nhân vật",
+      "Vùng Phông nền của sân khấu chính"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Để thay đổi số bước di chuyển của nhân vật Mèo, em thực hiện ở đâu?",
+    "Lever": 2,
+    "choices": [
+      "Thay đổi giá trị số ở ô trắng trong lệnh",
+      "Thay đổi màu sắc của khối lệnh di chuyển",
+      "Thay đổi tên của nhân vật ở vùng nhân vật",
+      "Thay đổi phông nền của vùng sân khấu chính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi em ghép các khối lệnh liên tiếp với nhau, chúng sẽ chạy thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Các lệnh thực hiện từ dưới lên phía trên",
+      "Các lệnh thực hiện đồng thời cùng một lúc",
+      "Các lệnh thực hiện ngẫu nhiên không thứ tự",
+      "Các lệnh thực hiện lần lượt từ trên xuống"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Lệnh 'nói ... trong ... giây' nằm trong nhóm lệnh nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Nhóm lệnh Chuyển động của nhân vật",
+      "Nhóm lệnh Hiển thị của các nhân vật",
+      "Nhóm lệnh Sự kiện để bắt đầu chạy máy",
+      "Nhóm lệnh Điều khiển các hoạt động lặp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn xóa một khối lệnh đã kéo ra vùng Lập trình, em thao tác thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Kéo khối lệnh đó thả vào Thư viện lệnh",
+      "Nháy đúp chuột vào vùng Sân khấu chính",
+      "Nháy chuột vào biểu tượng lá cờ màu đỏ",
+      "Kéo khối lệnh đó vào vùng Phông nền mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sự khác nhau giữa các nhóm lệnh trong Thư viện lệnh là điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Khác nhau về kích thước của khối lệnh",
+      "Khác nhau về phông chữ hiển thị ở lệnh",
+      "Khác nhau về màu nền và các chức năng",
+      "Khác nhau về vị trí đặt của các ô trắng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu em không ghép lệnh vào dưới khối lệnh Sự kiện thì điều gì xảy ra?",
+    "Lever": 3,
+    "choices": [
+      "Chương trình vẫn chạy bình thường như cũ",
+      "Các lệnh đó sẽ không bao giờ được thực hiện",
+      "Nhân vật sẽ tự động thực hiện các lệnh đó",
+      "Màu sắc của lệnh sẽ bị thay đổi sang màu đen"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em hãy sắp xếp thứ tự: 1. Nói Xin chào; 2. Đi 10 bước; 3. Khi bấm cờ xanh?",
+    "Lever": 3,
+    "choices": [
+      "Thứ tự đúng sẽ là các bước: 1 - 2 - 3",
+      "Thứ tự đúng sẽ là các bước: 2 - 1 - 3",
+      "Thứ tự đúng sẽ là các bước: 3 - 2 - 1",
+      "Thứ tự đúng sẽ là các bước: 3 - 1 - 2"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi hoàn thành chương trình, em chọn lệnh nào để lưu lại dự án?",
+    "Lever": 3,
+    "choices": [
+      "Chọn Tập tin rồi chọn Lưu về máy tính",
+      "Chọn Chỉnh sửa rồi chọn Lưu về máy tính",
+      "Chọn quả địa cầu rồi chọn Lưu về máy",
+      "Chọn nhân vật rồi chọn Lưu về máy tính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để nhân vật Mèo hiển thị bóng nói khi em nhấn phím trắng, em dùng lệnh?",
+    "Lever": 3,
+    "choices": [
+      "Dùng lệnh Khi bấm vào lá cờ màu xanh",
+      "Dùng lệnh Khi bấm vào nhân vật mèo này",
+      "Dùng lệnh Khi bấm phím là phím trắng",
+      "Dùng lệnh Di chuyển mười bước liên tiếp"
+    ],
+    "answer": 2
   }
 ]

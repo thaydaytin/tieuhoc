@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Cấu trúc lặp liên tục được dùng để mô tả các hoạt động có đặc điểm gì?",
+    "Lever": 1,
+    "choices": [
+      "Các hoạt động chỉ thực hiện duy nhất một lần",
+      "Các hoạt động lặp đi lặp lại và không bao giờ dừng",
+      "Các hoạt động được lặp lại theo số lần cho trước",
+      "Các hoạt động lặp lại cho đến khi thỏa mãn điều kiện"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Trong phần mềm Scratch, lệnh nào thể hiện cấu trúc lặp liên tục?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng khối lệnh lặp lại mười lần",
+      "Sử dụng khối lệnh lặp lại liên tục",
+      "Sử dụng khối lệnh lặp cho đến khi",
+      "Sử dụng khối lệnh nếu thì nếu không"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh 'liên tục' nằm trong nhóm lệnh nào của phần mềm Scratch?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh Chuyển động",
+      "Nằm trong nhóm lệnh Hiển thị màu",
+      "Nằm trong nhóm lệnh Điều khiển",
+      "Nằm trong nhóm lệnh Các phép toán"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ví dụ nào sau đây trong thực tế là một hoạt động lặp liên tục?",
+    "Lever": 1,
+    "choices": [
+      "Kim đồng hồ quay quanh trục của nó",
+      "Học sinh đi đến trường vào buổi sáng",
+      "Cây nảy mầm rồi ra hoa và kết trái",
+      "Người thợ xây xong một ngôi nhà mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khối lệnh nằm bên trong vòng lặp 'liên tục' sẽ được thực hiện khi nào?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện lần lượt từ trên xuống dưới",
+      "Thực hiện ngẫu nhiên các lệnh bên trong",
+      "Chỉ thực hiện lệnh đầu tiên của khối",
+      "Thực hiện từ dưới lên trên khối lệnh"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Điều gì xảy ra sau khi lệnh cuối cùng trong khối 'liên tục' kết thúc?",
+    "Lever": 1,
+    "choices": [
+      "Chương trình sẽ dừng lại hoàn toàn",
+      "Chương trình quay lại lệnh đầu trong khối",
+      "Chương trình thực hiện lệnh phía dưới",
+      "Nhân vật sẽ biến mất khỏi sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt chính giữa lệnh 'lặp lại 10 lần' và lệnh 'liên tục' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh liên tục không bao giờ dừng lại",
+      "Lệnh liên tục chỉ lặp lại đúng mười lần",
+      "Lệnh liên tục bắt buộc phải có điều kiện",
+      "Lệnh liên tục nằm trong nhóm chuyển động"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong kịch bản 'Mèo đuổi bóng', tại sao bóng cần lệnh lặp liên tục?",
+    "Lever": 2,
+    "choices": [
+      "Để bóng luôn đi theo con trỏ chuột",
+      "Để bóng tự động thay đổi kích thước",
+      "Để bóng di chuyển tới vị trí ngẫu nhiên",
+      "Để bóng có thể hiện lên trên sân khấu"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao không nên ghép lệnh phía dưới khối lệnh 'liên tục' trong Scratch?",
+    "Lever": 2,
+    "choices": [
+      "Vì các lệnh đó sẽ không bao giờ chạy",
+      "Vì máy tính sẽ báo lỗi ngay lập tức",
+      "Vì các lệnh đó sẽ làm chương trình chậm",
+      "Vì nhân vật sẽ không di chuyển được nữa"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Quan sát Hình 2 trang 69, nhân vật mèo sẽ thực hiện hành động gì?",
+    "Lever": 2,
+    "choices": [
+      "Di chuyển mười bước rồi dừng lại",
+      "Xoay mười lăm độ mãi mãi không ngừng",
+      "Nói xin chào liên tục trong hai giây",
+      "Thay đổi trang phục mười lần liên tiếp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Dựa vào Bảng 1 trang 68, lệnh 'liên tục' khác lệnh 'lặp lại cho đến khi' ở đâu?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh liên tục không cần kiểm tra điều kiện",
+      "Lệnh liên tục chỉ lặp khi điều kiện đúng",
+      "Lệnh liên tục thực hiện theo số lần biết trước",
+      "Lệnh liên tục không chứa được lệnh chuyển động"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tạo chương trình nhân vật đi bộ mãi mãi, em nên phối hợp các lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Liên tục, di chuyển và trang phục kế tiếp",
+      "Lặp lại 10, di chuyển và đợi một giây",
+      "Nếu thì, di chuyển và bật lại khi chạm cạnh",
+      "Khi bấm cờ xanh, di chuyển và đặt màu bút"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Hoạt động 'Ăn cơm ba bữa mỗi ngày' có được coi là lặp liên tục không?",
+    "Lever": 3,
+    "choices": [
+      "Không vì hoạt động này sẽ dừng khi kết thúc",
+      "Có vì hoạt động này diễn ra hàng ngày",
+      "Có vì đây là thói quen của con người",
+      "Không vì hoạt động này chỉ thực hiện một lần"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu chương trình 'Mèo đuổi bóng' thiếu lệnh 'đợi', điều gì sẽ xảy ra?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật mèo sẽ đứng yên một chỗ",
+      "Nhân vật mèo di chuyển cực kỳ nhanh",
+      "Nhân vật mèo sẽ bị biến mất khỏi máy",
+      "Chương trình sẽ tự động đóng lại ngay"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong cấu trúc tuần tự và lặp, thứ tự các lệnh bên trong có quan trọng không?",
+    "Lever": 3,
+    "choices": [
+      "Rất quan trọng vì quyết định kết quả chạy",
+      "Không quan trọng vì máy tính tự sắp xếp",
+      "Chỉ quan trọng khi chương trình bị lỗi",
+      "Chỉ quan trọng đối với các lệnh hiển thị"
+    ],
+    "answer": 0
   }
 ]

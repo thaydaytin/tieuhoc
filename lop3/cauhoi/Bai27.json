@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Phần mềm Mouse Skills được sử dụng nhằm mục đích chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Luyện tập gõ bàn phím",
+      "Luyện thao tác với chuột",
+      "Vẽ các hình học cơ bản",
+      "Soạn thảo văn bản mới"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Trong phần mềm, để bắt đầu hoặc sang mức tiếp theo em gõ phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Nhấn phím chữ cái Q",
+      "Nhấn phím chữ cái N",
+      "Nhấn phím chữ cái S",
+      "Nhấn phím chữ cái E"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thoát khỏi phần mềm luyện tập Mouse Skills, em cần gõ phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Nhấn phím chữ cái N",
+      "Nhấn phím chữ cái Q",
+      "Nhấn phím chữ cái X",
+      "Nhấn phím chữ cái T"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mức (Level) 1 trong phần mềm Mouse Skills yêu cầu em luyện tập gì?",
+    "Lever": 1,
+    "choices": [
+      "Thao tác di chuyển chuột",
+      "Thao tác nháy đúp chuột",
+      "Thao tác nháy chuột trái",
+      "Thao tác kéo thả chuột"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thành phần 'Score' trên màn hình phần mềm dùng để hiển thị nội dung gì?",
+    "Lever": 1,
+    "choices": [
+      "Hiển thị mức độ chơi",
+      "Hiển thị điểm đạt được",
+      "Hiển thị thời gian chơi",
+      "Hiển thị số cửa đã qua"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong phần mềm Mouse Skills, thành phần 'Stage' có ý nghĩa là gì?",
+    "Lever": 1,
+    "choices": [
+      "Cửa hay mức luyện tập",
+      "Thời gian luyện tập",
+      "Điểm số luyện tập",
+      "Mức độ luyện tập"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Mức độ đánh giá Expert (Chuyên gia) tương ứng với khoảng điểm nào?",
+    "Lever": 2,
+    "choices": [
+      "Từ 1 đến 29 điểm số",
+      "Từ 30 đến 49 điểm số",
+      "Từ 50 đến 69 điểm số",
+      "Từ 70 đến 100 điểm số"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thao tác 'nhấn nhanh nút chuột trái hai lần rồi thả ngón tay' gọi là gì?",
+    "Lever": 2,
+    "choices": [
+      "Thao tác nháy chuột",
+      "Thao tác nháy đúp chuột",
+      "Thao tác nháy chuột phải",
+      "Thao tác kéo thả chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em thực hiện cuộn nút cuộn chuột xuống dưới, màn hình làm việc sẽ?",
+    "Lever": 2,
+    "choices": [
+      "Màn hình dịch lên trên",
+      "Màn hình dịch xuống dưới",
+      "Màn hình dịch sang trái",
+      "Màn hình dịch sang phải"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự luyện tập các thao tác từ Mức 1 đến Mức 3 là như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Nháy-Di chuyển-Đúp",
+      "Di chuyển-Nháy-Đúp",
+      "Đúp-Nháy-Di chuyển",
+      "Di chuyển-Đúp-Nháy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để điều khiển máy tính linh hoạt và chính xác, em cần thực hiện điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Chỉ xem các bạn làm",
+      "Chăm chỉ luyện tập",
+      "Thay chuột máy tính mới",
+      "Tắt phần mềm luyện tập"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An luyện tập và đạt được 45 điểm. Mức đánh giá (Rating) của An là gì?",
+    "Lever": 3,
+    "choices": [
+      "Mức đánh giá Beginner",
+      "Mức đánh giá Not Bad",
+      "Mức đánh giá Good",
+      "Mức đánh giá Expert"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để luyện tập thao tác nháy đúp chuột trái, em cần luyện ở mức mấy?",
+    "Lever": 3,
+    "choices": [
+      "Luyện tập ở Mức số 1",
+      "Luyện tập ở Mức số 2",
+      "Luyện tập ở Mức số 3",
+      "Luyện tập ở Mức số 4"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sau khi hoàn thành 10 cửa của Mức 1, em làm gì để chuyển sang Mức 2?",
+    "Lever": 3,
+    "choices": [
+      "Nhấn phím bất kỳ nào",
+      "Tắt phần mềm đi rồi mở",
+      "Nhấn nút chuột phải",
+      "Nhấn nút cuộn chuột"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi muốn biết trình độ thành thạo hiện tại của mình, em nhìn vào đâu?",
+    "Lever": 3,
+    "choices": [
+      "Nhìn vào dòng Stage",
+      "Nhìn vào dòng Score",
+      "Nhìn vào dòng Rating",
+      "Nhìn vào phím Q và N"
+    ],
+    "answer": 2
   }
 ]
