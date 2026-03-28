@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Theo hướng dẫn ở Hình 1 trang 10, chuột máy tính thông dụng có các nút chính nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Nút trái, nút phải và nút cuộn",
+      "Nút trái, nút giữa và nút nguồn",
+      "Nút chọn, nút hủy và nút thoát",
+      "Nút bấm, nút lăn và nút khởi động"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Khi cầm chuột bằng tay phải, ngón tay trỏ của em được đặt vào vị trí nào?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Đặt nhẹ nhàng lên nút chuột phải",
+      "Đặt nhẹ nhàng lên nút chuột trái",
+      "Đặt nhẹ nhàng lên trên nút cuộn",
+      "Đặt ở bên trái của thân chuột"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Thao tác 'Nhấn nút chuột trái rồi thả ngón tay ra ngay' được gọi là gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Thao tác di chuyển chuột",
+      "Thao tác nháy đúp chuột",
+      "Thao tác nháy chuột trái",
+      "Thao tác kéo thả chuột"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác nháy đúp chuột yêu cầu em nhấn nút chuột trái nhanh mấy lần?",
+    "Lever": 1,
+    "choices": [
+      "Nhấn nhanh một lần duy nhất",
+      "Nhấn nhanh hai lần liên tiếp",
+      "Nhấn nhanh ba lần liên tiếp",
+      "Nhấn giữ nút trong vài giây"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bộ phận nào của chuột dùng để di chuyển trang màn hình lên trên hoặc xuống dưới?",
+    "Lever": 1,
+    "choices": [
+      "Nút chuột trái ở bên trên",
+      "Nút chuột phải ở bên trên",
+      "Thân chuột ở phía bên dưới",
+      "Nút cuộn nằm ở giữa chuột"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Trong phần mềm Mouse Skills, mức (Stage) nào luyện thao tác di chuyển chuột đơn thuần?",
+    "Lever": 1,
+    "choices": [
+      "Mức 1 (Level 1) của phần mềm",
+      "Mức 2 (Level 2) của phần mềm",
+      "Mức 3 (Level 3) của phần mềm",
+      "Mức 4 (Level 4) của phần mềm"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao em cần giữ cho bàn tay và cổ tay thẳng hàng khi cầm chuột máy tính?",
+    "Lever": 2,
+    "choices": [
+      "Để chuột di chuyển nhanh hơn",
+      "Để không bị mỏi và đau cổ tay",
+      "Để nút chuột không bị hỏng",
+      "Để máy tính không bị báo lỗi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sự khác biệt chính giữa thao tác 'Nháy chuột' và 'Nháy đúp chuột' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Sử dụng các nút khác nhau",
+      "Sử dụng các ngón tay khác",
+      "Tốc độ và số lần nhấn nút",
+      "Vị trí đặt chuột trên bàn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác 'Kéo thả chuột' thường được sử dụng trong trường hợp nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Để mở một tệp văn bản mới",
+      "Để cuộn trang sách lên xuống",
+      "Để thay đổi vị trí một biểu tượng",
+      "Để tắt máy tính một cách an toàn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi em di chuyển chuột trên mặt phẳng, con trỏ chuột trên màn hình sẽ như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Sẽ đứng yên tại một vị trí",
+      "Sẽ tự động biến mất khỏi máy",
+      "Sẽ di chuyển theo hướng chuột",
+      "Sẽ đổi màu sắc liên tục ngay"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong phần mềm Mouse Skills, việc đạt điểm số (Score) cao thể hiện điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Em sử dụng bàn phím giỏi",
+      "Thao tác chuột nhanh, chính xác",
+      "Máy tính của em đang chạy tốt",
+      "Em đã hoàn thành bài tập vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn An muốn mở phần mềm Wordpad trên màn hình. An nên sử dụng thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Nháy chuột trái một lần duy nhất",
+      "Nháy chuột phải một lần duy nhất",
+      "Nháy đúp chuột vào biểu tượng đó",
+      "Lăn nút cuộn chuột thật nhanh"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để luyện tập thao tác 'nháy chuột phải', em cần luyện tập ở mức mấy của Mouse Skills?",
+    "Lever": 3,
+    "choices": [
+      "Luyện tập ở Mức 1 (Level 1)",
+      "Luyện tập ở Mức 2 (Level 2)",
+      "Luyện tập ở Mức 3 (Level 3)",
+      "Luyện tập ở Mức 4 (Level 4)"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để thực hiện yêu cầu 'Kéo tệp tin Notes.doc vào cửa sổ My Documents', em dùng thao tác?",
+    "Lever": 3,
+    "choices": [
+      "Thao tác nháy đúp chuột trái",
+      "Thao tác kéo thả chuột trái",
+      "Thao tác nháy chuột phải ngay",
+      "Thao tác xoay nút cuộn chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi muốn chọn biểu tượng 'This PC' mà không mở nó ra, em thực hiện thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Nháy chuột trái vào biểu tượng",
+      "Nháy đúp chuột vào biểu tượng",
+      "Nháy chuột phải vào biểu tượng",
+      "Kéo thả biểu tượng đi chỗ khác"
     ],
     "answer": 0
   }

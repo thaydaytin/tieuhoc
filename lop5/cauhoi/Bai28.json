@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong lập trình Scratch, biến được định nghĩa là gì?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Một phần bộ nhớ dùng lưu giá trị",
+      "Một nhân vật hoạt hình trên máy",
+      "Một âm thanh phát ra từ hệ thống",
+      "Một hình ảnh nằm ở phông nền cũ"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nhóm lệnh nào chứa các khối lệnh để tạo và quản lý biến?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động của nhân vật",
+      "Nhóm lệnh Hiển thị các bóng nói",
+      "Nhóm lệnh Các biến số trong Scratch",
+      "Nhóm lệnh Sự kiện bắt đầu chương"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Biến 'trả lời' (answer) thuộc nhóm lệnh nào sau đây?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Nhóm lệnh Các phép toán số học",
+      "Nhóm lệnh Điều khiển vòng lặp",
+      "Nhóm lệnh Cảm biến của nhân vật",
+      "Nhóm lệnh Các biến số người dùng"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Biến 'trả lời' dùng để lưu trữ dữ liệu từ lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Lệnh nói Xin chào trong vài giây",
+      "Lệnh lặp lại mười lần các bước",
+      "Lệnh hỏi tên bạn là gì và đợi",
+      "Lệnh di chuyển mười bước liên tục"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để tạo một biến mới theo ý mình, em nháy chuột vào nút nào?",
+    "Lever": 1,
+    "choices": [
+      "Nháy vào nút Tạo một biến mới",
+      "Nháy vào nút Xóa một biến cũ",
+      "Nháy vào nút Hiển thị tên biến",
+      "Nháy vào nút Đặt lại giá trị số"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh nào sau đây dùng để gán một giá trị cụ thể cho biến?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh thay đổi biến một lượng số",
+      "Lệnh hiện biến số lên sân khấu",
+      "Lệnh đặt biến thành một giá trị",
+      "Lệnh ẩn biến số khỏi màn hình"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi thực hiện lệnh 'hỏi... và đợi', giá trị người dùng nhập sẽ ở đâu?",
+    "Lever": 2,
+    "choices": [
+      "Lưu vào trong biến số tên là trả lời",
+      "Lưu vào trong danh sách các nhân vật",
+      "Lưu vào trong vùng lập trình của máy",
+      "Lưu vào trong tệp tin của phần mềm"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sự khác nhau giữa lệnh 'đặt biến thành' và 'thay đổi biến' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh đặt gán luôn, lệnh thay đổi cộng thêm",
+      "Lệnh đặt nhân lên, lệnh thay đổi trừ đi",
+      "Lệnh đặt xóa biến, lệnh thay đổi tạo biến",
+      "Lệnh đặt ẩn biến, lệnh thay đổi hiện biến"
+    ],
+    "answer": 0
+  },
+  {
+    "choices": [
+      "Làm cho biến số bị xóa khỏi danh sách",
+      "Làm cho biến số không hiện trên sân khấu",
+      "Làm cho biến số không thể thay đổi nữa",
+      "Làm cho biến số đổi sang một màu sắc mới"
+    ],
+    "question": "Thao tác bỏ dấu tích bên cạnh tên biến trong bảng chọn có tác dụng gì?",
+    "Lever": 2,
+    "answer": 1
+  },
+  {
+    "question": "Tại sao chúng ta nên đặt tên biến gợi nhớ đến nội dung lưu trữ?",
+    "Lever": 2,
+    "choices": [
+      "Để chương trình chạy với tốc độ nhanh",
+      "Để dễ dàng quản lý và sử dụng biến số",
+      "Để máy tính tự động sửa lỗi kịch bản",
+      "Để nhân vật di chuyển một cách tự nhiên"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh 'thay đổi điểm một lượng 5' thực hiện công việc gì?",
+    "Lever": 2,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Giá trị của biến điểm sẽ luôn là bằng 5",
+      "Giá trị biến điểm tăng thêm 5 đơn vị",
+      "Giá trị biến điểm giảm đi 5 đơn vị",
+      "Giá trị biến điểm sẽ bị xóa hoàn toàn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Biến 'số giây' đang là 0. Thực hiện lệnh 'thay đổi số giây một lượng 1' mười lần, kết quả là?",
+    "Lever": 3,
+    "choices": [
+      "Kết quả cuối cùng của biến số là 1",
+      "Kết quả cuối cùng của biến số là 5",
+      "Kết quả cuối cùng của biến số là 10",
+      "Kết quả cuối cùng của biến số là 0"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu đặt biến 'điểm' là 10, sau đó chạy lệnh 'đặt điểm thành 5', giá trị cuối cùng là?",
+    "Lever": 3,
+    "choices": [
+      "Giá trị của biến điểm bây giờ là 10",
+      "Giá trị của biến điểm bây giờ là 15",
+      "Giá trị của biến điểm bây giờ là 5",
+      "Giá trị của biến điểm bây giờ là 0"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để nhân vật nói câu 'Chào bạn [tên của bạn]', em kết hợp biến 'trả lời' với lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng lệnh nói và phép toán kết hợp",
+      "Sử dụng lệnh nói và phép toán cộng số",
+      "Sử dụng lệnh nói và lệnh thay đổi biến",
+      "Sử dụng lệnh nói và lệnh lặp lại liên tục"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong trò chơi, để tăng điểm khi nhân vật chạm vào quả bóng, em dùng khối lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh nếu chạm bóng thì thay đổi điểm 1",
+      "Lệnh nếu chạm bóng thì đặt biến điểm là 1",
+      "Lệnh nếu chạm bóng thì hiện biến điểm số",
+      "Lệnh nếu chạm bóng thì xóa giá trị điểm"
     ],
     "answer": 0
   }

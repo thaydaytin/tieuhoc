@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong Scratch, nút lệnh nào được dùng để bắt đầu chạy các khối lệnh trong chương trình?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Nút lệnh có hình lá cờ màu đỏ",
+      "Nút lệnh có hình lá cờ màu xanh",
+      "Nút lệnh hình lục giác màu đỏ",
+      "Nút lệnh hình quả địa cầu xanh"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Nhóm lệnh Sự kiện trong phần mềm Scratch thường bao gồm các lệnh dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Dùng để thay đổi màu nhân vật",
+      "Dùng để bắt đầu chạy chương trình",
+      "Dùng để xóa các khối lệnh cũ",
+      "Dùng để lưu tệp vào trong máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo hướng dẫn ở trang 59, em có thể ghép thêm khối lệnh nào vào phía trên lệnh Sự kiện?",
+    "Lever": 1,
+    "choices": [
+      "Ghép được lệnh nói xin chào",
+      "Ghép được lệnh đi mười bước",
+      "Không thể ghép thêm lệnh nào",
+      "Ghép được lệnh đợi một giây"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để chạy chương trình khi người dùng nhấn một phím từ bàn phím, em sử dụng lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Lệnh khi bấm vào lá cờ xanh",
+      "Lệnh khi bấm vào nhân vật này",
+      "Lệnh khi bấm phím [phím trắng]",
+      "Lệnh khi phông nền thay đổi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi muốn dừng mọi hoạt động của nhân vật trên sân khấu, em nháy chuột vào biểu tượng nào?",
+    "Lever": 1,
+    "choices": [
+      "Biểu tượng hình lá cờ màu xanh",
+      "Biểu tượng hình lục giác màu đỏ",
+      "Biểu tượng hình chú mèo màu cam",
+      "Biểu tượng hình ô vuông màu trắng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh lưu chương trình Scratch về máy tính của em nằm trong bảng chọn (thẻ) nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong thẻ Chỉnh sửa tệp",
+      "Nằm trong thẻ Hướng dẫn học",
+      "Nằm trong thẻ Tập tin chương",
+      "Nằm trong thẻ Nhóm lệnh hiển"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi em ghép nhiều khối lệnh liên tiếp dưới một lệnh Sự kiện, chúng sẽ thực hiện như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Các lệnh thực hiện từ dưới lên",
+      "Các lệnh thực hiện cùng một lúc",
+      "Các lệnh thực hiện từ trên xuống",
+      "Các lệnh thực hiện rất ngẫu nhiên"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tại sao lệnh 'Khi bấm vào [cờ xanh]' lại rất quan trọng trong việc tạo chương trình?",
+    "Lever": 2,
+    "choices": [
+      "Vì nó giúp nhân vật đẹp hơn",
+      "Vì nó bắt đầu mọi khối lệnh",
+      "Vì nó làm máy tính chạy nhanh",
+      "Vì nó xóa được các lỗi sai"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong kịch bản ở Hình 1 trang 59, sau khi nháy lá cờ xanh, nhân vật Mèo sẽ làm gì đầu tiên?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật Mèo sẽ nói xin chào",
+      "Nhân vật Mèo sẽ đứng yên một chỗ",
+      "Nhân vật Mèo sẽ di chuyển 10 bước",
+      "Nhân vật Mèo sẽ thay đổi màu sắc"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điểm khác biệt chính giữa lệnh 'Khi bấm vào cờ xanh' và 'Khi bấm vào nhân vật' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Cách thức để bắt đầu thực hiện",
+      "Số lượng các lệnh được ghép nối",
+      "Màu sắc hiển thị của các khối",
+      "Vị trí đặt lệnh trong vùng lập"
     ],
     "answer": 0
+  },
+  {
+    "question": "Việc xây dựng kịch bản trước khi lập trình trong Scratch có lợi ích chính là gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm cho nhân vật di chuyển chậm",
+      "Giúp máy tính tiết kiệm điện năng",
+      "Giúp chương trình đúng yêu cầu",
+      "Làm cho các khối lệnh có màu đẹp"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Quan sát hai chương trình A và B ở Hình 2 trang 61, tại sao kết quả của chúng lại khác nhau?",
+    "Lever": 3,
+    "choices": [
+      "Do sử dụng các lệnh khác nhau",
+      "Do chọn các nhân vật khác nhau",
+      "Do thứ tự các lệnh đã thay đổi",
+      "Do nháy chuột vào các nút khác"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em muốn tạo chương trình giới thiệu bản thân gồm tên và sở thích. Em nên làm thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Chỉ dùng một lệnh nói rất dài",
+      "Ghép các lệnh nói theo thứ tự",
+      "Dùng lệnh di chuyển nhiều bước",
+      "Nháy đúp vào vùng phông nền sân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu một nhóm lệnh không có khối lệnh Sự kiện ở trên cùng thì chương trình đó sẽ?",
+    "Lever": 3,
+    "choices": [
+      "Vẫn tự động chạy khi mở máy",
+      "Chỉ chạy khi ta nhấn phím Alt",
+      "Không thể bắt đầu thực hiện được",
+      "Sẽ tự động xóa khỏi vùng lập"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để thay đổi phím kích hoạt từ phím 'trắng' sang phím 'a', em cần thực hiện thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Xóa lệnh cũ và lấy lệnh khác",
+      "Gõ chữ a từ bàn phím máy tính",
+      "Nháy chuột vào ô tùy chọn lệnh",
+      "Kéo lệnh vào vùng thư viện lệnh"
+    ],
+    "answer": 2
   }
 ]
