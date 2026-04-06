@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
+    "question": "Làm việc theo từng bước có nghĩa là thực hiện công việc như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện nhiều việc cùng một lúc",
+      "Thực hiện các việc theo một thứ tự",
+      "Thực hiện công việc một cách tự do",
+      "Thực hiện việc không cần kế hoạch"
+    ],
+    "answer": 1
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
+    "question": "Trong một quy trình, bước tiếp theo chỉ được thực hiện khi nào?",
+    "Lever": 1,
+    "choices": [
+      "Khi các bước trước đó đã hoàn thành",
+      "Khi công việc vừa mới được bắt đầu",
+      "Khi người làm cảm thấy muốn thực hiện",
+      "Khi tất cả các bước làm cùng một lúc"
+    ],
+    "answer": 0
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Việc chia một nhiệm vụ lớn thành các nhiệm vụ nhỏ có ích lợi gì?",
+    "Lever": 1,
+    "choices": [
+      "Làm cho công việc trở nên khó khăn",
+      "Làm cho công việc dễ hiểu và dễ làm",
+      "Làm cho máy tính chạy với tốc độ chậm",
+      "Làm cho người thực hiện mau chóng mệt"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Ví dụ về bài tập thể dục 'Vươn thở' trong sách thể hiện điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Các bước cần thực hiện đúng thứ tự",
+      "Các động tác không cần theo quy luật",
+      "Chỉ cần thực hiện động tác cuối cùng",
+      "Các bước thực hiện ngẫu nhiên bất kỳ"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong biểu thức toán học 216 + 30 : 5, bước đầu tiên cần làm là gì?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện phép tính cộng số 216",
+      "Thực hiện phép tính chia số 30 cho 5",
+      "Thực hiện ghi kết quả cuối cùng ngay",
+      "Thực hiện lấy số 216 chia cho số 30"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo ghi nhớ, mỗi bước thực hiện là một phần việc như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Là một phần việc có kích thước lớn",
+      "Là một phần việc có kích thước nhỏ",
+      "Là một phần việc không quan trọng",
+      "Là một phần việc làm mãi không xong"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao thứ tự các bước trong một công việc lại rất quan trọng?",
+    "Lever": 2,
+    "choices": [
+      "Để tiết kiệm thời gian cho người làm",
+      "Để đảm bảo kết quả công việc là đúng",
+      "Để máy tính không bị hỏng phần cứng",
+      "Để công việc có thêm nhiều bước mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc chuẩn bị nội dung và hình ảnh cho bài trình chiếu được gọi là gì?",
+    "Lever": 2,
+    "choices": [
+      "Chia một việc lớn thành các việc nhỏ",
+      "Thực hiện toàn bộ nội dung công việc",
+      "Bỏ qua các bước không cần thiết lắm",
+      "Làm việc không theo một quy trình nào"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Điểm chung giữa động tác thể dục và tính giá trị biểu thức là gì?",
+    "Lever": 2,
+    "choices": [
+      "Cần phải làm thật nhanh để có kết quả",
+      "Cần tuân theo đúng thứ tự các bước làm",
+      "Cần phải sử dụng máy tính để thực hiện",
+      "Cần phải có nhiều người cùng làm việc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em nên chia nhỏ nhiệm vụ khi làm việc nhóm với các bạn?",
+    "Lever": 2,
+    "choices": [
+      "Để mỗi bạn thực hiện một phần việc nhỏ",
+      "Để một bạn thực hiện hết các phần việc",
+      "Để công việc kéo dài thời gian làm hơn",
+      "Để không ai phải làm bất cứ việc gì cả"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu một bước trong quy trình bị thực hiện sai thì điều gì sẽ xảy ra?",
+    "Lever": 2,
+    "choices": [
+      "Công việc sẽ vẫn hoàn thành rất tốt",
+      "Kết quả cuối cùng sẽ không chính xác",
+      "Công việc sẽ tự động được sửa lại ngay",
+      "Máy tính sẽ tự thực hiện thay bước đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tạo bài trình chiếu giới thiệu gia đình, em cần làm theo trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Lưu tệp -> Mở phần mềm -> Tạo trang mới",
+      "Mở phần mềm -> Tạo trang -> Lưu và đặt tên",
+      "Đặt tên tệp -> Mở phần mềm -> Tạo các trang",
+      "Mở phần mềm -> Lưu và đặt tên -> Tạo trang"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi muốn gấp giấy thành hình con cá mà chưa biết cách, em nên làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Cứ gấp theo ý thích của mình ngay lập tức",
+      "Làm theo từng bước thầy cô đã hướng dẫn",
+      "Xé tờ giấy thành nhiều mảnh nhỏ khác nhau",
+      "Đợi bạn làm xong rồi mượn về xem kết quả"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong trò chơi chuyển đĩa (trang 62), quy tắc quan trọng nhất là gì?",
+    "Lever": 3,
+    "choices": [
+      "Mỗi bước có thể chuyển nhiều đĩa một lúc",
+      "Không được để đĩa to nằm trên đĩa nhỏ",
+      "Đĩa nhỏ phải nằm dưới các loại đĩa to",
+      "Có thể đặt đĩa ở bất cứ vị trí nào tùy ý"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em thực hiện lệnh Lưu bài trước khi gõ nội dung, tệp đó sẽ như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Tệp sẽ tự động có đầy đủ các hình ảnh",
+      "Tệp được tạo ra nhưng không có nội dung",
+      "Máy tính sẽ báo lỗi và tự động tắt máy",
+      "Tệp sẽ biến mất hoàn toàn khỏi máy tính"
+    ],
     "answer": 1
   }
 ]

@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Trong phần mềm Scratch, biểu tượng nào đại diện cho phép toán nhân?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng dấu cộng (+)",
+      "Sử dụng dấu nhân (*)",
+      "Sử dụng dấu chia (/)",
+      "Sử dụng dấu gạch (-)"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Nhóm lệnh nào chứa các khối lệnh để thực hiện tính tổng hoặc hiệu?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Các phép toán",
+      "Nhóm lệnh Các biến số",
+      "Nhóm lệnh sự Hiển thị"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'kết hợp [táo] [chuối]' được sử dụng nhằm mục đích chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Để nhân hai số với nhau",
+      "Để nối các dòng chữ lại",
+      "Để xóa các biến có sẵn",
+      "Để lặp lại một hành động"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả của khối lệnh phép toán '6 * 3' trong Scratch là bao nhiêu?",
+    "Lever": 1,
+    "choices": [
+      "Cho kết quả bằng số 9",
+      "Cho kết quả bằng số 3",
+      "Cho kết quả bằng số 2",
+      "Cho kết quả bằng số 18"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Quy tắc tính giá trị biểu thức trong Scratch tuân theo quy luật nào?",
+    "Lever": 1,
+    "choices": [
+      "Làm từ dưới lên phía trên",
+      "Làm ngẫu nhiên các lệnh",
+      "Giống quy tắc toán học",
+      "Làm từ phải sang bên trái"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh 'kết hợp [Em] [ học]' sẽ cho ra kết quả hiển thị như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Hiển thị chữ là: Em học",
+      "Hiển thị chữ là: Em",
+      "Hiển thị chữ là: học",
+      "Hiển thị chữ là: học Em"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tính giá trị biểu thức (6 + 3) / 3, em cần ghép các khối lệnh như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Lồng khối cộng vào khối chia",
+      "Lồng khối chia vào khối cộng",
+      "Ghép khối cộng nằm dưới khối chia",
+      "Ghép khối chia nằm dưới khối cộng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi biến x có giá trị bằng 10, lệnh 'kết hợp [x = ] (x)' sẽ trả về gì?",
+    "Lever": 2,
+    "choices": [
+      "Trả về kết quả là chữ x",
+      "Trả về kết quả là số 10",
+      "Trả về kết quả là: x = 10",
+      "Trả về kết quả là dấu bằng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt khi sử dụng lệnh 'nói' kết hợp với phép toán là gì?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật sẽ di chuyển nhanh",
+      "Nhân vật thông báo kết quả",
+      "Nhân vật sẽ đổi trang phục",
+      "Nhân vật sẽ bị biến mất đi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tạo ra câu 'Tổng là: 15', em cần sử dụng những thành phần nào?",
+    "Lever": 2,
+    "choices": [
+      "Dùng lệnh hỏi và lệnh đợi",
+      "Dùng lệnh lặp và lệnh cộng",
+      "Dùng lệnh nối và lệnh chia",
+      "Dùng lệnh kết hợp và phép cộng"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Khối lệnh '2 * (6 + 3)' sẽ cho kết quả là bao nhiêu theo đúng quy tắc?",
+    "Lever": 2,
+    "choices": [
+      "Kết quả cuối cùng là 12",
+      "Kết quả cuối cùng là 15",
+      "Kết quả cuối cùng là 18",
+      "Kết quả cuối cùng là 21"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong chương trình 'Nano làm toán', trình tự nào giúp nhập và tính tổng đúng?",
+    "Lever": 3,
+    "choices": [
+      "Hỏi số - Đặt biến - Tính - Nói",
+      "Tính số - Hỏi số - Đặt - Nói",
+      "Nói - Tính số - Đặt - Hỏi số",
+      "Đặt - Nói - Tính số - Hỏi số"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Muốn nhân vật nói 'Chào bạn [trả lời]', em cần ghép lệnh theo cách nào?",
+    "Lever": 3,
+    "choices": [
+      "Lồng biến trả lời vào lệnh nói",
+      "Nối chữ Chào và biến trả lời",
+      "Dùng hai lệnh nói liên tiếp",
+      "Chỉ dùng lệnh biến trả lời"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tính giá trị biểu thức (3 + 7) / 2 trong Scratch, kết quả sẽ là?",
+    "Lever": 3,
+    "choices": [
+      "Giá trị nhận được bằng 5",
+      "Giá trị nhận được bằng 6",
+      "Giá trị nhận được bằng 7",
+      "Giá trị nhận được bằng 8"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Làm thế nào để hiển thị họ tên đầy đủ từ hai biến 'Họ' và 'Tên'?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng một khối lệnh nhân",
+      "Sử dụng một khối lệnh cộng",
+      "Sử dụng khối lệnh kết hợp",
+      "Sử dụng một khối lệnh chia"
+    ],
+    "answer": 2
   }
 ]
