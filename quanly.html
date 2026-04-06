@@ -269,6 +269,38 @@
 	  font-size:18px;
 	  color:white;
 	}
+	/* Khung chứa camera và vùng chọn mặt */
+	.camera-container {
+	  position: relative;
+	  width: 200px;
+	  height: 200px;
+	  margin: 10px auto;
+	  border: 2px solid var(--primary);
+	  border-radius: 8px;
+	  overflow: hidden;
+	  background: #000;
+	}
+	#webcamVideo {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	}
+	/* Khung lưới hỗ trợ canh mặt */
+	.camera-overlay {
+	  position: absolute;
+	  top: 0; left: 0; width: 100%; height: 100%;
+	  border: 2px dashed rgba(255,255,255,0.5);
+	  box-sizing: border-box;
+	  pointer-events: none;
+	}
+	.camera-overlay::after {
+	  content: "";
+	  position: absolute;
+	  top: 15%; left: 15%; width: 70%; height: 70%;
+	  border: 2px solid yellow;
+	  border-radius: 50%;
+	  opacity: 0.6;
+	}
 </style>
 
 </head>
@@ -432,7 +464,19 @@
     <div style="display:flex; gap:14px; margin-top:12px; align-items:flex-start; flex-wrap:wrap;">
       <div style="flex:0 0 110px; text-align:center;">
         <div id="stuAvatarLarge" style="width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 8px;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;"></div>
-        <div class="muted" id="stuMetaId"></div>
+        
+		<div id="cameraArea" style="display:none; text-align:center;">
+		  <div class="camera-container">
+			<video id="webcamVideo" autoplay playsinline></video>
+			<div class="camera-overlay"></div>
+		  </div>
+		  <canvas id="captureCanvas" width="200" height="200" style="display:none;"></canvas>
+		  <button class="btn-like" style="padding:5px 10px; font-size:12px;" onclick="takePhoto()">📸 Chụp ảnh</button>
+		</div>
+		<button id="btnToggleCam" class="muted" style="margin-top:8px; cursor:pointer; border:1px solid #ddd; background:#fff; border-radius:5px;" onclick="toggleCamera()">📷 Thay đổi ảnh</button>
+		
+		
+		<div class="muted" id="stuMetaId"></div>
         <div class="muted" id="stuMetaClass" style="margin-top:4px"></div>
       </div>
 
@@ -1294,6 +1338,66 @@ function triggerFireworks(){const cx=window.innerWidth/2,cy=window.innerHeight/2
 	  return remark;
 	}
 
+	let stream = null;
+	let currentPhotoName = "avatar.jpg";
+
+	// Hàm bật/tắt camera
+	async function toggleCamera() {
+	  const area = document.getElementById('cameraArea');
+	  const video = document.getElementById('webcamVideo');
+	  const btn = document.getElementById('btnToggleCam');
+
+	  if (area.style.display === 'none') {
+		try {
+		  // Lấy tên file cũ từ ID học sinh đang chọn
+		  const currentId = document.getElementById("stuMetaId").textContent.replace("Mã: ", "").trim();
+		  currentPhotoName = `${currentId}.jpg`; 
+
+		  stream = await navigator.mediaDevices.getUserMedia({ video: { width: 400, height: 400 } });
+		  video.srcObject = stream;
+		  area.style.display = 'block';
+		  btn.textContent = "✖ Đóng Camera";
+		} catch (err) {
+		  alert("Không thể truy cập Webcam: " + err.message);
+		}
+	  } else {
+		stopCamera();
+	  }
+	}
+
+	function stopCamera() {
+	  if (stream) {
+		stream.getTracks().forEach(track => track.stop());
+	  }
+	  document.getElementById('cameraArea').style.display = 'none';
+	  document.getElementById('btnToggleCam').textContent = "📷 Thay đổi ảnh";
+	}
+
+	// Hàm chụp ảnh và tải về máy
+	function takePhoto() {
+	  const video = document.getElementById('webcamVideo');
+	  const canvas = document.getElementById('captureCanvas');
+	  const ctx = canvas.getContext('2d');
+
+	  // Vẽ ảnh từ video lên canvas với kích thước 200x200
+	  ctx.drawImage(video, 0, 0, 200, 200);
+
+	  // Chuyển canvas thành file để tải về
+	  const link = document.createElement('a');
+	  link.download = currentPhotoName;
+	  link.href = canvas.toDataURL('image/jpeg', 0.9);
+	  link.click();
+	  
+	  alert("Đã chụp! Vui lòng lưu đè vào thư mục ảnh của lớp.");
+	  stopCamera();
+	}
+
+	// Chỉnh sửa thêm vào hàm closeStudentPopup có sẵn để tự tắt cam khi đóng popup
+	const oldClosePopup = closeStudentPopup;
+	closeStudentPopup = function() {
+	  stopCamera();
+	  oldClosePopup();
+	};
 </script>
 </body>
 </html>
