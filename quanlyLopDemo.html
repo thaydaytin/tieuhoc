@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Quản lý lớp học — Thầy dạy tin</title>
+
+  <!-- Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js (for ranking chart) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --primary:#1976D2;
+      --accent:#26A69A;
+      --bg:#EAF4FF;
+      --card:#FFFFFF;
+      --muted:#6b7280;
+      --success:#00C853;
+      --warning:#FFEB3B;
+      --danger:#FF3D00;
+      --glass: rgba(255,255,255,0.7);
+      --shadow: 0 6px 18px rgba(8,35,63,0.08);
+    }
+    *{box-sizing:border-box;font-family:"Poppins",system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    body{
+      margin:0;
+      min-height:100vh;
+      background: linear-gradient(180deg, #f6fbff 0%, #eaf4ff 100%);
+      color:#0b2540;
+    }
+
+    /* Header */
+    header.app-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 28px;
+      background:var(--primary);
+      color:white;
+      box-shadow: 0 6px 18px rgba(25,118,210,0.18);
+      position:sticky;
+      top:0; z-index: 50;
+    }
+    .brand {font-size:20px; font-weight:700; display:flex; align-items:center; gap:12px;}
+    .brand .dot{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#fff9,#ffffff44);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--primary)}
+    .header-tools{display:flex; gap:10px; align-items:center;}
+
+    .tool-btn{
+      background: rgba(255,255,255,0.12);
+      border: none; color: white;
+      padding:8px 12px;border-radius:10px; cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px; font-weight:600;
+      box-shadow:none;
+    }
+    .tool-btn:hover{transform:translateY(-3px); transition:0.18s ease;}
+
+    /* Layout */
+    .container{
+      max-width:1200px;
+      margin:28px auto;
+      padding:0 20px 80px;
+    }
+
+    /* Top controls: class + week + actions */
+    .controls{
+      display:flex; gap:16px; align-items:center; margin-bottom:18px; flex-wrap:wrap;
+    }
+    .card{
+      background:var(--card); border-radius:12px; padding:14px; box-shadow:var(--shadow);
+    }
+    .class-select{
+      display:flex; gap:12px; align-items:center;
+      padding:10px 14px; border-radius:10px;
+    }
+    .class-grid{ display:flex; gap:10px; flex-wrap:wrap; }
+    .class-item{
+      min-width:92px; padding:10px 12px; border-radius:10px; background:linear-gradient(180deg,#fff,#f6fbff);
+      border:1px solid #ecf3fb; cursor:pointer; font-weight:600; color:var(--primary);
+    }
+    .class-item.active{ background:var(--primary); color:white; box-shadow:0 6px 20px rgba(25,118,210,0.14) }
+
+    .week-select{
+      display:flex; gap:8px; align-items:center;
+    }
+    select, input[type=number]{
+      padding:8px 10px; border-radius:8px; border:1px solid #dbe7f7; background:white;
+    }
+
+    .actions{ display:flex; gap:8px; align-items:center; }
+
+    /* Students grid */
+    .students{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap:16px;
+      margin-top:16px;
+    }
+    .student-card{
+      background:var(--card); border-radius:12px; padding:12px; box-shadow:var(--shadow);
+      display:flex; gap:12px; align-items:center; transition:transform .14s ease;
+    }
+    .student-card:hover{ transform:translateY(-6px) }
+    .avatar{
+      width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-weight:700; color:white; font-size:18px;
+      flex-shrink:0;
+    }
+    .student-info{ flex:1 }
+    .student-name{ font-weight:700; font-size:16px; color:#07324a; }
+    .student-meta{ color:var(--muted); font-size:13px; margin-top:6px; }
+    .student-actions{ display:flex; flex-direction:column; gap:8px; align-items:flex-end }
+
+    .btn-like, .btn-dislike{
+      border:none; padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700; color:white;
+      display:inline-flex; gap:6px; align-items:center; justify-content:center;
+    }
+    .btn-like{ background: linear-gradient(90deg,#00C853,#26A69A); }
+    .btn-dislike{ background: linear-gradient(90deg,#FF7043,#FF3D00); }
+
+    .score-badge{
+      margin-top:8px; font-weight:700; color:#07324a; background:#f1f7ff; padding:4px 8px; border-radius:8px; font-size:13px;
+    }
+
+    /* Floating tools */
+    .fab{
+      position:fixed; right:28px; bottom:28px; z-index:80;
+      display:flex; flex-direction:column; gap:10px; align-items:center;
+    }
+    .fab-main{
+      width:64px; height:64px; border-radius:50%; background:var(--primary); color:white; border:none;
+      box-shadow: 0 12px 30px rgba(25,118,210,0.28); font-size:26px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .fab-sub{ width:48px;height:48px;border-radius:10px;background:var(--card);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;cursor:pointer }
+
+    /* Ranking popup */
+    .overlay{
+      position:fixed; inset:0; background:rgba(3,10,28,0.6); display:none; align-items:center; justify-content:center; z-index:200;
+    }
+    .ranking-modal{
+      width:92%; max-width:960px; background: linear-gradient(180deg,#ffffff,#f7fbff); border-radius:16px; padding:20px; box-shadow:0 20px 60px rgba(3,10,28,0.32);
+    }
+    .ranking-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .ranking-body{ display:flex; gap:18px; margin-top:12px; flex-wrap:wrap; }
+    .top-list{ width:360px; display:flex; flex-direction:column; gap:8px; }
+    .top-item{ display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background:white; box-shadow:var(--shadow); }
+    .medal{ width:56px; height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; color:white; }
+    .medal.gold{ background: linear-gradient(90deg,#FFD54A,#FFC107) }
+    .medal.silver{ background: linear-gradient(90deg,#BDBDBD,#9E9E9E) }
+    .medal.bronze{ background: linear-gradient(90deg,#FFAB91,#FF7043) }
+
+    .close-btn{ background:transparent;border:none;color:var(--muted);font-weight:700;cursor:pointer }
+
+    /* small helpers */
+    .muted{ color:var(--muted); font-size:13px }
+    .hidden{ display:none }
+
+    /* loader */
+    .loader{ width:24px;height:24px;border-radius:50%; border:3px solid #e6f0ff;border-top-color:var(--primary); animation:spin 1s linear infinite }
+    @keyframes spin { to { transform:rotate(360deg) } }
+
+    /* login overlay */
+    #loginOverlay {
+      position: fixed; inset:0; background: rgba(2,6,23,0.6); display:flex; align-items:center; justify-content:center; z-index:9999;
+    }
+    #loginBox {
+      background:white; padding:26px; border-radius:12px; width:360px; box-shadow:0 20px 60px rgba(0,0,0,0.2); text-align:center;
+    }
+    #loginBox input {
+      width:100%; padding:10px; margin-top:12px; border-radius:8px; border:1px solid #e6f0ff;
+    }
+    #loginError { color:#c62828; margin-top:8px; }
+
+	/* === Hiệu ứng +1 / -1 bay lên === */
+	.fx-score {
+	  position: absolute;
+	  font-weight: bold;
+	  font-size: 22px;
+	  opacity: 1;
+	  animation: flyUp 0.8s ease-out forwards;
+	  pointer-events: none;
+	  z-index: 1000;
+	}
+
+	@keyframes flyUp {
+	  0% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	  }
+	  100% {
+		transform: translateY(-40px) scale(1.5);
+		opacity: 0;
+	  }
+	}
+
+	
+    /* responsive */
+    @media (max-width:640px){
+      .students{ grid-template-columns: repeat(2, 1fr); }
+      .student-card{ padding:10px }
+    }
+	/* Popup bảng xếp hạng - có thanh cuộn dọc */
+	.ranking-body {
+	  display: block !important;
+	  padding: 15px 25px;
+	  max-height: 80vh;        /* Chiều cao giới hạn 80% màn hình */
+	  overflow-y: auto;        /* Cho phép cuộn dọc */
+	  overflow-x: hidden;
+	}
+
+	.ranking-chart-scroll {
+	  width: 100%;
+	  min-height: 400px;
+	}
+
+	#rankingChart {
+	  width: 100% !important;
+	  display: block;
+	}
+
+	/* Student popup specifics (đặt cùng style hiện có) */
+	#stuAvatarLarge img { width:96px; height:96px; object-fit:cover; border-radius:50%; display:block; }
+	#stuAvatarLarge .initials { width:96px; height:96px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:800; color:white; font-size:28px; }
+
+  
+	.wheel-popup {
+	  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+	  background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center;
+	  flex-direction: column; z-index: 9999;
+	}
+	.wheel-content {
+	  background: white; border-radius: 16px; padding: 20px; text-align: center;
+	  box-shadow: 0 0 30px rgba(0,0,0,0.4); animation: fadeIn 0.3s ease-in-out;
+	}
+	@keyframes fadeIn { from { opacity: 0; transform: scale(0.8);} to { opacity: 1; transform: scale(1);} }
+	#wheelCanvas {
+	  border-radius: 50%; border: 6px solid #1976d2; background: #e3f2fd; cursor: pointer;
+	}
+	.winner-popup {
+	  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+	  font-size: 48px; font-weight: bold; color: #fff; background: rgba(46,125,50,0.9);
+	  padding: 30px 60px; border-radius: 20px; display: none; z-index: 10000;
+	  animation: blink 1s infinite alternate;
+	}
+	@keyframes blink { from { opacity: 1; transform: translate(-50%, -50%) scale(1);} to { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05);} }
+	#fireworksCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+	/* Avatar image */
+	.avatar { position: relative; overflow: hidden; }
+	.avatar img {
+	  width: 56px;
+	  height: 56px;
+	  object-fit: cover;
+	  display: block;
+	  border-radius: 50%;
+	  border: 1px solid rgba(255,255,255,0.12);
+	}
+	.avatar .initials {
+	  width: 56px;
+	  height: 56px;
+	  display:flex;
+	  align-items:center;
+	  justify-content:center;
+	  border-radius:50%;
+	  font-weight:700;
+	  font-size:18px;
+	  color:white;
+	}
+	/* Khung chứa camera và vùng chọn mặt */
+	.camera-container {
+	  position: relative;
+	  width: 200px;
+	  height: 200px;
+	  margin: 10px auto;
+	  border: 2px solid var(--primary);
+	  border-radius: 8px;
+	  overflow: hidden;
+	  background: #000;
+	}
+	#webcamVideo {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	}
+	/* Khung lưới hỗ trợ canh mặt */
+	.camera-overlay {
+	  position: absolute;
+	  top: 0; left: 0; width: 100%; height: 100%;
+	  border: 2px dashed rgba(255,255,255,0.5);
+	  box-sizing: border-box;
+	  pointer-events: none;
+	}
+	.camera-overlay::after {
+	  content: "";
+	  position: absolute;
+	  top: 15%; left: 15%; width: 70%; height: 70%;
+	  border: 2px solid yellow;
+	  border-radius: 50%;
+	  opacity: 0.6;
+	}
+</style>
+
+</head>
+<body>
+
+  <!-- LOGIN OVERLAY -->
+  <div id="loginOverlay">
+    <div id="loginBox">
+      <h3>🔐 Đăng nhập quản lý lớp</h3>
+      <input type="password" id="passwordInput" placeholder="Nhập mật khẩu">
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:center;">
+        <button class="btn-like" onclick="attemptLogin()">Đăng nhập</button>
+      </div>
+      <div id="loginError" class="muted" style="display:none"></div>
+      <div style="margin-top:10px; font-size:12px; color:#666">Chào mừng Thầy đến với trang quản lý lớp học </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="app-header" style="display:none" id="mainHeader">
+    <div class="brand">
+      <div class="dot">AH1</div>
+      <div>
+        <div>Quản lý lớp học</div>
+        <div style="font-size:12px; opacity:0.9">Thầy dạy tin</div>
+      </div>
+    </div>
+
+    <div class="header-tools">
+      <button class="tool-btn" onclick="openRanking()">📊 Bảng xếp hạng</button>
+      <button class="tool-btn" onclick="openWheel()">🎯 Gọi ngẫu nhiên</button>
+      <button class="tool-btn" onclick="openTimer()">⏰ Đồng hồ</button>
+      <button class="tool-btn" onclick="logout()">🚪 Đăng xuất</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="container" id="mainContent" style="display:none">
+    <!-- Controls -->
+    <div class="controls">
+      <div class="card class-select" style="display:flex;align-items:center;gap:12px;">
+        <div style="font-weight:700;color:var(--primary)">Chọn lớp</div>
+        <div class="class-grid" id="classGrid">
+          <!-- class cards inserted here -->
+        </div>
+      </div>
+
+      <div class="card week-select">
+        <label style="font-weight:700; margin-right:6px;">Tuần</label>
+        <select id="weekSelector" onchange="setCurrentWeek(this.value)">
+          <!-- options inserted by JS -->
+        </select>
+        <div style="margin-left:10px; font-size:13px; color:var(--muted)">Tuần đang chọn</div>
+      </div>
+
+      <div class="card actions">
+        <button class="btn-like" onclick="copyStudents()">📋 Copy danh sách</button>
+        <button class="btn-like" onclick="refreshStudents()">🔄 Làm mới</button>
+      </div>
+    </div>
+
+    <!-- Student grid -->
+    <div id="studentList" class="students">
+      <!-- student cards injected here -->
+    </div>
+  </div>
+
+  <!-- Floating action buttons -->
+  <div class="fab" style="display:none" id="fabTools">
+    <button class="fab-main" title="Công cụ">＋</button>
+    <div style="display:flex;flex-direction:column;align-items:center;margin-top:8px;">
+      <div class="fab-sub" title="Gọi ngẫu nhiên" onclick="openWheel()">🎯</div>
+      <div class="fab-sub" title="Đồng hồ" onclick="openTimer()">⏰</div>
+      <div class="fab-sub" title="Bảng xếp hạng" onclick="openRanking()">📊</div>
+      <div class="fab-sub" title="Trò chơi" onclick="alert('Tính năng mini-game sẽ được thêm vào')">🎮</div>
+    </div>
+  </div>
+
+  <!-- Popup: Ranking -->
+  <div id="rankingOverlay" class="overlay" style="display:none;">
+    <div class="ranking-modal">
+      <div class="ranking-header">
+        <div style="display:flex; gap:12px; align-items:center;">
+          <h2 style="margin:0">Bảng xếp hạng — Top 10</h2>
+          <div class="muted">Hiển thị: <select id="rankingMode" onchange="renderRanking()"><option value="week">Tuần</option><option value="total">Tổng điểm</option></select></div>
+          <div style="margin-left:6px;">
+            <label class="muted">Tuần:</label>
+            <select id="rankingWeek" onchange="renderRanking()"></select>
+          </div>
+        </div>
+        <div>
+          <button class="close-btn" onclick="closeRanking()">✖ Đóng</button>
+        </div>
+      </div>
+
+      <div class="ranking-body">
+        <div class="top-list" id="topList">
+          <!-- top items -->
+        </div>
+        <div style="flex:1">
+          <canvas id="rankingChart" height="360"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup: Timer -->
+  <div id="timerPopup" class="overlay" style="display:none;">
+    <div class="ranking-modal" style="max-width:420px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0">⏳ Đồng hồ đếm ngược</h3>
+        <button class="close-btn" onclick="closeTimer()">✖</button>
+      </div>
+
+      <div style="text-align:center; margin-top:14px;">
+        <div style="display:flex; justify-content:center;">
+          <svg class="progress-ring" width="220" height="220" style="transform:rotate(-90deg);">
+            <circle class="progress-ring__background" stroke="#ffffff44" stroke-width="10" fill="transparent" r="100" cx="110" cy="110"/>
+            <circle class="progress-ring__circle" stroke="#fff" stroke-width="10" fill="transparent" r="100" cx="110" cy="110"/>
+          </svg>
+          <div style="position:absolute; font-size:36px; font-weight:700; margin-top:60px; color:#0b2540" id="timerDisplay">05:00</div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <label style="color:var(--muted)">Phút</label>
+          <input type="number" id="minutesInput" value="5" min="0" style="width:80px;">
+          <label style="color:var(--muted); margin-left:8px;">Giây</label>
+          <input type="number" id="secondsInput" value="0" min="0" max="59" style="width:80px;">
+        </div>
+
+        <div style="margin-top:16px; display:flex; gap:8px; justify-content:center;">
+          <button class="btn-like" onclick="startTimer()">▶ Bắt đầu</button>
+          <button class="btn-dislike" onclick="pauseTimer()">⏸ Tạm dừng</button>
+          <button style="background:#fff;border-radius:8px;padding:8px 12px;font-weight:700" onclick="resetTimer()">🔄 Đặt lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup vòng quay học sinh -->
+<div id="wheelPopup" class="wheel-popup">
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="wheel-content">
+    <canvas id="wheelCanvas" width="600" height="600"></canvas>
+    <div style="margin-top:20px;">
+      <button onclick="spinWheel()">🎡 Quay</button>
+      <button onclick="closeWheel()">✖ Đóng</button>
+    </div>
+  </div>
+  <div id="winnerPopup" class="winner-popup"></div>
+</div>
+
+<!-- Popup: Student detail -->
+<div id="studentOverlay" class="overlay" style="display:none; align-items:center; justify-content:center;">
+  <div class="ranking-modal" style="max-width:720px; width:92%;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0" id="stuNameTitle">Thông tin học sinh</h3>
+      <button class="close-btn" onclick="closeStudentPopup()">✖</button>
+    </div>
+
+    <div style="display:flex; gap:14px; margin-top:12px; align-items:flex-start; flex-wrap:wrap;">
+      <div style="flex:0 0 110px; text-align:center;">
+        <div id="stuAvatarLarge" style="width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto 8px;background:#eee;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;"></div>
+        
+		<div id="cameraArea" style="display:none; text-align:center;">
+		  <div class="camera-container">
+			<video id="webcamVideo" autoplay playsinline></video>
+			<div class="camera-overlay"></div>
+		  </div>
+		  <canvas id="captureCanvas" width="200" height="200" style="display:none;"></canvas>
+		  <button class="btn-like" style="padding:5px 10px; font-size:12px;" onclick="takePhoto()">📸 Chụp ảnh</button>
+		</div>
+		<button id="btnToggleCam" class="muted" style="margin-top:8px; cursor:pointer; border:1px solid #ddd; background:#fff; border-radius:5px;" onclick="toggleCamera()">📷 Thay đổi ảnh</button>
+		
+		
+		<div class="muted" id="stuMetaId"></div>
+        <div class="muted" id="stuMetaClass" style="margin-top:4px"></div>
+      </div>
+
+      <div style="flex:1; min-width:260px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <div style="font-weight:700">Điểm trung bình:</div>
+          <div id="stuAvg" style="font-size:20px;font-weight:800;color:#07324a">—</div>
+          <div class="muted" style="margin-left:8px;">(từ Tuần 1 → Tuần <span id="stuToWeek"></span>)</div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <canvas id="stuChart" height="200"></canvas>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div style="font-weight:700">Nhận xét ngắn:</div>
+          <div id="stuRemark" style="margin-top:6px; font-size:15px; color:#0b2540"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:right; margin-top:12px;">
+      <button class="btn-like" onclick="closeStudentPopup()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================
+  CẤU HÌNH CHUNG
+  ============================ */
+const scriptUrl = "https://script.google.com/macros/s/AKfycbyJHedBSbEgl4xY9ybquh8sGLtBkybMAQ1k0IPWUrjih0yjmjNjyrTEetewfCm4ehSI/exec";
+let currentClass = "";
+let currentWeek = 1;
+let studentsData = []; // array of rows returned from sheet (including id + name + week cols)
+let chartInstance = null;
+
+/* ============================
+  HÀM HASH SHA-256 (dùng cho checkP)
+  ============================ */
+async function sha256(message){ const msgBuffer=new TextEncoder().encode(message); const hashBuffer=await crypto.subtle.digest("SHA-256", msgBuffer); const hashArray=Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b=>b.toString(16).padStart(2,"0")).join(""); }
+
+/* ============================
+  ĐĂNG NHẬP 
+  ============================ */
+async function attemptLogin(){
+  const pass = document.getElementById("passwordInput").value || "";
+  if(!pass){ showLoginError("Vui lòng nhập mật khẩu"); return; }
+  try{
+    const resp = await fetch("pwdemo.json");
+    if(!resp.ok){ showLoginError("Không tìm thấy pw.json"); return; }
+    const j = await resp.json();
+    const correctHash = j.hash;
+    const entered = await sha256(pass);
+    if(entered === correctHash){
+      // success
+      document.getElementById("loginOverlay").style.display = "none";
+      document.getElementById("mainHeader").style.display = "";
+      document.getElementById("mainContent").style.display = "";
+      document.getElementById("fabTools").style.display = "";
+      // render UI
+      renderClassCards();
+      populateWeekSelector();
+      populateRankingWeek();
+      // select first class automatically
+      const first = document.querySelector(".class-item");
+      if(first) first.click();
+    } else {
+      showLoginError("Mật khẩu sai");
+    }
+  }catch(e){
+    console.error("Login error:", e);
+    showLoginError("Lỗi khi kiểm tra mật khẩu");
+  }
+}
+
+function showLoginError(txt){
+  const el = document.getElementById("loginError");
+  el.style.display = "block";
+  el.textContent = txt;
+}
+function logout(){
+  // đơn giản reload trang để hiện lại login
+  window.location.reload();
+}
+
+/* =========== UI INIT =========== */
+// Render class cards etc only after login (renderClassCards called in attemptLogin on success)
+
+/* =========== class cards =========== */
+
+
+const classes = ["3A","3B","3C","4A","4B","4C","5A","5B1","5B2","5C"];
+function renderClassCards(){
+  const grid = document.getElementById("classGrid");
+  grid.innerHTML = "";
+  classes.forEach(c=>{
+    const el = document.createElement("div");
+    el.className = "class-item";
+    el.textContent = c;
+    el.onclick = () => {
+      document.querySelectorAll(".class-item").forEach(x=>x.classList.remove("active"));
+      el.classList.add("active");
+      selectClass(c);
+    };
+    grid.appendChild(el);
+  });
+}
+
+/* =========== week selector =========== */
+function populateWeekSelector(){
+  const sel = document.getElementById("weekSelector");
+  sel.innerHTML = "";
+  for(let i=1;i<=35;i++){
+    const opt=document.createElement("option"); opt.value=i; opt.textContent=`Tuần ${i}`;
+    sel.appendChild(opt);
+  }
+  sel.value = 1;
+  currentWeek = 1;
+}
+function populateRankingWeek(){
+  const sel = document.getElementById("rankingWeek");
+  sel.innerHTML = "";
+  for(let i=1;i<=35;i++){
+    const opt=document.createElement("option"); opt.value=i; opt.textContent=`Tuần ${i}`;
+    sel.appendChild(opt);
+  }
+  sel.value = 1;
+}
+
+/* =========== select class & load students =========== */
+function avatarSrcCandidates(className, id) {
+  // trả về các đường dẫn thử theo thứ tự ưu tiên
+  // giả sử file đặt tên theo id, không có tiền tố zero-pad
+  const exts = ['jpg', 'png', 'webp'];
+  const base = `hs/${encodeURIComponent(className)}/${encodeURIComponent(String(id))}`;
+  return exts.map(ext => `${base}.${ext}`);
+}
+
+
+async function selectClass(className){
+  currentClass = className;
+  await loadStudents();
+}
+
+async function loadStudents(){
+  if(!currentClass) return;
+  document.getElementById("studentList").innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px"><div class="loader"></div></div>';
+  try{
+    let res = await fetch(`${scriptUrl}?class=${encodeURIComponent(currentClass)}`);
+    if(!res.ok){
+      const text = await res.text();
+      console.error("GET failed:", res.status, res.statusText, text);
+      document.getElementById("studentList").innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#c00">Lỗi khi tải dữ liệu: ${res.status} ${res.statusText}</div>`;
+      return;
+    }
+    let data = await res.json();
+    // expect header + rows
+    studentsData = data.slice(1);
+    renderStudents();
+  }catch(e){
+    console.error("Fetch error:", e);
+    document.getElementById("studentList").innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#c00">Không tải được dữ liệu — kiểm tra console (F12).</div>';
+  }
+}
+
+	/* =========== render student cards =========== */
+function renderStudents() {
+  const wrap = document.getElementById("studentList");
+  wrap.innerHTML = "";
+
+  if (!studentsData || studentsData.length === 0) {
+    wrap.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:30px" class="muted">
+        Không có học sinh trong lớp
+      </div>`;
+    return;
+  }
+
+  studentsData.forEach(row => {
+    const id = row[0];
+    const name = row[1];
+    const weekIdx = 2 + (currentWeek - 1);
+    const weekScore = (row[weekIdx] !== undefined && row[weekIdx] !== "") ? Number(row[weekIdx]) : 0;
+    const total = (row[row.length - 1] !== undefined && row[row.length - 1] !== "") ? Number(row[row.length - 1]) : null;
+
+    const card = document.createElement("div");
+    card.className = "student-card card";
+
+    // AVATAR: cố gắng load ảnh từ hs/<class>/<id>.(jpg|png|webp). Nếu không có => hiển thị chữ cái
+    const avatar = document.createElement("div");
+    avatar.className = "avatar";
+
+    const initialsDiv = document.createElement("div");
+    initialsDiv.className = "initials";
+    initialsDiv.style.background = randomColorForName(name);
+    initialsDiv.textContent = initials(name);
+
+    // tạo thẻ img nhưng chưa append ngay — sẽ append nếu load thành công
+    const imgEl = document.createElement("img");
+    imgEl.alt = name;
+    imgEl.style.display = "none"; // ẩn trước khi load thành công
+
+    // thử các đường dẫn khả dĩ
+    const candidates = avatarSrcCandidates(currentClass, id);
+    let attempt = 0;
+
+    function tryNextSrc() {
+      if (attempt >= candidates.length) {
+        // không tìm thấy file => giữ initials (không có ảnh)
+        if (!avatar.contains(initialsDiv)) avatar.appendChild(initialsDiv);
+        return;
+      }
+      const src = candidates[attempt++];
+      imgEl.src = src;
+      // khi load thành công
+      imgEl.onload = function () {
+        imgEl.style.display = "block";
+        // đảm bảo kích thước và bo tròn bằng CSS; thay initial nếu có
+        if (avatar.contains(initialsDiv)) avatar.removeChild(initialsDiv);
+        if (!avatar.contains(imgEl)) avatar.appendChild(imgEl);
+      };
+      // nếu lỗi, thử tiếp ext tiếp theo
+      imgEl.onerror = function () {
+        // tránh loop vô hạn: xóa handler cũ trước khi thử tiếp
+        imgEl.onload = imgEl.onerror = null;
+        tryNextSrc();
+      };
+      // start tải tự động (gán src ở trên sẽ kích hoạt)
+    }
+
+    // bắt đầu thử
+    tryNextSrc();
+
+	avatar.style.cursor = "pointer";
+	avatar.onclick = () => openStudentPopup(id);
+
+    // Thông tin học sinh
+    const info = document.createElement("div");
+    info.className = "student-info";
+
+    const nm = document.createElement("div");
+    nm.className = "student-name";
+    nm.textContent = name;
+
+    const meta = document.createElement("div");
+    meta.className = "student-meta";
+    meta.innerHTML = `
+      Tuần ${currentWeek}: 
+      <strong class="score-cell" data-id="${id}">${weekScore}</strong>
+      ${total !== null ? ` · Tổng: <strong>${total}</strong>` : ""}
+    `;
+
+    info.appendChild(nm);
+    info.appendChild(meta);
+
+    // Actions
+    const actions = document.createElement("div");
+    actions.className = "student-actions";
+
+    const likeBtn = document.createElement("button");
+    likeBtn.className = "btn-like";
+    likeBtn.innerHTML = "👍";
+    likeBtn.onclick = () => updatePointWeek(id, 1, likeBtn);
+
+    const dislikeBtn = document.createElement("button");
+    dislikeBtn.className = "btn-dislike";
+    dislikeBtn.innerHTML = "👎";
+    dislikeBtn.onclick = () => updatePointWeek(id, -1, dislikeBtn);
+
+    actions.appendChild(likeBtn);
+    actions.appendChild(dislikeBtn);
+
+    // build card
+    card.appendChild(avatar);
+    card.appendChild(info);
+    card.appendChild(actions);
+
+    wrap.appendChild(card);
+  });
+}
+
+
+
+/* =========== helper utilities =========== */
+function initials(name){
+  const parts = name.trim().split(/\s+/);
+  if(parts.length===1) return parts[0].slice(0,2).toUpperCase();
+  return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+}
+function randomColorForName(name){
+  let h = 0;
+  for(let i=0;i<name.length;i++) h = (h*31 + name.charCodeAt(i)) % 360;
+  return `hsl(${h}, 75%, 45%)`;
+}
+
+/* =========== copy students =========== */
+async function copyStudents(){
+  if(!currentClass){ alert("Vui lòng chọn lớp"); return; }
+  try{
+    let res = await fetch(`${scriptUrl}?class=${encodeURIComponent(currentClass)}`);
+    let data = await res.json();
+    let rows = data.slice(1);
+    let text = rows.map(r=>r[1]).join("\r\n");
+    await navigator.clipboard.writeText(text);
+    alert("Đã copy danh sách — dán vào Excel được!");
+  }catch(e){ alert("Không thể copy: "+e.message) }
+}
+function refreshStudents(){ if(currentClass) loadStudents(); }
+
+	/* =========== update point (week) =========== */
+	async function updatePointWeek(id, delta, btnEl) {
+	  if (!currentClass) {
+		alert("Chọn lớp trước");
+		return;
+	  }
+
+	  // Hiệu ứng nhấn nút
+	  btnEl.animate(
+		[{ transform: "scale(1)" }, { transform: "scale(0.9)" }, { transform: "scale(1)" }],
+		{ duration: 200 }
+	  );
+
+	  // Tìm đúng phần tử điểm tuần theo ID
+	  const scoreCell = document.querySelector(`.score-cell[data-id="${id}"]`);
+	  if (!scoreCell) return;
+
+	  // Lấy thẻ chứa dòng tổng điểm (strong thứ 2 trong .student-meta)
+	  const metaDiv = scoreCell.closest(".student-meta");
+	  const totalStrong = metaDiv.querySelectorAll("strong")[1]; // strong đầu tiên là tuần, thứ 2 là tổng
+
+	  // Cập nhật điểm tuần trên giao diện
+	  const oldWeek = parseInt(scoreCell.textContent) || 0;
+	  const newWeek = oldWeek + delta;
+	  scoreCell.textContent = newWeek;
+
+	  // Cập nhật tổng điểm nếu có
+	  if (totalStrong) {
+		const oldTotal = parseInt(totalStrong.textContent) || 0;
+		totalStrong.textContent = oldTotal + delta;
+	  }
+
+	  // 🔹 Cập nhật lại dữ liệu trong studentsData (để Leaderboard dùng đúng giá trị)
+	  if (Array.isArray(studentsData)) {
+		const idx = studentsData.findIndex(r => String(r[0]).trim() === String(id).trim());
+		if (idx !== -1) {
+		  const weekIdx = 2 + (currentWeek - 1);
+		  const totalIdx = studentsData[idx].length - 1;
+
+		  const oldW = Number(studentsData[idx][weekIdx]) || 0;
+		  const oldT = Number(studentsData[idx][totalIdx]) || 0;
+
+		  studentsData[idx][weekIdx] = oldW + delta;
+		  studentsData[idx][totalIdx] = oldT + delta;
+		}
+	  }
+
+	  // Hiệu ứng sáng nhẹ (highlight)
+	  scoreCell.style.transition = "background 0.4s";
+	  scoreCell.style.background = delta > 0 ? "rgba(0,255,0,0.2)" : "rgba(255,0,0,0.2)";
+	  setTimeout(() => (scoreCell.style.background = "transparent"), 400);
+
+	  // Hiệu ứng +1 / -1 bay lên
+	  const fx = document.createElement("div");
+	  fx.textContent = delta > 0 ? "+1" : "-1";
+	  fx.className = "fx-score";
+	  fx.style.color = delta > 0 ? "limegreen" : "red";
+	  const rect = btnEl.getBoundingClientRect();
+	  fx.style.left = rect.left + window.scrollX + rect.width / 2 + "px";
+	  fx.style.top = rect.top + window.scrollY - 10 + "px";
+	  document.body.appendChild(fx);
+	  setTimeout(() => fx.remove(), 800);
+
+	  // Gửi dữ liệu lên Google Sheet (ngầm, không reload)
+	  try {
+		const formData = new FormData();
+		formData.append("id", id);
+		formData.append("action", delta > 0 ? "like" : "dislike");
+		formData.append("class", currentClass);
+		formData.append("week", currentWeek);
+
+		fetch(scriptUrl, { method: "POST", body: formData })
+		  .then(res => res.text())
+		  .then(txt => console.log("Đã cập nhật Google Sheet:", txt))
+		  .catch(err => console.warn("Không thể gửi dữ liệu:", err));
+	  } catch (e) {
+		console.error("Lỗi khi gửi dữ liệu:", e);
+	  }
+	}
+
+/* =========== set current week =========== */
+function setCurrentWeek(v){
+  currentWeek = parseInt(v);
+  renderStudents();
+}
+
+/* ============================
+  RANKING
+  ============================ */
+function openRanking(){
+  if(!currentClass){ alert("Vui lòng chọn lớp trước"); return; }
+  document.getElementById("rankingOverlay").style.display = "flex";
+  document.getElementById("rankingMode").value = "week";
+  document.getElementById("rankingWeek").value = currentWeek;
+  renderRanking();
+}
+function closeRanking(){ document.getElementById("rankingOverlay").style.display="none"; }
+
+	/* =========== renderRanking (full class + huy chương đúng vị trí + cuộn dọc) =========== */
+	async function renderRanking() {
+	  if (!currentClass) return;
+	  const mode = document.getElementById("rankingMode").value;
+	  const weekSel = parseInt(document.getElementById("rankingWeek").value);
+	  if (!studentsData || studentsData.length === 0) await loadStudents();
+
+	  const list = studentsData.map(row => {
+		const name = row[1];
+		let score = 0;
+		if (mode === 'week') {
+		  const idx = 2 + (weekSel - 1);
+		  score = row[idx] !== undefined && row[idx] !== "" ? Number(row[idx]) : 0;
+		} else {
+		  const last = row[row.length - 1];
+		  score = last !== undefined && last !== "" ? Number(last) : 0;
+		}
+		return { name, score };
+	  });
+
+	  list.sort((a, b) => b.score - a.score);
+
+	  const rankingBody = document.querySelector(".ranking-body");
+	  rankingBody.innerHTML = `
+		<div class="ranking-chart-scroll">
+		  <canvas id="rankingChart"></canvas>
+		</div>
+	  `;
+
+	  const ctx = document.getElementById("rankingChart").getContext("2d");
+	  if (window.chartInstance) window.chartInstance.destroy();
+
+	  const labels = list.map(t => t.name);
+	  const dataVals = list.map(t => t.score);
+	  const bgColors = list.map((t, i) =>
+		i === 0 ? "#FFD54A" :
+		i === 1 ? "#C0C0C0" :
+		i === 2 ? "#FFB26B" :
+		"rgba(33,150,243,0.8)"
+	  );
+
+	  const medalPlugin = {
+		id: "medalLabels",
+		afterDatasetsDraw(chart) {
+		  const { ctx } = chart;
+		  ctx.save();
+		  ctx.font = "20px Segoe UI Emoji";
+		  ctx.textBaseline = "middle";
+		  ctx.textAlign = "left";
+
+		  chart.getDatasetMeta(0).data.forEach((bar, i) => {
+			let medal = "";
+			if (i === 0) medal = "🥇";
+			else if (i === 1) medal = "🥈";
+			else if (i === 2) medal = "🥉";
+			if (medal) ctx.fillText(medal, bar.x + 10, bar.y);
+		  });
+
+		  ctx.restore();
+		}
+	  };
+
+	  // Biểu đồ tự giãn chiều cao theo số lượng học sinh
+	  const chartHeight = Math.max(400, list.length * 40);
+	  document.getElementById("rankingChart").style.height = chartHeight + "px";
+
+	  window.chartInstance = new Chart(ctx, {
+		type: "bar",
+		data: {
+		  labels,
+		  datasets: [{
+			label: "Điểm",
+			data: dataVals,
+			backgroundColor: bgColors,
+			borderRadius: 8,
+			barPercentage: 0.7,
+			categoryPercentage: 0.9
+		  }]
+		},
+		options: {
+		  indexAxis: "y",
+		  responsive: true,
+		  maintainAspectRatio: false,
+		  layout: { padding: { right: 50 } },
+		  scales: {
+			x: {
+			  beginAtZero: true,
+			  grid: { color: "rgba(0,0,0,0.05)" },
+			  ticks: { color: "#333", precision: 0 }
+			},
+			y: {
+			  grid: { display: false },
+			  ticks: { color: "#111", font: { size: 14, weight: "600" }, padding: 6 }
+			}
+		  },
+		  plugins: {
+			legend: { display: false },
+			tooltip: {
+			  callbacks: {
+				title: ctx => `${ctx[0].label}`,
+				label: ctx => `Điểm: ${ctx.raw}`
+			  }
+			}
+		  },
+		  animation: { duration: 1000, easing: "easeOutQuart" }
+		},
+		plugins: [medalPlugin]
+	  });
+	}
+
+/* ============================
+  WHEEL + FIREWORKS + WINNER
+  ============================ */
+
+/* ============================
+  TIMER
+  ============================ */
+let ringCircle = document.querySelector(".progress-ring__circle");
+let totalTime = 0, remainingSeconds = 0, timerInterval = null, isPaused=false;
+let audioTimeout = null;
+
+function openTimer(){ document.getElementById("timerPopup").style.display = "flex"; resetTimer(); }
+function closeTimer(){ document.getElementById("timerPopup").style.display = "none"; clearInterval(timerInterval); if(audioTimeout) audioTimeout.pause(); }
+
+function updateDisplay(){
+  const d = document.getElementById("timerDisplay");
+  const mm = Math.floor(remainingSeconds/60);
+  const ss = remainingSeconds%60;
+  d.textContent = `${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+}
+function updateRing(){
+  if(!ringCircle) ringCircle = document.querySelector(".progress-ring__circle");
+  if(!ringCircle) return;
+  const r = 100; const circumference = 2*Math.PI*r;
+  const offset = totalTime===0? circumference : circumference - (remainingSeconds/totalTime)*circumference;
+  ringCircle.style.strokeDasharray = circumference;
+  ringCircle.style.strokeDashoffset = offset;
+  const percent = totalTime===0?0: remainingSeconds/totalTime;
+  if(percent>0.5) ringCircle.style.stroke = "#00e676";
+  else if(percent>0.2) ringCircle.style.stroke = "#ffeb3b";
+  else ringCircle.style.stroke = "#ff1744";
+}
+
+function startTimer(){
+  const min = parseInt(document.getElementById("minutesInput").value) || 0;
+  const sec = parseInt(document.getElementById("secondsInput").value) || 0;
+  totalTime = min*60 + sec;
+  if(remainingSeconds===0 || (!isPaused && remainingSeconds!==totalTime)) remainingSeconds = totalTime;
+  if(remainingSeconds<=0){ alert("Nhập thời gian hợp lệ"); return; }
+  isPaused=false; clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    if(!isPaused){
+      remainingSeconds--; updateDisplay(); updateRing();
+      if(remainingSeconds<=0){ clearInterval(timerInterval); showTimeoutAlert(); }
+    }
+  },1000);
+}
+function pauseTimer(){ isPaused = !isPaused; }
+function resetTimer(){ clearInterval(timerInterval); isPaused=false; const m=document.getElementById("minutesInput").value||0; const s=document.getElementById("secondsInput").value||0; totalTime = Number(m)*60+Number(s); remainingSeconds = totalTime; updateDisplay(); updateRing(); }
+
+function showTimeoutAlert(){
+  const div = document.createElement("div"); div.textContent = "⏰ Hết thời gian!"; div.style.cssText="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);font-size:36px;background:#ff3d00;color:#fff;padding:24px;border-radius:12px;z-index:99999";
+  document.body.appendChild(div);
+  audioTimeout = new Audio("sound/alarm.mp3");
+  audioTimeout.play();
+  triggerFireworks();
+  setTimeout(()=>{ div.remove(); }, 4000);
+}
+
+/* ============================
+  DOM ready: show login overlay first (login overlay already visible by default)
+  ============================ */
+document.addEventListener("DOMContentLoaded", () => {
+  // login overlay visible; main content hidden until successful login.
+  // If you want to bypass login during testing, call attemptLogin() manually in console.
+});
+
+	let wheelCanvas, ctx, studentsForWheel = [], startAngle = 0, arc = 0, spinTimeout = null;
+	let spinAngleStart = 0, spinTime = 0, spinTimeTotal = 0;
+	let audioSpin = null;
+	let selectedIndex = -1; // -1: chưa chọn
+
+	function openWheel() {
+	  if (!studentsData || studentsData.length === 0) { alert("Vui lòng chọn lớp trước!"); return; }
+	  studentsForWheel = studentsData.map(r => r[1]);
+	  arc = Math.PI * 2 / studentsForWheel.length;
+	  document.getElementById("wheelPopup").style.display = "flex";
+	  document.getElementById("winnerPopup").style.display = "none";
+	  wheelCanvas = document.getElementById("wheelCanvas");
+	  ctx = wheelCanvas.getContext("2d");
+	  drawWheel();
+	  wheelCanvas.onclick = chooseStudentByClick;
+	}
+	function closeWheel() {
+	  document.getElementById("wheelPopup").style.display = "none";
+	  document.getElementById("winnerPopup").style.display = "none";
+	  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
+	}
+		// ---------------- Helper: normalize góc về [0, 2PI)
+	function normalizeAngle(a){
+	  const TWO = Math.PI * 2;
+	  a = a % TWO;
+	  if (a < 0) a += TWO;
+	  return a;
+	}
+
+		
+function drawWheel() {
+  const cx = 300, cy = 300;
+  const outsideRadius = 280;
+  const insideRadius = 50;
+  const textRadius = 180;
+
+  ctx.clearRect(0, 0, 600, 600);
+
+  for (let i = 0; i < studentsForWheel.length; i++) {
+    const angle = startAngle + i * arc;
+
+    // tô màu lát
+    const hue = (i * 360 / studentsForWheel.length);
+    ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
+    ctx.beginPath();
+    ctx.arc(cx, cy, outsideRadius, angle, angle + arc, false);
+    ctx.arc(cx, cy, insideRadius, angle + arc, angle, true);
+    ctx.fill();
+
+    /* ===============================
+       VẼ TÊN THEO HƯỚNG TỪ TÂM RA
+       — Auto scale chữ theo độ dài —
+       =============================== */
+    const name = studentsForWheel[i];
+    const maxFont = 19;        // cỡ chữ lớn nhất
+    let fontSize = maxFont;
+
+    // Thu nhỏ chữ nếu tên dài
+    if (name.length > 10) fontSize = 15;
+    if (name.length > 14) fontSize = 13;
+    if (name.length > 18) fontSize = 11;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle + arc / 2);
+
+    ctx.font = `bold ${fontSize}px Arial`;
+    ctx.fillStyle = "white";
+    ctx.textAlign = "left";
+
+    ctx.fillText(name, insideRadius + 20, 0);
+
+    ctx.restore();
+  }
+
+  // mũi tên chỉ
+  ctx.fillStyle = "#e53935";
+  ctx.beginPath();
+  ctx.moveTo(cx - 20, cy - outsideRadius - 20);
+  ctx.lineTo(cx + 20, cy - outsideRadius - 20);
+  ctx.lineTo(cx, cy - outsideRadius + 10);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function spinWheel() {
+  if (!audioSpin) audioSpin = new Audio("sound/vongquay.mp3");
+  audioSpin.currentTime = 0; audioSpin.play();
+  spinAngleStart = Math.random() * 20 + 15; spinTime = 0; spinTimeTotal = 6000;
+  document.getElementById("winnerPopup").style.display = "none"; rotateWheel();
+}
+function rotateWheel() {
+  const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+  startAngle += (spinAngle * Math.PI / 180); drawWheel();
+  spinTime += 30; if (spinTime >= spinTimeTotal) { stopRotateWheel(); return; }
+  spinTimeout = setTimeout(rotateWheel, 30);
+}
+function stopRotateWheel() {
+  clearTimeout(spinTimeout); if (audioSpin) audioSpin.pause();
+  const degrees = startAngle * 180 / Math.PI + 90, arcd = arc * 180 / Math.PI;
+  const index = Math.floor((360 - (degrees % 360)) / arcd) % studentsForWheel.length;
+  const winner = studentsForWheel[index];
+  const popup = document.getElementById("winnerPopup");
+  popup.textContent = "🎉 " + winner + " 🎉"; popup.style.display = "block"; triggerFireworks();
+  popup.onclick = () => { popup.style.display = "none"; };
+}
+function easeOut(t,b,c,d){const ts=(t/=d)*t;const tc=ts*t;return b+c*(tc+-3*ts+3*t);}
+let fireworksCanvas=document.getElementById("fireworksCanvas"),fCtx=fireworksCanvas.getContext("2d"),fireworks=[];
+function resizeFireworks(){fireworksCanvas.width=window.innerWidth;fireworksCanvas.height=window.innerHeight;}
+window.addEventListener("resize",resizeFireworks);resizeFireworks();
+function createFirework(x,y){const colors=["#ff5252","#ffca28","#69f0ae","#40c4ff","#ea80fc"];
+  for(let i=0;i<30;i++){fireworks.push({x:x,y:y,radius:Math.random()*3+2,color:colors[Math.floor(Math.random()*colors.length)],
+  angle:Math.random()*Math.PI*2,speed:Math.random()*4+2,life:100});}}
+function drawFireworks(){fCtx.clearRect(0,0,fireworksCanvas.width,fireworksCanvas.height);
+  for(let i=fireworks.length-1;i>=0;i--){const f=fireworks[i];f.x+=Math.cos(f.angle)*f.speed;f.y+=Math.sin(f.angle)*f.speed;
+  f.speed*=0.98;f.life-=2;fCtx.beginPath();fCtx.arc(f.x,f.y,f.radius,0,Math.PI*2);fCtx.fillStyle=f.color;fCtx.fill();
+  if(f.life<=0)fireworks.splice(i,1);}requestAnimationFrame(drawFireworks);}drawFireworks();
+function triggerFireworks(){const cx=window.innerWidth/2,cy=window.innerHeight/2;
+  for(let i=0;i<5;i++){setTimeout(()=>createFirework(cx,cy),i*200);}}
+  
+  
+  
+  // GLOBAL: lưu instance chart của popup để destroy khi mở lại
+	let studentChartInstance = null;
+
+	// Mở popup chi tiết học sinh theo id (stt)
+	function openStudentPopup(id) {
+	  if (!studentsData || studentsData.length === 0) return;
+	  // tìm row theo id (so sánh string trimmed)
+	  const idx = studentsData.findIndex(r => String(r[0]).trim() === String(id).trim());
+	  if (idx === -1) { alert("Không tìm thấy học sinh"); return; }
+
+	  const row = studentsData[idx];
+	  const name = row[1];
+	  const clas = currentClass || "";
+	  // Thu thập điểm từ Tuần 1 đến currentWeek (nếu sheet chứa ít cột hơn, sẽ fill 0)
+	  const weekCount = Math.min(currentWeek, row.length - 3 + 1); // cột 2..(n-2) là tuần, cuối cùng là tổng
+	  const scores = [];
+	  const labels = [];
+	  for (let w = 1; w <= currentWeek; w++) {
+		const colIdx = 2 + (w - 1);
+		const val = (row[colIdx] !== undefined && row[colIdx] !== "") ? Number(row[colIdx]) : 0;
+		scores.push(val);
+		labels.push("W" + w);
+	  }
+
+	  // Hiển thị meta
+	  document.getElementById("stuNameTitle").textContent = name;
+	  document.getElementById("stuMetaId").textContent = "Mã: " + id;
+	  document.getElementById("stuMetaClass").textContent = "Lớp: " + clas;
+	  document.getElementById("stuToWeek").textContent = currentWeek;
+
+	  // Avatar lớn: thử load ảnh giống như avatar nhỏ
+	  const avatarWrap = document.getElementById("stuAvatarLarge");
+	  avatarWrap.innerHTML = ""; // clear
+	  const img = document.createElement("img");
+	  img.alt = name;
+	  img.style.display = "none";
+	  const initialsDiv = document.createElement("div");
+	  initialsDiv.className = "initials";
+	  initialsDiv.style.background = randomColorForName(name);
+	  initialsDiv.textContent = initials(name);
+
+	  const candidates = avatarSrcCandidates(currentClass, id);
+	  let at = 0;
+	  function tryImg() {
+		if (at >= candidates.length) {
+		  if (!avatarWrap.contains(initialsDiv)) avatarWrap.appendChild(initialsDiv);
+		  return;
+		}
+		const src = candidates[at++];
+		img.src = src;
+		img.onload = function() {
+		  img.style.display = "block";
+		  if (avatarWrap.contains(initialsDiv)) avatarWrap.removeChild(initialsDiv);
+		  if (!avatarWrap.contains(img)) avatarWrap.appendChild(img);
+		};
+		img.onerror = function() {
+		  img.onload = img.onerror = null;
+		  tryImg();
+		};
+	  }
+	  tryImg();
+
+	  // Tính trung bình và nhận xét
+	  const avg = (scores.reduce((a,b)=>a+b,0)) / (scores.length || 1);
+	  document.getElementById("stuAvg").textContent = avg.toFixed(2);
+
+	  const remark = generateRemark(scores);
+	  document.getElementById("stuRemark").textContent = remark;
+
+	  // Vẽ biểu đồ (destroy trước nếu có)
+	  const ctx = document.getElementById("stuChart").getContext("2d");
+	  if (studentChartInstance) studentChartInstance.destroy();
+
+	  studentChartInstance = new Chart(ctx, {
+		type: 'line',
+		data: {
+		  labels: labels,
+		  datasets: [{
+			label: 'Điểm tuần',
+			data: scores,
+			fill: true,
+			tension: 0.25,
+			pointRadius: 6,
+			borderWidth: 2
+		  }]
+		},
+		options: {
+		  responsive: true,
+		  maintainAspectRatio: false,
+		  scales: {
+			y: {
+			  beginAtZero: true,
+			  ticks: { precision: 0 }
+			}
+		  },
+		  plugins: {
+			legend: { display: false },
+			tooltip: {
+			  callbacks: {
+				label: ctx => `Điểm: ${ctx.raw}`
+			  }
+			}
+		  }
+		}
+	  });
+
+	  // Hiển thị popup
+	  document.getElementById("studentOverlay").style.display = "flex";
+	}
+
+	// Đóng popup
+	function closeStudentPopup() {
+	  document.getElementById("studentOverlay").style.display = "none";
+	  if (studentChartInstance) { studentChartInstance.destroy(); studentChartInstance = null; }
+	}
+
+	// Sinh nhận xét ngắn dựa trên trung bình + xu hướng
+	function generateRemark(scores) {
+	  if (!scores || scores.length === 0) return "Chưa có dữ liệu điểm.";
+	  // Tính trung bình
+	  const sum = scores.reduce((a,b)=>a+b,0);
+	  const avg = sum / scores.length;
+
+	  // Tính xu hướng đơn giản bằng cách lấy độ dốc tuyến tính (least squares)
+	  const n = scores.length;
+	  let sx = 0, sy = 0, sxx = 0, sxy = 0;
+	  for (let i=0;i<n;i++){
+		const x = i+1;
+		const y = scores[i];
+		sx += x; sy += y; sxx += x*x; sxy += x*y;
+	  }
+	  const denom = (n*sxx - sx*sx) || 1;
+	  const slope = (n*sxy - sx*sy) / denom; // slope >0 => tăng
+
+	  // Phân loại mức điểm
+	  let level = "";
+	  if (avg >= 8) level = "Rất tốt";
+	  else if (avg >= 6.5) level = "Tốt";
+	  else if (avg >= 5) level = "Trung bình";
+	  else level = "Cần cố gắng";
+
+	  // Xu hướng
+	  let trend = "";
+	  if (slope > 0.12) trend = "điểm có xu hướng tăng rõ rệt";
+	  else if (slope > 0.03) trend = "xu hướng tăng nhẹ";
+	  else if (slope < -0.12) trend = "xu hướng giảm rõ rệt";
+	  else if (slope < -0.03) trend = "xu hướng giảm nhẹ";
+	  else trend = "tương đối ổn định";
+
+	  // Tạo câu nhận xét ngắn
+	  const remark = `${level}: điểm trung bình ${avg.toFixed(1)} — ${trend}.`;
+	  return remark;
+	}
+
+	let stream = null;
+	let currentPhotoName = "avatar.jpg";
+
+	// Hàm bật/tắt camera
+	async function toggleCamera() {
+	  const area = document.getElementById('cameraArea');
+	  const video = document.getElementById('webcamVideo');
+	  const btn = document.getElementById('btnToggleCam');
+
+	  if (area.style.display === 'none') {
+		try {
+		  // Lấy tên file cũ từ ID học sinh đang chọn
+		  const currentId = document.getElementById("stuMetaId").textContent.replace("Mã: ", "").trim();
+		  currentPhotoName = `${currentId}.jpg`; 
+
+		  stream = await navigator.mediaDevices.getUserMedia({ video: { width: 400, height: 400 } });
+		  video.srcObject = stream;
+		  area.style.display = 'block';
+		  btn.textContent = "✖ Đóng Camera";
+		} catch (err) {
+		  alert("Không thể truy cập Webcam: " + err.message);
+		}
+	  } else {
+		stopCamera();
+	  }
+	}
+
+	function stopCamera() {
+	  if (stream) {
+		stream.getTracks().forEach(track => track.stop());
+	  }
+	  document.getElementById('cameraArea').style.display = 'none';
+	  document.getElementById('btnToggleCam').textContent = "📷 Thay đổi ảnh";
+	}
+
+	// Hàm chụp ảnh và tải về máy
+	function takePhoto() {
+	  const video = document.getElementById('webcamVideo');
+	  const canvas = document.getElementById('captureCanvas');
+	  const ctx = canvas.getContext('2d');
+
+	  // Vẽ ảnh từ video lên canvas với kích thước 200x200
+	  ctx.drawImage(video, 0, 0, 200, 200);
+
+	  // Chuyển canvas thành file để tải về
+	  const link = document.createElement('a');
+	  link.download = currentPhotoName;
+	  link.href = canvas.toDataURL('image/jpeg', 0.9);
+	  link.click();
+	  
+	  alert("Đã chụp! Vui lòng lưu đè vào thư mục ảnh của lớp.");
+	  stopCamera();
+	}
+
+	// Chỉnh sửa thêm vào hàm closeStudentPopup có sẵn để tự tắt cam khi đóng popup
+	const oldClosePopup = closeStudentPopup;
+	closeStudentPopup = function() {
+	  stopCamera();
+	  oldClosePopup();
+	};
+</script>
+</body>
+</html>
