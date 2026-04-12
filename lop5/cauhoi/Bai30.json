@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Kết quả của một phép so sánh trong lập trình Scratch là giá trị nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Có giá trị là đúng hoặc sai",
+      "Có giá trị là một số tự nhiên",
+      "Có giá trị là một chữ cái dài",
+      "Có giá trị là một tệp hình ảnh"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Trong phần mềm Scratch, ký hiệu nào được dùng để so sánh lớn hơn?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Sử dụng ký hiệu dấu nhỏ hơn <",
+      "Sử dụng ký hiệu dấu lớn hơn >",
+      "Sử dụng ký hiệu dấu bằng nhau =",
+      "Sử dụng ký hiệu dấu cộng thêm +"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trong phần mềm Scratch, ký hiệu nào được dùng để so sánh bằng nhau?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Sử dụng ký hiệu dấu lớn hơn >",
+      "Sử dụng ký hiệu dấu bằng nhau =",
+      "Sử dụng ký hiệu dấu nhỏ hơn <",
+      "Sử dụng ký hiệu dấu nhân lên là *"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh thực hiện phép so sánh trong Scratch thường có hình dạng gì?",
+    "Lever": 1,
+    "choices": [
+      "Khối lệnh có hình lục giác đều",
+      "Khối lệnh có hình chữ nhật nhỏ",
+      "Khối lệnh có hình tròn màu sắc",
+      "Khối lệnh có hình tam giác cân"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tìm khối lệnh so sánh, em cần vào nhóm lệnh nào trong thư viện?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm Các phép toán màu xanh",
+      "Nhóm sự Hiển thị màu tím nhạt",
+      "Nhóm Chuyển động màu xanh lam",
+      "Nhóm các Biến số màu cam tươi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khối lệnh 'lấy ngẫu nhiên từ 1 đến 10' có tác dụng chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Xóa các con số có trong máy",
+      "Sắp xếp các số theo thứ tự",
+      "Chọn một số bất kỳ từ 1 tới 10",
+      "Chỉ chọn duy nhất con số một"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Dựa trên bài học, kết quả của phép so sánh '50 > 50' sẽ hiển thị như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Hiển thị kết quả đúng (true)",
+      "Hiển thị kết quả sai (false)",
+      "Hiển thị ra một con số bằng 0",
+      "Hiển thị ra một thông báo lỗi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả của phép so sánh '40 = 40' trong Scratch sẽ cho giá trị gì?",
+    "Lever": 2,
+    "choices": [
+      "Giá trị nhận được là sai (false)",
+      "Giá trị nhận được là đúng (true)",
+      "Giá trị nhận được là số tám mươi",
+      "Giá trị nhận được là một dấu bằng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thực hiện khối lệnh 'nói (10 < 7)', nhân vật sẽ hiển thị bóng nói gì?",
+    "Lever": 2,
+    "choices": [
+      "Sẽ nói nội dung là chữ true",
+      "Sẽ nói nội dung là chữ false",
+      "Sẽ nói nội dung là con số mười",
+      "Sẽ nói nội dung là một số bảy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mục đích của việc sử dụng lệnh 'đợi' khi nhân vật nói kết quả so sánh là?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính chạy nhanh hơn nữa",
+      "Để nhân vật có thể đổi trang phục",
+      "Để em kịp quan sát được kết quả",
+      "Để xóa bớt các câu lệnh đã ghép"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Phép so sánh '45 < 55' sẽ cho ra kết quả nào sau đây là chính xác?",
+    "Lever": 2,
+    "choices": [
+      "Cho ra kết quả là đúng (true)",
+      "Cho ra kết quả là sai (false)",
+      "Cho ra một giá trị là số mười",
+      "Cho ra giá trị là một chữ cái"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu đặt biến x là số từ 10 đến 20, phép so sánh 'x > 6' sẽ cho kết quả?",
+    "Lever": 3,
+    "choices": [
+      "Luôn luôn cho kết quả là đúng",
+      "Luôn luôn cho kết quả là sai",
+      "Kết quả lúc đúng và lúc là sai",
+      "Kết quả là một số ngẫu nhiên"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Giá trị của phép so sánh biểu thức '(5 + 3) > (4 + 7)' sẽ là gì?",
+    "Lever": 3,
+    "choices": [
+      "Kết quả so sánh là sai (false)",
+      "Kết quả so sánh là đúng (true)",
+      "Kết quả là một con số dương 8",
+      "Kết quả là một con số dương 11"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong chương trình 'Mèo đố em', biến 'trả lời' có nhiệm vụ lưu trữ gì?",
+    "Lever": 3,
+    "choices": [
+      "Lưu số ngẫu nhiên của chú mèo",
+      "Lưu tên của nhân vật chú mèo",
+      "Lưu giá trị mà người dùng nhập",
+      "Lưu màu sắc của phông nền cũ"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để so sánh kết quả của hai phép tính khác nhau, em cần thực hiện thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Lồng hai khối toán vào khối so sánh",
+      "Đặt hai khối so sánh nằm cạnh nhau",
+      "Dùng lệnh nói cho từng phép tính một",
+      "Tạo thêm hai biến số mới cho máy"
     ],
     "answer": 0
   }

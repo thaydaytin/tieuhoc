@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để diễn tả một việc thực hiện tùy thuộc vào điều kiện, ta dùng câu có dạng nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Câu có dạng Là... thì...",
+      "Câu có dạng Nếu... thì...",
+      "Câu có dạng Vì... nên...",
+      "Câu có dạng Tuy... nhưng..."
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trong câu 'Nếu em bị ốm thì em không đi học', điều kiện ở đây là gì?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Việc em không đi học",
+      "Việc em đang ở nhà",
+      "Việc em bị đau chân",
+      "Việc em bị mắc bệnh"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Trong cấu trúc 'Nếu... thì...', phần việc được thực hiện nằm ở vị trí nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm ở ngay đầu câu",
+      "Nằm ở sau từ 'Nếu'",
+      "Nằm ở sau từ 'thì'",
+      "Nằm ở cuối đoạn văn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo bài học, một việc chỉ được thực hiện khi điều kiện tương ứng như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Khi điều kiện đó sai",
+      "Khi điều kiện thỏa mãn",
+      "Khi không có điều kiện",
+      "Khi điều kiện bị hủy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong trò chơi 'Cho thú ăn', nếu con vật là 'Khỉ' thì em chọn thức ăn gì?",
+    "Lever": 1,
+    "choices": [
+      "Em chọn lấy bó cỏ",
+      "Em chọn lấy con cá",
+      "Em chọn lấy quả táo",
+      "Em chọn lấy quả chuối"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Câu nào sau đây mô tả một việc thực hiện tùy thuộc vào điều kiện cụ thể?",
+    "Lever": 1,
+    "choices": [
+      "Em đi học mỗi ngày",
+      "Nếu trời mưa thì nghỉ",
+      "Em đang ngồi học bài",
+      "Bố em đi làm về sớm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả của việc ghép cột A và B (trang 64): 'Nếu trời mưa to' thì dẫn đến việc?",
+    "Lever": 2,
+    "choices": [
+      "Em nhặt giấy bỏ rác",
+      "Em xin mẹ mua bút",
+      "Em không chơi bóng đá",
+      "Em sang nhà bạn chơi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt chính giữa việc làm bình thường và việc làm có điều kiện là gì?",
+    "Lever": 2,
+    "choices": [
+      "Việc làm có mục đích",
+      "Việc dựa vào kết quả",
+      "Việc thực hiện mãi mãi",
+      "Việc không cần suy nghĩ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong ví dụ về bạn Hương (trang 65), Hương sẽ không xem ti vi khi nào?",
+    "Lever": 2,
+    "choices": [
+      "Khi trời đang nắng to",
+      "Khi chưa xong bài tập",
+      "Khi mẹ đi làm về muộn",
+      "Khi máy tính bị hỏng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điều gì xảy ra nếu điều kiện trong câu 'Nếu... thì...' không được thỏa mãn?",
+    "Lever": 2,
+    "choices": [
+      "Việc đó vẫn thực hiện",
+      "Việc đó bị thực hiện sai",
+      "Việc đó không thực hiện",
+      "Việc đó làm đi làm lại"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tại sao trong cuộc sống chúng ta thường xuyên phải ra quyết định có điều kiện?",
+    "Lever": 2,
+    "choices": [
+      "Để mọi việc diễn ra đúng",
+      "Để tiết kiệm thời gian làm",
+      "Để máy tính chạy nhanh",
+      "Để không phải đi học nữa"
     ],
     "answer": 0
+  },
+  {
+    "question": "Bạn An định ra quy tắc: 'Nếu điện thoại hết pin thì đi sạc'. Điều kiện ở đây là?",
+    "Lever": 3,
+    "choices": [
+      "Hành động đi sạc điện",
+      "Điện thoại đang đầy pin",
+      "Điện thoại đã hết điện",
+      "Điện thoại bị hỏng màn"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em hãy hoàn thành kịch bản cho thú ăn: 'Nếu con vật là con Mèo thì em lấy...'",
+    "Lever": 3,
+    "choices": [
+      "Lấy cỏ tươi cho nó ăn",
+      "Lấy cá khô cho nó ăn",
+      "Lấy chuối cho nó ăn",
+      "Lấy thịt hổ cho nó ăn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Vận dụng cách nói 'Nếu... thì...', em hãy chọn câu đúng để mô tả việc làm tròn số?",
+    "Lever": 3,
+    "choices": [
+      "Nếu số bé thì bỏ qua",
+      "Nếu số lớn thì thêm vào",
+      "Nếu thỏa mãn thì làm",
+      "Nếu là số 5 thì tăng"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi em thấy thông báo 'Pin yếu' trên máy tính, em nên thực hiện việc gì?",
+    "Lever": 3,
+    "choices": [
+      "Em nháy chuột vào tắt",
+      "Em kết nối với bộ sạc",
+      "Em mở thêm trò chơi mới",
+      "Em lau màn hình sạch sẽ"
+    ],
+    "answer": 1
   }
 ]
