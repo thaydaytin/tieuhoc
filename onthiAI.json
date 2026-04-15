@@ -1,0 +1,1002 @@
+[
+  {
+    "question": "Thuật ngữ \"Generative AI\" (AI tạo sinh) dùng để chỉ loại AI có khả năng gì?",
+    "choices": [
+      "A. Chỉ phân loại và gắn nhãn dữ liệu theo các mẫu đã được lập trình sẵn.",
+      "B. Tạo ra nội dung hoàn toàn mới như văn bản, hình ảnh hoặc âm thanh.",
+      "C. Điều khiển thiết bị phần cứng thông qua lệnh số và cảm biến tích hợp.",
+      "D. Tính toán các phép toán số học phức tạp mà không cần dữ liệu đầu vào."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Prompt Engineering, \"Prompt\" được hiểu một cách chính xác là gì?",
+    "choices": [
+      "A. Câu lệnh hoặc hướng dẫn đầu vào giúp AI hiểu, thực hiện yêu cầu.",
+      "B. Một ngôn ngữ lập trình thiết kế riêng cho các ứng dụng trí tuệ nhân tạo.",
+      "C. Đoạn mã nguồn dùng để xây dựng và huấn luyện mô hình học máy lớn.",
+      "D. Tên của loại chip xử lý tốc độ cao chuyên dụng trong trí tuệ nhân tạo."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Hiện tượng AI đưa ra thông tin sai lệch nhưng trình bày rất tự tin được gọi là gì?",
+    "choices": [
+      "A. Lỗi hệ thống (System Error) do máy chủ AI bị quá tải dữ liệu đầu vào.",
+      "B. Quá tải dữ liệu (Data Overload) khiến AI không thể xử lý thông tin.",
+      "C. Ảo giác AI (Hallucination) do AI tạo ra thông tin không có thực tế.",
+      "D. Tấn công mạng (Cyber Attack) làm sai lệch kết quả của mô hình AI."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "LLM là từ viết tắt của cụm từ nào trong lĩnh vực ứng dụng AI?",
+    "choices": [
+      "A. Logic Learning Machine – máy học logic theo quy tắc cứng được lập trình.",
+      "B. Linear Language Mapper – bộ ánh xạ ngôn ngữ vận hành theo tuyến tính.",
+      "C. Low Level Machine – kiến trúc máy tính cấp thấp trong các hệ thống.",
+      "D. Large Language Model – mô hình ngôn ngữ lớn xử lý ngôn ngữ tự nhiên."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Điểm hạn chế lớn nhất của hầu hết các mô hình AI ngôn ngữ hiện nay là gì?",
+    "choices": [
+      "A. Luôn mất phí đăng ký sử dụng hàng tháng đối với mọi tính năng.",
+      "B. Chỉ hiểu được câu lệnh viết bằng tiếng Anh chuẩn.",
+      "C. Dễ bịa đặt thông tin (ảo giác) một cách rất tự tin.",
+      "D. Không thể xuất ra kết quả có độ dài quá 100 chữ."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "AI có thay thế hoàn toàn được cán bộ công chức trong tương lai gần không?",
+    "choices": [
+      "A. Có, AI sẽ tự động xử lý mọi thủ tục hành chính không cần cán bộ.",
+      "B. Không, AI chỉ đóng vai trò hỗ trợ, khuếch đại năng lực của con người.",
+      "C. Có, AI sẽ lập quy hoạch và ra quyết định thay lãnh đạo phường.",
+      "D. Không, AI hiện tại không có tác dụng gì ngoài việc giải trí."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Công cụ AI nào sau đây do Google phát triển?",
+    "choices": [
+      "A. ChatGPT.",
+      "B. Gemini.",
+      "C. Copilot.",
+      "D. Claude."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Một cán bộ không có kiến thức kỹ thuật lập trình có dùng được AI tạo sinh không?",
+    "choices": [
+      "A. Khó dùng, vì phải biết viết mã code Python.",
+      "B. Chỉ dùng được tính năng rất cơ bản, tốc độ chậm.",
+      "C. Không thể sử dụng, cần kỹ sư máy tính xử lý giúp.",
+      "D. Có thể dùng dễ dàng qua giao diện trò chuyện bằng văn bản tự nhiên."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "\"Context Window\" (Cửa sổ ngữ cảnh) trong các công cụ AI (ChatGPT, Gemini) là gì?",
+    "choices": [
+      "A. Lượng thông tin tối đa AI có thể xử lý cùng một lúc trong phiên hội thoại.",
+      "B. Thời gian tối đa AI cần để phân tích, tạo ra câu trả lời cho người sử dụng.",
+      "C. Kích thước màn hình hiển thị giao diện phần mềm AI trên các thiết bị.",
+      "D. Số lượng người dùng đăng nhập đồng thời vào tài khoản AI công cộng."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "“Mô hình ngôn ngữ lớn” (LLM) vận hành chủ yếu dựa trên nguyên lý nào?",
+    "choices": [
+      "A. Dự đoán từ tiếp theo hợp lý nhất dựa trên dữ liệu đã được học.",
+      "B. Lên mạng tải toàn bộ các bài viết Wikipedia để trả lời.",
+      "C. Đọc suy nghĩ của người dùng thông qua camera máy tính.",
+      "D. Giải các phương trình toán học phức tạp để sắp xếp chữ."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Các công cụ AI trả phí thường khác bản miễn phí ở điểm cốt lõi nào?",
+    "choices": [
+      "A. Bản miễn phí không thể dùng tiếng Việt được.",
+      "B. Bản trả phí được cập nhật mô hình mới nhất và xử lý logic tốt hơn.",
+      "C. Bản trả phí tự động đóng dấu giáp lai cho văn bản phường.",
+      "D. Bản miễn phí sẽ thường xuyên khóa máy tính người dùng."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "NotebookLM của Google có tính năng ưu việt nào thích hợp với việc nghiên cứu văn bản pháp quy?",
+    "choices": [
+      "A. Khả năng tự động thay thế thuật ngữ trong luật cũ thành luật mới.",
+      "B. Chỉ trả lời dựa trên các tài liệu cụ thể mà người dùng tải lên.",
+      "C. Phát loa đọc trực tiếp văn bản cho người dân ở nơi công cộng.",
+      "D. Soạn văn bản có quy mô lớn hơn cả ChatGPT trả phí."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc ứng dụng AI ở UBND xã Ô Loan tập trung nhằm mục đích gì cao nhất?",
+    "choices": [
+      "A. Thay thế bộ phận tiếp công dân và loại bỏ hoàn toàn biểu mẫu giấy.",
+      "B. Nhờ máy móc tham gia đưa ra đường lối chính sách của ủy ban.",
+      "C. Đổi mới phương pháp làm việc, nâng cao hiệu quả và phục vụ dân tốt hơn.",
+      "D. Yêu cầu toàn bộ cán bộ phải học viết mã nguồn lập trình."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Điều gì xảy ra khi người sử dụng cung cấp thông tin không đầy đủ cho AI?",
+    "choices": [
+      "A. AI tự động từ chối yêu cầu và cảnh báo cung cấp thông tin hoàn thiện.",
+      "B. AI chủ động tự tìm kiếm các thông tin bổ sung trên nền tảng internet.",
+      "C. AI vẫn tạo câu trả lời nhưng dùng dữ liệu giả định dẫn đến thiếu chính xác.",
+      "D. AI lập tức truy vấn lại người dùng hàng loạt các câu hỏi cụ thể giải quyết."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Định hướng tư duy chuẩn xác nhất khi triển khai các công cụ AI trong công việc?",
+    "choices": [
+      "A. AI tự động hoàn thiện công việc, có kết quả đáng tin cậy không cần đối soát.",
+      "B. AI hỗ trợ người dùng như cộng sự – cần được định hướng, kiểm soát kết quả.",
+      "C. AI hoàn thành được tốt mọi yêu cầu trong phiên bản xử lý truy vấn ban đầu.",
+      "D. AI giúp cho các cán bộ không có chuyên môn trở thành chuyên gia lập trình."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cấu trúc Prompt hiệu quả (thường được gọi là 4 yếu tố) bao gồm phần nào sau đây?",
+    "choices": [
+      "A. Sáng tạo – Yêu cầu – Độ dài – Hình nền.",
+      "B. Vai trò – Nhiệm vụ – Bối cảnh – Định dạng.",
+      "C. Tóm tắt – Cụ thể – Chỉnh sửa – Hoàn thiện.",
+      "D. Cấp phép – Nguồn dữ liệu – Hình ảnh – Văn bản."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là sai lầm phổ biến nhất trong thực tế khi rèn luyện kỹ năng sử dụng AI?",
+    "choices": [
+      "A. Thực thi phương pháp chia nhỏ yêu cầu đầu vào thay vì kết hợp một câu lệnh.",
+      "B. Gắn kết bối cảnh thông tin chi tiết vào câu lệnh để hỗ trợ định hướng trả lời.",
+      "C. Áp dụng luôn kết quả đầu tiên AI tạo ra để phục vụ công việc mà chưa kiểm tra.",
+      "D. Yêu cầu AI tinh chỉnh hoặc hiệu đính kết quả trong nhiều lượt giao tiếp liên tục."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Kỹ thuật \"đặt vai trò\" (Role Prompting) đối với AI mang lại hiệu quả thực tế như thế nào?",
+    "choices": [
+      "A. Hỗ trợ hệ thống AI dịch văn bản đa ngôn ngữ, nhận dạng các vùng thổ ngữ.",
+      "B. Giúp AI hiểu ngữ cảnh chuyên môn, để phản hồi chính xác phù hợp lĩnh vực.",
+      "C. Cung cấp khả năng chia sẻ phiên hội thoại để nhiều người tương tác cùng lúc.",
+      "D. Hỗ trợ phần mềm AI tự vận hành một phiên làm việc độc lập thay cho tác giả."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi AI trả lời sai hướng hoặc chưa đúng yêu cầu, phương pháp xử lý nào tốt nhất?",
+    "choices": [
+      "A. Chủ động xóa sổ hoàn toàn phiên hội thoại và tạo dựng chuỗi mệnh lệnh mới.",
+      "B. Tìm kiếm nền tảng chatbot nhân tạo mới nhằm mong chờ hồi đáp chất lượng.",
+      "C. Tạm chấp nhận nội dung bởi vì giới hạn nền tảng kiến thức công nghệ hiện tại.",
+      "D. Tiếp tục chuỗi hội thoại, cung cấp thêm chỉ dẫn cụ thể để AI tinh chỉnh dữ liệu."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để AI tóm tắt chính xác một Kế hoạch hoạt động dài, bạn nên làm gì?",
+    "choices": [
+      "A. Yêu cầu AI tự lên mạng tìm tất cả kế hoạch từ trước tới nay.",
+      "B. Cung cấp nội dung Kế hoạch đó vào prompt và ra lệnh \"Gạch ý chính\".",
+      "C. Ra lệnh cho AI \"Làm bài phân tích 3 trang về kế hoạch sắp tới\".",
+      "D. Nhập mỗi tiêu đề Kế hoạch rồi hy vọng AI tự đoán nội dung."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nguyên tắc trọng điểm phải tuân thủ trước khi ứng dụng kết quả nội dung từ AI?",
+    "choices": [
+      "A. Tin cậy hoàn toàn vào năng lực ngôn ngữ chuyên gia của hệ thống trí tuệ ảo.",
+      "B. Yêu cầu bộ phận tin học có chuyên môn quản trị AI ký duyệt trước khi phát hành.",
+      "C. Cán bộ trực tiếp đánh giá lại độ chính xác pháp lý, nội dung và chịu trách nhiệm.",
+      "D. Kết hợp đóng dấu bản quyền tự do sử dụng do sự thay thế kinh nghiệm con người."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi muốn yêu cầu viết \"Bài phát thanh tuyên truyền\", thông tin \"Bối cảnh\" nào sau đây cần đưa vào Prompt nhất?",
+    "choices": [
+      "A. Số lượng nhân viên công nghệ thông tin trong xã.",
+      "B. Đối tượng nghe đài (bà con nông dân) và độ dài bản tin (3 phút).",
+      "C. Màu sắc phông chữ ưu tiên hiển thị trên giao diện người dùng.",
+      "D. Danh sách họ tên và địa chỉ của toàn bộ người phát thanh."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong lệnh prompt yêu cầu AI soạn thảo văn bản, chi tiết nào là ưu tiên số một?",
+    "choices": [
+      "A. Đặt vai trò, loại văn bản quy chuẩn, cơ quan nhận và yếu tố trọng tâm nội dung.",
+      "B. Quy định về màu sắc kết cấu khối và bộ cài đặt phông chữ đặc biệt áp dụng ngay.",
+      "C. viết rõ thương hiệu phần mềm, ấn bản cập nhật giúp AI tùy chỉnh hệ giọng điệu.",
+      "D. Số lượng ký tự từ khóa tối đa giới hạn cho văn thư mà người phát hành đòi hỏi."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nội dung prompt nào sau đây bảo đảm yếu tố cung cấp hoàn thiện dữ kiện tối ưu?",
+    "choices": [
+      "A. \"Tham mưu cho Ủy ban kế hoạch tổ chức, chú ý không quá dài dòng lan man\".",
+      "B. \"Nhờ hệ thống tự triển khai kế hoạch giải cao cho xã tôi, xin phản hồi sớm\".",
+      "C. \"Đóng vai chuyên viên phòng Văn hóa - Xã hội xã Ô Loan, soạn Kế hoạch Ngày chạy Olympic với thể thức Nghị định 30/2020/NĐ-CP gồm căn cứ, mục đích, thời gian và phân công\".",
+      "D. \"Xây dựng khung Kế hoạch hội thao chính xác quy định cơ quan hành chính\"."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nhằm kích hoạt khả năng AI xuất ra trình tự suy nghĩ kỹ, ta cần thêm câu lệnh gì?",
+    "choices": [
+      "A. \"Vui lòng hồi đáp ngắn gọn và súc tích trong khuôn khổ từ khóa quy định\".",
+      "B. \"Hãy suy nghĩ, lý luận từng bước một (Think step by step) trước khi kết luận\".",
+      "C. \"Chỉ trình bày bằng văn phạm tiếng mẹ đẻ chuẩn chỉnh, không pha tạp ngữ\".",
+      "D. \"In ra định dạng đáp án bảng biểu cuối cùng hoàn thiện một cách nhanh nhất\"."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "“Prompt chaining” (chuỗi prompt) là kỹ thuật gì?",
+    "choices": [
+      "A. Gửi cùng một prompt đến nhiều công cụ AI khác nhau để so sánh, đối chiếu và chọn kết quả tốt nhất.",
+      "B. Chia nhỏ tác vụ phức tạp thành nhiều bước prompt liên tiếp, đầu ra bước trước là đầu vào bước sau.",
+      "C. Khóa hội thoại lại ngay sau khi nền tảng AI tạo ra kết quả đã được người dùng kiểm duyệt và hài lòng.",
+      "D. Lặp lại cùng một prompt từ ba đến năm lần liên tục để AI phân tích và cho kết quả chuẩn, ổn định hơn."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thành phần “Context” (Bối cảnh) trong một Prompt chuẩn giúp AI điều gì?",
+    "choices": [
+      "A. Xác định chi tiết AI sẽ trả về kết quả cuối cùng dưới dạng bảng biểu, gạch đầu dòng hay đoạn văn.",
+      "B. Khẳng định rõ chức danh, nghề nghiệp cụ thể và giọng điệu chuyên môn mà AI bắt buộc phải đóng vai.",
+      "C. Giúp AI hiểu tình huống cụ thể, giới hạn phạm vi kiến thức để hệ thống phản hồi chính xác hơn.",
+      "D. Quy định nghiêm ngặt về số lượng từ, định dạng file đầu ra và giới hạn thời gian phản hồi của AI."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Một Prompt yêu cầu: “Soạn thông báo về việc tiêm chủng cho trẻ em” bị đánh giá là thiếu sót vì sao?",
+    "choices": [
+      "A. Yêu cầu đưa ra quá ngắn gọn, chưa giải thích rõ mục đích hướng đến đối tượng nào.",
+      "B. Lệnh sử dụng ngôn ngữ tiếng Việt chưa có các từ khóa chuyên ngành quốc tế để AI hiểu.",
+      "C. Thiếu vai trò (Role), bối cảnh địa phương cụ thể và định dạng kết quả mong muốn.",
+      "D. Công cụ AI thông thường chưa được cấp phép để tự động soạn các loại thông báo y khoa."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "“Bạn là Chuyên viên Địa chính xã Ô Loan” là ví dụ cho thành phần nào của Prompt?",
+    "choices": [
+      "A. Role (Vai trò).",
+      "B. Context (Bối cảnh).",
+      "C. Task (Nhiệm vụ).",
+      "D. Format (Định dạng)"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong việc xây dựng “Trợ lý ảo riêng” cho đơn vị, bước “Instructions” (Hướng dẫn hệ thống) có vai trò gì?",
+    "choices": [
+      "A. Tải tài liệu cục bộ từ máy tính của người dùng lên hệ thống lưu trữ đám mây.",
+      "B. Thiết lập phong cách làm việc, nhiệm vụ chính và các quy tắc tuyệt đối cho AI.",
+      "C. Đặt lại tên gọi định danh cá nhân độc quyền cho hệ thống chatbot của đơn vị.",
+      "D. Cấp quyền cho AI tự động kết nối và phản hồi thay con người trên Facebook Messenger."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi cần soạn một văn bản hành chính theo đúng mẫu của Nghị định 30/2020/NĐ-CP, kỹ thuật Prompting nào hiệu quả nhất?",
+    "choices": [
+      "A. Zero-shot Prompting (Chỉ đưa ra yêu cầu trực tiếp mà không cung cấp mẫu ví dụ).",
+      "B. Few-shot Prompting (Cung cấp sẵn 1-2 mẫu văn bản chuẩn để hệ thống AI học theo).",
+      "C. Negative Prompting (Đưa ra danh sách chi tiết liệt kê những điều khoản AI không được làm).",
+      "D. Keyword Prompting (Chỉ cung cấp một từ khóa duy nhất liên quan sát với chủ đề văn bản)."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Đâu là một sai lầm phổ biến khi sử dụng AI cần tránh?",
+    "choices": [
+      "A. Nhồi 5-6 yêu cầu vào một câu lệnh thay vì chia nhỏ từng bước.",
+      "B. Lấy nguyên kết quả đầu tiên của Claude gửi cho sếp/khách hàng mà không kiểm tra.",
+      "C. Viết câu lệnh quá ngắn, thiếu bối cảnh và không nói rõ ai sẽ là người đọc kết quả.",
+      "D. Tất cả các phương án trên."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "4 thành phần chính cần xem xét để viết một câu lệnh (prompt) cơ bản và hiệu quả là gì?",
+    "choices": [
+      "A. Sáng tạo, Yêu cầu, Bối cảnh, Kết luận.",
+      "B. Personal (Vai trò), Task (Nhiệm vụ), Context (Bối cảnh), Format (Định dạng).",
+      "C. Phân tích, Kế hoạch, Dữ liệu, Phản hồi.",
+      "D. Bối cảnh, Nội dung, Mã lệnh, Kiểm tra."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "“System Prompt” (prompt hệ thống) khác với prompt thông thường của người dùng ở điểm nào?",
+    "choices": [
+      "A. System Prompt được lập trình cấu trúc bằng ngôn ngữ đặc biệt phức tạp, không phải bằng ngôn ngữ cơ bản thông dụng.",
+      "B. System Prompt do chính nhà phát triển nền tảng hệ thống AI viết nguyên bản, cá nhân người dùng bình thường không thể đổi.",
+      "C. System Prompt chỉ được nhà phát hành cho phép áp dụng trên phiên bản AI trả phí nội dung, còn bản dùng thử không có.",
+      "D. System Prompt thiết lập vai trò, hành vi và giới hạn tổng thể cho AI trong toàn bộ phiên làm việc."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Kỹ thuật nào giúp nhiều cán bộ trong cùng cơ quan dùng AI tạo ra văn bản có phong cách nhất quán?",
+    "choices": [
+      "A. Mỗi người tự viết yêu cầu thiết kế theo cách riêng, tự nền tảng máy học sẽ tự nhận ra phong cách chung của cơ quan.",
+      "B. Xây dựng mẫu prompt chuẩn thống nhất cho cơ quan và chia sẻ để mọi người cùng sử dụng.",
+      "C. Chỉ cho phép một chuyên viên duy nhất được ủy quyền dùng công cụ AI, sau đó chia sẻ kết quả trực tiếp cho phòng mình.",
+      "D. Yêu cầu AI ghi chú lại tính cách và phong thái văn phong của cơ quan thông qua khoảng thời gian hệ thống được chạy thử."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi AI tạo ra câu trả lời quá dài và lan man, prompt nào hiệu quả nhất để AI tập trung hơn?",
+    "choices": [
+      "A. “Hãy tập trung trả lời lại một lần nữa, nhưng đề nghị ở lần này bạn thao tác thật ngắn gọn và dễ hiểu hơn một chút nhé.”",
+      "B. “Tôi cảm thấy không thích định dạng câu trả lời dài dòng chắp vá này, hãy nghiêm túc rèn luyện viết lại ngắn gọn cho tôi.”",
+      "C. “Tiến hành rà soát lược bỏ bớt đi những phần râu ria không quan trọng và bảo đảm phải giữ lại đầy đủ những điểm chính yếu.”",
+      "D. “Trả lời trong tối đa 5 câu. Liệt kê rõ: [điểm 1], [điểm 2], [điểm 3] như tôi cung cấp ở trên. Không được tự giải thích thêm.”"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Khi nào nên bắt đầu một hội thoại MỚI với AI thay vì tiếp tục hội thoại hiện tại?",
+    "choices": [
+      "A. Mỗi khi bắt đầu ngày làm việc mới, kể cả đang làm dở một tài liệu quan trọng và cấp thiết.",
+      "B. Khi chuyển sang tác vụ hoàn toàn khác, không liên quan đến nội dung hội thoại hiện tại.",
+      "C. Sau mỗi 10 lượt trao đổi liên tiếp để tránh tình huống bộ lọc AI bị “mệt” và giảm phản hồi.",
+      "D. Khi kết quả đạt được chưa như ý, vì tạo lập hội thoại khởi động lại mới luôn cho phản hồi tốt."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sử dụng Các công cụ AI soạn văn bản, yếu tố nào người dùng buộc phải chủ động tự nhập?",
+    "choices": [
+      "A. Bố cục cấu trúc chính của văn bản thuộc quy chế quản lý hành chính nội bộ.",
+      "B. Văn phong, cách diễn đạt câu chữ phù hợp ngôn ngữ văn phòng và lề lối làm việc.",
+      "C. Hình thức tự chia nhỏ đề mục logic trong dàn bài nghị định hay giải pháp mới.",
+      "D. Các số liệu ngân sách thực tế, mốc thời gian, tên cán bộ và địa danh thực địa."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thể thức bắt buộc nào cấu thành văn bản hành chính đúng quy chuẩn Nghị định 30/2020/NĐ-CP?",
+    "choices": [
+      "A. Ảnh màu minh họa kèm theo chữ ký số, bảng phân tích số liệu trên cơ quan mạng.",
+      "B. Quốc hiệu, tiêu ngữ, tên cơ quan, số ký hiệu, trích yếu, chữ ký, nơi nhận cụ thể.",
+      "C. Hệ thống mã QR check-in, phần chứng từ sao y và dấu điện tử tổ chức ban hành.",
+      "D. Biểu mẫu hướng dẫn, chú thích danh từ ngoại lai, danh mục tư liệu có tham chiếu."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sau khi thu nhận kết quả tài liệu từ AI sinh ra, quá trình trọng tâm cần làm tiếp theo?",
+    "choices": [
+      "A. Người chuyên trách phải rà soát, đọc toàn bộ, kiểm chứng số liệu, đối chiếu sai.",
+      "B. Lập tức ký hiệu và chuyển phát đến lãnh đạo trực thuộc vì tiết kiệm thời gian.",
+      "C. Sử dụng thêm trình chỉnh sửa hình học để tự động gắn kết mã đối chiếu tham dự.",
+      "D. In trực tiếp tệp văn bản từ giao diện chatbot nhằm bảo toàn thuộc tính hiển thị."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để có báo cáo quý tích hợp thông tin số liệu cơ quan bằng AI đạt chất lượng cao nhất?",
+    "choices": [
+      "A. Cung cấp cụm từ khóa cho AI mở mạng thu thập bảng số liệu đơn vị thuộc tính.",
+      "B. Thông báo mã phân loại lĩnh vực, AI tự động đánh số tổng quan cho nội dung.",
+      "C. Giao chính xác số liệu vào hệ prompt kèm theo yêu cầu viết đúng cấu trúc chuẩn.",
+      "D. Sinh nội dung dựa trên bộ mỏ neo báo cáo cũ, bổ sung bằng tính năng sao chép."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thao tác nào dưới đây thể hiện kỹ năng sử dụng AI ở mức độ nâng cao khi soạn thảo văn bản?",
+    "choices": [
+      "A. Sao chép toàn bộ kết quả AI trả về mà không đọc lại hay chỉnh sửa bất kỳ nội dung nào.",
+      "B. Chỉ sử dụng một lượt prompt duy nhất để tiết kiệm thời gian làm việc với AI.",
+      "C. Yêu cầu AI tự đánh giá sản phẩm vừa tạo ra, chỉ ra điểm yếu và đề xuất cách cải thiện.",
+      "D. Thay thế toàn bộ số liệu thực tế bằng số liệu giả định do AI tự tạo ra trong văn bản."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi soạn thảo Báo cáo tháng bằng AI, cán bộ nên làm bước nào đầu tiên?",
+    "choices": [
+      "A. Yêu cầu AI dùng mạng để tự đoán ra con số nộp ngân sách địa phương.",
+      "B. Nạp sẵn số liệu và dàn ý chi tiết các sự kiện của tháng vào Prompt.",
+      "C. Gõ lệnh \"Viết cho tôi một báo cáo thật hay\" và nộp thẳng lên huyện.",
+      "D. Nhờ AI vẽ một sơ đồ tư duy bằng tiếng Anh để cho báo cáo sinh động."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cán bộ văn hóa thiết kế Pano/Áp phích truyền thông có thể kết hợp AI bằng công cụ nào hiệu quả?",
+    "choices": [
+      "A. Trình duyệt Microsoft Edge và Zalo chat trực tiếp cùng nhau.",
+      "B. Kết hợp ChatGPT tìm Slogan và Canva AI/Gamma để thiết kế hình ảnh.",
+      "C. Dùng tính năng gõ văn bản thông thường của phần mềm Notepad.",
+      "D. Chỉ dùng được ứng dụng Adobe Photoshop độc lập trả phí cao nhất."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại cơ quan UBND xã, công nghệ Canva AI ứng dụng nổi bật ở chuyên môn gì?",
+    "choices": [
+      "A. Soạn thảo các dự thảo báo đệ trình chuyên đề đúng phông nền, thể thức nghị định.",
+      "B. Số hóa hồ sơ đăng ký và sắp xếp cơ cấu kho lưu trữ văn phòng một cách khoa học.",
+      "C. Thiết kế thư tín, áp phích băng rôn chống dịch, làm các tờ rơi tuyên truyền trực quan.",
+      "D. Tham số hóa hồ sơ kinh tế dự tính nhằm làm bảng biểu kế toán thanh quyết tài vụ."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi sử dụng AI soạn Thông báo phòng dịch bệnh, dữ liệu nào KHÔNG cho AI tự bịa ra?",
+    "choices": [
+      "A. Bối cảnh dàn ý chung, cấu hình dàn trang khung trình bày trong khuôn khổ văn bản.",
+      "B. Hệ thống từ ngữ kêu gọi ý thức thực hành cộng đồng, phối hợp đồng bộ toàn dân.",
+      "C. Khung nhiệm vụ chức năng theo bảng nội quy chỉ định chức vụ phân công cơ bản.",
+      "D. Số ca lây nhiễm, địa điểm, ngày tháng, thông tin tình hình thực tế trạm Y tế cung cấp."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Tác động thay đổi thực tiễn khi đưa công nghệ AI vào quy trình ban hành nghị quyết xã?",
+    "choices": [
+      "A. Tiết kiệm lao động thao tác đánh máy, tạo dàn ý định hướng giúp sâu sát chuyên môn.",
+      "B. Tách rời hoàn toàn chuyên viên hành chính ra khỏi hệ thống tổ chức tham mưu.",
+      "C. Miễn giảm tối đa bước đọc rà duyệt văn bản của cấp lãnh đạo trước khi ký đóng dấu.",
+      "D. Phát hành hệ thống văn kiện khép kín thực thi việc thay mặt cán bộ chốt chữ ký."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nhận diện điểm yếu đặc trưng của văn bản thô sơ được xuất bản độc lập từ trí tuệ nhân tạo AI?",
+    "choices": [
+      "A. Chứa trọn vẹn mọi khung danh mục điều khoản đúng theo nghị định cơ bản đề xuất.",
+      "B. Cấu trúc câu ngữ mang tính lý thuyết suông, thiếu số liệu vùng, sai phong cách Nghị định 30/2020/NĐ-CP.",
+      "C. Phân đoạn danh mục logic tuần tự theo từng chữ số tự nhiên và bảng mã định danh.",
+      "D. Biểu đạt trúng phần tiêu ngữ, tiêu chuẩn ban ngành tại ô giao diện ngay mặt trang."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quy trình nhờ AI nào dưới đây để đọc nhanh tóm lược một công văn hỏa tốc chuyên đề nội dung dài?",
+    "choices": [
+      "A. Chụp toàn bộ văn bản cứng bằng máy cơ tải chuyển định dạng trên khung mạng ảo.",
+      "B. Giao AI rà quét theo tên luật bằng kho thông tin hành lang nhằm lấy văn bản đích.",
+      "C. Cung cấp luồng văn bản, lệnh AI thu gọn các ý cốt lõi, hạn định, và mốc thi hành.",
+      "D. Phiên dịch ngoại ngữ văn thư sang hệ Anh rồi tái chuyển đổi lại tiếng Việt đại ý."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tính năng \"Thực hành ứng dụng AI trong thiết kế truyền thông\" (Gamma / Canva AI) giúp cán bộ gì lớn nhất?",
+    "choices": [
+      "A. Tự lập trình lại một website đồ họa riêng biệt cho cấp ủy từ số không.",
+      "B. Trình bày biểu đồ dữ liệu thống kê, bài thuyết trình đẹp mắt nhanh chóng.",
+      "C. Giảm nhu cầu dùng cáp quang và ổ cứng chứa dữ liệu nặng ở công sở.",
+      "D. Cho phép in ra các khổ giấy pano kích thước to gấp ngàn lần thông thường."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hãy lựa chọn một phương thức tối ưu nhất khi yêu cầu AI tiến hành soạn song song một Kế hoạch & Thông báo?",
+    "choices": [
+      "A. Giao tiếp lệnh theo hai luồng duyệt riêng biệt đồng thời bằng thao tác tách cửa sổ.",
+      "B. Viết xong toàn bộ nội dung mẫu Thông báo rồi khởi tạo phiên giao tiếp AI độc lập.",
+      "C. Hướng AI tập hợp nội dung cả hai bản vào chung tệp duy nhất để thuận tiện biên tập.",
+      "D. Tại một phiên làm việc, cấp đầy đủ bối cảnh, giao AI tuần tự phân tách hai loại văn bản."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Điểm khác biệt quan trọng nhất khiến NotebookLM được đề xuất cho việc xây dựng “Sổ tay văn bản xã” là gì?",
+    "choices": [
+      "A. Có khả năng tự động thiết kế hình ảnh minh họa chi tiết cho từng loại văn bản và báo cáo.",
+      "B. Chỉ phản hồi dựa trên dữ liệu nội bộ được tải lên, giúp giảm thiểu tối đa hiện tượng “ảo giác”.",
+      "C. Có thể thay thế hoàn toàn việc đọc, phân tích và phê duyệt mọi văn bản dài của đội ngũ lãnh đạo.",
+      "D. Tích hợp sẵn và liên tục cập nhật tất cả các luật, nghị định hiện hành của cơ quan nhà nước."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Chuyên viên Văn phòng UBND và HĐND xã cần soạn gấp Thông báo triệu tập họp HĐND nhưng chưa có đầy đủ nội dung các điểm thảo luận. Cách tiếp cận prompt ĐÚNG NHẤT là gì?",
+    "choices": [
+      "A. Yêu cầu mô hình AI tự đặt ra toàn bộ nội dung thảo luận và soạn hoàn chỉnh thông báo này ngay lập tức.",
+      "B. Không nên dùng AI vì thiếu thông tin đầu vào ở thời điểm hiện tại, cần chờ có đủ dữ liệu mới làm.",
+      "C. Yêu cầu AI soạn khung thông báo đầy đủ thể thức, phần nội dung chưa có đánh dấu “[chờ bổ sung]” để hoàn thiện sau.",
+      "D. Chỉ nhập tiêu đề văn bản để công cụ AI tự điền toàn bộ nội dung chi tiết bên trong theo các phán đoán sơ bộ."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi áp dụng công thức R-C-T-F để soạn kịch bản phát thanh tại địa phương xã phường, yếu tố nào giúp bài viết có tính “dân vận” cao nhất?",
+    "choices": [
+      "A. Liên tục yêu cầu hệ thống AI phải sử dụng thật nhiều thuật ngữ pháp lý và văn tự hành chính.",
+      "B. Lồng ghép văn hóa địa phương và yêu cầu giọng văn gần gũi với bà con dân tộc trong phần bối cảnh/định dạng.",
+      "C. Tập trung chuyên sâu vào việc liệt kê đầy đủ các mức xử phạt vi phạm hành chính tại địa bàn.",
+      "D. Bắt buộc mô hình AI viết ra một kịch bản thật chi tiết với độ dài tối thiểu phải trên 1000 từ."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn cần AI tạo bảng phân công nhiệm vụ cho 5 phòng ban trong một Kế hoạch. Cách cung cấp thông tin cho AI HIỆU QUẢ NHẤT là gì?",
+    "choices": [
+      "A. Chỉ nêu tên 5 phòng ban và để máy học tự phân công tự động toàn phần dựa trên chức năng thường gặp.",
+      "B. Mô tả sơ lược ý tưởng kế hoạch chung chung để thuật toán AI tự xây dựng các đầu việc nhiệm vụ phù hợp.",
+      "C. Tiến hành hỏi AI từng phòng ban một trong 5 câu lệnh tương ứng vô cùng rành mạch để mô hình phân tích tốt.",
+      "D. Cung cấp: tên kế hoạch, vai trò của từng phòng ban quy định và các đầu việc chính cần AI phân công."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Khi dùng AI soạn báo cáo, AI luôn tạo ra ngôn ngữ chung chung, thiếu tính địa phương. Cách khắc phục hiệu quả nhất là gì?",
+    "choices": [
+      "A. Chuyển sang dùng các nền tảng công cụ AI khác có khả năng tích hợp và hiểu sâu dữ liệu địa phương tốt hơn.",
+      "B. Bổ sung vào prompt các thông tin đặc thù: tên xã, số liệu thực tế, tên đơn vị và thôn liên quan.",
+      "C. Yêu cầu AI dùng ngôn ngữ mô tả làm sao cho thật đơn giản hơn, tránh nhóm từ ngữ mang tính hàn lâm chuyên ngành.",
+      "D. Yêu cầu công cụ AI chủ động tra cứu thông tin về tình hình địa phương từ các trang internet trước khi viết bài."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thực hiện các yêu cầu nghiên cứu thông tin phức tạp từ hàng chục trang web, lập luận qua các phát hiện và viết một báo cáo toàn diện chỉ trong vài phút, tính năng nào của các công cụ AI phổ biến được khuyên dùng?",
+    "choices": [
+      "A. Canvas.",
+      "B. Deep Research.",
+      "C. Research Assistant.",
+      "D. Help me write."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bạn muốn AI đánh giá bản thảo kế hoạch vừa soạn. Prompt nào cho phản hồi hữu ích nhất?",
+    "choices": [
+      "A. “Tôi vừa gửi cho bạn một nội dung. Theo năng lực phân tích chuyên môn của mình, bạn thấy tổng thể bản kế hoạch này thế nào? Đã thật sự tốt, chặt chẽ hay chưa?”",
+      "B. “Hãy sử dụng bộ lọc ngôn ngữ để tiến hành kiểm tra kế hoạch này từ trên xuống dưới và cho tôi biết có vấn đề gì bất ổn cần lưu tâm ghi chú sửa lại hay không.”",
+      "C. “Đánh giá kế hoạch theo 3 tiêu chí: (1) Tính đầy đủ nội dung, (2) Tính khả thi của phân công, (3) Phù hợp thể thức Nghị định 30/2020/NĐ-CP. Mỗi tiêu chí nêu điểm mạnh và lỗi.”",
+      "D. “Hãy thực hiện chức năng định dạng và tự động sửa chữa phần lớn văn bản trong kế hoạch này cho thật đúng thể thức, hoàn chỉnh hơn theo mọi quy định hiện hành.”"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thí sinh Vòng Chung khảo dùng ChatGPT soạn Kế hoạch Ngày chạy Olympic. Phần “Phân công nhiệm vụ” còn chung chung. Prompt tinh chỉnh nào hiệu quả nhất?",
+    "choices": [
+      "A. Yêu cầu công cụ xóa bỏ những dòng vừa hoàn thành rồi vội vàng tạo một bản mới từ con số hiển thị đầu tiên kèm chi tiết bổ sung rõ rệt hơn.",
+      "B. Bỏ qua phương pháp ra lệnh tự động, người thi phải dùng sức người thủ công gõ từng dòng để trám lấp dữ liệu ở những khoảng trống thiếu sót.",
+      "C. Gõ lên bảng tương tác một câu đánh giá như “Thuật toán mày đã cảm thấy an tâm với danh mục này chưa?” để bot ngầm theo dõi rút kinh nghiệm lỗi.",
+      "D. “Viết riêng lại phần Phân công. Liệt kê đúng theo chuẩn: đơn vị – đầu việc – thời hạn. Giao việc tối thiểu cho 5 cơ quan.”"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Thí sinh vừa dùng AI soạn xong Báo cáo CCHC Quý I. Trước khi nộp bài, bước kiểm tra nào là BẮT BUỘC nhất?",
+    "choices": [
+      "A. Thao tác kích đếm tự động tổng số lượng từ tạo ra tại tài liệu báo cáo để kiểm soát chắc chắn không bị vi phạm barem văn bản theo như quy chế.",
+      "B. Triển khai phương pháp copy và thả chéo kết quả vào vùng một nền tảng đối thoại máy tính trí tuệ AI hoàn toàn khác để nhờ bot đánh giá khách quan.",
+      "C. Mở văn bản xác định số liệu tính toán khớp khít bộ gợi ý, định dạng chuẩn mốc Nghị định 30/2020/NĐ-CP đi kèm ngôn từ có sắc thái hành chính.",
+      "D. Nhanh nhẹn sao chép lại một biên bản in trên giấy mang về đưa ngay cho đồng đội khảo luận đánh giá nội dung chớp nhoáng trước lúc ký đè gửi nộp."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để các công cụ AI tạo hình ảnh (như Gemini Nano Banana, Canva AI …) sát với ý định truyền thông nhất, cán bộ cần tập trung vào yếu tố nào trong Prompt?",
+    "choices": [
+      "A. Viết các câu lệnh ra lệnh cho máy tính xử lý thật ngắn gọn súc tích để tiết kiệm thời gian.",
+      "B. Mô tả chi tiết chủ thể, bối cảnh đặc trưng của địa phương và phong cách thẩm mỹ mong muốn.",
+      "C. Chỉ cần cung cấp biểu tượng logo chính thức của đơn vị phường xã để AI tự động đóng dấu.",
+      "D. Cung cấp từ khóa chủ đề và yêu cầu nền tảng AI tự do sáng tạo nghệ thuật không bao giờ hướng dẫn."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Công cụ AI nào của Google được thiết kế đặc biệt để hoạt động như một trợ lý sản xuất, viết kịch bản và chỉnh sửa video chuyên nghiệp mà không yêu cầu chuyên môn?",
+    "choices": [
+      "A. NotebookLM.",
+      "B. Gemini in Slides.",
+      "C. Google Vids.",
+      "D. Gemini App."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nếu bạn muốn biến một tài liệu nghiên cứu hoặc tài liệu cuộc họp thành một bản tóm tắt âm thanh (giống như podcast) để nghe khi đang di chuyển, bạn nên sử dụng tính năng nào?",
+    "choices": [
+      "A. Voice-to-text trong Docs.",
+      "B. Read Aloud trong Workspace.",
+      "C. Audio Overview trong NotebookLM.",
+      "D. Take notes for me trong Meet."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Yếu điểm bảo mật nào nghiêm trọng nhất nếu mang dự thảo cơ quan lên công cụ AI công cộng?",
+    "choices": [
+      "A. Sever máy chủ dễ gặp chướng ngại vật dẫn đến rớt kết nối ảnh hưởng khả năng làm việc.",
+      "B. Công cụ sao chép tự động phát thư rác gồm dự thảo này gửi đến vô vàn tập khách hàng.",
+      "C. Nội dung lưu trong chuỗi huấn luyện, có nguy cơ rò rỉ cơ mật chuyên ngành khi có truy vấn.",
+      "D. AI sẽ trực tiếp tự hủy nội dung theo cơ chế bảo hiểm chặn các định dạng tin nội bộ."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thông tin định danh cá nhân (PII) như Căn cước công dân, số điện thoại người dân... khi đưa vào AI cần xử lý ra sao?",
+    "choices": [
+      "A. Bắt buộc để nguyên độ uy tín thông tin để phần mềm AI duyệt nhanh hơn.",
+      "B. Phải ẩn danh, che hoặc xóa bớt thông tin định danh trước khi nhập vào Prompt.",
+      "C. Nén thành file dạng .zip và nhờ AI đọc toàn bộ file mà không giải nén.",
+      "D. Xóa định dạng chữ in hoa thành dạng chữ in thường phổ cập cho AI."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong mô hình trách nhiệm chia sẻ, ai là người chịu trách nhiệm về văn bản sai lệch do AI tạo ra và phát hành?",
+    "choices": [
+      "A. Kỹ sư xây dựng hệ thống mô hình ngôn ngữ lớn đó chịu đền bù toàn bộ.",
+      "B. Công ty chủ quản nền tảng như Google hoặc Microsoft sẽ bồi thẩm đền bù.",
+      "C. Cán bộ duyệt, ký và phát hành văn bản hành chính đó chịu trách nhiệm.",
+      "D. Phải hỏi máy chủ đám mây thuộc không gian mạng nào phân phát ra kết quả đó."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Công nghệ \"Deepfake\" đe dọa các cuộc tấn công kỹ thuật số vì hiểm họa đặc trưng nào?",
+    "choices": [
+      "A. Tạo mã khóa phá tung công nghệ mã OTP, đột nhập kho thẻ ngân hàng của nhà quản lý.",
+      "B. Sao chép và thao túng khung hình, giả lập giọng điệu y chang bản chính để lừa gạt tiền.",
+      "C. Phủ định chuỗi mã nguồn máy, xóa băng hệ thống số hóa văn thư cấp chính quyền địa hạt.",
+      "D. Biến thể lan truyền con đường lây nhiễm vi rút vào thiết bị điện thoại bằng điểm kích ảo."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "“Ảo giác hệ thống” (Hallucination) ảnh hưởng thế nào đến độ an toàn của văn bản?",
+    "choices": [
+      "A. AI tự động trích dẫn các Nghị định, Điều khoản không hề tồn tại trên thực tế.",
+      "B. Máy tính bất ngờ phát ra các hình ảnh gây phân tán cảm tính cho con người.",
+      "C. Dữ liệu trên bộ lưu trữ nhanh chóng bốc hơi do tốc độ xử lý nhanh bất thường.",
+      "D. Nhìn màn hình quá lâu khiến hệ thống não bị suy nhược làm máy sập đường truyền."
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Rủi ro của việc nhân viên cấp xã dùng AI dò tìm và sửa lỗi các dự thảo \"Quyết định quan trọng chưa công bố\" trên mạng internet chung là gì?",
+    "choices": [
+      "A. Mạng sẽ rớt vì dòng tài liệu ấy có chứa văn bản từ chối hiển thị từ xa ngẫu nhiên.",
+      "B. Kẻ gian lập tức xâm nhập phá hủy phần cứng của bộ gõ bàn phím lưu trữ lệnh ảo.",
+      "C. Nội dung chiến lược có rủi ro bị lộ do máy chủ nước ngoài thu nạp trước thời điểm phát hành.",
+      "D. Kích thước file bị chuyển lên đám mây chiếm nhiều băng thông nội bộ làm chậm cả bộ máy xã."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Quy tắc “tuyệt đối” khi sử dụng AI trong công tác địa chính - xây dựng tại địa phương là gì?",
+    "choices": [
+      "A. Cán bộ bắt buộc phải luôn sử dụng ChatGPT phiên bản cũ nhất để đảm bảo tính ổn định.",
+      "B. Nghiêm cấm hoàn toàn hành vi dùng công cụ AI dưới mọi hình thức để viết báo cáo thống kê.",
+      "C. Không bịa đặt thông tin quy hoạch; mọi tư vấn phải dựa trên các căn cứ pháp lý cụ thể.",
+      "D. Phân quyền hoàn toàn để AI tự động đưa ra quyết định thay lãnh đạo trong các vụ tranh chấp."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia xác định tầm nhìn đến năm 2045 như thế nào?",
+    "choices": [
+      "A. Việt Nam là quốc gia đang phát triển có thu nhập trung bình cao, làm chủ một số công nghệ chiến lược.",
+      "B. Việt Nam là quốc gia phát triển, có thu nhập cao, đạt mức phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số thuộc nhóm dẫn đầu thế giới.",
+      "C. Việt Nam hoàn thành chuyển đổi số toàn diện, 100% dịch vụ công được cung cấp trực tuyến.",
+      "D. Việt Nam nằm trong top 30 quốc gia có chỉ số đổi mới sáng tạo toàn cầu (GII) cao nhất."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số tỉnh Đắk Lắk năm 2026, chỉ tiêu tỷ trọng kinh tế số trong GRDP năm 2026 phấn đấu đạt mức bao nhiêu?",
+    "choices": [
+      "A. Phấn đấu đạt mức tỷ trọng 15%.",
+      "B. Phấn đấu đạt mức tỷ trọng 20%.",
+      "C. Phấn đấu đạt mức tỷ trọng 25%.",
+      "D. Phấn đấu đạt mức tỷ trọng 30%."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số tỉnh Đắk Lắk năm 2026, chỉ tiêu tỷ lệ hồ sơ và kết quả giải quyết thủ tục hành chính được số hóa trong năm 2026 là bao nhiêu?",
+    "choices": [
+      "A. Số hóa hồ sơ đạt tỷ lệ 70%.",
+      "B. Số hóa hồ sơ đạt tỷ lệ 80%.",
+      "C. Số hóa hồ sơ đạt tỷ lệ 90%.",
+      "D. Số hóa hồ sơ đạt tỷ lệ 100%."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số tỉnh Đắk Lắk năm 2026, tỷ lệ hài lòng của người dân đối với Chính quyền số được kỳ vọng đạt tối thiểu bao nhiêu phần trăm?",
+    "choices": [
+      "A. Đạt tỷ lệ hài lòng tối thiểu 80%.",
+      "B. Đạt tỷ lệ hài lòng tối thiểu 85%.",
+      "C. Đạt tỷ lệ hài lòng tối thiểu 90%.",
+      "D. Đạt tỷ lệ hài lòng tối thiểu 95%."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Theo Kế hoạch số 05-KH/BCĐ ngày 13/02/2026 của Ban Chỉ đạo về triển khai các nhiệm vụ phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số tỉnh Đắk Lắk năm 2026, đơn vị nào được giao chủ trì tổ chức kiểm tra, giám sát chuyên đề việc triển khai Nghị quyết số 57-NQ/TW trên địa bàn tỉnh?",
+    "choices": [
+      "A. Sở Khoa học Công nghệ tỉnh.",
+      "B. Ban Tuyên giáo của Tỉnh ủy.",
+      "C. Ủy ban Kiểm tra của Tỉnh ủy.",
+      "D. Ban Dân vận thuộc Tỉnh ủy."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Kế hoạch số 05-KH/BCĐ ngày 13/02/2026 của Ban Chỉ đạo tỉnh Đắk Lắk về triển khai các nhiệm vụ phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số năm 2026 được ban hành nhằm cụ thể hóa Nghị quyết nào của Bộ Chính trị?",
+    "choices": [
+      "A. Cụ thể hóa Nghị quyết số 55-NQ/TW.",
+      "B. Cụ thể hóa Nghị quyết số 56-NQ/TW.",
+      "C. Cụ thể hóa Nghị quyết số 57-NQ/TW.",
+      "D. Cụ thể hóa Nghị quyết số 58-NQ/TW."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 41/KH-UBND ngày 26/02/2026 của UBND xã Ô Loan về việc thực hiện công tác Chuyển đổi số xã Ô Loan năm 2026, mục tiêu về mức độ hài lòng của người dân đối với phát triển Chính quyền số được đặt ra như thế nào?",
+    "choices": [
+      "A. Tỷ lệ hài lòng của người dân đối với Chính quyền số tối thiểu là 80%.",
+      "B. Tỷ lệ hài lòng của người dân đối với Chính quyền số tối thiểu là 85%.",
+      "C. Tỷ lệ hài lòng của người dân đối với Chính quyền số tối thiểu là 95%.",
+      "D. Tỷ lệ hài lòng của người dân đối với Chính quyền số là 100%."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục I – Phân công theo dõi, thực hiện các chỉ tiêu phấn đấu hoàn thành đến hết năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, chỉ tiêu số 02 quy định tỷ lệ hồ sơ công việc được xử lý trên môi trường mạng (trừ hồ sơ mật) tại cấp tỉnh và cấp xã là bao nhiêu?",
+    "choices": [
+      "A. Phấn đấu đạt trên 80%.",
+      "B. Phấn đấu đạt trên 90%.",
+      "C. Phải đạt tỷ lệ 95%.",
+      "D. Phải đạt tỷ lệ 100%."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Theo Phụ lục I – Phân công theo dõi, thực hiện các chỉ tiêu phấn đấu hoàn thành đến hết năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, chỉ tiêu nào sau đây thuộc lĩnh vực y tế và an sinh xã hội được đặt ra để hoàn thành trong năm 2026?",
+    "choices": [
+      "A. 100% người dân tỉnh Đắk Lắk được lập, cập nhật và quản lý Hồ sơ sức khỏe điện tử cá nhân trên nền tảng số.",
+      "B. 100% cơ sở khám bệnh, chữa bệnh tiếp nhận khám chữa bệnh bằng Sổ sức khỏe điện tử trên VNeID.",
+      "C. 85% bệnh viện tuyến tỉnh trên địa bàn triển khai thực hiện thanh toán viện phí và các dịch vụ y tế không dùng tiền mặt.",
+      "D. 100% trẻ em trên địa bàn tỉnh được trang bị đầy đủ kỹ năng an toàn thông tin cần thiết khi tham gia môi trường mạng."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, nhân tố nào được xác định là nội dung trọng tâm, cốt lõi để phát triển nhanh và bền vững?",
+    "choices": [
+      "A. Việc thu hút mạnh mẽ nguồn vốn đầu tư trực tiếp từ nước ngoài.",
+      "B. Việc xây dựng và nâng cao chất lượng cơ sở hạ tầng giao thông.",
+      "C. Khoa học, công nghệ, đổi mới sáng tạo cùng sự chuyển đổi số quốc gia.",
+      "D. Việc hình thành và xây dựng thị trường bất động sản ổn định."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục I – Phân công theo dõi, thực hiện các chỉ tiêu phấn đấu hoàn thành đến hết năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, chỉ tiêu số 22 quy định 100% cán bộ, công chức, viên chức được tập huấn và tuyên truyền về kỹ năng gì trong lĩnh vực bảo đảm an toàn thông tin?",
+    "choices": [
+      "A. Kỹ năng vận hành, viết mã bảo đảm an toàn hệ thống.",
+      "B. Kỹ năng cơ bản nhằm bảo đảm an toàn thông tin.",
+      "C. Kỹ năng khai thác và lưu trữ an toàn cơ sở dữ liệu.",
+      "D. Kỹ năng quản trị điều hành hoạt động không gian mạng."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Kế hoạch số 95/KH-UBND ngày 25/3/2026 của UBND tỉnh Đắk Lắk về chuyển đổi số giai đoạn 2026–2030, chiến lược Chuyển đổi số tỉnh Đắk Lắk giai đoạn 2025–2030 xác định yếu tố nào làm trọng tâm?",
+    "choices": [
+      "A. Lấy phát triển hạ tầng số làm trung tâm và động lực chuyển đổi số.",
+      "B. Lấy cơ quan nhà nước làm trung tâm, chủ thể và động lực chuyển đổi số.",
+      "C. Lấy người dân, doanh nghiệp làm trung tâm, chủ thể và động lực chuyển đổi số.",
+      "D. Lấy ứng dụng trí tuệ nhân tạo làm trung tâm và động lực chuyển đổi số."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục II – Danh mục nhiệm vụ, dự án triển khai thực hiện năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk, việc hoàn thiện Hệ thống thông tin báo cáo của tỉnh hướng tới hình thành hệ thống nào để phục vụ điều hành thông suốt từ Trung ương đến địa phương?",
+    "choices": [
+      "A. Xây dựng nên Hệ thống thông tin điều hành của các tổ chức cơ sở.",
+      "B. Kết nối liên thông Hệ thống thông tin chỉ đạo điều hành Chính phủ.",
+      "C. Tích hợp theo Hệ thống chia sẻ dữ liệu chung mở trên toàn quốc gia.",
+      "D. Đồng bộ trực tiếp với mạng Hệ thống lưu trữ dữ liệu điện tử lớn."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Kế hoạch số 95/KH-UBND ngày 25/3/2026 của UBND tỉnh Đắk Lắk về chuyển đổi số giai đoạn 2026–2030, chỉ tiêu tỷ lệ dân số trưởng thành có chữ ký số hoặc chữ ký điện tử cá nhân đến năm 2030 được xác định ở mức bao nhiêu?",
+    "choices": [
+      "A. Đặt chỉ tiêu hoàn thành tỷ lệ mục tiêu ở mức 50%.",
+      "B. Đặt chỉ tiêu hoàn thành tỷ lệ mục tiêu ở mức 60%.",
+      "C. Đặt chỉ tiêu hoàn thành tỷ lệ mục tiêu ở mức 70%.",
+      "D. Đặt chỉ tiêu hoàn thành tỷ lệ mục tiêu ở mức 80%."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Kế hoạch số 95/KH-UBND ngày 25/3/2026 của UBND tỉnh Đắk Lắk về chuyển đổi số giai đoạn 2026–2030, chỉ tiêu tỷ lệ doanh nghiệp sử dụng hóa đơn điện tử đến năm 2030 được xác định ở mức bao nhiêu?",
+    "choices": [
+      "A. Kỳ vọng tỷ lệ doanh nghiệp tham gia đạt mức 80%.",
+      "B. Kỳ vọng tỷ lệ doanh nghiệp tham gia đạt mức 90%.",
+      "C. Kỳ vọng tỷ lệ doanh nghiệp tham gia đạt mức 95%.",
+      "D. Kỳ vọng tỷ lệ doanh nghiệp tham gia đạt mức 100%."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 41/KH-UBND ngày 26/02/2026 của UBND xã Ô Loan về việc thực hiện công tác Chuyển đổi số xã Ô Loan năm 2026, mục tiêu nào sau đây được đặt ra trong việc phát triển xã hội số?",
+    "choices": [
+      "A. Tỷ lệ người dân từ 15 tuổi trở lên có tài khoản giao dịch tại ngân hàng hoặc các tổ chức được phép khác đạt trên 70%.",
+      "B. Tỷ lệ người dân từ 15 tuổi trở lên có tài khoản giao dịch tại ngân hàng hoặc các tổ chức được phép khác đạt trên 80%.",
+      "C. Tỷ lệ người dân từ 15 tuổi trở lên có tài khoản giao dịch tại ngân hàng hoặc các tổ chức được phép khác đạt trên 85%.",
+      "D. Tỷ lệ người dân từ 15 tuổi trở lên có tài khoản giao dịch tại ngân hàng hoặc các tổ chức được phép khác đạt trên 90%."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục II – Danh mục nhiệm vụ, dự án triển khai thực hiện giai đoạn 2026–2030 ban hành kèm theo Kế hoạch số 95/KH-UBND ngày 25/3/2026 của UBND tỉnh Đắk Lắk, đơn vị nào được giao chủ trì triển khai Cổng thông tin dữ liệu mở của tỉnh?",
+    "choices": [
+      "A. Phân công chủ trì cho Văn phòng UBND tỉnh.",
+      "B. Phân công chủ trì cho Sở Thông tin Truyền thông.",
+      "C. Phân công chủ trì cho Sở Khoa học và Công nghệ.",
+      "D. Phân công chủ trì cho Sở Tài nguyên và Môi trường."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục I – Phân công theo dõi, thực hiện các chỉ tiêu phấn đấu hoàn thành đến hết năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, chỉ tiêu số 10 và số 11 xác định tỷ trọng kinh tế số trong GRDP của tỉnh và trong từng ngành, lĩnh vực lần lượt là bao nhiêu?",
+    "choices": [
+      "A. 15% GRDP và tối thiểu 10% trong từng ngành.",
+      "B. 20% GRDP và tối thiểu 12% trong từng ngành.",
+      "C. 25% GRDP và tối thiểu 15% trong từng ngành.",
+      "D. 30% GRDP và tối thiểu 20% trong từng ngành."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Phụ lục II – Danh mục nhiệm vụ, dự án triển khai thực hiện năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, đơn vị nào được giao chủ trì nhiệm vụ ban hành Quy chế quản trị dữ liệu, quản lý và khai thác Học bạ số và sử dụng AI trong giáo dục?",
+    "choices": [
+      "A. Sở Khoa học và Công nghệ.",
+      "B. Sở Giáo dục và Đào tạo.",
+      "C. Sở Nội vụ.",
+      "D. UBND các xã, phường."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Phụ lục II – Danh mục nhiệm vụ, dự án triển khai thực hiện năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, dự án nào sau đây thuộc nhóm nhiệm vụ phát triển hạ tầng số được giao cho Sở Giáo dục và Đào tạo chủ trì thực hiện?",
+    "choices": [
+      "A. Triển khai kế hoạch xây dựng hệ thống kết nối mạng WAN nội bộ trên toàn tỉnh Đắk Lắk.",
+      "B. Tiến hành nâng cấp và bảo mật hệ thống thông tin mạng nội bộ của văn phòng UBND tỉnh.",
+      "C. Đầu tư mua sắm, trang bị các thiết bị dạy học thông minh và hỗ trợ mạng Wifi tại các lớp học.",
+      "D. Triển khai thuê và nâng cấp hạ tầng các tuyến đường truyền cáp quang băng thông Leased line."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục II – Danh mục nhiệm vụ, dự án triển khai thực hiện năm 2026 ban hành kèm theo Kế hoạch số 0155/KH-UBND ngày 24/12/2025 của UBND tỉnh Đắk Lắk về chuyển đổi số năm 2026, đơn vị nào được giao chủ trì nhiệm vụ tổ chức tập huấn kỹ năng số cho cán bộ, công chức, viên chức, Tổ Công nghệ số cộng đồng và người dân?",
+    "choices": [
+      "A. Sở Thông tin và Truyền thông.",
+      "B. Sở Khoa học và Công nghệ.",
+      "C. UBND các xã, phường.",
+      "D. Sở Nội vụ."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, đối tượng nào được xác định là trung tâm, chủ thể, nguồn lực và động lực chính trong phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số?",
+    "choices": [
+      "A. Các nhà khoa học và các viện nghiên cứu.",
+      "B. Các cơ quan quản lý nhà nước từ Trung ương đến địa phương.",
+      "C. Người dân và doanh nghiệp.",
+      "D. Đội ngũ trí thức và nhân tài trong và ngoài nước."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, mục tiêu đến năm 2030 quy định quy mô kinh tế số của Việt Nam phải đạt tối thiểu bao nhiêu phần trăm GDP?",
+    "choices": [
+      "A. 20% GDP.",
+      "B. 25% GDP.",
+      "C. 30% GDP.",
+      "D. 50% GDP."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia, mục tiêu đến năm 2030 xác định Việt Nam phấn đấu thuộc nhóm bao nhiêu nước dẫn đầu khu vực Đông Nam Á về nghiên cứu và phát triển trí tuệ nhân tạo?",
+    "choices": [
+      "A. Nhóm 2 nước dẫn đầu.",
+      "B. Nhóm 3 nước dẫn đầu.",
+      "C. Nhóm 4 nước dẫn đầu.",
+      "D. Nhóm 5 nước dẫn đầu."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Kế hoạch số 05-KH/BCĐ ngày 13/02/2026 của Ban Chỉ đạo tỉnh Đắk Lắk về triển khai các nhiệm vụ phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số năm 2026, năm 2026 được xác định có tính chất như thế nào trong việc triển khai các nhiệm vụ chuyển đổi số?",
+    "choices": [
+      "A. Đây được xem là năm bản lề khởi động và bắt đầu thí điểm đại trà các mô hình công nghệ hiện đại.",
+      "B. Năm tăng tốc triển khai Nghị quyết số 57-NQ/TW và thực hiện các nhiệm vụ Ban Chỉ đạo Trung ương giao.",
+      "C. Là năm hoàn thành một cách toàn diện tất cả các chỉ tiêu trọng tâm của giai đoạn chuyển đổi số 2021-2025.",
+      "D. Đóng vai trò là năm sơ kết, tổng hợp và đánh giá kết quả thực hiện hoạt động chuyển đổi số ở cấp cơ sở."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo Phụ lục II – Danh mục nhiệm vụ, dự án triển khai thực hiện giai đoạn 2026–2030 ban hành kèm theo Kế hoạch số 95/KH-UBND ngày 25/3/2026 của UBND tỉnh Đắk Lắk, đơn vị nào được giao chủ trì triển khai hệ thống Họp không giấy tờ ở cấp cơ sở?",
+    "choices": [
+      "A. Giao cho Sở Khoa học và Công nghệ.",
+      "B. Giao cho Sở Thông tin và Truyền thông.",
+      "C. Giao cho Ủy ban nhân dân các xã, phường.",
+      "D. Giao cho Văn phòng Ủy ban nhân dân tỉnh."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 08-KH/BCĐ ngày 30/01/2026 của Đảng ủy xã Ô Loan về việc thực hiện nhiệm vụ phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số trên địa bàn xã Ô Loan năm 2026, mục tiêu cụ thể về tỷ lệ giải quyết thủ tục hành chính đúng hạn phải đạt từ bao nhiêu trở lên?",
+    "choices": [
+      "A. Phải đạt tỷ lệ từ 85% trở lên.",
+      "B. Phải đạt tỷ lệ từ 90% trở lên.",
+      "C. Phải đạt tỷ lệ từ 95% trở lên.",
+      "D. Phải đạt tỷ lệ là 100% tuyệt đối."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Căn cứ Kế hoạch số 41/KH-UBND ngày 26/02/2026 của UBND xã Ô Loan về việc thực hiện công tác Chuyển đổi số xã Ô Loan năm 2026, nội dung nào sau đây KHÔNG được đề cập trong mục Kinh tế số và xã hội số của kế hoạch?",
+    "choices": [
+      "A. Thúc đẩy thương mại điện tử và thanh toán không dùng tiền mặt.",
+      "B. Hướng dẫn đăng ký, sử dụng và kiểm tra chữ ký số cho người dân.",
+      "C. Xây dựng hệ thống camera giám sát an ninh tại các chợ truyền thống.",
+      "D. Ứng dụng công nghệ số trong quảng bá và tiêu thụ sản phẩm địa phương."
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Theo Phụ lục I (Danh mục nhiệm vụ địa phương chủ trì) ban hành kèm Kế hoạch số 75/KH-UBND ngày 20/3/2026 của UBND xã Ô Loan về việc triển khai các nhiệm vụ về phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số xã Ô Loan năm 2026. Cơ quan nào chủ trì xây dựng và triển khai phong trào “Bình dân học vụ số” năm 2026?",
+    "choices": [
+      "A. Trung tâm Phục vụ hành chính công.",
+      "B. Ban Chỉ đạo chuyển đổi số cấp xã.",
+      "C. Tổ công nghệ số cộng đồng các thôn.",
+      "D. Phòng Văn hóa - Xã hội của cấp xã."
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Theo Kế hoạch số 75/KH-UBND ngày 20/3/2026 của UBND xã Ô Loan về việc triển khai các nhiệm vụ về phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số xã Ô Loan năm 2026. Tỷ lệ cán bộ, công chức cấp xã yêu cầu phải có chữ ký số cá nhân để giải quyết công việc trên môi trường điện tử là bao nhiêu?",
+    "choices": [
+      "A. Tỷ lệ yêu cầu đạt mức tối thiểu là 80%.",
+      "B. Tỷ lệ yêu cầu đạt mức tối thiểu là 85%.",
+      "C. Tỷ lệ yêu cầu đạt mức tối thiểu là 90%.",
+      "D. Tỷ lệ yêu cầu đạt mức tối đa là 100%."
+    ],
+    "answer": 3
+  }
+]
