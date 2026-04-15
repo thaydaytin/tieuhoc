@@ -5,172 +5,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ Thống Thi Trắc Nghiệm Công Nghệ AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top right, #1e293b, #0f172a);
-            color: #f8fafc;
+            background-color: #f1f5f9;
+            color: #1e293b;
             min-height: 100vh;
         }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .pro-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
         }
         .option-btn {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
+            border: 2px solid #f1f5f9;
+            background: #f8fafc;
         }
         .option-btn:hover:not(:disabled) {
-            background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
+            border-color: #cbd5e1;
+            background: #f1f5f9;
         }
         .option-selected {
-            background: #3b82f6 !important;
-            border-color: #60a5fa !important;
-            color: white !important;
+            background: #eff6ff !important;
+            border-color: #3b82f6 !important;
+            color: #1e40af !important;
+            font-weight: 500;
         }
         .option-correct {
-            background: #10b981 !important;
-            border-color: #34d399 !important;
-            color: white !important;
+            background: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
         }
         .option-wrong {
-            background: #ef4444 !important;
-            border-color: #f87171 !important;
-            color: white !important;
+            background: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
         }
         .progress-bar {
-            transition: width 0.4s ease;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #1e293b; }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(241, 245, 249, 0.8);
+            backdrop-filter: blur(8px);
+        }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="pb-12">
 
-    <div id="app" class="max-w-4xl mx-auto">
-        <!-- Loading Screen -->
-        <div id="loading" class="text-center py-20">
-            <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto mb-4"></div>
-            <p class="text-slate-400">Đang tải bộ câu hỏi...</p>
+    <div id="app" class="max-w-4xl mx-auto px-4 md:px-6">
+        <!-- Loading -->
+        <div id="loading" class="flex flex-col items-center justify-center min-h-[60vh]">
+            <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-100 border-t-blue-600 mb-4"></div>
+            <p class="text-slate-500 font-medium">Đang chuẩn bị dữ liệu thi...</p>
         </div>
 
         <!-- Start Screen -->
-        <div id="start-screen" class="hidden glass-card p-8 rounded-3xl text-center shadow-2xl">
-            <div class="mb-6">
-                <div class="w-20 h-20 bg-blue-600/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        <div id="start-screen" class="hidden mt-12 md:mt-20 text-center">
+            <div class="pro-card p-8 md:p-12 max-w-2xl mx-auto">
+                <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                 </div>
-                <h1 class="text-3xl font-bold mb-2">Kiểm Tra Kiến Thức Công Nghệ</h1>
-                <p class="text-slate-400">Hệ thống sẽ chọn ngẫu nhiên 20 câu hỏi từ ngân hàng dữ liệu.</p>
-            </div>
-            <div class="grid grid-cols-2 gap-4 mb-8 text-sm">
-                <div class="bg-slate-800/50 p-4 rounded-xl">
-                    <span class="block text-blue-400 font-bold text-lg">20</span>
-                    Câu hỏi
+                <h1 class="text-3xl font-extrabold text-slate-900 mb-4">Hệ Thống Kiểm Tra Kỹ Năng Số</h1>
+                <p class="text-slate-600 mb-8 leading-relaxed">Chào mừng bạn đến với kỳ thi đánh giá kiến thức công nghệ. Bài thi bao gồm 20 câu hỏi được chọn lọc ngẫu nhiên từ thư viện câu hỏi chính thức.</p>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-10">
+                    <div class="bg-slate-50 border border-slate-100 px-6 py-3 rounded-xl">
+                        <span class="block text-slate-400 text-xs uppercase font-bold tracking-wider">Số câu hỏi</span>
+                        <span class="text-xl font-bold text-slate-800">20 Câu</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 px-6 py-3 rounded-xl">
+                        <span class="block text-slate-400 text-xs uppercase font-bold tracking-wider">Thời gian</span>
+                        <span class="text-xl font-bold text-slate-800">Tự do</span>
+                    </div>
                 </div>
-                <div class="bg-slate-800/50 p-4 rounded-xl">
-                    <span class="block text-blue-400 font-bold text-lg">100%</span>
-                    Công nghệ
-                </div>
+
+                <button onclick="startQuiz()" class="w-full sm:w-auto px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-200 focus:ring-4 focus:ring-blue-100">
+                    BẮT ĐẦU LÀM BÀI
+                </button>
             </div>
-            <button onclick="startQuiz()" class="w-full md:w-auto px-12 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-blue-500/20">
-                BẮT ĐẦU NGAY
-            </button>
         </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz-screen" class="hidden space-y-6">
-            <div class="flex justify-between items-end">
+        <div id="quiz-screen" class="hidden mt-6 space-y-6">
+            <div class="sticky-header py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-2xl font-bold">Đang làm bài</h2>
-                    <p class="text-slate-400" id="question-counter">Câu hỏi 1/20</p>
+                    <h2 class="text-xl font-bold text-slate-900">Bài kiểm tra năng lực</h2>
+                    <p class="text-slate-500 text-sm" id="question-counter">Tiến độ: 0/20 câu</p>
                 </div>
-                <div class="text-right">
-                    <span class="text-xs font-mono text-slate-500 uppercase tracking-widest">Tiến trình</span>
-                    <div class="w-32 md:w-64 h-2 bg-slate-800 rounded-full mt-1 overflow-hidden">
-                        <div id="progress-bar" class="progress-bar h-full bg-blue-500" style="width: 5%"></div>
+                <div class="flex items-center gap-3">
+                    <div class="flex-1 md:w-64 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="progress-bar h-full bg-blue-600" style="width: 0%"></div>
                     </div>
+                    <span id="progress-text" class="text-sm font-bold text-blue-600 min-w-[3rem] text-right">0%</span>
                 </div>
             </div>
 
-            <div id="questions-container" class="space-y-8">
-                <!-- Questions will be injected here -->
+            <div id="questions-container" class="space-y-6">
+                <!-- Questions injected here -->
             </div>
 
-            <div class="flex justify-center pt-8">
-                <button id="submit-btn" onclick="showResultsModal()" class="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-lg shadow-emerald-500/20">
-                    NỘP BÀI VÀ CHẤM ĐIỂM
+            <div class="flex justify-center pt-10 pb-20">
+                <button onclick="showResultsModal()" class="group relative px-12 py-4 bg-slate-900 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-xl flex items-center gap-2">
+                    NỘP BÀI THI
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
                 </button>
             </div>
         </div>
 
         <!-- Result Screen -->
-        <div id="result-screen" class="hidden space-y-6">
-            <div class="glass-card p-8 rounded-3xl text-center shadow-2xl relative overflow-hidden">
-                <div id="confetti-effect"></div>
-                <h2 class="text-2xl font-bold mb-2">Kết Quả Bài Thi</h2>
-                <div class="inline-block relative mb-4">
-                    <svg class="w-32 h-32 transform -rotate-90">
-                        <circle cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" class="text-slate-800" />
-                        <circle id="score-circle" cx="64" cy="64" r="58" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="364.4" stroke-dashoffset="364.4" class="text-blue-500 transition-all duration-1000 ease-out" />
+        <div id="result-screen" class="hidden mt-8 space-y-8">
+            <div class="pro-card p-8 text-center bg-gradient-to-br from-white to-blue-50/30">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6">Kết Quả Hoàn Thành</h2>
+                
+                <div class="relative inline-flex items-center justify-center mb-6">
+                    <svg class="w-40 h-40 transform -rotate-90">
+                        <circle cx="80" cy="80" r="70" stroke="#e2e8f0" stroke-width="10" fill="transparent" />
+                        <circle id="score-circle" cx="80" cy="80" r="70" stroke="#2563eb" stroke-width="10" fill="transparent" stroke-dasharray="439.8" stroke-dashoffset="439.8" stroke-linecap="round" class="transition-all duration-1000 ease-out" />
                     </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <span id="final-score" class="text-3xl font-bold">0/20</span>
+                    <div class="absolute text-center">
+                        <span id="final-score" class="block text-4xl font-black text-slate-900">0/20</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Điểm số</span>
                     </div>
                 </div>
-                <p id="result-message" class="text-slate-300 mb-6 font-medium">Bạn đã hoàn thành bài thi!</p>
-                <button onclick="restartQuiz()" class="px-8 py-3 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-xl transition-all">
-                    LÀM LẠI BÀI THI
-                </button>
+
+                <div id="result-badge" class="mb-6 inline-block px-4 py-2 rounded-full text-sm font-bold"></div>
+                <p id="result-message" class="text-slate-600 mb-8 max-w-md mx-auto"></p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="restartQuiz()" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all">
+                        LÀM LẠI BÀI THI
+                    </button>
+                    <button onclick="window.print()" class="px-8 py-3 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 transition-all">
+                        IN KẾT QUẢ
+                    </button>
+                </div>
             </div>
 
-            <h3 class="text-xl font-bold px-2 border-l-4 border-blue-500">Xem lại đáp án</h3>
-            <div id="review-container" class="space-y-4">
-                <!-- Review details will be injected here -->
+            <div class="flex items-center justify-between px-2">
+                <h3 class="text-xl font-bold text-slate-900">Chi tiết bài làm</h3>
+                <div class="flex gap-4 text-xs font-bold uppercase">
+                    <span class="flex items-center gap-1 text-emerald-600"><span class="w-3 h-3 bg-emerald-500 rounded-full"></span> Đúng</span>
+                    <span class="flex items-center gap-1 text-red-600"><span class="w-3 h-3 bg-red-500 rounded-full"></span> Sai</span>
+                </div>
             </div>
-            
-            <div class="flex justify-center pb-12">
-                 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-slate-400 hover:text-white flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                    </svg>
-                    Quay lại đầu trang
-                 </button>
+
+            <div id="review-container" class="space-y-4 pb-20">
+                <!-- Review cards injected here -->
             </div>
         </div>
     </div>
 
-    <!-- Confirmation Modal -->
-    <div id="confirm-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card max-w-sm w-full p-6 rounded-2xl shadow-2xl text-center">
-            <h3 class="text-xl font-bold mb-4">Xác nhận nộp bài?</h3>
-            <p class="text-slate-400 mb-6">Bạn có chắc chắn muốn nộp bài và kết thúc lượt thi này không?</p>
+    <!-- Confirm Modal -->
+    <div id="confirm-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white max-w-md w-full p-8 rounded-2xl shadow-2xl border border-slate-100">
+            <div class="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 text-center mb-2">Bạn đã hoàn thành?</h3>
+            <p class="text-slate-500 text-center mb-8">Hệ thống sẽ chấm điểm ngay lập tức sau khi bạn nhấn "Đồng ý nộp bài".</p>
             <div class="flex gap-3">
-                <button onclick="closeModal()" class="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 font-medium">Hủy</button>
-                <button onclick="submitQuiz()" class="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 font-bold">Đồng ý</button>
+                <button onclick="closeModal()" class="flex-1 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold transition-all">Quay lại</button>
+                <button onclick="submitQuiz()" class="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all shadow-lg shadow-blue-200">Đồng ý nộp bài</button>
             </div>
         </div>
     </div>
 
     <script>
-        // CẤU HÌNH: Thay đổi URL GitHub của bạn tại đây
-        const JSON_URL = 'onthiAI.json'; // Nếu chạy cùng thư mục. Nếu ở GitHub: 'https://raw.githubusercontent.com/user/repo/main/file.json'
-        
+        const JSON_URL = 'onthiAI.json';
         let allQuestions = [];
         let selectedQuestions = [];
         let userAnswers = {};
 
-        // 1. Tải dữ liệu
         async function fetchQuestions() {
             try {
                 const response = await fetch(JSON_URL);
-                if (!response.ok) throw new Error('Không thể tải file JSON');
+                if (!response.ok) throw new Error('Network error');
                 allQuestions = await response.json();
                 
                 document.getElementById('loading').classList.add('hidden');
@@ -178,54 +199,49 @@
             } catch (error) {
                 console.error(error);
                 document.getElementById('loading').innerHTML = `
-                    <div class="text-red-500">
-                        <p class="font-bold">Lỗi!</p>
-                        <p class="text-sm">Không tìm thấy bộ câu hỏi. Vui lòng kiểm tra đường dẫn file JSON.</p>
-                        <p class="mt-4 text-xs text-slate-500">${error.message}</p>
+                    <div class="p-6 bg-red-50 border border-red-100 rounded-2xl text-center max-w-sm mx-auto">
+                        <p class="text-red-600 font-bold mb-2">Lỗi tải dữ liệu!</p>
+                        <p class="text-red-500 text-sm">Vui lòng kiểm tra file JSON hoặc kết nối mạng.</p>
                     </div>
                 `;
             }
         }
 
-        // 2. Bắt đầu Quiz
         function startQuiz() {
-            // Xáo trộn và chọn 20 câu
-            selectedQuestions = [...allQuestions]
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 20);
-            
+            selectedQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 20);
             userAnswers = {};
             renderQuestions();
-            
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 3. Hiển thị danh sách câu hỏi
         function renderQuestions() {
             const container = document.getElementById('questions-container');
             container.innerHTML = '';
             
             selectedQuestions.forEach((q, qIndex) => {
                 const qEl = document.createElement('div');
-                qEl.className = 'glass-card p-6 md:p-8 rounded-2xl shadow-lg';
+                qEl.className = 'pro-card p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500';
                 qEl.innerHTML = `
-                    <div class="flex gap-4 mb-4">
-                        <span class="flex-shrink-0 w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-sm">
-                            ${qIndex + 1}
+                    <div class="flex gap-4 mb-6">
+                        <span class="flex-shrink-0 w-10 h-10 bg-slate-100 text-slate-600 rounded-xl flex items-center justify-center font-black text-sm">
+                            ${(qIndex + 1).toString().padStart(2, '0')}
                         </span>
-                        <p class="text-lg font-medium leading-relaxed">${q.question}</p>
+                        <p class="text-lg font-semibold text-slate-800 leading-snug pt-1">${q.question}</p>
                     </div>
-                    <div class="grid grid-cols-1 gap-3 ml-0 md:ml-12">
+                    <div class="grid grid-cols-1 gap-3 sm:ml-14">
                         ${q.choices.map((choice, cIndex) => `
                             <button 
                                 id="btn-${qIndex}-${cIndex}"
                                 onclick="selectOption(${qIndex}, ${cIndex})"
-                                class="option-btn text-left p-4 rounded-xl border border-slate-700 bg-slate-800/30 hover:bg-slate-800/60"
+                                class="option-btn text-left p-4 rounded-xl text-slate-600 hover:text-slate-900 flex items-center gap-3"
                             >
-                                ${choice}
+                                <span class="w-6 h-6 rounded-full border-2 border-current flex-shrink-0 flex items-center justify-center text-[10px] font-bold">
+                                    ${String.fromCharCode(65 + cIndex)}
+                                </span>
+                                <span class="flex-1">${choice}</span>
                             </button>
                         `).join('')}
                     </div>
@@ -235,34 +251,24 @@
             updateProgress();
         }
 
-        // 4. Chọn đáp án
         function selectOption(qIndex, cIndex) {
             userAnswers[qIndex] = cIndex;
-            
-            // Xóa style cũ của câu hỏi này
             selectedQuestions[qIndex].choices.forEach((_, idx) => {
                 document.getElementById(`btn-${qIndex}-${idx}`).classList.remove('option-selected');
             });
-            
-            // Thêm style mới
             document.getElementById(`btn-${qIndex}-${cIndex}`).classList.add('option-selected');
             updateProgress();
         }
 
-        // 5. Cập nhật tiến trình
         function updateProgress() {
-            const answeredCount = Object.keys(userAnswers).length;
-            const percentage = (answeredCount / 20) * 100;
-            document.getElementById('progress-bar').style.width = `${percentage}%`;
-            document.getElementById('question-counter').innerText = `Câu hỏi ${answeredCount}/20`;
+            const count = Object.keys(userAnswers).length;
+            const pct = Math.round((count / 20) * 100);
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('progress-text').innerText = `${pct}%`;
+            document.getElementById('question-counter').innerText = `Tiến độ: ${count}/20 câu`;
         }
 
-        // 6. Xử lý nộp bài
         function showResultsModal() {
-            const answeredCount = Object.keys(userAnswers).length;
-            if (answeredCount < 20) {
-                if(!confirm(`Bạn mới trả lời ${answeredCount}/20 câu hỏi. Bạn vẫn muốn nộp bài?`)) return;
-            }
             document.getElementById('confirm-modal').classList.remove('hidden');
         }
 
@@ -276,68 +282,73 @@
             document.getElementById('result-screen').classList.remove('hidden');
             
             let score = 0;
-            const reviewContainer = document.getElementById('review-container');
-            reviewContainer.innerHTML = '';
+            const container = document.getElementById('review-container');
+            container.innerHTML = '';
 
             selectedQuestions.forEach((q, qIndex) => {
                 const userChoice = userAnswers[qIndex];
                 const isCorrect = userChoice === q.answer;
                 if (isCorrect) score++;
 
-                const reviewEl = document.createElement('div');
-                reviewEl.className = `p-5 rounded-2xl border ${isCorrect ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-red-500/5 border-red-500/20'}`;
-                reviewEl.innerHTML = `
-                    <div class="flex items-start gap-3 mb-3">
-                        <span class="mt-1 flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${isCorrect ? 'bg-emerald-500' : 'bg-red-500'}">
+                const card = document.createElement('div');
+                card.className = `pro-card p-6 border-l-8 ${isCorrect ? 'border-l-emerald-500' : 'border-l-red-500'}`;
+                card.innerHTML = `
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="mt-1 w-6 h-6 rounded-full flex items-center justify-center text-white ${isCorrect ? 'bg-emerald-500' : 'bg-red-500'}">
                             ${isCorrect ? '✓' : '✕'}
-                        </span>
-                        <p class="font-medium">${qIndex + 1}. ${q.question}</p>
+                        </div>
+                        <p class="font-bold text-slate-800">${qIndex + 1}. ${q.question}</p>
                     </div>
-                    <div class="space-y-2 ml-9 text-sm">
+                    <div class="sm:ml-10 space-y-2">
                         ${q.choices.map((choice, cIndex) => {
-                            let statusClass = 'text-slate-400';
+                            let cls = 'text-slate-500 flex items-center gap-2 py-1 px-3 rounded-lg text-sm';
                             let icon = '';
                             
                             if (cIndex === q.answer) {
-                                statusClass = 'text-emerald-400 font-bold';
-                                icon = ' <span class="text-[10px] bg-emerald-500/20 px-2 py-0.5 rounded uppercase ml-2 text-emerald-400">Đáp án đúng</span>';
+                                cls = 'bg-emerald-50 text-emerald-700 font-bold flex items-center gap-2 py-1 px-3 rounded-lg text-sm';
+                                icon = ' <span class="ml-auto text-[10px] bg-emerald-100 px-2 py-0.5 rounded text-emerald-600">ĐÁP ÁN ĐÚNG</span>';
                             } else if (cIndex === userChoice && !isCorrect) {
-                                statusClass = 'text-red-400 line-through';
+                                cls = 'bg-red-50 text-red-700 font-medium flex items-center gap-2 py-1 px-3 rounded-lg text-sm';
                             }
 
-                            return `<p class="${statusClass}">${choice}${icon}</p>`;
+                            return `<div class="${cls}">
+                                <span class="w-5 h-5 border border-current rounded-full flex items-center justify-center text-[10px] flex-shrink-0">${String.fromCharCode(65 + cIndex)}</span>
+                                <span>${choice}</span>
+                                ${icon}
+                            </div>`;
                         }).join('')}
                     </div>
                 `;
-                reviewContainer.appendChild(reviewEl);
+                container.appendChild(card);
             });
 
-            // Hiển thị điểm số
-            const scoreDisplay = document.getElementById('final-score');
-            scoreDisplay.innerText = `${score}/20`;
-            
-            // Animation vòng tròn điểm
+            document.getElementById('final-score').innerText = `${score}/20`;
             const circle = document.getElementById('score-circle');
-            const offset = 364.4 - (score / 20) * 364.4;
-            setTimeout(() => {
-                circle.style.strokeDashoffset = offset;
-            }, 100);
+            circle.style.strokeDashoffset = 439.8 - (score / 20) * 439.8;
 
-            // Thông điệp kết quả
+            const badge = document.getElementById('result-badge');
             const msg = document.getElementById('result-message');
-            if(score >= 16) msg.innerText = "Xuất sắc! Bạn nắm rất vững kiến thức công nghệ.";
-            else if(score >= 10) msg.innerText = "Khá tốt! Hãy xem lại các câu sai để hoàn thiện hơn.";
-            else msg.innerText = "Cố gắng lên! Bạn cần tìm hiểu thêm về các lĩnh vực này.";
-
-            window.scrollTo(0, 0);
+            
+            if(score >= 18) {
+                badge.className = "mb-6 inline-block px-4 py-2 rounded-full text-sm font-bold bg-emerald-100 text-emerald-700";
+                badge.innerText = "Hạng: Chuyên Gia";
+                msg.innerText = "Chúc mừng! Bạn có kiến thức tuyệt vời về công nghệ và AI.";
+            } else if(score >= 14) {
+                badge.className = "mb-6 inline-block px-4 py-2 rounded-full text-sm font-bold bg-blue-100 text-blue-700";
+                badge.innerText = "Hạng: Khá";
+                msg.innerText = "Kết quả rất tốt. Bạn đã nắm vững phần lớn các nội dung quan trọng.";
+            } else {
+                badge.className = "mb-6 inline-block px-4 py-2 rounded-full text-sm font-bold bg-slate-100 text-slate-700";
+                badge.innerText = "Hạng: Cơ Bản";
+                msg.innerText = "Hãy xem lại các câu trả lời sai để củng cố thêm kiến thức nhé.";
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 7. Restart
         function restartQuiz() {
             startQuiz();
         }
 
-        // Chạy ngay khi tải trang
         window.onload = fetchQuestions;
     </script>
 </body>
