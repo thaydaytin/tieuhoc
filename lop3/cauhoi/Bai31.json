@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
+    "question": "Theo bài học, việc chia một công việc lớn thành các việc nhỏ có lợi ích gì?",
+    "Lever": 1,
+    "choices": [
+      "Làm cho công việc dễ thực hiện",
+      "Làm cho công việc tốn thời gian",
+      "Làm cho công việc trở nên khó",
+      "Làm cho máy tính bị hỏng hóc"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong trò chơi điều khiển robot, lệnh 'Tiến (1)' có nghĩa là gì?",
+    "Lever": 1,
+    "choices": [
+      "Đi thẳng một đoạn dài một ô vuông",
+      "Đi thẳng một đoạn dài hai ô vuông",
+      "Đi thẳng một đoạn dài ba ô vuông",
+      "Đi thẳng một đoạn dài bốn ô vuông"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi robot gặp đèn màu đỏ (vật cản), robot cần thực hiện lệnh gì?",
+    "Lever": 1,
+    "choices": [
+      "Quay sang bên hướng phía tay trái",
+      "Quay sang bên hướng phía tay phải",
+      "Nhảy lên cao để bước qua vật cản",
+      "Dừng lại và không di chuyển nữa"
+    ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
+    "question": "Một trong các việc nhỏ để làm tờ rơi bảo vệ môi trường là gì?",
+    "Lever": 1,
+    "choices": [
+      "Tìm và chọn ảnh minh họa tờ rơi",
+      "Quét dọn rác ở xung quanh trường",
+      "Đi mua túi nilon ở trong siêu thị",
+      "Vẽ tranh lên trên bảng của lớp học"
+    ],
+    "answer": 0
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
-    "answer": 1
+    "question": "Để làm người chỉ huy giỏi, khi phát biểu nhiệm vụ em cần nêu rõ điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Những gì đã có và cần tạo ra gì",
+      "Tên của tất cả các bạn trong lớp",
+      "Địa chỉ nhà của những người bạn",
+      "Những món ăn mà em thích nhất"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu chia nhỏ nhiệm vụ một cách hợp lý thì sẽ giúp ích điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Dễ thực hiện và dễ phân công việc",
+      "Khó thực hiện và khó phân công việc",
+      "Không cần phải dùng đến máy tính",
+      "Không cần phải có người chỉ huy"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao nhiệm vụ làm tờ rơi được chia thành 4 việc nhỏ khác nhau?",
+    "Lever": 2,
+    "choices": [
+      "Để mỗi bạn thực hiện một phần việc",
+      "Để một bạn thực hiện tất cả các việc",
+      "Để công việc kéo dài thời gian hơn",
+      "Để các bạn không phải làm việc gì"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Theo Bảng 1 trang 67, sau khi robot 'Quay trái' thì robot thường làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Thực hiện lệnh di chuyển tiến lên",
+      "Thực hiện lệnh nhảy qua vật cản",
+      "Thực hiện lệnh quay sang bên phải",
+      "Thực hiện việc dừng lại hoàn toàn"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Việc 'Viết nội dung các câu sẽ đưa vào tờ rơi' thuộc bước nào?",
+    "Lever": 2,
+    "choices": [
+      "Bước chuẩn bị nội dung cho tờ rơi",
+      "Bước in ấn ra các tờ rơi giống nhau",
+      "Bước tìm kiếm hình ảnh trên mạng",
+      "Bước trang trí màu sắc cho tờ rơi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Robot chỉ lăn bánh khi bánh xe không chạm vào màu nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Không chạm vào các vạch màu đỏ",
+      "Không chạm vào các vạch màu xanh",
+      "Không chạm vào các vạch màu vàng",
+      "Không chạm vào các vạch màu đen"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Máy tính có thể hỗ trợ em thực hiện việc nào khi làm tờ rơi?",
+    "Lever": 2,
+    "choices": [
+      "Soạn thảo nội dung và sắp xếp ảnh",
+      "Đi phát tờ rơi cho các bác phụ huynh",
+      "Nhặt túi nilon ở ngoài môi trường",
+      "Trồng cây xanh ở trong vườn trường"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Quan sát Hình 2 trang 67, để robot đi từ C đến D, lệnh số 2 nên là gì?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh nếu đỏ thì nhảy để vượt qua",
+      "Lệnh quay trái rồi tiến ba ô vuông",
+      "Lệnh quay phải rồi tiến một ô vuông",
+      "Lệnh lùi lại một đoạn là một ô vuông"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nhóm của An có ảnh và máy tính nhưng chưa biết viết gì. An thiếu việc gì?",
+    "Lever": 3,
+    "choices": [
+      "Thiếu việc viết nội dung cho tờ rơi",
+      "Thiếu việc tìm ảnh minh họa tờ rơi",
+      "Thiếu máy tính để làm các tờ rơi",
+      "Thiếu người để đi in ấn các tờ rơi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để chỉ huy nhóm làm bài giới thiệu về loài vật, em nên làm gì đầu tiên?",
+    "Lever": 3,
+    "choices": [
+      "Chia nhỏ nhiệm vụ cho các thành viên",
+      "Tự mình làm hết tất cả mọi công việc",
+      "Ngồi đợi cô giáo làm hộ cho cả nhóm",
+      "Đi mượn bài của các nhóm bạn khác"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu việc 'Tìm ảnh' thực hiện sau việc 'In tờ rơi' thì kết quả thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Tờ rơi sẽ không có hình ảnh minh họa",
+      "Tờ rơi sẽ có hình ảnh rất là đẹp mắt",
+      "Tờ rơi sẽ tự động được thêm hình ảnh",
+      "Tờ rơi sẽ không thể in ra được giấy"
+    ],
+    "answer": 0
   }
 ]

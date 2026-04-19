@@ -1,17 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
-    "choices": ["Màn hình", "Chuột", "CPU", "Loa"],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": ["Enter", "Shift", "Backspace", "Ctrl"],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": ["Paint", "Word", "Excel", "Chrome"],
+    "question": "Cấu trúc rẽ nhánh được sử dụng trong lập trình để mô tả điều gì?",
+    "Lever": 1,
+    "choices": [
+      "Hành động lặp đi lặp lại",
+      "Hành động làm theo điều kiện",
+      "Hành động thực hiện một lần",
+      "Hành động không bao giờ dừng"
+    ],
     "answer": 1
+  },
+  {
+    "question": "Trong phần mềm Scratch, khối lệnh rẽ nhánh nằm ở nhóm lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh Sự kiện",
+      "Nằm trong nhóm lệnh Hiển thị",
+      "Nằm trong nhóm lệnh Điều khiển",
+      "Nằm trong nhóm lệnh Chuyển động"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Lệnh rẽ nhánh dạng 'nếu... thì' thực hiện khối lệnh khi nào?",
+    "Lever": 1,
+    "choices": [
+      "Khi điều kiện có giá trị sai",
+      "Khi điều kiện có giá trị đúng",
+      "Khi nhân vật đang di chuyển",
+      "Khi người dùng nhấn phím tắt"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Biểu thức điều kiện trong cấu trúc rẽ nhánh trả về kết quả gì?",
+    "Lever": 1,
+    "choices": [
+      "Một con số tự nhiên bất kỳ",
+      "Một đoạn văn bản thông báo",
+      "Một giá trị là đúng hoặc sai",
+      "Một màu sắc hiển thị ở nền"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Cấu trúc rẽ nhánh đầy đủ trong Scratch có bao nhiêu nhánh lệnh?",
+    "Lever": 1,
+    "choices": [
+      "Có duy nhất một nhánh lệnh",
+      "Có tất cả hai nhánh lệnh",
+      "Có tất cả ba nhánh lệnh",
+      "Có tất cả bốn nhánh lệnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Câu nào sau đây mô tả cấu trúc rẽ nhánh trong thực tế?",
+    "Lever": 1,
+    "choices": [
+      "Em đi học mỗi ngày vào sáng",
+      "Em tập thể dục vào mỗi chiều",
+      "Nếu trời mưa thì em đội mũ",
+      "Em đang ngồi làm bài tập về"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Sự khác biệt chính giữa cấu trúc rẽ nhánh khuyết và đầy đủ là gì?",
+    "Lever": 2,
+    "choices": [
+      "Số lượng điều kiện kiểm tra",
+      "Số lượng khối lệnh thực hiện",
+      "Màu sắc của các khối lệnh đó",
+      "Vị trí đặt lệnh trên sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong lệnh rẽ nhánh đầy đủ, nếu điều kiện sai thì máy làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Thực hiện lệnh ở nhánh 'nếu'",
+      "Thực hiện lệnh ở 'nếu không'",
+      "Dừng toàn bộ chương trình lại",
+      "Bỏ qua tất cả các khối lệnh đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao hình lục giác được dùng để chứa điều kiện trong rẽ nhánh?",
+    "Lever": 2,
+    "choices": [
+      "Để nhân vật có thể đẹp hơn",
+      "Để chứa giá trị đúng hoặc sai",
+      "Để tăng tốc độ chạy chương",
+      "Để chứa các con số tính toán"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cấu trúc rẽ nhánh giúp chương trình máy tính trở nên như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Chạy chậm và tốn bộ nhớ hơn",
+      "Linh hoạt xử lý các tình huống",
+      "Luôn thực hiện cùng một kết quả",
+      "Chỉ dùng cho các bài toán cộng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quan sát Hình 4 trang 80, lệnh rẽ nhánh khuyết sẽ làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm theo nhánh 'nếu không thì'",
+      "Thực hiện lệnh nếu điều kiện đúng",
+      "Xóa bỏ điều kiện rẽ nhánh đó",
+      "Tự động lặp lại mười lần lệnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong kịch bản Mèo kiểm tra toán (trang 79), nếu nhập số 11 thì sao?",
+    "Lever": 3,
+    "choices": [
+      "Mèo nói: Bạn cộng đúng rồi!",
+      "Mèo nói: Bạn cộng sai rồi!",
+      "Mèo sẽ không nói bất cứ gì",
+      "Mèo di chuyển tới vị trí mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu điều kiện là '10 > 5', lệnh rẽ nhánh đầy đủ thực hiện nhánh nào?",
+    "Lever": 3,
+    "choices": [
+      "Thực hiện nhánh thứ nhất (nếu)",
+      "Thực hiện nhánh thứ hai (không)",
+      "Thực hiện cả hai nhánh lệnh đó",
+      "Không thực hiện nhánh lệnh nào"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Dựa vào Hình 8 trang 81, khi Chó và Mèo chạm nhau thì hành động gì?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật sẽ đi tới con trỏ",
+      "Nhân vật sẽ hiển thị nghĩ Hmm",
+      "Nhân vật sẽ biến mất khỏi máy",
+      "Cả hai hành động cùng xảy ra"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tạo chương trình hỏi mật khẩu đúng/sai, em nên dùng lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh rẽ nhánh đầy đủ (if-else)",
+      "Lệnh rẽ nhánh khuyết (if-then)",
+      "Lệnh lặp lại mười lần liên tiếp",
+      "Lệnh di chuyển mười bước thẳng"
+    ],
+    "answer": 0
   }
 ]
