@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Generator Prompt Văn Bản Hành Chính</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f0f2f5; }
+    h2 { text-align: center; }
+    .container { max-width: 900px; margin: auto; background: #fff; padding: 20px; border-radius: 12px; }
+    label { font-weight: bold; }
+    input, select, textarea {
+      width: 100%; padding: 10px; margin: 6px 0 15px;
+      border-radius: 6px; border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px; margin-right: 10px;
+      background: #007bff; color: white; border: none; border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    pre {
+      white-space: pre-wrap; background: #eee; padding: 15px;
+      border-radius: 8px; margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🤖 Sinh Prompt Văn Bản Hành Chính</h2>
+
+  <label>Loại văn bản</label>
+  <select id="type">
+    <option>Thông báo</option>
+    <option>Kế hoạch</option>
+    <option>Báo cáo</option>
+    <option>Tờ trình</option>
+    <option>Quyết định</option>
+  </select>
+
+  <label>Tên cơ quan</label>
+  <input id="org" placeholder="VD: Trường Tiểu học An Hòa số 1">
+
+  <label>Nội dung chính</label>
+  <textarea id="content" rows="3" placeholder="Mô tả chi tiết nội dung"></textarea>
+
+  <label>Mục đích / Yêu cầu</label>
+  <input id="purpose">
+
+  <label>Đối tượng áp dụng</label>
+  <input id="target">
+
+  <label>Thời gian</label>
+  <input id="time">
+
+  <label>Địa điểm</label>
+  <input id="location">
+
+  <label>Yêu cầu bổ sung</label>
+  <textarea id="extra" rows="2"></textarea>
+
+  <button onclick="generatePrompt()">Tạo Prompt</button>
+  <button onclick="copyPrompt()">Copy</button>
+
+  <pre id="output"></pre>
+</div>
+
+<script>
+function generatePrompt() {
+  const type = document.getElementById('type').value;
+  const org = document.getElementById('org').value;
+  const content = document.getElementById('content').value;
+  const purpose = document.getElementById('purpose').value;
+  const target = document.getElementById('target').value;
+  const time = document.getElementById('time').value;
+  const location = document.getElementById('location').value;
+  const extra = document.getElementById('extra').value;
+
+  let prompt = `Bạn là chuyên gia hành chính văn phòng, am hiểu sâu sắc thể thức văn bản theo Nghị định 30/2020/NĐ-CP.\n\n`;
+
+  prompt += `Hãy soạn thảo một văn bản hành chính hoàn chỉnh với các thông tin sau:\n`;
+  prompt += `- Loại văn bản: ${type}\n`;
+  prompt += `- Tên văn bản phải thể hiện rõ dạng: "${type.toUpperCase()} - Về việc ${content}"\n`;
+  prompt += `- Cơ quan ban hành: ${org}\n`;
+  prompt += `- Nội dung công việc: ${content}\n`;
+  prompt += `- Mục đích/yêu cầu: ${purpose}\n`;
+  prompt += `- Đối tượng áp dụng: ${target}\n`;
+  prompt += `- Thời gian: ${time}\n`;
+  prompt += `- Địa điểm: ${location}\n`;
+  prompt += `- Yêu cầu bổ sung: ${extra}\n\n`;
+
+  prompt += `YÊU CẦU BẮT BUỘC:\n`;
+  prompt += `- Văn bản phải đúng thể thức văn bản hành chính theo Nghị định 30/2020/NĐ-CP\n`;
+  prompt += `- Trình bày đầy đủ: Quốc hiệu, tiêu ngữ, tên cơ quan, số văn bản, địa danh ngày tháng, tên văn bản, nội dung, nơi nhận, chữ ký\n`;
+  prompt += `- Phải có Tên văn bản thể hiện rõ dạng: "${type.toUpperCase()} - Về việc ${content}"\n`;
+  prompt += `- Văn phong trang trọng, rõ ràng, đúng chuẩn nhà nước\n`;
+  prompt += `- Nội dung logic, phù hợp thực tế\n`;
+  prompt += `- Xuất kết quả dưới dạng nội dung có thể chuyển thành file Word (.docx)\n`;
+
+  prompt += `- Nếu nền tảng hỗ trợ, hãy cung cấp file Word (.docx) để tải xuống\n`;
+  
+  document.getElementById('output').innerText = prompt;
+}
+
+function copyPrompt() {
+  const text = document.getElementById('output').innerText;
+  navigator.clipboard.writeText(text);
+  alert('Đã copy prompt!');
+}
+</script>
+
+</body>
+</html>
