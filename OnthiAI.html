@@ -55,6 +55,15 @@
             backdrop-filter: blur(8px);
             border-bottom: 1px solid #e2e8f0;
         }
+        .timer-warning {
+            color: #ef4444;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body class="pb-12">
@@ -75,16 +84,16 @@
                     </svg>
                 </div>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Hệ Thống Kiểm Tra Kỹ Năng Số</h1>
-                <p class="text-lg text-slate-600 mb-10 leading-relaxed">Chào mừng bạn đến với kỳ thi đánh giá kiến thức công nghệ. Bài thi bao gồm 20 câu hỏi được chọn lọc ngẫu nhiên từ thư viện câu hỏi chính thức.</p>
+                <p class="text-lg text-slate-600 mb-10 leading-relaxed">Chào mừng bạn đến với kỳ thi đánh giá kiến thức công nghệ. Bài thi bao gồm 10 câu hỏi được chọn lọc ngẫu nhiên từ thư viện câu hỏi chính thức.</p>
                 
                 <div class="flex flex-wrap justify-center gap-6 mb-12">
                     <div class="bg-white border border-slate-200 px-8 py-4 rounded-2xl shadow-sm">
                         <span class="block text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Số câu hỏi</span>
-                        <span class="text-2xl font-bold text-slate-800">20 Câu</span>
+                        <span class="text-2xl font-bold text-slate-800">10 Câu</span>
                     </div>
                     <div class="bg-white border border-slate-200 px-8 py-4 rounded-2xl shadow-sm">
                         <span class="block text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Thời gian</span>
-                        <span class="text-2xl font-bold text-slate-800">Tự do</span>
+                        <span class="text-2xl font-bold text-slate-800">10 Phút</span>
                     </div>
                 </div>
 
@@ -97,12 +106,21 @@
         <!-- Quiz Screen -->
         <div id="quiz-screen" class="hidden mt-6 space-y-6">
             <div class="sticky-header px-4 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-b-2xl shadow-sm">
-                <div>
-                    <h2 class="text-xl font-bold text-slate-900">Bài kiểm tra năng lực</h2>
-                    <p class="text-slate-500 text-sm font-medium" id="question-counter">Tiến độ: 0/20 câu</p>
+                <div class="flex items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Bài kiểm tra năng lực</h2>
+                        <p class="text-slate-500 text-sm font-medium" id="question-counter">Tiến độ: 0/10 câu</p>
+                    </div>
+                    <!-- Đồng hồ đếm ngược -->
+                    <div id="timer-display" class="ml-4 px-4 py-2 bg-slate-900 text-white rounded-xl font-mono text-xl font-bold flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span id="timer-text">10:00</span>
+                    </div>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div class="flex-1 md:w-80 h-3 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="flex-1 md:w-64 h-3 bg-slate-200 rounded-full overflow-hidden">
                         <div id="progress-bar" class="progress-bar h-full bg-blue-600" style="width: 0%"></div>
                     </div>
                     <span id="progress-text" class="text-lg font-bold text-blue-600 min-w-[3.5rem] text-right">0%</span>
@@ -134,7 +152,7 @@
                         <circle id="score-circle" cx="96" cy="96" r="85" stroke="#2563eb" stroke-width="12" fill="transparent" stroke-dasharray="534" stroke-dashoffset="534" stroke-linecap="round" class="transition-all duration-1000 ease-out" />
                     </svg>
                     <div class="absolute text-center">
-                        <span id="final-score" class="block text-5xl font-black text-slate-900">0/20</span>
+                        <span id="final-score" class="block text-5xl font-black text-slate-900">0/10</span>
                         <span class="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Điểm số</span>
                     </div>
                 </div>
@@ -185,9 +203,14 @@
 
     <script>
         const JSON_URL = 'onthiAI.json';
+        const QUIZ_COUNT = 10;
+        const QUIZ_TIME = 10 * 60; // 10 phút tính bằng giây
+        
         let allQuestions = [];
         let selectedQuestions = [];
         let userAnswers = {};
+        let timeLeft = QUIZ_TIME;
+        let timerInterval = null;
 
         async function fetchQuestions() {
             try {
@@ -208,14 +231,80 @@
             }
         }
 
+        // Hàm xáo trộn mảng (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
         function startQuiz() {
-            selectedQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 20);
+            // Lấy 10 câu hỏi ngẫu nhiên
+            selectedQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, QUIZ_COUNT);
+            
+            // Xáo trộn đáp án cho từng câu hỏi
+            selectedQuestions = selectedQuestions.map(q => {
+                const originalChoices = [...q.choices];
+                const correctAnswerText = originalChoices[q.answer];
+                
+                // Xáo trộn
+                const shuffledChoices = shuffleArray([...originalChoices]);
+                
+                // Tìm vị trí mới của đáp án đúng
+                const newAnswerIndex = shuffledChoices.indexOf(correctAnswerText);
+                
+                return {
+                    ...q,
+                    choices: shuffledChoices,
+                    answer: newAnswerIndex
+                };
+            });
+
             userAnswers = {};
+            timeLeft = QUIZ_TIME;
+            
             renderQuestions();
+            startTimer();
+            
             document.getElementById('start-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.add('hidden');
             document.getElementById('quiz-screen').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz(true); // Tự động nộp bài khi hết giờ
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            const timerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            const timerEl = document.getElementById('timer-text');
+            const timerDisplay = document.getElementById('timer-display');
+            
+            timerEl.innerText = timerText;
+            
+            // Cảnh báo khi còn dưới 1 phút
+            if (timeLeft <= 60) {
+                timerDisplay.classList.add('timer-warning');
+            } else {
+                timerDisplay.classList.remove('timer-warning');
+            }
         }
 
         function renderQuestions() {
@@ -224,7 +313,6 @@
             
             selectedQuestions.forEach((q, qIndex) => {
                 const qEl = document.createElement('div');
-                // Tăng kích thước chữ ở md:text-xl cho câu hỏi
                 qEl.className = 'pro-card p-6 md:p-10 animate-in fade-in slide-in-from-bottom-6 duration-500';
                 qEl.innerHTML = `
                     <div class="flex gap-5 mb-8">
@@ -256,18 +344,20 @@
         function selectOption(qIndex, cIndex) {
             userAnswers[qIndex] = cIndex;
             selectedQuestions[qIndex].choices.forEach((_, idx) => {
-                document.getElementById(`btn-${qIndex}-${idx}`).classList.remove('option-selected');
+                const btn = document.getElementById(`btn-${qIndex}-${idx}`);
+                if (btn) btn.classList.remove('option-selected');
             });
-            document.getElementById(`btn-${qIndex}-${cIndex}`).classList.add('option-selected');
+            const selectedBtn = document.getElementById(`btn-${qIndex}-${cIndex}`);
+            if (selectedBtn) selectedBtn.classList.add('option-selected');
             updateProgress();
         }
 
         function updateProgress() {
             const count = Object.keys(userAnswers).length;
-            const pct = Math.round((count / 20) * 100);
+            const pct = Math.round((count / QUIZ_COUNT) * 100);
             document.getElementById('progress-bar').style.width = `${pct}%`;
             document.getElementById('progress-text').innerText = `${pct}%`;
-            document.getElementById('question-counter').innerText = `Tiến độ: ${count}/20 câu`;
+            document.getElementById('question-counter').innerText = `Tiến độ: ${count}/${QUIZ_COUNT} câu`;
         }
 
         function showResultsModal() {
@@ -278,7 +368,8 @@
             document.getElementById('confirm-modal').classList.add('hidden');
         }
 
-        function submitQuiz() {
+        function submitQuiz(isAuto = false) {
+            clearInterval(timerInterval);
             closeModal();
             document.getElementById('quiz-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
@@ -324,25 +415,26 @@
                 container.appendChild(card);
             });
 
-            document.getElementById('final-score').innerText = `${score}/20`;
+            document.getElementById('final-score').innerText = `${score}/${QUIZ_COUNT}`;
             const circle = document.getElementById('score-circle');
-            circle.style.strokeDashoffset = 534 - (score / 20) * 534;
+            circle.style.strokeDashoffset = 534 - (score / QUIZ_COUNT) * 534;
 
             const badge = document.getElementById('result-badge');
             const msg = document.getElementById('result-message');
             
-            if(score >= 18) {
+            // Điều chỉnh logic xếp loại cho 10 câu
+            if(score >= 9) {
                 badge.className = "mb-6 inline-block px-8 py-3 rounded-full text-lg font-bold bg-emerald-100 text-emerald-700 shadow-sm";
                 badge.innerText = "Xếp loại: Chuyên Gia";
-                msg.innerText = "Chúc mừng! Bạn đã thể hiện kiến thức cực kỳ xuất sắc. Bạn hoàn toàn làm chủ được các nội dung trong bài kiểm tra này.";
-            } else if(score >= 14) {
+                msg.innerText = isAuto ? "Hết giờ! Nhưng bạn vẫn đạt kết quả xuất sắc." : "Chúc mừng! Bạn đã thể hiện kiến thức cực kỳ xuất sắc.";
+            } else if(score >= 7) {
                 badge.className = "mb-6 inline-block px-8 py-3 rounded-full text-lg font-bold bg-blue-100 text-blue-700 shadow-sm";
                 badge.innerText = "Xếp loại: Khá";
-                msg.innerText = "Kết quả rất ấn tượng. Bạn có nền tảng kiến thức tốt, chỉ cần rèn luyện thêm một chút ở các câu sai để đạt mức tuyệt đối.";
+                msg.innerText = "Kết quả rất ấn tượng. Bạn có nền tảng kiến thức tốt, hãy rèn luyện thêm để đạt điểm tuyệt đối.";
             } else {
                 badge.className = "mb-6 inline-block px-8 py-3 rounded-full text-lg font-bold bg-slate-100 text-slate-700 shadow-sm";
                 badge.innerText = "Xếp loại: Cơ Bản";
-                msg.innerText = "Bạn đã hoàn thành bài thi. Đừng lo lắng nếu điểm chưa cao, hãy xem lại các câu trả lời sai bên dưới để củng cố kiến thức nhé.";
+                msg.innerText = "Bạn đã hoàn thành bài thi. Hãy xem lại các câu sai để củng cố thêm kiến thức nhé.";
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
