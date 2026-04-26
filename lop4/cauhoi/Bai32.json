@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong Scratch, nhóm lệnh Hiển thị chứa các lệnh dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Thay đổi hình dạng và màu sắc",
+      "Điều khiển nhân vật di chuyển",
+      "Bắt đầu thực hiện chương trình",
+      "Tạo ra các âm thanh sinh động"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để thiết lập kích thước nhân vật về một giá trị cố định, em dùng?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Lệnh đặt kích thước thành 100%",
+      "Lệnh thay đổi kích thước một lượng",
+      "Lệnh đặt hướng bằng chín mươi độ",
+      "Lệnh lướt trong một giây tới điểm"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Khối lệnh thay đổi hiệu ứng màu nằm trong nhóm lệnh nào sau đây?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Nằm trong nhóm lệnh về Sự kiện",
+      "Nằm trong nhóm lệnh về Hiển thị",
+      "Nằm trong nhóm lệnh về Điều khiển",
+      "Nằm trong nhóm lệnh về Bút vẽ"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh 'bỏ các hiệu ứng đồ họa' thực hiện nhiệm vụ gì cho nhân vật?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Xóa toàn bộ nhân vật trên sân",
+      "Đưa nhân vật về hình dạng ban đầu",
+      "Di chuyển nhân vật về vị trí cũ",
+      "Phóng to kích thước của nhân vật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Các khối lệnh trong nhóm Hiển thị thường có màu sắc đặc trưng gì?",
+    "Lever": 1,
+    "choices": [
+      "Các khối lệnh có màu xanh lam",
+      "Các khối lệnh có màu tím nhạt",
+      "Các khối lệnh có màu cam tươi",
+      "Các khối lệnh có màu đỏ đậm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'đặt hiệu ứng màu bằng 0' có ý nghĩa chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Thiết lập màu sắc cho nhân vật",
+      "Làm nhân vật biến mất hoàn toàn",
+      "Thay đổi vị trí của phông nền",
+      "Nhân bản nhân vật thành nhiều cái"
     ],
     "answer": 0
+  },
+  {
+    "question": "Để làm nhân vật thu nhỏ lại, em nên nhập giá trị lượng thay đổi là?",
+    "Lever": 2,
+    "choices": [
+      "Nhập một con số lớn hơn số 0",
+      "Nhập một con số nhỏ hơn số 0",
+      "Nhập một con số bằng đúng 100",
+      "Nhập một con số bằng đúng 200"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'thay đổi kích thước một lượng 10' khác lệnh 'đặt' ở điểm nào?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh thay đổi làm tăng hoặc giảm",
+      "Lệnh thay đổi chỉ dùng cho màu",
+      "Lệnh thay đổi làm nhân vật đi tới",
+      "Lệnh thay đổi dùng để xóa hiệu ứng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi nhân vật Sứa thực hiện đổi màu rồi bơi, em cần phối hợp gì?",
+    "Lever": 2,
+    "choices": [
+      "Kết hợp nhóm Hiển thị và Sự kiện",
+      "Kết hợp nhóm Hiển thị và Chuyển động",
+      "Kết hợp nhóm Sự kiện và Âm thanh",
+      "Kết hợp nhóm Chuyển động và Bút vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn nhân vật Cá Nóc to gấp đôi bình thường, em đặt kích thước là?",
+    "Lever": 2,
+    "choices": [
+      "Đặt kích thước thành mức là 50%",
+      "Đặt kích thước thành mức là 100%",
+      "Đặt kích thước thành mức là 150%",
+      "Đặt kích thước thành mức là 200%"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Sau khi đổi màu, làm sao để nhân vật quay về màu sắc cũ nhanh nhất?",
+    "Lever": 2,
+    "choices": [
+      "Dùng lệnh bỏ các hiệu ứng đồ họa",
+      "Dùng lệnh đặt kích thước thành 100",
+      "Dùng lệnh di chuyển mười bước chân",
+      "Dùng lệnh khi bấm vào lá cờ xanh"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để Cá Nóc: to lên -> bơi -> nhỏ lại, thứ tự khối lệnh đúng là gì?",
+    "Lever": 3,
+    "choices": [
+      "Đổi lượng 50 - Lướt - Đặt 100",
+      "Lướt - Đặt 100 - Đổi lượng 50",
+      "Đặt 100 - Lướt - Đổi lượng 50",
+      "Đổi lượng 50 - Đặt 100 - Lướt"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em muốn nhân vật đổi màu khi nháy chuột vào nó, em dùng lệnh gì?",
+    "Lever": 3,
+    "choices": [
+      "Khi bấm cờ xanh và thay đổi màu",
+      "Khi bấm nhân vật và thay đổi màu",
+      "Khi bấm phím trắng và thay đổi màu",
+      "Khi đổi phông nền và thay đổi màu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu chạy lệnh: Đặt màu 50 -> Đợi 1 giây -> Bỏ hiệu ứng thì kết quả là?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật đổi màu rồi giữ nguyên",
+      "Nhân vật đổi màu rồi quay lại cũ",
+      "Nhân vật đứng yên không đổi màu",
+      "Nhân vật biến mất sau một giây chờ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nhân vật đang ở 100%, chạy 'Thay đổi lượng 20' hai lần thì đạt mức nào?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật có kích thước bằng 100%",
+      "Nhân vật có kích thước bằng 120%",
+      "Nhân vật có kích thước bằng 140%",
+      "Nhân vật có kích thước bằng 200%"
+    ],
+    "answer": 2
   }
 ]

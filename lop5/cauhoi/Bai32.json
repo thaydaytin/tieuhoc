@@ -1,41 +1,166 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Mục đích chính của việc chạy thử chương trình Scratch là gì?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Để tìm và sửa lỗi chương trình",
+      "Để nhân vật trông đẹp mắt hơn",
+      "Để máy tính hoạt động nhanh hơn",
+      "Để thay đổi phông nền sân khấu"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Lỗi nào sau đây là lỗi phổ biến khi ghép các khối lệnh?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Các khối lệnh không ghép khít",
+      "Thay đổi màu sắc của nhân vật",
+      "Lưu tệp chương trình vào máy",
+      "Chia sẻ dự án với người khác"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Khi một chương trình chạy không đúng yêu cầu, ta gọi đó là?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Chương trình đang bị lỗi kịch bản",
+      "Chương trình đã hoàn thành rất tốt",
+      "Chương trình không cần sửa lại nữa",
+      "Chương trình chạy rất ổn định máy"
     ],
-    "answer": 1
+    "answer": 0
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Việc thay đổi thứ tự các khối lệnh giúp em sửa loại lỗi nào?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Lỗi các lệnh ghép sai trình tự",
+      "Lỗi các lệnh không ghép khít lại",
+      "Lỗi chọn sai khối lệnh cần dùng",
+      "Lỗi biểu thức toán học bị sai số"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Theo sách giáo khoa, sau khi tạo xong chương trình em cần?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện bước chạy thử chương",
+      "Tắt máy tính và đi nghỉ ngơi ngay",
+      "Xóa bỏ toàn bộ các khối lệnh cũ",
+      "Thay đổi tên của các nhân vật mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Việc chọn đúng khối lệnh tương ứng với yêu cầu giúp ích gì?",
+    "Lever": 1,
+    "choices": [
+      "Chương trình chạy đúng kịch bản",
+      "Chương trình thay đổi phông nền",
+      "Nhân vật di chuyển nhanh hơn nữa",
+      "Máy tính tiết kiệm được điện năng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao chương trình ở Hình 1 (trang 82) lại bị lỗi kịch bản?",
+    "Lever": 2,
+    "choices": [
+      "Do các khối lệnh không ghép khít",
+      "Do nhân vật mèo không di chuyển",
+      "Do phông nền sân khấu bị mất đi",
+      "Do người dùng chưa nhấn lá cờ đỏ"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Điều gì xảy ra nếu các lệnh trong Scratch không được ghép khít?",
+    "Lever": 2,
+    "choices": [
+      "Chương trình chạy không như ý muốn",
+      "Nhân vật tự động biến mất khỏi máy",
+      "Máy tính sẽ báo lỗi phần cứng ngay",
+      "Phông nền sân khấu sẽ đổi màu sắc"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong Hình 2 (trang 82), lỗi tính quãng đường là loại lỗi gì?",
+    "Lever": 2,
+    "choices": [
+      "Lỗi lập sai biểu thức tính toán số",
+      "Lỗi chọn sai nhân vật hoạt hình cũ",
+      "Lỗi các khối lệnh không ghép khít",
+      "Lỗi kịch bản bị thiếu lệnh đợi máy"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi phát hiện lỗi sai thứ tự lệnh, em cần thực hiện hành động gì?",
+    "Lever": 2,
+    "choices": [
+      "Sắp xếp lại các lệnh cho chính xác",
+      "Xóa bỏ chương trình và làm lại hết",
+      "Thay đổi màu sắc của khối lệnh đó",
+      "Thêm các biến số mới vào máy tính"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao cần kiểm tra kịch bản kỹ trước khi ghép các khối lệnh?",
+    "Lever": 2,
+    "choices": [
+      "Để đảm bảo đúng yêu cầu đề ra ban",
+      "Để nhân vật di chuyển chậm lại hơn",
+      "Để máy tính không bị nhiễm virus lạ",
+      "Để thay đổi phông chữ hiển thị máy"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để sửa lỗi kịch bản 'hỏi tên' trước 'chào', em nên làm như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Ghép lệnh chào sau lệnh nhận trả lời",
+      "Ghép lệnh chào trước lệnh nhận trả lời",
+      "Xóa bỏ hoàn toàn lệnh hỏi tên của máy",
+      "Thay đổi nhân vật thực hiện các lệnh đó"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Phép toán 'vận tốc * thời gian' dùng để sửa lỗi tính toán gì?",
+    "Lever": 3,
+    "choices": [
+      "Sửa lỗi tính biểu thức quãng đường đi",
+      "Sửa lỗi tính biểu thức tổng của hai số",
+      "Sửa lỗi tính biểu thức hiệu của hai số",
+      "Sửa lỗi tính biểu thức thương của hai số"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Quan sát Hình 3 và 4 (trang 83), điểm khác biệt chính yếu nhất là?",
+    "Lever": 3,
+    "choices": [
+      "Các lỗi kịch bản đã được sửa lại hết",
+      "Các nhân vật đã bị thay đổi hoàn toàn",
+      "Các phông nền sân khấu đã rất khác lạ",
+      "Các khối lệnh đã bị xóa bỏ bớt đi rồi"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu chương trình có lỗi ghép lệnh, kết quả chạy thử sẽ như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Không đạt được các yêu cầu kịch bản",
+      "Đạt được kết quả như mong muốn ban",
+      "Máy tính tự động sửa hết các lỗi sai",
+      "Nhân vật thực hiện đúng mọi các bước"
     ],
     "answer": 0
   }
