@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Trong lập trình Scratch, khái niệm 'Biến' được hiểu như thế nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Một đại lượng không bao giờ thay đổi",
+      "Một phần bộ nhớ dùng để lưu giá trị",
+      "Một hình ảnh trang phục của nhân vật",
+      "Một âm thanh phát ra khi di chuyển"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Cấu trúc lặp với số lần lặp biết trước thuộc nhóm lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Nằm trong nhóm lệnh Điều khiển",
+      "Nằm trong nhóm lệnh Các biến số",
+      "Nằm trong nhóm lệnh Các phép toán",
+      "Nằm trong nhóm lệnh sự Chuyển động"
     ],
     "answer": 0
+  },
+  {
+    "question": "Trong Scratch, các khối lệnh tạo biểu thức toán học nằm ở đâu?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh Sự kiện",
+      "Nằm trong nhóm lệnh Cảm biến",
+      "Nằm trong nhóm lệnh Các phép toán",
+      "Nằm trong nhóm lệnh các Biến số"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Mục đích chính của việc thực hiện chạy thử chương trình là gì?",
+    "Lever": 1,
+    "choices": [
+      "Để thay đổi tên của các nhân vật",
+      "Để xác định kết quả của dự án",
+      "Để phát hiện các lỗi trong chương",
+      "Để nhân vật có thể di chuyển nhanh"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Trong Scratch, cấu trúc rẽ nhánh được chia làm mấy loại chính?",
+    "Lever": 1,
+    "choices": [
+      "Gồm có một loại rẽ nhánh duy nhất",
+      "Gồm có hai loại rẽ nhánh cơ bản",
+      "Gồm có ba loại rẽ nhánh cơ bản",
+      "Gồm có bốn loại rẽ nhánh cơ bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin nhập từ bàn phím được lưu trữ vào biến có sẵn nào?",
+    "Lever": 1,
+    "choices": [
+      "Được lưu vào biến có tên là Hỏi",
+      "Được lưu vào biến có tên là Đáp",
+      "Được lưu vào biến có tên là Trả lời",
+      "Được lưu vào biến có tên là Đợi"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Website YouTube Kids cung cấp chức năng nào giúp em học làm thủ công?",
+    "Lever": 2,
+    "choices": [
+      "Chức năng tạm dừng video khi cần",
+      "Chức năng tăng giảm âm lượng loa",
+      "Chức năng phóng to màn hình máy",
+      "Tất cả các chức năng đã nêu trên"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Câu 'Nếu đèn tín hiệu màu đỏ thì em dừng lại' thuộc cấu trúc nào?",
+    "Lever": 2,
+    "choices": [
+      "Cấu trúc rẽ nhánh dạng đầy đủ",
+      "Cấu trúc rẽ nhánh dạng thiếu",
+      "Cấu trúc lặp với số lần trước",
+      "Cấu trúc thực hiện việc tuần tự"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự thực hiện một biểu thức có nhiều phép toán trong Scratch là?",
+    "Lever": 2,
+    "choices": [
+      "Thực hiện theo hướng từ trái qua",
+      "Thực hiện theo hướng từ phải qua",
+      "Thực hiện theo hướng từ ngoài vào",
+      "Thực hiện theo hướng từ trong ra"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Kết quả nhận được khi sử dụng lệnh 'lấy ngẫu nhiên từ 1 đến 10' là?",
+    "Lever": 2,
+    "choices": [
+      "Luôn luôn trả về kết quả là số 1",
+      "Luôn luôn trả về kết quả là số 10",
+      "Trả về một số bất kì từ 1 đến 10",
+      "Luôn luôn trả về kết quả là số 5"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Quy trình thực hiện các bước rửa rau trong tệp ôn tập thuộc cấu trúc nào?",
+    "Lever": 2,
+    "choices": [
+      "Thể hiện cấu trúc điều khiển tuần tự",
+      "Thể hiện cấu trúc rẽ nhánh dạng thiếu",
+      "Thể hiện cấu trúc lặp liên tục mãi",
+      "Thể hiện cấu trúc lặp với số lần"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để vẽ được một hình vuông, em cần kết hợp xoay một góc bao nhiêu độ?",
+    "Lever": 3,
+    "choices": [
+      "Thực hiện xoay một góc là 60 độ",
+      "Thực hiện xoay một góc là 90 độ",
+      "Thực hiện xoay một góc là 120 độ",
+      "Thực hiện xoay một góc là 180 độ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật lặp lại hành động di chuyển 10 bước mãi mãi, em dùng lệnh?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng khối lệnh lặp lại 10 lần",
+      "Sử dụng khối lệnh lặp lại liên tục",
+      "Sử dụng khối lệnh lặp cho đến khi",
+      "Sử dụng khối lệnh nếu thì khi đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cho biến Số 1 là 8 và Số 2 là 2. Giá trị của biểu thức (Số 1 / Số 2) là?",
+    "Lever": 3,
+    "choices": [
+      "Kết quả của biểu thức là bằng 16",
+      "Kết quả của biểu thức là bằng 10",
+      "Kết quả của biểu thức là bằng 6",
+      "Kết quả của biểu thức là bằng 4"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Để bổ sung nhóm lệnh Bút vẽ vào thư viện, em cần thực hiện thao tác gì?",
+    "Lever": 3,
+    "choices": [
+      "Bấm chọn vào mục mã lệnh Code",
+      "Bấm chọn vào mục các Trang phục",
+      "Bấm chọn vào mục mục âm thanh",
+      "Bấm chọn mục Thêm phần mở rộng"
+    ],
+    "answer": 3
   }
 ]

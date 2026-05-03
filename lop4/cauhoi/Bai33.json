@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để thực hiện lưu tệp văn bản trong phần mềm soạn thảo, em chọn lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Sử dụng lệnh Save",
+      "Sử dụng lệnh Home",
+      "Sử dụng lệnh New",
+      "Sử dụng lệnh Open"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong phần mềm Scratch, khu vực hiển thị kết quả hoạt động của nhân vật là?",
+    "Lever": 1,
+    "choices": [
+      "Vùng Thư viện lệnh",
+      "Vùng Lập trình lệnh",
+      "Vùng Sân khấu chính",
+      "Vùng Nhân vật chính"
     ],
     "answer": 2
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Để chèn thêm hình ảnh vào văn bản, em sử dụng kết hợp các lệnh nào?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
+      "Lệnh Insert, Pictures",
+      "Lệnh Insert, Shapes",
+      "Lệnh Wrap và Square",
+      "Lệnh File và Open"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tổ hợp phím nào sau đây được dùng để thực hiện lệnh dán (Paste) khối văn bản?",
+    "Lever": 1,
+    "choices": [
+      "Nhấn phím Ctrl + C",
+      "Nhấn phím Ctrl + X",
+      "Nhấn phím Ctrl + V",
+      "Nhấn phím Ctrl + Z"
     ],
     "answer": 2
   },
   {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
+    "question": "Nhóm lệnh nào trong Scratch giúp nhân vật thay đổi các bộ trang phục khác nhau?",
+    "Lever": 1,
     "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Âm thanh",
+      "Nhóm lệnh Hiển thị",
+      "Nhóm lệnh Sự kiện"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Tổ hợp phím nào trên bàn phím được sử dụng để thực hiện lệnh sao chép (Copy)?",
+    "Lever": 1,
+    "choices": [
+      "Nhấn phím Ctrl + Z",
+      "Nhấn phím Ctrl + X",
+      "Nhấn phím Ctrl + C",
+      "Nhấn phím Ctrl + V"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để di chuyển và sao chép khối văn bản, em cần sử dụng nhóm các lệnh nào?",
+    "Lever": 2,
+    "choices": [
+      "Lệnh Cut, Copy, Delete",
+      "Lệnh Cut, Copy, Paste",
+      "Lệnh Home, Cut, Copy",
+      "Lệnh Copy, Paste, Delete"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Khi muốn tìm hiểu thông tin về các quốc gia, em có thể tìm hiểu qua nguồn nào?",
+    "Lever": 2,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Đọc các loại sách",
+      "Xem các tranh ảnh",
+      "Xem các đoạn video",
+      "Tất cả các nguồn trên"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Trong Scratch, nhóm lệnh nào giúp nhân vật đổi màu sắc hoặc hiển thị bóng nói?",
+    "Lever": 2,
+    "choices": [
+      "Nhóm lệnh Chuyển động",
+      "Nhóm lệnh Sự kiện",
+      "Nhóm lệnh Hiển thị",
+      "Nhóm lệnh Điều khiển"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Em hiểu thế nào là định nghĩa đúng nhất về phần mềm lập trình trực quan Scratch?",
+    "Lever": 2,
+    "choices": [
+      "Phần mềm tạo chương trình bằng cách kéo thả lệnh",
+      "Phần mềm dùng để sao chép thêm các đoạn văn bản",
+      "Phần mềm dùng để di chuyển các khối văn bản mới",
+      "Phần mềm dùng để dịch văn bản sang tiếng nước ngoài"
     ],
     "answer": 0
+  },
+  {
+    "question": "Muốn chuyển đổi ngôn ngữ trong Scratch sang Tiếng Việt, em thực hiện như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Chọn biểu tượng quả địa cầu rồi chọn Tiếng Việt",
+      "Vào bảng chọn File rồi chọn mục Tiếng Việt",
+      "Vào File, chọn Save rồi chọn mục Tiếng Việt",
+      "Vào File, chọn Open rồi chọn mục Tiếng Việt"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh nào trong nhóm lệnh Hiển thị có tác dụng làm cho nhân vật to lên?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh thay đổi kích thước một lượng 10",
+      "Lệnh thay đổi kích thước một lượng -10",
+      "Lệnh đặt kích thước nhân vật bằng 50%",
+      "Lệnh đặt kích thước nhân vật bằng 10%"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em hãy điền từ: 'Mỗi lệnh thực hiện một... đơn giản được mô tả ở lệnh đó.'",
+    "Lever": 3,
+    "choices": [
+      "Thực hiện một kịch bản",
+      "Thực hiện một hành động",
+      "Thực hiện một chương trình",
+      "Thực hiện một nhân vật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thiết lập kích thước nhân vật về đúng giá trị gốc ban đầu, em dùng lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Đặt kích thước thành 100%",
+      "Đặt kích thước thành 200%",
+      "Đặt kích thước thành 0%",
+      "Đặt kích thước thành 50%"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thứ tự đúng để mở chương trình có sẵn: 1. Thẻ Tập tin; 2. Mở từ máy tính; 3. Chọn tệp.",
+    "Lever": 3,
+    "choices": [
+      "Thứ tự đúng là: 3 - 2 - 1",
+      "Thứ tự đúng là: 1 - 2 - 3",
+      "Thứ tự đúng là: 2 - 1 - 3",
+      "Thứ tự đúng là: 1 - 3 - 2"
+    ],
+    "answer": 1
   }
 ]

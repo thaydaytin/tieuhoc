@@ -1,42 +1,167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Biểu tượng nào dưới đây là biểu tượng của phần mềm trình chiếu PowerPoint?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Biểu tượng chữ W màu xanh dương",
+      "Biểu tượng chữ P màu cam đỏ",
+      "Biểu tượng có hình chiếc loa",
+      "Biểu tượng có hình thùng rác"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trong máy tính, thông tin thường được tổ chức lưu trữ dưới dạng nào?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Một danh sách dài duy nhất",
+      "Cấu trúc theo cây thư mục",
+      "Các tập tin nằm rời rạc nhau",
+      "Chỉ lưu trữ trong ổ đĩa C"
     ],
-    "answer": 0
+    "answer": 1
+  },
+  {
+    "question": "Hằng ngày, chúng ta thường thực hiện các công việc theo trình tự nào?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện mọi việc cùng lúc",
+      "Thực hiện theo từng bước một",
+      "Thực hiện không cần thứ tự",
+      "Thực hiện việc lớn trước tiên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin cá nhân (địa chỉ, số điện thoại) cần được bảo vệ như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Chia sẻ công khai trên mạng",
+      "Cần được giữ bí mật an toàn",
+      "Gửi cho tất cả người lạ mặt",
+      "Không cần thiết phải bảo vệ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong cấu trúc 'Nếu... thì...', phần việc được thực hiện nằm ở đâu?",
+    "Lever": 1,
+    "choices": [
+      "Nằm ở ngay sau từ 'Nếu'",
+      "Nằm ở ngay sau từ 'thì'",
+      "Nằm ở tận cùng của văn bản",
+      "Nằm ở phía trước của từ Nếu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi kẻ xấu có thông tin địa chỉ nhà của em, chúng có thể làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Giúp gia đình em dọn dẹp nhà",
+      "Thực hiện hành vi lừa đảo",
+      "Gửi tặng quà miễn phí cho em",
+      "Mua thêm đồ dùng cho nhà em"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc chia một nhiệm vụ lớn thành các nhiệm vụ nhỏ có ích lợi gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm công việc trở nên khó hơn",
+      "Làm công việc dễ thực hiện hơn",
+      "Làm máy tính chạy chậm hơn",
+      "Làm tốn nhiều thời gian hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong nhiệm vụ 'Tính diện tích hình vuông cạnh 8cm', cái đã cho trước là gì?",
+    "Lever": 2,
+    "choices": [
+      "Kết quả diện tích hình vuông",
+      "Độ dài cạnh vuông là 8 cm",
+      "Các công thức tính toán số",
+      "Hình vẽ của hình vuông đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điều kiện trong câu: 'Nếu trời mưa thì em mang theo áo mưa' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Hành động mang theo áo mưa",
+      "Tình huống khi trời đổ mưa",
+      "Tình huống khi trời đang nắng",
+      "Em đang đi bộ trên đường"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao mỗi học sinh cần có thói quen không tự ý chia sẻ thông tin riêng tư?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính luôn luôn mới",
+      "Để đảm bảo an toàn cho mình",
+      "Để kết bạn được nhiều hơn",
+      "Để học giỏi môn Tin học hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Theo ví dụ cây thư mục, khi mở ổ đĩa D: em có thể thấy các thư mục nào?",
+    "Lever": 2,
+    "choices": [
+      "Thư mục Học tập, Trò chơi",
+      "Giá sách, Học tập, Trò chơi",
+      "Sách, Vở bài tập, Giá sách",
+      "Thư mục Hình ảnh, Video"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thực hiện công việc 'Đánh răng buổi sáng' đúng cách, em cần làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Thực hiện các bước lộn xộn",
+      "Làm theo đúng thứ tự các bước",
+      "Chỉ thực hiện bước cuối cùng",
+      "Bỏ qua các bước không thích"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong bài toán 'Tính tổng học sinh có 18 nam và 16 nữ', việc cần làm là gì?",
+    "Lever": 3,
+    "choices": [
+      "Số học sinh nam là 18 bạn",
+      "Tính tổng số học sinh lớp đó",
+      "Số học sinh nữ là 16 bạn",
+      "Liệt kê tên các bạn trong lớp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu thấy vòi nước nhà vệ sinh chưa khóa chặt, câu 'Nếu... thì' nào đúng?",
+    "Lever": 3,
+    "choices": [
+      "Nếu vòi hỏng thì em đi về",
+      "Nếu vòi chưa khóa thì em khóa",
+      "Nếu vòi chảy thì em cứ kệ",
+      "Nếu vòi sạch thì em đi rửa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Bước đầu tiên khi em muốn tạo một thư mục mới có tên mình trên ổ đĩa D là?",
+    "Lever": 3,
+    "choices": [
+      "Gõ tên của mình vào máy",
+      "Mở ổ đĩa D: trong máy tính",
+      "Tắt máy tính và đi ngủ",
+      "Nhấn phím Enter nhiều lần"
+    ],
+    "answer": 1
   }
 ]
