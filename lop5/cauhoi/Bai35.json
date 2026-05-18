@@ -1,42 +1,1091 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Website YouTube Kids được thiết kế dành riêng cho đối tượng nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Dành cho người cao tuổi",
+      "Dành cho lứa tuổi thiếu nhi",
+      "Dành cho các kỹ sư máy tính",
+      "Dành cho vận động viên bơi"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Để tìm kiếm video hướng dẫn trên YouTube Kids, em nhập nội dung vào?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Nhập vào vùng phông nền sân",
+      "Nhập vào ô công cụ tìm kiếm",
+      "Nhập vào danh sách nhân vật",
+      "Nhập vào thẻ âm thanh của máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nút lệnh nào trên YouTube Kids cho phép em tạm dừng video đang xem?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng biểu tượng chiếc loa",
+      "Sử dụng biểu tượng hai gạch dọc",
+      "Sử dụng biểu tượng hình tam giác",
+      "Sử dụng biểu tượng hình bánh răng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, nút lệnh để bổ sung nhóm lệnh 'Bút vẽ' nằm ở đâu?",
+    "Lever": 1,
+    "choices": [
+      "Nằm ở biểu tượng quả địa cầu",
+      "Nút lệnh Thêm phần mở rộng",
+      "Nằm ở thẻ trang phục nhân vật",
+      "Nằm ở bảng chọn Tập tin chương"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào sau đây dùng để xóa mọi hình vẽ hiện có trên sân khấu?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng khối lệnh tên là nhấc bút",
+      "Sử dụng khối lệnh tên là xóa tất cả",
+      "Sử dụng khối lệnh tên là đặt bút vẽ",
+      "Sử dụng khối lệnh tên là in hình vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật vẽ được hình khi di chuyển, em phải thực hiện lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện khối lệnh có tên nhấc bút",
+      "Thực hiện khối lệnh có tên đặt bút",
+      "Thực hiện khối lệnh có tên di chuyển",
+      "Thực hiện khối lệnh tên in hình nhân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, mỗi hình ảnh thể hiện của một nhân vật được gọi là gì?",
+    "Lever": 1,
+    "choices": [
+      "Được gọi là một đoạn âm thanh",
+      "Được gọi là một trang phục",
+      "Được gọi là một phông nền mới",
+      "Được gọi là một tệp kịch bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nhóm lệnh nào chứa lệnh 'chuyển sang trang phục' tiếp theo?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh về Chuyển động",
+      "Nằm trong nhóm lệnh về sự Hiển thị",
+      "Nằm trong nhóm lệnh về sự Điều khiển",
+      "Nằm trong nhóm lệnh về sự Kiện máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cấu trúc tuần tự trong chương trình được hiểu là các lệnh thực hiện?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện ngẫu nhiên không thứ tự",
+      "Thực hiện lần lượt từ trên xuống",
+      "Thực hiện từ dưới lên phía trên máy",
+      "Thực hiện đồng thời cùng một lúc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh 'lặp lại 10 lần' nằm trong nhóm lệnh nào của Scratch?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh Các phép toán",
+      "Nằm trong nhóm lệnh sự Điều khiển",
+      "Nằm trong nhóm lệnh Sự kiện máy tính",
+      "Nằm trong nhóm lệnh các Cảm biến"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh lặp nào dùng để thực hiện hành động mãi mãi không dừng?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng khối lệnh lặp lại mười lần",
+      "Sử dụng khối lệnh lặp lại liên tục",
+      "Sử dụng khối lệnh lặp cho đến khi",
+      "Sử dụng khối lệnh nếu thì khi đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong lập trình, 'Biến' được dùng nhằm mục đích chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng để xóa các phông nền cũ",
+      "Dùng để lưu trữ giá trị dữ liệu",
+      "Dùng để thay đổi tên nhân vật",
+      "Dùng để bắt đầu một kịch bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Biến có sẵn 'trả lời' (answer) nằm trong nhóm lệnh nào sau đây?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh Các phép toán",
+      "Nằm trong nhóm lệnh các Cảm biến",
+      "Nằm trong nhóm lệnh sự Điều khiển",
+      "Nằm trong nhóm lệnh Chuyển động"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Ký hiệu nào trong Scratch đại diện cho phép toán chia hai con số?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng ký hiệu dấu nhân hình sao",
+      "Sử dụng ký hiệu dấu gạch chéo (/)",
+      "Sử dụng ký hiệu dấu gạch ngang (-)",
+      "Sử dụng ký hiệu dấu cộng (+) của máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh 'kết hợp' trong nhóm Phép toán có công dụng chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng thực hiện phép tính nhân số",
+      "Dùng nối các dòng chữ hoặc giá trị",
+      "Dùng so sánh hai giá trị lớn nhỏ",
+      "Dùng để xóa bỏ các nhân vật cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả của một phép so sánh trong Scratch luôn trả về giá trị nào?",
+    "Lever": 1,
+    "choices": [
+      "Trả về một con số ngẫu nhiên mới",
+      "Trả về giá trị là Đúng hoặc Sai",
+      "Trả về một chuỗi ký tự dài bất kỳ",
+      "Trả về một hình ảnh nhân vật cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cấu trúc rẽ nhánh đầy đủ có dạng phát biểu như thế nào trong Scratch?",
+    "Lever": 1,
+    "choices": [
+      "Dạng phát biểu Nếu... thì... làm việc",
+      "Dạng phát biểu Nếu... thì... không thì",
+      "Dạng phát biểu Lặp lại... cho đến khi",
+      "Dạng phát biểu Đợi... giây rồi làm việc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Loại lỗi nào xảy ra khi các khối lệnh không được ghép khít với nhau?",
+    "Lever": 1,
+    "choices": [
+      "Lỗi thiết bị phần cứng của máy tính",
+      "Lỗi chương trình không thực hiện",
+      "Lỗi phông chữ hiển thị của màn hình",
+      "Lỗi màu sắc của các khối lệnh cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, biểu tượng lá cờ màu xanh dùng để thực hiện việc gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng để xóa chương trình vừa lập",
+      "Dùng bắt đầu thực hiện chương trình",
+      "Dùng để lưu tệp tin vào trong máy",
+      "Dùng để dừng mọi hoạt động lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự ưu tiên tính toán trong biểu thức Scratch tuân theo quy tắc nào?",
+    "Lever": 1,
+    "choices": [
+      "Quy tắc từ dưới lên phía trên cao",
+      "Quy tắc toán học thông thường nhất",
+      "Quy tắc ngẫu nhiên do máy tự chọn",
+      "Quy tắc thực hiện phép cộng trước"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Chức năng 'Quay lại một thời điểm' trên YouTube Kids giúp em điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Giúp xem video nhanh hơn tốc độ cũ",
+      "Giúp xem lại thao tác chưa rõ kỹ",
+      "Giúp thay đổi màu sắc của đoạn video",
+      "Giúp lưu video vào bộ nhớ máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em nên sử dụng YouTube Kids thay vì trang YouTube thông thường?",
+    "Lever": 2,
+    "choices": [
+      "Vì nó có nhiều quảng cáo đồ chơi hơn",
+      "Vì nội dung an toàn và phù hợp tuổi",
+      "Vì nó không cần kết nối mạng internet",
+      "Vì video ở đây có độ phân giải thấp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sự khác biệt giữa lệnh 'đặt bút' và 'nhấc bút' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Một lệnh chọn màu, một lệnh chọn cỡ",
+      "Một lệnh vẽ hình, một lệnh dừng vẽ",
+      "Một lệnh đi tới, một lệnh quay hình",
+      "Một lệnh ẩn mèo, một lệnh hiện mèo"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sử dụng lệnh 'in hình', điều gì sẽ xảy ra trên sân khấu Scratch?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật sẽ di chuyển nhanh hơn nữa",
+      "Hình ảnh nhân vật được lưu tại chỗ",
+      "Toàn bộ các lệnh cũ sẽ bị xóa hết đi",
+      "Phông nền sân khấu sẽ tự động đổi màu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật vẽ một hình tam giác đều, góc xoay cần thiết là bao nhiêu?",
+    "Lever": 2,
+    "choices": [
+      "Xoay một góc bằng đúng là chín mươi",
+      "Xoay một góc bằng đúng một trăm hai",
+      "Xoay một góc bằng đúng là sáu mươi",
+      "Xoay một góc bằng đúng là bốn mươi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mục đích của việc đặt lệnh 'đợi' giữa các trang phục trong hoạt hình?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị quá nóng khi chạy",
+      "Để em quan sát được hiệu ứng chuyển",
+      "Để thay đổi kích thước của nhân vật",
+      "Để nhân vật có thể phát ra âm thanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'đi tới lớp phía trên cùng' có tác dụng gì đối với các nhân vật?",
+    "Lever": 2,
+    "choices": [
+      "Làm nhân vật biến mất khỏi sân khấu",
+      "Giúp nhân vật hiện lên trên hình khác",
+      "Làm nhân vật tự động xoay vòng tròn",
+      "Giúp nhân vật nhân bản thành nhiều cái"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong kịch bản 'Mèo đuổi bóng', lệnh nào giúp mèo luôn hướng về phía bóng?",
+    "Lever": 2,
+    "choices": [
+      "Sử dụng khối lệnh di chuyển mười bước",
+      "Sử dụng khối lệnh hướng về phía đối",
+      "Sử dụng khối lệnh bật lại nếu chạm cạnh",
+      "Sử dụng khối lệnh thay đổi hiệu ứng màu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao cần sử dụng cấu trúc lặp thay vì viết nhiều lệnh giống nhau?",
+    "Lever": 2,
+    "choices": [
+      "Để làm cho chương trình chạy lâu hơn",
+      "Để chương trình ngắn gọn, dễ quản lý",
+      "Để máy tính không cần phải dùng bộ nhớ",
+      "Để nhân vật có thể thay đổi màu sắc đẹp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cấu trúc lặp có điều kiện 'lặp cho đến khi' kết thúc khi nào?",
+    "Lever": 2,
+    "choices": [
+      "Kết thúc khi điều kiện có giá trị sai",
+      "Kết thúc khi điều kiện có giá trị đúng",
+      "Kết thúc ngay khi lệnh vừa mới bắt đầu",
+      "Kết thúc sau khi máy tính bị tắt nguồn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'lấy ngẫu nhiên từ 1 đến 10' sẽ cho kết quả như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Luôn luôn trả về kết quả là con số một",
+      "Chọn bất kỳ một số trong khoảng đó",
+      "Luôn luôn trả về kết quả là con số mười",
+      "Sắp xếp các số theo một thứ tự tăng dần"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tăng giá trị của biến 'Điểm' thêm 1, em sử dụng lệnh nào?",
+    "Lever": 2,
+    "choices": [
+      "Sử dụng khối lệnh đặt điểm thành số một",
+      "Sử dụng lệnh thay đổi điểm một lượng 1",
+      "Sử dụng khối lệnh hiện biến số điểm lên",
+      "Sử dụng khối lệnh xóa giá trị của điểm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, biểu thức (6 + 4) * 2 sẽ cho kết quả là bao nhiêu?",
+    "Lever": 2,
+    "choices": [
+      "Cho kết quả cuối cùng là mười bốn",
+      "Cho kết quả cuối cùng là hai mươi",
+      "Cho kết quả cuối cùng là mười hai",
+      "Cho kết quả cuối cùng là mười sáu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phép so sánh '50 < 30' sẽ trả về kết quả hiển thị là gì?",
+    "Lever": 2,
+    "choices": [
+      "Trả về kết quả là giá trị đúng (true)",
+      "Trả về kết quả là giá trị sai (false)",
+      "Trả về kết quả là con số tám mươi",
+      "Trả về kết quả là một dấu nhỏ hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mục đích chính của việc chạy thử chương trình sau khi lập trình?",
+    "Lever": 2,
+    "choices": [
+      "Để chia sẻ dự án với bạn bè trên mạng",
+      "Để phát hiện và sửa các lỗi kịch bản",
+      "Để thay đổi hình dáng của nhân vật cũ",
+      "Để máy tính hoạt động với tốc độ nhanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thêm một khối lệnh vào vùng lập trình, em thực hiện thao tác?",
+    "Lever": 2,
+    "choices": [
+      "Nháy đúp chuột vào vùng sân khấu chính",
+      "Kéo thả khối lệnh từ thư viện vào vùng",
+      "Gõ tên lệnh bằng bàn phím máy tính em",
+      "Nháy chuột phải vào biểu tượng chú mèo"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'nhấc bút' thường được dùng trong trường hợp nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Khi muốn bắt đầu vẽ các đường nét mới",
+      "Khi muốn di chuyển mà không để lại vết",
+      "Khi muốn thay đổi màu sắc của nét vẽ cũ",
+      "Khi muốn xóa toàn bộ hình ảnh trên sân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em nên đặt tên biến gợi nhớ đến nội dung lưu trữ?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính có thể chạy nhanh hơn nữa",
+      "Để dễ dàng theo dõi và sử dụng biến số",
+      "Để tăng dung lượng bộ nhớ cho máy tính",
+      "Để phông nền sân khấu trông đẹp mắt hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong lệnh rẽ nhánh đầy đủ, nếu điều kiện sai thì máy tính làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Thực hiện khối lệnh nằm sau từ 'nếu'",
+      "Thực hiện lệnh nằm sau 'nếu không thì'",
+      "Dừng thực hiện toàn bộ chương trình lại",
+      "Tự động xóa các biến số đã được tạo ra"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả của lệnh 'kết hợp [Số là: ] [45]' sẽ hiển thị bóng nói gì?",
+    "Lever": 2,
+    "choices": [
+      "Chỉ hiển thị duy nhất nội dung là: 10",
+      "Hiển thị nội dung văn bản là: Số là: 10",
+      "Chỉ hiển thị nội dung văn bản là: Số là",
+      "Không hiển thị bất cứ nội dung gì trên sân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật thay đổi màu sắc ngẫu nhiên, em kết hợp lệnh đổi màu với?",
+    "Lever": 2,
+    "choices": [
+      "Kết hợp với lệnh đặt kích thước nhân vật",
+      "Kết hợp với lệnh lấy số ngẫu nhiên máy",
+      "Kết hợp với lệnh lướt trong vòng một giây",
+      "Kết hợp với lệnh bật lại nếu chạm cạnh sân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lỗi 'biểu thức tính toán sai' thường dẫn đến kết quả như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật sẽ tự động biến mất khỏi máy",
+      "Kết quả đầu ra không đúng theo yêu cầu",
+      "Máy tính sẽ báo lỗi phần mềm hệ thống",
+      "Chương trình sẽ tự động được lưu lại máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Các bước thực hiện video thủ công: 1. Chuẩn bị; 2. Xem; 3. Làm; 4. Đánh giá.",
+    "Lever": 2,
+    "choices": [
+      "Làm theo trình tự các bước là: 2-1-3-4",
+      "Làm theo trình tự các bước là: 1-2-3-4",
+      "Làm theo trình tự các bước là: 3-2-1-4",
+      "Làm theo trình tự các bước là: 1-3-2-4"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để quan sát kỹ một chi tiết nhỏ trong video, em nên sử dụng tính năng?",
+    "Lever": 2,
+    "choices": [
+      "Tính năng tắt âm thanh của video máy",
+      "Tính năng phóng to màn hình của video",
+      "Tính năng chọn video tiếp theo của danh",
+      "Tính năng báo cáo video vi phạm nội dung"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc đánh giá sản phẩm thủ công sau khi làm giúp em điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Giúp video đó được nhiều người xem hơn",
+      "Giúp rút kinh nghiệm để làm tốt hơn nữa",
+      "Giúp tiết kiệm nguyên liệu cho lần làm sau",
+      "Giúp máy tính chạy được video nhanh hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, thẻ 'Âm thanh' dùng để thực hiện công việc gì?",
+    "Lever": 2,
+    "choices": [
+      "Dùng để thiết lập tốc độ của nhân vật",
+      "Dùng quản lý các tiếng động của dự án",
+      "Dùng để thay đổi phông nền của sân khấu",
+      "Dùng để tạo ra các biến số cho máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi nhân vật chạm cạnh sân khấu, lệnh nào giúp nó không đi mất?",
+    "Lever": 2,
+    "choices": [
+      "Khối lệnh lướt trong vòng một giây tới",
+      "Khối lệnh nếu chạm cạnh thì bật lại sân",
+      "Khối lệnh hướng về phía đối tượng chuột",
+      "Khối lệnh đặt hướng bằng chín mươi độ máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sơ đồ khối lệnh trong bài 'Mèo kiểm tra toán' (trang 79) thể hiện điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Thể hiện một cấu trúc lặp đi lặp lại",
+      "Thể hiện logic rẽ nhánh có điều kiện",
+      "Thể hiện một cấu trúc thực hiện tuần tự",
+      "Thể hiện cách tạo biến số cho chương trình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'nhấc bút' và 'đặt bút' thuộc danh mục mở rộng nào?",
+    "Lever": 2,
+    "choices": [
+      "Nằm trong danh mục cảm biến video cũ",
+      "Nằm trong danh mục bút vẽ của Scratch",
+      "Nằm trong danh mục âm nhạc sinh động",
+      "Nằm trong danh mục chuyển văn bản nói"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Một nhân vật trong Scratch có thể có tối đa bao nhiêu trang phục?",
+    "Lever": 2,
+    "choices": [
+      "Chỉ được phép có duy nhất một trang phục",
+      "Có thể có nhiều trang phục khác nhau máy",
+      "Chỉ được có tối đa là hai trang phục thôi",
+      "Bắt buộc phải có đúng mười trang phục mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kịch bản: [Lặp lại 4] { [Di chuyển 100], [Xoay 90] }. Nhân vật vẽ hình gì?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật sẽ vẽ một hình tam giác đều",
+      "Nhân vật sẽ vẽ một hình vuông hoàn chỉnh",
+      "Nhân vật sẽ vẽ một đoạn thẳng đứng yên",
+      "Nhân vật sẽ vẽ một hình tròn khép kín"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật vẽ 3 hình vuông tại các vị trí khác nhau, em cần dùng lệnh?",
+    "Lever": 3,
+    "choices": [
+      "Dùng lệnh xóa tất cả trước mỗi hình vẽ",
+      "Dùng lệnh nhấc bút khi di chuyển chỗ mới",
+      "Dùng lệnh lặp lại liên tục cho toàn bài",
+      "Dùng lệnh đặt hướng bằng một trăm tám"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn nhân vật di chuyển theo hình ngũ giác, góc xoay là bao nhiêu độ?",
+    "Lever": 3,
+    "choices": [
+      "Góc xoay cần thiết là chín mươi độ máy",
+      "Góc xoay cần thiết là bảy mươi hai độ",
+      "Góc xoay cần thiết là sáu mươi độ máy",
+      "Góc xoay cần thiết là bốn mươi lăm độ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tạo hiệu ứng nhân vật đang bay liên tục, em cần ghép lệnh như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Ghép kế tiếp và lướt ngoài vòng lặp",
+      "Lặp liên tục {kế tiếp, đợi, di chuyển}",
+      "Chỉ cần dùng một lệnh trang phục kế tiếp",
+      "Dùng lệnh nếu thì để thay đổi trang phục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phối hợp lệnh: [Hiện], [Lướt 1s], [Ẩn], [Đợi 1s] trong vòng lặp liên tục?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật sẽ đứng yên một chỗ và ẩn đi",
+      "Nhân vật nhấp nháy khi đang di chuyển",
+      "Nhân vật chỉ di chuyển một lần duy nhất",
+      "Nhân vật biến mất hoàn toàn khỏi sân khấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong chương trình vẽ 'Hàng cây' (trang 51), tại sao cần dùng lệnh 'in hình'?",
+    "Lever": 3,
+    "choices": [
+      "Để làm cho cái cây có màu sắc xanh hơn",
+      "Để tạo ra nhiều bản sao của cây trên sân",
+      "Để nhân vật cây có thể tự động bơi lội",
+      "Để xóa bớt các khối lệnh không cần dùng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật dừng lại khi chạm vào màu đỏ, em sử dụng cấu trúc nào?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng cấu trúc lặp lại mười lần di chuyển",
+      "Lặp cho đến khi [đang chạm màu đỏ] máy",
+      "Sử dụng khối lệnh lặp lại liên tục mãi mãi",
+      "Sử dụng khối lệnh di chuyển mười bước chân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Làm thế nào để tạo chương trình tính tổng hai số nhập từ bàn phím?",
+    "Lever": 3,
+    "choices": [
+      "Dùng lệnh nói để cộng trực tiếp hai con số",
+      "Dùng hai biến lưu giá trị rồi thực hiện cộng",
+      "Chỉ cần dùng duy nhất lệnh hỏi và đợi máy",
+      "Dùng lệnh lấy số ngẫu nhiên để tính tổng số"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu đặt x = 5, sau đó chạy lệnh 'thay đổi x một lượng 10', giá trị x là?",
+    "Lever": 3,
+    "choices": [
+      "Giá trị của x lúc này bằng con số mười",
+      "Giá trị của x lúc này bằng mười lăm máy",
+      "Giá trị của x lúc này bằng con số năm máy",
+      "Giá trị của x lúc này bằng con số mười lăm"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Biểu thức Scratch nào đúng để tính (a + b) chia cho 2?",
+    "Lever": 3,
+    "choices": [
+      "Khối lệnh cộng lồng bên trong khối chia",
+      "Khối lệnh chia lồng bên trong khối cộng",
+      "Đặt khối lệnh cộng nằm dưới khối chia máy",
+      "Đặt khối lệnh chia nằm dưới khối cộng máy"
     ],
     "answer": 0
+  },
+  {
+    "question": "Để nhân vật nói 'Chúc mừng! Bạn đạt 10 điểm', em dùng lệnh kết hợp nào?",
+    "Lever": 3,
+    "choices": [
+      "Kết hợp [Chúc mừng! ] và [Bạn đạt ] và [45]",
+      "Nối chuỗi [Chúc mừng! Bạn đạt ] và [45] máy",
+      "Sử dụng ba lệnh nói liên tiếp nhau trên sân",
+      "Dùng lệnh hỏi để nhập giá trị của điểm số"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong chương trình 'Mèo đố em', biến 'số của Mèo' có nhiệm vụ gì?",
+    "Lever": 3,
+    "choices": [
+      "Để lưu tên của người đang chơi trò chơi",
+      "Lưu số bí mật mà người dùng phải đoán",
+      "Lưu điểm số mà người chơi đã đạt được máy",
+      "Để thay đổi màu sắc của nhân vật chú mèo"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thực hiện lệnh: Nếu (Điểm > 5) thì [Nói Đậu] không thì [Nói Trượt]?",
+    "Lever": 3,
+    "choices": [
+      "Nếu Điểm bằng 5 thì nhân vật nói chữ Đậu",
+      "Nếu Điểm bằng 4 thì nhân vật nói chữ Trượt",
+      "Nếu Điểm bằng 6 thì nhân vật nói chữ Trượt",
+      "Nhân vật nói cả hai chữ Đậu và Trượt luôn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để sửa lỗi nhân vật vẽ lệch vị trí, em cần thực hiện thao tác nào?",
+    "Lever": 3,
+    "choices": [
+      "Thay đổi màu sắc của bút vẽ sang màu đỏ",
+      "Điều chỉnh lại lệnh đi tới điểm bắt đầu",
+      "Xóa bỏ toàn bộ nhóm lệnh bút vẽ hiện có",
+      "Tăng kích thước của nhân vật lên hai lần"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Dự đoán kết quả: x=2, lặp lại 3 lần {thay đổi x lượng x}. Kết quả x là?",
+    "Lever": 3,
+    "choices": [
+      "Kết quả cuối cùng của x là con số tám máy",
+      "Kết quả cuối cùng của x là mười sáu máy",
+      "Kết quả cuối cùng của x là con số sáu máy",
+      "Kết quả cuối cùng của x là mười hai máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong kịch bản múa ở Hình 5 trang 56, tại sao cần lệnh 'bỏ hiệu ứng'?",
+    "Lever": 3,
+    "choices": [
+      "Để nhân vật có thể di chuyển ra xa hơn nữa",
+      "Đưa sân khấu về màu sắc ban đầu của nó",
+      "Làm nhân vật biến mất hoàn toàn trên sân",
+      "Để máy tính xóa bỏ các biến số không dùng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tạo trò chơi 'Hứng táo', điều kiện nào dùng để tăng điểm?",
+    "Lever": 3,
+    "choices": [
+      "Nếu quả táo đang di chuyển tới phía trên",
+      "Nếu quả táo đang chạm vào nhân vật rổ",
+      "Nếu quả táo đang chạm vào cạnh của sân",
+      "Nếu người dùng nhấn phím trắng bàn phím"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Cách nào tốt nhất để tìm lỗi trong một chương trình phức tạp?",
+    "Lever": 3,
+    "choices": [
+      "Tắt phần mềm và mở lại dự án từ đầu máy",
+      "Kiểm tra từng khối lệnh theo cấu trúc",
+      "Thay đổi toàn bộ các nhân vật đang có máy",
+      "Chia sẻ dự án để người khác sửa hộ mình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật vẽ một hình tròn khép kín, ta lặp 360 lần việc?",
+    "Lever": 3,
+    "choices": [
+      "Di chuyển mười bước và xoay mười độ máy",
+      "Di chuyển một bước và xoay một độ máy",
+      "Di chuyển một trăm bước và nhấc bút vẽ",
+      "Xoay một trăm tám mươi độ và đặt bút vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn nhân vật di chuyển theo hình chữ nhật (dài 100, rộng 50), ta lặp 2 lần?",
+    "Lever": 3,
+    "choices": [
+      "Đi 100, xoay 90, đi 100, xoay 90 máy tính",
+      "Đi 100, xoay 90, đi 50, xoay 90 máy tính",
+      "Đi 50, xoay 90, đi 50, xoay 90 máy tính em",
+      "Đi 100, xoay 60, đi 50, xoay 60 máy tính em"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sự kết hợp giữa lệnh 'in hình' và 'xoay' trong vòng lặp tạo ra hiệu ứng?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật sẽ di chuyển thành hình tam giác",
+      "Các hình ảnh nhân vật xếp thành vòng tròn",
+      "Nhân vật sẽ tự động thay đổi các màu sắc",
+      "Toàn bộ các hình vẽ trên sân khấu bị mất"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gõ từ bàn phím để trả lời câu hỏi của nhân vật, dữ liệu được lưu vào?",
+    "Lever": 3,
+    "choices": [
+      "Lưu vào trong tệp tin của phần mềm Scratch",
+      "Lưu vào khối lệnh cảm biến mang tên trả",
+      "Lưu vào vùng phông nền của sân khấu chính",
+      "Lưu vào trong danh sách các trang phục mèo"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu kịch bản yêu cầu 'Nhân vật nói số lớn hơn', em so sánh hai biến x, y bằng?",
+    "Lever": 3,
+    "choices": [
+      "Dùng cấu trúc lặp lại cho đến khi x lớn hơn",
+      "Dùng cấu trúc rẽ nhánh nếu x lớn hơn y",
+      "Dùng cấu trúc thực hiện tuần tự các khối",
+      "Dùng cấu trúc lặp lại liên tục việc so sánh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật vừa bơi vừa đổi màu liên tục, em cần sử dụng mấy vòng lặp?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng hai vòng lặp lồng vào bên trong",
+      "Sử dụng một vòng lặp liên tục duy nhất",
+      "Không cần sử dụng bất kỳ vòng lặp nào cả",
+      "Sử dụng mười vòng lặp tuần tự liên tiếp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lỗi 'vòng lặp vô tận' xảy ra khi nào trong chương trình?",
+    "Lever": 3,
+    "choices": [
+      "Khi em sử dụng cấu trúc lặp lại mười lần",
+      "Khi điều kiện dừng lặp không bao giờ đúng",
+      "Khi em sử dụng cấu trúc rẽ nhánh đầy đủ",
+      "Khi em ghép các khối lệnh không khít lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để vẽ hình thoi có góc 60 và 120 độ, các lệnh xoay tương ứng là?",
+    "Lever": 3,
+    "choices": [
+      "Xoay 90 độ và xoay 90 độ liên tục máy em",
+      "Xoay 60 độ và xoay 120 độ liên tục máy em",
+      "Xoay 120 độ và xoay 120 độ liên tục máy em",
+      "Xoay 45 độ và xoay 45 độ liên tục máy em"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự thực hiện: 1. Đặt bút; 2. Di chuyển; 3. Nhấc bút. Kết quả là?",
+    "Lever": 3,
+    "choices": [
+      "Không có nét vẽ nào xuất hiện trên sân",
+      "Vẽ được một đoạn thẳng trên sân khấu",
+      "Vẽ được một hình vuông hoàn chỉnh máy",
+      "Toàn bộ sân khấu sẽ bị xóa sạch hình vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong bài toán tìm số lớn nhất của 3 số, em cần dùng bao nhiêu phép so sánh?",
+    "Lever": 3,
+    "choices": [
+      "Cần thực hiện ít nhất là một phép so sánh",
+      "Cần thực hiện ít nhất là hai phép so sánh",
+      "Cần thực hiện ít nhất là ba phép so sánh",
+      "Cần thực hiện ít nhất là bốn phép so sánh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để nhân vật thông báo kết quả phép tính 'a + b', trình tự khối lệnh đúng là?",
+    "Lever": 3,
+    "choices": [
+      "Nói -> Kết hợp -> Phép cộng hai biến",
+      "Phép cộng -> Nói -> Kết hợp hai biến",
+      "Kết hợp -> Nói -> Phép cộng hai biến máy",
+      "Đợi -> Nói -> Phép cộng hai biến máy em"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi tự làm một sản phẩm theo YouTube Kids, việc chuẩn bị đồ dùng giúp em?",
+    "Lever": "RL",
+    "choices": [
+      "Giúp tiết kiệm thời gian và làm việc tốt",
+      "Làm cho sản phẩm trở nên đắt tiền hơn",
+      "Giúp video chạy được với tốc độ nhanh",
+      "Để không cần phải xem video hướng dẫn"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong thực tế, việc em lặp lại động tác đánh răng mỗi sáng giống cấu trúc?",
+    "Lever": "RL",
+    "choices": [
+      "Giống với cấu trúc rẽ nhánh trong máy",
+      "Giống cấu trúc lặp với số lần trước",
+      "Giống với cấu trúc thực hiện việc tuần tự",
+      "Giống với việc tạo biến số trong lập trình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi đi trên đường, nếu gặp đèn đỏ thì em dừng lại là ví dụ thực tế của?",
+    "Lever": "RL",
+    "choices": [
+      "Ví dụ về một cấu trúc lặp lại liên tục",
+      "Ví dụ về cấu trúc rẽ nhánh điều kiện",
+      "Ví dụ về việc sử dụng các biến số máy",
+      "Ví dụ về việc xóa bỏ các hình vẽ cũ đi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc mẹ phân công em rửa bát hằng ngày sau bữa ăn thể hiện điều gì?",
+    "Lever": "RL",
+    "choices": [
+      "Một cấu trúc lặp lại theo chu kỳ ngày",
+      "Một cấu trúc rẽ nhánh khi có điều kiện",
+      "Một cấu trúc tuần tự các bước làm việc",
+      "Một cách để lưu trữ các thông tin mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để gấp được một chiếc máy bay giấy đẹp, bước quan trọng nhất là gì?",
+    "Lever": "RL",
+    "choices": [
+      "Sử dụng loại giấy có nhiều màu sắc đẹp",
+      "Làm theo đúng từng bước hướng dẫn kỹ",
+      "Vẽ lên giấy thật nhiều hình trang trí",
+      "Cắt tờ giấy thành nhiều mảnh nhỏ khác"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kỹ năng chạy thử chương trình trong Scratch giúp em rèn luyện tính cách?",
+    "Lever": "RL",
+    "choices": [
+      "Rèn luyện tính cách nóng nảy, vội vàng",
+      "Rèn luyện tính cẩn thận và kiên trì em",
+      "Rèn luyện khả năng gõ bàn phím nhanh",
+      "Rèn luyện khả năng vẽ tranh nghệ thuật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu em muốn tạo một trò chơi tính điểm, kiến thức nào là quan trọng nhất?",
+    "Lever": "RL",
+    "choices": [
+      "Kiến thức về thay đổi phông nền sân",
+      "Kiến thức về sử dụng biến số trong bài",
+      "Kiến thức về cách sử dụng chuột máy",
+      "Kiến thức về các loại âm thanh sinh động"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em thấy video có nội dung không phù hợp trên YouTube Kids, em nên?",
+    "Lever": "RL",
+    "choices": [
+      "Cứ tiếp tục xem để biết nội dung là gì",
+      "Báo cho cha mẹ hoặc sử dụng nút chặn",
+      "Gửi video đó cho tất cả các bạn cùng xem",
+      "Tắt máy tính ngay lập tức và đi ngủ luôn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc học lập trình giúp ích gì cho em trong các môn học khác như Toán?",
+    "Lever": "RL",
+    "choices": [
+      "Giúp em không cần phải học thuộc bài",
+      "Phát triển tư duy logic và giải quyết",
+      "Giúp em vẽ hình trong môn mỹ thuật đẹp",
+      "Giúp em biết thêm nhiều tiếng nước ngoài"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em sắp xếp các bước để làm một món ăn, em đang thể hiện kiến thức?",
+    "Lever": "RL",
+    "choices": [
+      "Thể hiện kiến thức về cấu trúc rẽ nhánh",
+      "Thể hiện kiến thức về cấu trúc tuần tự",
+      "Thể hiện kiến thức về các phép so sánh",
+      "Thể hiện kiến thức về cách dùng bút vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để sản phẩm thủ công của em bền và đẹp, em nên lựa chọn?",
+    "Lever": "RL",
+    "choices": [
+      "Lựa chọn các loại giấy mỏng và dễ rách",
+      "Lựa chọn vật liệu phù hợp và chắc chắn",
+      "Lựa chọn các vật liệu đắt tiền nhất máy",
+      "Lựa chọn các vật liệu có màu sắc tối đen"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong thực tế, việc dự báo thời tiết 'Nếu trời mưa...' giống với lệnh nào?",
+    "Lever": "RL",
+    "choices": [
+      "Giống với khối lệnh lặp lại mười lần máy",
+      "Giống với khối lệnh nếu thì của Scratch",
+      "Giống với khối lệnh xóa tất cả trên sân",
+      "Giống với khối lệnh nhấc bút không vẽ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc em tập thể dục theo nhịp đếm 1, 2, 3, 4 thể hiện cấu trúc nào?",
+    "Lever": "RL",
+    "choices": [
+      "Thể hiện cấu trúc lặp với số lần trước",
+      "Thể hiện cấu trúc rẽ nhánh đầy đủ máy",
+      "Thể hiện cách đặt tên biến cho máy tính",
+      "Thể hiện cách thay đổi kích thước nhân"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi em giúp mẹ dọn nhà 'cho đến khi sạch' thì đó là ví dụ của?",
+    "Lever": "RL",
+    "choices": [
+      "Ví dụ về cấu trúc lặp lại liên tục mãi",
+      "Ví dụ về cấu trúc lặp có điều kiện dừng",
+      "Ví dụ về cấu trúc thực hiện việc tuần tự",
+      "Ví dụ về các phép tính số học cơ bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao khi làm thủ công em cần phải dọn dẹp sau khi hoàn thành?",
+    "Lever": "RL",
+    "choices": [
+      "Để máy tính không bị nhiễm các virus lạ",
+      "Để giữ vệ sinh và rèn tính ngăn nắp em",
+      "Để sản phẩm của em trông sẽ đẹp hơn nữa",
+      "Để video hướng dẫn chạy nhanh hơn trước"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kỹ năng phối hợp nhiều lệnh trong Scratch giúp em rèn luyện?",
+    "Lever": "RL",
+    "choices": [
+      "Rèn luyện kỹ năng gõ chữ tiếng Việt nhanh",
+      "Rèn luyện tư duy tổng hợp và sáng tạo",
+      "Rèn luyện khả năng tìm kiếm ảnh trên mạng",
+      "Rèn luyện cách sử dụng chuột máy tính giỏi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi làm việc nhóm để tạo chương trình, điều quan trọng nhất là?",
+    "Lever": "RL",
+    "choices": [
+      "Mỗi người tự làm một phần riêng biệt máy",
+      "Sự hợp tác và trao đổi giữa các thành",
+      "Chỉ để một người giỏi nhất làm mọi việc",
+      "Phải sử dụng chiếc máy tính đắt tiền nhất"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc sử dụng Scratch để vẽ sơ đồ tư duy giúp ích gì cho học tập?",
+    "Lever": "RL",
+    "choices": [
+      "Làm cho bài học trở nên khó hiểu hơn nhiều",
+      "Giúp ghi nhớ và trình bày kiến thức tốt",
+      "Giúp máy tính tiết kiệm được nhiều điện",
+      "Làm cho chữ viết có nhiều màu sắc khác"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để kể một câu chuyện bằng Scratch, em cần chuẩn bị những gì?",
+    "Lever": "RL",
+    "choices": [
+      "Chuẩn bị thật nhiều các con số tính toán",
+      "Chuẩn bị kịch bản, nhân vật và lời thoại",
+      "Chuẩn bị các thiết bị nhớ ngoài như USB",
+      "Chuẩn bị phần mềm gõ tiếng Việt Unikey"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thói quen kiểm tra kết quả bài tập giống với thao tác nào trong Scratch?",
+    "Lever": "RL",
+    "choices": [
+      "Giống với thao tác xóa bỏ các nhân vật",
+      "Giống với bước chạy thử để sửa lỗi bài",
+      "Giống với thao tác thêm các phông nền",
+      "Giống với việc tạo ra các biến số mới"
+    ],
+    "answer": 1
   }
 ]

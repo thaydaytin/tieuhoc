@@ -1,42 +1,1102 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Sơ đồ hình cây được sử dụng để làm công việc gì sau đây?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
-    "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Dùng để tính toán các con số",
+      "Dùng biểu diễn một sắp xếp",
+      "Dùng để vẽ các bức tranh đẹp",
+      "Dùng để soạn thảo các văn bản"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Trong sơ đồ hình cây, các nhánh được chia ra từ đâu?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Chia ra từ nhiều gốc khác nhau",
+      "Chia ra từ một gốc duy nhất",
+      "Chia ra từ các lá của cái cây",
+      "Chia ra từ phần ngọn của cây"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thông tin trong máy tính thường được lưu trữ trong cái gì?",
+    "Lever": 1,
+    "choices": [
+      "Lưu trữ trong các trang giấy",
+      "Lưu trữ trong các tệp dữ liệu",
+      "Lưu trữ trong các thẻ nhớ điện",
+      "Lưu trữ trong các thùng rác cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thư mục có thể chứa những thành phần nào bên trong nó?",
+    "Lever": 1,
+    "choices": [
+      "Chỉ chứa được các tệp dữ liệu",
+      "Chỉ chứa được thư mục con khác",
+      "Chứa tệp và các thư mục con",
+      "Không chứa được gì bên trong cả"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Ổ đĩa trong máy tính được gọi là thành phần gì?",
+    "Lever": 1,
+    "choices": [
+      "Được gọi là các tệp dữ liệu",
+      "Được gọi là các thư mục gốc",
+      "Được gọi là các thư mục con",
+      "Được gọi là phần mềm máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Biểu tượng của một thư mục thường có màu sắc gì?",
+    "Lever": 1,
+    "choices": [
+      "Thường có màu xanh dương nhạt",
+      "Thường có màu vàng hình kẹp",
+      "Thường có màu đỏ hình tròn",
+      "Thường có màu đen hình vuông"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thao tác nào dùng để mở xem nội dung của một thư mục?",
+    "Lever": 1,
+    "choices": [
+      "Thao tác nháy chuột trái một lần",
+      "Thao tác nháy đúp chuột vào nó",
+      "Thao tác kéo thả thư mục đó đi",
+      "Thao tác nháy chuột phải một lần"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh nào được dùng để tạo một thư mục mới trong máy tính?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng lệnh tên là Rename",
+      "Sử dụng lệnh tên là Delete",
+      "Sử dụng lệnh tên là New folder",
+      "Sử dụng lệnh tên là Close"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Thông tin cá nhân nào sau đây cần được giữ bí mật?",
+    "Lever": 1,
+    "choices": [
+      "Tên trường học và tên của lớp",
+      "Địa chỉ nhà và số điện thoại",
+      "Tên của các môn học yêu thích",
+      "Tên của các loại phim hoạt hình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm PowerPoint là phần mềm dùng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng để luyện tập gõ bàn phím",
+      "Dùng để tạo bài trình chiếu",
+      "Dùng để vẽ các hình khối cơ bản",
+      "Dùng để quản lý các tệp tin cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Mỗi trang trong bài trình chiếu được gọi là thành phần gì?",
+    "Lever": 1,
+    "choices": [
+      "Được gọi là một trang văn bản",
+      "Được gọi là một trang chiếu",
+      "Được gọi là một tệp hình ảnh",
+      "Được gọi là một thư mục con"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chèn ảnh vào trang chiếu, em sử dụng dải lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng dải lệnh tên là Home",
+      "Sử dụng dải lệnh tên là Insert",
+      "Sử dụng dải lệnh tên là Design",
+      "Sử dụng dải lệnh tên là File"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm Mouse Skills giúp em luyện tập kỹ năng gì?",
+    "Lever": 1,
+    "choices": [
+      "Kỹ năng gõ bàn phím bằng 10 ngón",
+      "Kỹ năng sử dụng chuột máy tính",
+      "Kỹ năng vẽ tranh trên máy tính",
+      "Kỹ năng tìm kiếm ảnh trên mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nút cuộn của chuột máy tính thường nằm ở vị trí nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm ở bên phía tay trái chuột",
+      "Nằm ở giữa nút trái và nút phải",
+      "Nằm ở phía dưới thân của chuột",
+      "Nằm ở bên phía tay phải chuột"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Công cụ đa phương tiện bao gồm những loại thành phần nào?",
+    "Lever": 1,
+    "choices": [
+      "Chỉ bao gồm các dòng chữ viết",
+      "Bao gồm văn bản, ảnh, âm thanh",
+      "Chỉ bao gồm các con số tính toán",
+      "Chỉ bao gồm các loại tệp tin cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Làm việc theo từng bước có nghĩa là thực hiện như thế nào?",
+    "Lever": 1,
+    "choices": [
+      "Thực hiện mọi việc cùng một lúc",
+      "Thực hiện theo một thứ tự nhất định",
+      "Thực hiện công việc một cách tự do",
+      "Thực hiện việc không cần kế hoạch"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để diễn tả việc làm có điều kiện, ta dùng cấu trúc nào?",
+    "Lever": 1,
+    "choices": [
+      "Dùng cấu trúc là Vì... nên...",
+      "Dùng cấu trúc là Nếu... thì...",
+      "Dùng cấu trúc là Tuy... nhưng...",
+      "Dùng cấu trúc là Do... bởi vì..."
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Người chỉ huy giỏi cần biết làm việc gì đối với nhiệm vụ lớn?",
+    "Lever": 1,
+    "choices": [
+      "Giữ nguyên nhiệm vụ đó để làm",
+      "Chia nhiệm vụ lớn thành việc nhỏ",
+      "Bỏ qua không thực hiện nhiệm vụ",
+      "Để cho máy tính tự làm mọi việc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi phát biểu nhiệm vụ, em cần nêu rõ điều gì sau đây?",
+    "Lever": 1,
+    "choices": [
+      "Nêu tên của tất cả các bạn học",
+      "Nêu những gì có và cần tạo ra",
+      "Nêu địa chỉ của trường tiểu học",
+      "Nêu sở thích cá nhân của mình"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Máy tính có thể trợ giúp em làm việc gì trong học tập?",
+    "Lever": 1,
+    "choices": [
+      "Đi phát tờ rơi cho các phụ huynh",
+      "Tìm kiếm thông tin và hình ảnh",
+      "Quét dọn rác ở sân trường học",
+      "Trồng cây xanh ở vườn nhà trường"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lợi ích lớn nhất của việc sắp xếp đồ vật hợp lý là gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm cho đồ vật trở nên đẹp hơn",
+      "Giúp tìm kiếm nhanh chóng hơn",
+      "Làm cho đồ vật không bị hỏng",
+      "Giúp tiết kiệm diện tích phòng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sơ đồ hình cây dạng ngang và dạng dọc khác nhau ở điểm nào?",
+    "Lever": 2,
+    "choices": [
+      "Khác nhau về nội dung sắp xếp",
+      "Khác nhau về hướng trình bày",
+      "Khác nhau về số lượng các gốc",
+      "Khác nhau về màu sắc của sơ đồ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao một thư mục lại được gọi là thư mục con?",
+    "Lever": 2,
+    "choices": [
+      "Vì nó không chứa gì bên trong",
+      "Vì nó nằm trong một thư mục khác",
+      "Vì nó có kích thước rất là nhỏ",
+      "Vì nó được tạo ra sau thư mục gốc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm giống nhau giữa ngăn sách và thư mục máy tính là gì?",
+    "Lever": 2,
+    "choices": [
+      "Đều dùng để đọc các tin tức",
+      "Đều dùng để phân loại, lưu trữ",
+      "Đều dùng để vẽ các hình khối",
+      "Đều dùng để kết nối mạng internet"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi muốn đổi tên thư mục, em chọn lệnh nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Chọn lệnh có tên là New folder",
+      "Chọn lệnh có tên là Rename",
+      "Chọn lệnh có tên là Delete",
+      "Chọn lệnh có tên là View icons"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thao tác xóa thư mục sẽ dẫn đến kết quả nào sau đây?",
+    "Lever": 2,
+    "choices": [
+      "Thư mục đó sẽ được đổi sang tên",
+      "Thư mục và nội dung bên trong mất",
+      "Thư mục đó sẽ được nhân bản lên",
+      "Thư mục đó sẽ tự động được mở"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao không nên chia sẻ mật khẩu máy tính cho người lạ?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị bám bụi bẩn",
+      "Để bảo vệ thông tin của cá nhân",
+      "Để máy tính chạy nhanh hơn nữa",
+      "Để tiết kiệm điện năng tiêu thụ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc sử dụng ảnh trong bài trình chiếu có tác dụng gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm cho bài trình chiếu dài hơn",
+      "Làm bài sinh động và hấp dẫn",
+      "Làm cho máy tính chạy chậm lại",
+      "Làm cho người xem cảm thấy khó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi vị trí ảnh trên trang chiếu, em thực hiện thao tác?",
+    "Lever": 2,
+    "choices": [
+      "Nháy chuột phải rồi chọn Delete",
+      "Kéo thả ảnh đến vị trí mong muốn",
+      "Nháy đúp chuột trái vào bức ảnh",
+      "Gõ tên vị trí từ bàn phím máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Mouse Skills, việc đạt điểm Score cao thể hiện điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Em gõ bàn phím rất là nhanh",
+      "Thao tác chuột nhanh, chính xác",
+      "Em đã vẽ được nhiều bức tranh",
+      "Em đã mở được nhiều thư mục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi cuộn nút cuộn xuống dưới, trang màn hình sẽ chuyển động?",
+    "Lever": 2,
+    "choices": [
+      "Màn hình sẽ chuyển sang bên trái",
+      "Màn hình sẽ di chuyển xuống dưới",
+      "Màn hình sẽ di chuyển lên trên",
+      "Màn hình sẽ tự động đóng lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao phim hoạt hình được gọi là sản phẩm đa phương tiện?",
+    "Lever": 2,
+    "choices": [
+      "Vì nó được chiếu ở rạp chiếu phim",
+      "Vì kết hợp chữ, ảnh, âm thanh",
+      "Vì nó có thời gian chiếu rất dài",
+      "Vì nó được tạo ra từ máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự thực hiện các bước trong quy trình có quan trọng không?",
+    "Lever": 2,
+    "choices": [
+      "Không quan trọng, làm sao cũng được",
+      "Rất quan trọng để có kết quả đúng",
+      "Chỉ quan trọng khi làm bài kiểm tra",
+      "Chỉ quan trọng đối với máy tính lớn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong câu 'Nếu thỏa mãn điều kiện thì làm việc', điều kiện là?",
+    "Lever": 2,
+    "choices": [
+      "Phần việc được thực hiện ngay",
+      "Sự việc cần kiểm tra xem đúng sai",
+      "Kết quả cuối cùng của công việc",
+      "Tên của người thực hiện công việc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc chia nhỏ nhiệm vụ giúp ích gì cho làm việc nhóm?",
+    "Lever": 2,
+    "choices": [
+      "Giúp mỗi bạn làm một phần việc",
+      "Giúp một bạn làm hết mọi việc",
+      "Làm cho công việc tốn thời gian",
+      "Để không ai phải làm việc gì cả"
     ],
     "answer": 0
+  },
+  {
+    "question": "Dấu hiệu để nhận biết một thư mục đang được mở là gì?",
+    "Lever": 2,
+    "choices": [
+      "Tên thư mục hiện ở trên cùng cửa sổ",
+      "Biểu tượng thư mục đổi sang màu đỏ",
+      "Máy tính sẽ phát ra âm thanh báo",
+      "Màn hình máy tính sẽ bị tắt đi ngay"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Mục tiêu 'Cần tạo ra gì' trong nhiệm vụ giúp em điều gì?",
+    "Lever": 2,
+    "choices": [
+      "Biết sản phẩm cần hoàn thành",
+      "Biết tên của những người chỉ huy",
+      "Biết thời gian máy tính bắt đầu",
+      "Biết cách sửa lỗi của phần mềm"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Quan sát sơ đồ cây thư mục, em biết được thông tin gì?",
+    "Lever": 2,
+    "choices": [
+      "Biết máy tính có bao nhiêu phần mềm",
+      "Biết cấu trúc sắp xếp tệp và thư mục",
+      "Biết được giá tiền của chiếc máy tính",
+      "Biết được mật khẩu để mở máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em cần lưu bài trình chiếu trước khi tắt máy tính?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị hỏng màn hình",
+      "Để không bị mất nội dung đã làm",
+      "Để máy tính tắt được nhanh chóng",
+      "Để các bức ảnh trông đẹp hơn nữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thực hiện kéo thả chuột, em cần giữ nút nào của chuột?",
+    "Lever": 2,
+    "choices": [
+      "Nhấn và giữ nút chuột phía tay phải",
+      "Nhấn và giữ nút chuột phía tay trái",
+      "Nhấn và giữ nút cuộn ở giữa chuột",
+      "Không cần phải nhấn giữ nút nào cả"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tìm tệp 'Doraemon.jpg' trong thư mục 'Anh', em nên làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Mở thư mục Anh rồi tìm tệp đó",
+      "Tạo một thư mục mới tên là Anh",
+      "Xóa tất cả các tệp hiện có đi",
+      "Tắt máy tính rồi mở lại từ đầu"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sắp xếp đúng quy trình tạo thư mục: 1. Gõ tên; 2. New folder; 3. Enter.",
+    "Lever": 3,
+    "choices": [
+      "Thứ tự đúng là các bước: 1-2-3",
+      "Thứ tự đúng là các bước: 2-1-3",
+      "Thứ tự đúng là các bước: 3-2-1",
+      "Thứ tự đúng là các bước: 2-3-1"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quy trình đổi tên thư mục Mai thành Lan là những bước nào?",
+    "Lever": 3,
+    "choices": [
+      "Chọn Mai -> Rename -> Gõ Lan -> Enter",
+      "Chọn Mai -> Delete -> Gõ Lan -> Enter",
+      "Chọn Mai -> New folder -> Gõ Lan",
+      "Chọn Mai -> Mở thư mục -> Gõ Lan"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để bảo vệ thông tin, khi dùng máy tính công cộng em nên làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Lưu mật khẩu lại trên trình duyệt",
+      "Đăng xuất tài khoản sau khi dùng",
+      "Chia sẻ mật khẩu cho người ngồi sau",
+      "Để nguyên màn hình rồi đi về luôn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Các bước để thêm trang chiếu mới vào bài trình chiếu hiện tại?",
+    "Lever": 3,
+    "choices": [
+      "Dải lệnh Home -> Chọn lệnh New Slide",
+      "Dải lệnh Insert -> Chọn lệnh Picture",
+      "Dải lệnh File -> Chọn lệnh Save bài",
+      "Dải lệnh Design -> Chọn mẫu thiết kế"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Muốn mở một bài trình chiếu đã lưu trên máy, em chọn lệnh nào?",
+    "Lever": 3,
+    "choices": [
+      "Vào bảng chọn File rồi chọn New",
+      "Vào bảng chọn File rồi chọn Open",
+      "Vào bảng chọn File rồi chọn Save",
+      "Vào bảng chọn File rồi chọn Close"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự luyện tập chuột trong Mouse Skills từ Stage 1 đến 5 là gì?",
+    "Lever": 3,
+    "choices": [
+      "Di chuyển-Nháy-Nháy đúp-Nháy phải-Kéo",
+      "Nháy-Di chuyển-Kéo thả-Nháy đúp-Phải",
+      "Kéo thả-Nháy phải-Nháy trái-Di chuyển",
+      "Nháy đúp-Nháy trái-Nháy phải-Kéo thả"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để thay đổi kích thước ảnh trong trang chiếu, em kéo thả ở đâu?",
+    "Lever": 3,
+    "choices": [
+      "Kéo thả ở vị trí giữa của bức ảnh",
+      "Kéo thả các nút tròn nhỏ quanh ảnh",
+      "Nhấn phím mũi tên trên bàn phím",
+      "Gõ số kích thước từ bàn phím máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong trò chơi Chuyển đĩa, quy tắc quan trọng nhất em cần nhớ?",
+    "Lever": 3,
+    "choices": [
+      "Đĩa nhỏ phải nằm dưới đĩa to hơn",
+      "Không được để đĩa to trên đĩa nhỏ",
+      "Mỗi bước có thể chuyển hai cái đĩa",
+      "Phải chuyển đĩa sang cọc 2 trước tiên"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quy trình tính 216 + 30 : 5 gồm những bước thực hiện nào?",
+    "Lever": 3,
+    "choices": [
+      "Tính 216+30 trước rồi chia cho 5",
+      "Tính 30:5 trước rồi cộng với 216",
+      "Thực hiện các phép tính cùng lúc",
+      "Thực hiện từ trái sang phải luôn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hoàn thành câu: 'Nếu trời mưa to thì em ... không đi chơi đá bóng'",
+    "Lever": 3,
+    "choices": [
+      "Dẫn đến kết quả là việc em sẽ",
+      "Dẫn đến việc điều kiện là em",
+      "Thực hiện phần việc tương ứng là",
+      "Thực hiện phần điều kiện mới là"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Để làm tờ rơi bảo vệ môi trường, em cần chuẩn bị những gì?",
+    "Lever": 3,
+    "choices": [
+      "Chuẩn bị nội dung chữ và hình ảnh",
+      "Chuẩn bị một chiếc máy tính xách tay",
+      "Chuẩn bị các loại túi nilon bỏ đi",
+      "Cả hai đáp án đầu tiên đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Trình tự đúng khi làm một bài trình chiếu giới thiệu về loài vật?",
+    "Lever": 3,
+    "choices": [
+      "Lưu bài -> Gõ nội dung -> Thêm ảnh",
+      "Thêm ảnh -> Lưu bài -> Gõ nội dung",
+      "Gõ nội dung -> Thêm ảnh -> Lưu bài",
+      "Lưu bài -> Thêm ảnh -> Gõ nội dung"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi robot gặp vật cản màu đỏ, lệnh nào giúp robot vượt qua?",
+    "Lever": 3,
+    "choices": [
+      "Thực hiện lệnh có tên là Tiến (1)",
+      "Thực hiện lệnh Nếu đỏ thì nhảy",
+      "Thực hiện lệnh có tên là Quay trái",
+      "Thực hiện lệnh có tên là Dừng lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tìm video hướng dẫn gấp giấy, em thực hiện các bước nào?",
+    "Lever": 3,
+    "choices": [
+      "Vào Youtube Kids -> Gõ từ khóa -> Tìm",
+      "Mở thư mục -> Gõ từ khóa -> Tìm ảnh",
+      "Mở PowerPoint -> Chèn ảnh -> Tìm kiếm",
+      "Mở Mouse Skills -> Stage 1 -> Tìm kiếm"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Muốn quan sát hạt đậu nảy mầm qua nhiều ngày, em nên dùng?",
+    "Lever": 3,
+    "choices": [
+      "Dùng máy tính để xem video quá trình",
+      "Dùng bàn phím để gõ tên hạt đậu đó",
+      "Dùng phần mềm PowerPoint để vẽ đậu",
+      "Dùng chuột để nháy đúp vào hạt đậu"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi tạo sơ đồ hình cây cho 'Động vật', nhánh con có thể là?",
+    "Lever": 3,
+    "choices": [
+      "Nhánh Chim, Nhánh Thú, Nhánh Cá",
+      "Nhánh Bút, Nhánh Thước, Nhánh Vở",
+      "Nhánh Toán, Nhánh Văn, Nhánh Anh",
+      "Nhánh Bố, Nhánh Mẹ, Nhánh Anh em"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nếu em xóa nhầm một thư mục quan trọng, em nên làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Tắt máy tính ngay lập tức để sửa",
+      "Nhờ người lớn hoặc thầy cô trợ giúp",
+      "Gõ tên thư mục mới đè lên thư mục",
+      "Mở phần mềm PowerPoint để tìm lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để bài trình chiếu có 4 trang, em cần nháy 'New Slide' mấy lần?",
+    "Lever": 3,
+    "choices": [
+      "Nháy chuột vào lệnh đó một lần",
+      "Nháy chuột vào lệnh đó hai lần",
+      "Nháy chuột vào lệnh đó ba lần",
+      "Nháy chuột vào lệnh đó bốn lần"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Khi luyện Mouse Skills, nếu muốn thoát phần mềm em nhấn phím?",
+    "Lever": 3,
+    "choices": [
+      "Nhấn phím có chữ N trên bàn phím",
+      "Nhấn phím có chữ Q trên bàn phím",
+      "Nhấn phím có chữ S trên bàn phím",
+      "Nhấn phím Enter trên bàn phím máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong thực tế, việc sắp xếp quần áo vào tủ giống với kiến thức?",
+    "Lever": "RL",
+    "choices": [
+      "Giống với kiến thức về soạn thảo",
+      "Giống kiến thức về sơ đồ hình cây",
+      "Giống với kiến thức về gõ bàn phím",
+      "Giống kiến thức về tìm kiếm mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc xếp các toa tàu hỏa theo số thứ tự 1, 2, 3 giúp em?",
+    "Lever": "RL",
+    "choices": [
+      "Giúp tìm đúng toa tàu nhanh hơn",
+      "Giúp tàu hỏa chạy với tốc độ nhanh",
+      "Làm cho tàu hỏa trông đẹp mắt hơn",
+      "Để tiết kiệm nhiên liệu cho tàu"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em phân loại sách giáo khoa và truyện tranh vào hai ngăn là?",
+    "Lever": "RL",
+    "choices": [
+      "Thực hiện việc xóa bỏ các tệp tin",
+      "Thực hiện sắp xếp phân loại đồ vật",
+      "Thực hiện tìm kiếm thông tin mạng",
+      "Thực hiện gõ chữ tiếng Việt có dấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi đi siêu thị, biển chỉ dẫn các khu vực hàng hóa là ví dụ?",
+    "Lever": "RL",
+    "choices": [
+      "Ví dụ của việc sử dụng chuột máy",
+      "Ví dụ của việc sắp xếp để dễ tìm",
+      "Ví dụ của phần mềm trình chiếu cũ",
+      "Ví dụ của việc bảo vệ thông tin cá"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc em cất sách vở đúng nơi quy định hằng ngày thể hiện?",
+    "Lever": "RL",
+    "choices": [
+      "Thói quen ngăn nắp và sắp xếp tốt",
+      "Khả năng sử dụng máy tính thành thạo",
+      "Kỹ năng gõ bàn phím nhanh và đúng",
+      "Việc thực hiện các lệnh rẽ nhánh"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi một người lạ hỏi số điện thoại của mẹ trên mạng, em nên?",
+    "Lever": "RL",
+    "choices": [
+      "Cung cấp ngay số điện thoại cho họ",
+      "Không cho và hỏi ý kiến của cha mẹ",
+      "Hỏi lại số điện thoại của người đó",
+      "Gõ số điện thoại bất kỳ cho họ xem"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc đặt mật khẩu cho máy tính gia đình có mục đích thực tế là?",
+    "Lever": "RL",
+    "choices": [
+      "Để trang trí cho màn hình đẹp hơn",
+      "Ngăn người lạ xem thông tin riêng",
+      "Để máy tính không bị nhiễm virus",
+      "Để máy tính khởi động nhanh chóng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em dùng bài trình chiếu để giới thiệu về gia đình trong buổi?",
+    "Lever": "RL",
+    "choices": [
+      "Trong buổi họp lớp hoặc sinh hoạt",
+      "Trong lúc đang làm bài tập về nhà",
+      "Trong khi đang đi chơi công viên",
+      "Trong giờ ra chơi ở sân trường học"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi chụp ảnh gia đình và lưu vào máy tính, em nên lưu vào?",
+    "Lever": "RL",
+    "choices": [
+      "Lưu vào thư mục có tên là Hình ảnh",
+      "Lưu vào thư mục có tên là Bài tập",
+      "Lưu vào thư mục có tên là Trò chơi",
+      "Lưu trực tiếp vào trong Thùng rác"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thao tác cầm chuột đúng giúp em tránh được tác hại thực tế?",
+    "Lever": "RL",
+    "choices": [
+      "Tránh việc máy tính bị báo lỗi sai",
+      "Tránh bị mỏi tay và đau cổ tay em",
+      "Tránh việc bàn phím bị hỏng nút",
+      "Tránh việc màn hình bị mờ hình ảnh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu thấy vòi nước đang chảy lãng phí, em sẽ làm gì?",
+    "Lever": "RL",
+    "choices": [
+      "Bỏ đi chỗ khác để không liên quan",
+      "Sử dụng cấu trúc Nếu... thì khóa lại",
+      "Đợi cho đến khi nước tự động ngừng",
+      "Gọi tất cả các bạn đến xem nước chảy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Các bước để đánh răng buổi sáng là một ví dụ thực tế của?",
+    "Lever": "RL",
+    "choices": [
+      "Việc thực hiện công việc tuần tự",
+      "Việc thực hiện các thao tác với chuột",
+      "Việc tìm kiếm thông tin trên mạng",
+      "Việc bảo vệ các bí mật cá nhân em"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi đèn giao thông chuyển màu đỏ, hành động của em là?",
+    "Lever": "RL",
+    "choices": [
+      "Tiếp tục đi thật nhanh qua đường",
+      "Dừng lại theo đúng luật lệ giao thông",
+      "Quay xe lại và đi theo hướng khác",
+      "Nhảy xuống xe và đi bộ trên vỉa hè"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc trực nhật lớp được phân công cho các tổ là ví dụ của?",
+    "Lever": "RL",
+    "choices": [
+      "Việc chia nhỏ nhiệm vụ để thực hiện",
+      "Việc sử dụng các công cụ đa phương",
+      "Việc lưu trữ các tệp tin trong máy",
+      "Việc thay đổi phông nền trang chiếu"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trước khi làm một món ăn, em cần đọc hướng dẫn để biết?",
+    "Lever": "RL",
+    "choices": [
+      "Biết các bước thực hiện theo thứ tự",
+      "Biết giá tiền của các nguyên liệu đó",
+      "Biết tên của người đã viết hướng dẫn",
+      "Biết màu sắc của các loại nồi nấu ăn"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Máy tính giúp em xem video về vòng đời của con ếch giúp em?",
+    "Lever": "RL",
+    "choices": [
+      "Giúp em học tốt môn Tự nhiên xã hội",
+      "Giúp em biết cách bơi giống như ếch",
+      "Giúp em biết cách bắt các loại côn trùng",
+      "Giúp em gõ bàn phím nhanh hơn nữa"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi làm việc nhóm, nếu có bạn chưa hiểu việc em nên?",
+    "Lever": "RL",
+    "choices": [
+      "Mắng bạn vì làm chậm công việc nhóm",
+      "Giải thích và hướng dẫn lại cho bạn",
+      "Yêu cầu bạn rời khỏi nhóm làm việc",
+      "Cứ để bạn ngồi im không làm gì cả"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chuẩn bị cho chuyến du lịch, em lập danh sách đồ dùng là?",
+    "Lever": "RL",
+    "choices": [
+      "Lập kế hoạch làm việc theo các bước",
+      "Sử dụng phần mềm luyện tập chuột máy",
+      "Thay đổi màu sắc cho các nhân vật",
+      "Xóa các thư mục không còn dùng đến"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Việc em tự giác học bài khi đến giờ là một ví dụ về?",
+    "Lever": "RL",
+    "choices": [
+      "Thực hiện việc tùy thuộc vào điều kiện",
+      "Sử dụng máy tính để tìm kiếm video",
+      "Chia sẻ thông tin cá nhân cho bạn bè",
+      "Tạo sơ đồ hình cây cho các môn học"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi máy tính báo 'Pin yếu', hành động thực tế của em là?",
+    "Lever": "RL",
+    "choices": [
+      "Tiếp tục chơi trò chơi thêm một lúc",
+      "Cắm sạc điện cho máy tính ngay lập",
+      "Tắt máy tính và đi ngủ luôn lập tức",
+      "Nhờ bạn sửa hộ chiếc máy tính đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thư mục nào sau đây thường chứa các bài tập vẽ của em?",
+    "Lever": 1,
+    "choices": [
+      "Thư mục có tên là Giai tri",
+      "Thư mục có tên là Hoc tap",
+      "Thư mục có tên là Phim anh",
+      "Thư mục có tên là Am nhac"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tên tệp nào sau đây có khả năng là một bài trình chiếu?",
+    "Lever": 1,
+    "choices": [
+      "Tệp có tên là Gioithieu.pptx",
+      "Tệp có tên là Baihat.mp3",
+      "Tệp có tên là Hinhve.png",
+      "Tệp có tên là Văn bản.docx"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh 'Save' trong PowerPoint nằm ở dải lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong dải lệnh tên là File",
+      "Nằm trong dải lệnh tên là Insert",
+      "Nằm trong dải lệnh tên là Design",
+      "Nằm trong dải lệnh tên là View"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Thao tác nháy đúp chuột trái thường dùng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng để chọn một biểu tượng nào đó",
+      "Dùng để mở một thư mục hoặc tệp",
+      "Dùng để xóa một thư mục khỏi máy",
+      "Dùng để đổi tên một tệp dữ liệu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong sơ đồ hình cây, gốc thường nằm ở vị trí nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm ở vị trí dưới cùng sơ đồ",
+      "Nằm ở vị trí trên cùng sơ đồ",
+      "Nằm ở bên phải của các nhánh",
+      "Nằm xen kẽ giữa các lá của cây"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chọn một bức ảnh có sẵn trong máy tính, em chọn?",
+    "Lever": 2,
+    "choices": [
+      "Chọn Online Pictures để tìm ảnh",
+      "Chọn Pictures từ dải lệnh Insert",
+      "Chọn Shapes từ dải lệnh Insert",
+      "Chọn Text Box từ dải lệnh Home"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao cần đặt tên thư mục không nên có dấu tiếng Việt?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính dễ dàng quản lý hơn",
+      "Để tiết kiệm dung lượng ổ đĩa D",
+      "Để thư mục trông chuyên nghiệp",
+      "Để tránh các lỗi khi mở tệp tin"
+    ],
+    "answer": 3
+  },
+  {
+    "question": "Sự khác nhau giữa tệp và thư mục là gì?",
+    "Lever": 2,
+    "choices": [
+      "Thư mục chứa tệp, tệp chứa dữ liệu",
+      "Tệp chứa thư mục, thư mục chứa ảnh",
+      "Cả hai đều có biểu tượng màu vàng",
+      "Không có sự khác nhau nào giữa chúng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nút lệnh có hình dấu 'x' màu trắng nền đỏ dùng để?",
+    "Lever": 2,
+    "choices": [
+      "Dùng để thu nhỏ cửa sổ làm việc",
+      "Dùng để đóng cửa sổ đang mở lại",
+      "Dùng để mở một cửa sổ làm việc mới",
+      "Dùng để lưu lại nội dung công việc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gõ phím 'N' trong Mouse Skills, phần mềm sẽ làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Phần mềm sẽ tự động được đóng lại",
+      "Phần mềm bắt đầu bài luyện tập mới",
+      "Phần mềm sẽ chuyển sang màu khác",
+      "Phần mềm sẽ hiện ra bảng điểm số"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em nên làm gì nếu vô tình xem được thông tin xấu trên mạng?",
+    "Lever": 3,
+    "choices": [
+      "Tắt trình duyệt và báo cho cha mẹ",
+      "Gửi thông tin đó cho các bạn xem cùng",
+      "Tiếp tục xem để biết nội dung là gì",
+      "Lưu thông tin đó vào trong thư mục"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để bài trình chiếu giới thiệu bản thân hay, em cần có?",
+    "Lever": 3,
+    "choices": [
+      "Thông tin họ tên, tuổi, sở thích, ảnh",
+      "Rất nhiều các con số toán học khó",
+      "Thật nhiều các tệp tin âm thanh lớn",
+      "Mật khẩu của tất cả các bạn trong lớp"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh 'New Slide' sẽ tạo trang mới ở vị trí nào?",
+    "Lever": 3,
+    "choices": [
+      "Tạo ở ngay phía trước trang đầu",
+      "Tạo ở ngay phía sau trang hiện tại",
+      "Tạo ở một tệp trình chiếu hoàn toàn mới",
+      "Tạo ở trong một thư mục bất kỳ nào đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi luyện tập Stage 5, em cần thực hiện thao tác chuột nào?",
+    "Lever": 3,
+    "choices": [
+      "Thao tác nháy chuột trái nhanh",
+      "Thao tác kéo thả các biểu tượng",
+      "Thao tác nháy chuột phải liên tục",
+      "Thao tác nháy đúp chuột trái nhanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu muốn robot quay lại hướng ban đầu, em dùng lệnh gì?",
+    "Lever": 3,
+    "choices": [
+      "Dùng lệnh Quay phải rồi Quay trái",
+      "Dùng lệnh Tiến (1) rồi Lùi (1)",
+      "Dùng lệnh Nếu đỏ thì nhảy cao lên",
+      "Dùng lệnh Quay trái hai lần liên tiếp"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để tìm thông tin về chim bồ câu bón mồi, em dùng từ khóa?",
+    "Lever": 3,
+    "choices": [
+      "Gõ từ khóa là 'Hạt đậu nảy mầm'",
+      "Gõ từ khóa là 'Chim bồ câu bón mồi'",
+      "Gõ từ khóa là 'Cách gõ bàn phím'",
+      "Gõ từ khóa là 'Phần mềm PowerPoint'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thư mục 'Doi bong' chứa 'An' và 'Binh'. An và Binh là?",
+    "Lever": 3,
+    "choices": [
+      "Là các thư mục gốc của ổ đĩa D",
+      "Là các thư mục con của Doi bong",
+      "Là các tệp dữ liệu hình ảnh cũ",
+      "Là các phần mềm trình chiếu mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sắp xếp tệp vào thư mục giúp máy tính hoạt động như thế nào?",
+    "Lever": 3,
+    "choices": [
+      "Hoạt động chậm hơn vì nhiều thư mục",
+      "Hoạt động ngăn nắp và dễ tìm kiếm",
+      "Tốn nhiều dung lượng bộ nhớ hơn nữa",
+      "Dễ bị nhiễm các loại virus máy tính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi chèn ảnh bị quá to che hết chữ, em cần làm gì?",
+    "Lever": 3,
+    "choices": [
+      "Xóa bức ảnh đó đi và chèn ảnh khác",
+      "Thu nhỏ kích thước của bức ảnh đó",
+      "Gõ thêm nhiều chữ để đè lên bức ảnh",
+      "Thay đổi phông nền của trang chiếu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả cuối cùng của việc gộp nhiều việc nhỏ lại là gì?",
+    "Lever": 3,
+    "choices": [
+      "Sẽ tạo thành một nhiệm vụ lớn hơn",
+      "Hoàn thành nhiệm vụ lớn ban đầu",
+      "Làm cho máy tính bị quá tải dữ liệu",
+      "Tạo ra một sơ đồ hình cây rất phức tạp"
+    ],
+    "answer": 1
   }
 ]

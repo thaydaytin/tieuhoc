@@ -1,41 +1,1167 @@
 [
   {
-    "question": "Thiết bị nào là bộ xử lý trung tâm của máy tính?",
+    "question": "Để soạn thảo văn bản có dấu tiếng Việt, máy tính cần cài đặt phần mềm nào?",
+    "Lever": 1,
     "choices": [
-      "Màn hình",
-      "Chuột",
-      "CPU",
-      "Loa"
+      "Phần mềm hỗ trợ gõ tiếng Việt",
+      "Phần mềm dùng để vẽ hình khối",
+      "Phần mềm dùng để nghe âm nhạc",
+      "Phần mềm dùng quản lý các tệp"
     ],
-    "answer": 2
+    "answer": 0
   },
   {
-    "question": "Phím nào dùng để xóa ký tự bên trái con trỏ?",
+    "question": "Trong phần mềm soạn thảo văn bản, tổ hợp phím Ctrl + S dùng để làm gì?",
+    "Lever": 1,
     "choices": [
-      "Enter",
-      "Shift",
-      "Backspace",
-      "Ctrl"
-    ],
-    "answer": 2
-  },
-  {
-    "question": "Phần mềm nào dùng để soạn thảo văn bản?",
-    "choices": [
-      "Paint",
-      "Word",
-      "Excel",
-      "Chrome"
+      "Dùng để xóa một đoạn văn bản",
+      "Dùng để lưu tệp văn bản hiện có",
+      "Dùng để sao chép khối văn bản",
+      "Dùng để in văn bản ra giấy tờ"
     ],
     "answer": 1
   },
   {
-    "question": "Đâu là thiết bị ngoại vi?",
+    "question": "Lệnh 'Save As' trong bảng chọn File được sử dụng khi nào sau đây?",
+    "Lever": 1,
     "choices": [
-      "Bàn phím",
-      "Ram",
-      "CPU",
-      "Ổ đĩa"
+      "Khi muốn lưu tệp với một tên mới",
+      "Khi muốn xóa tệp tin ra khỏi máy",
+      "Khi muốn đóng phần mềm đang mở",
+      "Khi muốn mở một tệp văn bản mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Theo kiểu gõ Telex, để gõ được chữ 'ă' em cần thực hiện gõ phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Gõ phím chữ a rồi gõ phím chữ w",
+      "Gõ phím chữ a rồi gõ phím chữ a",
+      "Gõ phím chữ a rồi gõ phím chữ s",
+      "Gõ phím chữ a rồi gõ phím chữ f"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong dải lệnh Insert, nút lệnh 'Pictures' được sử dụng để làm gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng để thay đổi màu sắc của chữ",
+      "Dùng để chèn hình ảnh vào văn bản",
+      "Dùng để thay đổi phông chữ trình",
+      "Dùng để xóa đoạn văn bản vừa gõ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi kích thước của ảnh, em cần kéo thả các nút tròn ở vị trí nào?",
+    "Lever": 1,
+    "choices": [
+      "Ở các góc hoặc các cạnh của ảnh",
+      "Ở ngay vị trí chính giữa của ảnh",
+      "Ở bên ngoài vùng của dải lệnh cũ",
+      "Ở trên thanh trạng thái của máy"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Nút lệnh 'Wrap Text' thường được sử dụng nhằm mục đích chính là gì?",
+    "Lever": 1,
+    "choices": [
+      "Dùng xóa ảnh ra khỏi trang giấy",
+      "Dùng thay đổi cách bố trí của ảnh",
+      "Dùng lưu văn bản vào thư mục con",
+      "Dùng đổi tên của tệp văn bản mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thao tác chọn một phần văn bản (bôi đen) thường được thực hiện bằng cách?",
+    "Lever": 1,
+    "choices": [
+      "Nháy đúp chuột vào thanh tiêu đề",
+      "Kéo thả chuột từ đầu đến cuối khối",
+      "Nhấn phím Enter nhiều lần liên tục",
+      "Nháy chuột phải vào biểu tượng lưu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thực hiện lệnh Sao chép (Copy) khối văn bản, em dùng tổ hợp phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng tổ hợp phím Ctrl và chữ C",
+      "Sử dụng tổ hợp phím Ctrl và chữ V",
+      "Sử dụng tổ hợp phím Ctrl và chữ X",
+      "Sử dụng tổ hợp phím Ctrl và chữ Z"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để thực hiện lệnh Dán (Paste) khối văn bản, em dùng tổ hợp phím nào?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng tổ hợp phím Ctrl và chữ C",
+      "Sử dụng tổ hợp phím Ctrl và chữ V",
+      "Sử dụng tổ hợp phím Ctrl và chữ X",
+      "Sử dụng tổ hợp phím Ctrl và chữ S"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm Google Earth giúp em thực hiện công việc gì sau đây?",
+    "Lever": 1,
+    "choices": [
+      "Luyện gõ bàn phím bằng mười ngón",
+      "Khám phá các địa điểm trên thế giới",
+      "Lập trình các nhân vật bơi lội",
+      "Chỉnh sửa các bức ảnh nghệ thuật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong phần mềm RapidTyping, cấp độ 'Basics' dùng để luyện tập gõ gì?",
+    "Lever": 1,
+    "choices": [
+      "Luyện tập gõ các phím số ở trên",
+      "Luyện tập gõ các phím ở hàng cơ sở",
+      "Luyện tập gõ các ký tự đặc biệt",
+      "Luyện tập gõ phím Shift với chữ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, vùng nào là nơi chứa các khối lệnh để em chọn và kéo?",
+    "Lever": 1,
+    "choices": [
+      "Vùng Sân khấu (Stage) của mèo",
+      "Vùng Thư viện lệnh (Code) của máy",
+      "Vùng Nhân vật (Sprite) hiện có",
+      "Vùng Lập trình (Script Area) mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh 'Khi bấm vào lá cờ xanh' nằm trong nhóm lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Nằm trong nhóm lệnh về Sự kiện",
+      "Nằm trong nhóm lệnh về Chuyển động",
+      "Nằm trong nhóm lệnh về sự Hiển thị",
+      "Nằm trong nhóm lệnh về sự Điều khiển"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để nhân vật nói câu 'Xin chào' trong vài giây, em dùng nhóm lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Chuyển động màu lam",
+      "Nhóm lệnh Hiển thị có màu tím",
+      "Nhóm lệnh Âm thanh có màu hồng",
+      "Nhóm lệnh Sự kiện có màu vàng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh dùng để thay đổi phông nền của sân khấu nằm ở nhóm lệnh nào?",
+    "Lever": 1,
+    "choices": [
+      "Nhóm lệnh Các sự kiện của máy",
+      "Nhóm lệnh Hiển thị của nhân vật",
+      "Nhóm lệnh Các biến số của mèo",
+      "Nhóm lệnh Cảm biến của phần mềm"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thêm một nhân vật mới vào chương trình Scratch, em nháy chọn nút nào?",
+    "Lever": 1,
+    "choices": [
+      "Nút có biểu tượng hình lá cờ xanh",
+      "Nút có hình chú mèo và dấu cộng",
+      "Nút có hình lục giác màu đỏ tươi",
+      "Nút có biểu tượng quả địa cầu xanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khối lệnh 'di chuyển 10 bước' có màu sắc đặc trưng là màu gì?",
+    "Lever": 1,
+    "choices": [
+      "Khối lệnh có màu xanh lam nhạt",
+      "Khối lệnh có màu cam tươi mới",
+      "Khối lệnh có màu đỏ đậm rực rỡ",
+      "Khối lệnh có màu vàng tươi sáng"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh 'đặt kích thước thành 100%' dùng để thực hiện việc gì?",
+    "Lever": 1,
+    "choices": [
+      "Để xóa bớt một nhân vật hiện có",
+      "Để thiết lập lại cỡ của nhân vật",
+      "Để thay đổi màu sắc của nhân vật",
+      "Để làm nhân vật di chuyển nhanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, để dừng chương trình đang chạy em nháy chuột vào?",
+    "Lever": 1,
+    "choices": [
+      "Biểu tượng có hình lá cờ màu xanh",
+      "Biểu tượng hình lục giác màu đỏ",
+      "Biểu tượng có hình quả địa cầu",
+      "Biểu tượng dấu x ở góc nhân vật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sự khác biệt giữa việc nhấn nút 'Save' và dùng lệnh 'Save As' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Save lưu đè, Save As tạo tệp mới",
+      "Save xóa tệp, Save As lưu tệp cũ",
+      "Save đổi màu, Save As đổi kiểu chữ",
+      "Save đóng tệp, Save As mở tệp mới"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Tại sao khi gõ văn bản tiếng Việt em cần bật biểu tượng 'V' của Unikey?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính có thể kết nối internet",
+      "Để kích hoạt chế độ gõ có dấu chữ",
+      "Để phần mềm Word không bị lỗi font",
+      "Để máy tính tự động lưu lại văn bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu gõ phím 's' ngay sau chữ 'a' theo kiểu Telex, kết quả nhận được là?",
+    "Lever": 2,
+    "choices": [
+      "Sẽ nhận được chữ có dấu huyền là à",
+      "Sẽ nhận được chữ có dấu sắc là á",
+      "Sẽ nhận được chữ có dấu nặng là ạ",
+      "Sẽ nhận được chữ có dấu hỏi là ả"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sau khi chèn ảnh, nếu ảnh quá to che mất chữ em nên làm gì?",
+    "Lever": 2,
+    "choices": [
+      "Nên xóa bớt nội dung chữ trong bài",
+      "Nên thu nhỏ kích thước của bức ảnh",
+      "Nên đổi phông chữ sang kích cỡ lớn",
+      "Nên tắt phần mềm và mở lại từ đầu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt chính giữa lệnh 'Cut' và lệnh 'Copy' khối văn bản là gì?",
+    "Lever": 2,
+    "choices": [
+      "Cut giữ bản gốc, Copy mất bản gốc",
+      "Cut mất bản gốc, Copy giữ bản gốc",
+      "Cut đổi màu, Copy giữ nguyên màu",
+      "Cut cần phím V, Copy cần phím X"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi em thực hiện lệnh 'Paste', văn bản sẽ được dán vào vị trí nào?",
+    "Lever": 2,
+    "choices": [
+      "Vào vị trí cuối cùng của văn bản",
+      "Vào vị trí ngay tại con trỏ soạn thảo",
+      "Vào vị trí đầu tiên của trang giấy",
+      "Vào một tệp tin hoàn toàn mới khác"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm Google Earth giúp em xem hình ảnh trái đất từ nguồn nào?",
+    "Lever": 2,
+    "choices": [
+      "Hình ảnh vẽ tay của các họa sĩ",
+      "Hình ảnh chụp thực tế từ vệ tinh",
+      "Hình ảnh cắt từ các phim hoạt hình",
+      "Hình ảnh do người dùng tự vẽ ra"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong RapidTyping, việc hiển thị màu đỏ khi gõ phím có nghĩa là gì?",
+    "Lever": 2,
+    "choices": [
+      "Em đã gõ phím hoàn toàn chính xác",
+      "Em đã gõ sai ký tự theo yêu cầu",
+      "Phần mềm đang bị lỗi không gõ được",
+      "Em cần nhấn phím Shift để tiếp tục"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao trong Scratch các lệnh được phân chia theo các màu khác nhau?",
+    "Lever": 2,
+    "choices": [
+      "Để trang trí chương trình đẹp hơn",
+      "Để dễ phân biệt chức năng của lệnh",
+      "Để máy tính chạy nhanh hơn lúc đầu",
+      "Để các nhân vật mèo có thể đổi màu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi kéo một khối lệnh vào vùng Lập trình, lệnh đó sẽ thực hiện khi nào?",
+    "Lever": 2,
+    "choices": [
+      "Sẽ thực hiện ngay khi vừa kéo vào",
+      "Sẽ thực hiện khi ghép dưới lệnh sự kiện",
+      "Sẽ thực hiện khi em tắt máy tính đi",
+      "Sẽ thực hiện khi em gõ tên nhân vật"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kết quả của lệnh 'đi tới [vị trí ngẫu nhiên]' trong Scratch là gì?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật bơi từ từ đến vị trí mới",
+      "Nhân vật biến ngay tới một điểm bất kỳ",
+      "Nhân vật quay về vị trí trung tâm sân",
+      "Nhân vật biến mất khỏi sân khấu chính"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Điểm khác biệt giữa 'đi tới' và 'lướt trong 1 giây tới' là gì?",
+    "Lever": 2,
+    "choices": [
+      "Tốc độ di chuyển tức thời và từ từ",
+      "Màu sắc của các khối lệnh đã khác",
+      "Vị trí đích đến của nhân vật mèo",
+      "Số lượng nhân vật có thể di chuyển"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Lệnh 'phông nền kế tiếp' giúp chương trình thay đổi như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Xóa tất cả phông nền đang có sẵn",
+      "Chuyển sang hình nền tiếp theo thứ tự",
+      "Chỉ hiện duy nhất một hình nền trắng",
+      "Làm cho hình nền sân khấu biến mất"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi có nhiều nhân vật, làm sao để biết em đang lập trình cho nhân vật nào?",
+    "Lever": 2,
+    "choices": [
+      "Nhìn vào màu sắc của các khối lệnh",
+      "Nhìn vào hình ảnh nhân vật ở vùng lập",
+      "Nhìn vào tên của tệp chương trình cũ",
+      "Nhìn vào vị trí của nhân vật trên sân"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc đổi tên nhân vật Ben thành An (trang 64) nhằm mục đích gì?",
+    "Lever": 2,
+    "choices": [
+      "Để chương trình chạy được nhanh hơn",
+      "Để dễ phân biệt và quản lý nhân vật",
+      "Để nhân vật có thể thay đổi màu sắc",
+      "Để xóa bớt các lệnh không dùng đến"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em nên gõ phím bằng 10 ngón đúng cách khi soạn thảo?",
+    "Lever": 2,
+    "choices": [
+      "Để bảo vệ bàn phím không bị hỏng",
+      "Để tăng tốc độ và độ chính xác gõ",
+      "Để máy tính không báo lỗi phần mềm",
+      "Để chữ hiện ra có nhiều màu sắc đẹp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'thay đổi hiệu ứng màu một lượng 25' có tác dụng gì?",
+    "Lever": 2,
+    "choices": [
+      "Làm nhân vật to lên một chút nữa",
+      "Làm nhân vật chuyển sang màu sắc mới",
+      "Làm nhân vật di chuyển sang bên phải",
+      "Làm phông nền sân khấu bị mất đi ngay"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn nhân vật biến mất hoàn toàn trên sân khấu, em dùng lệnh nào?",
+    "Lever": 2,
+    "choices": [
+      "Sử dụng lệnh có tên là Hiện (Show)",
+      "Sử dụng lệnh có tên là Ẩn (Hide)",
+      "Sử dụng lệnh đổi trang phục kế tiếp",
+      "Sử dụng lệnh di chuyển lùi mười bước"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao cần phải lưu bài thường xuyên trong quá trình soạn thảo?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị hết pin nhanh",
+      "Để tránh mất dữ liệu khi có sự cố",
+      "Để các bức ảnh trong bài đẹp hơn",
+      "Để phần mềm Unikey không bị tắt đi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sự trợ giúp của máy tính trong việc tìm hiểu quốc gia giúp em?",
+    "Lever": 2,
+    "choices": [
+      "Biết chính xác mọi chuyện tương lai",
+      "Xem được hình ảnh, vị trí của đất nước",
+      "Tự động làm hết các bài tập về nhà",
+      "Không cần phải đi học môn Địa lý nữa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Quy trình lưu tệp mới: 1. Chọn File; 2. Chọn Save As; 3. Gõ tên; 4. Nhấn?",
+    "Lever": 3,
+    "choices": [
+      "Nhấn phím Delete trên bàn phím",
+      "Nhấn nút lệnh có tên là Save",
+      "Nhấn nút lệnh có tên là Open",
+      "Nhấn phím Shift trên bàn phím"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để gõ từ 'Trường học' bằng kiểu Telex, em gõ chuỗi phím nào?",
+    "Lever": 3,
+    "choices": [
+      "Truwowngf hocj trên bàn phím",
+      "Truong hoc trên bàn phím máy",
+      "Trương học trên bàn phím máy",
+      "Truwong hocj trên bàn phím"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Em đã soạn xong bài, muốn gửi cho bạn nhưng phải giữ tên cũ. Em chọn?",
+    "Lever": 3,
+    "choices": [
+      "Chọn lệnh Save rồi gõ tên của bạn",
+      "Chọn Save As rồi gõ tên mới cho bạn",
+      "Chọn lệnh Delete để xóa tệp cũ đi",
+      "Chọn lệnh Open để mở tệp của bạn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để ảnh nằm gọn giữa các dòng chữ, trong Wrap Text em nên chọn?",
+    "Lever": 3,
+    "choices": [
+      "Chọn lệnh có tên là In Line with Text",
+      "Chọn lệnh có tên là Square hoặc Tight",
+      "Chọn lệnh có tên là Behind the Text",
+      "Chọn lệnh có tên là Top and Bottom"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để di chuyển câu 1 xuống dưới câu 2, trình tự lệnh đúng là gì?",
+    "Lever": 3,
+    "choices": [
+      "Chọn câu 1 -> Copy -> Dán dưới câu 2",
+      "Chọn câu 1 -> Cut -> Dán dưới câu 2",
+      "Chọn câu 1 -> Dán -> Cut dưới câu 2",
+      "Chọn câu 2 -> Copy -> Dán trên câu 1"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Làm thế nào để chọn nhanh một từ trong văn bản bằng chuột?",
+    "Lever": 3,
+    "choices": [
+      "Nháy chuột trái một lần duy nhất",
+      "Nháy đúp chuột trái vào từ đó ngay",
+      "Nháy chuột phải vào từ đó một lần",
+      "Lăn nút cuộn chuột lên xuống nhanh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu muốn gõ từ 'Học tập' có dấu nặng, phím cuối cùng em gõ là?",
+    "Lever": 3,
+    "choices": [
+      "Em cần gõ phím có chữ là s",
+      "Em cần gõ phím có chữ là j",
+      "Em cần gõ phím có chữ là f",
+      "Em cần gõ phím có chữ là r"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, để nhân vật lùi lại 50 bước, em nhập giá trị nào?",
+    "Lever": 3,
+    "choices": [
+      "Nhập vào con số dương là 50",
+      "Nhập vào con số âm là -50",
+      "Nhập vào con số không là 0",
+      "Nhập vào con số rất lớn là 500"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Kịch bản: [Khi bấm cờ] -> [Hiện] -> [Đợi 1s] -> [Ẩn]. Kết quả là?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật hiện mãi mãi trên sân",
+      "Nhân vật hiện 1 giây rồi biến mất",
+      "Nhân vật biến mất rồi hiện lại ngay",
+      "Nhân vật không bao giờ xuất hiện cả"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để mèo đổi màu liên tục, em nên ghép lệnh đổi màu vào khối nào?",
+    "Lever": 3,
+    "choices": [
+      "Ghép vào khối lệnh Di chuyển 10",
+      "Ghép vào khối lệnh Lặp lại mãi mãi",
+      "Ghép vào khối lệnh Đợi một giây",
+      "Ghép vào khối lệnh Khi bấm phím"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Dựa vào Hình 5 trang 63, sau câu 'Tớ thích biển nhất', phông nào hiện?",
+    "Lever": 3,
+    "choices": [
+      "Phông nền có tên là Arctic",
+      "Phông nền có tên là Malibu",
+      "Phông nền có tên là Sân khấu",
+      "Phông nền có màu trắng tinh"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thứ tự đúng: 1. Thêm nhân vật; 2. Chọn nhân vật; 3. Kéo khối lệnh?",
+    "Lever": 3,
+    "choices": [
+      "Thực hiện theo trình tự: 1 - 2 - 3",
+      "Thực hiện theo trình tự: 3 - 2 - 1",
+      "Thực hiện theo trình tự: 2 - 1 - 3",
+      "Thực hiện theo trình tự: 1 - 3 - 2"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để nhân vật Ben di chuyển khi nhấn phím 'a', em chọn lệnh sự kiện?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh khi bấm vào nhân vật này",
+      "Lệnh khi bấm phím [a] của máy",
+      "Lệnh khi bấm vào lá cờ màu xanh",
+      "Lệnh khi phông nền được thay đổi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Muốn nhân vật quay ngược lại 180 độ, em dùng lệnh xoay và nhập?",
+    "Lever": 3,
+    "choices": [
+      "Nhập con số góc quay là 15 độ",
+      "Nhập con số góc quay là 180 độ",
+      "Nhập con số góc quay là 90 độ",
+      "Nhập con số góc quay là 45 độ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu chạy lệnh 'đặt kích thước 200%' rồi 'thay đổi -50', kích thước là?",
+    "Lever": 3,
+    "choices": [
+      "Nhân vật có kích thước là 250%",
+      "Nhân vật có kích thước là 150%",
+      "Nhân vật có kích thước là 100%",
+      "Nhân vật có kích thước là 200%"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để xóa nhân vật Mèo và thêm nhân vật Chim, em thực hiện?",
+    "Lever": 3,
+    "choices": [
+      "Nháy dấu x ở Mèo, rồi chọn Chim",
+      "Nháy đúp vào Mèo, rồi gõ tên Chim",
+      "Kéo Mèo vào thùng rác, rồi vẽ Chim",
+      "Tắt Scratch đi rồi mở lại chọn Chim"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Bạn An gõ 'D d uwowng' sẽ nhận được kết quả hiển thị là chữ gì?",
+    "Lever": 3,
+    "choices": [
+      "Kết quả nhận được là chữ: Dương",
+      "Kết quả nhận được là chữ: Đường",
+      "Kết quả nhận được là chữ: Dường",
+      "Kết quả nhận được là chữ: Đương"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tìm hiểu dân số Việt Nam năm 2020 trên Google Earth, em nháy vào?",
+    "Lever": 3,
+    "choices": [
+      "Nháy vào nút lệnh có hình tháp",
+      "Nháy vào mục Thông tin khác",
+      "Nháy vào nút lệnh hình bánh xe",
+      "Nháy vào biểu tượng kính lúp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi gõ phím Shift kết hợp phím 'a' đang bật Caps Lock, kết quả là?",
+    "Lever": 3,
+    "choices": [
+      "Sẽ nhận được chữ A viết hoa",
+      "Sẽ nhận được chữ a viết thường",
+      "Sẽ không hiện ra chữ cái nào",
+      "Máy tính sẽ tự động xóa chữ đó"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để lưu bài vẽ từ Paint vào thư mục riêng, em chọn trình tự nào?",
+    "Lever": 3,
+    "choices": [
+      "Save -> Chọn thư mục -> Gõ tên",
+      "Open -> Chọn thư mục -> Gõ tên",
+      "Delete -> Chọn thư mục -> Gõ tên",
+      "Rename -> Chọn thư mục -> Gõ tên"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi em viết một bức thư chúc mừng sinh nhật mẹ, em nên dùng?",
+    "Lever": "RL",
+    "choices": [
+      "Dùng phần mềm soạn thảo văn bản",
+      "Dùng phần mềm lập trình Scratch",
+      "Dùng phần mềm luyện gõ bàn phím",
+      "Dùng công cụ quản lý thư mục gốc"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Sắp xếp quần áo vào các ngăn tủ giúp em điều gì giống máy tính?",
+    "Lever": "RL",
+    "choices": [
+      "Giúp tủ áo trông đẹp màu sắc hơn",
+      "Giúp tìm kiếm quần áo nhanh hơn",
+      "Giúp quần áo luôn luôn được mới",
+      "Giúp tủ áo có thêm nhiều ngăn mới"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để giới thiệu về danh lam thắng cảnh quê em, phần mềm tốt nhất là?",
+    "Lever": "RL",
+    "choices": [
+      "Phần mềm dùng để luyện gõ phím",
+      "Phần mềm trình chiếu hoặc soạn thảo",
+      "Phần mềm giải các bài toán đố khó",
+      "Phần mềm quản lý các tệp tin cũ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thấy một bức ảnh đẹp trên mạng muốn đưa vào bài học, em làm gì?",
+    "Lever": "RL",
+    "choices": [
+      "Lấy máy ảnh chụp lại màn hình máy",
+      "Lưu ảnh về máy rồi dùng Insert",
+      "Vẽ lại bức ảnh đó bằng bút chì màu",
+      "Dùng phần mềm Scratch để vẽ lại"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hành động nào thể hiện em tôn trọng bản quyền phần mềm?",
+    "Lever": "RL",
+    "choices": [
+      "Tự ý sao chép phần mềm của bạn",
+      "Chỉ sử dụng khi được phép tác giả",
+      "Sử dụng các bản bẻ khóa trên mạng",
+      "Chia sẻ phần mềm trả phí cho mọi người"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để chuẩn bị bài thuyết trình nhóm về loài vật, em nên dùng gì?",
+    "Lever": "RL",
+    "choices": [
+      "Dùng Google Earth tìm nơi chúng sống",
+      "Dùng RapidTyping để gõ tên chúng",
+      "Dùng lệnh xóa để bỏ hình ảnh chúng",
+      "Dùng Unikey để vẽ hình các con vật"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Kỹ năng gõ phím nhanh giúp em điều gì trong cuộc sống hằng ngày?",
+    "Lever": "RL",
+    "choices": [
+      "Giúp em chơi trò chơi giỏi hơn bạn",
+      "Giúp hoàn thành bài tập nhanh hơn",
+      "Giúp máy tính không bị hỏng bàn phím",
+      "Giúp màn hình máy tính sáng đẹp hơn"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi muốn tạo một trò chơi đơn giản tặng bạn, em nên học?",
+    "Lever": "RL",
+    "choices": [
+      "Học cách gõ văn bản tiếng Việt mới",
+      "Học lập trình trực quan với Scratch",
+      "Học cách chèn ảnh vào trong tệp tin",
+      "Học cách xóa các thư mục không dùng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc đổi tên tệp 'Bai tap' thành 'Bai tap Toan' giúp em điều gì?",
+    "Lever": "RL",
+    "choices": [
+      "Làm cho tệp có dung lượng nhỏ hơn",
+      "Dễ dàng nhận biết nội dung bên trong",
+      "Làm cho máy tính khởi động nhanh",
+      "Xóa bỏ các lỗi sai khi gõ văn bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu muốn tìm hiểu về tháp Eiffel ở Pháp, em nên dùng từ khóa?",
+    "Lever": "RL",
+    "choices": [
+      "Gõ từ khóa là 'Hà Nội Việt Nam'",
+      "Gõ từ khóa là 'Eiffel Tower France'",
+      "Gõ từ khóa là 'Luyện tập chuột máy'",
+      "Gõ từ khóa là 'Cách gõ tiếng Việt'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong một bài văn, để nhấn mạnh tên tiêu đề em nên làm gì?",
+    "Lever": "RL",
+    "choices": [
+      "Xóa tiêu đề đó đi và gõ lại sau",
+      "Chọn tiêu đề và để chế độ In đậm",
+      "Chèn thật nhiều ảnh vào tiêu đề đó",
+      "Dùng phím cách để đẩy tiêu đề xa"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để kể một câu chuyện bằng hình ảnh chuyển động, em dùng?",
+    "Lever": "RL",
+    "choices": [
+      "Sử dụng phần mềm soạn thảo Word",
+      "Sử dụng lập trình Scratch của máy",
+      "Sử dụng phần mềm luyện gõ mười ngón",
+      "Sử dụng công cụ tìm kiếm địa chỉ mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi thấy bạn gõ tiếng Việt không có dấu, em nên khuyên bạn?",
+    "Lever": "RL",
+    "choices": [
+      "Khuyên bạn nên mua bàn phím mới",
+      "Khuyên bạn bật Unikey và chọn Telex",
+      "Khuyên bạn nên tắt máy tính đi ngủ",
+      "Khuyên bạn gõ chậm lại để có dấu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Em dùng Google Earth để xem đường đi đến trường là ví dụ của?",
+    "Lever": "RL",
+    "choices": [
+      "Sử dụng máy tính để gõ văn bản",
+      "Sử dụng máy tính tìm kiếm thông tin",
+      "Sử dụng máy tính để lập trình game",
+      "Sử dụng máy tính để xóa tệp dữ liệu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc chèn ảnh gia đình vào bài viết về 'Tết' có tác dụng gì?",
+    "Lever": "RL",
+    "choices": [
+      "Làm bài viết dài thêm nhiều trang",
+      "Làm bài viết sinh động và hấp dẫn",
+      "Giúp máy tính tiết kiệm điện năng",
+      "Làm cho chữ viết có nhiều màu sắc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để bảo vệ thông tin cá nhân trên mạng, em không nên làm gì?",
+    "Lever": "RL",
+    "choices": [
+      "Tự mình tìm hiểu kiến thức bổ ích",
+      "Cung cấp địa chỉ nhà cho người lạ",
+      "Lưu tệp bài tập vào trong thư mục",
+      "Sử dụng phần mềm gõ tiếng Việt V"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Hành động chia sẻ mật khẩu máy tính cho bạn cùng lớp là?",
+    "Lever": "RL",
+    "choices": [
+      "Một hành động giúp đỡ bạn rất tốt",
+      "Một hành động không an toàn bảo mật",
+      "Một hành động giúp máy chạy nhanh",
+      "Một hành động đúng quy định lớp học"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi máy tính bị nhiễm virus từ trang web lạ, em nên làm gì?",
+    "Lever": "RL",
+    "choices": [
+      "Cứ tiếp tục sử dụng như bình thường",
+      "Báo cho thầy cô hoặc cha mẹ trợ giúp",
+      "Tự mình tháo bàn phím ra để sửa lại",
+      "Xóa bỏ phần mềm gõ tiếng Việt đi ngay"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc học lập trình giúp em rèn luyện tư duy gì cho tương lai?",
+    "Lever": "RL",
+    "choices": [
+      "Tư duy gõ bàn phím bằng hai ngón",
+      "Tư duy giải quyết vấn đề logic máy",
+      "Tư duy xóa bỏ các dữ liệu quan trọng",
+      "Tư duy chỉ làm việc một mình đơn lẻ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để giúp mẹ tìm công thức nấu ăn trên mạng, em sử dụng?",
+    "Lever": "RL",
+    "choices": [
+      "Phần mềm lập trình nhân vật mèo con",
+      "Trình duyệt web và công cụ tìm kiếm",
+      "Phần mềm luyện tập gõ mười ngón tay",
+      "Dải lệnh Insert chèn ảnh vào văn bản"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nhóm lệnh Sự kiện trong Scratch thường có màu sắc đặc trưng nào?",
+    "Lever": 1,
+    "choices": [
+      "Có màu xanh dương rất đậm",
+      "Có màu vàng hoặc màu cam",
+      "Có màu tím nhạt rất đẹp",
+      "Có màu hồng đậm rực rỡ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tên phím nào dùng để xóa ký tự ở phía bên trái con trỏ?",
+    "Lever": 1,
+    "choices": [
+      "Sử dụng phím có tên Delete",
+      "Sử dụng phím tên Backspace",
+      "Sử dụng phím có tên Enter",
+      "Sử dụng phím có tên Shift"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để gõ chữ hoa khi đèn Caps Lock đang tắt, em nhấn giữ phím?",
+    "Lever": 1,
+    "choices": [
+      "Nhấn và giữ phím có tên Ctrl",
+      "Nhấn và giữ phím có tên Shift",
+      "Nhấn và giữ phím có tên Alt",
+      "Nhấn và giữ phím có tên Enter"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Thành phần nào sau đây là 'não bộ' xử lý của máy tính?",
+    "Lever": 1,
+    "choices": [
+      "Bộ nhớ trong của máy là RAM",
+      "Bộ vi xử lý trung tâm là CPU",
+      "Màn hình hiển thị các hình ảnh",
+      "Bàn phím dùng để nhập dữ liệu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Phần mềm nào là phần mềm hệ thống điều hành phổ biến nhất?",
+    "Lever": 1,
+    "choices": [
+      "Phần mềm soạn thảo văn bản Word",
+      "Hệ điều hành tên gọi là Windows",
+      "Phần mềm lập trình tên là Scratch",
+      "Phần mềm vẽ tranh tên gọi là Paint"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, vùng nào hiển thị kết quả các lệnh đã ghép?",
+    "Lever": 1,
+    "choices": [
+      "Vùng Thư viện chứa các khối lệnh",
+      "Vùng Sân khấu hiển thị hoạt động",
+      "Vùng Nhân vật chứa danh sách mèo",
+      "Vùng Phông nền chứa các ảnh nền"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi di chuyển chuột vào siêu liên kết, con trỏ có hình gì?",
+    "Lever": 1,
+    "choices": [
+      "Có hình một mũi tên màu trắng",
+      "Có hình một bàn tay chỉ ngón trỏ",
+      "Có hình một dấu cộng màu đen",
+      "Có hình một chiếc đồng hồ cát"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lợi ích của việc gõ bàn phím bằng 10 ngón đúng cách là gì?",
+    "Lever": 2,
+    "choices": [
+      "Để bàn phím máy tính trông mới hơn",
+      "Để gõ nhanh, chính xác và chuyên nghiệp",
+      "Để máy tính không bị nhiễm các virus",
+      "Để chữ hiện ra có nhiều màu sắc đẹp"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao không nên truy cập vào các trang web có nội dung xấu?",
+    "Lever": 2,
+    "choices": [
+      "Vì nó làm cho máy tính chạy nhanh hơn",
+      "Vì gây hại cho bản thân và máy tính",
+      "Vì nó giúp em học tập được tốt hơn",
+      "Vì nó làm cho màn hình máy bị sáng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Khi sao chép tệp từ máy này sang máy khác, em nên dùng?",
+    "Lever": 2,
+    "choices": [
+      "Dùng phần mềm soạn thảo văn bản cũ",
+      "Dùng thiết bị nhớ ngoài như USB",
+      "Dùng bàn phím để gõ lại nội dung",
+      "Dùng lệnh xóa để di chuyển tệp đi"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu muốn tìm hình ảnh con mèo trên internet, em dùng từ khóa?",
+    "Lever": 2,
+    "choices": [
+      "Gõ từ khóa là 'Hoa hồng đỏ đẹp'",
+      "Gõ từ khóa là 'Hình ảnh con mèo'",
+      "Gõ từ khóa là 'Cách sử dụng chuột'",
+      "Gõ từ khóa là 'Học lập trình Scratch'"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Trong Scratch, để xóa một khối lệnh em thực hiện thao tác?",
+    "Lever": 2,
+    "choices": [
+      "Kéo khối lệnh đó thả vào vùng Sân khấu",
+      "Kéo khối lệnh trả về vùng Thư viện",
+      "Nháy đúp chuột trái vào khối lệnh đó",
+      "Tắt chương trình và mở lại từ đầu"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Sự khác nhau giữa 'nhân vật' và 'phông nền' trong Scratch là?",
+    "Lever": 2,
+    "choices": [
+      "Nhân vật đứng yên, phông nền chạy",
+      "Nhân vật hoạt động, phông nền làm cảnh",
+      "Cả hai đều có các lệnh chuyển động",
+      "Không có sự khác nhau nào giữa chúng"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Tại sao em cần phải đặt tên tệp gợi nhớ đến nội dung?",
+    "Lever": 2,
+    "choices": [
+      "Để máy tính không bị báo lỗi font",
+      "Để dễ dàng tìm kiếm lại khi cần",
+      "Để hình ảnh trong tệp được đẹp hơn",
+      "Để tiết kiệm dung lượng bộ nhớ máy"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Lệnh 'xoay trái 15 độ' làm nhân vật quay theo hướng nào?",
+    "Lever": 2,
+    "choices": [
+      "Quay theo chiều của kim đồng hồ",
+      "Quay ngược chiều kim đồng hồ máy",
+      "Di chuyển thẳng về phía trước sân",
+      "Nhân vật nhảy lên cao rồi rơi xuống"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Việc chèn thêm ảnh vào văn bản giúp trang soạn thảo như thế nào?",
+    "Lever": 2,
+    "choices": [
+      "Làm cho văn bản khó đọc hơn nhiều",
+      "Làm cho văn bản sinh động, dễ hiểu",
+      "Làm cho máy tính chạy chậm lại ngay",
+      "Làm cho chữ viết bị mất đi màu sắc"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để tìm hiểu về Bảo tàng Lịch sử, em truy cập trang web nào?",
+    "Lever": 3,
+    "choices": [
+      "Trang web có địa chỉ là google.com",
+      "Trang baotanglichsu.vn của quốc gia",
+      "Trang web luyện gõ phím RapidTyping",
+      "Trang web lập trình tên là Scratch"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để vẽ hình vuông trong Scratch, em cần phối hợp các lệnh?",
+    "Lever": 3,
+    "choices": [
+      "Lệnh di chuyển và lệnh nói xin chào",
+      "Lệnh di chuyển và lệnh xoay 90 độ",
+      "Lệnh thay đổi màu và lệnh ẩn nhân",
+      "Lệnh lặp lại và lệnh thay đổi phông"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Nếu gõ 'Ssa' trong Unikey (Telex), kết quả hiện ra là gì?",
+    "Lever": 3,
+    "choices": [
+      "Sẽ hiện ra chữ có nội dung là Sa",
+      "Sẽ hiện ra chữ có nội dung là Sả",
+      "Sẽ hiện ra chữ có nội dung là Sá",
+      "Sẽ hiện ra chữ có nội dung là Sạ"
+    ],
+    "answer": 1
+  },
+  {
+    "question": "Để thay đổi màu của nhân vật rồi 3 giây sau quay lại cũ?",
+    "Lever": 3,
+    "choices": [
+      "Đổi màu -> Đợi 3s -> Bỏ hiệu ứng",
+      "Đợi 3s -> Đổi màu -> Bỏ hiệu ứng",
+      "Bỏ hiệu ứng -> Đổi màu -> Đợi 3s",
+      "Đổi màu -> Bỏ hiệu ứng -> Đợi 3s"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi gõ từ 'Huyền', thứ tự các phím em gõ theo Telex là?",
+    "Lever": 3,
+    "choices": [
+      "Gõ phím theo thứ tự: H u y e e n f",
+      "Gõ phím theo thứ tự: H u y e n f s",
+      "Gõ phím theo thứ tự: H u y e n r j",
+      "Gõ phím theo thứ tự: H u y e n f f"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Trong Scratch, để tạo hiệu ứng mèo đi bộ, em dùng lệnh?",
+    "Lever": 3,
+    "choices": [
+      "Di chuyển 10 -> Trang phục kế tiếp",
+      "Di chuyển 10 -> Phông nền kế tiếp",
+      "Xoay 15 độ -> Trang phục kế tiếp",
+      "Nói xin chào -> Trang phục kế tiếp"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để chọn đồng thời 3 nhân vật cho chương trình, em cần?",
+    "Lever": 3,
+    "choices": [
+      "Sử dụng nút thêm nhân vật ba lần",
+      "Sử dụng nút xóa nhân vật ba lần",
+      "Sử dụng phím Caps Lock ba lần",
+      "Sử dụng nút lá cờ xanh ba lần"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Muốn tìm kiếm video hướng dẫn gấp giấy trên YouTube Kids?",
+    "Lever": 3,
+    "choices": [
+      "Gõ từ khóa 'cách gấp máy bay giấy'",
+      "Gõ từ khóa 'phần mềm soạn thảo văn'",
+      "Gõ từ khóa 'lập trình nhân vật Scratch'",
+      "Gõ từ khóa 'cách bật phần mềm Unikey'"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Khi tạo kịch bản cho 2 nhân vật hội thoại, em cần lưu ý?",
+    "Lever": 3,
+    "choices": [
+      "Dùng lệnh đợi để các nhân vật chờ",
+      "Cả hai nhân vật nói cùng một lúc",
+      "Chỉ một nhân vật được phép nói chữ",
+      "Xóa nhân vật này khi nhân vật kia nói"
+    ],
+    "answer": 0
+  },
+  {
+    "question": "Để lưu một văn bản đang soạn thảo vào ổ đĩa D, em chọn?",
+    "Lever": 3,
+    "choices": [
+      "Save As -> Chọn ổ D -> Gõ tên -> Save",
+      "Save -> Chọn ổ C -> Gõ tên -> Save",
+      "Open -> Chọn ổ D -> Gõ tên -> Save",
+      "New -> Chọn ổ D -> Gõ tên -> Save"
     ],
     "answer": 0
   }
