@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinh Phục Ô Chữ Tin Học - Trò Chơi Học Tập Tiểu Học</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: Baloo 2 (Dành cho trẻ em) & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tone.js for high-quality synthesised game sound effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #e0f2fe, #bae6fd, #7dd3fc);
+        }
+        .font-kids {
+            font-family: 'Baloo 2', cursive;
+        }
+        .letter-cell {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes bounce-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        .mascot-bounce {
+            animation: bounce-gentle 3s infinite ease-in-out;
+        }
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 5px #f59e0b; border-color: #f59e0b; }
+            50% { box-shadow: 0 0 15px #fbbf24, 0 0 20px #f59e0b; border-color: #fbbf24; }
+        }
+        .spine-highlight {
+            animation: pulse-gold 2s infinite;
+        }
+        /* Custom styled scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden text-slate-800 selection:bg-yellow-300">
+
+<div id="confetti-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+<div class="relative z-10 flex flex-col min-h-screen">
+    
+    <!-- TOP NAVBAR -->
+    <header class="bg-white/80 backdrop-blur-md border-b-4 border-sky-300/40 px-4 py-3 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            
+            <!-- Game Title & Cute Icon -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center shadow-md border-2 border-white animate-bounce">
+                    <span class="text-2xl">🐝</span>
+                </div>
+                <div>
+                    <h1 class="font-kids text-2xl md:text-3xl font-extrabold tracking-wide text-sky-600 drop-shadow-sm leading-none flex items-center gap-1">
+                        Ô CHỮ <span class="text-yellow-500">TIN HỌC</span> KỲ THÚ
+                    </h1>
+                    <p class="text-[11px] md:text-xs font-semibold uppercase tracking-wider text-sky-500/80 flex items-center gap-1 mt-0.5">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-green-400 animate-ping"></span>
+                        Vừa chơi vừa học - Đạt điểm mười thi đua!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Header Dashboard Statistics -->
+            <div class="flex items-center flex-wrap gap-2.5">
+                <div class="px-3 py-1.5 bg-sky-100/80 border-2 border-sky-200 rounded-xl flex items-center gap-1.5 text-xs font-bold text-sky-700">
+                    <span class="text-base">👦</span>
+                    <span id="player-tag">Học sinh</span>
+                </div>
+                <div class="px-3 py-1.5 bg-yellow-100 border-2 border-yellow-200 rounded-xl flex items-center gap-1.5 text-xs font-bold text-yellow-800">
+                    <span>⭐</span>
+                    <span>Điểm: <span id="player-score" class="text-sm font-black">0</span></span>
+                </div>
+                <div class="px-3 py-1.5 bg-rose-100 border-2 border-rose-200 rounded-xl flex items-center gap-1.5 text-xs font-bold text-rose-700">
+                    <span>⏱️</span>
+                    <span id="time-counter" class="font-mono text-sm font-black">00:00</span>
+                </div>
+                <button onclick="toggleSound()" id="sound-toggle-btn" class="w-9 h-9 flex items-center justify-center bg-sky-100 hover:bg-sky-200 border-2 border-sky-300/30 rounded-xl transition text-sky-600 active:scale-95 shadow-sm" title="Bật/Tắt âm thanh">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN GAME BODY -->
+    <main class="flex-grow p-4 md:p-6 max-w-7xl w-full mx-auto flex flex-col justify-center relative">
+        
+        <!-- SCREEN 1: Welcome & Player Registration -->
+        <section id="screen-welcome" class="w-full max-w-xl mx-auto bg-white border-4 border-sky-300 rounded-[32px] p-6 md:p-8 shadow-xl relative overflow-hidden my-auto">
+            <!-- Decorative background items -->
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-yellow-200/50 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-sky-200/60 rounded-full blur-2xl"></div>
+
+            <div class="text-center mb-6 relative z-10">
+                <span class="text-6xl inline-block mascot-bounce mb-3">🐝</span>
+                <h2 class="font-kids text-3xl font-black text-sky-600 mb-2">Chào mừng em đến với Đảo Ô Chữ!</h2>
+                <p class="text-slate-500 text-sm">Hãy cùng nhau chinh phục 4 màn trò chơi ô chữ đầy bổ ích từ sách giáo khoa Tin Học để rinh về chiếc Cúp Chiến Thắng lấp lánh nhé!</p>
+            </div>
+
+            <div class="space-y-4 relative z-10">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
+                        <span>📝</span> Nhập họ và tên của em để làm giấy khen:
+                    </label>
+                    <input type="text" id="input-player-name" placeholder="Ví dụ: Nguyễn Gia Bảo..." class="w-full px-4 py-3 bg-slate-50 border-3 border-sky-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-200 rounded-2xl outline-none font-bold text-lg text-slate-800 placeholder-slate-400 transition-all">
+                </div>
+
+                <button onclick="launchGame()" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 border-b-4 border-amber-700 text-slate-950 font-black text-xl rounded-2xl shadow-lg shadow-yellow-500/20 active:scale-95 transition-all flex items-center justify-center gap-2">
+                    VÀO CHƠI NGAY 🚀
+                </button>
+            </div>
+
+            <!-- Small educational guidelines -->
+            <div class="mt-8 pt-6 border-t-2 border-slate-100 flex flex-wrap justify-between gap-2 text-xs text-slate-400 font-semibold">
+                <span>🎯 4 Chủ đề hấp dẫn</span>
+                <span>🔥 40 Thử thách thú vị</span>
+                <span>💡 Không dấu tiếng Việt</span>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: Active Crossword gameplay -->
+        <section id="screen-gameplay" class="hidden flex flex-col gap-6 w-full animate-fade-in">
+            
+            <!-- STAGE SELECTOR TABS -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <!-- Theme Tab 1 -->
+                <button onclick="changeActiveTheme(0)" id="theme-tab-0" class="theme-tab-btn bg-white border-3 border-slate-200 p-3 rounded-2xl text-left transition-all hover:scale-[1.01] active:scale-95 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                    <span class="text-[10px] font-black text-indigo-400 uppercase tracking-wider">MÀN 1</span>
+                    <span class="font-kids font-extrabold text-sm text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis">Chủ đề C: Lưu trữ</span>
+                    <div class="flex items-center gap-1.5 mt-1.5 w-full">
+                        <div class="flex-grow bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200/50">
+                            <div id="progress-bar-0" class="bg-indigo-400 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                        <span id="progress-val-0" class="text-[10px] font-mono font-bold text-slate-500">0/10</span>
+                    </div>
+                </button>
+                <!-- Theme Tab 2 -->
+                <button onclick="changeActiveTheme(1)" id="theme-tab-1" class="theme-tab-btn bg-white border-3 border-slate-200 p-3 rounded-2xl text-left transition-all hover:scale-[1.01] active:scale-95 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                    <span class="text-[10px] font-black text-pink-400 uppercase tracking-wider">MÀN 2</span>
+                    <span class="font-kids font-extrabold text-sm text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis">Chủ đề D: An toàn tin</span>
+                    <div class="flex items-center gap-1.5 mt-1.5 w-full">
+                        <div class="flex-grow bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200/50">
+                            <div id="progress-bar-1" class="bg-pink-400 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                        <span id="progress-val-1" class="text-[10px] font-mono font-bold text-slate-500">0/10</span>
+                    </div>
+                </button>
+                <!-- Theme Tab 3 -->
+                <button onclick="changeActiveTheme(2)" id="theme-tab-2" class="theme-tab-btn bg-white border-3 border-slate-200 p-3 rounded-2xl text-left transition-all hover:scale-[1.01] active:scale-95 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                    <span class="text-[10px] font-black text-amber-500 uppercase tracking-wider">MÀN 3</span>
+                    <span class="font-kids font-extrabold text-sm text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis">Chủ đề E: Trình chiếu</span>
+                    <div class="flex items-center gap-1.5 mt-1.5 w-full">
+                        <div class="flex-grow bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200/50">
+                            <div id="progress-bar-2" class="bg-amber-400 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                        <span id="progress-val-2" class="text-[10px] font-mono font-bold text-slate-500">0/10</span>
+                    </div>
+                </button>
+                <!-- Theme Tab 4 -->
+                <button onclick="changeActiveTheme(3)" id="theme-tab-3" class="theme-tab-btn bg-white border-3 border-slate-200 p-3 rounded-2xl text-left transition-all hover:scale-[1.01] active:scale-95 flex flex-col justify-between shadow-sm relative overflow-hidden">
+                    <span class="text-[10px] font-black text-emerald-500 uppercase tracking-wider">MÀN 4</span>
+                    <span class="font-kids font-extrabold text-sm text-slate-700 whitespace-nowrap overflow-hidden text-ellipsis">Chủ đề F: Thuật toán</span>
+                    <div class="flex items-center gap-1.5 mt-1.5 w-full">
+                        <div class="flex-grow bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200/50">
+                            <div id="progress-bar-3" class="bg-emerald-400 h-full w-0 transition-all duration-300"></div>
+                        </div>
+                        <span id="progress-val-3" class="text-[10px] font-mono font-bold text-slate-500">0/10</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- INTERACTIVE GRID & CONSOLE -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <!-- LEFT: CROSSWORD BOARD -->
+                <div class="lg:col-span-7 bg-white border-4 border-sky-200 rounded-[32px] p-4 md:p-6 shadow-md relative overflow-hidden">
+                    
+                    <div class="flex items-center justify-between border-b-2 border-slate-100 pb-3 mb-4">
+                        <div class="flex items-center gap-2">
+                            <span id="lbl-theme-badge" class="px-2.5 py-1 text-xs font-black rounded-lg text-white bg-sky-500 uppercase tracking-wider">MÀN 1</span>
+                            <h3 id="lbl-theme-title" class="font-kids font-black text-slate-700 text-sm md:text-base">Chủ đề</h3>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-amber-500 font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-star text-yellow-400 animate-spin-slow"></i> Cột màu vàng: Trọng tâm
+                        </div>
+                    </div>
+
+                    <!-- Letter Rows Container -->
+                    <div id="crossword-board-inner" class="flex flex-col gap-2.5 overflow-x-auto pb-2 select-none">
+                        <!-- Crossword Rows are programmatically generated here -->
+                    </div>
+
+                </div>
+
+                <!-- RIGHT: ACTIVE CONSOLE PANEL -->
+                <div class="lg:col-span-5 flex flex-col gap-4">
+                    
+                    <!-- Question Card Container -->
+                    <div id="question-card" class="bg-white border-4 border-slate-200 rounded-[32px] p-5 md:p-6 shadow-md relative overflow-hidden transition-all duration-300">
+                        
+                        <!-- Empty Overlay when no row is active -->
+                        <div id="no-selection-overlay" class="absolute inset-0 bg-white/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center text-center p-6">
+                            <span class="text-5xl mascot-bounce mb-3">👈</span>
+                            <h4 class="font-kids text-xl font-bold text-slate-700">Chọn một hàng ô chữ</h4>
+                            <p class="text-xs text-slate-400 max-w-[260px] mt-1">Bấm vào bất kỳ số thứ tự hoặc hàng ô chữ màu xám bên trái để khám phá câu hỏi nhé!</p>
+                        </div>
+
+                        <!-- Card Header details -->
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-black text-sky-500 uppercase tracking-widest flex items-center gap-1.5">
+                                🎯 CÂU HỎI SỐ <span id="lbl-active-index" class="text-sm font-black text-slate-700">1</span>
+                            </span>
+                            <div id="lbl-active-difficulty" class="flex gap-0.5 text-xs text-yellow-400" title="Độ khó">
+                                <!-- Dynamic star icons -->
+                            </div>
+                        </div>
+
+                        <!-- Question Statement -->
+                        <div class="bg-sky-50/60 border-2 border-sky-100 rounded-2xl p-4 mb-4">
+                            <p id="lbl-active-question" class="text-sm md:text-base font-extrabold text-slate-700 leading-relaxed">
+                                ...
+                            </p>
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center text-xs font-bold text-slate-500 px-1">
+                                <span>Nhập chữ KHÔNG DẤU và KHÔNG CÁCH:</span>
+                                <span id="lbl-letter-length-alert" class="text-sky-600 font-mono">độ dài: ... chữ cái</span>
+                            </div>
+
+                            <div class="relative flex items-center">
+                                <input type="text" id="input-active-answer" autocomplete="off" placeholder="NHẬP ĐÁP ÁN..." class="w-full pl-4 pr-12 py-3.5 bg-slate-50 border-3 border-slate-200 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 rounded-2xl outline-none font-black text-lg tracking-widest text-slate-700 uppercase placeholder-slate-400 transition-all">
+                                <button onclick="triggerOneLetterHint()" id="btn-hint-lightbulb" class="absolute right-3.5 p-1.5 bg-yellow-100 border border-yellow-300 rounded-xl text-yellow-500 hover:text-yellow-600 active:scale-90 transition" title="Gợi ý một chữ cái (Mất 5 điểm)">
+                                    💡
+                                </button>
+                            </div>
+
+                            <!-- Big Submit Button -->
+                            <button onclick="verifyPlayerAnswer()" id="btn-submit-answer" class="w-full py-3 bg-sky-500 hover:bg-sky-600 border-b-4 border-sky-700 text-white font-black text-lg rounded-2xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2">
+                                Kiểm tra kết quả 🎯
+                            </button>
+
+                            <!-- Feedback alert message -->
+                            <div id="feedback-panel" class="hidden p-3 rounded-2xl text-center text-xs font-black border animate-fade-in">
+                                <!-- Status text -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- MASCOT COMPANION CARD -->
+                    <div class="bg-yellow-50/80 border-3 border-yellow-200/60 rounded-[28px] p-4 flex items-start gap-3 shadow-sm">
+                        <span class="text-4xl mascot-bounce shrink-0 mt-1">🐝</span>
+                        <div class="flex-grow">
+                            <span class="font-kids font-bold text-sm text-yellow-800 block">Bạn Ong Nhỏ khuyên:</span>
+                            <p id="lbl-mascot-advice" class="text-xs text-yellow-700/90 leading-relaxed font-semibold">
+                                Hãy nhấp chuột chọn bất cứ hàng ngang nào mà em biết đáp án trước. Ô chữ không phân biệt chữ hoa hay chữ thường đâu nhé!
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SCREEN 3: Level completion & Final Ceremony -->
+        <section id="screen-victory" class="hidden w-full max-w-2xl mx-auto bg-white border-4 border-yellow-400 rounded-[36px] p-6 md:p-8 shadow-2xl relative overflow-hidden text-center my-auto animate-fade-in">
+            <!-- Decorative celebratory sparks -->
+            <div class="absolute -top-16 -left-16 w-48 h-48 bg-yellow-300/20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-indigo-300/20 rounded-full blur-3xl animate-pulse"></div>
+
+            <div class="relative z-10 space-y-6">
+                <!-- Golden Trophy rendering -->
+                <div class="relative inline-block">
+                    <div class="w-28 h-28 bg-yellow-100 rounded-full border-2 border-yellow-300 flex items-center justify-center text-5xl mx-auto animate-pulse">
+                        🏆
+                    </div>
+                    <span class="absolute top-0 right-0 text-xl animate-bounce">⭐</span>
+                    <span class="absolute bottom-1 -left-1 text-xl animate-spin-slow">🌟</span>
+                </div>
+
+                <div>
+                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 border-2 border-yellow-200 rounded-full text-[10px] font-black uppercase tracking-widest">THÀNH TÍCH ĐỈNH CAO</span>
+                    <h2 class="font-kids text-3xl md:text-4xl font-black text-sky-600 drop-shadow-sm mt-1">
+                        BẢNG VÀNG DANH DỰ
+                    </h2>
+                    <p class="text-slate-500 text-xs md:text-sm max-w-md mx-auto mt-2">Chúc mừng bạn nhỏ thông thái đã xuất sắc trả lời đúng tất cả 40 câu hỏi ô chữ thuộc chương trình Tin Học!</p>
+                </div>
+
+                <!-- Custom Certificate Details -->
+                <div class="bg-yellow-50/50 border-3 border-dashed border-yellow-300 rounded-[28px] p-5 text-left max-w-md mx-auto space-y-3.5 shadow-inner">
+                    <div class="flex justify-between items-center border-b border-yellow-200 pb-2">
+                        <span class="text-[10px] text-yellow-800/80 font-black uppercase tracking-wider">CHỨNG NHẬN CHIẾN THẮNG</span>
+                        <span id="lbl-certificate-date" class="text-xs font-mono font-bold text-slate-500">19/05/2026</span>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-500 font-semibold">Tên Học Sinh:</span>
+                            <span id="lbl-certificate-name" class="font-kids font-black text-base text-slate-700">Nguyễn Gia Bảo</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-500 font-semibold">Màn Chơi Hoàn Thành:</span>
+                            <span class="px-2.5 py-0.5 bg-green-100 text-green-700 text-[10px] font-extrabold rounded-full border border-green-200">4 / 4 Chủ Đề</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-500 font-semibold">Tổng Điểm Tích Lũy:</span>
+                            <span id="lbl-certificate-score" class="text-base font-black text-yellow-600">400 Điểm</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-500 font-semibold">Thời Gian Giải Đố:</span>
+                            <span id="lbl-certificate-time" class="font-mono font-black text-rose-500 text-sm">05:45</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer buttons inside certificate screen -->
+                <div class="flex flex-col sm:flex-row justify-center gap-3 max-w-md mx-auto pt-2">
+                    <button onclick="resetWholeGame()" class="flex-1 py-3 bg-sky-500 hover:bg-sky-600 border-b-4 border-sky-700 text-white font-black rounded-2xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-1">
+                        🔄 CHƠI LẠI
+                    </button>
+                    <button onclick="copyCertificateShareText()" class="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 border-b-4 border-emerald-700 text-white font-black rounded-2xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-1">
+                        📋 SAO CHÉP THÀNH TÍCH
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BOTTOM CREDITS BAR -->
+    <footer class="bg-white border-t-2 border-slate-100 py-3.5 px-4 text-center text-xs text-slate-400 font-semibold">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div>
+                <span>© 2026 - Ô Chữ Tin Học Thầy dạy tin có sự hỗ trợ của AI</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-emerald-500"><span class="inline-block animate-pulse">❤️</span> Phù Hợp Cho Trẻ Em</span>
+                <!-- Secret cheatkey developer panel -->
+                <button
+					onclick="showTeacherPassword()"
+					class="hover:text-slate-600 transition"
+					title="Bảng Giáo Viên: Mở Khóa Đáp Án Độc Quyền">
+					🔑 Giáo Viên
+				</button>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script>
+    // Mật khẩu bí mật
+    const TEACHER_PASSWORD = "159"; // Thay đổi mật khẩu theo ý muốn
+
+    // Hiển thị hộp nhập mật khẩu
+    function showTeacherPassword() {
+        const password = prompt("🔐 Vui lòng nhập mã bí mật dành cho giáo viên:");
+
+        // Nếu người dùng bấm Cancel
+        if (password === null) {
+            return;
+        }
+
+        // Kiểm tra mật khẩu
+        if (password === TEACHER_PASSWORD) {
+            alert("✅ Mật khẩu chính xác! Đang mở bảng đáp án...");
+            revealAllCheatanswers(); // Gọi hàm gốc của bạn
+        } else {
+            alert("❌ Mật khẩu không đúng!");
+        }
+    }
+
+    // Hàm mẫu - thay bằng hàm thật của bạn
+    function revealAllCheatanswers() {
+        alert("🎉 Đã mở toàn bộ đáp án!");
+    }
+</script>
+<script>
+// JSON DATABASE AS PRESENTED BY USER
+const GAME_JSON_DATABASE = {
+  "Chu_de_C": [
+    {
+      "question": "Sắp xếp đồ vật hay dữ liệu hợp lý giúp việc này trở nên nhanh hơn?",
+      "Lever": 1,
+      "answer": "TIMKIEM"
+    },
+    {
+      "question": "Sơ đồ nào dùng để biểu diễn việc sắp xếp, phân loại đồ vật, dữ liệu?",
+      "Lever": 1,
+      "answer": "HINHCAY"
+    },
+    {
+      "question": "Trong sơ đồ hình cây, các nhánh được chia ra từ bộ phận nào?",
+      "Lever": 2,
+      "answer": "GOC"
+    },
+    {
+      "question": "Thông tin trong máy tính được lưu trữ trong các thành phần này?",
+      "Lever": 1,
+      "answer": "TEP"
+    },
+    {
+      "question": "Thành phần có thể chứa các tệp và các thư mục con bên trong?",
+      "Lever": 1,
+      "answer": "THUMUC"
+    },
+    {
+      "question": "Thư mục nằm bên trong một thư mục khác được gọi là thư mục gì?",
+      "Lever": 2,
+      "answer": "CON"
+    },
+    {
+      "question": "Các ổ đĩa C, D trong máy tính được coi là các thư mục gì?",
+      "Lever": 2,
+      "answer": "GOC"
+    },
+    {
+      "question": "Lệnh dùng để thay đổi tên của một thư mục hiện có?",
+      "Lever": 3,
+      "answer": "RENAME"
+    },
+    {
+      "question": "Lệnh dùng để loại bỏ một thư mục không còn sử dụng ra khỏi máy?",
+      "Lever": 3,
+      "answer": "DELETE"
+    },
+    {
+      "question": "Màu sắc đặc trưng của biểu tượng thư mục trong hệ điều hành Windows?",
+      "Lever": 1,
+      "answer": "VANG"
+    }
+  ],
+  "Chu_de_D": [
+    {
+      "question": "Thông tin cá nhân cần được giữ kín, không cho người lạ biết gọi là gì?",
+      "Lever": 1,
+      "answer": "BIMAT"
+    },
+    {
+      "question": "Địa chỉ nhà, số điện thoại, ảnh kỷ niệm thuộc loại thông tin nào?",
+      "Lever": 1,
+      "answer": "CANHAN"
+    },
+    {
+      "question": "Mã số dùng để bảo vệ quyền truy cập và dữ liệu trong máy tính?",
+      "Lever": 2,
+      "answer": "MATKHAU"
+    },
+    {
+      "question": "Hành vi kẻ xấu lợi dụng thông tin cá nhân để chiếm đoạt tài sản?",
+      "Lever": 2,
+      "answer": "LUADAO"
+    },
+    {
+      "question": "Môi trường giao tiếp chứa nhiều nguy cơ mất an toàn thông tin nhất?",
+      "Lever": 1,
+      "answer": "INTERNET"
+    },
+    {
+      "question": "Việc em đưa mật khẩu của mình cho người khác biết gọi là hành động gì?",
+      "Lever": 2,
+      "answer": "CHIASE"
+    },
+    {
+      "question": "Trước khi sử dụng thông tin của người khác, em cần có sự gì từ họ?",
+      "Lever": 3,
+      "answer": "DONGY"
+    },
+    {
+      "question": "Yếu tố cần đảm bảo khi trao đổi thông tin qua máy tính?",
+      "Lever": 2,
+      "answer": "ANTOAN"
+    },
+    {
+      "question": "Thông tin mang tính chất riêng tư của mỗi người hoặc gia đình?",
+      "Lever": 1,
+      "answer": "RIENGTU"
+    },
+    {
+      "question": "Thiết bị phổ biến nhất dùng để lưu trữ và gửi thông tin cá nhân hiện nay?",
+      "Lever": 1,
+      "answer": "MAYTINH"
+    }
+  ],
+  "Chu_de_E": [
+    {
+      "question": "Mỗi thành phần của một bài trình chiếu PowerPoint được gọi là gì?",
+      "Lever": 1,
+      "answer": "TRANGCHIEU"
+    },
+    {
+      "question": "Tên phần mềm phổ biến dùng để thiết kế bài trình chiếu?",
+      "Lever": 1,
+      "answer": "POWERPOINT"
+    },
+    {
+      "question": "Dải lệnh dùng để thực hiện việc chèn hình ảnh, bảng biểu vào trang?",
+      "Lever": 2,
+      "answer": "INSERT"
+    },
+    {
+      "question": "Lệnh dùng để mở một tệp trình chiếu đã được lưu trong máy?",
+      "Lever": 3,
+      "answer": "OPEN"
+    },
+    {
+      "question": "Lệnh dùng để cất giữ nội dung bài trình chiếu vào bộ nhớ máy tính?",
+      "Lever": 3,
+      "answer": "SAVE"
+    },
+    {
+      "question": "Tên phần mềm giúp em luyện tập 5 thao tác cơ bản với chuột?",
+      "Lever": 1,
+      "answer": "MOUSE"
+    },
+    {
+      "question": "Bộ phận nằm giữa nút trái và nút phải của chuột máy tính?",
+      "Lever": 1,
+      "answer": "NUTCUON"
+    },
+    {
+      "question": "Chỉ số điểm em đạt được khi thực hiện đúng các Stage trong Mouse Skills?",
+      "Lever": 2,
+      "answer": "SCORE"
+    },
+    {
+      "question": "Sản phẩm kết hợp giữa văn bản, hình ảnh và âm thanh gọi là gì?",
+      "Lever": 2,
+      "answer": "DAPHUONG"
+    },
+    {
+      "question": "Tên gọi khác của mỗi trang trong bài trình chiếu (tiếng Anh)?",
+      "Lever": 2,
+      "answer": "SLIDE"
+    }
+  ],
+  "Chu_de_F": [
+    {
+      "question": "Thực hiện công việc lần lượt theo một trình tự xác định gọi là gì?",
+      "Lever": 1,
+      "answer": "TUNGBUOC"
+    },
+    {
+      "question": "Nên làm việc này với nhiệm vụ lớn để dễ hiểu và dễ thực hiện hơn?",
+      "Lever": 1,
+      "answer": "CHIANHO"
+    },
+    {
+      "question": "Thành phần quan trọng nhất cần tuân thủ khi thực hiện một quy trình?",
+      "Lever": 2,
+      "answer": "THUTU"
+    },
+    {
+      "question": "Cấu trúc câu lệnh dùng để diễn tả một việc làm có điều kiện?",
+      "Lever": 2,
+      "answer": "NEUTHI"
+    },
+    {
+      "question": "Vật thể máy móc có khả năng tự động thực hiện công việc theo lệnh?",
+      "Lever": 1,
+      "answer": "ROBOT"
+    },
+    {
+      "question": "Lệnh robot cần thực hiện khi nhận biết vật cản là vạch màu đỏ?",
+      "Lever": 3,
+      "answer": "DUNGLAI"
+    },
+    {
+      "question": "Thành phần nêu rõ những gì đã có khi bắt đầu một nhiệm vụ?",
+      "Lever": 2,
+      "answer": "DACO"
+    },
+    {
+      "question": "Sản phẩm đích hoặc kết quả mà nhiệm vụ cần đạt được gọi là gì?",
+      "Lever": 2,
+      "answer": "TAORA"
+    },
+    {
+      "question": "Máy tính đóng vai trò này giúp con người làm việc hiệu quả hơn?",
+      "Lever": 1,
+      "answer": "TROGIUP"
+    },
+    {
+      "question": "Vai trò của người thực hiện phân chia nhiệm vụ cho các thành viên?",
+      "Lever": 3,
+      "answer": "CHIHUY"
+    }
+  ]
+};
+
+// META STAGE INFO (CAN HIEU CHINH CAC MO TA THEME)
+const SYSTEM_THEMES = [
+    { key: "Chu_de_C", label: "MÀN 1", title: "Chủ đề C: Tổ chức lưu trữ, tìm kiếm và giới thiệu thông tin", accentColor: "indigo" },
+    { key: "Chu_de_D", label: "MÀN 2", title: "Chủ đề D: Đạo đức, pháp luật và văn hoá trong môi trường số", accentColor: "pink" },
+    { key: "Chu_de_E", label: "MÀN 3", title: "Chủ đề E: Ứng dụng tin học (Trình chiếu & Chuột máy tính)", accentColor: "amber" },
+    { key: "Chu_de_F", label: "MÀN 4", title: "Chủ đề F: Giải quyết vấn đề với sự trợ giúp của máy tính", accentColor: "emerald" }
+];
+
+// DESIGN ALIGNMENT OFSETS TO MAKE CROSSWORD STRUCTURALLY COMPACT
+// This offsets values map so index of each character is aligned on a common central column.
+const ALIGNMENT_MAPS = {
+    "Chu_de_C": [2, 2, 5, 5, 2, 5, 5, 2, 2, 5],
+    "Chu_de_D": [3, 2, 2, 2, 1, 2, 2, 2, 1, 2],
+    "Chu_de_E": [1, 1, 1, 3, 3, 3, 2, 3, 2, 3],
+    "Chu_de_F": [1, 2, 3, 2, 3, 2, 3, 3, 2, 2]
+};
+
+// STATE VARIABLES
+let playerName = "Học sinh";
+let activeThemeIdx = 0;
+let activeRowIdx = null; // null or 0 to 9
+let currentScore = 0;
+let totalTimeSeconds = 0;
+let isSoundOff = false;
+let gameTimerInterval = null;
+let currentStageClears = [false, false, false, false];
+
+// Track solved items per theme
+let unlockedWords = {
+    "Chu_de_C": Array(10).fill(null),
+    "Chu_de_D": Array(10).fill(null),
+    "Chu_de_E": Array(10).fill(null),
+    "Chu_de_F": Array(10).fill(null)
+};
+
+// Manual letter hints used
+let hintedLetters = {
+    "Chu_de_C": Array(10).fill(null).map(() => []),
+    "Chu_de_D": Array(10).fill(null).map(() => []),
+    "Chu_de_E": Array(10).fill(null).map(() => []),
+    "Chu_de_F": Array(10).fill(null).map(() => [])
+};
+
+let developerModeOn = false;
+let audioInstrument = null;
+
+// MASCOT QUOTES FOR PRIMARY KIDS
+const HAPPY_MASCOT_QUOTES = [
+    "Tuyệt vời ông mặt trời! Hãy thử câu tiếp theo nhé!",
+    "Bộ não của em thông minh quá đi mất! Cố lên nào!",
+    "Wow! Em quá đỉnh luôn! Điểm mười học tập dành cho em!",
+    "Chính xác rồi! Bạn Ong rất tự hào về em!",
+    "Thông thái tuyệt đối! Thêm một ô chữ nữa được mở ra!"
+];
+
+const WRONG_MASCOT_QUOTES = [
+    "Hơi tiếc một chút! Hãy suy nghĩ kỹ lại xem sao nhé!",
+    "Không sao cả, sai là mẹ của thành công! Thử lại đi em!",
+    "Hãy đọc kỹ câu hỏi một lần nữa nhé, em sắp tìm ra rồi!",
+    "Đáp án này chưa chính xác. Đừng nản lòng, em làm được mà!",
+    "Suy nghĩ và thử một từ khác xem sao nha!"
+];
+
+// AUDIO SYNTH FUNCTIONS
+function ensureAudioSetup() {
+    if (!audioInstrument) {
+        audioInstrument = new Tone.PolySynth(Tone.Synth).toDestination();
+        audioInstrument.set({
+            oscillator: { type: "sine" },
+            envelope: { attack: 0.04, decay: 0.08, sustain: 0.25, release: 0.6 }
+        });
+        Tone.Destination.volume.value = -8; // Comfortable level
+    }
+}
+
+function triggerAudioFeedback(soundType) {
+    if (isSoundOff) return;
+    try {
+        ensureAudioSetup();
+        Tone.start();
+        const currentTime = Tone.now();
+
+        if (soundType === 'correct') {
+            // Happy upward scale chord
+            audioInstrument.triggerAttackRelease("G5", "16n", currentTime);
+            audioInstrument.triggerAttackRelease("B5", "16n", currentTime + 0.08);
+            audioInstrument.triggerAttackRelease("E6", "16n", currentTime + 0.16);
+        } else if (soundType === 'incorrect') {
+            // Dull downward tone
+            audioInstrument.triggerAttackRelease("A3", "8n", currentTime);
+        } else if (soundType === 'hint') {
+            // Bright chime
+            audioInstrument.triggerAttackRelease("D5", "16n", currentTime);
+            audioInstrument.triggerAttackRelease("A5", "16n", currentTime + 0.06);
+        } else if (soundType === 'victory') {
+            // Epic little fanfare melody
+            const notes = ["C5", "E5", "G5", "C6", "E6", "G6"];
+            notes.forEach((note, index) => {
+                audioInstrument.triggerAttackRelease(note, "8n", currentTime + index * 0.12);
+            });
+        } else if (soundType === 'click') {
+            audioInstrument.triggerAttackRelease("E5", "16n", currentTime);
+        }
+    } catch (e) {
+        console.warn("User interaction block or browser audio capability missing.", e);
+    }
+}
+
+function toggleSound() {
+    isSoundOff = !isSoundOff;
+    const btn = document.getElementById('sound-toggle-btn');
+    if (isSoundOff) {
+        btn.innerHTML = `<i class="fa-solid fa-volume-xmark text-sm"></i>`;
+        btn.className = "w-9 h-9 flex items-center justify-center bg-slate-100 border-2 border-slate-300 rounded-xl transition text-slate-400 active:scale-95 shadow-sm";
+    } else {
+        btn.innerHTML = `<i class="fa-solid fa-volume-high text-sm"></i>`;
+        btn.className = "w-9 h-9 flex items-center justify-center bg-sky-100 hover:bg-sky-200 border-2 border-sky-300/30 rounded-xl transition text-sky-600 active:scale-95 shadow-sm";
+        triggerAudioFeedback('click');
+    }
+}
+
+// STRIP DIACRITICS & NORMALIZE STRINGS
+function normalizeInput(sourceStr) {
+    if (!sourceStr) return '';
+    return sourceStr
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[đĐ]/g, 'd')
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .toUpperCase();
+}
+
+// SCREEN NAVIGATION LOGIC
+function launchGame() {
+    const nameBox = document.getElementById('input-player-name');
+    playerName = nameBox.value.trim() || "Người Hùng Nhỏ";
+    document.getElementById('player-tag').innerText = playerName;
+
+    // Transition Screens
+    document.getElementById('screen-welcome').classList.add('hidden');
+    document.getElementById('screen-gameplay').classList.remove('hidden');
+
+    triggerAudioFeedback('correct');
+
+    // Run Timer clock
+    totalTimeSeconds = 0;
+    gameTimerInterval = setInterval(updateGameplayClock, 1000);
+
+    // Initial setup
+    renderStageTabs();
+    changeActiveTheme(0);
+}
+
+function updateGameplayClock() {
+    totalTimeSeconds++;
+    const mins = Math.floor(totalTimeSeconds / 60).toString().padStart(2, '0');
+    const secs = (totalTimeSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('time-counter').innerText = `${mins}:${secs}`;
+}
+
+// STAGE VIEW RENDERING
+function renderStageTabs() {
+    SYSTEM_THEMES.forEach((themeData, idx) => {
+        const tabBtn = document.getElementById(`theme-tab-${idx}`);
+        
+        // Count solved items
+        const currentSolved = countThemeSolvedItems(themeData.key);
+        document.getElementById(`progress-val-${idx}`).innerText = `${currentSolved}/10`;
+        const percentage = (currentSolved / 10) * 100;
+        document.getElementById(`progress-bar-${idx}`).style.width = `${percentage}%`;
+
+        // Reset base classes
+        tabBtn.className = "theme-tab-btn bg-white border-3 p-3 rounded-2xl text-left transition-all hover:scale-[1.01] active:scale-95 flex flex-col justify-between shadow-sm relative overflow-hidden ";
+        
+        // Highlight active tab
+        if (idx === activeThemeIdx) {
+            if (idx === 0) tabBtn.className += "border-indigo-400 bg-indigo-50 text-indigo-800 ring-2 ring-indigo-200";
+            if (idx === 1) tabBtn.className += "border-pink-400 bg-pink-50 text-pink-800 ring-2 ring-pink-200";
+            if (idx === 2) tabBtn.className += "border-amber-400 bg-amber-50 text-amber-800 ring-2 ring-amber-200";
+            if (idx === 3) tabBtn.className += "border-emerald-400 bg-emerald-50 text-emerald-800 ring-2 ring-emerald-200";
+        } else {
+            tabBtn.className += "border-slate-200 hover:bg-slate-50 text-slate-600";
+        }
+    });
+}
+
+function countThemeSolvedItems(themeKey) {
+    return unlockedWords[themeKey].filter(ans => ans !== null).length;
+}
+
+// SWITCH ACTIVE TOPICS
+function changeActiveTheme(targetIdx) {
+    triggerAudioFeedback('click');
+    activeThemeIdx = targetIdx;
+    activeRowIdx = null;
+
+    // Display placeholder card overlay on right
+    document.getElementById('no-selection-overlay').classList.remove('hidden');
+
+    renderStageTabs();
+    drawCrosswordGridBoard();
+}
+
+// BOARD LAYOUT GENERATION & POSITION ALIGNMENT
+function drawCrosswordGridBoard() {
+    const activeTheme = SYSTEM_THEMES[activeThemeIdx];
+    const dataRows = GAME_JSON_DATABASE[activeTheme.key];
+    const alignmentConfig = ALIGNMENT_MAPS[activeTheme.key];
+    const container = document.getElementById('crossword-board-inner');
+
+    // Update metadata on interface
+    const currentBadge = document.getElementById('lbl-theme-badge');
+    currentBadge.innerText = `MÀN ${activeThemeIdx + 1}`;
+    
+    // Theme color adaptation
+    const badgesColors = ["bg-indigo-500", "bg-pink-500", "bg-amber-500", "bg-emerald-500"];
+    currentBadge.className = `px-2.5 py-1 text-xs font-black rounded-lg text-white uppercase tracking-wider ${badgesColors[activeThemeIdx]}`;
+
+    document.getElementById('lbl-theme-title').innerText = activeTheme.title;
+    container.innerHTML = '';
+
+    dataRows.forEach((item, rowIndex) => {
+        const correctWord = item.answer;
+        const startOffset = alignmentConfig[rowIndex];
+        
+        const isAlreadySolved = unlockedWords[activeTheme.key][rowIndex] !== null;
+        const isRowFocused = activeRowIdx === rowIndex;
+
+        // Parent Row element
+        const rowDiv = document.createElement('div');
+        rowDiv.className = `flex items-center gap-1.5 p-1 rounded-2xl transition-all ${isRowFocused ? 'bg-sky-50 ring-2 ring-sky-300/30' : ''}`;
+
+        // Mini Left Navigation Number
+        const labelBtn = document.createElement('button');
+        labelBtn.onclick = () => activateRow(rowIndex);
+
+        let selectorStyles = "w-8 h-8 shrink-0 text-sm font-black flex items-center justify-center rounded-xl transition-all ";
+        if (isAlreadySolved) {
+            selectorStyles += "bg-green-100 border-2 border-green-400 text-green-600";
+        } else if (isRowFocused) {
+            selectorStyles += "bg-sky-500 border-2 border-sky-400 text-white shadow-md animate-bounce";
+        } else {
+            selectorStyles += "bg-slate-100 border-2 border-slate-300 hover:bg-slate-200 text-slate-500";
+        }
+
+        labelBtn.className = selectorStyles;
+        if (isAlreadySolved) {
+            labelBtn.innerHTML = `<i class="fa-solid fa-check text-xs"></i>`;
+        } else {
+            labelBtn.innerText = rowIndex + 1;
+        }
+        rowDiv.appendChild(labelBtn);
+
+        // Word row container
+        const lettersContainer = document.createElement('div');
+        lettersContainer.className = "flex items-center gap-1.5";
+
+        // Offset spacing items (creates the aligned stagger effect)
+        for (let s = 0; s < startOffset; s++) {
+            const spaceHolder = document.createElement('div');
+            spaceHolder.className = "w-7 h-7 md:w-9 md:h-9 shrink-0 hidden md:block";
+            lettersContainer.appendChild(spaceHolder);
+        }
+
+        // Render Letter boxes
+        for (let charIdx = 0; charIdx < correctWord.length; charIdx++) {
+            const isSpineHighlightColumn = (charIdx + startOffset) === 5; // Unified Central Column alignment
+
+            const charCell = document.createElement('div');
+            let baseStyles = "w-7 h-7 md:w-9 md:h-9 text-xs md:text-sm font-black flex items-center justify-center rounded-xl select-none border-2 letter-cell uppercase ";
+
+            if (isAlreadySolved) {
+                baseStyles += "bg-green-100 border-green-400 text-green-700";
+                charCell.innerText = correctWord[charIdx];
+            } else {
+                const isHintedLetter = hintedLetters[activeTheme.key][rowIndex].includes(charIdx);
+                
+                if (isHintedLetter) {
+                    baseStyles += "bg-yellow-50 border-yellow-400 text-yellow-600 animate-pulse";
+                    charCell.innerText = correctWord[charIdx];
+                } else if (developerModeOn) {
+                    baseStyles += "bg-slate-50 border-slate-200 text-slate-300 font-normal";
+                    charCell.innerText = correctWord[charIdx];
+                } else {
+                    baseStyles += "bg-slate-100 border-slate-300 text-slate-400";
+                    charCell.innerText = "?";
+                }
+            }
+
+            // Central column highlighted as golden path
+            if (isSpineHighlightColumn && !isAlreadySolved) {
+                charCell.classList.add('spine-highlight');
+            }
+
+            // Click row to focus
+            if (!isAlreadySolved) {
+                baseStyles += " cursor-pointer hover:border-sky-400 hover:bg-sky-50";
+                charCell.onclick = () => activateRow(rowIndex);
+            }
+
+            charCell.className = baseStyles;
+            lettersContainer.appendChild(charCell);
+        }
+
+        rowDiv.appendChild(lettersContainer);
+        container.appendChild(rowDiv);
+    });
+}
+
+// INTERACTION CONSOLE TRIGGER
+function activateRow(rowIndex) {
+    triggerAudioFeedback('click');
+    activeRowIdx = rowIndex;
+
+    // Redraw grid
+    drawCrosswordGridBoard();
+
+    // Reset status box
+    const feedbackBox = document.getElementById('feedback-panel');
+    feedbackBox.className = "hidden p-3 rounded-2xl text-center text-xs font-black border animate-fade-in";
+
+    // Reveal interactive panel
+    document.getElementById('no-selection-overlay').classList.add('hidden');
+
+    const activeTheme = SYSTEM_THEMES[activeThemeIdx];
+    const dataObj = GAME_JSON_DATABASE[activeTheme.key][rowIndex];
+
+    // Populate Details
+    document.getElementById('lbl-active-index').innerText = rowIndex + 1;
+    document.getElementById('lbl-active-question').innerText = dataObj.question;
+    document.getElementById('lbl-letter-length-alert').innerText = `độ dài: ${dataObj.answer.length} chữ cái`;
+
+    // Dynamic difficulty stars representation
+    const diffContainer = document.getElementById('lbl-active-difficulty');
+    diffContainer.innerHTML = '';
+    for (let s = 0; s < 3; s++) {
+        if (s < dataObj.Lever) {
+            diffContainer.innerHTML += `⭐`;
+        } else {
+            diffContainer.innerHTML += `<span class="opacity-30">⭐</span>`;
+        }
+    }
+
+    // Prepare inputs
+    const inputField = document.getElementById('input-active-answer');
+    inputField.value = '';
+
+    const isSolved = unlockedWords[activeTheme.key][rowIndex] !== null;
+    if (isSolved) {
+        inputField.value = dataObj.answer;
+        inputField.disabled = true;
+        document.getElementById('btn-submit-answer').classList.add('hidden');
+        document.getElementById('btn-hint-lightbulb').classList.add('hidden');
+        displayStatusLabel("success", "Em đã xuất sắc hoàn thành ô chữ này rồi!");
+    } else {
+        inputField.disabled = false;
+        document.getElementById('btn-submit-answer').classList.remove('hidden');
+        document.getElementById('btn-hint-lightbulb').classList.remove('hidden');
+        inputField.focus();
+    }
+}
+
+// CORE ANSWER SUBMIT ACTION
+function verifyPlayerAnswer() {
+    if (activeRowIdx === null) return;
+
+    const activeTheme = SYSTEM_THEMES[activeThemeIdx];
+    const inputField = document.getElementById('input-active-answer');
+    const inputValClean = normalizeInput(inputField.value);
+
+    if (!inputValClean) {
+        displayStatusLabel("warning", "Em chưa điền câu trả lời vào ô trống!");
+        triggerAudioFeedback('incorrect');
+        return;
+    }
+
+    const correctAnswerClean = normalizeInput(GAME_JSON_DATABASE[activeTheme.key][activeRowIdx].answer);
+
+    if (inputValClean === correctAnswerClean) {
+        // CORRECT ANSWER
+        triggerAudioFeedback('correct');
+        unlockedWords[activeTheme.key][activeRowIdx] = GAME_JSON_DATABASE[activeTheme.key][activeRowIdx].answer;
+
+        // Calculate score
+        const levelWeight = GAME_JSON_DATABASE[activeTheme.key][activeRowIdx].Lever;
+        const awardedPoints = levelWeight * 10;
+        currentScore += awardedPoints;
+        updateHeaderDashboard();
+
+        // Reveal the word onto crossword grid
+        drawCrosswordGridBoard();
+
+        // Display success state on inputs
+        inputField.disabled = true;
+        document.getElementById('btn-submit-answer').classList.add('hidden');
+        document.getElementById('btn-hint-lightbulb').classList.add('hidden');
+
+        displayStatusLabel("success", `Chính xác! Cực giỏi, em nhận được +${awardedPoints} điểm!`);
+
+        // Mascot cute comment
+        const randomPositive = HAPPY_MASCOT_QUOTES[Math.floor(Math.random() * HAPPY_MASCOT_QUOTES.length)];
+        document.getElementById('lbl-mascot-advice').innerText = randomPositive;
+
+        // Verify and reward level completions
+        checkActiveStageProgress();
+
+    } else {
+        // WRONG ANSWER
+        triggerAudioFeedback('incorrect');
+        displayStatusLabel("danger", "Chưa đúng rồi! Hãy soát lại từng ký tự nhé!");
+
+        // Mascot encouragement
+        const randomNegative = WRONG_MASCOT_QUOTES[Math.floor(Math.random() * WRONG_MASCOT_QUOTES.length)];
+        document.getElementById('lbl-mascot-advice').innerText = randomNegative;
+
+        // Visual wiggle feedback
+        inputField.classList.add('ring-2', 'ring-rose-500', 'animate-bounce');
+        setTimeout(() => {
+            inputField.classList.remove('ring-2', 'ring-rose-500', 'animate-bounce');
+        }, 800);
+    }
+}
+
+// HINT LOGIC (REVEALS A SINGLE RANDOM CHARACTER)
+function triggerOneLetterHint() {
+    if (activeRowIdx === null) return;
+
+    const activeTheme = SYSTEM_THEMES[activeThemeIdx];
+    const targetWord = GAME_JSON_DATABASE[activeTheme.key][activeRowIdx].answer;
+    const currentlyRevealed = hintedLetters[activeTheme.key][activeRowIdx];
+
+    // Find index of unrevealed characters
+    let availableUnrevealedPositions = [];
+    for (let c = 0; c < targetWord.length; c++) {
+        if (!currentlyRevealed.includes(c)) {
+            availableUnrevealedPositions.push(c);
+        }
+    }
+
+    if (availableUnrevealedPositions.length === 0) {
+        displayStatusLabel("warning", "Hết ký tự để gợi ý rồi bạn nhỏ!");
+        return;
+    }
+
+    if (currentScore < 5) {
+        displayStatusLabel("warning", "Em cần tích lũy ít nhất 5 điểm để sử dụng Gợi Ý nhé!");
+        triggerAudioFeedback('incorrect');
+        return;
+    }
+
+    // Pick 1 random position
+    const randomPickIdx = availableUnrevealedPositions[Math.floor(Math.random() * availableUnrevealedPositions.length)];
+    hintedLetters[activeTheme.key][activeRowIdx].push(randomPickIdx);
+
+    // Deduct points
+    currentScore -= 5;
+    updateHeaderDashboard();
+
+    triggerAudioFeedback('hint');
+    drawCrosswordGridBoard();
+
+    displayStatusLabel("warning", "Đã mở khóa 1 chữ cái thành công! (-5 điểm)");
+}
+
+function displayStatusLabel(statusType, textMessage) {
+    const feedbackBox = document.getElementById('feedback-panel');
+    feedbackBox.classList.remove('hidden');
+
+    let classes = "";
+    let icon = "";
+
+    if (statusType === 'success') {
+        classes = "bg-green-50 border-green-300 text-green-600";
+        icon = "🎉";
+    } else if (statusType === 'danger') {
+        classes = "bg-rose-50 border-rose-300 text-rose-600";
+        icon = "😢";
+    } else if (statusType === 'warning') {
+        classes = "bg-yellow-50 border-yellow-300 text-yellow-700";
+        icon = "💡";
+    }
+
+    feedbackBox.className = `p-3 rounded-2xl text-center text-xs font-black border animate-fade-in ${classes}`;
+    feedbackBox.innerHTML = `<span>${icon} ${textMessage}</span>`;
+}
+
+function updateHeaderDashboard() {
+    document.getElementById('player-score').innerText = currentScore;
+}
+
+// PROGRESS & TRANSITION RULES
+function checkActiveStageProgress() {
+    const activeTheme = SYSTEM_THEMES[activeThemeIdx];
+    const isLevelAllDone = unlockedWords[activeTheme.key].every(item => item !== null);
+
+    // Update tab bar layout
+    renderStageTabs();
+
+    if (isLevelAllDone && !currentStageClears[activeThemeIdx]) {
+        currentStageClears[activeThemeIdx] = true;
+
+        setTimeout(() => {
+            triggerAudioFeedback('victory');
+            blastColorfulConfetti();
+
+            // Verify if all 4 stages are complete
+            if (currentStageClears.every(clearState => clearState === true)) {
+                // VICTORY!
+                triggerGrandCongratulationCelebration();
+            } else {
+                // Let student celebrate stage completion
+                displayStatusLabel("success", `Em đã giải mã thành công toàn bộ Màn ${activeThemeIdx + 1}! Xuất sắc!`);
+
+                // Auto forward student to next unsolved level in 2.5 seconds
+                setTimeout(() => {
+                    const firstUnsolvedIdx = currentStageClears.findIndex(st => st === false);
+                    if (firstUnsolvedIdx !== -1) {
+                        changeActiveTheme(firstUnsolvedIdx);
+                    }
+                }, 2500);
+            }
+        }, 500);
+    }
+}
+
+// TOTAL COMPLETION CEREMONY
+function triggerGrandCongratulationCelebration() {
+    clearInterval(gameTimerInterval);
+    triggerAudioFeedback('victory');
+
+    // Switch Screens
+    document.getElementById('screen-gameplay').classList.add('hidden');
+    document.getElementById('screen-victory').classList.remove('hidden');
+
+    // Draw Certificate Info
+    document.getElementById('lbl-certificate-name').innerText = playerName;
+    document.getElementById('lbl-certificate-score').innerText = `${currentScore} Điểm`;
+
+    const finalMins = Math.floor(totalTimeSeconds / 60);
+    const finalSecs = totalTimeSeconds % 60;
+    document.getElementById('lbl-certificate-time').innerText = `${finalMins} phút ${finalSecs} giây`;
+
+    const currentDate = new Date();
+    document.getElementById('lbl-certificate-date').innerText = currentDate.toLocaleDateString('vi-VN');
+
+    // Grand Celebration Confetti blast sequence
+    let count = 0;
+    const continuousCelebration = setInterval(() => {
+        if (count > 12) clearInterval(continuousCelebration);
+        blastColorfulConfetti();
+        count++;
+    }, 1000);
+}
+
+function resetWholeGame() {
+    playerName = "Học sinh";
+    activeThemeIdx = 0;
+    activeRowIdx = null;
+    currentScore = 0;
+    totalTimeSeconds = 0;
+    currentStageClears = [false, false, false, false];
+
+    unlockedWords = {
+        "Chu_de_C": Array(10).fill(null),
+        "Chu_de_D": Array(10).fill(null),
+        "Chu_de_E": Array(10).fill(null),
+        "Chu_de_F": Array(10).fill(null)
+    };
+
+    hintedLetters = {
+        "Chu_de_C": Array(10).fill(null).map(() => []),
+        "Chu_de_D": Array(10).fill(null).map(() => []),
+        "Chu_de_E": Array(10).fill(null).map(() => []),
+        "Chu_de_F": Array(10).fill(null).map(() => [])
+    };
+
+    updateHeaderDashboard();
+
+    document.getElementById('screen-victory').classList.add('hidden');
+    document.getElementById('screen-welcome').classList.remove('hidden');
+    document.getElementById('input-player-name').value = '';
+}
+
+// SHARED CERTIFICATE GENERATION METHOD
+function copyCertificateShareText() {
+    const shareMessage = `🏆 BẢNG VÀNG DANH DỰ TRÒ CHƠI Ô CHỮ TIN HỌC 🏆
+👤 Tên Học Sinh: ${playerName}
+⭐ Điểm Đạt Được: ${currentScore} Điểm
+⏱️ Thời Gian Giải Đố: ${document.getElementById('lbl-certificate-time').innerText}
+🌟 Bạn nhỏ đã xuất sắc chinh phục thành công 40/40 thử thách ô chữ sách giáo khoa Tin Học lớp 3-4-5!`;
+
+    // Dynamic safe copy
+    const invisibleArea = document.createElement("textarea");
+    invisibleArea.value = shareMessage;
+    document.body.appendChild(invisibleArea);
+    invisibleArea.select();
+    try {
+        document.execCommand('copy');
+        alert("Đã sao chép bảng vàng thành tích của em vào bộ nhớ tạm! Em có thể dán (Paste) để gửi khoe thầy cô hoặc ba mẹ nhé!");
+    } catch (err) {
+        console.error("Copy failed");
+    }
+    document.body.removeChild(invisibleArea);
+}
+
+// DEVELOPER TOOL / TEACHER QUICK SOLVER KEY
+function revealAllCheatanswers() {
+    developerModeOn = !developerModeOn;
+    triggerAudioFeedback('hint');
+    drawCrosswordGridBoard();
+
+    // Create a beautiful brief floating notification
+    const banner = document.createElement('div');
+    banner.className = `fixed bottom-5 right-5 z-50 px-4 py-3 rounded-2xl border-3 shadow-xl transition-all duration-300 transform scale-100 flex items-center gap-2 font-kids font-black text-sm ${developerModeOn ? 'bg-indigo-50 border-indigo-400 text-indigo-700' : 'bg-slate-50 border-slate-300 text-slate-500'}`;
+    banner.innerHTML = `<span>🔑 Chế độ giáo viên: ${developerModeOn ? 'BẬT' : 'TẮT'} (Hiển thị mờ các đáp án để chấm bài)</span>`;
+    document.body.appendChild(banner);
+
+    setTimeout(() => {
+        banner.classList.add('opacity-0', 'translate-y-3');
+        setTimeout(() => banner.remove(), 400);
+    }, 2500);
+}
+
+// CELEBRATIVE PARTICLE SYSTEM (Pure HTML5 Canvas simulation style inside DOM)
+function blastColorfulConfetti() {
+    const area = document.getElementById('confetti-container');
+    const colorSpectrum = ['#ff4b72', '#3b82f6', '#fbbf24', '#10b981', '#a855f7', '#ff7d3b', '#22d3ee'];
+
+    for (let c = 0; c < 50; c++) {
+        const flake = document.createElement('div');
+        const chosenColor = colorSpectrum[Math.floor(Math.random() * colorSpectrum.length)];
+
+        flake.className = "absolute pointer-events-none rounded-md";
+        flake.style.background = chosenColor;
+        
+        const randomDiameter = Math.random() * 8 + 6;
+        flake.style.width = `${randomDiameter}px`;
+        flake.style.height = `${randomDiameter}px`;
+
+        const originX = Math.random() * window.innerWidth;
+        const originY = window.innerHeight;
+
+        flake.style.left = `${originX}px`;
+        flake.style.top = `${originY}px`;
+
+        area.appendChild(flake);
+
+        const velocityY = Math.random() * 8 + 9;
+        const velocityX = (Math.random() - 0.5) * 8;
+        const weightGravity = 0.22;
+
+        let posX = originX;
+        let posY = originY;
+        let speedY = -velocityY;
+        let speedX = velocityX;
+
+        function animateIndividualFlake() {
+            speedY += weightGravity;
+            posX += speedX;
+            posY += speedY;
+
+            flake.style.left = `${posX}px`;
+            flake.style.top = `${posY}px`;
+
+            if (posY < window.innerHeight && posY > -60 && posX > 0 && posX < window.innerWidth) {
+                requestAnimationFrame(animateIndividualFlake);
+            } else {
+                flake.remove();
+            }
+        }
+
+        requestAnimationFrame(animateIndividualFlake);
+    }
+}
+
+// Window load trigger safety check
+window.onload = function() {
+    console.log("Crossword Game Engine loaded successfully. Student panel primed.");
+};
+</script>
+</body>
+</html>
