@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Webcam Toàn Màn Hình</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Đảm bảo video lấp đầy màn hình và giữ tỷ lệ khung hình tốt */
+        #webcamVideo {
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white h-screen w-screen overflow-hidden flex flex-col relative">
+
+    <!-- Khung hiển thị video toàn màn hình nền phía sau -->
+    <div class="absolute inset-0 z-0 flex items-center justify-center bg-black">
+        <video id="webcamVideo" autoplay playsinline muted class="w-full h-full"></video>
+        <!-- Thông báo khi chưa cấp quyền hoặc không tìm thấy camera -->
+        <div id="placeholderMessage" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900/90 text-center p-6 transition-opacity duration-300 z-10">
+            <i class="fa-solid fa-video-slash text-6xl text-slate-500 mb-4 animate-bounce"></i>
+            <h2 class="text-2xl font-bold mb-2">Chưa kết nối Camera</h2>
+            <p class="text-slate-400 max-w-md mb-6">Vui lòng cấp quyền truy cập camera hoặc chọn nguồn camera (như webcam PC, DroidCam, Camo) từ thanh điều khiển phía dưới.</p>
+            <button onclick="startCamera()" class="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg transition-all duration-200 flex items-center gap-2">
+                <i class="fa-solid fa-play"></i> Bật Camera Ngay
+            </button>
+        </div>
+    </div>
+
+    <!-- Thanh điều hướng phía trên (Nút quay lại & Tiêu đề) -->
+    <div class="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/80 via-black/40 to-transparent pointer-events-auto">
+        <button onclick="goBack()" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-xl text-white font-medium flex items-center gap-2 transition-all border border-white/10 shadow-lg">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại
+        </button>
+        <h1 class="text-lg font-semibold tracking-wide drop-shadow-md hidden sm:block">Trình Stream Webcam Trực Tuyến</h1>
+        <div class="w-20"></div> <!-- Giữ cân bằng layout -->
+    </div>
+
+    <!-- Thanh điều khiển nổi phía dưới -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 w-11/12 max-w-xl bg-slate-900/80 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="w-full sm:w-auto flex-1">
+            <label for="cameraSelect" class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wider">Chọn Nguồn Camera:</label>
+            <select id="cameraSelect" class="w-full bg-slate-800 text-white border border-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors">
+                <option value="">Đang tải danh sách camera...</option>
+            </select>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button id="toggleBtn" onclick="toggleStream()" class="flex-1 sm:flex-none px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-stop" id="toggleIcon"></i> <span id="toggleText">Tắt Stream</span>
+            </button>
+            <button onclick="takeSnapshot()" title="Chụp ảnh nhanh" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl border border-slate-700 transition-all flex items-center justify-center">
+                <i class="fa-solid fa-camera"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal thông báo nhỏ thay thế cho alert() -->
+    <div id="toast" class="fixed top-20 right-5 z-50 bg-slate-800 border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl transform translate-x-full transition-transform duration-300 flex items-center gap-3">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-green-400"></i>
+        <span id="toastMessage" class="text-sm">Thông báo hệ thống</span>
+    </div>
+
+    <script>
+        let currentStream = null;
+        const videoElement = document.getElementById('webcamVideo');
+        const cameraSelect = document.getElementById('cameraSelect');
+        const placeholderMessage = document.getElementById('placeholderMessage');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const toggleIcon = document.getElementById('toggleIcon');
+        const toggleText = document.getElementById('toggleText');
+
+        // Hiển thị thông báo đẹp mắt thay thế alert()
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastMessage.textContent = message;
+            toastIcon.className = isError ? "fa-solid fa-circle-exclamation text-red-400" : "fa-solid fa-circle-check text-green-400";
+            
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Lấy danh sách thiết bị camera (bao gồm webcam máy tính, DroidCam, v.v.)
+        async function getCameraList() {
+            try {
+                // Xin quyền trước để trình duyệt hiển thị đầy đủ tên thiết bị
+                const tempStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                tempStream.getTracks().forEach(track => track.stop());
+
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                
+                cameraSelect.innerHTML = '';
+                if (videoDevices.length === 0) {
+                    cameraSelect.innerHTML = '<option value="">Không tìm thấy camera nào</option>';
+                    return;
+                }
+
+                videoDevices.forEach((device, index) => {
+                    const option = document.createElement('option');
+                    option.value = device.deviceId;
+                    // Đặt tên gợi ý, nếu thiết bị trống thì đặt tên mặc định
+                    option.textContent = device.label || `Camera ${index + 1}`;
+                    cameraSelect.appendChild(option);
+                });
+
+                // Tự động khởi động camera đầu tiên trong danh sách
+                if (videoDevices.length > 0) {
+                    startCamera(videoDevices[0].deviceId);
+                }
+            } catch (error) {
+                console.error("Lỗi khi truy cập danh sách camera:", error);
+                showToast("Không thể truy cập camera. Vui lòng kiểm tra quyền trình duyệt.", true);
+                placeholderMessage.style.opacity = '1';
+            }
+        }
+
+        // Khởi động stream camera theo deviceId
+        async function startCamera(deviceId = null) {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+            }
+
+            const selectedDeviceId = deviceId || cameraSelect.value;
+            const constraints = {
+                video: selectedDeviceId ? { deviceId: { exact: selectedDeviceId } } : true,
+                audio: false
+            };
+
+            try {
+                currentStream = await navigator.mediaDevices.getUserMedia(constraints);
+                videoElement.srcObject = currentStream;
+                placeholderMessage.style.opacity = '0';
+                setTimeout(() => placeholderMessage.style.display = 'none', 300);
+                
+                // Cập nhật trạng thái nút Bật/Tắt
+                toggleText.textContent = "Tắt Stream";
+                toggleIcon.className = "fa-solid fa-stop";
+                toggleBtn.className = "flex-1 sm:flex-none px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-medium rounded-xl shadow-md transition-all flex items-center justify-center gap-2";
+                
+                showToast("Đã kết nối camera thành công!");
+            } catch (error) {
+                console.error("Lỗi khởi động camera:", error);
+                placeholderMessage.style.display = 'flex';
+                placeholderMessage.style.opacity = '1';
+                showToast("Không thể kết nối với nguồn camera này.", true);
+            }
+        }
+
+        // Bật/Tắt stream khi bấm nút
+        function toggleStream() {
+            if (currentStream) {
+                currentStream.getTracks().forEach(track => track.stop());
+                currentStream = null;
+                videoElement.srcObject = null;
+                
+                toggleText.textContent = "Bật Stream";
+                toggleIcon.className = "fa-solid fa-play";
+                toggleBtn.className = "flex-1 sm:flex-none px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-xl shadow-md transition-all flex items-center justify-center gap-2";
+                
+                placeholderMessage.style.display = 'flex';
+                placeholderMessage.style.opacity = '1';
+                showToast("Đã dừng stream camera.");
+            } else {
+                startCamera(cameraSelect.value);
+            }
+        }
+
+        // Chụp ảnh nhanh khung hình hiện tại
+        function takeSnapshot() {
+            if (!currentStream) {
+                showToast("Camera chưa được bật để chụp ảnh!", true);
+                return;
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = videoElement.videoWidth || 1280;
+            canvas.height = videoElement.videoHeight || 720;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            
+            const link = document.createElement('a');
+            link.download = `webcam-snapshot-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showToast("Đã chụp và tải ảnh thành công!");
+        }
+
+        // Xử lý nút quay lại trang trước
+        function goBack() {
+            if (document.referrer && document.referrer !== window.location.href) {
+                window.history.back();
+            } else {
+                // Fallback nếu người dùng mở trực tiếp file HTML này
+                window.location.href = "about:blank";
+            }
+        }
+
+        // Lắng nghe sự kiện thay đổi lựa chọn camera trên dropdown
+        cameraSelect.addEventListener('change', (e) => {
+            startCamera(e.target.value);
+        });
+
+        // Khởi chạy khi tải trang xong
+        window.addEventListener('load', () => {
+            getCameraList();
+        });
+    </script>
+</body>
+</html>
