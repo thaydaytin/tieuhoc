@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Công Việc</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-100 min-h-screen py-6 px-3 sm:px-6 lg:px-8 flex flex-col">
+
+    <div class="w-full max-w-[1600px] mx-auto flex-1 flex flex-col">
+        <!-- Tiêu đề trang -->
+        <header class="text-center mb-8 pt-4">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight flex items-center justify-center gap-3">
+                <i class="fa-solid fa-terminal text-cyan-400"></i>
+                Danh Sách Công Việc
+            </h1>
+            <p class="mt-2 text-sm sm:text-base text-gray-400 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-cloud-arrow-down text-emerald-400"></i> 🌟🌟🌟🌟🌟❤️🌟🌟🌟🌟🌟
+            </p>
+        </header>
+
+        <div class="bg-zinc-900 border border-zinc-800 shadow-2xl rounded-2xl overflow-hidden flex-1 flex flex-col">
+            
+            <!-- Trạng thái đang tải -->
+            <div id="loadingState" class="text-center py-20 text-gray-400 flex flex-col items-center justify-center flex-1">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-cyan-400 mb-3"></i>
+                <p class="text-base font-medium">Đang kết nối và tải dữ liệu từ Google Sheets...</p>
+            </div>
+
+            <!-- Bảng Hiển Thị Công Việc -->
+            <div id="tableContainer" class="hidden overflow-x-auto w-full flex-1">
+                <table class="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                        <tr class="bg-zinc-950 text-cyan-400 uppercase text-xs sm:text-sm font-semibold tracking-wider border-b border-zinc-800">
+                            <th class="py-4 px-6 w-1/4">
+                                <i class="fa-regular fa-clock mr-2 text-amber-400"></i>Thời gian
+                            </th>
+                            <th class="py-4 px-6 w-2/3">
+                                <i class="fa-solid fa-list-check mr-2 text-emerald-400"></i>Nội dung công việc
+                            </th>
+                            <th class="py-4 px-6 w-1/12 text-center">
+                                <i class="fa-solid fa-link mr-1 text-purple-400"></i>Liên kết
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="todoTableBody" class="text-sm sm:text-base text-zinc-200 divide-y divide-zinc-800">
+                        <!-- Dữ liệu được chèn động bằng JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Trạng thái khi không có dữ liệu hoặc lỗi -->
+            <div id="emptyState" class="hidden text-center py-20 text-gray-400 flex flex-col items-center justify-center flex-1">
+                <i class="fa-solid fa-triangle-exclamation text-4xl text-amber-400 mb-3"></i>
+                <p id="emptyText" class="text-base font-medium">Chưa có công việc nào trong Google Sheets.</p>
+            </div>
+        </div>
+        
+        <!-- Chân trang -->
+        <footer class="text-center mt-6 text-xs text-zinc-500">
+            <p>&copy; 2026 Quản lý công việc cá nhân. Tự động cập nhật theo thời gian thực.</p>
+        </footer>
+    </div>
+
+    <script>
+        // THAY THẾ LINK WEB APP GOOGLE APPS SCRIPT CỦA BẠN VÀO ĐÂY
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzPBp69QF2DCIkjqS0sC_ow2HiFGjKFf-pUAqawNr55LDzNF0a0__NRocYVpQrzIGDO/exec";
+
+        async function fetchTasks() {
+            const loadingState = document.getElementById('loadingState');
+            const tableContainer = document.getElementById('tableContainer');
+            const emptyState = document.getElementById('emptyState');
+            const emptyText = document.getElementById('emptyText');
+            const tbody = document.getElementById('todoTableBody');
+
+            if (WEB_APP_URL.includes("ĐIỀN_WEB_APP_URL")) {
+                loadingState.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                emptyText.textContent = "Vui lòng cập nhật URL của Google Apps Script trong mã nguồn JavaScript!";
+                return;
+            }
+
+            try {
+                const response = await fetch(WEB_APP_URL);
+                const data = await response.json();
+
+                loadingState.classList.add('hidden');
+
+                if (!data || data.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+
+                tableContainer.classList.remove('hidden');
+                tbody.innerHTML = '';
+
+                data.forEach(item => {
+                    const tr = document.createElement('tr');
+                    // Hiệu ứng hover mượt mà và đường gạch ngang phân tách giữa các dòng
+                    tr.className = 'hover:bg-zinc-800/50 transition-colors duration-150 border-b border-zinc-800';
+
+                    let linkHtml = '<span class="text-zinc-600">-</span>';
+                    if (item.link && item.link.trim() !== '') {
+                        let href = item.link.trim();
+                        if (!href.startsWith('http://') && !href.startsWith('https://')) {
+                            href = 'https://' + href;
+                        }
+                        // Chỉ hiện chữ Click gắn link với màu sắc nổi bật và icon
+                        linkHtml = `
+                            <a href="${escapeHTML(href)}" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 hover:text-cyan-300 font-medium transition text-xs sm:text-sm">
+                                <span>Click</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        `;
+                    }
+
+                    tr.innerHTML = `
+                        <td class="py-4 px-6 font-semibold text-cyan-300 whitespace-nowrap">${escapeHTML(item.time || '')}</td>
+                        <td class="py-4 px-6 text-zinc-100">${escapeHTML(item.content || '')}</td>
+                        <td class="py-4 px-6 text-center">${linkHtml}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (error) {
+                console.error("Lỗi khi tải dữ liệu:", error);
+                loadingState.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                emptyText.textContent = "Không thể tải dữ liệu từ Google Sheets. Vui lòng kiểm tra lại URL hoặc quyền truy cập.";
+            }
+        }
+
+        // Chống XSS cơ bản
+        function escapeHTML(str) {
+            return String(str).replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        // Gọi hàm tải dữ liệu khi trang được mở
+        window.onload = fetchTasks;
+    </script>
+</body>
+</html>
